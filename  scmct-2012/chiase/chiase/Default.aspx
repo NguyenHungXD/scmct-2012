@@ -53,7 +53,34 @@
 
 <asp:Content ID="register" ContentPlaceHolderID="content_area" Runat="Server">
 
-    <cc1:Grid ID="show_page" runat="server" Width="900px">
-    </cc1:Grid>           
+    <asp:DataList ID="DataList1" runat="server" Width="100%" 
+        onitemdatabound="DataList1_ItemDataBound">
+   <HeaderTemplate>
+        Header
+    </HeaderTemplate>
+
+    <ItemTemplate>
+            <asp:HyperLink ID="link_post_new" runat="server" NavigateUrl='<%# Eval("id", "post_news.aspx?subjectID={0}") %>' Text="Bài mới"></asp:HyperLink>
+            <asp:Label ID="lbl_subject" runat="server" Text='<%# System.String.Format("{0}({1})",Eval("title"), Eval("description")) %>'></asp:Label>
+    
+
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="5" GridLines="None" ShowHeader="False">
+                            <Columns>
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                            <asp:Label runat="server" Text='<%# Eval("tieu_de") %>'></asp:Label>
+                                             <asp:Label runat="server" Text='<%# Eval("noi_dung") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                   
+                            </Columns>
+        </asp:GridView>
+
+    </ItemTemplate>
+
+<FooterTemplate>
+Copyright Hege Refsnes
+</FooterTemplate>
+    </asp:DataList>
 
 </asp:Content>

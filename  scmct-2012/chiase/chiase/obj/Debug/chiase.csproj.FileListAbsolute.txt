@@ -4,3 +4,9 @@ E:\HocTap\Hoc Ky VI\DOAN\sach\chiase\chiase\obj\Debug\ResolveAssemblyReference.c
 E:\HocTap\Hoc Ky VI\DOAN\sach\chiase\chiase\obj\Debug\chiase.dll
 E:\HocTap\Hoc Ky VI\DOAN\sach\chiase\chiase\obj\Debug\chiase.pdb
 E:\HocTap\Hoc Ky VI\DOAN\sach\chiase\chiase\bin\AjaxControlToolkit.dll
+E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\chiase.dll
+E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\chiase.pdb
+E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\AjaxControlToolkit.dll
+E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\obj\Debug\ResolveAssemblyReference.cache
+E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\obj\Debug\chiase.dll
+E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\obj\Debug\chiase.pdb
