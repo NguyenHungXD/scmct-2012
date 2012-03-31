@@ -1,0 +1,5 @@
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DataAccess\obj\Debug\ResolveAssemblyReference.cache
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DataAccess\bin\Debug\DataAccess.dll
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DataAccess\bin\Debug\DataAccess.pdb
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DataAccess\obj\Debug\DataAccess.dll
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DataAccess\obj\Debug\DataAccess.pdb

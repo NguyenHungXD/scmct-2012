@@ -1,0 +1,7 @@
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\obj\Debug\ResolveAssemblyReference.cache
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\bin\Debug\GenaralProcess.exe
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\bin\Debug\GenaralProcess.pdb
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\bin\Debug\DataAcess.dll
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\bin\Debug\DataAcess.pdb
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\obj\Debug\GenaralProcess.exe
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\obj\Debug\GenaralProcess.pdb

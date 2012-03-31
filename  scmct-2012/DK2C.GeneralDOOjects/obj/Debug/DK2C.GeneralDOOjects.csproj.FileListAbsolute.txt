@@ -1,0 +1,17 @@
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\bin\Debug\GeneralDOOjects.exe
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\bin\Debug\GeneralDOOjects.pdb
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\bin\Debug\DK2C.DataAccess.dll
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\bin\Debug\DK2C.DataAccess.pdb
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\obj\Debug\ResolveAssemblyReference.cache
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\obj\Debug\GeneralDOOjects.exe
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\GenaralProcess\obj\Debug\GeneralDOOjects.pdb
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\bin\Debug\GeneralDOOjects.exe
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\bin\Debug\GeneralDOOjects.pdb
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\bin\Debug\DK2C.DataAccess.dll
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\bin\Debug\DK2C.DataAccess.pdb
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\obj\Debug\ResolveAssemblyReference.cache
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GeneralDOOjects.exe
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GeneralDOOjects.pdb
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\obj\Debug\DK2C.GeneralDOOjects.frmMain.resources
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GenerateResource-ResGen.read.1.tlog
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GenerateResource-ResGen.write.1.tlog
