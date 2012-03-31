@@ -1,0 +1,182 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="chiase.MasterPage" %>
+
+<%@ Register Assembly="obout_Interface" Namespace="Obout.Interface" TagPrefix="cc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>.:SCMCT-Cổng thông tin SCMCT:.</title>
+<meta name="keywords" content="SCMCT, Sách cho miền cát trắng, sach cho mien cat trang, quyen gop sach, sach cu, sach cho tre em ngheo" />
+<meta name="description" content=".::SCMCT - Công quyên góp sách online ::." />
+<link href="templatemain_style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="content_slider_style.css" />
+<head id="MasterHead" runat="server">
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
+</head>
+<script type="text/javascript" src="Scripts/jquery.1.3.2.min.js" ></script>
+<script type="text/javascript" src="Scripts/jquery-ui.min.js" ></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#featured > ul").tabs({ fx: { opacity: "toggle"} }).tabs("rotate", 5000, true);
+    });
+</script>
+
+</head>
+<body>
+
+<form id="chiase" runat="server">
+<div id="templatemo_header_main">
+<div id="templatemo_headers_flash">
+<embed src="flash/hieuung.swf" width="800" height="100" wmode="transparent" align="left"> 
+</div>
+
+<div id="templatemo_header_flash">
+<!--<embed src="Flash/header.swf" width="400" height="500" wmode="transparent" align="left"> -->
+</div> 
+
+    <div id="templatemo_header">
+    	<div id="site_title">
+        
+            <h1><a href="http://www.chiase.org"><img src="images/templatemo_logo.png" alt="logo" /><span>Cổng quyên góp sách online</span></a></h1>
+        </div> <!-- end of site_title -->
+		<div id="templatemo_login" class="textformat">
+            <asp:MultiView ID="MultiView1" runat="server">
+                <asp:View ID="View1" runat="server">
+                     Tài khoản:<asp:TextBox ID="txtUserID" runat="server" class="txtformat" 
+                         Width="95px"></asp:TextBox>
+                    &nbsp;Mật khẩu:<asp:TextBox ID="txtPassWord" runat="server" class="txtformat" 
+                         Width="95px" TextMode="Password"></asp:TextBox>
+                    <cc1:OboutButton ID="btn_login" runat="server" Text="Đăng nhập" Height="23px" 
+                         Width="85px" onclick="btn_login_Click" style="top: 0px; left: 0px" >
+                    </cc1:OboutButton>
+                    <cc1:OboutCheckBox ID="keep_login" runat="server" Checked="True">
+                    </cc1:OboutCheckBox><font color=white>Ghi nhớ</font>
+
+                
+                    <br>
+                    <!--<p align=center>Quên mật khẩu ? | Đăng ký</p>-->
+                    <p align=right><b><font color=red size=-2><asp:Label ID="lblError" runat="server" ForeColor="#FF3300"></asp:Label></b></font> <asp:HyperLink ID="link_forget_pass" runat="server" 
+                Text="Quên mật khẩu?" NavigateUrl="forget_password.aspx"></asp:HyperLink> | 
+                        <asp:HyperLink ID="register_link" runat="server" Text="Đăng ký" NavigateUrl="~/register.aspx" title="Đăng ký thành viên"></asp:HyperLink>&nbsp</p>
+                </asp:View>
+                <asp:View ID="View2" runat="server">
+                   <table cellpadding=1 cellspacing=3 border=0 width=100%>
+                   <tr>
+                   <td rowspan=2 align=center>
+                    <asp:Image ID="imgUser" runat="server" Height="50px" Width="40px" BorderStyle="Solid" BorderWidth="1px" />
+                    </td>
+                    <td align=center>
+                    Chào mừng <b><asp:Label ID="lbl_username" runat="server" ForeColor="White"/></asp:Label></b>,
+                        <i>truy cập lần cuối, <asp:Label ID="lbl_lasted_access" runat="server" ForeColor="White"></asp:Label></i><br>
+                    </td>
+                    <tr>
+                    <td align=center>
+                    <p align=center class="textformat"> 
+                        <asp:HyperLink ID="link_member_page" runat="server" Text="Trang của tôi" NavigateUrl="index.aspx"></asp:HyperLink> | <asp:HyperLink ID="update_profile" runat="server" Text="Cập nhật thông tin cá nhân"  NavigateUrl="~/edit_profile.aspx"></asp:HyperLink> | 
+                        <asp:HyperLink ID="link_changepass" runat="server" Text="Đổi mật khẩu" NavigateUrl="~/change_password.aspx" title="Đổi mật khẩ"></asp:HyperLink> | 
+                        <asp:LinkButton ID="logout" runat="server" onclick="logout_Click">Thoát</asp:LinkButton> </p>
+                    </td>
+                    </tr>
+                    </table>
+                </asp:View>
+            </asp:MultiView>
+			
+        </div> <!-- end of templatemo_menu -->
+
+        <div id="templatemo_menu">
+        <ul class=blue>
+	        <li><a href="default.aspx" title="Trang chủ" class="current"><span>Trang chủ</span></a></li>
+            <li><a href="request.aspx" title="Gửi yêu cầu"><span>Gửi yêu cầu</span></a></li>
+            <li><a href="#" title="Giới thiệu"><span>Giới thiệu</span></a></li>
+            <li><a href="#" title="Liên hệ"><span>Liên hệ</span></a></li>
+            <li><a href="admin.aspx" title="Quản trị"><span>Quản trị</span></a></li>
+        </ul>
+        </div> <!-- end of templatemo_menu -->
+    </div> <!-- end of templatemo_header -->
+</div>  <!-- end of templatemo_header_main -->
+ <div id="templatemo_wrapper_outer">
+ <div id="templatemo_wrapper">
+        <asp:ContentPlaceHolder ID="Content_slider" runat="server">
+        </asp:ContentPlaceHolder>
+	<div id="footer_top1">&nbsp 
+    </div>	
+    <div id="templatemo_content">
+     <asp:ContentPlaceHolder ID="content_area" runat="server">
+    </asp:ContentPlaceHolder>
+    <div class="cleaner"></div>
+    </div> <!--End div content-->
+   
+   
+	<div class="cleaner"></div>
+<!--</div> -->
+<!--</div> -->
+
+<div id="templatemo_footer_wrapper">
+	<div id="footer_top"></div>
+	
+	<div id="templatemo_footer">
+    
+        <div class="col_w220">
+            <h5>Follow Us</h5>
+            <p>Curabitur enim tellus, iaculis at imperdiet eget, pretium sit amet purus. Nullam eleifend ultricies consequat.</p>
+            
+            <ul id="social_box">
+                <li><a href="http://www.facebook.com/templatemo"><img src="images/facebook.png" alt="Facebook" /></a></li>
+                <li><a href="http://www.facebook.com/templatemo"><img src="images/twitter.png" alt="Twitter" /></a></li>
+                <li><a href="http://www.facebook.com/templatemo"><img src="images/linkedin.png" alt="Linkedin" /></a></li>
+                <li><a href="http://www.facebook.com/templatemo"><img src="images/technorati.png" alt="Technorati" /></a></li>
+                <li><a href="http://www.facebook.com/templatemo"><img src="images/myspace.png" alt="Myspace" /></a></li>                
+            </ul>
+            
+        </div>
+        
+        <div class="col_w220">
+            <h5>Our Pages</h5>
+            <ul class="tmo_list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="about.html">About us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>  
+ 
+        </div>
+        
+        <div class="col_w220">
+            <h5>Partners</h5>
+			<ul class="tmo_list">
+                <li><a href="http://www.templatemo.com">Free CSS Templates</a></li>
+                <li><a href="http://www.koflash.com">Websites Gallery</a></li>
+                <li><a href="http://www.flashmo.com/store">Premiun Templates</a></li>
+                <li><a href="http://www.templatemo.com/page/1">Website Layouts</a></li>
+				<li><a href="http://www.flashmo.com">Flash Templates</a></li>
+            </ul>
+ 
+        </div>
+        
+        <div class="col_w220 col_last">
+            <h5>Links</h5>
+            <ul class="tmo_list">
+                <li><a href="#">Aenean rhoncus leo ut eros</a></li>
+                <li><a href="#">Consectetur adipiscing elit</a></li>
+                <li><a href="#">Lorem ipsum dolor sit amet</a></li>
+                <li><a href="#">Pellentesque vel est ut leo</a></li>
+				<li><a href="#">Sed fringilla sollicitudin nisi</a></li>
+            </ul>    
+ 
+        </div>
+        
+        <div class="cleaner"></div>
+    </div> <!-- end of footer -->
+	
+    <div id="templatemo_copyright">
+    
+        Copyright © 2048 <a href="#">Your Company Name</a> | <a href="http://www.iwebsitetemplate.com" target="_parent">Website Templates</a> by <a href="http://www.templatemo.com" target="_parent">Free CSS Templates</a>
+    
+    </div>
+</div>
+</div> <!-- templatemo_wrapper -->
+</div><!-- templatemo_wrapper_outer -->
+</form>
+</body>
+</html>
