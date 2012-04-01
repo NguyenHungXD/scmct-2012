@@ -39,10 +39,10 @@
 	background:#f2f2f2; 
 }
 #featured li.ui-tabs-selected{ 
-	background:url('images/content_slider/selected-item.gif') top left no-repeat;  
+	background:url('/images/content_slider/selected-item.gif') top left no-repeat;  
 }
 #featured ul.ui-tabs-nav li.ui-tabs-selected a{ 
-	background:url('images/content_slider/ui-tabs-nav-bg.png') top left no-repeat;  
+	background:url('/images/content_slider/ui-tabs-nav-bg.png') top left no-repeat;  
 }
 #featured .ui-tabs-panel{ 
 	width:580px; height:250px; 
@@ -52,7 +52,7 @@
 	position:absolute; 
 	top:180px; left:0; 
 	height:70px; 
-	background: url('images/content_slider/transparent-bg.png'); 
+	background: url('/images/content_slider/transparent-bg.png'); 
 }
 #featured .info h2{ 
 	font-size:18px; font-family:Georgia, serif; 
