@@ -206,11 +206,65 @@
                         str3 = (str11 + "  string sqlSave= \" UPDATE " + sTableName + " SET " + str9 + "='" + str5 + "\"+s" + str9 + "+\"' WHERE " + table.Rows[0]["COLUMN_NAME"].ToString() + "='" + str8 + "\"+ s_" + table.Rows[0]["COLUMN_NAME"].ToString() + "+\"' \";\r\n bool OK=Exec(sqlSave)==1?true:false;\r\n return OK;\r\n") + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
                     }
                 }
-                str11 = (((((((((str3 + "#endregion\r\n //───────────────────────────────────────────────────────────────────────────────────────\r\n") + " public static DataTable dtGetAll() \r\n" + " {\r\n") + "        string sqlSelect=\" SELECT * FROM " + sTableName + " \" ;\r\n") + "        return GetTable(sqlSelect) ;\r\n") + " }\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n")
+                str11 = str3 + "#endregion\r\n"
+                    + "//───────────────────────────────────────────────────────────────────────────────────────\r\n"
+                    + " public static DataTable dtGetTableAll() \r\n"
+                    + " {\r\n"
+                    + "       return  dtGetTableAll(null, null);\r\n"
+                    + " }\r\n"
+                    + "public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)\r\n"
+                    + "{\r\n"
+                    + "   string sqlSelect = \" SELECT * FROM " + sTableName + "\";\r\n"
+                    + "   if (!string.IsNullOrEmpty(sWhere))\r\n"
+                    + "      sqlSelect += \" where \" + sWhere; \r\n"
+                    + "   string order = \"\";\r\n"
+                    + "   if (orderFields != null && orderFields.Length > 0)\r\n"
+                    + "     order = string.Join(\",\", orderFields);\r\n"
+                    + "   if (order != \"\")\r\n"
+                    + "      sqlSelect += \" ORDER BY \" + order;\r\n"
+                    + "   return GetTable(sqlSelect);\r\n"
+                    + "}\r\n"
+                    + "//───────────────────────────────────────────────────────────────────────────────────────\r\n"
+                    + "//───────────────────────────────────────────────────────────────────────────────────────\r\n" 
+                    + "public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)\r\n"
+                    + "{\r\n"
+                    + " string field = \"\";\r\n"
+                    + " if (fields != null && fields.Length > 0)\r\n"
+                    + "    field = string.Join(\",\", fields);\r\n"
+                    + " else field = \"*\";\r\n"
+                    + " string sqlSelect = string.Format(\" SELECT {0} FROM {1} \", field, \""+sTableName+"\");\r\n"
+                    + " if (!string.IsNullOrEmpty(sWhere))\r\n"
+                    + "    sqlSelect += \" where \" + sWhere;\r\n"
+                    + " string order = \"\";\r\n"
+                    + " if (orderFields != null && orderFields.Length > 0)\r\n"
+                    + "    order = string.Join(\",\", orderFields);\r\n"
+                    + " if (order != \"\")\r\n"
+                    + "    sqlSelect += \" ORDER BY \" + order;\r\n"
+                    + " return GetTable(sqlSelect);\r\n"
+                    + " }\r\n"
+                    + " public static DataTable dtGetTableFields(params string[] fields)\r\n"
+                    + " {\r\n"
+                    + "    return dtGetTableFields(null, null, fields);\r\n"
+                    + " }\r\n"
+                    + " public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)\r\n"
+                    + " {\r\n"
+                    + "    return dtGetTableFields(null, orderFields, fields);\r\n"
+                    + " }\r\n"
 
-                    + "   private static DataTable dt_" + sTableName + ";\r\n") + "   public static bool Change_dt_" + sTableName + " = true;\r\n") + "   public static bool AllowAutoChange = true;\r\n") + "   public static DataTable get_" + sTableName + "()\r\n") + "   {\r\n";
-                str11 = (((((((((str3 + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + " public static DataTable dtGetAll() \r\n" + " {\r\n") + "        string sqlSelect=\" SELECT * FROM " + sTableName + " \" ;\r\n") + "        return GetTable(sqlSelect) ;\r\n") + " }\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + "   private static DataTable dt_" + sTableName + ";\r\n") + "   public static bool Change_dt_" + sTableName + " = true;\r\n") + "   public static bool AllowAutoChange = true;\r\n") + "   public static DataTable get_" + sTableName + "()\r\n") + "   {\r\n";
-                str3 = (((((((str11 + "   if (dt_" + sTableName + " == null || Change_dt_" + sTableName + " == true)\r\n") + "   {\r\n") + "   dt_" + sTableName + " = dtGetAll();\r\n") + "   Change_dt_" + sTableName + " = true && AllowAutoChange ;\r\n") + "   }\r\n") + "   return dt_" + sTableName + ";\r\n") + "   }\r\n") + "   //───────────────────────────────────────────────────────────────────────────────────────\r\n" + "}  \r\n } ";
+                    + "//───────────────────────────────────────────────────────────────────────────────────────\r\n"
+                    + "   private static DataTable dt_" + sTableName + ";\r\n"
+                    + "   public static bool Change_dt_" + sTableName + " = true;\r\n"
+                    + "   public static bool AllowAutoChange = true;\r\n"
+                    + "   public static DataTable get_" + sTableName + "()\r\n"
+                    + "   {\r\n";
+                str3 = str11 + "   if (dt_" + sTableName + " == null || Change_dt_" + sTableName + " == true)\r\n"
+                    + "     {\r\n" + "   dt_" + sTableName + " = dtGetTableAll();\r\n"
+                    + "         Change_dt_" + sTableName + " = true && AllowAutoChange ;\r\n"
+                    + "     }\r\n"
+                    + "     return dt_" + sTableName + ";\r\n"
+                    + "   }\r\n"
+                    + "   //───────────────────────────────────────────────────────────────────────────────────────\r\n"
+                    + "}  \r\n } ";
                 writer.WriteLine(str3);
                 writer.Close();
             }
@@ -289,7 +343,7 @@
             }
         }
 
-        public static void CreateStaticClass(string sPrefixNameSpace,DataTable dt, string sPath)
+        public static void CreateStaticClass(string sPrefixNameSpace, DataTable dt, string sPath)
         {
             string contents = "namespace " + sPrefixNameSpace + ".Objects {\r\n public class TBLS{\r\n";
             for (int i = 0; i < dt.Rows.Count; i++)
@@ -314,11 +368,11 @@
                 contents = contents + "    " + table2.Rows[j][0].ToString() + "\r\n,";
             }
             contents = (contents.Remove(contents.Length - 1, 1) + " } \r\n") + "}// end class \r\n" + "}// end name space \r\n";
-            if (!Directory.Exists(sPath + "\\"+sPrefixNameSpace + ".Objects"))
+            if (!Directory.Exists(sPath + "\\" + sPrefixNameSpace + ".Objects"))
             {
-                Directory.CreateDirectory(sPath + "\\"+sPrefixNameSpace + ".Objects");
+                Directory.CreateDirectory(sPath + "\\" + sPrefixNameSpace + ".Objects");
             }
-            File.WriteAllText(sPath + "\\"+sPrefixNameSpace + ".Objects\\z_TBLS.CS", contents);
+            File.WriteAllText(sPath + "\\" + sPrefixNameSpace + ".Objects\\z_TBLS.CS", contents);
         }
     }
 }
