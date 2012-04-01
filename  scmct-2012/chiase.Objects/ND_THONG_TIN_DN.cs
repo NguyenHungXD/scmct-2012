@@ -25,33 +25,19 @@ using System;
    public string MEM_ID;
    #region DataColumn Name ;
  public static  string cl_USERID="USERID" ;
- public static  string cl_USERID_VN="USERID";
  public static  string cl_USERNAME="USERNAME" ;
- public static  string cl_USERNAME_VN="USERNAME";
  public static  string cl_PWD="PWD" ;
- public static  string cl_PWD_VN="PWD";
  public static  string cl_PWD1="PWD1" ;
- public static  string cl_PWD1_VN="PWD1";
  public static  string cl_PWD2="PWD2" ;
- public static  string cl_PWD2_VN="PWD2";
  public static  string cl_BLAST="BLAST" ;
- public static  string cl_BLAST_VN="BLAST";
  public static  string cl_LASTED_ACCESS="LASTED_ACCESS" ;
- public static  string cl_LASTED_ACCESS_VN="LASTED_ACCESS";
  public static  string cl_CREATED_BY="CREATED_BY" ;
- public static  string cl_CREATED_BY_VN="CREATED_BY";
  public static  string cl_CREATED_DATE="CREATED_DATE" ;
- public static  string cl_CREATED_DATE_VN="CREATED_DATE";
  public static  string cl_EDITED_BY="EDITED_BY" ;
- public static  string cl_EDITED_BY_VN="EDITED_BY";
  public static  string cl_EDITED_DATE="EDITED_DATE" ;
- public static  string cl_EDITED_DATE_VN="EDITED_DATE";
  public static  string cl_ISCHANGEPWD_BIT="ISCHANGEPWD_BIT" ;
- public static  string cl_ISCHANGEPWD_BIT_VN="ISCHANGEPWD_BIT";
  public static  string cl_ISACTIVE_BIT="ISACTIVE_BIT" ;
- public static  string cl_ISACTIVE_BIT_VN="ISACTIVE_BIT";
  public static  string cl_MEM_ID="MEM_ID" ;
- public static  string cl_MEM_ID_VN="MEM_ID";
  #endregion;
 //───────────────────────────────────────────────────────────────────────────────────────
        public ND_THONG_TIN_DN() {}
@@ -88,7 +74,7 @@ using System;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
        public static ND_THONG_TIN_DN Create_ND_THONG_TIN_DN ( string sUSERID  ){
-    DataTable dt=dtSearchByUSERID(sUSERID) ;
+    DataTable dt=SearchByUSERID(sUSERID) ;
     if(dt!=null && dt.Rows.Count>0) 
       return new ND_THONG_TIN_DN(dt.DefaultView,0);
       return null;
@@ -117,140 +103,140 @@ using System;
          this.MEM_ID= dv[pos][13].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByUSERID(string sUSERID)
+ public static DataTable SearchByUSERID(string sUSERID)
 {
           string sqlSelect= s_Select()+ " WHERE USERID  ="+ sUSERID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByUSERID(string sUSERID,string sMatch)
+ public static DataTable SearchByUSERID(string sUSERID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE USERID"+ sMatch +sUSERID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByUSERNAME(string sUSERNAME)
+ public static DataTable SearchByUSERNAME(string sUSERNAME)
 {
           string sqlSelect= s_Select()+ " WHERE USERNAME  Like N'%"+ sUSERNAME + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByPWD(string sPWD)
+ public static DataTable SearchByPWD(string sPWD)
 {
           string sqlSelect= s_Select()+ " WHERE PWD  Like N'%"+ sPWD + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByPWD1(string sPWD1)
+ public static DataTable SearchByPWD1(string sPWD1)
 {
           string sqlSelect= s_Select()+ " WHERE PWD1  Like N'%"+ sPWD1 + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByPWD2(string sPWD2)
+ public static DataTable SearchByPWD2(string sPWD2)
 {
           string sqlSelect= s_Select()+ " WHERE PWD2  Like N'%"+ sPWD2 + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByBLAST(string sBLAST)
+ public static DataTable SearchByBLAST(string sBLAST)
 {
           string sqlSelect= s_Select()+ " WHERE BLAST  Like N'%"+ sBLAST + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByLASTED_ACCESS(string sLASTED_ACCESS)
+ public static DataTable SearchByLASTED_ACCESS(string sLASTED_ACCESS)
 {
           string sqlSelect= s_Select()+ " WHERE LASTED_ACCESS  ="+ sLASTED_ACCESS + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByLASTED_ACCESS(string sLASTED_ACCESS,string sMatch)
+ public static DataTable SearchByLASTED_ACCESS(string sLASTED_ACCESS,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE LASTED_ACCESS"+ sMatch +sLASTED_ACCESS + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByCREATED_BY(string sCREATED_BY)
+ public static DataTable SearchByCREATED_BY(string sCREATED_BY)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_BY  ="+ sCREATED_BY + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByCREATED_BY(string sCREATED_BY,string sMatch)
+ public static DataTable SearchByCREATED_BY(string sCREATED_BY,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_BY"+ sMatch +sCREATED_BY + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByCREATED_DATE(string sCREATED_DATE)
+ public static DataTable SearchByCREATED_DATE(string sCREATED_DATE)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_DATE  ="+ sCREATED_DATE + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByCREATED_DATE(string sCREATED_DATE,string sMatch)
+ public static DataTable SearchByCREATED_DATE(string sCREATED_DATE,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_DATE"+ sMatch +sCREATED_DATE + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByEDITED_BY(string sEDITED_BY)
+ public static DataTable SearchByEDITED_BY(string sEDITED_BY)
 {
           string sqlSelect= s_Select()+ " WHERE EDITED_BY  ="+ sEDITED_BY + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByEDITED_BY(string sEDITED_BY,string sMatch)
+ public static DataTable SearchByEDITED_BY(string sEDITED_BY,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE EDITED_BY"+ sMatch +sEDITED_BY + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByEDITED_DATE(string sEDITED_DATE)
+ public static DataTable SearchByEDITED_DATE(string sEDITED_DATE)
 {
           string sqlSelect= s_Select()+ " WHERE EDITED_DATE  ="+ sEDITED_DATE + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByEDITED_DATE(string sEDITED_DATE,string sMatch)
+ public static DataTable SearchByEDITED_DATE(string sEDITED_DATE,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE EDITED_DATE"+ sMatch +sEDITED_DATE + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByISCHANGEPWD_BIT(string sISCHANGEPWD_BIT)
+ public static DataTable SearchByISCHANGEPWD_BIT(string sISCHANGEPWD_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE ISCHANGEPWD_BIT  Like N'%"+ sISCHANGEPWD_BIT + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByISACTIVE_BIT(string sISACTIVE_BIT)
+ public static DataTable SearchByISACTIVE_BIT(string sISACTIVE_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE ISACTIVE_BIT  Like N'%"+ sISACTIVE_BIT + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByMEM_ID(string sMEM_ID)
+ public static DataTable SearchByMEM_ID(string sMEM_ID)
 {
           string sqlSelect= s_Select()+ " WHERE MEM_ID  ="+ sMEM_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByMEM_ID(string sMEM_ID,string sMatch)
+ public static DataTable SearchByMEM_ID(string sMEM_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE MEM_ID"+ sMatch +sMEM_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearch( string sUSERID
+ public static DataTable Search( string sUSERID
             , string sUSERNAME
             , string sPWD
             , string sPWD1
@@ -358,7 +344,7 @@ string  sUSERNAME
  +tem_sISCHANGEPWD_BIT+","
  +tem_sISACTIVE_BIT+","
  +tem_sMEM_ID +")";
-             bool OK = Exec(sqlSave)==1?true:false;
+             bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
           ND_THONG_TIN_DN newND_THONG_TIN_DN= new ND_THONG_TIN_DN();
@@ -423,7 +409,7 @@ public bool  Save_Object(string sUSERNAME
  +"ISCHANGEPWD_BIT ="+tem_sISCHANGEPWD_BIT+","
  +"ISACTIVE_BIT ="+tem_sISACTIVE_BIT+","
  +"MEM_ID ="+tem_sMEM_ID+" WHERE USERID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.USERID,"bigint identity");;
-              bool OK = Exec(sqlSave)==1?true:false;
+              bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
                 this.USERNAME=sUSERNAME;
@@ -446,7 +432,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_USERID(string sUSERID)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET USERID='"+ sUSERID+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.USERID=sUSERID;
@@ -457,7 +443,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_USERNAME(string sUSERNAME)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET USERNAME='N"+ sUSERNAME+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.USERNAME=sUSERNAME;
@@ -468,7 +454,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_PWD(string sPWD)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET PWD='N"+ sPWD+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.PWD=sPWD;
@@ -479,7 +465,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_PWD1(string sPWD1)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET PWD1='N"+ sPWD1+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.PWD1=sPWD1;
@@ -490,7 +476,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_PWD2(string sPWD2)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET PWD2='N"+ sPWD2+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.PWD2=sPWD2;
@@ -501,7 +487,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_BLAST(string sBLAST)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET BLAST='N"+ sBLAST+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.BLAST=sBLAST;
@@ -512,7 +498,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_LASTED_ACCESS(string sLASTED_ACCESS)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET LASTED_ACCESS='"+ sLASTED_ACCESS+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.LASTED_ACCESS=sLASTED_ACCESS;
@@ -523,7 +509,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_CREATED_BY(string sCREATED_BY)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET CREATED_BY='"+ sCREATED_BY+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.CREATED_BY=sCREATED_BY;
@@ -534,7 +520,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_CREATED_DATE(string sCREATED_DATE)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET CREATED_DATE='"+ sCREATED_DATE+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.CREATED_DATE=sCREATED_DATE;
@@ -545,7 +531,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_EDITED_BY(string sEDITED_BY)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET EDITED_BY='"+ sEDITED_BY+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.EDITED_BY=sEDITED_BY;
@@ -556,7 +542,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_EDITED_DATE(string sEDITED_DATE)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET EDITED_DATE='"+ sEDITED_DATE+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.EDITED_DATE=sEDITED_DATE;
@@ -567,7 +553,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_ISCHANGEPWD_BIT(string sISCHANGEPWD_BIT)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET ISCHANGEPWD_BIT='N"+ sISCHANGEPWD_BIT+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ISCHANGEPWD_BIT=sISCHANGEPWD_BIT;
@@ -578,7 +564,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_ISACTIVE_BIT(string sISACTIVE_BIT)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET ISACTIVE_BIT='N"+ sISACTIVE_BIT+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ISACTIVE_BIT=sISACTIVE_BIT;
@@ -589,7 +575,7 @@ public bool  Save_Object(string sUSERNAME
  public bool Update_MEM_ID(string sMEM_ID)
 {
     string sqlSave= " UPDATE ND_THONG_TIN_DN SET MEM_ID='"+ sMEM_ID+ "' WHERE USERID='"+ this.USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.MEM_ID=sMEM_ID;
@@ -602,101 +588,101 @@ public bool  Save_Object(string sUSERNAME
  public static bool Update_USERNAME(string sUSERNAME,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET USERNAME='N"+sUSERNAME+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_PWD(string sPWD,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET PWD='N"+sPWD+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_PWD1(string sPWD1,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET PWD1='N"+sPWD1+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_PWD2(string sPWD2,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET PWD2='N"+sPWD2+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_BLAST(string sBLAST,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET BLAST='N"+sBLAST+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_LASTED_ACCESS(string sLASTED_ACCESS,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET LASTED_ACCESS='"+sLASTED_ACCESS+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_CREATED_BY(string sCREATED_BY,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET CREATED_BY='"+sCREATED_BY+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_CREATED_DATE(string sCREATED_DATE,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET CREATED_DATE='"+sCREATED_DATE+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_EDITED_BY(string sEDITED_BY,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET EDITED_BY='"+sEDITED_BY+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_EDITED_DATE(string sEDITED_DATE,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET EDITED_DATE='"+sEDITED_DATE+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_ISCHANGEPWD_BIT(string sISCHANGEPWD_BIT,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET ISCHANGEPWD_BIT='N"+sISCHANGEPWD_BIT+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_ISACTIVE_BIT(string sISACTIVE_BIT,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET ISACTIVE_BIT='N"+sISACTIVE_BIT+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_MEM_ID(string sMEM_ID,string s_USERID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_DN SET MEM_ID='"+sMEM_ID+"' WHERE USERID='"+ s_USERID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 #endregion
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtGetTableAll() 
+ public static DataTable GetTableAll() 
  {
-       return  dtGetTableAll(null, null);
+       return  GetTableAll(null, null);
  }
-public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)
+public static DataTable GetTableAll(string sWhere, params string[] orderFields)
 {
    string sqlSelect = " SELECT * FROM ND_THONG_TIN_DN";
    if (!string.IsNullOrEmpty(sWhere))
@@ -710,7 +696,7 @@ public static DataTable dtGetTableAll(string sWhere, params string[] orderFields
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
-public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)
+public static DataTable GetTableFields(string sWhere, string[] orderFields, params string[] fields)
 {
  string field = "";
  if (fields != null && fields.Length > 0)
@@ -726,13 +712,13 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
     sqlSelect += " ORDER BY " + order;
  return GetTable(sqlSelect);
  }
- public static DataTable dtGetTableFields(params string[] fields)
+ public static DataTable GetTableFields(params string[] fields)
  {
-    return dtGetTableFields(null, null, fields);
+    return GetTableFields(null, null, fields);
  }
- public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)
+ public static DataTable GetTableFields(string[] orderFields, params string[] fields)
  {
-    return dtGetTableFields(null, orderFields, fields);
+    return GetTableFields(null, orderFields, fields);
  }
 //───────────────────────────────────────────────────────────────────────────────────────
    private static DataTable dt_ND_THONG_TIN_DN;
@@ -742,7 +728,7 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
    {
    if (dt_ND_THONG_TIN_DN == null || Change_dt_ND_THONG_TIN_DN == true)
      {
-   dt_ND_THONG_TIN_DN = dtGetTableAll();
+   dt_ND_THONG_TIN_DN = GetTableAll();
          Change_dt_ND_THONG_TIN_DN = true && AllowAutoChange ;
      }
      return dt_ND_THONG_TIN_DN;

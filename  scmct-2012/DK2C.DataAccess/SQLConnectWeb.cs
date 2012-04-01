@@ -427,6 +427,52 @@
                 return "";
             }
         }
+        #region from database
+
+        public static DataTable Fill(DataTable table, String sql, params Object[] parameters)
+        {
+            SqlCommand command = SQLConnectWeb.CreateCommand(sql, parameters);
+            new SqlDataAdapter(command).Fill(table);
+            command.Connection.Close();
+
+            return table;
+        }
+        public static SqlCommand CreateCommand(String sql, params Object[] parameters)
+        {
+            SqlCommand command = new SqlCommand(sql, SQLConnectWeb.GetConnection());
+            for (int i = 0; i < parameters.Length; i += 2)
+            {
+                command.Parameters.AddWithValue(parameters[i].ToString(), parameters[i + 1]);
+            }
+            return command;
+        }
+        public static DataTable GetTableParmams(String sql, params Object[] parameters)
+        {
+            return SQLConnectWeb.Fill(new DataTable(), sql, parameters);
+        }
+        public static int ExecuteNonQuery(String sql, params Object[] parameters)
+        {
+            SqlCommand command = SQLConnectWeb.CreateCommand(sql, parameters);
+
+            command.Connection.Open();
+            int rows = command.ExecuteNonQuery();
+            command.Connection.Close();
+
+            return rows;
+        }
+
+        public static object ExecuteScalar(String sql, params Object[] parameters)
+        {
+            SqlCommand command = SQLConnectWeb.CreateCommand(sql, parameters);
+
+            command.Connection.Open();
+            object value = command.ExecuteScalar();
+            command.Connection.Close();
+
+            return value;
+        }
+
+        #endregion
     }
 }
 

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using chiase.Objects;
 
 namespace chiase
 {
@@ -20,8 +21,8 @@ namespace chiase
         }
         public void display()
         {
-            String sql = "Select id,title, description from BV_DM_CHU_DE_BV order by sort ";
-            DataTable table = Database.GetData(sql);
+            DataTable table = BV_DM_CHU_DE_BV.GetTableFields(new string[] { BV_DM_CHU_DE_BV.cl_SORT },
+                BV_DM_CHU_DE_BV.cl_ID, BV_DM_CHU_DE_BV.cl_TITLE, BV_DM_CHU_DE_BV.cl_DESCRIPTION);
             DataList1.DataSource = table;
             DataList1.DataBind();
         
@@ -32,9 +33,9 @@ namespace chiase
             GridView GridView1 = (GridView)e.Item.FindControl("GridView1");
             DataRowView RowView = (DataRowView)e.Item.DataItem;
             if (RowView == null) return;
-            long id = (long)RowView.Row["id"];
-            String sql = "SELECT tieu_de,noi_dung FROM bv_bai_viet WHERE CHU_DE_ID=@v_id order by sort";
-            DataTable baiviet = Database.GetData(sql, "@v_id", id);
+            long id = (long)RowView.Row[BV_DM_CHU_DE_BV.cl_ID];
+            DataTable baiviet = BV_BAI_VIET.GetTableFields(BV_BAI_VIET.cl_CHU_DE_ID + "=" + id,
+                new string[] { BV_BAI_VIET.cl_SORT }, BV_BAI_VIET.cl_TIEU_DE, BV_BAI_VIET.cl_NOI_DUNG);
 
             GridView1.DataSource = baiviet;
             GridView1.DataBind();

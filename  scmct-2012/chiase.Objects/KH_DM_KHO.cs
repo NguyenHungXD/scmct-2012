@@ -17,17 +17,11 @@ using System;
    public string VISIBLE_BIT;
    #region DataColumn Name ;
  public static  string cl_ID="ID" ;
- public static  string cl_ID_VN="ID";
  public static  string cl_NAME="NAME" ;
- public static  string cl_NAME_VN="NAME";
  public static  string cl_DIA_CHI="DIA_CHI" ;
- public static  string cl_DIA_CHI_VN="DIA_CHI";
  public static  string cl_DIEN_THOAI="DIEN_THOAI" ;
- public static  string cl_DIEN_THOAI_VN="DIEN_THOAI";
  public static  string cl_NGUOI_QUAN_LY="NGUOI_QUAN_LY" ;
- public static  string cl_NGUOI_QUAN_LY_VN="NGUOI_QUAN_LY";
  public static  string cl_VISIBLE_BIT="VISIBLE_BIT" ;
- public static  string cl_VISIBLE_BIT_VN="VISIBLE_BIT";
  #endregion;
 //───────────────────────────────────────────────────────────────────────────────────────
        public KH_DM_KHO() {}
@@ -48,7 +42,7 @@ using System;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
        public static KH_DM_KHO Create_KH_DM_KHO ( string sID  ){
-    DataTable dt=dtSearchByID(sID) ;
+    DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
       return new KH_DM_KHO(dt.DefaultView,0);
       return null;
@@ -69,50 +63,50 @@ using System;
          this.VISIBLE_BIT= dv[pos][5].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByID(string sID)
+ public static DataTable SearchByID(string sID)
 {
           string sqlSelect= s_Select()+ " WHERE ID  ="+ sID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByID(string sID,string sMatch)
+ public static DataTable SearchByID(string sID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE ID"+ sMatch +sID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNAME(string sNAME)
+ public static DataTable SearchByNAME(string sNAME)
 {
           string sqlSelect= s_Select()+ " WHERE NAME  Like N'%"+ sNAME + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByDIA_CHI(string sDIA_CHI)
+ public static DataTable SearchByDIA_CHI(string sDIA_CHI)
 {
           string sqlSelect= s_Select()+ " WHERE DIA_CHI  Like N'%"+ sDIA_CHI + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByDIEN_THOAI(string sDIEN_THOAI)
+ public static DataTable SearchByDIEN_THOAI(string sDIEN_THOAI)
 {
           string sqlSelect= s_Select()+ " WHERE DIEN_THOAI  Like N'%"+ sDIEN_THOAI + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNGUOI_QUAN_LY(string sNGUOI_QUAN_LY)
+ public static DataTable SearchByNGUOI_QUAN_LY(string sNGUOI_QUAN_LY)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_QUAN_LY  Like N'%"+ sNGUOI_QUAN_LY + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByVISIBLE_BIT(string sVISIBLE_BIT)
+ public static DataTable SearchByVISIBLE_BIT(string sVISIBLE_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE VISIBLE_BIT  Like N'%"+ sVISIBLE_BIT + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearch( string sID
+ public static DataTable Search( string sID
             , string sNAME
             , string sDIA_CHI
             , string sDIEN_THOAI
@@ -164,7 +158,7 @@ string  sNAME
  +tem_sDIEN_THOAI+","
  +tem_sNGUOI_QUAN_LY+","
  +tem_sVISIBLE_BIT +")";
-             bool OK = Exec(sqlSave)==1?true:false;
+             bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
           KH_DM_KHO newKH_DM_KHO= new KH_DM_KHO();
@@ -197,7 +191,7 @@ public bool  Save_Object(string sNAME
  +"DIEN_THOAI ="+tem_sDIEN_THOAI+","
  +"NGUOI_QUAN_LY ="+tem_sNGUOI_QUAN_LY+","
  +"VISIBLE_BIT ="+tem_sVISIBLE_BIT+" WHERE ID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.ID,"bigint identity");;
-              bool OK = Exec(sqlSave)==1?true:false;
+              bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
                 this.NAME=sNAME;
@@ -212,7 +206,7 @@ public bool  Save_Object(string sNAME
  public bool Update_ID(string sID)
 {
     string sqlSave= " UPDATE KH_DM_KHO SET ID='"+ sID+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ID=sID;
@@ -223,7 +217,7 @@ public bool  Save_Object(string sNAME
  public bool Update_NAME(string sNAME)
 {
     string sqlSave= " UPDATE KH_DM_KHO SET NAME='N"+ sNAME+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.NAME=sNAME;
@@ -234,7 +228,7 @@ public bool  Save_Object(string sNAME
  public bool Update_DIA_CHI(string sDIA_CHI)
 {
     string sqlSave= " UPDATE KH_DM_KHO SET DIA_CHI='N"+ sDIA_CHI+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.DIA_CHI=sDIA_CHI;
@@ -245,7 +239,7 @@ public bool  Save_Object(string sNAME
  public bool Update_DIEN_THOAI(string sDIEN_THOAI)
 {
     string sqlSave= " UPDATE KH_DM_KHO SET DIEN_THOAI='N"+ sDIEN_THOAI+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.DIEN_THOAI=sDIEN_THOAI;
@@ -256,7 +250,7 @@ public bool  Save_Object(string sNAME
  public bool Update_NGUOI_QUAN_LY(string sNGUOI_QUAN_LY)
 {
     string sqlSave= " UPDATE KH_DM_KHO SET NGUOI_QUAN_LY='N"+ sNGUOI_QUAN_LY+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.NGUOI_QUAN_LY=sNGUOI_QUAN_LY;
@@ -267,7 +261,7 @@ public bool  Save_Object(string sNAME
  public bool Update_VISIBLE_BIT(string sVISIBLE_BIT)
 {
     string sqlSave= " UPDATE KH_DM_KHO SET VISIBLE_BIT='N"+ sVISIBLE_BIT+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.VISIBLE_BIT=sVISIBLE_BIT;
@@ -280,45 +274,45 @@ public bool  Save_Object(string sNAME
  public static bool Update_NAME(string sNAME,string s_ID)
 {
   string sqlSave= " UPDATE KH_DM_KHO SET NAME='N"+sNAME+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_DIA_CHI(string sDIA_CHI,string s_ID)
 {
   string sqlSave= " UPDATE KH_DM_KHO SET DIA_CHI='N"+sDIA_CHI+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_DIEN_THOAI(string sDIEN_THOAI,string s_ID)
 {
   string sqlSave= " UPDATE KH_DM_KHO SET DIEN_THOAI='N"+sDIEN_THOAI+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_NGUOI_QUAN_LY(string sNGUOI_QUAN_LY,string s_ID)
 {
   string sqlSave= " UPDATE KH_DM_KHO SET NGUOI_QUAN_LY='N"+sNGUOI_QUAN_LY+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_VISIBLE_BIT(string sVISIBLE_BIT,string s_ID)
 {
   string sqlSave= " UPDATE KH_DM_KHO SET VISIBLE_BIT='N"+sVISIBLE_BIT+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 #endregion
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtGetTableAll() 
+ public static DataTable GetTableAll() 
  {
-       return  dtGetTableAll(null, null);
+       return  GetTableAll(null, null);
  }
-public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)
+public static DataTable GetTableAll(string sWhere, params string[] orderFields)
 {
    string sqlSelect = " SELECT * FROM KH_DM_KHO";
    if (!string.IsNullOrEmpty(sWhere))
@@ -332,7 +326,7 @@ public static DataTable dtGetTableAll(string sWhere, params string[] orderFields
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
-public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)
+public static DataTable GetTableFields(string sWhere, string[] orderFields, params string[] fields)
 {
  string field = "";
  if (fields != null && fields.Length > 0)
@@ -348,13 +342,13 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
     sqlSelect += " ORDER BY " + order;
  return GetTable(sqlSelect);
  }
- public static DataTable dtGetTableFields(params string[] fields)
+ public static DataTable GetTableFields(params string[] fields)
  {
-    return dtGetTableFields(null, null, fields);
+    return GetTableFields(null, null, fields);
  }
- public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)
+ public static DataTable GetTableFields(string[] orderFields, params string[] fields)
  {
-    return dtGetTableFields(null, orderFields, fields);
+    return GetTableFields(null, orderFields, fields);
  }
 //───────────────────────────────────────────────────────────────────────────────────────
    private static DataTable dt_KH_DM_KHO;
@@ -364,7 +358,7 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
    {
    if (dt_KH_DM_KHO == null || Change_dt_KH_DM_KHO == true)
      {
-   dt_KH_DM_KHO = dtGetTableAll();
+   dt_KH_DM_KHO = GetTableAll();
          Change_dt_KH_DM_KHO = true && AllowAutoChange ;
      }
      return dt_KH_DM_KHO;

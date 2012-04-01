@@ -38,9 +38,7 @@
                 str3 = str3 + "   #region DataColumn Name ;\r\n";
                 for (num = 0; num < table.Rows.Count; num++)
                 {
-                    str11 = str3;
-                    str11 = str11 + " public static  string cl_" + table.Rows[num]["COLUMN_NAME"].ToString() + "=\"" + table.Rows[num]["COLUMN_NAME"].ToString() + "\" ;\r\n";
-                    str3 = str11 + " public static  string cl_" + table.Rows[num]["COLUMN_NAME"].ToString() + "_VN=\"" + table.Rows[num]["COLUMN_NAME"].ToString() + "\";\r\n";
+                    str3 += " public static  string cl_" + table.Rows[num]["COLUMN_NAME"].ToString() + "=\"" + table.Rows[num]["COLUMN_NAME"].ToString() + "\" ;\r\n";
                 }
                 str3 = (((str3 + " #endregion;\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + "       public " + sTableName + "() {}\r\n") + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + "       public " + sTableName + "(\r\n";
                 for (num = 0; num < table.Rows.Count; num++)
@@ -55,7 +53,7 @@
                 }
                 str11 = str3 + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
                 str11 = str11 + "       public static " + sTableName + " Create_" + sTableName + " ( string s" + table.Rows[0]["COLUMN_NAME"].ToString() + "  ){\r\n";
-                str3 = ((((((((str11 + "    DataTable dt=dtSearchBy" + table.Rows[0]["COLUMN_NAME"].ToString() + "(s" + table.Rows[0]["COLUMN_NAME"].ToString() + ") ;\r\n") + "    if(dt!=null && dt.Rows.Count>0) \r\n") + "      return new " + sTableName + "(dt.DefaultView,0);\r\n") + "      return null;\r\n") + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + "   private static string s_Select()\r\n" + "    {\r\n") + "   return \" SELECT T.* FROM " + sTableName + " AS T\";\r\n") + "    }\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + " public " + sTableName + "( DataView dv,int pos)\r\n{\r\n";
+                str3 = ((((((((str11 + "    DataTable dt=SearchBy" + table.Rows[0]["COLUMN_NAME"].ToString() + "(s" + table.Rows[0]["COLUMN_NAME"].ToString() + ") ;\r\n") + "    if(dt!=null && dt.Rows.Count>0) \r\n") + "      return new " + sTableName + "(dt.DefaultView,0);\r\n") + "      return null;\r\n") + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + "   private static string s_Select()\r\n" + "    {\r\n") + "   return \" SELECT T.* FROM " + sTableName + " AS T\";\r\n") + "    }\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + " public " + sTableName + "( DataView dv,int pos)\r\n{\r\n";
                 for (num = 0; num < table.Rows.Count; num++)
                 {
                     str11 = str3;
@@ -77,7 +75,7 @@
                         str5 = "N";
                     }
                     str11 = str3;
-                    str3 = (str11 + " public static DataTable dtSearchBy" + table.Rows[num]["COLUMN_NAME"].ToString() + "(string s" + table.Rows[num]["COLUMN_NAME"].ToString() + ")\r\n{\r\n") + "          string sqlSelect= s_Select()+ \" WHERE " + str4;
+                    str3 = (str11 + " public static DataTable SearchBy" + table.Rows[num]["COLUMN_NAME"].ToString() + "(string s" + table.Rows[num]["COLUMN_NAME"].ToString() + ")\r\n{\r\n") + "          string sqlSelect= s_Select()+ \" WHERE " + str4;
                     if (!flag)
                     {
                         str11 = str3;
@@ -91,10 +89,10 @@
                     if (flag)
                     {
                         str11 = str3 + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
-                        str3 = ((((str11 + " public static DataTable dtSearchBy" + table.Rows[num]["COLUMN_NAME"].ToString() + "(string s" + table.Rows[num]["COLUMN_NAME"].ToString() + ",string sMatch)\r\n{\r\n") + "          string sqlSelect= s_Select()+ \" WHERE " + str4) + "\"+ sMatch +s" + str4 + " + \"\"; \r\n") + "          DataTable dt=GetTable(sqlSelect) ;\r\n") + "          return dt; \r\n }" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
+                        str3 = ((((str11 + " public static DataTable SearchBy" + table.Rows[num]["COLUMN_NAME"].ToString() + "(string s" + table.Rows[num]["COLUMN_NAME"].ToString() + ",string sMatch)\r\n{\r\n") + "          string sqlSelect= s_Select()+ \" WHERE " + str4) + "\"+ sMatch +s" + str4 + " + \"\"; \r\n") + "          DataTable dt=GetTable(sqlSelect) ;\r\n") + "          return dt; \r\n }" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
                     }
                 }
-                str3 = str3 + " public static DataTable dtSearch(";
+                str3 = str3 + " public static DataTable Search(";
                 for (num = 0; num < table.Rows.Count; num++)
                 {
                     str3 = str3 + " string s" + table.Rows[num]["COLUMN_NAME"].ToString() + "\r\n            ,";
@@ -187,7 +185,7 @@
                     }
                     str11 = str3;
                     str11 = (str11 + " public bool Update_" + str9 + "(string s" + str9 + ")\r\n") + "{\r\n";
-                    str3 = (str11 + "    string sqlSave= \" UPDATE " + sTableName + " SET " + str9 + "='" + str5 + "\"+ s" + str9 + "+ \"' WHERE " + table.Rows[0]["COLUMN_NAME"].ToString() + "='" + str8 + "\"+ this." + table.Rows[0]["COLUMN_NAME"].ToString() + "+\"' \";\r\n bool OK=Exec(sqlSave)==1?true:false;\r\n if(OK)\r\n {\r\n    this." + str9 + "=s" + str9 + ";\r\n }\r\n return OK;\r\n") + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
+                    str3 = (str11 + "    string sqlSave= \" UPDATE " + sTableName + " SET " + str9 + "='" + str5 + "\"+ s" + str9 + "+ \"' WHERE " + table.Rows[0]["COLUMN_NAME"].ToString() + "='" + str8 + "\"+ this." + table.Rows[0]["COLUMN_NAME"].ToString() + "+\"' \";\r\n bool OK=Exec(sqlSave)>=1?true:false;\r\n if(OK)\r\n {\r\n    this." + str9 + "=s" + str9 + ";\r\n }\r\n return OK;\r\n") + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
                 }
                 str3 = str3 + " #endregion\r\n" + " #region Update DataColumn  Static \r\n";
                 for (num = 0; num < table.Rows.Count; num++)
@@ -203,16 +201,16 @@
                     {
                         str11 = str3;
                         str11 = (str11 + " public static bool Update_" + str9 + "(string s" + str9 + ",string s_" + table.Rows[0]["COLUMN_NAME"].ToString() + ")\r\n") + "{\r\n";
-                        str3 = (str11 + "  string sqlSave= \" UPDATE " + sTableName + " SET " + str9 + "='" + str5 + "\"+s" + str9 + "+\"' WHERE " + table.Rows[0]["COLUMN_NAME"].ToString() + "='" + str8 + "\"+ s_" + table.Rows[0]["COLUMN_NAME"].ToString() + "+\"' \";\r\n bool OK=Exec(sqlSave)==1?true:false;\r\n return OK;\r\n") + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
+                        str3 = (str11 + "  string sqlSave= \" UPDATE " + sTableName + " SET " + str9 + "='" + str5 + "\"+s" + str9 + "+\"' WHERE " + table.Rows[0]["COLUMN_NAME"].ToString() + "='" + str8 + "\"+ s_" + table.Rows[0]["COLUMN_NAME"].ToString() + "+\"' \";\r\n bool OK=Exec(sqlSave)>=1?true:false;\r\n return OK;\r\n") + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
                     }
                 }
                 str11 = str3 + "#endregion\r\n"
                     + "//───────────────────────────────────────────────────────────────────────────────────────\r\n"
-                    + " public static DataTable dtGetTableAll() \r\n"
+                    + " public static DataTable GetTableAll() \r\n"
                     + " {\r\n"
-                    + "       return  dtGetTableAll(null, null);\r\n"
+                    + "       return  GetTableAll(null, null);\r\n"
                     + " }\r\n"
-                    + "public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)\r\n"
+                    + "public static DataTable GetTableAll(string sWhere, params string[] orderFields)\r\n"
                     + "{\r\n"
                     + "   string sqlSelect = \" SELECT * FROM " + sTableName + "\";\r\n"
                     + "   if (!string.IsNullOrEmpty(sWhere))\r\n"
@@ -226,7 +224,7 @@
                     + "}\r\n"
                     + "//───────────────────────────────────────────────────────────────────────────────────────\r\n"
                     + "//───────────────────────────────────────────────────────────────────────────────────────\r\n" 
-                    + "public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)\r\n"
+                    + "public static DataTable GetTableFields(string sWhere, string[] orderFields, params string[] fields)\r\n"
                     + "{\r\n"
                     + " string field = \"\";\r\n"
                     + " if (fields != null && fields.Length > 0)\r\n"
@@ -242,13 +240,13 @@
                     + "    sqlSelect += \" ORDER BY \" + order;\r\n"
                     + " return GetTable(sqlSelect);\r\n"
                     + " }\r\n"
-                    + " public static DataTable dtGetTableFields(params string[] fields)\r\n"
+                    + " public static DataTable GetTableFields(params string[] fields)\r\n"
                     + " {\r\n"
-                    + "    return dtGetTableFields(null, null, fields);\r\n"
+                    + "    return GetTableFields(null, null, fields);\r\n"
                     + " }\r\n"
-                    + " public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)\r\n"
+                    + " public static DataTable GetTableFields(string[] orderFields, params string[] fields)\r\n"
                     + " {\r\n"
-                    + "    return dtGetTableFields(null, orderFields, fields);\r\n"
+                    + "    return GetTableFields(null, orderFields, fields);\r\n"
                     + " }\r\n"
 
                     + "//───────────────────────────────────────────────────────────────────────────────────────\r\n"
@@ -258,7 +256,7 @@
                     + "   public static DataTable get_" + sTableName + "()\r\n"
                     + "   {\r\n";
                 str3 = str11 + "   if (dt_" + sTableName + " == null || Change_dt_" + sTableName + " == true)\r\n"
-                    + "     {\r\n" + "   dt_" + sTableName + " = dtGetTableAll();\r\n"
+                    + "     {\r\n" + "   dt_" + sTableName + " = GetTableAll();\r\n"
                     + "         Change_dt_" + sTableName + " = true && AllowAutoChange ;\r\n"
                     + "     }\r\n"
                     + "     return dt_" + sTableName + ";\r\n"
@@ -299,7 +297,7 @@
             str2 = str2.Substring(0, num4);
             str = str + ") VALUES(\"\r\n +";
             str2 = str2 + " +\")\"";
-            return ((str3 + "\r\n             string sqlSave=" + str + str2 + ";\r\n") + "             bool OK = Exec(sqlSave)==1?true:false;\r\n");
+            return ((str3 + "\r\n             string sqlSave=" + str + str2 + ";\r\n") + "             bool OK = Exec(sqlSave)>=1?true:false;\r\n");
         }
 
         public static string GetUpdateText(string sTableName)
@@ -332,7 +330,7 @@
             }
             str8 = str2;
             str2 = str8 + "+\" WHERE " + table.Rows[0]["COLUMN_NAME"].ToString() + "=\"+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this." + table.Rows[0]["COLUMN_NAME"].ToString() + ",\"" + table.Rows[0]["TYPE_NAME"].ToString() + "\");";
-            return ((str + "\r\n string sqlSave=" + str2 + ";\r\n") + "              bool OK = Exec(sqlSave)==1?true:false;\r\n");
+            return ((str + "\r\n string sqlSave=" + str2 + ";\r\n") + "              bool OK = Exec(sqlSave)>=1?true:false;\r\n");
         }
 
         public static void CreateDOObject(string sPrefixNameSpace, DataTable dt, string sPath)

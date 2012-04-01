@@ -13,9 +13,7 @@ using System;
    public string USERID;
    #region DataColumn Name ;
  public static  string cl_GROUPID="GROUPID" ;
- public static  string cl_GROUPID_VN="GROUPID";
  public static  string cl_USERID="USERID" ;
- public static  string cl_USERID_VN="USERID";
  #endregion;
 //───────────────────────────────────────────────────────────────────────────────────────
        public ND_NHOM_ND() {}
@@ -28,7 +26,7 @@ using System;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
        public static ND_NHOM_ND Create_ND_NHOM_ND ( string sGROUPID  ){
-    DataTable dt=dtSearchByGROUPID(sGROUPID) ;
+    DataTable dt=SearchByGROUPID(sGROUPID) ;
     if(dt!=null && dt.Rows.Count>0) 
       return new ND_NHOM_ND(dt.DefaultView,0);
       return null;
@@ -45,33 +43,33 @@ using System;
          this.USERID= dv[pos][1].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByGROUPID(string sGROUPID)
+ public static DataTable SearchByGROUPID(string sGROUPID)
 {
           string sqlSelect= s_Select()+ " WHERE GROUPID  ="+ sGROUPID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByGROUPID(string sGROUPID,string sMatch)
+ public static DataTable SearchByGROUPID(string sGROUPID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE GROUPID"+ sMatch +sGROUPID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByUSERID(string sUSERID)
+ public static DataTable SearchByUSERID(string sUSERID)
 {
           string sqlSelect= s_Select()+ " WHERE USERID  ="+ sUSERID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByUSERID(string sUSERID,string sMatch)
+ public static DataTable SearchByUSERID(string sUSERID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE USERID"+ sMatch +sUSERID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearch( string sGROUPID
+ public static DataTable Search( string sGROUPID
             , string sUSERID
             )
  {
@@ -99,7 +97,7 @@ string  sGROUPID
         +                   "USERID) VALUES("
  +tem_sGROUPID+","
  +tem_sUSERID +")";
-             bool OK = Exec(sqlSave)==1?true:false;
+             bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
           ND_NHOM_ND newND_NHOM_ND= new ND_NHOM_ND();
@@ -117,7 +115,7 @@ public bool  Save_Object(string sGROUPID
               string tem_sUSERID=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sUSERID,"bigint");
 
  string sqlSave=" UPDATE ND_NHOM_ND SET "+"USERID ="+tem_sUSERID+" WHERE GROUPID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.GROUPID,"bigint");;
-              bool OK = Exec(sqlSave)==1?true:false;
+              bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
                 this.USERID=sUSERID;
@@ -128,7 +126,7 @@ public bool  Save_Object(string sGROUPID
  public bool Update_GROUPID(string sGROUPID)
 {
     string sqlSave= " UPDATE ND_NHOM_ND SET GROUPID='"+ sGROUPID+ "' WHERE GROUPID='"+ this.GROUPID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.GROUPID=sGROUPID;
@@ -139,7 +137,7 @@ public bool  Save_Object(string sGROUPID
  public bool Update_USERID(string sUSERID)
 {
     string sqlSave= " UPDATE ND_NHOM_ND SET USERID='"+ sUSERID+ "' WHERE GROUPID='"+ this.GROUPID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.USERID=sUSERID;
@@ -152,24 +150,24 @@ public bool  Save_Object(string sGROUPID
  public static bool Update_GROUPID(string sGROUPID,string s_GROUPID)
 {
   string sqlSave= " UPDATE ND_NHOM_ND SET GROUPID='"+sGROUPID+"' WHERE GROUPID='"+ s_GROUPID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_USERID(string sUSERID,string s_GROUPID)
 {
   string sqlSave= " UPDATE ND_NHOM_ND SET USERID='"+sUSERID+"' WHERE GROUPID='"+ s_GROUPID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 #endregion
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtGetTableAll() 
+ public static DataTable GetTableAll() 
  {
-       return  dtGetTableAll(null, null);
+       return  GetTableAll(null, null);
  }
-public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)
+public static DataTable GetTableAll(string sWhere, params string[] orderFields)
 {
    string sqlSelect = " SELECT * FROM ND_NHOM_ND";
    if (!string.IsNullOrEmpty(sWhere))
@@ -183,7 +181,7 @@ public static DataTable dtGetTableAll(string sWhere, params string[] orderFields
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
-public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)
+public static DataTable GetTableFields(string sWhere, string[] orderFields, params string[] fields)
 {
  string field = "";
  if (fields != null && fields.Length > 0)
@@ -199,13 +197,13 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
     sqlSelect += " ORDER BY " + order;
  return GetTable(sqlSelect);
  }
- public static DataTable dtGetTableFields(params string[] fields)
+ public static DataTable GetTableFields(params string[] fields)
  {
-    return dtGetTableFields(null, null, fields);
+    return GetTableFields(null, null, fields);
  }
- public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)
+ public static DataTable GetTableFields(string[] orderFields, params string[] fields)
  {
-    return dtGetTableFields(null, orderFields, fields);
+    return GetTableFields(null, orderFields, fields);
  }
 //───────────────────────────────────────────────────────────────────────────────────────
    private static DataTable dt_ND_NHOM_ND;
@@ -215,7 +213,7 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
    {
    if (dt_ND_NHOM_ND == null || Change_dt_ND_NHOM_ND == true)
      {
-   dt_ND_NHOM_ND = dtGetTableAll();
+   dt_ND_NHOM_ND = GetTableAll();
          Change_dt_ND_NHOM_ND = true && AllowAutoChange ;
      }
      return dt_ND_NHOM_ND;

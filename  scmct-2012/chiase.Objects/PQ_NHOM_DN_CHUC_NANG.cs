@@ -17,17 +17,11 @@ using System;
    public string ISDELETE_BIT;
    #region DataColumn Name ;
  public static  string cl_FEATUREID="FEATUREID" ;
- public static  string cl_FEATUREID_VN="FEATUREID";
  public static  string cl_GROUPID="GROUPID" ;
- public static  string cl_GROUPID_VN="GROUPID";
  public static  string cl_ISREAD_BIT="ISREAD_BIT" ;
- public static  string cl_ISREAD_BIT_VN="ISREAD_BIT";
  public static  string cl_ISINSERT_BIT="ISINSERT_BIT" ;
- public static  string cl_ISINSERT_BIT_VN="ISINSERT_BIT";
  public static  string cl_ISUPDATE_BIT="ISUPDATE_BIT" ;
- public static  string cl_ISUPDATE_BIT_VN="ISUPDATE_BIT";
  public static  string cl_ISDELETE_BIT="ISDELETE_BIT" ;
- public static  string cl_ISDELETE_BIT_VN="ISDELETE_BIT";
  #endregion;
 //───────────────────────────────────────────────────────────────────────────────────────
        public PQ_NHOM_DN_CHUC_NANG() {}
@@ -48,7 +42,7 @@ using System;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
        public static PQ_NHOM_DN_CHUC_NANG Create_PQ_NHOM_DN_CHUC_NANG ( string sFEATUREID  ){
-    DataTable dt=dtSearchByFEATUREID(sFEATUREID) ;
+    DataTable dt=SearchByFEATUREID(sFEATUREID) ;
     if(dt!=null && dt.Rows.Count>0) 
       return new PQ_NHOM_DN_CHUC_NANG(dt.DefaultView,0);
       return null;
@@ -69,57 +63,57 @@ using System;
          this.ISDELETE_BIT= dv[pos][5].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByFEATUREID(string sFEATUREID)
+ public static DataTable SearchByFEATUREID(string sFEATUREID)
 {
           string sqlSelect= s_Select()+ " WHERE FEATUREID  ="+ sFEATUREID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByFEATUREID(string sFEATUREID,string sMatch)
+ public static DataTable SearchByFEATUREID(string sFEATUREID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE FEATUREID"+ sMatch +sFEATUREID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByGROUPID(string sGROUPID)
+ public static DataTable SearchByGROUPID(string sGROUPID)
 {
           string sqlSelect= s_Select()+ " WHERE GROUPID  ="+ sGROUPID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByGROUPID(string sGROUPID,string sMatch)
+ public static DataTable SearchByGROUPID(string sGROUPID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE GROUPID"+ sMatch +sGROUPID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByISREAD_BIT(string sISREAD_BIT)
+ public static DataTable SearchByISREAD_BIT(string sISREAD_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE ISREAD_BIT  Like N'%"+ sISREAD_BIT + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByISINSERT_BIT(string sISINSERT_BIT)
+ public static DataTable SearchByISINSERT_BIT(string sISINSERT_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE ISINSERT_BIT  Like N'%"+ sISINSERT_BIT + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByISUPDATE_BIT(string sISUPDATE_BIT)
+ public static DataTable SearchByISUPDATE_BIT(string sISUPDATE_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE ISUPDATE_BIT  Like N'%"+ sISUPDATE_BIT + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByISDELETE_BIT(string sISDELETE_BIT)
+ public static DataTable SearchByISDELETE_BIT(string sISDELETE_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE ISDELETE_BIT  Like N'%"+ sISDELETE_BIT + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearch( string sFEATUREID
+ public static DataTable Search( string sFEATUREID
             , string sGROUPID
             , string sISREAD_BIT
             , string sISINSERT_BIT
@@ -175,7 +169,7 @@ string  sFEATUREID
  +tem_sISINSERT_BIT+","
  +tem_sISUPDATE_BIT+","
  +tem_sISDELETE_BIT +")";
-             bool OK = Exec(sqlSave)==1?true:false;
+             bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
           PQ_NHOM_DN_CHUC_NANG newPQ_NHOM_DN_CHUC_NANG= new PQ_NHOM_DN_CHUC_NANG();
@@ -209,7 +203,7 @@ public bool  Save_Object(string sFEATUREID
  +"ISINSERT_BIT ="+tem_sISINSERT_BIT+","
  +"ISUPDATE_BIT ="+tem_sISUPDATE_BIT+","
  +"ISDELETE_BIT ="+tem_sISDELETE_BIT+" WHERE FEATUREID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.FEATUREID,"bigint");;
-              bool OK = Exec(sqlSave)==1?true:false;
+              bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
                 this.GROUPID=sGROUPID;
@@ -224,7 +218,7 @@ public bool  Save_Object(string sFEATUREID
  public bool Update_FEATUREID(string sFEATUREID)
 {
     string sqlSave= " UPDATE PQ_NHOM_DN_CHUC_NANG SET FEATUREID='"+ sFEATUREID+ "' WHERE FEATUREID='"+ this.FEATUREID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.FEATUREID=sFEATUREID;
@@ -235,7 +229,7 @@ public bool  Save_Object(string sFEATUREID
  public bool Update_GROUPID(string sGROUPID)
 {
     string sqlSave= " UPDATE PQ_NHOM_DN_CHUC_NANG SET GROUPID='"+ sGROUPID+ "' WHERE FEATUREID='"+ this.FEATUREID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.GROUPID=sGROUPID;
@@ -246,7 +240,7 @@ public bool  Save_Object(string sFEATUREID
  public bool Update_ISREAD_BIT(string sISREAD_BIT)
 {
     string sqlSave= " UPDATE PQ_NHOM_DN_CHUC_NANG SET ISREAD_BIT='N"+ sISREAD_BIT+ "' WHERE FEATUREID='"+ this.FEATUREID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ISREAD_BIT=sISREAD_BIT;
@@ -257,7 +251,7 @@ public bool  Save_Object(string sFEATUREID
  public bool Update_ISINSERT_BIT(string sISINSERT_BIT)
 {
     string sqlSave= " UPDATE PQ_NHOM_DN_CHUC_NANG SET ISINSERT_BIT='N"+ sISINSERT_BIT+ "' WHERE FEATUREID='"+ this.FEATUREID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ISINSERT_BIT=sISINSERT_BIT;
@@ -268,7 +262,7 @@ public bool  Save_Object(string sFEATUREID
  public bool Update_ISUPDATE_BIT(string sISUPDATE_BIT)
 {
     string sqlSave= " UPDATE PQ_NHOM_DN_CHUC_NANG SET ISUPDATE_BIT='N"+ sISUPDATE_BIT+ "' WHERE FEATUREID='"+ this.FEATUREID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ISUPDATE_BIT=sISUPDATE_BIT;
@@ -279,7 +273,7 @@ public bool  Save_Object(string sFEATUREID
  public bool Update_ISDELETE_BIT(string sISDELETE_BIT)
 {
     string sqlSave= " UPDATE PQ_NHOM_DN_CHUC_NANG SET ISDELETE_BIT='N"+ sISDELETE_BIT+ "' WHERE FEATUREID='"+ this.FEATUREID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ISDELETE_BIT=sISDELETE_BIT;
@@ -292,52 +286,52 @@ public bool  Save_Object(string sFEATUREID
  public static bool Update_FEATUREID(string sFEATUREID,string s_FEATUREID)
 {
   string sqlSave= " UPDATE PQ_NHOM_DN_CHUC_NANG SET FEATUREID='"+sFEATUREID+"' WHERE FEATUREID='"+ s_FEATUREID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_GROUPID(string sGROUPID,string s_FEATUREID)
 {
   string sqlSave= " UPDATE PQ_NHOM_DN_CHUC_NANG SET GROUPID='"+sGROUPID+"' WHERE FEATUREID='"+ s_FEATUREID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_ISREAD_BIT(string sISREAD_BIT,string s_FEATUREID)
 {
   string sqlSave= " UPDATE PQ_NHOM_DN_CHUC_NANG SET ISREAD_BIT='N"+sISREAD_BIT+"' WHERE FEATUREID='"+ s_FEATUREID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_ISINSERT_BIT(string sISINSERT_BIT,string s_FEATUREID)
 {
   string sqlSave= " UPDATE PQ_NHOM_DN_CHUC_NANG SET ISINSERT_BIT='N"+sISINSERT_BIT+"' WHERE FEATUREID='"+ s_FEATUREID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_ISUPDATE_BIT(string sISUPDATE_BIT,string s_FEATUREID)
 {
   string sqlSave= " UPDATE PQ_NHOM_DN_CHUC_NANG SET ISUPDATE_BIT='N"+sISUPDATE_BIT+"' WHERE FEATUREID='"+ s_FEATUREID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_ISDELETE_BIT(string sISDELETE_BIT,string s_FEATUREID)
 {
   string sqlSave= " UPDATE PQ_NHOM_DN_CHUC_NANG SET ISDELETE_BIT='N"+sISDELETE_BIT+"' WHERE FEATUREID='"+ s_FEATUREID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 #endregion
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtGetTableAll() 
+ public static DataTable GetTableAll() 
  {
-       return  dtGetTableAll(null, null);
+       return  GetTableAll(null, null);
  }
-public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)
+public static DataTable GetTableAll(string sWhere, params string[] orderFields)
 {
    string sqlSelect = " SELECT * FROM PQ_NHOM_DN_CHUC_NANG";
    if (!string.IsNullOrEmpty(sWhere))
@@ -351,7 +345,7 @@ public static DataTable dtGetTableAll(string sWhere, params string[] orderFields
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
-public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)
+public static DataTable GetTableFields(string sWhere, string[] orderFields, params string[] fields)
 {
  string field = "";
  if (fields != null && fields.Length > 0)
@@ -367,13 +361,13 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
     sqlSelect += " ORDER BY " + order;
  return GetTable(sqlSelect);
  }
- public static DataTable dtGetTableFields(params string[] fields)
+ public static DataTable GetTableFields(params string[] fields)
  {
-    return dtGetTableFields(null, null, fields);
+    return GetTableFields(null, null, fields);
  }
- public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)
+ public static DataTable GetTableFields(string[] orderFields, params string[] fields)
  {
-    return dtGetTableFields(null, orderFields, fields);
+    return GetTableFields(null, orderFields, fields);
  }
 //───────────────────────────────────────────────────────────────────────────────────────
    private static DataTable dt_PQ_NHOM_DN_CHUC_NANG;
@@ -383,7 +377,7 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
    {
    if (dt_PQ_NHOM_DN_CHUC_NANG == null || Change_dt_PQ_NHOM_DN_CHUC_NANG == true)
      {
-   dt_PQ_NHOM_DN_CHUC_NANG = dtGetTableAll();
+   dt_PQ_NHOM_DN_CHUC_NANG = GetTableAll();
          Change_dt_PQ_NHOM_DN_CHUC_NANG = true && AllowAutoChange ;
      }
      return dt_PQ_NHOM_DN_CHUC_NANG;

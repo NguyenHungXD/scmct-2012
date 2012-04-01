@@ -20,23 +20,14 @@ using System;
    public string PARENT_ID;
    #region DataColumn Name ;
  public static  string cl_ID="ID" ;
- public static  string cl_ID_VN="ID";
  public static  string cl_NAME="NAME" ;
- public static  string cl_NAME_VN="NAME";
  public static  string cl_DESCRIPTION="DESCRIPTION" ;
- public static  string cl_DESCRIPTION_VN="DESCRIPTION";
  public static  string cl_VISIBLE_BIT="VISIBLE_BIT" ;
- public static  string cl_VISIBLE_BIT_VN="VISIBLE_BIT";
  public static  string cl_ISREAD="ISREAD" ;
- public static  string cl_ISREAD_VN="ISREAD";
  public static  string cl_ISINSERT="ISINSERT" ;
- public static  string cl_ISINSERT_VN="ISINSERT";
  public static  string cl_ISDELETE="ISDELETE" ;
- public static  string cl_ISDELETE_VN="ISDELETE";
  public static  string cl_ISUPDATE="ISUPDATE" ;
- public static  string cl_ISUPDATE_VN="ISUPDATE";
  public static  string cl_PARENT_ID="PARENT_ID" ;
- public static  string cl_PARENT_ID_VN="PARENT_ID";
  #endregion;
 //───────────────────────────────────────────────────────────────────────────────────────
        public PQ_CHUC_NANG() {}
@@ -63,7 +54,7 @@ using System;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
        public static PQ_CHUC_NANG Create_PQ_CHUC_NANG ( string sID  ){
-    DataTable dt=dtSearchByID(sID) ;
+    DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
       return new PQ_CHUC_NANG(dt.DefaultView,0);
       return null;
@@ -87,75 +78,75 @@ using System;
          this.PARENT_ID= dv[pos][8].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByID(string sID)
+ public static DataTable SearchByID(string sID)
 {
           string sqlSelect= s_Select()+ " WHERE ID  ="+ sID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByID(string sID,string sMatch)
+ public static DataTable SearchByID(string sID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE ID"+ sMatch +sID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNAME(string sNAME)
+ public static DataTable SearchByNAME(string sNAME)
 {
           string sqlSelect= s_Select()+ " WHERE NAME  Like N'%"+ sNAME + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByDESCRIPTION(string sDESCRIPTION)
+ public static DataTable SearchByDESCRIPTION(string sDESCRIPTION)
 {
           string sqlSelect= s_Select()+ " WHERE DESCRIPTION  Like N'%"+ sDESCRIPTION + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByVISIBLE_BIT(string sVISIBLE_BIT)
+ public static DataTable SearchByVISIBLE_BIT(string sVISIBLE_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE VISIBLE_BIT  Like N'%"+ sVISIBLE_BIT + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByISREAD(string sISREAD)
+ public static DataTable SearchByISREAD(string sISREAD)
 {
           string sqlSelect= s_Select()+ " WHERE ISREAD  Like N'%"+ sISREAD + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByISINSERT(string sISINSERT)
+ public static DataTable SearchByISINSERT(string sISINSERT)
 {
           string sqlSelect= s_Select()+ " WHERE ISINSERT  Like N'%"+ sISINSERT + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByISDELETE(string sISDELETE)
+ public static DataTable SearchByISDELETE(string sISDELETE)
 {
           string sqlSelect= s_Select()+ " WHERE ISDELETE  Like N'%"+ sISDELETE + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByISUPDATE(string sISUPDATE)
+ public static DataTable SearchByISUPDATE(string sISUPDATE)
 {
           string sqlSelect= s_Select()+ " WHERE ISUPDATE  Like N'%"+ sISUPDATE + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByPARENT_ID(string sPARENT_ID)
+ public static DataTable SearchByPARENT_ID(string sPARENT_ID)
 {
           string sqlSelect= s_Select()+ " WHERE PARENT_ID  ="+ sPARENT_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByPARENT_ID(string sPARENT_ID,string sMatch)
+ public static DataTable SearchByPARENT_ID(string sPARENT_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE PARENT_ID"+ sMatch +sPARENT_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearch( string sID
+ public static DataTable Search( string sID
             , string sNAME
             , string sDESCRIPTION
             , string sVISIBLE_BIT
@@ -228,7 +219,7 @@ string  sNAME
  +tem_sISDELETE+","
  +tem_sISUPDATE+","
  +tem_sPARENT_ID +")";
-             bool OK = Exec(sqlSave)==1?true:false;
+             bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
           PQ_CHUC_NANG newPQ_CHUC_NANG= new PQ_CHUC_NANG();
@@ -273,7 +264,7 @@ public bool  Save_Object(string sNAME
  +"ISDELETE ="+tem_sISDELETE+","
  +"ISUPDATE ="+tem_sISUPDATE+","
  +"PARENT_ID ="+tem_sPARENT_ID+" WHERE ID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.ID,"bigint identity");;
-              bool OK = Exec(sqlSave)==1?true:false;
+              bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
                 this.NAME=sNAME;
@@ -291,7 +282,7 @@ public bool  Save_Object(string sNAME
  public bool Update_ID(string sID)
 {
     string sqlSave= " UPDATE PQ_CHUC_NANG SET ID='"+ sID+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ID=sID;
@@ -302,7 +293,7 @@ public bool  Save_Object(string sNAME
  public bool Update_NAME(string sNAME)
 {
     string sqlSave= " UPDATE PQ_CHUC_NANG SET NAME='N"+ sNAME+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.NAME=sNAME;
@@ -313,7 +304,7 @@ public bool  Save_Object(string sNAME
  public bool Update_DESCRIPTION(string sDESCRIPTION)
 {
     string sqlSave= " UPDATE PQ_CHUC_NANG SET DESCRIPTION='N"+ sDESCRIPTION+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.DESCRIPTION=sDESCRIPTION;
@@ -324,7 +315,7 @@ public bool  Save_Object(string sNAME
  public bool Update_VISIBLE_BIT(string sVISIBLE_BIT)
 {
     string sqlSave= " UPDATE PQ_CHUC_NANG SET VISIBLE_BIT='N"+ sVISIBLE_BIT+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.VISIBLE_BIT=sVISIBLE_BIT;
@@ -335,7 +326,7 @@ public bool  Save_Object(string sNAME
  public bool Update_ISREAD(string sISREAD)
 {
     string sqlSave= " UPDATE PQ_CHUC_NANG SET ISREAD='N"+ sISREAD+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ISREAD=sISREAD;
@@ -346,7 +337,7 @@ public bool  Save_Object(string sNAME
  public bool Update_ISINSERT(string sISINSERT)
 {
     string sqlSave= " UPDATE PQ_CHUC_NANG SET ISINSERT='N"+ sISINSERT+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ISINSERT=sISINSERT;
@@ -357,7 +348,7 @@ public bool  Save_Object(string sNAME
  public bool Update_ISDELETE(string sISDELETE)
 {
     string sqlSave= " UPDATE PQ_CHUC_NANG SET ISDELETE='N"+ sISDELETE+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ISDELETE=sISDELETE;
@@ -368,7 +359,7 @@ public bool  Save_Object(string sNAME
  public bool Update_ISUPDATE(string sISUPDATE)
 {
     string sqlSave= " UPDATE PQ_CHUC_NANG SET ISUPDATE='N"+ sISUPDATE+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ISUPDATE=sISUPDATE;
@@ -379,7 +370,7 @@ public bool  Save_Object(string sNAME
  public bool Update_PARENT_ID(string sPARENT_ID)
 {
     string sqlSave= " UPDATE PQ_CHUC_NANG SET PARENT_ID='"+ sPARENT_ID+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.PARENT_ID=sPARENT_ID;
@@ -392,66 +383,66 @@ public bool  Save_Object(string sNAME
  public static bool Update_NAME(string sNAME,string s_ID)
 {
   string sqlSave= " UPDATE PQ_CHUC_NANG SET NAME='N"+sNAME+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_DESCRIPTION(string sDESCRIPTION,string s_ID)
 {
   string sqlSave= " UPDATE PQ_CHUC_NANG SET DESCRIPTION='N"+sDESCRIPTION+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_VISIBLE_BIT(string sVISIBLE_BIT,string s_ID)
 {
   string sqlSave= " UPDATE PQ_CHUC_NANG SET VISIBLE_BIT='N"+sVISIBLE_BIT+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_ISREAD(string sISREAD,string s_ID)
 {
   string sqlSave= " UPDATE PQ_CHUC_NANG SET ISREAD='N"+sISREAD+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_ISINSERT(string sISINSERT,string s_ID)
 {
   string sqlSave= " UPDATE PQ_CHUC_NANG SET ISINSERT='N"+sISINSERT+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_ISDELETE(string sISDELETE,string s_ID)
 {
   string sqlSave= " UPDATE PQ_CHUC_NANG SET ISDELETE='N"+sISDELETE+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_ISUPDATE(string sISUPDATE,string s_ID)
 {
   string sqlSave= " UPDATE PQ_CHUC_NANG SET ISUPDATE='N"+sISUPDATE+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_PARENT_ID(string sPARENT_ID,string s_ID)
 {
   string sqlSave= " UPDATE PQ_CHUC_NANG SET PARENT_ID='"+sPARENT_ID+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 #endregion
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtGetTableAll() 
+ public static DataTable GetTableAll() 
  {
-       return  dtGetTableAll(null, null);
+       return  GetTableAll(null, null);
  }
-public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)
+public static DataTable GetTableAll(string sWhere, params string[] orderFields)
 {
    string sqlSelect = " SELECT * FROM PQ_CHUC_NANG";
    if (!string.IsNullOrEmpty(sWhere))
@@ -465,7 +456,7 @@ public static DataTable dtGetTableAll(string sWhere, params string[] orderFields
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
-public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)
+public static DataTable GetTableFields(string sWhere, string[] orderFields, params string[] fields)
 {
  string field = "";
  if (fields != null && fields.Length > 0)
@@ -481,13 +472,13 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
     sqlSelect += " ORDER BY " + order;
  return GetTable(sqlSelect);
  }
- public static DataTable dtGetTableFields(params string[] fields)
+ public static DataTable GetTableFields(params string[] fields)
  {
-    return dtGetTableFields(null, null, fields);
+    return GetTableFields(null, null, fields);
  }
- public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)
+ public static DataTable GetTableFields(string[] orderFields, params string[] fields)
  {
-    return dtGetTableFields(null, orderFields, fields);
+    return GetTableFields(null, orderFields, fields);
  }
 //───────────────────────────────────────────────────────────────────────────────────────
    private static DataTable dt_PQ_CHUC_NANG;
@@ -497,7 +488,7 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
    {
    if (dt_PQ_CHUC_NANG == null || Change_dt_PQ_CHUC_NANG == true)
      {
-   dt_PQ_CHUC_NANG = dtGetTableAll();
+   dt_PQ_CHUC_NANG = GetTableAll();
          Change_dt_PQ_CHUC_NANG = true && AllowAutoChange ;
      }
      return dt_PQ_CHUC_NANG;

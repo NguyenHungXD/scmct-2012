@@ -21,25 +21,15 @@ using System;
    public string EDITED_BY;
    #region DataColumn Name ;
  public static  string cl_ID="ID" ;
- public static  string cl_ID_VN="ID";
  public static  string cl_TITLE="TITLE" ;
- public static  string cl_TITLE_VN="TITLE";
  public static  string cl_VISIBLE_BIT="VISIBLE_BIT" ;
- public static  string cl_VISIBLE_BIT_VN="VISIBLE_BIT";
  public static  string cl_SORT="SORT" ;
- public static  string cl_SORT_VN="SORT";
  public static  string cl_STATUS="STATUS" ;
- public static  string cl_STATUS_VN="STATUS";
  public static  string cl_DESCRIPTION="DESCRIPTION" ;
- public static  string cl_DESCRIPTION_VN="DESCRIPTION";
  public static  string cl_CREATED_DATE="CREATED_DATE" ;
- public static  string cl_CREATED_DATE_VN="CREATED_DATE";
  public static  string cl_CREATED_BY="CREATED_BY" ;
- public static  string cl_CREATED_BY_VN="CREATED_BY";
  public static  string cl_EDITED_DATE="EDITED_DATE" ;
- public static  string cl_EDITED_DATE_VN="EDITED_DATE";
  public static  string cl_EDITED_BY="EDITED_BY" ;
- public static  string cl_EDITED_BY_VN="EDITED_BY";
  #endregion;
 //───────────────────────────────────────────────────────────────────────────────────────
        public BV_DM_CHU_DE_BV() {}
@@ -68,7 +58,7 @@ using System;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
        public static BV_DM_CHU_DE_BV Create_BV_DM_CHU_DE_BV ( string sID  ){
-    DataTable dt=dtSearchByID(sID) ;
+    DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
       return new BV_DM_CHU_DE_BV(dt.DefaultView,0);
       return null;
@@ -93,116 +83,116 @@ using System;
          this.EDITED_BY= dv[pos][9].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByID(string sID)
+ public static DataTable SearchByID(string sID)
 {
           string sqlSelect= s_Select()+ " WHERE ID  ="+ sID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByID(string sID,string sMatch)
+ public static DataTable SearchByID(string sID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE ID"+ sMatch +sID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByTITLE(string sTITLE)
+ public static DataTable SearchByTITLE(string sTITLE)
 {
           string sqlSelect= s_Select()+ " WHERE TITLE  Like N'%"+ sTITLE + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByVISIBLE_BIT(string sVISIBLE_BIT)
+ public static DataTable SearchByVISIBLE_BIT(string sVISIBLE_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE VISIBLE_BIT  Like N'%"+ sVISIBLE_BIT + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchBySORT(string sSORT)
+ public static DataTable SearchBySORT(string sSORT)
 {
           string sqlSelect= s_Select()+ " WHERE SORT  ="+ sSORT + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchBySORT(string sSORT,string sMatch)
+ public static DataTable SearchBySORT(string sSORT,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE SORT"+ sMatch +sSORT + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchBySTATUS(string sSTATUS)
+ public static DataTable SearchBySTATUS(string sSTATUS)
 {
           string sqlSelect= s_Select()+ " WHERE STATUS  ="+ sSTATUS + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchBySTATUS(string sSTATUS,string sMatch)
+ public static DataTable SearchBySTATUS(string sSTATUS,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE STATUS"+ sMatch +sSTATUS + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByDESCRIPTION(string sDESCRIPTION)
+ public static DataTable SearchByDESCRIPTION(string sDESCRIPTION)
 {
           string sqlSelect= s_Select()+ " WHERE DESCRIPTION  Like N'%"+ sDESCRIPTION + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByCREATED_DATE(string sCREATED_DATE)
+ public static DataTable SearchByCREATED_DATE(string sCREATED_DATE)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_DATE  ="+ sCREATED_DATE + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByCREATED_DATE(string sCREATED_DATE,string sMatch)
+ public static DataTable SearchByCREATED_DATE(string sCREATED_DATE,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_DATE"+ sMatch +sCREATED_DATE + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByCREATED_BY(string sCREATED_BY)
+ public static DataTable SearchByCREATED_BY(string sCREATED_BY)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_BY  ="+ sCREATED_BY + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByCREATED_BY(string sCREATED_BY,string sMatch)
+ public static DataTable SearchByCREATED_BY(string sCREATED_BY,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_BY"+ sMatch +sCREATED_BY + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByEDITED_DATE(string sEDITED_DATE)
+ public static DataTable SearchByEDITED_DATE(string sEDITED_DATE)
 {
           string sqlSelect= s_Select()+ " WHERE EDITED_DATE  ="+ sEDITED_DATE + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByEDITED_DATE(string sEDITED_DATE,string sMatch)
+ public static DataTable SearchByEDITED_DATE(string sEDITED_DATE,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE EDITED_DATE"+ sMatch +sEDITED_DATE + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByEDITED_BY(string sEDITED_BY)
+ public static DataTable SearchByEDITED_BY(string sEDITED_BY)
 {
           string sqlSelect= s_Select()+ " WHERE EDITED_BY  ="+ sEDITED_BY + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByEDITED_BY(string sEDITED_BY,string sMatch)
+ public static DataTable SearchByEDITED_BY(string sEDITED_BY,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE EDITED_BY"+ sMatch +sEDITED_BY + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearch( string sID
+ public static DataTable Search( string sID
             , string sTITLE
             , string sVISIBLE_BIT
             , string sSORT
@@ -282,7 +272,7 @@ string  sTITLE
  +tem_sCREATED_BY+","
  +tem_sEDITED_DATE+","
  +tem_sEDITED_BY +")";
-             bool OK = Exec(sqlSave)==1?true:false;
+             bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
           BV_DM_CHU_DE_BV newBV_DM_CHU_DE_BV= new BV_DM_CHU_DE_BV();
@@ -331,7 +321,7 @@ public bool  Save_Object(string sTITLE
  +"CREATED_BY ="+tem_sCREATED_BY+","
  +"EDITED_DATE ="+tem_sEDITED_DATE+","
  +"EDITED_BY ="+tem_sEDITED_BY+" WHERE ID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.ID,"bigint identity");;
-              bool OK = Exec(sqlSave)==1?true:false;
+              bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
                 this.TITLE=sTITLE;
@@ -350,7 +340,7 @@ public bool  Save_Object(string sTITLE
  public bool Update_ID(string sID)
 {
     string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET ID='"+ sID+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ID=sID;
@@ -361,7 +351,7 @@ public bool  Save_Object(string sTITLE
  public bool Update_TITLE(string sTITLE)
 {
     string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET TITLE='N"+ sTITLE+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.TITLE=sTITLE;
@@ -372,7 +362,7 @@ public bool  Save_Object(string sTITLE
  public bool Update_VISIBLE_BIT(string sVISIBLE_BIT)
 {
     string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET VISIBLE_BIT='N"+ sVISIBLE_BIT+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.VISIBLE_BIT=sVISIBLE_BIT;
@@ -383,7 +373,7 @@ public bool  Save_Object(string sTITLE
  public bool Update_SORT(string sSORT)
 {
     string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET SORT='"+ sSORT+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.SORT=sSORT;
@@ -394,7 +384,7 @@ public bool  Save_Object(string sTITLE
  public bool Update_STATUS(string sSTATUS)
 {
     string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET STATUS='"+ sSTATUS+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.STATUS=sSTATUS;
@@ -405,7 +395,7 @@ public bool  Save_Object(string sTITLE
  public bool Update_DESCRIPTION(string sDESCRIPTION)
 {
     string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET DESCRIPTION='N"+ sDESCRIPTION+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.DESCRIPTION=sDESCRIPTION;
@@ -416,7 +406,7 @@ public bool  Save_Object(string sTITLE
  public bool Update_CREATED_DATE(string sCREATED_DATE)
 {
     string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET CREATED_DATE='"+ sCREATED_DATE+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.CREATED_DATE=sCREATED_DATE;
@@ -427,7 +417,7 @@ public bool  Save_Object(string sTITLE
  public bool Update_CREATED_BY(string sCREATED_BY)
 {
     string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET CREATED_BY='"+ sCREATED_BY+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.CREATED_BY=sCREATED_BY;
@@ -438,7 +428,7 @@ public bool  Save_Object(string sTITLE
  public bool Update_EDITED_DATE(string sEDITED_DATE)
 {
     string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET EDITED_DATE='"+ sEDITED_DATE+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.EDITED_DATE=sEDITED_DATE;
@@ -449,7 +439,7 @@ public bool  Save_Object(string sTITLE
  public bool Update_EDITED_BY(string sEDITED_BY)
 {
     string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET EDITED_BY='"+ sEDITED_BY+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.EDITED_BY=sEDITED_BY;
@@ -462,73 +452,73 @@ public bool  Save_Object(string sTITLE
  public static bool Update_TITLE(string sTITLE,string s_ID)
 {
   string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET TITLE='N"+sTITLE+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_VISIBLE_BIT(string sVISIBLE_BIT,string s_ID)
 {
   string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET VISIBLE_BIT='N"+sVISIBLE_BIT+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_SORT(string sSORT,string s_ID)
 {
   string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET SORT='"+sSORT+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_STATUS(string sSTATUS,string s_ID)
 {
   string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET STATUS='"+sSTATUS+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_DESCRIPTION(string sDESCRIPTION,string s_ID)
 {
   string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET DESCRIPTION='N"+sDESCRIPTION+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_CREATED_DATE(string sCREATED_DATE,string s_ID)
 {
   string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET CREATED_DATE='"+sCREATED_DATE+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_CREATED_BY(string sCREATED_BY,string s_ID)
 {
   string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET CREATED_BY='"+sCREATED_BY+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_EDITED_DATE(string sEDITED_DATE,string s_ID)
 {
   string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET EDITED_DATE='"+sEDITED_DATE+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_EDITED_BY(string sEDITED_BY,string s_ID)
 {
   string sqlSave= " UPDATE BV_DM_CHU_DE_BV SET EDITED_BY='"+sEDITED_BY+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 #endregion
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtGetTableAll() 
+ public static DataTable GetTableAll() 
  {
-       return  dtGetTableAll(null, null);
+       return  GetTableAll(null, null);
  }
-public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)
+public static DataTable GetTableAll(string sWhere, params string[] orderFields)
 {
    string sqlSelect = " SELECT * FROM BV_DM_CHU_DE_BV";
    if (!string.IsNullOrEmpty(sWhere))
@@ -542,7 +532,7 @@ public static DataTable dtGetTableAll(string sWhere, params string[] orderFields
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
-public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)
+public static DataTable GetTableFields(string sWhere, string[] orderFields, params string[] fields)
 {
  string field = "";
  if (fields != null && fields.Length > 0)
@@ -558,13 +548,13 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
     sqlSelect += " ORDER BY " + order;
  return GetTable(sqlSelect);
  }
- public static DataTable dtGetTableFields(params string[] fields)
+ public static DataTable GetTableFields(params string[] fields)
  {
-    return dtGetTableFields(null, null, fields);
+    return GetTableFields(null, null, fields);
  }
- public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)
+ public static DataTable GetTableFields(string[] orderFields, params string[] fields)
  {
-    return dtGetTableFields(null, orderFields, fields);
+    return GetTableFields(null, orderFields, fields);
  }
 //───────────────────────────────────────────────────────────────────────────────────────
    private static DataTable dt_BV_DM_CHU_DE_BV;
@@ -574,7 +564,7 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
    {
    if (dt_BV_DM_CHU_DE_BV == null || Change_dt_BV_DM_CHU_DE_BV == true)
      {
-   dt_BV_DM_CHU_DE_BV = dtGetTableAll();
+   dt_BV_DM_CHU_DE_BV = GetTableAll();
          Change_dt_BV_DM_CHU_DE_BV = true && AllowAutoChange ;
      }
      return dt_BV_DM_CHU_DE_BV;

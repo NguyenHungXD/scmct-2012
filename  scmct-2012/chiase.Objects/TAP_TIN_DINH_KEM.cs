@@ -16,15 +16,10 @@ using System;
    public string BAI_VIET_ID;
    #region DataColumn Name ;
  public static  string cl_TTDK_ID="TTDK_ID" ;
- public static  string cl_TTDK_ID_VN="TTDK_ID";
  public static  string cl_TEN_TAP_TIN="TEN_TAP_TIN" ;
- public static  string cl_TEN_TAP_TIN_VN="TEN_TAP_TIN";
  public static  string cl_PATH="PATH" ;
- public static  string cl_PATH_VN="PATH";
  public static  string cl_SO_LUOT_TAI="SO_LUOT_TAI" ;
- public static  string cl_SO_LUOT_TAI_VN="SO_LUOT_TAI";
  public static  string cl_BAI_VIET_ID="BAI_VIET_ID" ;
- public static  string cl_BAI_VIET_ID_VN="BAI_VIET_ID";
  #endregion;
 //───────────────────────────────────────────────────────────────────────────────────────
        public TAP_TIN_DINH_KEM() {}
@@ -43,7 +38,7 @@ using System;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
        public static TAP_TIN_DINH_KEM Create_TAP_TIN_DINH_KEM ( string sTTDK_ID  ){
-    DataTable dt=dtSearchByTTDK_ID(sTTDK_ID) ;
+    DataTable dt=SearchByTTDK_ID(sTTDK_ID) ;
     if(dt!=null && dt.Rows.Count>0) 
       return new TAP_TIN_DINH_KEM(dt.DefaultView,0);
       return null;
@@ -63,58 +58,58 @@ using System;
          this.BAI_VIET_ID= dv[pos][4].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByTTDK_ID(string sTTDK_ID)
+ public static DataTable SearchByTTDK_ID(string sTTDK_ID)
 {
           string sqlSelect= s_Select()+ " WHERE TTDK_ID  ="+ sTTDK_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByTTDK_ID(string sTTDK_ID,string sMatch)
+ public static DataTable SearchByTTDK_ID(string sTTDK_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE TTDK_ID"+ sMatch +sTTDK_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByTEN_TAP_TIN(string sTEN_TAP_TIN)
+ public static DataTable SearchByTEN_TAP_TIN(string sTEN_TAP_TIN)
 {
           string sqlSelect= s_Select()+ " WHERE TEN_TAP_TIN  Like N'%"+ sTEN_TAP_TIN + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByPATH(string sPATH)
+ public static DataTable SearchByPATH(string sPATH)
 {
           string sqlSelect= s_Select()+ " WHERE PATH  Like N'%"+ sPATH + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchBySO_LUOT_TAI(string sSO_LUOT_TAI)
+ public static DataTable SearchBySO_LUOT_TAI(string sSO_LUOT_TAI)
 {
           string sqlSelect= s_Select()+ " WHERE SO_LUOT_TAI  ="+ sSO_LUOT_TAI + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchBySO_LUOT_TAI(string sSO_LUOT_TAI,string sMatch)
+ public static DataTable SearchBySO_LUOT_TAI(string sSO_LUOT_TAI,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE SO_LUOT_TAI"+ sMatch +sSO_LUOT_TAI + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByBAI_VIET_ID(string sBAI_VIET_ID)
+ public static DataTable SearchByBAI_VIET_ID(string sBAI_VIET_ID)
 {
           string sqlSelect= s_Select()+ " WHERE BAI_VIET_ID  ="+ sBAI_VIET_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByBAI_VIET_ID(string sBAI_VIET_ID,string sMatch)
+ public static DataTable SearchByBAI_VIET_ID(string sBAI_VIET_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE BAI_VIET_ID"+ sMatch +sBAI_VIET_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearch( string sTTDK_ID
+ public static DataTable Search( string sTTDK_ID
             , string sTEN_TAP_TIN
             , string sPATH
             , string sSO_LUOT_TAI
@@ -163,7 +158,7 @@ string  sTTDK_ID
  +tem_sPATH+","
  +tem_sSO_LUOT_TAI+","
  +tem_sBAI_VIET_ID +")";
-             bool OK = Exec(sqlSave)==1?true:false;
+             bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
           TAP_TIN_DINH_KEM newTAP_TIN_DINH_KEM= new TAP_TIN_DINH_KEM();
@@ -193,7 +188,7 @@ public bool  Save_Object(string sTTDK_ID
  +"PATH ="+tem_sPATH+","
  +"SO_LUOT_TAI ="+tem_sSO_LUOT_TAI+","
  +"BAI_VIET_ID ="+tem_sBAI_VIET_ID+" WHERE TTDK_ID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.TTDK_ID,"bigint");;
-              bool OK = Exec(sqlSave)==1?true:false;
+              bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
                 this.TEN_TAP_TIN=sTEN_TAP_TIN;
@@ -207,7 +202,7 @@ public bool  Save_Object(string sTTDK_ID
  public bool Update_TTDK_ID(string sTTDK_ID)
 {
     string sqlSave= " UPDATE TAP_TIN_DINH_KEM SET TTDK_ID='"+ sTTDK_ID+ "' WHERE TTDK_ID='"+ this.TTDK_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.TTDK_ID=sTTDK_ID;
@@ -218,7 +213,7 @@ public bool  Save_Object(string sTTDK_ID
  public bool Update_TEN_TAP_TIN(string sTEN_TAP_TIN)
 {
     string sqlSave= " UPDATE TAP_TIN_DINH_KEM SET TEN_TAP_TIN='N"+ sTEN_TAP_TIN+ "' WHERE TTDK_ID='"+ this.TTDK_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.TEN_TAP_TIN=sTEN_TAP_TIN;
@@ -229,7 +224,7 @@ public bool  Save_Object(string sTTDK_ID
  public bool Update_PATH(string sPATH)
 {
     string sqlSave= " UPDATE TAP_TIN_DINH_KEM SET PATH='N"+ sPATH+ "' WHERE TTDK_ID='"+ this.TTDK_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.PATH=sPATH;
@@ -240,7 +235,7 @@ public bool  Save_Object(string sTTDK_ID
  public bool Update_SO_LUOT_TAI(string sSO_LUOT_TAI)
 {
     string sqlSave= " UPDATE TAP_TIN_DINH_KEM SET SO_LUOT_TAI='"+ sSO_LUOT_TAI+ "' WHERE TTDK_ID='"+ this.TTDK_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.SO_LUOT_TAI=sSO_LUOT_TAI;
@@ -251,7 +246,7 @@ public bool  Save_Object(string sTTDK_ID
  public bool Update_BAI_VIET_ID(string sBAI_VIET_ID)
 {
     string sqlSave= " UPDATE TAP_TIN_DINH_KEM SET BAI_VIET_ID='"+ sBAI_VIET_ID+ "' WHERE TTDK_ID='"+ this.TTDK_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.BAI_VIET_ID=sBAI_VIET_ID;
@@ -264,45 +259,45 @@ public bool  Save_Object(string sTTDK_ID
  public static bool Update_TTDK_ID(string sTTDK_ID,string s_TTDK_ID)
 {
   string sqlSave= " UPDATE TAP_TIN_DINH_KEM SET TTDK_ID='"+sTTDK_ID+"' WHERE TTDK_ID='"+ s_TTDK_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_TEN_TAP_TIN(string sTEN_TAP_TIN,string s_TTDK_ID)
 {
   string sqlSave= " UPDATE TAP_TIN_DINH_KEM SET TEN_TAP_TIN='N"+sTEN_TAP_TIN+"' WHERE TTDK_ID='"+ s_TTDK_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_PATH(string sPATH,string s_TTDK_ID)
 {
   string sqlSave= " UPDATE TAP_TIN_DINH_KEM SET PATH='N"+sPATH+"' WHERE TTDK_ID='"+ s_TTDK_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_SO_LUOT_TAI(string sSO_LUOT_TAI,string s_TTDK_ID)
 {
   string sqlSave= " UPDATE TAP_TIN_DINH_KEM SET SO_LUOT_TAI='"+sSO_LUOT_TAI+"' WHERE TTDK_ID='"+ s_TTDK_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_BAI_VIET_ID(string sBAI_VIET_ID,string s_TTDK_ID)
 {
   string sqlSave= " UPDATE TAP_TIN_DINH_KEM SET BAI_VIET_ID='"+sBAI_VIET_ID+"' WHERE TTDK_ID='"+ s_TTDK_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 #endregion
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtGetTableAll() 
+ public static DataTable GetTableAll() 
  {
-       return  dtGetTableAll(null, null);
+       return  GetTableAll(null, null);
  }
-public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)
+public static DataTable GetTableAll(string sWhere, params string[] orderFields)
 {
    string sqlSelect = " SELECT * FROM TAP_TIN_DINH_KEM";
    if (!string.IsNullOrEmpty(sWhere))
@@ -316,7 +311,7 @@ public static DataTable dtGetTableAll(string sWhere, params string[] orderFields
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
-public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)
+public static DataTable GetTableFields(string sWhere, string[] orderFields, params string[] fields)
 {
  string field = "";
  if (fields != null && fields.Length > 0)
@@ -332,13 +327,13 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
     sqlSelect += " ORDER BY " + order;
  return GetTable(sqlSelect);
  }
- public static DataTable dtGetTableFields(params string[] fields)
+ public static DataTable GetTableFields(params string[] fields)
  {
-    return dtGetTableFields(null, null, fields);
+    return GetTableFields(null, null, fields);
  }
- public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)
+ public static DataTable GetTableFields(string[] orderFields, params string[] fields)
  {
-    return dtGetTableFields(null, orderFields, fields);
+    return GetTableFields(null, orderFields, fields);
  }
 //───────────────────────────────────────────────────────────────────────────────────────
    private static DataTable dt_TAP_TIN_DINH_KEM;
@@ -348,7 +343,7 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
    {
    if (dt_TAP_TIN_DINH_KEM == null || Change_dt_TAP_TIN_DINH_KEM == true)
      {
-   dt_TAP_TIN_DINH_KEM = dtGetTableAll();
+   dt_TAP_TIN_DINH_KEM = GetTableAll();
          Change_dt_TAP_TIN_DINH_KEM = true && AllowAutoChange ;
      }
      return dt_TAP_TIN_DINH_KEM;

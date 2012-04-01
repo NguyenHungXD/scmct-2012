@@ -14,11 +14,8 @@ using System;
    public string VISIBLE_BIT;
    #region DataColumn Name ;
  public static  string cl_ID="ID" ;
- public static  string cl_ID_VN="ID";
  public static  string cl_NAME="NAME" ;
- public static  string cl_NAME_VN="NAME";
  public static  string cl_VISIBLE_BIT="VISIBLE_BIT" ;
- public static  string cl_VISIBLE_BIT_VN="VISIBLE_BIT";
  #endregion;
 //───────────────────────────────────────────────────────────────────────────────────────
        public KH_DM_LY_DO_XUAT_KHO() {}
@@ -33,7 +30,7 @@ using System;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
        public static KH_DM_LY_DO_XUAT_KHO Create_KH_DM_LY_DO_XUAT_KHO ( string sID  ){
-    DataTable dt=dtSearchByID(sID) ;
+    DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
       return new KH_DM_LY_DO_XUAT_KHO(dt.DefaultView,0);
       return null;
@@ -51,32 +48,32 @@ using System;
          this.VISIBLE_BIT= dv[pos][2].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByID(string sID)
+ public static DataTable SearchByID(string sID)
 {
           string sqlSelect= s_Select()+ " WHERE ID  ="+ sID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByID(string sID,string sMatch)
+ public static DataTable SearchByID(string sID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE ID"+ sMatch +sID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNAME(string sNAME)
+ public static DataTable SearchByNAME(string sNAME)
 {
           string sqlSelect= s_Select()+ " WHERE NAME  Like N'%"+ sNAME + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByVISIBLE_BIT(string sVISIBLE_BIT)
+ public static DataTable SearchByVISIBLE_BIT(string sVISIBLE_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE VISIBLE_BIT  Like N'%"+ sVISIBLE_BIT + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearch( string sID
+ public static DataTable Search( string sID
             , string sNAME
             , string sVISIBLE_BIT
             )
@@ -107,7 +104,7 @@ string  sNAME
         +                   "VISIBLE_BIT) VALUES("
  +tem_sNAME+","
  +tem_sVISIBLE_BIT +")";
-             bool OK = Exec(sqlSave)==1?true:false;
+             bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
           KH_DM_LY_DO_XUAT_KHO newKH_DM_LY_DO_XUAT_KHO= new KH_DM_LY_DO_XUAT_KHO();
@@ -128,7 +125,7 @@ public bool  Save_Object(string sNAME
 
  string sqlSave=" UPDATE KH_DM_LY_DO_XUAT_KHO SET "+"NAME ="+tem_sNAME+","
  +"VISIBLE_BIT ="+tem_sVISIBLE_BIT+" WHERE ID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.ID,"bigint identity");;
-              bool OK = Exec(sqlSave)==1?true:false;
+              bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
                 this.NAME=sNAME;
@@ -140,7 +137,7 @@ public bool  Save_Object(string sNAME
  public bool Update_ID(string sID)
 {
     string sqlSave= " UPDATE KH_DM_LY_DO_XUAT_KHO SET ID='"+ sID+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ID=sID;
@@ -151,7 +148,7 @@ public bool  Save_Object(string sNAME
  public bool Update_NAME(string sNAME)
 {
     string sqlSave= " UPDATE KH_DM_LY_DO_XUAT_KHO SET NAME='N"+ sNAME+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.NAME=sNAME;
@@ -162,7 +159,7 @@ public bool  Save_Object(string sNAME
  public bool Update_VISIBLE_BIT(string sVISIBLE_BIT)
 {
     string sqlSave= " UPDATE KH_DM_LY_DO_XUAT_KHO SET VISIBLE_BIT='N"+ sVISIBLE_BIT+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.VISIBLE_BIT=sVISIBLE_BIT;
@@ -175,24 +172,24 @@ public bool  Save_Object(string sNAME
  public static bool Update_NAME(string sNAME,string s_ID)
 {
   string sqlSave= " UPDATE KH_DM_LY_DO_XUAT_KHO SET NAME='N"+sNAME+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_VISIBLE_BIT(string sVISIBLE_BIT,string s_ID)
 {
   string sqlSave= " UPDATE KH_DM_LY_DO_XUAT_KHO SET VISIBLE_BIT='N"+sVISIBLE_BIT+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 #endregion
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtGetTableAll() 
+ public static DataTable GetTableAll() 
  {
-       return  dtGetTableAll(null, null);
+       return  GetTableAll(null, null);
  }
-public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)
+public static DataTable GetTableAll(string sWhere, params string[] orderFields)
 {
    string sqlSelect = " SELECT * FROM KH_DM_LY_DO_XUAT_KHO";
    if (!string.IsNullOrEmpty(sWhere))
@@ -206,7 +203,7 @@ public static DataTable dtGetTableAll(string sWhere, params string[] orderFields
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
-public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)
+public static DataTable GetTableFields(string sWhere, string[] orderFields, params string[] fields)
 {
  string field = "";
  if (fields != null && fields.Length > 0)
@@ -222,13 +219,13 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
     sqlSelect += " ORDER BY " + order;
  return GetTable(sqlSelect);
  }
- public static DataTable dtGetTableFields(params string[] fields)
+ public static DataTable GetTableFields(params string[] fields)
  {
-    return dtGetTableFields(null, null, fields);
+    return GetTableFields(null, null, fields);
  }
- public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)
+ public static DataTable GetTableFields(string[] orderFields, params string[] fields)
  {
-    return dtGetTableFields(null, orderFields, fields);
+    return GetTableFields(null, orderFields, fields);
  }
 //───────────────────────────────────────────────────────────────────────────────────────
    private static DataTable dt_KH_DM_LY_DO_XUAT_KHO;
@@ -238,7 +235,7 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
    {
    if (dt_KH_DM_LY_DO_XUAT_KHO == null || Change_dt_KH_DM_LY_DO_XUAT_KHO == true)
      {
-   dt_KH_DM_LY_DO_XUAT_KHO = dtGetTableAll();
+   dt_KH_DM_LY_DO_XUAT_KHO = GetTableAll();
          Change_dt_KH_DM_LY_DO_XUAT_KHO = true && AllowAutoChange ;
      }
      return dt_KH_DM_LY_DO_XUAT_KHO;

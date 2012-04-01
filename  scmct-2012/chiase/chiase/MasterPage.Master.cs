@@ -8,6 +8,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using DK2C.DataAccess.Web;
+using chiase.Objects;
 
 namespace chiase
 {
@@ -27,11 +29,11 @@ namespace chiase
             MultiView1.ActiveViewIndex = (table == null) ? 0 : 1;
             if (table != null)
             {
-                lbl_username.Text = (String)table.Rows[0]["username"];
+                lbl_username.Text = (String)table.Rows[0][ND_THONG_TIN_DN.cl_USERNAME];
 
-                DateTime lasted_access = (DateTime)table.Rows[0]["lasted_access"];
+                DateTime lasted_access = (DateTime)table.Rows[0][ND_THONG_TIN_DN.cl_LASTED_ACCESS];
                 lbl_lasted_access.Text = lasted_access.ToString("dd/mm/yyyy hh:mm:ss tt");
-                String avatar_name = Convert.IsDBNull(table.Rows[0]["avatar_path"]) ? "default_img.gif" : (String)table.Rows[0]["avatar_path"];
+                String avatar_name = Convert.IsDBNull(table.Rows[0][ND_THONG_TIN_ND.cl_AVATAR_PATH]) ? "default_img.gif" : (String)table.Rows[0][ND_THONG_TIN_ND.cl_AVATAR_PATH];
                 imgUser.ImageUrl = "Images/avatars/" + avatar_name;
             }
         }
@@ -45,21 +47,34 @@ namespace chiase
 
         protected void btn_login_Click(object sender, EventArgs e)
         {
-            String sql = "SELECT a.*,b.*,c.* FROM ND_THONG_TIN_DN a,ND_THONG_TIN_ND b,ND_TEN_NHOM_ND c WHERE a.MEM_ID=b.ID and b.MEM_GROUP_ID = c.GROUPID AND username=@v_username AND pwd=@v_password";
-            String userId = txtUserID.Text;
-            String password = txtPassWord.Text;
-            DataTable table = Database.GetData(sql, "@v_username", userId, "@v_password", password);
+            bool ok=false;
+            String sql = string.Format(@"SELECT a.*,b.*,c.* 
+                         FROM ND_THONG_TIN_DN a
+                        INNER JOIN  ND_THONG_TIN_ND b ON  a.MEM_ID=b.ID
+                        INNER JOIN ND_TEN_NHOM_ND c ON  b.MEM_GROUP_ID = c.GROUPID
+                        WHERE username=N'{0}'", txtUserID.Text);
 
-            if (table.Rows.Count > 0)
+
+            DataTable table = SQLConnectWeb.GetTable(sql);
+
+
+
+            if (table != null && table.Rows.Count > 0)
             {
-                Session["ThanhVien"] = table;
-                //lblError.Text = "Dang nhap thanh cong !";
-                this.Display();
+                if (table.Rows[0][ND_THONG_TIN_DN.cl_PWD].ToString().Equals(txtPassWord.Text))
+                {
+                    ok = true;
+                    Session["ThanhVien"] = table;
+                    //lblError.Text = "Dang nhap thanh cong !";
+                    this.Display();
+
+                }
             }
-            else
+            if (ok == false)
             {
-                lblError.Text = "Tài khoản không tôn tại hoặc mật khẩu không đúng !";
+                lblError.Text = "Tên đăng nhập hoặc mật khẩu không hợp lệ!";
             }
+           
         }
 
    

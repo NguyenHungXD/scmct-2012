@@ -16,15 +16,10 @@ using System;
    public string CREATED_BY;
    #region DataColumn Name ;
  public static  string cl_ID="ID" ;
- public static  string cl_ID_VN="ID";
  public static  string cl_NAME="NAME" ;
- public static  string cl_NAME_VN="NAME";
  public static  string cl_ENABLE_BIT="ENABLE_BIT" ;
- public static  string cl_ENABLE_BIT_VN="ENABLE_BIT";
  public static  string cl_CREATED_DATE="CREATED_DATE" ;
- public static  string cl_CREATED_DATE_VN="CREATED_DATE";
  public static  string cl_CREATED_BY="CREATED_BY" ;
- public static  string cl_CREATED_BY_VN="CREATED_BY";
  #endregion;
 //───────────────────────────────────────────────────────────────────────────────────────
        public DA_DM_TRANG_THAI_DU_AN() {}
@@ -43,7 +38,7 @@ using System;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
        public static DA_DM_TRANG_THAI_DU_AN Create_DA_DM_TRANG_THAI_DU_AN ( string sID  ){
-    DataTable dt=dtSearchByID(sID) ;
+    DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
       return new DA_DM_TRANG_THAI_DU_AN(dt.DefaultView,0);
       return null;
@@ -63,58 +58,58 @@ using System;
          this.CREATED_BY= dv[pos][4].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByID(string sID)
+ public static DataTable SearchByID(string sID)
 {
           string sqlSelect= s_Select()+ " WHERE ID  ="+ sID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByID(string sID,string sMatch)
+ public static DataTable SearchByID(string sID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE ID"+ sMatch +sID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNAME(string sNAME)
+ public static DataTable SearchByNAME(string sNAME)
 {
           string sqlSelect= s_Select()+ " WHERE NAME  Like N'%"+ sNAME + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByENABLE_BIT(string sENABLE_BIT)
+ public static DataTable SearchByENABLE_BIT(string sENABLE_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE ENABLE_BIT  Like N'%"+ sENABLE_BIT + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByCREATED_DATE(string sCREATED_DATE)
+ public static DataTable SearchByCREATED_DATE(string sCREATED_DATE)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_DATE  ="+ sCREATED_DATE + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByCREATED_DATE(string sCREATED_DATE,string sMatch)
+ public static DataTable SearchByCREATED_DATE(string sCREATED_DATE,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_DATE"+ sMatch +sCREATED_DATE + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByCREATED_BY(string sCREATED_BY)
+ public static DataTable SearchByCREATED_BY(string sCREATED_BY)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_BY  ="+ sCREATED_BY + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByCREATED_BY(string sCREATED_BY,string sMatch)
+ public static DataTable SearchByCREATED_BY(string sCREATED_BY,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_BY"+ sMatch +sCREATED_BY + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearch( string sID
+ public static DataTable Search( string sID
             , string sNAME
             , string sENABLE_BIT
             , string sCREATED_DATE
@@ -159,7 +154,7 @@ string  sNAME
  +tem_sENABLE_BIT+","
  +tem_sCREATED_DATE+","
  +tem_sCREATED_BY +")";
-             bool OK = Exec(sqlSave)==1?true:false;
+             bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
           DA_DM_TRANG_THAI_DU_AN newDA_DM_TRANG_THAI_DU_AN= new DA_DM_TRANG_THAI_DU_AN();
@@ -188,7 +183,7 @@ public bool  Save_Object(string sNAME
  +"ENABLE_BIT ="+tem_sENABLE_BIT+","
  +"CREATED_DATE ="+tem_sCREATED_DATE+","
  +"CREATED_BY ="+tem_sCREATED_BY+" WHERE ID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.ID,"bigint identity");;
-              bool OK = Exec(sqlSave)==1?true:false;
+              bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
                 this.NAME=sNAME;
@@ -202,7 +197,7 @@ public bool  Save_Object(string sNAME
  public bool Update_ID(string sID)
 {
     string sqlSave= " UPDATE DA_DM_TRANG_THAI_DU_AN SET ID='"+ sID+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ID=sID;
@@ -213,7 +208,7 @@ public bool  Save_Object(string sNAME
  public bool Update_NAME(string sNAME)
 {
     string sqlSave= " UPDATE DA_DM_TRANG_THAI_DU_AN SET NAME='N"+ sNAME+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.NAME=sNAME;
@@ -224,7 +219,7 @@ public bool  Save_Object(string sNAME
  public bool Update_ENABLE_BIT(string sENABLE_BIT)
 {
     string sqlSave= " UPDATE DA_DM_TRANG_THAI_DU_AN SET ENABLE_BIT='N"+ sENABLE_BIT+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.ENABLE_BIT=sENABLE_BIT;
@@ -235,7 +230,7 @@ public bool  Save_Object(string sNAME
  public bool Update_CREATED_DATE(string sCREATED_DATE)
 {
     string sqlSave= " UPDATE DA_DM_TRANG_THAI_DU_AN SET CREATED_DATE='"+ sCREATED_DATE+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.CREATED_DATE=sCREATED_DATE;
@@ -246,7 +241,7 @@ public bool  Save_Object(string sNAME
  public bool Update_CREATED_BY(string sCREATED_BY)
 {
     string sqlSave= " UPDATE DA_DM_TRANG_THAI_DU_AN SET CREATED_BY='"+ sCREATED_BY+ "' WHERE ID='"+ this.ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.CREATED_BY=sCREATED_BY;
@@ -259,38 +254,38 @@ public bool  Save_Object(string sNAME
  public static bool Update_NAME(string sNAME,string s_ID)
 {
   string sqlSave= " UPDATE DA_DM_TRANG_THAI_DU_AN SET NAME='N"+sNAME+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_ENABLE_BIT(string sENABLE_BIT,string s_ID)
 {
   string sqlSave= " UPDATE DA_DM_TRANG_THAI_DU_AN SET ENABLE_BIT='N"+sENABLE_BIT+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_CREATED_DATE(string sCREATED_DATE,string s_ID)
 {
   string sqlSave= " UPDATE DA_DM_TRANG_THAI_DU_AN SET CREATED_DATE='"+sCREATED_DATE+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_CREATED_BY(string sCREATED_BY,string s_ID)
 {
   string sqlSave= " UPDATE DA_DM_TRANG_THAI_DU_AN SET CREATED_BY='"+sCREATED_BY+"' WHERE ID='"+ s_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 #endregion
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtGetTableAll() 
+ public static DataTable GetTableAll() 
  {
-       return  dtGetTableAll(null, null);
+       return  GetTableAll(null, null);
  }
-public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)
+public static DataTable GetTableAll(string sWhere, params string[] orderFields)
 {
    string sqlSelect = " SELECT * FROM DA_DM_TRANG_THAI_DU_AN";
    if (!string.IsNullOrEmpty(sWhere))
@@ -304,7 +299,7 @@ public static DataTable dtGetTableAll(string sWhere, params string[] orderFields
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
-public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)
+public static DataTable GetTableFields(string sWhere, string[] orderFields, params string[] fields)
 {
  string field = "";
  if (fields != null && fields.Length > 0)
@@ -320,13 +315,13 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
     sqlSelect += " ORDER BY " + order;
  return GetTable(sqlSelect);
  }
- public static DataTable dtGetTableFields(params string[] fields)
+ public static DataTable GetTableFields(params string[] fields)
  {
-    return dtGetTableFields(null, null, fields);
+    return GetTableFields(null, null, fields);
  }
- public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)
+ public static DataTable GetTableFields(string[] orderFields, params string[] fields)
  {
-    return dtGetTableFields(null, orderFields, fields);
+    return GetTableFields(null, orderFields, fields);
  }
 //───────────────────────────────────────────────────────────────────────────────────────
    private static DataTable dt_DA_DM_TRANG_THAI_DU_AN;
@@ -336,7 +331,7 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
    {
    if (dt_DA_DM_TRANG_THAI_DU_AN == null || Change_dt_DA_DM_TRANG_THAI_DU_AN == true)
      {
-   dt_DA_DM_TRANG_THAI_DU_AN = dtGetTableAll();
+   dt_DA_DM_TRANG_THAI_DU_AN = GetTableAll();
          Change_dt_DA_DM_TRANG_THAI_DU_AN = true && AllowAutoChange ;
      }
      return dt_DA_DM_TRANG_THAI_DU_AN;

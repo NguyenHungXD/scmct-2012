@@ -20,23 +20,14 @@ using System;
    public string NGAYC_CAP_NHAT;
    #region DataColumn Name ;
  public static  string cl_YEU_CAU_ID="YEU_CAU_ID" ;
- public static  string cl_YEU_CAU_ID_VN="YEU_CAU_ID";
  public static  string cl_TIEU_DE="TIEU_DE" ;
- public static  string cl_TIEU_DE_VN="TIEU_DE";
  public static  string cl_NOI_DUNG="NOI_DUNG" ;
- public static  string cl_NOI_DUNG_VN="NOI_DUNG";
  public static  string cl_TRANG_THAI_ID="TRANG_THAI_ID" ;
- public static  string cl_TRANG_THAI_ID_VN="TRANG_THAI_ID";
  public static  string cl_LOAI_YC_ID="LOAI_YC_ID" ;
- public static  string cl_LOAI_YC_ID_VN="LOAI_YC_ID";
  public static  string cl_NGUOI_YEU_CAU="NGUOI_YEU_CAU" ;
- public static  string cl_NGUOI_YEU_CAU_VN="NGUOI_YEU_CAU";
  public static  string cl_NGAY_YEU_CAU="NGAY_YEU_CAU" ;
- public static  string cl_NGAY_YEU_CAU_VN="NGAY_YEU_CAU";
  public static  string cl_NGUOI_CAP_NHAT="NGUOI_CAP_NHAT" ;
- public static  string cl_NGUOI_CAP_NHAT_VN="NGUOI_CAP_NHAT";
  public static  string cl_NGAYC_CAP_NHAT="NGAYC_CAP_NHAT" ;
- public static  string cl_NGAYC_CAP_NHAT_VN="NGAYC_CAP_NHAT";
  #endregion;
 //───────────────────────────────────────────────────────────────────────────────────────
        public YC_YEU_CAU() {}
@@ -63,7 +54,7 @@ using System;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
        public static YC_YEU_CAU Create_YC_YEU_CAU ( string sYEU_CAU_ID  ){
-    DataTable dt=dtSearchByYEU_CAU_ID(sYEU_CAU_ID) ;
+    DataTable dt=SearchByYEU_CAU_ID(sYEU_CAU_ID) ;
     if(dt!=null && dt.Rows.Count>0) 
       return new YC_YEU_CAU(dt.DefaultView,0);
       return null;
@@ -87,110 +78,110 @@ using System;
          this.NGAYC_CAP_NHAT= dv[pos][8].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByYEU_CAU_ID(string sYEU_CAU_ID)
+ public static DataTable SearchByYEU_CAU_ID(string sYEU_CAU_ID)
 {
           string sqlSelect= s_Select()+ " WHERE YEU_CAU_ID  ="+ sYEU_CAU_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByYEU_CAU_ID(string sYEU_CAU_ID,string sMatch)
+ public static DataTable SearchByYEU_CAU_ID(string sYEU_CAU_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE YEU_CAU_ID"+ sMatch +sYEU_CAU_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByTIEU_DE(string sTIEU_DE)
+ public static DataTable SearchByTIEU_DE(string sTIEU_DE)
 {
           string sqlSelect= s_Select()+ " WHERE TIEU_DE  Like N'%"+ sTIEU_DE + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNOI_DUNG(string sNOI_DUNG)
+ public static DataTable SearchByNOI_DUNG(string sNOI_DUNG)
 {
           string sqlSelect= s_Select()+ " WHERE NOI_DUNG  Like '%"+ sNOI_DUNG + "%'"; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByTRANG_THAI_ID(string sTRANG_THAI_ID)
+ public static DataTable SearchByTRANG_THAI_ID(string sTRANG_THAI_ID)
 {
           string sqlSelect= s_Select()+ " WHERE TRANG_THAI_ID  ="+ sTRANG_THAI_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByTRANG_THAI_ID(string sTRANG_THAI_ID,string sMatch)
+ public static DataTable SearchByTRANG_THAI_ID(string sTRANG_THAI_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE TRANG_THAI_ID"+ sMatch +sTRANG_THAI_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByLOAI_YC_ID(string sLOAI_YC_ID)
+ public static DataTable SearchByLOAI_YC_ID(string sLOAI_YC_ID)
 {
           string sqlSelect= s_Select()+ " WHERE LOAI_YC_ID  ="+ sLOAI_YC_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByLOAI_YC_ID(string sLOAI_YC_ID,string sMatch)
+ public static DataTable SearchByLOAI_YC_ID(string sLOAI_YC_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE LOAI_YC_ID"+ sMatch +sLOAI_YC_ID + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNGUOI_YEU_CAU(string sNGUOI_YEU_CAU)
+ public static DataTable SearchByNGUOI_YEU_CAU(string sNGUOI_YEU_CAU)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_YEU_CAU  ="+ sNGUOI_YEU_CAU + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNGUOI_YEU_CAU(string sNGUOI_YEU_CAU,string sMatch)
+ public static DataTable SearchByNGUOI_YEU_CAU(string sNGUOI_YEU_CAU,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_YEU_CAU"+ sMatch +sNGUOI_YEU_CAU + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNGAY_YEU_CAU(string sNGAY_YEU_CAU)
+ public static DataTable SearchByNGAY_YEU_CAU(string sNGAY_YEU_CAU)
 {
           string sqlSelect= s_Select()+ " WHERE NGAY_YEU_CAU  ="+ sNGAY_YEU_CAU + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNGAY_YEU_CAU(string sNGAY_YEU_CAU,string sMatch)
+ public static DataTable SearchByNGAY_YEU_CAU(string sNGAY_YEU_CAU,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE NGAY_YEU_CAU"+ sMatch +sNGAY_YEU_CAU + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNGUOI_CAP_NHAT(string sNGUOI_CAP_NHAT)
+ public static DataTable SearchByNGUOI_CAP_NHAT(string sNGUOI_CAP_NHAT)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_CAP_NHAT  ="+ sNGUOI_CAP_NHAT + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNGUOI_CAP_NHAT(string sNGUOI_CAP_NHAT,string sMatch)
+ public static DataTable SearchByNGUOI_CAP_NHAT(string sNGUOI_CAP_NHAT,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_CAP_NHAT"+ sMatch +sNGUOI_CAP_NHAT + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNGAYC_CAP_NHAT(string sNGAYC_CAP_NHAT)
+ public static DataTable SearchByNGAYC_CAP_NHAT(string sNGAYC_CAP_NHAT)
 {
           string sqlSelect= s_Select()+ " WHERE NGAYC_CAP_NHAT  ="+ sNGAYC_CAP_NHAT + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearchByNGAYC_CAP_NHAT(string sNGAYC_CAP_NHAT,string sMatch)
+ public static DataTable SearchByNGAYC_CAP_NHAT(string sNGAYC_CAP_NHAT,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE NGAYC_CAP_NHAT"+ sMatch +sNGAYC_CAP_NHAT + ""; 
           DataTable dt=GetTable(sqlSelect) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtSearch( string sYEU_CAU_ID
+ public static DataTable Search( string sYEU_CAU_ID
             , string sTIEU_DE
             , string sNOI_DUNG
             , string sTRANG_THAI_ID
@@ -263,7 +254,7 @@ string  sTIEU_DE
  +tem_sNGAY_YEU_CAU+","
  +tem_sNGUOI_CAP_NHAT+","
  +tem_sNGAYC_CAP_NHAT +")";
-             bool OK = Exec(sqlSave)==1?true:false;
+             bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
           YC_YEU_CAU newYC_YEU_CAU= new YC_YEU_CAU();
@@ -308,7 +299,7 @@ public bool  Save_Object(string sTIEU_DE
  +"NGAY_YEU_CAU ="+tem_sNGAY_YEU_CAU+","
  +"NGUOI_CAP_NHAT ="+tem_sNGUOI_CAP_NHAT+","
  +"NGAYC_CAP_NHAT ="+tem_sNGAYC_CAP_NHAT+" WHERE YEU_CAU_ID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.YEU_CAU_ID,"bigint identity");;
-              bool OK = Exec(sqlSave)==1?true:false;
+              bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
                 this.TIEU_DE=sTIEU_DE;
@@ -326,7 +317,7 @@ public bool  Save_Object(string sTIEU_DE
  public bool Update_YEU_CAU_ID(string sYEU_CAU_ID)
 {
     string sqlSave= " UPDATE YC_YEU_CAU SET YEU_CAU_ID='"+ sYEU_CAU_ID+ "' WHERE YEU_CAU_ID='"+ this.YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.YEU_CAU_ID=sYEU_CAU_ID;
@@ -337,7 +328,7 @@ public bool  Save_Object(string sTIEU_DE
  public bool Update_TIEU_DE(string sTIEU_DE)
 {
     string sqlSave= " UPDATE YC_YEU_CAU SET TIEU_DE='N"+ sTIEU_DE+ "' WHERE YEU_CAU_ID='"+ this.YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.TIEU_DE=sTIEU_DE;
@@ -348,7 +339,7 @@ public bool  Save_Object(string sTIEU_DE
  public bool Update_NOI_DUNG(string sNOI_DUNG)
 {
     string sqlSave= " UPDATE YC_YEU_CAU SET NOI_DUNG='"+ sNOI_DUNG+ "' WHERE YEU_CAU_ID='"+ this.YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.NOI_DUNG=sNOI_DUNG;
@@ -359,7 +350,7 @@ public bool  Save_Object(string sTIEU_DE
  public bool Update_TRANG_THAI_ID(string sTRANG_THAI_ID)
 {
     string sqlSave= " UPDATE YC_YEU_CAU SET TRANG_THAI_ID='"+ sTRANG_THAI_ID+ "' WHERE YEU_CAU_ID='"+ this.YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.TRANG_THAI_ID=sTRANG_THAI_ID;
@@ -370,7 +361,7 @@ public bool  Save_Object(string sTIEU_DE
  public bool Update_LOAI_YC_ID(string sLOAI_YC_ID)
 {
     string sqlSave= " UPDATE YC_YEU_CAU SET LOAI_YC_ID='"+ sLOAI_YC_ID+ "' WHERE YEU_CAU_ID='"+ this.YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.LOAI_YC_ID=sLOAI_YC_ID;
@@ -381,7 +372,7 @@ public bool  Save_Object(string sTIEU_DE
  public bool Update_NGUOI_YEU_CAU(string sNGUOI_YEU_CAU)
 {
     string sqlSave= " UPDATE YC_YEU_CAU SET NGUOI_YEU_CAU='"+ sNGUOI_YEU_CAU+ "' WHERE YEU_CAU_ID='"+ this.YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.NGUOI_YEU_CAU=sNGUOI_YEU_CAU;
@@ -392,7 +383,7 @@ public bool  Save_Object(string sTIEU_DE
  public bool Update_NGAY_YEU_CAU(string sNGAY_YEU_CAU)
 {
     string sqlSave= " UPDATE YC_YEU_CAU SET NGAY_YEU_CAU='"+ sNGAY_YEU_CAU+ "' WHERE YEU_CAU_ID='"+ this.YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.NGAY_YEU_CAU=sNGAY_YEU_CAU;
@@ -403,7 +394,7 @@ public bool  Save_Object(string sTIEU_DE
  public bool Update_NGUOI_CAP_NHAT(string sNGUOI_CAP_NHAT)
 {
     string sqlSave= " UPDATE YC_YEU_CAU SET NGUOI_CAP_NHAT='"+ sNGUOI_CAP_NHAT+ "' WHERE YEU_CAU_ID='"+ this.YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.NGUOI_CAP_NHAT=sNGUOI_CAP_NHAT;
@@ -414,7 +405,7 @@ public bool  Save_Object(string sTIEU_DE
  public bool Update_NGAYC_CAP_NHAT(string sNGAYC_CAP_NHAT)
 {
     string sqlSave= " UPDATE YC_YEU_CAU SET NGAYC_CAP_NHAT='"+ sNGAYC_CAP_NHAT+ "' WHERE YEU_CAU_ID='"+ this.YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  if(OK)
  {
     this.NGAYC_CAP_NHAT=sNGAYC_CAP_NHAT;
@@ -427,66 +418,66 @@ public bool  Save_Object(string sTIEU_DE
  public static bool Update_TIEU_DE(string sTIEU_DE,string s_YEU_CAU_ID)
 {
   string sqlSave= " UPDATE YC_YEU_CAU SET TIEU_DE='N"+sTIEU_DE+"' WHERE YEU_CAU_ID='"+ s_YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_NOI_DUNG(string sNOI_DUNG,string s_YEU_CAU_ID)
 {
   string sqlSave= " UPDATE YC_YEU_CAU SET NOI_DUNG='"+sNOI_DUNG+"' WHERE YEU_CAU_ID='"+ s_YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_TRANG_THAI_ID(string sTRANG_THAI_ID,string s_YEU_CAU_ID)
 {
   string sqlSave= " UPDATE YC_YEU_CAU SET TRANG_THAI_ID='"+sTRANG_THAI_ID+"' WHERE YEU_CAU_ID='"+ s_YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_LOAI_YC_ID(string sLOAI_YC_ID,string s_YEU_CAU_ID)
 {
   string sqlSave= " UPDATE YC_YEU_CAU SET LOAI_YC_ID='"+sLOAI_YC_ID+"' WHERE YEU_CAU_ID='"+ s_YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_NGUOI_YEU_CAU(string sNGUOI_YEU_CAU,string s_YEU_CAU_ID)
 {
   string sqlSave= " UPDATE YC_YEU_CAU SET NGUOI_YEU_CAU='"+sNGUOI_YEU_CAU+"' WHERE YEU_CAU_ID='"+ s_YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_NGAY_YEU_CAU(string sNGAY_YEU_CAU,string s_YEU_CAU_ID)
 {
   string sqlSave= " UPDATE YC_YEU_CAU SET NGAY_YEU_CAU='"+sNGAY_YEU_CAU+"' WHERE YEU_CAU_ID='"+ s_YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_NGUOI_CAP_NHAT(string sNGUOI_CAP_NHAT,string s_YEU_CAU_ID)
 {
   string sqlSave= " UPDATE YC_YEU_CAU SET NGUOI_CAP_NHAT='"+sNGUOI_CAP_NHAT+"' WHERE YEU_CAU_ID='"+ s_YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_NGAYC_CAP_NHAT(string sNGAYC_CAP_NHAT,string s_YEU_CAU_ID)
 {
   string sqlSave= " UPDATE YC_YEU_CAU SET NGAYC_CAP_NHAT='"+sNGAYC_CAP_NHAT+"' WHERE YEU_CAU_ID='"+ s_YEU_CAU_ID+"' ";
- bool OK=Exec(sqlSave)==1?true:false;
+ bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 #endregion
 //───────────────────────────────────────────────────────────────────────────────────────
- public static DataTable dtGetTableAll() 
+ public static DataTable GetTableAll() 
  {
-       return  dtGetTableAll(null, null);
+       return  GetTableAll(null, null);
  }
-public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)
+public static DataTable GetTableAll(string sWhere, params string[] orderFields)
 {
    string sqlSelect = " SELECT * FROM YC_YEU_CAU";
    if (!string.IsNullOrEmpty(sWhere))
@@ -500,7 +491,7 @@ public static DataTable dtGetTableAll(string sWhere, params string[] orderFields
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
-public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)
+public static DataTable GetTableFields(string sWhere, string[] orderFields, params string[] fields)
 {
  string field = "";
  if (fields != null && fields.Length > 0)
@@ -516,13 +507,13 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
     sqlSelect += " ORDER BY " + order;
  return GetTable(sqlSelect);
  }
- public static DataTable dtGetTableFields(params string[] fields)
+ public static DataTable GetTableFields(params string[] fields)
  {
-    return dtGetTableFields(null, null, fields);
+    return GetTableFields(null, null, fields);
  }
- public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)
+ public static DataTable GetTableFields(string[] orderFields, params string[] fields)
  {
-    return dtGetTableFields(null, orderFields, fields);
+    return GetTableFields(null, orderFields, fields);
  }
 //───────────────────────────────────────────────────────────────────────────────────────
    private static DataTable dt_YC_YEU_CAU;
@@ -532,7 +523,7 @@ public static DataTable dtGetTableFields(string sWhere, string[] orderFields, pa
    {
    if (dt_YC_YEU_CAU == null || Change_dt_YC_YEU_CAU == true)
      {
-   dt_YC_YEU_CAU = dtGetTableAll();
+   dt_YC_YEU_CAU = GetTableAll();
          Change_dt_YC_YEU_CAU = true && AllowAutoChange ;
      }
      return dt_YC_YEU_CAU;
