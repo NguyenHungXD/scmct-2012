@@ -31,8 +31,13 @@ namespace chiase
             {
                 lbl_username.Text = (String)table.Rows[0][ND_THONG_TIN_DN.cl_USERNAME];
 
-                DateTime lasted_access = (DateTime)table.Rows[0][ND_THONG_TIN_DN.cl_LASTED_ACCESS];
-                lbl_lasted_access.Text = lasted_access.ToString("dd/mm/yyyy hh:mm:ss tt");
+                object obj = table.Rows[0][ND_THONG_TIN_DN.cl_LASTED_ACCESS];
+                if (obj != null && obj != DBNull.Value)
+                {
+                    DateTime lasted_access = (DateTime)obj;
+                    lbl_lasted_access.Text = lasted_access.ToString("dd/mm/yyyy hh:mm:ss tt");
+                }
+                else lbl_lasted_access.Text = "__/__/___ __:__:__";
                 String avatar_name = Convert.IsDBNull(table.Rows[0][ND_THONG_TIN_ND.cl_AVATAR_PATH]) ? "default_img.gif" : (String)table.Rows[0][ND_THONG_TIN_ND.cl_AVATAR_PATH];
                 imgUser.ImageUrl = "Images/avatars/" + avatar_name;
             }
