@@ -186,12 +186,49 @@ public bool  Save_Object(string sNAME
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
+#endregion
 //───────────────────────────────────────────────────────────────────────────────────────
- #endregion
- public static DataTable dtGetAll() 
+ public static DataTable dtGetTableAll() 
  {
-        string sqlSelect=" SELECT * FROM KH_DM_LY_DO_XUAT_KHO " ;
-        return GetTable(sqlSelect) ;
+       return  dtGetTableAll(null, null);
+ }
+public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)
+{
+   string sqlSelect = " SELECT * FROM KH_DM_LY_DO_XUAT_KHO";
+   if (!string.IsNullOrEmpty(sWhere))
+      sqlSelect += " where " + sWhere; 
+   string order = "";
+   if (orderFields != null && orderFields.Length > 0)
+     order = string.Join(",", orderFields);
+   if (order != "")
+      sqlSelect += " ORDER BY " + order;
+   return GetTable(sqlSelect);
+}
+//───────────────────────────────────────────────────────────────────────────────────────
+//───────────────────────────────────────────────────────────────────────────────────────
+public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)
+{
+ string field = "";
+ if (fields != null && fields.Length > 0)
+    field = string.Join(",", fields);
+ else field = "*";
+ string sqlSelect = string.Format(" SELECT {0} FROM {1} ", field, "KH_DM_LY_DO_XUAT_KHO");
+ if (!string.IsNullOrEmpty(sWhere))
+    sqlSelect += " where " + sWhere;
+ string order = "";
+ if (orderFields != null && orderFields.Length > 0)
+    order = string.Join(",", orderFields);
+ if (order != "")
+    sqlSelect += " ORDER BY " + order;
+ return GetTable(sqlSelect);
+ }
+ public static DataTable dtGetTableFields(params string[] fields)
+ {
+    return dtGetTableFields(null, null, fields);
+ }
+ public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)
+ {
+    return dtGetTableFields(null, orderFields, fields);
  }
 //───────────────────────────────────────────────────────────────────────────────────────
    private static DataTable dt_KH_DM_LY_DO_XUAT_KHO;
@@ -200,11 +237,11 @@ public bool  Save_Object(string sNAME
    public static DataTable get_KH_DM_LY_DO_XUAT_KHO()
    {
    if (dt_KH_DM_LY_DO_XUAT_KHO == null || Change_dt_KH_DM_LY_DO_XUAT_KHO == true)
-   {
-   dt_KH_DM_LY_DO_XUAT_KHO = dtGetAll();
-   Change_dt_KH_DM_LY_DO_XUAT_KHO = true && AllowAutoChange ;
-   }
-   return dt_KH_DM_LY_DO_XUAT_KHO;
+     {
+   dt_KH_DM_LY_DO_XUAT_KHO = dtGetTableAll();
+         Change_dt_KH_DM_LY_DO_XUAT_KHO = true && AllowAutoChange ;
+     }
+     return dt_KH_DM_LY_DO_XUAT_KHO;
    }
    //───────────────────────────────────────────────────────────────────────────────────────
 }  

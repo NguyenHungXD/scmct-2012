@@ -949,12 +949,49 @@ public bool  Save_Object(string sNAME
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
+#endregion
 //───────────────────────────────────────────────────────────────────────────────────────
- #endregion
- public static DataTable dtGetAll() 
+ public static DataTable dtGetTableAll() 
  {
-        string sqlSelect=" SELECT * FROM ND_THONG_TIN_ND " ;
-        return GetTable(sqlSelect) ;
+       return  dtGetTableAll(null, null);
+ }
+public static DataTable dtGetTableAll(string sWhere, params string[] orderFields)
+{
+   string sqlSelect = " SELECT * FROM ND_THONG_TIN_ND";
+   if (!string.IsNullOrEmpty(sWhere))
+      sqlSelect += " where " + sWhere; 
+   string order = "";
+   if (orderFields != null && orderFields.Length > 0)
+     order = string.Join(",", orderFields);
+   if (order != "")
+      sqlSelect += " ORDER BY " + order;
+   return GetTable(sqlSelect);
+}
+//───────────────────────────────────────────────────────────────────────────────────────
+//───────────────────────────────────────────────────────────────────────────────────────
+public static DataTable dtGetTableFields(string sWhere, string[] orderFields, params string[] fields)
+{
+ string field = "";
+ if (fields != null && fields.Length > 0)
+    field = string.Join(",", fields);
+ else field = "*";
+ string sqlSelect = string.Format(" SELECT {0} FROM {1} ", field, "ND_THONG_TIN_ND");
+ if (!string.IsNullOrEmpty(sWhere))
+    sqlSelect += " where " + sWhere;
+ string order = "";
+ if (orderFields != null && orderFields.Length > 0)
+    order = string.Join(",", orderFields);
+ if (order != "")
+    sqlSelect += " ORDER BY " + order;
+ return GetTable(sqlSelect);
+ }
+ public static DataTable dtGetTableFields(params string[] fields)
+ {
+    return dtGetTableFields(null, null, fields);
+ }
+ public static DataTable dtGetTableFields(string[] orderFields, params string[] fields)
+ {
+    return dtGetTableFields(null, orderFields, fields);
  }
 //───────────────────────────────────────────────────────────────────────────────────────
    private static DataTable dt_ND_THONG_TIN_ND;
@@ -963,11 +1000,11 @@ public bool  Save_Object(string sNAME
    public static DataTable get_ND_THONG_TIN_ND()
    {
    if (dt_ND_THONG_TIN_ND == null || Change_dt_ND_THONG_TIN_ND == true)
-   {
-   dt_ND_THONG_TIN_ND = dtGetAll();
-   Change_dt_ND_THONG_TIN_ND = true && AllowAutoChange ;
-   }
-   return dt_ND_THONG_TIN_ND;
+     {
+   dt_ND_THONG_TIN_ND = dtGetTableAll();
+         Change_dt_ND_THONG_TIN_ND = true && AllowAutoChange ;
+     }
+     return dt_ND_THONG_TIN_ND;
    }
    //───────────────────────────────────────────────────────────────────────────────────────
 }  
