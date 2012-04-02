@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using chiase.Objects;
 
 namespace chiase
 {
@@ -21,8 +22,8 @@ namespace chiase
         {
             try
             {
-                const String sql = "SELECT * FROM DA_DU_AN";
-                DataTable table = Database.GetData(sql);
+                //const String sql = "SELECT * FROM DA_DU_AN";
+                DataTable table = DA_DU_AN.GetTableAll();
                 functions.fill_DropdownList(dropd_lst_project, table, 0, 1);
                 show_project_name();
             }
@@ -37,9 +38,8 @@ namespace chiase
         {
             try
             {
-                const String sql = "SELECT * FROM DA_DU_AN WHERE ID = @v_ID";
-                DataTable table = Database.GetData(sql, "@v_ID", dropd_lst_project.SelectedValue);
-                lbl_project_name.Text = (String)table.Rows[0]["TEN_DU_AN"];
+                DataTable table = DA_DU_AN.GetTableAll(ID + "=" + dropd_lst_project.SelectedValue);
+                lbl_project_name.Text = table.Rows[0][DA_DU_AN.cl_TEN_DU_AN].ToString();
             }
             catch (Exception ex)
             {
