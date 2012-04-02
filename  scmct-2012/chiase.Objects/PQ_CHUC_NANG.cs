@@ -56,7 +56,7 @@ using System;
        public static PQ_CHUC_NANG Create_PQ_CHUC_NANG ( string sID  ){
     DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new PQ_CHUC_NANG(dt.DefaultView,0);
+      return new PQ_CHUC_NANG(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -65,17 +65,17 @@ using System;
    return " SELECT T.* FROM PQ_CHUC_NANG AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public PQ_CHUC_NANG( DataView dv,int pos)
+ public PQ_CHUC_NANG( DataTable table,int pos)
 {
-         this.ID= dv[pos][0].ToString();
-         this.NAME= dv[pos][1].ToString();
-         this.DESCRIPTION= dv[pos][2].ToString();
-         this.VISIBLE_BIT= dv[pos][3].ToString();
-         this.ISREAD= dv[pos][4].ToString();
-         this.ISINSERT= dv[pos][5].ToString();
-         this.ISDELETE= dv[pos][6].ToString();
-         this.ISUPDATE= dv[pos][7].ToString();
-         this.PARENT_ID= dv[pos][8].ToString();
+         this.ID= table.Rows[pos]["ID"].ToString();
+         this.NAME= table.Rows[pos]["NAME"].ToString();
+         this.DESCRIPTION= table.Rows[pos]["DESCRIPTION"].ToString();
+         this.VISIBLE_BIT= table.Rows[pos]["VISIBLE_BIT"].ToString();
+         this.ISREAD= table.Rows[pos]["ISREAD"].ToString();
+         this.ISINSERT= table.Rows[pos]["ISINSERT"].ToString();
+         this.ISDELETE= table.Rows[pos]["ISDELETE"].ToString();
+         this.ISUPDATE= table.Rows[pos]["ISUPDATE"].ToString();
+         this.PARENT_ID= table.Rows[pos]["PARENT_ID"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID)

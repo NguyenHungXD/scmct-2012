@@ -40,7 +40,7 @@ using System;
        public static DA_DM_TRANG_THAI_DU_AN Create_DA_DM_TRANG_THAI_DU_AN ( string sID  ){
     DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new DA_DM_TRANG_THAI_DU_AN(dt.DefaultView,0);
+      return new DA_DM_TRANG_THAI_DU_AN(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -49,13 +49,13 @@ using System;
    return " SELECT T.* FROM DA_DM_TRANG_THAI_DU_AN AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public DA_DM_TRANG_THAI_DU_AN( DataView dv,int pos)
+ public DA_DM_TRANG_THAI_DU_AN( DataTable table,int pos)
 {
-         this.ID= dv[pos][0].ToString();
-         this.NAME= dv[pos][1].ToString();
-         this.ENABLE_BIT= dv[pos][2].ToString();
-         this.CREATED_DATE= dv[pos][3].ToString();
-         this.CREATED_BY= dv[pos][4].ToString();
+         this.ID= table.Rows[pos]["ID"].ToString();
+         this.NAME= table.Rows[pos]["NAME"].ToString();
+         this.ENABLE_BIT= table.Rows[pos]["ENABLE_BIT"].ToString();
+         this.CREATED_DATE= table.Rows[pos]["CREATED_DATE"].ToString();
+         this.CREATED_BY= table.Rows[pos]["CREATED_BY"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID)

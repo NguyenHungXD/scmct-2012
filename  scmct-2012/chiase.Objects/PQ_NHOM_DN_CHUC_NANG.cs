@@ -44,7 +44,7 @@ using System;
        public static PQ_NHOM_DN_CHUC_NANG Create_PQ_NHOM_DN_CHUC_NANG ( string sFEATUREID  ){
     DataTable dt=SearchByFEATUREID(sFEATUREID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new PQ_NHOM_DN_CHUC_NANG(dt.DefaultView,0);
+      return new PQ_NHOM_DN_CHUC_NANG(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -53,14 +53,14 @@ using System;
    return " SELECT T.* FROM PQ_NHOM_DN_CHUC_NANG AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public PQ_NHOM_DN_CHUC_NANG( DataView dv,int pos)
+ public PQ_NHOM_DN_CHUC_NANG( DataTable table,int pos)
 {
-         this.FEATUREID= dv[pos][0].ToString();
-         this.GROUPID= dv[pos][1].ToString();
-         this.ISREAD_BIT= dv[pos][2].ToString();
-         this.ISINSERT_BIT= dv[pos][3].ToString();
-         this.ISUPDATE_BIT= dv[pos][4].ToString();
-         this.ISDELETE_BIT= dv[pos][5].ToString();
+         this.FEATUREID= table.Rows[pos]["FEATUREID"].ToString();
+         this.GROUPID= table.Rows[pos]["GROUPID"].ToString();
+         this.ISREAD_BIT= table.Rows[pos]["ISREAD_BIT"].ToString();
+         this.ISINSERT_BIT= table.Rows[pos]["ISINSERT_BIT"].ToString();
+         this.ISUPDATE_BIT= table.Rows[pos]["ISUPDATE_BIT"].ToString();
+         this.ISDELETE_BIT= table.Rows[pos]["ISDELETE_BIT"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByFEATUREID(string sFEATUREID)

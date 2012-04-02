@@ -44,7 +44,7 @@ using System;
        public static DM_HANG_HOA Create_DM_HANG_HOA ( string sID  ){
     DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new DM_HANG_HOA(dt.DefaultView,0);
+      return new DM_HANG_HOA(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -53,14 +53,14 @@ using System;
    return " SELECT T.* FROM DM_HANG_HOA AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public DM_HANG_HOA( DataView dv,int pos)
+ public DM_HANG_HOA( DataTable table,int pos)
 {
-         this.ID= dv[pos][0].ToString();
-         this.MA_HH= dv[pos][1].ToString();
-         this.NAME= dv[pos][2].ToString();
-         this.NHH_ID= dv[pos][3].ToString();
-         this.MO_TA= dv[pos][4].ToString();
-         this.VISIBLE_BIT= dv[pos][5].ToString();
+         this.ID= table.Rows[pos]["ID"].ToString();
+         this.MA_HH= table.Rows[pos]["MA_HH"].ToString();
+         this.NAME= table.Rows[pos]["NAME"].ToString();
+         this.NHH_ID= table.Rows[pos]["NHH_ID"].ToString();
+         this.MO_TA= table.Rows[pos]["MO_TA"].ToString();
+         this.VISIBLE_BIT= table.Rows[pos]["VISIBLE_BIT"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID)

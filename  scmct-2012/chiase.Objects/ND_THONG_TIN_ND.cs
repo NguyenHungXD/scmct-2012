@@ -100,7 +100,7 @@ using System;
        public static ND_THONG_TIN_ND Create_ND_THONG_TIN_ND ( string sID  ){
     DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new ND_THONG_TIN_ND(dt.DefaultView,0);
+      return new ND_THONG_TIN_ND(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -109,28 +109,28 @@ using System;
    return " SELECT T.* FROM ND_THONG_TIN_ND AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public ND_THONG_TIN_ND( DataView dv,int pos)
+ public ND_THONG_TIN_ND( DataTable table,int pos)
 {
-         this.ID= dv[pos][0].ToString();
-         this.NAME= dv[pos][1].ToString();
-         this.MEM_GROUP_ID= dv[pos][2].ToString();
-         this.ADDRESS= dv[pos][3].ToString();
-         this.BIRTH_DAY= dv[pos][4].ToString();
-         this.SEX= dv[pos][5].ToString();
-         this.PHONE= dv[pos][6].ToString();
-         this.FAX= dv[pos][7].ToString();
-         this.EMAIL= dv[pos][8].ToString();
-         this.WEBSITE= dv[pos][9].ToString();
-         this.YAHOO= dv[pos][10].ToString();
-         this.SKYPE= dv[pos][11].ToString();
-         this.TAX_CODE= dv[pos][12].ToString();
-         this.NOTE= dv[pos][13].ToString();
-         this.AVATAR_PATH= dv[pos][14].ToString();
-         this.VISIBLE_BIT= dv[pos][15].ToString();
-         this.CREATED_DATE= dv[pos][16].ToString();
-         this.CREATED_BY= dv[pos][17].ToString();
-         this.EDITED_DATE= dv[pos][18].ToString();
-         this.EDITED_BY= dv[pos][19].ToString();
+         this.ID= table.Rows[pos]["ID"].ToString();
+         this.NAME= table.Rows[pos]["NAME"].ToString();
+         this.MEM_GROUP_ID= table.Rows[pos]["MEM_GROUP_ID"].ToString();
+         this.ADDRESS= table.Rows[pos]["ADDRESS"].ToString();
+         this.BIRTH_DAY= table.Rows[pos]["BIRTH_DAY"].ToString();
+         this.SEX= table.Rows[pos]["SEX"].ToString();
+         this.PHONE= table.Rows[pos]["PHONE"].ToString();
+         this.FAX= table.Rows[pos]["FAX"].ToString();
+         this.EMAIL= table.Rows[pos]["EMAIL"].ToString();
+         this.WEBSITE= table.Rows[pos]["WEBSITE"].ToString();
+         this.YAHOO= table.Rows[pos]["YAHOO"].ToString();
+         this.SKYPE= table.Rows[pos]["SKYPE"].ToString();
+         this.TAX_CODE= table.Rows[pos]["TAX_CODE"].ToString();
+         this.NOTE= table.Rows[pos]["NOTE"].ToString();
+         this.AVATAR_PATH= table.Rows[pos]["AVATAR_PATH"].ToString();
+         this.VISIBLE_BIT= table.Rows[pos]["VISIBLE_BIT"].ToString();
+         this.CREATED_DATE= table.Rows[pos]["CREATED_DATE"].ToString();
+         this.CREATED_BY= table.Rows[pos]["CREATED_BY"].ToString();
+         this.EDITED_DATE= table.Rows[pos]["EDITED_DATE"].ToString();
+         this.EDITED_BY= table.Rows[pos]["EDITED_BY"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID)

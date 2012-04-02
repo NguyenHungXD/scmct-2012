@@ -28,7 +28,7 @@ using System;
        public static ND_NHOM_ND Create_ND_NHOM_ND ( string sGROUPID  ){
     DataTable dt=SearchByGROUPID(sGROUPID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new ND_NHOM_ND(dt.DefaultView,0);
+      return new ND_NHOM_ND(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -37,10 +37,10 @@ using System;
    return " SELECT T.* FROM ND_NHOM_ND AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public ND_NHOM_ND( DataView dv,int pos)
+ public ND_NHOM_ND( DataTable table,int pos)
 {
-         this.GROUPID= dv[pos][0].ToString();
-         this.USERID= dv[pos][1].ToString();
+         this.GROUPID= table.Rows[pos]["GROUPID"].ToString();
+         this.USERID= table.Rows[pos]["USERID"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByGROUPID(string sGROUPID)

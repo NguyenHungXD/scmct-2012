@@ -40,7 +40,7 @@ using System;
        public static TC_PHIEU_THU_CT Create_TC_PHIEU_THU_CT ( string sPTCT_ID  ){
     DataTable dt=SearchByPTCT_ID(sPTCT_ID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new TC_PHIEU_THU_CT(dt.DefaultView,0);
+      return new TC_PHIEU_THU_CT(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -49,13 +49,13 @@ using System;
    return " SELECT T.* FROM TC_PHIEU_THU_CT AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public TC_PHIEU_THU_CT( DataView dv,int pos)
+ public TC_PHIEU_THU_CT( DataTable table,int pos)
 {
-         this.PTCT_ID= dv[pos][0].ToString();
-         this.PT_ID= dv[pos][1].ToString();
-         this.DIEN_GIAI= dv[pos][2].ToString();
-         this.SO_TIEN= dv[pos][3].ToString();
-         this.GHI_CHU= dv[pos][4].ToString();
+         this.PTCT_ID= table.Rows[pos]["PTCT_ID"].ToString();
+         this.PT_ID= table.Rows[pos]["PT_ID"].ToString();
+         this.DIEN_GIAI= table.Rows[pos]["DIEN_GIAI"].ToString();
+         this.SO_TIEN= table.Rows[pos]["SO_TIEN"].ToString();
+         this.GHI_CHU= table.Rows[pos]["GHI_CHU"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByPTCT_ID(string sPTCT_ID)

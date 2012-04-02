@@ -52,7 +52,7 @@ using System;
        public static YC_DM_LOAI_YEU_CAU Create_YC_DM_LOAI_YEU_CAU ( string sID  ){
     DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new YC_DM_LOAI_YEU_CAU(dt.DefaultView,0);
+      return new YC_DM_LOAI_YEU_CAU(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -61,16 +61,16 @@ using System;
    return " SELECT T.* FROM YC_DM_LOAI_YEU_CAU AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public YC_DM_LOAI_YEU_CAU( DataView dv,int pos)
+ public YC_DM_LOAI_YEU_CAU( DataTable table,int pos)
 {
-         this.ID= dv[pos][0].ToString();
-         this.TEN_LOAI_YC= dv[pos][1].ToString();
-         this.NGUOI_TAO= dv[pos][2].ToString();
-         this.NGAY_TAO= dv[pos][3].ToString();
-         this.NGUOI_CAP_NHAT= dv[pos][4].ToString();
-         this.NGAY_CAP_NHAT= dv[pos][5].ToString();
-         this.GHI_CHU= dv[pos][6].ToString();
-         this.ENABLE_BIT= dv[pos][7].ToString();
+         this.ID= table.Rows[pos]["ID"].ToString();
+         this.TEN_LOAI_YC= table.Rows[pos]["TEN_LOAI_YC"].ToString();
+         this.NGUOI_TAO= table.Rows[pos]["NGUOI_TAO"].ToString();
+         this.NGAY_TAO= table.Rows[pos]["NGAY_TAO"].ToString();
+         this.NGUOI_CAP_NHAT= table.Rows[pos]["NGUOI_CAP_NHAT"].ToString();
+         this.NGAY_CAP_NHAT= table.Rows[pos]["NGAY_CAP_NHAT"].ToString();
+         this.GHI_CHU= table.Rows[pos]["GHI_CHU"].ToString();
+         this.ENABLE_BIT= table.Rows[pos]["ENABLE_BIT"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID)

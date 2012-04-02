@@ -76,7 +76,7 @@ using System;
        public static ND_THONG_TIN_DN Create_ND_THONG_TIN_DN ( string sUSERID  ){
     DataTable dt=SearchByUSERID(sUSERID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new ND_THONG_TIN_DN(dt.DefaultView,0);
+      return new ND_THONG_TIN_DN(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -85,22 +85,22 @@ using System;
    return " SELECT T.* FROM ND_THONG_TIN_DN AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public ND_THONG_TIN_DN( DataView dv,int pos)
+ public ND_THONG_TIN_DN( DataTable table,int pos)
 {
-         this.USERID= dv[pos][0].ToString();
-         this.USERNAME= dv[pos][1].ToString();
-         this.PWD= dv[pos][2].ToString();
-         this.PWD1= dv[pos][3].ToString();
-         this.PWD2= dv[pos][4].ToString();
-         this.BLAST= dv[pos][5].ToString();
-         this.LASTED_ACCESS= dv[pos][6].ToString();
-         this.CREATED_BY= dv[pos][7].ToString();
-         this.CREATED_DATE= dv[pos][8].ToString();
-         this.EDITED_BY= dv[pos][9].ToString();
-         this.EDITED_DATE= dv[pos][10].ToString();
-         this.ISCHANGEPWD_BIT= dv[pos][11].ToString();
-         this.ISACTIVE_BIT= dv[pos][12].ToString();
-         this.MEM_ID= dv[pos][13].ToString();
+         this.USERID= table.Rows[pos]["USERID"].ToString();
+         this.USERNAME= table.Rows[pos]["USERNAME"].ToString();
+         this.PWD= table.Rows[pos]["PWD"].ToString();
+         this.PWD1= table.Rows[pos]["PWD1"].ToString();
+         this.PWD2= table.Rows[pos]["PWD2"].ToString();
+         this.BLAST= table.Rows[pos]["BLAST"].ToString();
+         this.LASTED_ACCESS= table.Rows[pos]["LASTED_ACCESS"].ToString();
+         this.CREATED_BY= table.Rows[pos]["CREATED_BY"].ToString();
+         this.CREATED_DATE= table.Rows[pos]["CREATED_DATE"].ToString();
+         this.EDITED_BY= table.Rows[pos]["EDITED_BY"].ToString();
+         this.EDITED_DATE= table.Rows[pos]["EDITED_DATE"].ToString();
+         this.ISCHANGEPWD_BIT= table.Rows[pos]["ISCHANGEPWD_BIT"].ToString();
+         this.ISACTIVE_BIT= table.Rows[pos]["ISACTIVE_BIT"].ToString();
+         this.MEM_ID= table.Rows[pos]["MEM_ID"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByUSERID(string sUSERID)

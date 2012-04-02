@@ -72,7 +72,7 @@ using System;
        public static TC_PHIEU_THU Create_TC_PHIEU_THU ( string sPT_ID  ){
     DataTable dt=SearchByPT_ID(sPT_ID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new TC_PHIEU_THU(dt.DefaultView,0);
+      return new TC_PHIEU_THU(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -81,21 +81,21 @@ using System;
    return " SELECT T.* FROM TC_PHIEU_THU AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public TC_PHIEU_THU( DataView dv,int pos)
+ public TC_PHIEU_THU( DataTable table,int pos)
 {
-         this.PT_ID= dv[pos][0].ToString();
-         this.MA_PT= dv[pos][1].ToString();
-         this.NGUOI_CAP_NHAT= dv[pos][2].ToString();
-         this.NGAY_CAP_NHAT= dv[pos][3].ToString();
-         this.NGUOI_THU= dv[pos][4].ToString();
-         this.NGAY_THU= dv[pos][5].ToString();
-         this.TONG_TIEN= dv[pos][6].ToString();
-         this.CHUNG_TU_GOC= dv[pos][7].ToString();
-         this.NOI_DUNG_THU= dv[pos][8].ToString();
-         this.DU_AN_ID= dv[pos][9].ToString();
-         this.DOI_TUONG_THU= dv[pos][10].ToString();
-         this.MEM_ID= dv[pos][11].ToString();
-         this.YEU_CAU_ID= dv[pos][12].ToString();
+         this.PT_ID= table.Rows[pos]["PT_ID"].ToString();
+         this.MA_PT= table.Rows[pos]["MA_PT"].ToString();
+         this.NGUOI_CAP_NHAT= table.Rows[pos]["NGUOI_CAP_NHAT"].ToString();
+         this.NGAY_CAP_NHAT= table.Rows[pos]["NGAY_CAP_NHAT"].ToString();
+         this.NGUOI_THU= table.Rows[pos]["NGUOI_THU"].ToString();
+         this.NGAY_THU= table.Rows[pos]["NGAY_THU"].ToString();
+         this.TONG_TIEN= table.Rows[pos]["TONG_TIEN"].ToString();
+         this.CHUNG_TU_GOC= table.Rows[pos]["CHUNG_TU_GOC"].ToString();
+         this.NOI_DUNG_THU= table.Rows[pos]["NOI_DUNG_THU"].ToString();
+         this.DU_AN_ID= table.Rows[pos]["DU_AN_ID"].ToString();
+         this.DOI_TUONG_THU= table.Rows[pos]["DOI_TUONG_THU"].ToString();
+         this.MEM_ID= table.Rows[pos]["MEM_ID"].ToString();
+         this.YEU_CAU_ID= table.Rows[pos]["YEU_CAU_ID"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByPT_ID(string sPT_ID)

@@ -60,7 +60,7 @@ using System;
        public static KH_PHIEU_CHUYEN_KHO Create_KH_PHIEU_CHUYEN_KHO ( string sPCK_ID  ){
     DataTable dt=SearchByPCK_ID(sPCK_ID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new KH_PHIEU_CHUYEN_KHO(dt.DefaultView,0);
+      return new KH_PHIEU_CHUYEN_KHO(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -69,18 +69,18 @@ using System;
    return " SELECT T.* FROM KH_PHIEU_CHUYEN_KHO AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public KH_PHIEU_CHUYEN_KHO( DataView dv,int pos)
+ public KH_PHIEU_CHUYEN_KHO( DataTable table,int pos)
 {
-         this.PCK_ID= dv[pos][0].ToString();
-         this.MA_PCK= dv[pos][1].ToString();
-         this.NGUOI_CAP_NHAT= dv[pos][2].ToString();
-         this.NGAY_CAP_NHAT= dv[pos][3].ToString();
-         this.NGUOI_CHUYEN= dv[pos][4].ToString();
-         this.NGAY_CHUYEN= dv[pos][5].ToString();
-         this.KHO_XUAT_ID= dv[pos][6].ToString();
-         this.KHO_NHAP_ID= dv[pos][7].ToString();
-         this.DU_AN_ID= dv[pos][8].ToString();
-         this.GHI_CHU= dv[pos][9].ToString();
+         this.PCK_ID= table.Rows[pos]["PCK_ID"].ToString();
+         this.MA_PCK= table.Rows[pos]["MA_PCK"].ToString();
+         this.NGUOI_CAP_NHAT= table.Rows[pos]["NGUOI_CAP_NHAT"].ToString();
+         this.NGAY_CAP_NHAT= table.Rows[pos]["NGAY_CAP_NHAT"].ToString();
+         this.NGUOI_CHUYEN= table.Rows[pos]["NGUOI_CHUYEN"].ToString();
+         this.NGAY_CHUYEN= table.Rows[pos]["NGAY_CHUYEN"].ToString();
+         this.KHO_XUAT_ID= table.Rows[pos]["KHO_XUAT_ID"].ToString();
+         this.KHO_NHAP_ID= table.Rows[pos]["KHO_NHAP_ID"].ToString();
+         this.DU_AN_ID= table.Rows[pos]["DU_AN_ID"].ToString();
+         this.GHI_CHU= table.Rows[pos]["GHI_CHU"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByPCK_ID(string sPCK_ID)

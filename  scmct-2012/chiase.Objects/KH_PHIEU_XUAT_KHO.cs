@@ -72,7 +72,7 @@ using System;
        public static KH_PHIEU_XUAT_KHO Create_KH_PHIEU_XUAT_KHO ( string sPXK_ID  ){
     DataTable dt=SearchByPXK_ID(sPXK_ID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new KH_PHIEU_XUAT_KHO(dt.DefaultView,0);
+      return new KH_PHIEU_XUAT_KHO(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -81,21 +81,21 @@ using System;
    return " SELECT T.* FROM KH_PHIEU_XUAT_KHO AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public KH_PHIEU_XUAT_KHO( DataView dv,int pos)
+ public KH_PHIEU_XUAT_KHO( DataTable table,int pos)
 {
-         this.PXK_ID= dv[pos][0].ToString();
-         this.MA_PXK= dv[pos][1].ToString();
-         this.NGUOI_XUAT= dv[pos][2].ToString();
-         this.NGAY_XUAT= dv[pos][3].ToString();
-         this.NGUOI_CAP_NHAT= dv[pos][4].ToString();
-         this.NGAY_CAP_NHAT= dv[pos][5].ToString();
-         this.NGUOI_NHAN= dv[pos][6].ToString();
-         this.MEM_ID= dv[pos][7].ToString();
-         this.KHO_ID= dv[pos][8].ToString();
-         this.DU_AN_ID= dv[pos][9].ToString();
-         this.LY_DO_XUAT_ID= dv[pos][10].ToString();
-         this.CHUNG_TU= dv[pos][11].ToString();
-         this.GHI_CHU= dv[pos][12].ToString();
+         this.PXK_ID= table.Rows[pos]["PXK_ID"].ToString();
+         this.MA_PXK= table.Rows[pos]["MA_PXK"].ToString();
+         this.NGUOI_XUAT= table.Rows[pos]["NGUOI_XUAT"].ToString();
+         this.NGAY_XUAT= table.Rows[pos]["NGAY_XUAT"].ToString();
+         this.NGUOI_CAP_NHAT= table.Rows[pos]["NGUOI_CAP_NHAT"].ToString();
+         this.NGAY_CAP_NHAT= table.Rows[pos]["NGAY_CAP_NHAT"].ToString();
+         this.NGUOI_NHAN= table.Rows[pos]["NGUOI_NHAN"].ToString();
+         this.MEM_ID= table.Rows[pos]["MEM_ID"].ToString();
+         this.KHO_ID= table.Rows[pos]["KHO_ID"].ToString();
+         this.DU_AN_ID= table.Rows[pos]["DU_AN_ID"].ToString();
+         this.LY_DO_XUAT_ID= table.Rows[pos]["LY_DO_XUAT_ID"].ToString();
+         this.CHUNG_TU= table.Rows[pos]["CHUNG_TU"].ToString();
+         this.GHI_CHU= table.Rows[pos]["GHI_CHU"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByPXK_ID(string sPXK_ID)

@@ -32,7 +32,7 @@ using System;
        public static BV_DM_TRANG_THAI_BAI_VIET Create_BV_DM_TRANG_THAI_BAI_VIET ( string sID  ){
     DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new BV_DM_TRANG_THAI_BAI_VIET(dt.DefaultView,0);
+      return new BV_DM_TRANG_THAI_BAI_VIET(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -41,11 +41,11 @@ using System;
    return " SELECT T.* FROM BV_DM_TRANG_THAI_BAI_VIET AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public BV_DM_TRANG_THAI_BAI_VIET( DataView dv,int pos)
+ public BV_DM_TRANG_THAI_BAI_VIET( DataTable table,int pos)
 {
-         this.ID= dv[pos][0].ToString();
-         this.NAME= dv[pos][1].ToString();
-         this.VISIBLE_BIT= dv[pos][2].ToString();
+         this.ID= table.Rows[pos]["ID"].ToString();
+         this.NAME= table.Rows[pos]["NAME"].ToString();
+         this.VISIBLE_BIT= table.Rows[pos]["VISIBLE_BIT"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID)

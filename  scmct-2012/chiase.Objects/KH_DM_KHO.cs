@@ -44,7 +44,7 @@ using System;
        public static KH_DM_KHO Create_KH_DM_KHO ( string sID  ){
     DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new KH_DM_KHO(dt.DefaultView,0);
+      return new KH_DM_KHO(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -53,14 +53,14 @@ using System;
    return " SELECT T.* FROM KH_DM_KHO AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public KH_DM_KHO( DataView dv,int pos)
+ public KH_DM_KHO( DataTable table,int pos)
 {
-         this.ID= dv[pos][0].ToString();
-         this.NAME= dv[pos][1].ToString();
-         this.DIA_CHI= dv[pos][2].ToString();
-         this.DIEN_THOAI= dv[pos][3].ToString();
-         this.NGUOI_QUAN_LY= dv[pos][4].ToString();
-         this.VISIBLE_BIT= dv[pos][5].ToString();
+         this.ID= table.Rows[pos]["ID"].ToString();
+         this.NAME= table.Rows[pos]["NAME"].ToString();
+         this.DIA_CHI= table.Rows[pos]["DIA_CHI"].ToString();
+         this.DIEN_THOAI= table.Rows[pos]["DIEN_THOAI"].ToString();
+         this.NGUOI_QUAN_LY= table.Rows[pos]["NGUOI_QUAN_LY"].ToString();
+         this.VISIBLE_BIT= table.Rows[pos]["VISIBLE_BIT"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID)

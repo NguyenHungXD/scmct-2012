@@ -56,7 +56,7 @@ using System;
        public static YC_YEU_CAU Create_YC_YEU_CAU ( string sYEU_CAU_ID  ){
     DataTable dt=SearchByYEU_CAU_ID(sYEU_CAU_ID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new YC_YEU_CAU(dt.DefaultView,0);
+      return new YC_YEU_CAU(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -65,17 +65,17 @@ using System;
    return " SELECT T.* FROM YC_YEU_CAU AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public YC_YEU_CAU( DataView dv,int pos)
+ public YC_YEU_CAU( DataTable table,int pos)
 {
-         this.YEU_CAU_ID= dv[pos][0].ToString();
-         this.TIEU_DE= dv[pos][1].ToString();
-         this.NOI_DUNG= dv[pos][2].ToString();
-         this.TRANG_THAI_ID= dv[pos][3].ToString();
-         this.LOAI_YC_ID= dv[pos][4].ToString();
-         this.NGUOI_YEU_CAU= dv[pos][5].ToString();
-         this.NGAY_YEU_CAU= dv[pos][6].ToString();
-         this.NGUOI_CAP_NHAT= dv[pos][7].ToString();
-         this.NGAYC_CAP_NHAT= dv[pos][8].ToString();
+         this.YEU_CAU_ID= table.Rows[pos]["YEU_CAU_ID"].ToString();
+         this.TIEU_DE= table.Rows[pos]["TIEU_DE"].ToString();
+         this.NOI_DUNG= table.Rows[pos]["NOI_DUNG"].ToString();
+         this.TRANG_THAI_ID= table.Rows[pos]["TRANG_THAI_ID"].ToString();
+         this.LOAI_YC_ID= table.Rows[pos]["LOAI_YC_ID"].ToString();
+         this.NGUOI_YEU_CAU= table.Rows[pos]["NGUOI_YEU_CAU"].ToString();
+         this.NGAY_YEU_CAU= table.Rows[pos]["NGAY_YEU_CAU"].ToString();
+         this.NGUOI_CAP_NHAT= table.Rows[pos]["NGUOI_CAP_NHAT"].ToString();
+         this.NGAYC_CAP_NHAT= table.Rows[pos]["NGAYC_CAP_NHAT"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByYEU_CAU_ID(string sYEU_CAU_ID)

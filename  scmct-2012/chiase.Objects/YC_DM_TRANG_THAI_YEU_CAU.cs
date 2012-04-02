@@ -32,7 +32,7 @@ using System;
        public static YC_DM_TRANG_THAI_YEU_CAU Create_YC_DM_TRANG_THAI_YEU_CAU ( string sID  ){
     DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new YC_DM_TRANG_THAI_YEU_CAU(dt.DefaultView,0);
+      return new YC_DM_TRANG_THAI_YEU_CAU(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -41,11 +41,11 @@ using System;
    return " SELECT T.* FROM YC_DM_TRANG_THAI_YEU_CAU AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public YC_DM_TRANG_THAI_YEU_CAU( DataView dv,int pos)
+ public YC_DM_TRANG_THAI_YEU_CAU( DataTable table,int pos)
 {
-         this.ID= dv[pos][0].ToString();
-         this.NAME= dv[pos][1].ToString();
-         this.VISIBLE_BIT= dv[pos][2].ToString();
+         this.ID= table.Rows[pos]["ID"].ToString();
+         this.NAME= table.Rows[pos]["NAME"].ToString();
+         this.VISIBLE_BIT= table.Rows[pos]["VISIBLE_BIT"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID)

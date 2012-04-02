@@ -44,7 +44,7 @@ using System;
        public static DA_NHAN_SU Create_DA_NHAN_SU ( string sDATV_ID  ){
     DataTable dt=SearchByDATV_ID(sDATV_ID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new DA_NHAN_SU(dt.DefaultView,0);
+      return new DA_NHAN_SU(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -53,14 +53,14 @@ using System;
    return " SELECT T.* FROM DA_NHAN_SU AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public DA_NHAN_SU( DataView dv,int pos)
+ public DA_NHAN_SU( DataTable table,int pos)
 {
-         this.DATV_ID= dv[pos][0].ToString();
-         this.DU_AN_ID= dv[pos][1].ToString();
-         this.MEM_ID= dv[pos][2].ToString();
-         this.NGAY_THAM_GIA= dv[pos][3].ToString();
-         this.NGAY_KET_THUC= dv[pos][4].ToString();
-         this.GHI_CHU= dv[pos][5].ToString();
+         this.DATV_ID= table.Rows[pos]["DATV_ID"].ToString();
+         this.DU_AN_ID= table.Rows[pos]["DU_AN_ID"].ToString();
+         this.MEM_ID= table.Rows[pos]["MEM_ID"].ToString();
+         this.NGAY_THAM_GIA= table.Rows[pos]["NGAY_THAM_GIA"].ToString();
+         this.NGAY_KET_THUC= table.Rows[pos]["NGAY_KET_THUC"].ToString();
+         this.GHI_CHU= table.Rows[pos]["GHI_CHU"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByDATV_ID(string sDATV_ID)

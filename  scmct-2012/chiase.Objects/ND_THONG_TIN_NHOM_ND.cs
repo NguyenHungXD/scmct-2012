@@ -48,7 +48,7 @@ using System;
        public static ND_THONG_TIN_NHOM_ND Create_ND_THONG_TIN_NHOM_ND ( string sID  ){
     DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new ND_THONG_TIN_NHOM_ND(dt.DefaultView,0);
+      return new ND_THONG_TIN_NHOM_ND(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -57,15 +57,15 @@ using System;
    return " SELECT T.* FROM ND_THONG_TIN_NHOM_ND AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public ND_THONG_TIN_NHOM_ND( DataView dv,int pos)
+ public ND_THONG_TIN_NHOM_ND( DataTable table,int pos)
 {
-         this.ID= dv[pos][0].ToString();
-         this.CODE= dv[pos][1].ToString();
-         this.NAME= dv[pos][2].ToString();
-         this.PARENT_ID= dv[pos][3].ToString();
-         this.ROOT_ID= dv[pos][4].ToString();
-         this.DESCRIPTION= dv[pos][5].ToString();
-         this.VISIBLE_BIT= dv[pos][6].ToString();
+         this.ID= table.Rows[pos]["ID"].ToString();
+         this.CODE= table.Rows[pos]["CODE"].ToString();
+         this.NAME= table.Rows[pos]["NAME"].ToString();
+         this.PARENT_ID= table.Rows[pos]["PARENT_ID"].ToString();
+         this.ROOT_ID= table.Rows[pos]["ROOT_ID"].ToString();
+         this.DESCRIPTION= table.Rows[pos]["DESCRIPTION"].ToString();
+         this.VISIBLE_BIT= table.Rows[pos]["VISIBLE_BIT"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID)

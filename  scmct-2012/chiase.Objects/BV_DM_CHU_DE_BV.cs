@@ -60,7 +60,7 @@ using System;
        public static BV_DM_CHU_DE_BV Create_BV_DM_CHU_DE_BV ( string sID  ){
     DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new BV_DM_CHU_DE_BV(dt.DefaultView,0);
+      return new BV_DM_CHU_DE_BV(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -69,18 +69,18 @@ using System;
    return " SELECT T.* FROM BV_DM_CHU_DE_BV AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public BV_DM_CHU_DE_BV( DataView dv,int pos)
+ public BV_DM_CHU_DE_BV( DataTable table,int pos)
 {
-         this.ID= dv[pos][0].ToString();
-         this.TITLE= dv[pos][1].ToString();
-         this.VISIBLE_BIT= dv[pos][2].ToString();
-         this.SORT= dv[pos][3].ToString();
-         this.STATUS= dv[pos][4].ToString();
-         this.DESCRIPTION= dv[pos][5].ToString();
-         this.CREATED_DATE= dv[pos][6].ToString();
-         this.CREATED_BY= dv[pos][7].ToString();
-         this.EDITED_DATE= dv[pos][8].ToString();
-         this.EDITED_BY= dv[pos][9].ToString();
+         this.ID= table.Rows[pos]["ID"].ToString();
+         this.TITLE= table.Rows[pos]["TITLE"].ToString();
+         this.VISIBLE_BIT= table.Rows[pos]["VISIBLE_BIT"].ToString();
+         this.SORT= table.Rows[pos]["SORT"].ToString();
+         this.STATUS= table.Rows[pos]["STATUS"].ToString();
+         this.DESCRIPTION= table.Rows[pos]["DESCRIPTION"].ToString();
+         this.CREATED_DATE= table.Rows[pos]["CREATED_DATE"].ToString();
+         this.CREATED_BY= table.Rows[pos]["CREATED_BY"].ToString();
+         this.EDITED_DATE= table.Rows[pos]["EDITED_DATE"].ToString();
+         this.EDITED_BY= table.Rows[pos]["EDITED_BY"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID)

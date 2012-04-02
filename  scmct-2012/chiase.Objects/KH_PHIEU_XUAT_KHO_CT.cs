@@ -52,7 +52,7 @@ using System;
        public static KH_PHIEU_XUAT_KHO_CT Create_KH_PHIEU_XUAT_KHO_CT ( string sPXK_CT_ID  ){
     DataTable dt=SearchByPXK_CT_ID(sPXK_CT_ID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new KH_PHIEU_XUAT_KHO_CT(dt.DefaultView,0);
+      return new KH_PHIEU_XUAT_KHO_CT(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -61,16 +61,16 @@ using System;
    return " SELECT T.* FROM KH_PHIEU_XUAT_KHO_CT AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public KH_PHIEU_XUAT_KHO_CT( DataView dv,int pos)
+ public KH_PHIEU_XUAT_KHO_CT( DataTable table,int pos)
 {
-         this.PXK_CT_ID= dv[pos][0].ToString();
-         this.PXK_ID= dv[pos][1].ToString();
-         this.HH_ID= dv[pos][2].ToString();
-         this.SO_LUONG= dv[pos][3].ToString();
-         this.DON_GIA= dv[pos][4].ToString();
-         this.THANH_TIEN= dv[pos][5].ToString();
-         this.GHI_CHU= dv[pos][6].ToString();
-         this.PNK_CT_ID= dv[pos][7].ToString();
+         this.PXK_CT_ID= table.Rows[pos]["PXK_CT_ID"].ToString();
+         this.PXK_ID= table.Rows[pos]["PXK_ID"].ToString();
+         this.HH_ID= table.Rows[pos]["HH_ID"].ToString();
+         this.SO_LUONG= table.Rows[pos]["SO_LUONG"].ToString();
+         this.DON_GIA= table.Rows[pos]["DON_GIA"].ToString();
+         this.THANH_TIEN= table.Rows[pos]["THANH_TIEN"].ToString();
+         this.GHI_CHU= table.Rows[pos]["GHI_CHU"].ToString();
+         this.PNK_CT_ID= table.Rows[pos]["PNK_CT_ID"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByPXK_CT_ID(string sPXK_CT_ID)

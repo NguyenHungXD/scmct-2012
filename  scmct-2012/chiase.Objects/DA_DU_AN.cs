@@ -72,7 +72,7 @@ using System;
        public static DA_DU_AN Create_DA_DU_AN ( string sID  ){
     DataTable dt=SearchByID(sID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new DA_DU_AN(dt.DefaultView,0);
+      return new DA_DU_AN(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -81,21 +81,21 @@ using System;
    return " SELECT T.* FROM DA_DU_AN AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public DA_DU_AN( DataView dv,int pos)
+ public DA_DU_AN( DataTable table,int pos)
 {
-         this.ID= dv[pos][0].ToString();
-         this.MA_DU_AN= dv[pos][1].ToString();
-         this.TEN_DU_AN= dv[pos][2].ToString();
-         this.NGAY_TAO= dv[pos][3].ToString();
-         this.NGUOI_TAO= dv[pos][4].ToString();
-         this.NGAY_BAT_DAU= dv[pos][5].ToString();
-         this.NGAY_KET_THUC= dv[pos][6].ToString();
-         this.CHI_TIET= dv[pos][7].ToString();
-         this.TRANG_THAI_ID= dv[pos][8].ToString();
-         this.NGUOI_CAP_NHAT= dv[pos][9].ToString();
-         this.NGAY_CAP_NHAT= dv[pos][10].ToString();
-         this.GHI_CHU= dv[pos][11].ToString();
-         this.ENABLE_BIT= dv[pos][12].ToString();
+         this.ID= table.Rows[pos]["ID"].ToString();
+         this.MA_DU_AN= table.Rows[pos]["MA_DU_AN"].ToString();
+         this.TEN_DU_AN= table.Rows[pos]["TEN_DU_AN"].ToString();
+         this.NGAY_TAO= table.Rows[pos]["NGAY_TAO"].ToString();
+         this.NGUOI_TAO= table.Rows[pos]["NGUOI_TAO"].ToString();
+         this.NGAY_BAT_DAU= table.Rows[pos]["NGAY_BAT_DAU"].ToString();
+         this.NGAY_KET_THUC= table.Rows[pos]["NGAY_KET_THUC"].ToString();
+         this.CHI_TIET= table.Rows[pos]["CHI_TIET"].ToString();
+         this.TRANG_THAI_ID= table.Rows[pos]["TRANG_THAI_ID"].ToString();
+         this.NGUOI_CAP_NHAT= table.Rows[pos]["NGUOI_CAP_NHAT"].ToString();
+         this.NGAY_CAP_NHAT= table.Rows[pos]["NGAY_CAP_NHAT"].ToString();
+         this.GHI_CHU= table.Rows[pos]["GHI_CHU"].ToString();
+         this.ENABLE_BIT= table.Rows[pos]["ENABLE_BIT"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID)

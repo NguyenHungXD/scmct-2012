@@ -40,7 +40,7 @@ using System;
        public static TAP_TIN_DINH_KEM Create_TAP_TIN_DINH_KEM ( string sTTDK_ID  ){
     DataTable dt=SearchByTTDK_ID(sTTDK_ID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new TAP_TIN_DINH_KEM(dt.DefaultView,0);
+      return new TAP_TIN_DINH_KEM(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -49,13 +49,13 @@ using System;
    return " SELECT T.* FROM TAP_TIN_DINH_KEM AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public TAP_TIN_DINH_KEM( DataView dv,int pos)
+ public TAP_TIN_DINH_KEM( DataTable table,int pos)
 {
-         this.TTDK_ID= dv[pos][0].ToString();
-         this.TEN_TAP_TIN= dv[pos][1].ToString();
-         this.PATH= dv[pos][2].ToString();
-         this.SO_LUOT_TAI= dv[pos][3].ToString();
-         this.BAI_VIET_ID= dv[pos][4].ToString();
+         this.TTDK_ID= table.Rows[pos]["TTDK_ID"].ToString();
+         this.TEN_TAP_TIN= table.Rows[pos]["TEN_TAP_TIN"].ToString();
+         this.PATH= table.Rows[pos]["PATH"].ToString();
+         this.SO_LUOT_TAI= table.Rows[pos]["SO_LUOT_TAI"].ToString();
+         this.BAI_VIET_ID= table.Rows[pos]["BAI_VIET_ID"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByTTDK_ID(string sTTDK_ID)

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-
+using DK2C.DataAccess.Web;
 namespace chiase
 {
     public partial class forget_password : System.Web.UI.Page
@@ -39,7 +39,7 @@ namespace chiase
             String sql = "SELECT a.*,b.* FROM ND_THONG_TIN_DN a,ND_THONG_TIN_ND b WHERE a.MEM_ID=b.ID AND (username=@v_username OR email=@v_email)";
             String username = txt_username.Text;
             String email = txt_email.Text;
-            DataTable table = Database.GetData(sql, "@v_username", username, "@v_email", email);
+            DataTable table = SQLConnectWeb.GetTableParmams(sql, "@v_username", username, "@v_email", email);
 
             if (table.Rows.Count == 0)
             {

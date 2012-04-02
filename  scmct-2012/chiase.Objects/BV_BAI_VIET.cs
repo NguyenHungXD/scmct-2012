@@ -68,7 +68,7 @@ using System;
        public static BV_BAI_VIET Create_BV_BAI_VIET ( string sBAI_VIET_ID  ){
     DataTable dt=SearchByBAI_VIET_ID(sBAI_VIET_ID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new BV_BAI_VIET(dt.DefaultView,0);
+      return new BV_BAI_VIET(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -77,20 +77,20 @@ using System;
    return " SELECT T.* FROM BV_BAI_VIET AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public BV_BAI_VIET( DataView dv,int pos)
+ public BV_BAI_VIET( DataTable table,int pos)
 {
-         this.BAI_VIET_ID= dv[pos][0].ToString();
-         this.TIEU_DE= dv[pos][1].ToString();
-         this.NGUOI_TAO= dv[pos][2].ToString();
-         this.NGAY_TAO= dv[pos][3].ToString();
-         this.NGUOI_CAP_NHAT= dv[pos][4].ToString();
-         this.NGAY_CAP_NHAT= dv[pos][5].ToString();
-         this.NOI_DUNG= dv[pos][6].ToString();
-         this.TRANG_THAI_ID= dv[pos][7].ToString();
-         this.BAI_VIET_CHA_ID= dv[pos][8].ToString();
-         this.DU_AN_ID= dv[pos][9].ToString();
-         this.CHU_DE_ID= dv[pos][10].ToString();
-         this.SORT= dv[pos][11].ToString();
+         this.BAI_VIET_ID= table.Rows[pos]["BAI_VIET_ID"].ToString();
+         this.TIEU_DE= table.Rows[pos]["TIEU_DE"].ToString();
+         this.NGUOI_TAO= table.Rows[pos]["NGUOI_TAO"].ToString();
+         this.NGAY_TAO= table.Rows[pos]["NGAY_TAO"].ToString();
+         this.NGUOI_CAP_NHAT= table.Rows[pos]["NGUOI_CAP_NHAT"].ToString();
+         this.NGAY_CAP_NHAT= table.Rows[pos]["NGAY_CAP_NHAT"].ToString();
+         this.NOI_DUNG= table.Rows[pos]["NOI_DUNG"].ToString();
+         this.TRANG_THAI_ID= table.Rows[pos]["TRANG_THAI_ID"].ToString();
+         this.BAI_VIET_CHA_ID= table.Rows[pos]["BAI_VIET_CHA_ID"].ToString();
+         this.DU_AN_ID= table.Rows[pos]["DU_AN_ID"].ToString();
+         this.CHU_DE_ID= table.Rows[pos]["CHU_DE_ID"].ToString();
+         this.SORT= table.Rows[pos]["SORT"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByBAI_VIET_ID(string sBAI_VIET_ID)

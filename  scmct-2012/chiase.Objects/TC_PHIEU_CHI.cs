@@ -68,7 +68,7 @@ using System;
        public static TC_PHIEU_CHI Create_TC_PHIEU_CHI ( string sPC_ID  ){
     DataTable dt=SearchByPC_ID(sPC_ID) ;
     if(dt!=null && dt.Rows.Count>0) 
-      return new TC_PHIEU_CHI(dt.DefaultView,0);
+      return new TC_PHIEU_CHI(dt,0);
       return null;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -77,20 +77,20 @@ using System;
    return " SELECT T.* FROM TC_PHIEU_CHI AS T";
     }
 //───────────────────────────────────────────────────────────────────────────────────────
- public TC_PHIEU_CHI( DataView dv,int pos)
+ public TC_PHIEU_CHI( DataTable table,int pos)
 {
-         this.PC_ID= dv[pos][0].ToString();
-         this.MA_PC= dv[pos][1].ToString();
-         this.NGUOI_CAP_NHAT= dv[pos][2].ToString();
-         this.NGAY_CAP_NHAT= dv[pos][3].ToString();
-         this.NGUOI_CHI= dv[pos][4].ToString();
-         this.NGAY_CHI= dv[pos][5].ToString();
-         this.TONG_TIEN= dv[pos][6].ToString();
-         this.CHUNG_TU_GOC= dv[pos][7].ToString();
-         this.NOI_DUNG_CHI= dv[pos][8].ToString();
-         this.DU_AN_ID= dv[pos][9].ToString();
-         this.DOI_TUONG_CHI= dv[pos][10].ToString();
-         this.MEM_ID= dv[pos][11].ToString();
+         this.PC_ID= table.Rows[pos]["PC_ID"].ToString();
+         this.MA_PC= table.Rows[pos]["MA_PC"].ToString();
+         this.NGUOI_CAP_NHAT= table.Rows[pos]["NGUOI_CAP_NHAT"].ToString();
+         this.NGAY_CAP_NHAT= table.Rows[pos]["NGAY_CAP_NHAT"].ToString();
+         this.NGUOI_CHI= table.Rows[pos]["NGUOI_CHI"].ToString();
+         this.NGAY_CHI= table.Rows[pos]["NGAY_CHI"].ToString();
+         this.TONG_TIEN= table.Rows[pos]["TONG_TIEN"].ToString();
+         this.CHUNG_TU_GOC= table.Rows[pos]["CHUNG_TU_GOC"].ToString();
+         this.NOI_DUNG_CHI= table.Rows[pos]["NOI_DUNG_CHI"].ToString();
+         this.DU_AN_ID= table.Rows[pos]["DU_AN_ID"].ToString();
+         this.DOI_TUONG_CHI= table.Rows[pos]["DOI_TUONG_CHI"].ToString();
+         this.MEM_ID= table.Rows[pos]["MEM_ID"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByPC_ID(string sPC_ID)
