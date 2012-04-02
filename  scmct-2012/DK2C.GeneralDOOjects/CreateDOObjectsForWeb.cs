@@ -53,11 +53,12 @@
                 }
                 str11 = str3 + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
                 str11 = str11 + "       public static " + sTableName + " Create_" + sTableName + " ( string s" + table.Rows[0]["COLUMN_NAME"].ToString() + "  ){\r\n";
-                str3 = ((((((((str11 + "    DataTable dt=SearchBy" + table.Rows[0]["COLUMN_NAME"].ToString() + "(s" + table.Rows[0]["COLUMN_NAME"].ToString() + ") ;\r\n") + "    if(dt!=null && dt.Rows.Count>0) \r\n") + "      return new " + sTableName + "(dt.DefaultView,0);\r\n") + "      return null;\r\n") + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + "   private static string s_Select()\r\n" + "    {\r\n") + "   return \" SELECT T.* FROM " + sTableName + " AS T\";\r\n") + "    }\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + " public " + sTableName + "( DataView dv,int pos)\r\n{\r\n";
+                str3 = ((((((((str11 + "    DataTable dt=SearchBy" + table.Rows[0]["COLUMN_NAME"].ToString() + "(s" + table.Rows[0]["COLUMN_NAME"].ToString() + ") ;\r\n") + "    if(dt!=null && dt.Rows.Count>0) \r\n") + "      return new " + sTableName + "(dt,0);\r\n") + "      return null;\r\n") + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + "   private static string s_Select()\r\n" + "    {\r\n") + "   return \" SELECT T.* FROM " + sTableName + " AS T\";\r\n") + "    }\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n")
+                    + " public " + sTableName + "( DataTable table,int pos)\r\n{\r\n";
                 for (num = 0; num < table.Rows.Count; num++)
                 {
                     str11 = str3;
-                    str3 = str11 + "         this." + table.Rows[num]["COLUMN_NAME"].ToString() + "= dv[pos][" + num.ToString() + "].ToString();\r\n";
+                    str3 = str11 + "         this." + table.Rows[num]["COLUMN_NAME"].ToString() + "= table.Rows[pos][\"" +table.Rows[num]["COLUMN_NAME"]+ "\"].ToString();\r\n";
                 }
                 str3 = str3 + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
                 for (num = 0; num < table.Rows.Count; num++)
