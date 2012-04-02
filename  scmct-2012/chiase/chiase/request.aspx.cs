@@ -46,8 +46,9 @@ namespace chiase
         {
             try
             {
-                DataTable table = (DataTable)Session["ThanhVien"];
-                if (table != null)
+                //DataTable table = (DataTable)Session["ThanhVien"];
+                string memid= functions.LoginMemID(this);
+                if (!string.IsNullOrEmpty(memid))
                 {
 
                     //String sql = "INSERT INTO YC_YEU_CAU(TIEU_DE,NOI_DUNG,TRANG_THAI_ID,LOAI_YC_ID,NGUOI_YEU_CAU,NGAY_YEU_CAU) VALUES(@V_TIEU_DE,@V_NOI_DUNG,@V_TRANG_THAI_ID,@V_LOAI_YC_ID,@V_NGUOI_YEU_CAU,@V_NGAY_YEU_CAU)";
@@ -58,10 +59,9 @@ namespace chiase
                     //            "@V_LOAI_YC_ID", dropd_request_kind.SelectedValue,
                     //            "@V_NGUOI_YEU_CAU", table.Rows[0]["mem_id"],
                     //            "@V_NGAY_YEU_CAU", DateTime.Now);
-                    YC_YEU_CAU yc=YC_YEU_CAU.Insert_Object(txt_request_subject.Text,txt_content.Text,
-                        "1",dropd_request_kind.SelectedValue,
-                        table.Rows[0][ND_THONG_TIN_DN.cl_MEM_ID].ToString(),
-                        DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"),"","");
+                    YC_YEU_CAU yc = YC_YEU_CAU.Insert_Object(txt_request_subject.Text, txt_content.Text,
+                        "1", dropd_request_kind.SelectedValue,memid ,
+                      functions.GetStringDatetime(), "", "");
                     if (yc != null)
                         lbl_result.Text = "Đã gửi yêu cầu thành công";
                     else lbl_result.Text = "Yêu cầu gửi không thành công, vui lòng kiểm tra lại thông tin!";

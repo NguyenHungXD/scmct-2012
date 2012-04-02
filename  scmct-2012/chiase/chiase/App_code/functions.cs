@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using chiase.Objects;
 
 namespace chiase
 {
@@ -69,6 +70,62 @@ namespace chiase
                 indexInt++;
             }
             return 0;
+        }
+        /// <summary>
+        /// Return login Member ID (NOT UserID)
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public static string LoginMemID(System.Web.UI.Page page)
+        {
+            DataTable table = (DataTable)page.Session["ThanhVien"];
+            if (table == null || table.Rows.Count == 0) return "";
+            return table.Rows[0][ND_THONG_TIN_DN.cl_MEM_ID].ToString();
+        }
+        /// <summary>
+        /// Return login USer ID
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public static string LoginUserID(System.Web.UI.Page page)
+        {
+            DataTable table = (DataTable)page.Session["ThanhVien"];
+            if (table == null || table.Rows.Count == 0) return "";
+            return table.Rows[0][ND_THONG_TIN_DN.cl_USERID].ToString();
+        }
+        /// <summary>
+        /// retutn string "yyyy-MM-dd hh:mm:ss" form datetime
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static string GetStringDatetime(DateTime date)
+        {
+            return date.ToString("yyyy-MM-dd hh:mm:ss");
+        }
+        /// <summary>
+        /// return string "yyyy-MM-dd hh:mm:ss" current datetime
+        /// </summary>
+        /// <returns></returns>
+        public static string GetStringDatetime()
+        {
+            return GetStringDatetime(DateTime.Now);
+        }
+        /// <summary>
+        /// return string "yyyy-MM-dd" form datetime
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static string GetStringDate(DateTime date)
+        {
+            return date.ToString("yyyy-MM-dd");
+        }
+        /// <summary>
+        /// return string "yyyy-MM-dd" current datetime
+        /// </summary>
+        /// <returns></returns>
+        public static string GetStringDate()
+        {
+            return GetStringDate(DateTime.Now);
         }
     }
 }

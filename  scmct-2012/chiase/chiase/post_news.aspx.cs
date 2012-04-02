@@ -23,7 +23,7 @@ namespace chiase
             //String sql = "INSERT INTO BV_BAI_VIET(TIEU_DE,NGUOI_TAO,NGAY_TAO,NOI_DUNG,TRANG_THAI_ID,CHU_DE_ID,SORT)VALUES(@V_TIEU_DE,@V_NGUOI_TAO,@V_NGAY_TAO,@V_NOI_DUNG,@V_TRANG_THAI_ID,@V_CHU_DE_ID,@V_SORT)";
             try
             {
-                DataTable table = (DataTable)Session["ThanhVien"];
+                //DataTable table = (DataTable)Session["ThanhVien"];
                 //Database.ExecuteNonQuery(sql,
                 //                 "@V_TIEU_DE", txt_title.Text,
                 //                 "@V_NGUOI_TAO", table.Rows[0]["mem_id"],
@@ -32,9 +32,11 @@ namespace chiase
                 //                 "@V_TRANG_THAI_ID",1,
                 //                 "@V_CHU_DE_ID", Request.QueryString["subjectID"],
                 //                 "@V_SORT", txt_sort.Text);
-                BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(txt_title.Text, table.Rows[0][ND_THONG_TIN_DN.cl_MEM_ID].ToString(),
-                    DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), table.Rows[0][ND_THONG_TIN_DN.cl_MEM_ID].ToString(),
-                    DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss").ToString(),
+                string date = functions.GetStringDatetime();
+                string memid = functions.LoginMemID(this);
+                BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(txt_title.Text,memid,
+                   date, memid,
+                   date.ToString(),
                     Editor1.Content, "1", "", "", Request.QueryString["subjectID"], txt_sort.Text);
                 if (bv != null)
                     lbl_error.Text = "Đăng bài thành công";
