@@ -36,7 +36,7 @@ namespace chiase
             long id = (long)RowView.Row[BV_DM_CHU_DE_BV.cl_ID];
 
             //nvdat02/04/12 : Get posted_by field --commented-out and replace
-            String sql = string.Format(@"SELECT a.*,b.*
+            String sql = string.Format(@"SELECT a.*,b.USERNAME
                          FROM BV_BAI_VIET a
                         INNER JOIN  ND_THONG_TIN_DN b ON  a.NGUOI_TAO=b.MEM_ID
                         WHERE BAI_VIET_ID=N'{0}'", id);
