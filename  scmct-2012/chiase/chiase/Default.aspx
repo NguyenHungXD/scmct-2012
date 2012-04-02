@@ -55,15 +55,30 @@
 
     <asp:DataList ID="DataList1" runat="server" Width="100%" 
         onitemdatabound="DataList1_ItemDataBound">
-   <HeaderTemplate>
-        Header
-    </HeaderTemplate>
-
     <ItemTemplate>
+    <table border=1 cellpadding=0 cellspacing=0 width=100%>
+    <tr>
+    <td colspan=2>
+    </td>
+    <td align=right>
             <asp:HyperLink ID="link_post_new" runat="server" NavigateUrl='<%# Eval("id", "post_news.aspx?subjectID={0}") %>' Text="Bài mới"></asp:HyperLink>
-            <asp:Label ID="lbl_subject" runat="server" Text='<%# System.String.Format("{0}({1})",Eval("title"), Eval("description")) %>'></asp:Label>
-    
-
+    </td>
+    </tr>
+    <tr>
+    <td>
+            <asp:Label ID="lbl_subject" runat="server" Text='<%# System.String.Format("{0}",Eval("title")) %>'></asp:Label>
+    </td>
+    <td>
+           
+    </td>
+    </tr>
+     <tr>
+    <td colspan=3>
+            <asp:Label ID="lbl_description" runat="server" Text='<%# System.String.Format("{0}",Eval("description")) %>'></asp:Label>
+    </td>
+    </tr>
+    <tr>
+    <td colspan=3>
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="5" GridLines="None" ShowHeader="False">
                             <Columns>
                                 <asp:TemplateField>
@@ -75,11 +90,13 @@
                                    
                             </Columns>
         </asp:GridView>
-
+      </td>
+      </tr>
+     </table>
     </ItemTemplate>
 
 <FooterTemplate>
-Copyright Hege Refsnes
+<br>&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/mm/yyyy hh:mm:ss tt") %>
 </FooterTemplate>
     </asp:DataList>
 
