@@ -39,7 +39,7 @@ namespace chiase
             String sql = string.Format(@"SELECT a.*,b.USERNAME
                          FROM BV_BAI_VIET a
                         INNER JOIN  ND_THONG_TIN_DN b ON  a.NGUOI_TAO=b.MEM_ID
-                        WHERE BAI_VIET_ID=N'{0}'", id);
+                        WHERE BAI_VIET_ID={0}'", id);
             DataTable baiviet = SQLConnectWeb.GetTable(sql);
            // DataTable baiviet = BV_BAI_VIET.GetTableFields(BV_BAI_VIET.cl_CHU_DE_ID + "=" + id,
            //     new string[] { BV_BAI_VIET.cl_SORT }, BV_BAI_VIET.cl_TIEU_DE, BV_BAI_VIET.cl_NOI_DUNG);
