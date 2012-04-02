@@ -87,8 +87,7 @@
                                     <tr>
                                     <td>
                                             <asp:Label ID="lbl_subject" runat="server" Text='<%# Eval("tieu_de") %>'></asp:Label>
-                                            <asp:Label ID="lbl_posted_by" runat="server" Text='<%# Eval("username") %>'></asp:Label>
-                                    </td>
+                                          <asp:Label ID="Label1" runat="server" Text='<%# Eval("username") %>'></asp:Label>
                                     <td>
                                     </td>
                                     </tr>
