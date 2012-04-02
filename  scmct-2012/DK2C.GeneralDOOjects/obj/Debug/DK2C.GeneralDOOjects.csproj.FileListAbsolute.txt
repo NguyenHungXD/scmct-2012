@@ -15,3 +15,5 @@ D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GeneralD
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\obj\Debug\DK2C.GeneralDOOjects.frmMain.resources
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GenerateResource-ResGen.read.1.tlog
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GenerateResource-ResGen.write.1.tlog
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GenerateResource.read.1.tlog
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GenerateResource.write.1.tlog
