@@ -23,7 +23,7 @@ namespace chiase
             Gmail.Send(Mail);
         }
 
-        static public void Send(String To, String Cc, String Bcc, String Subject, String Body, String[] Attachments)
+        public static void Send(String To, String Cc, String Bcc, String Subject, String Body, String[] Attachments)
         {
             MailMessage Mail = Gmail.CreateMailMessage(To, Subject, Body);
 
@@ -48,7 +48,7 @@ namespace chiase
             Gmail.Send(Mail);
         }
 
-        static MailMessage CreateMailMessage(String To, String Subject, String Body)
+        public static MailMessage CreateMailMessage(String To, String Subject, String Body)
         {
             MailMessage Mail = new MailMessage();
             Mail.BodyFormat = MailFormat.Html;
@@ -69,7 +69,7 @@ namespace chiase
             return Mail;
         }
 
-        static void Send(MailMessage Mail)
+        public static void Send(MailMessage Mail)
         {
             SmtpMail.SmtpServer = "smtp.gmail.com:465";
             SmtpMail.Send(Mail);

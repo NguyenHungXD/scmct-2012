@@ -3,7 +3,7 @@
 
 <%@ Register Assembly="obout_Grid_NET" Namespace="Obout.Grid" TagPrefix="cc1" %>
  <asp:Content ID="Content1" ContentPlaceHolderID="content_slider" Runat="Server">
-  <div id="templatemo_slider">
+     <div id="templatemo_slider">
 		<div id="featured" >
 			<ul class="ui-tabs-nav">
 				<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-1"><a href="#fragment-1"><img src="images/content_slider/image1-small.jpg" alt="Image1small" /><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span></a></li>
