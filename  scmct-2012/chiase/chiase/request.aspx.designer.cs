@@ -46,7 +46,7 @@ namespace chiase {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Obout.Interface.OboutDropDownList dropd_request_kind;
+        protected global::System.Web.UI.WebControls.DropDownList dropd_request_kind;
         
         /// <summary>
         /// Panel1 control.
@@ -100,7 +100,7 @@ namespace chiase {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Obout.Interface.OboutButton btn_request;
+        protected global::System.Web.UI.WebControls.Button btn_request;
         
         /// <summary>
         /// btn_close control.
@@ -109,6 +109,6 @@ namespace chiase {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Obout.Interface.OboutButton btn_close;
+        protected global::System.Web.UI.WebControls.Button btn_close;
     }
 }

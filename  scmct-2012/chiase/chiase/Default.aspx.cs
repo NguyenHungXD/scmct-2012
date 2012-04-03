@@ -15,10 +15,11 @@ namespace chiase
         {
             if(!IsPostBack)
             {
-                display();
+             //   display();
             
             }
         }
+        /*
         public void display()
         {
             DataTable table = BV_DM_CHU_DE_BV.GetTableFields(new string[] { BV_DM_CHU_DE_BV.cl_SORT },
@@ -47,6 +48,6 @@ namespace chiase
             GridView1.DataSource = baiviet;
             GridView1.DataBind();
         }
-
+        */
     }
 }

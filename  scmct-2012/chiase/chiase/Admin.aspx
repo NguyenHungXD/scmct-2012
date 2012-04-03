@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Admin.aspx.cs" Inherits="chiase.Admin" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
+
+
     <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td>
@@ -220,5 +222,9 @@
      </table>
 
     <br>&nbsp
+
+
+
+
 </asp:Content>
 

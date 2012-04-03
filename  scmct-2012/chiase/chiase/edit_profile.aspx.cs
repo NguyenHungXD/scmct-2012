@@ -78,7 +78,7 @@ namespace chiase
             Response.Redirect("default.aspx");
         }
 
-        protected void btn_update_profile_Click(object sender, EventArgs e)
+        protected void btn_updateprofile_Click(object sender, EventArgs e)
         {
             DataTable table = (DataTable)Session["ThanhVien"];
             ND_THONG_TIN_ND nd = new ND_THONG_TIN_ND(table, 0);
@@ -99,7 +99,8 @@ namespace chiase
             }
         }
 
-        protected void btn_update_avatar_Click(object sender, EventArgs e)
+
+protected void btn_avatar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -144,20 +145,16 @@ namespace chiase
 
         }
 
-    
-
-   
-
-
-
-
+        protected void btn_close_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("default.aspx");
+        }
 
      
 
+        
 
 
-   
 
-   
-    }
+        } 
 }

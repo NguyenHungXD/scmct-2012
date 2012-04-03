@@ -1,11 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="post_news.aspx.cs" Inherits="chiase.post_news"%>
 
-<%@ Register Assembly="obout_Interface" Namespace="Obout.Interface" TagPrefix="cc1" %>
-<%@ Register
-    Assembly="AjaxControlToolkit"
-    Namespace="AjaxControlToolkit"
-    TagPrefix="ajaxToolkit" %>
-<%@ Register Assembly="Obout.Ajax.UI" Namespace="Obout.Ajax.UI.HTMLEditor" TagPrefix="obout" %>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
 
    <fieldset>
@@ -17,7 +12,6 @@
         <hr>
         </td>
     </tr>
-
           <tr>
     <td>
         Tiêu đề:
@@ -32,10 +26,10 @@
      Nội dung:
      </td>
      <td>
-         <ajaxToolkit:ToolkitScriptManager runat="Server" EnablePartialRendering="true" ID="ScriptManager1" />
-    <obout:Editor ID="Editor1" runat="server" Height="300px" Width="850px" 
-             class="txtformat_area">
-    </obout:Editor>
+
+
+         <asp:TextBox ID="txt_content" runat="server" TextMode="MultiLine" class="txtformat_area"></asp:TextBox>
+
     <br>
      </td>
      </tr>

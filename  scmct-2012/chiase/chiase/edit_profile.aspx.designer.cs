@@ -40,13 +40,13 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.FileUpload upload_img;
         
         /// <summary>
-        /// btn_update_avatar control.
+        /// btn_avatar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Obout.Interface.OboutButton btn_update_avatar;
+        protected global::System.Web.UI.WebControls.Button btn_avatar;
         
         /// <summary>
         /// lbl_lasted_access control.
@@ -220,13 +220,13 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_note;
         
         /// <summary>
-        /// btn_update_profile control.
+        /// btn_updateprofile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Obout.Interface.OboutButton btn_update_profile;
+        protected global::System.Web.UI.WebControls.Button btn_updateprofile;
         
         /// <summary>
         /// btn_close control.
@@ -235,6 +235,6 @@ namespace chiase {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Obout.Interface.OboutButton btn_close;
+        protected global::System.Web.UI.WebControls.Button btn_close;
     }
 }

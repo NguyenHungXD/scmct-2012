@@ -37,7 +37,7 @@ namespace chiase
                 BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(txt_title.Text,memid,
                    date, memid,
                    date.ToString(),
-                    Editor1.Content, "1", "", "", Request.QueryString["subjectID"], txt_sort.Text);
+                    txt_content.Text, "1", "", "", Request.QueryString["subjectID"], txt_sort.Text);
                 if (bv != null)
                     lbl_error.Text = "Đăng bài thành công";
                 else

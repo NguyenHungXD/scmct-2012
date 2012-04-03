@@ -40,9 +40,9 @@ namespace chiase
             }
         }
 
-     
 
-        protected void btn_request_Click1(object sender, EventArgs e)
+
+        protected void btn_request_Click(object sender, EventArgs e)
         {
             try
             {
@@ -76,5 +76,14 @@ namespace chiase
                 lbl_result.Text = "Không gửi được yêu cầu" + ex.ToString() + dropd_request_kind.SelectedValue.ToString();
             }
         }
+
+        protected void btn_close_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("default.aspx");
+        }
+
+ 
+
+        
     }
 }

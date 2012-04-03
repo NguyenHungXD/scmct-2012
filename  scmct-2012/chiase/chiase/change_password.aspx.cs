@@ -35,12 +35,9 @@ namespace chiase
             }
         }
 
-        protected void btn_close_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("default.aspx");
-        }
+ 
 
-        protected void btn_change_pass_Click(object sender, EventArgs e)
+        protected void btn_change_pass_Click1(object sender, EventArgs e)
         {
             DataTable table = (DataTable)Session["ThanhVien"];
             String sql_check = "Select * from ND_THONG_TIN_DN where username=@v_username and pwd=@v_password";
@@ -63,6 +60,15 @@ namespace chiase
                 lbl_error.Text = "Đổi mật khẩu không thành công !";
             }
         }
+
+        protected void btn_close_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("default.aspx");
+        }
+
+  
+
+        
 
 
 

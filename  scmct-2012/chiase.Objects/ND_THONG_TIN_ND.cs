@@ -889,7 +889,7 @@ public bool  Save_Object(string sNAME
 //───────────────────────────────────────────────────────────────────────────────────────
  public static bool Update_AVATAR_PATH(string sAVATAR_PATH,string s_ID)
 {
-  string sqlSave= " UPDATE ND_THONG_TIN_ND SET AVATAR_PATH='N"+sAVATAR_PATH+"' WHERE ID='"+ s_ID+"' ";
+  string sqlSave= " UPDATE ND_THONG_TIN_ND SET AVATAR_PATH='"+sAVATAR_PATH+"' WHERE ID='"+ s_ID+"' ";
  bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }

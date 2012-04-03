@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="edit_profile.aspx.cs" Inherits="chiase.edit_profile" %>
-<%@ Register Assembly="obout_Interface" Namespace="Obout.Interface" TagPrefix="cc1" %>
 
 <asp:Content ID="register" ContentPlaceHolderID="content_area" Runat="Server">
     <fieldset>
@@ -21,9 +20,8 @@
                 Text="Chọn hình" class="btnformat" BorderColor="White" BorderStyle="Solid" 
                 BorderWidth="1px" Height="21px" ToolTip="Chọn hình" Width="300px"/>
         </div>
-            <cc1:OboutButton ID="btn_update_avatar" runat="server" 
-                onclick="btn_update_avatar_Click" Text="Lưu avatar mới">
-            </cc1:OboutButton>
+        <asp:Button ID="btn_avatar" runat="server" Text="Cập nhật Avatar" 
+            class="btnformat" onclick="btn_avatar_Click"/>
         <br>
         <i>Truy cập lần cuối, <asp:Label ID="lbl_lasted_access" runat="server" ForeColor="White"></asp:Label></i><br>
         <asp:Label ID="lbl_group_name" runat="server" Text=""></asp:Label>
@@ -173,15 +171,10 @@
     <tr>
     <td colspan=3 align="left"/><hr/><br/>
     
-
-        <cc1:OboutButton ID="btn_update_profile" runat="server" 
-            Text="Cập nhật thông tin" onclick="btn_update_profile_Click">
-        </cc1:OboutButton>
-
-        <cc1:OboutButton ID="btn_close" runat="server" Text="Đóng" Width="100px" 
-            onclick="btn_close_Click">
-        </cc1:OboutButton>
-
+        <asp:Button ID="btn_updateprofile" runat="server" Text="Lưu thay đổi" 
+            onclick="btn_updateprofile_Click" class="btnformat" Width="100px"/>
+        <asp:Button ID="btn_close" runat="server" Text="Đóng" 
+            onclick="btn_close_Click1" class="btnformat"/>
 </tr>
 <tr>
     <td colspan=3 align=right>
@@ -191,6 +184,4 @@
      </table>
     </fieldset>
     <br>&nbsp
-
-    
     </asp:Content>

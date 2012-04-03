@@ -1,6 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="chiase.MasterPage" %>
 
-<%@ Register Assembly="obout_Interface" Namespace="Obout.Interface" TagPrefix="cc1" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -46,12 +46,10 @@
                          Width="95px"></asp:TextBox>
                     &nbsp;Mật khẩu:<asp:TextBox ID="txtPassWord" runat="server" class="txtformat" 
                          Width="95px" TextMode="Password"></asp:TextBox>
-                    <cc1:OboutButton ID="btn_login" runat="server" Text="Đăng nhập" Height="23px" 
-                         Width="85px" onclick="btn_login_Click" style="top: 0px; left: 0px" >
-                    </cc1:OboutButton>
-                    <cc1:OboutCheckBox ID="keep_login" runat="server" Checked="True">
-                    </cc1:OboutCheckBox><font color=white>Ghi nhớ</font>
 
+                    <asp:Button ID="btn_login" runat="server" Text="Đăng nhập" 
+                         onclick="btn_login_Click1" class="btnformat" Height="20px" Width="90px"/>
+                    <asp:CheckBox ID="chk_remember" runat="server" checked="true"/>Ghi nhớ
                 
                     <br>
                     <!--<p align=center>Quên mật khẩu ? | Đăng ký</p>-->
@@ -73,7 +71,7 @@
                     <td align=center>
                     <p align=center class="textformat"> 
                         <asp:HyperLink ID="link_member_page" runat="server" Text="Trang của tôi" NavigateUrl="index.aspx"></asp:HyperLink> | <asp:HyperLink ID="update_profile" runat="server" Text="Cập nhật thông tin cá nhân"  NavigateUrl="~/edit_profile.aspx"></asp:HyperLink> | 
-                        <asp:HyperLink ID="link_changepass" runat="server" Text="Đổi mật khẩu" NavigateUrl="~/change_password.aspx" title="Đổi mật khẩ"></asp:HyperLink> | 
+                        <asp:HyperLink ID="link_changepass" runat="server" Text="Đổi mật khẩu" NavigateUrl="change_password.aspx" title="Đổi mật khẩ"></asp:HyperLink> | 
                         <asp:LinkButton ID="logout" runat="server" onclick="logout_Click">Thoát</asp:LinkButton> </p>
                     </td>
                     </tr>

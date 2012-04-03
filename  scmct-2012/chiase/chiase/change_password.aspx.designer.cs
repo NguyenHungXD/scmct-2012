@@ -109,7 +109,7 @@ namespace chiase {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Obout.Interface.OboutButton btn_change_pass;
+        protected global::System.Web.UI.WebControls.Button btn_change_pass;
         
         /// <summary>
         /// btn_close control.
@@ -118,6 +118,6 @@ namespace chiase {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Obout.Interface.OboutButton btn_close;
+        protected global::System.Web.UI.WebControls.Button btn_close;
     }
 }

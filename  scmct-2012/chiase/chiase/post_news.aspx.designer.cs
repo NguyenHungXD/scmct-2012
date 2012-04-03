@@ -31,22 +31,13 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_title;
         
         /// <summary>
-        /// ScriptManager1 control.
+        /// txt_content control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ToolkitScriptManager ScriptManager1;
-        
-        /// <summary>
-        /// Editor1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Obout.Ajax.UI.HTMLEditor.Editor Editor1;
+        protected global::System.Web.UI.WebControls.TextBox txt_content;
         
         /// <summary>
         /// txt_sort control.

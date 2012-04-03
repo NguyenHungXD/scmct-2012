@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="register.aspx.cs" Inherits="chiase.register" %>
 
-<%@ Register Assembly="obout_Interface" Namespace="Obout.Interface" TagPrefix="cc1" %>
 <asp:Content ID="register" ContentPlaceHolderID="content_area" Runat="Server">
 <fieldset>
 <legend><font size=2 color=white><b>Đăng ký thành viên</font></b></legend>    
@@ -111,13 +110,10 @@
     </tr>
     <tr>
     <td colspan=3 align=left><hr><br>
-
-        <cc1:OboutButton ID="btn_register" runat="server" Text="Đăng ký" 
-            onclick="btn_register_Click1">
-        </cc1:OboutButton>
-        <cc1:OboutButton ID="btn_close" runat="server" Text="Đóng" 
-            onclick="btn_close_Click">
-        </cc1:OboutButton>
+        <asp:Button ID="btn_register" runat="server" Text="Đăng ký" 
+            onclick="btn_register_Click"  class="btnformat"/>
+        <asp:Button ID="btn_close" runat="server" Text="Đóng" 
+            onclick="btn_close_Click1" class="btnformat"/>
         
     </td>
     </tr>

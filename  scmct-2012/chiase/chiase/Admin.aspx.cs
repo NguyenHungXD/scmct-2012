@@ -18,6 +18,8 @@ namespace chiase
                 display();
             }
         }
+
+
         public void display()
         {
             try
@@ -30,7 +32,7 @@ namespace chiase
             catch (Exception ex)
             {
                 lbl_error.Text = ex.ToString();
-            
+
             }
         
         }
@@ -38,7 +40,8 @@ namespace chiase
         {
             try
             {
-                DataTable table = DA_DU_AN.GetTableAll(ID + "=" + dropd_lst_project.SelectedValue);
+                DataTable table = DA_DU_AN.GetTableAll("ID=" + dropd_lst_project.SelectedValue);
+                if (table == null) return;
                 lbl_project_name.Text = table.Rows[0][DA_DU_AN.cl_TEN_DU_AN].ToString();
             }
             catch (Exception ex)
@@ -56,5 +59,6 @@ namespace chiase
         {
             show_project_name();
         }
+
     }
 } 

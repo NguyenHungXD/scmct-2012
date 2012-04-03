@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
     CodeBehind="Default.aspx.cs" Inherits="chiase._Default" %>
-
-<%@ Register Assembly="obout_Grid_NET" Namespace="Obout.Grid" TagPrefix="cc1" %>
  <asp:Content ID="Content1" ContentPlaceHolderID="content_slider" Runat="Server">
      <div id="templatemo_slider">
 		<div id="featured" >
@@ -53,58 +51,5 @@
 
 <asp:Content ID="register" ContentPlaceHolderID="content_area" Runat="Server">
 
-<asp:DataList ID="DataList1" runat="server" Width="100%" 
-        onitemdatabound="DataList1_ItemDataBound">
-<HeaderTemplate>
-    
-    <table border=0 cellpadding=0 cellspacing=0 width=100%>
-</HeaderTemplate>
-    <ItemTemplate>
-  
-    <tr>
-   
-    <td colspan=3 align=right>
-            <asp:HyperLink ID="link_post_new" runat="server" NavigateUrl='<%# Eval("id", "post_news.aspx?subjectID={0}") %>' Text="Bài mới"></asp:HyperLink>
-    </td>
-    </tr>
-    <tr>
-    <td colspan=3>
-            <asp:Label ID="lbl_subject" runat="server" Text='<%# System.String.Format("{0}",Eval("title")) %>'></asp:Label>
-    </td>
-    </tr>
-     <tr>
-    <td colspan=3>
-            <asp:Label ID="lbl_description" runat="server" Text='<%# System.String.Format("{0}",Eval("description")) %>'></asp:Label>
-    </td>
-    </tr>
-    <tr>
-    <td colspan=3>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="5" GridLines="None" ShowHeader="False">
-                            <Columns>
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-                                    <table border=0 cellpadding=0 cellspacing=0 width=100%>
-                                    <tr>
-                                    <td>
-                                            <asp:Label ID="lbl_subject" runat="server" Text='<%# Eval("tieu_de") %>'></asp:Label>
-                                    
-                                    <td>
-                                    </td>
-                                    </tr>
-                                    </table>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-        </asp:GridView>
-      </td>
-      </tr>
-     
-    </ItemTemplate>
-   
-<FooterTemplate>
-     </table>
-<br>&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/mm/yyyy hh:mm:ss tt") %>
-</FooterTemplate>
-    </asp:DataList>
 
 </asp:Content>

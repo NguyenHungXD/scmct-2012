@@ -1,7 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="request.aspx.cs" Inherits="chiase.request" %>
-
-<%@ Register assembly="obout_Interface" namespace="Obout.Interface" tagprefix="cc1" %>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
     <fieldset>
 <legend><font size=2 color=white><b>Gửi yêu cầu</font></b></legend>    
@@ -37,8 +34,11 @@
     Loại yêu cầu:
     </td>
     <td>
-        <cc1:OboutDropDownList ID="dropd_request_kind" runat="server">
-        </cc1:OboutDropDownList>
+
+    
+        <asp:DropDownList ID="dropd_request_kind" runat="server">
+        </asp:DropDownList>
+
     </td>
     </tr>
 
@@ -89,13 +89,12 @@
     </asp:Panel>
     <tr>
     <td colspan=3 align=left><hr><br>
-        <cc1:OboutButton ID="btn_request" runat="server" onclick="btn_request_Click1" 
-            Text="Gửi yêu cầu" Height="25px" Width="100px">
-        </cc1:OboutButton>
-        <cc1:OboutButton ID="btn_close" runat="server" Text="Đóng" Height="25px" 
-            Width="100px">
-        </cc1:OboutButton>
+            <asp:Button ID="btn_request" runat="server" Text="Gửi yêu cầu" 
+            onclick="btn_request_Click" class="btnformat"/>
+            <asp:Button ID="btn_close" runat="server" Text="Đóng" 
+            onclick="btn_close_Click" class="btnformat"/>
     </td>
+        
     </tr>
     <tr>
     <td colspan=3 align=right>

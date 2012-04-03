@@ -50,7 +50,7 @@ namespace chiase
             Response.Redirect("Default.aspx");
         }
 
-        protected void btn_login_Click(object sender, EventArgs e)
+        protected void btn_login_Click1(object sender, EventArgs e)
         {
             bool ok=false;
             String sql = string.Format(@"SELECT a.*,b.*,c.* 
@@ -81,6 +81,10 @@ namespace chiase
             }
            
         }
+
+ 
+
+        
 
    
     }

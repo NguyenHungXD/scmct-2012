@@ -1,6 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="change_password.aspx.cs" Inherits="chiase.change_password" %>
-
-<%@ Register Assembly="obout_Interface" Namespace="Obout.Interface" TagPrefix="cc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="content_area" runat="server">
     <fieldset>
 <legend><font size=2 color=white><b>Đổi mật khẩu</font></b></legend> 
@@ -70,12 +68,11 @@
     <br>
 
 
-        <cc1:OboutButton ID="btn_change_pass" runat="server" 
-            onclick="btn_change_pass_Click" Text="Đổi mật khẩu">
-        </cc1:OboutButton>
-        <cc1:OboutButton ID="btn_close" runat="server" onclick="btn_close_Click" 
-            Text="Đóng" Width="100px">
-        </cc1:OboutButton>
+            <asp:Button ID="btn_change_pass" runat="server" Text="Đổi mật khẩu" 
+                onclick="btn_change_pass_Click1" class="btnformat" Width="100px"/>
+            <asp:Button ID="btn_close" runat="server" Text="Đóng" 
+                onclick="btn_close_Click1" class="btnformat"/>
+ </td>
 
 </tr>
 <tr>

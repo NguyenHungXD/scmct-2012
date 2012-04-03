@@ -24,7 +24,7 @@ namespace chiase
   
 
 
-        protected void btn_register_Click1(object sender, EventArgs e)
+      protected void btn_register_Click(object sender, EventArgs e)
         {
             Boolean check = true;//Check availabe (Username,Email address)
             //SQL String
@@ -132,11 +132,14 @@ namespace chiase
            
             
         }
-
-        protected void btn_close_Click(object sender, EventArgs e)
+        protected void btn_close_Click1(object sender, EventArgs e)
         {
             Response.Redirect("default.aspx");
         }
+
+    
+
+        
 
       
 

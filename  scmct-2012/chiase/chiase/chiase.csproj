@@ -33,20 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxControlToolkit, Version=4.1.51116.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\AjaxControlToolkit.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Obout.Ajax.UI, Version=2.12.309.1, Culture=neutral, PublicKeyToken=24f3c5cea456f322, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="obout_Grid_NET, Version=7.0.9.0, Culture=neutral, PublicKeyToken=5ddc49d3b53e3f98, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="obout_Interface, Version=4.0.10.0, Culture=neutral, PublicKeyToken=d5dff6913a9d6649, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -65,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin.aspx" />
-    <Content Include="Account\change_password.aspx" />
+    <Content Include="change_password.aspx" />
     <Content Include="App_Data\ServerConfig.txt" />
     <Content Include="Styles\content_slider_style.css" />
     <Content Include="create_new_project.aspx" />
@@ -73,7 +60,7 @@
     <Content Include="edit_profile.aspx" />
     <Content Include="Flash\header.swf" />
     <Content Include="Flash\hieuung.swf" />
-    <Content Include="Account\forget_password.aspx" />
+    <Content Include="forget_password.aspx" />
     <Content Include="Images\bg_b.gif" />
     <Content Include="Images\Calendar_scheduleHS.png" />
     <Content Include="Images\content_slider\image1-small.jpg" />
@@ -150,11 +137,11 @@
     <Compile Include="Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Account\change_password.aspx.cs">
+    <Compile Include="change_password.aspx.cs">
       <DependentUpon>change_password.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Account\change_password.aspx.designer.cs">
+    <Compile Include="change_password.aspx.designer.cs">
       <DependentUpon>change_password.aspx</DependentUpon>
     </Compile>
     <Compile Include="create_new_project.aspx.cs">
@@ -178,11 +165,11 @@
     <Compile Include="edit_profile.aspx.designer.cs">
       <DependentUpon>edit_profile.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Account\forget_password.aspx.cs">
+    <Compile Include="forget_password.aspx.cs">
       <DependentUpon>forget_password.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Account\forget_password.aspx.designer.cs">
+    <Compile Include="forget_password.aspx.designer.cs">
       <DependentUpon>forget_password.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_code\functions.cs" />
