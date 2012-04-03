@@ -90,7 +90,56 @@ em { color: #000; }
 	text-decoration: none;
     cursor:pointer;
     }
+  .post_news
+  {
+       background: url(/images/post_news.gif) repeat;
+       color:#FFFFFF;
+       	padding: 10px 10px 10px 50px;
+	    font-size: 13px;
+	    text-align: left;
+	    font-weight: bold;
+	    text-decoration: none;
+   }
+     .new_post
+  {
+        text-align: center;
+        background: url(/images/main_header.png) repeat;
+        color:#0099FF;
+       	padding: 0px 0px 0px 0px;
+	    font-size: 12px;
+	    font-weight: bold;
+	    text-decoration: none;
+	    border:2px solid #FFFFFF;
+
+	    
+   }
+        .new_post_details
+  {
+         background: url(/images/post_news1.gif) repeat;
+        color:#000066;
+       	padding: 0px 0px 0px 0px;
+	    font-size: 12px;
+	    text-align: center;
+	    
+	    text-decoration: none;
+	    border:2px solid #FFFFFF; 
+   }
+ .new_post_details a
+  {
+        color: #993399; text-decoration: none; font-weight: bold;
+   }
+.new_post_details a:hover { text-decoration: underline;color:#FF00FF;font-weight:bold; }
    
+     .post_news_desc
+  {
+       background: url(/images/post_news1.gif) repeat;
+       color:#000033;
+       	padding: 3px 3px 3px 20px;
+	    font-size: 11px;
+	    text-align: left;
+	    text-decoration: none;
+   }
+
 .txtformat {
 	background-image:url('/images/form_bg.jpg');
 	background-repeat:repeat-x;
@@ -295,9 +344,10 @@ BACKGROUND-COLOR: #ffffff"
 
 #templatemo_content {
 	clear: both;
-	width: 930px;
+	width: 940px;
+	margin-top: 0px;
 	margin-bottom: 10px;
-	padding-left: 10px;
+	padding-left: 0px;
 	background: url(/images/templatemo_footer.png) center repeat-y;
 	/*border: 1px solid #2B60DE;*/
 

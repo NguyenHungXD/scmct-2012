@@ -15,23 +15,23 @@ namespace chiase
         {
             if(!IsPostBack)
             {
-             //   display();
+               display();
             
             }
         }
-        /*
+
         public void display()
         {
             DataTable table = BV_DM_CHU_DE_BV.GetTableFields(new string[] { BV_DM_CHU_DE_BV.cl_SORT },
-                BV_DM_CHU_DE_BV.cl_ID, BV_DM_CHU_DE_BV.cl_TITLE, BV_DM_CHU_DE_BV.cl_DESCRIPTION,BV_DM_CHU_DE_BV.cl_CREATED_DATE);
-            DataList1.DataSource = table;
-            DataList1.DataBind();
+                BV_DM_CHU_DE_BV.cl_ID, BV_DM_CHU_DE_BV.cl_TITLE, BV_DM_CHU_DE_BV.cl_DESCRIPTION, BV_DM_CHU_DE_BV.cl_CREATED_DATE);
+            show_subject.DataSource = table;
+            show_subject.DataBind();
         
         }
 
-        protected void DataList1_ItemDataBound(object sender, DataListItemEventArgs e)
+        protected void show_subject_ItemDataBound1(object sender, RepeaterItemEventArgs e)
         {
-            GridView GridView1 = (GridView)e.Item.FindControl("GridView1");
+            Repeater showListPost = (Repeater)e.Item.FindControl("showListPost");
             DataRowView RowView = (DataRowView)e.Item.DataItem;
             if (RowView == null) return;
             long id = (long)RowView.Row[BV_DM_CHU_DE_BV.cl_ID];
@@ -40,14 +40,15 @@ namespace chiase
             String sql = string.Format(@"SELECT a.*,b.USERNAME
                          FROM BV_BAI_VIET a
                         INNER JOIN  ND_THONG_TIN_DN b ON  a.NGUOI_TAO=b.MEM_ID
-                        WHERE BAI_VIET_ID={0}'", id);
+                        WHERE CHU_DE_ID={0}", id);
             DataTable baiviet = SQLConnectWeb.GetTable(sql);
-           // DataTable baiviet = BV_BAI_VIET.GetTableFields(BV_BAI_VIET.cl_CHU_DE_ID + "=" + id,
-           //     new string[] { BV_BAI_VIET.cl_SORT }, BV_BAI_VIET.cl_TIEU_DE, BV_BAI_VIET.cl_NOI_DUNG);
+            //DataTable baiviet = BV_BAI_VIET.GetTableFields(BV_BAI_VIET.cl_CHU_DE_ID + "=" + id,
+            //    new string[] { BV_BAI_VIET.cl_SORT }, BV_BAI_VIET.cl_TIEU_DE, BV_BAI_VIET.cl_NOI_DUNG);
 
-            GridView1.DataSource = baiviet;
-            GridView1.DataBind();
+            showListPost.DataSource = baiviet;
+            showListPost.DataBind();
         }
-        */
+
+
     }
 }
