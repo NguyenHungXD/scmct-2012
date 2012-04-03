@@ -54,7 +54,7 @@ namespace chiase
                 try
                 {
                     Gmail.Send(table.Rows[0]["email"].ToString(), subject, body);
-                   // lbl_error.Text = String.Format("Mật khẩu của bạn đã được gửi đến <u>{0}</u>. Xin vui lòng kiểm tra hộp thư của bạn", table.Rows[0]["email"]);
+                    lbl_error.Text = String.Format("Mật khẩu của bạn đã được gửi đến <u>{0}</u>. Xin vui lòng kiểm tra hộp thư của bạn", table.Rows[0]["email"]);
                 }
                 catch
                 {
