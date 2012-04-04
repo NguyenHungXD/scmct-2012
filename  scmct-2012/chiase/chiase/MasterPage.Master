@@ -176,5 +176,8 @@
 </div> <!-- templatemo_wrapper -->
 </div><!-- templatemo_wrapper_outer -->
 </form>
+<a href="#" style="display:scroll;position:fixed;bottom:35px;right:5px;" title="Go to Top"><img src="images/top.gif"></a>  
+<a name="bottom"></a>  
+<a href="#bottom" style="display:scroll;position:fixed;bottom:5px;right:5px;" title="Go to Bottom"><img src="images/down.gif"></a>
 </body>
 </html>

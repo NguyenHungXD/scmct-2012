@@ -60,7 +60,7 @@
     <tr class="post_news">
     <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("title")%></td><td align=right>
     
-        <asp:HyperLink ID="link_post_new" runat="server" Text="Bài mới" NavigateUrl='<%#Eval("id","post_news.aspx?subjectID={0}") %>'></asp:HyperLink>
+        <asp:HyperLink ID="link_post_new" runat="server" Text="Bài mới" NavigateUrl='<%#Eval("id","post_news.aspx?subjectID={0}") %>' class="btn_link"></asp:HyperLink>
     </td><tr></table> </td>
         
     </tr>
