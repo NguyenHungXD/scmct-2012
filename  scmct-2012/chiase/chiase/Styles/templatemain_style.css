@@ -76,6 +76,7 @@ em { color: #000; }
      background: url(/images/grid_medblue.gif) repeat;
      line-height: 130%;
      font-size: 13px;
+    margin-left: 2px;
 }
 
 .btnformat 

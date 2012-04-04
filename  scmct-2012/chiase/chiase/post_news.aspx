@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
 
    <fieldset>
-<legend><font size=2 color=white><b>Tạo chủ đề mới</font></b></legend> 
+<legend><font size=2 color=white><b>Đăng bài mới</font></b></legend>
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td align=center colspan=2><br>
@@ -28,7 +28,8 @@
      <td>
 
 
-         <asp:TextBox ID="txt_content" runat="server" TextMode="MultiLine" class="txtformat_area"></asp:TextBox>
+         <asp:TextBox ID="txt_content" runat="server" TextMode="MultiLine" 
+             class="txtformat_area" Height="462px" Width="849px"></asp:TextBox>
 
     <br>
      </td>

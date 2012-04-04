@@ -58,7 +58,11 @@
 </HeaderTemplate>
 <ItemTemplate>
     <tr class="post_news">
-    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("title")%></td><tr></table> </td>
+    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("title")%></td><td align=right>
+    
+        <asp:HyperLink ID="link_post_new" runat="server" Text="Bài mới" NavigateUrl='<%#Eval("id","post_news.aspx?subjectID={0}") %>'></asp:HyperLink>
+    </td><tr></table> </td>
+        
     </tr>
     <tr class="post_news_desc">
     <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("description")%></td><td align=right><%#Eval("created_date", "{0:dd/mm/yyyy hh:mm:ss tt}")%></td></tr></table></td>
@@ -91,7 +95,7 @@
                     <tr class="new_post_details">
                     <td with=10%>Status</td>
                     <td with=10%>Like</td>
-                    <td align=left with=25%><asp:HyperLink ID="link_show_detail" runat="server" NavigateUrl='<%# Eval("bai_viet_id", "news_details.aspx?id={0}") %>'
+                    <td align=left with=25%><asp:HyperLink ID="link_show_detail" runat="server" NavigateUrl='<%# Eval("bai_viet_id", "post_show_details.aspx?news_id={0}") %>'
                                         Text='<%# Eval("tieu_de") %>'></asp:HyperLink><br><i>Tạo bởi 
                                         <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Eval("username", "user_info.aspx?user_id={0}") %>' Text='<%# Eval("username") %>'></asp:HyperLink>, <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%></i></td>
                     <td with=10%>0</td>

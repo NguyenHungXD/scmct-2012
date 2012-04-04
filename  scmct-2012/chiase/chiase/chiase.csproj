@@ -54,6 +54,8 @@
     <Content Include="Admin.aspx" />
     <Content Include="change_password.aspx" />
     <Content Include="App_Data\ServerConfig.txt" />
+    <Content Include="post_show_details.aspx" />
+    <Content Include="show_details.aspx" />
     <Content Include="Styles\content_slider_style.css" />
     <Content Include="create_new_project.aspx" />
     <Content Include="create_new_subject.aspx" />
@@ -181,6 +183,13 @@
     <Compile Include="post_news.aspx.designer.cs">
       <DependentUpon>post_news.aspx</DependentUpon>
     </Compile>
+    <Compile Include="post_show_details.aspx.cs">
+      <DependentUpon>post_show_details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="post_show_details.aspx.designer.cs">
+      <DependentUpon>post_show_details.aspx</DependentUpon>
+    </Compile>
     <Compile Include="register.aspx.cs">
       <DependentUpon>register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -214,6 +223,13 @@
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="show_details.aspx.cs">
+      <DependentUpon>show_details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="show_details.aspx.designer.cs">
+      <DependentUpon>show_details.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -237,7 +253,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3520</DevelopmentServerPort>
+          <DevelopmentServerPort>1518</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
