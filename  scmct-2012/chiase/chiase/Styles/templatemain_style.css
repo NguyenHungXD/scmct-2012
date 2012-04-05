@@ -132,14 +132,27 @@ em { color: #000; }
    {
         color:#000000;
         font-size: 12px;
-        background:url(/images/comment_bg.gif) no-repeat;
-        padding: 5px 5px 5px 10px;
+        background:url(/images/comment_bg_main.gif) repeat;
+        padding: 0px 5px 5px 5px;
          WIDTH: 895px;
-         HEIGHT: 200px;
+
         
    }
+   .comment_format_header
+   {
+        background:url(/images/comment_bg_header.gif) no-repeat;
+        padding: 0px 5px 5px 0px;
+         WIDTH: 900px;
+ 
+   }
+      .comment_format_footer
+   {
+        background:url(/images/comment_bg_footer.gif) no-repeat;
+        padding: 0px 5px 5px 0px;
+         WIDTH: 900px;
 
-   
+        
+   }
  .new_post_details a
   {
         color: #0066FF; text-decoration: none; font-weight: bold;

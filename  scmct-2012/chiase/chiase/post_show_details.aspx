@@ -23,7 +23,7 @@
     <td>       
         <asp:Repeater ID="showList_comment" runat="server">
         <HeaderTemplate>
-        <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;">
+        <table border="0" cellpadding=0 cellspacing=0 width="100%"  style="border:1px solid #CCFFFF;">
         </HeaderTemplate>
         <ItemTemplate>
                     <tr >
@@ -31,10 +31,13 @@
                     &nbsp;&nbsp
                     </td>
                     <td>
+                    <div class="comment_format_header">
+                    &nbsp
+                    <div>
                     <div class="comment_format">
-                    <table border=0 cellpadding=1 cellspacing=1 width=100%>
+                    <table border=0 cellpadding=1 cellspacing=1 width=100% bgcolor="#ede7fe">
                     <tr>
-                    <td width=20% bgcolor="#FFFFCC">
+                    <td width=20% bgcolor="#FFFFCC" VALIGN="top">
                         <table border=0 cellpadding=0 cellspacing=0>
                         <tr>
                         <td colspan=2>
@@ -74,12 +77,16 @@
                         </tr>
                         </table>
                     </td>
-                    <td width=80% bgcolor="#FFFFCC">
+                    <td width=80% bgcolor="#FFFFCC" VALIGN="top">
                         <%#Eval("noi_dung")%>
                     </td>
                     </tr>
                     </table>
                     </div>
+                    <div class="comment_format_footer">
+                    &nbsp
+
+                    <div>
                     </td>
                     </tr>
         </ItemTemplate>
