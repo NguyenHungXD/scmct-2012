@@ -87,6 +87,7 @@
             <li><a href="request.aspx" title="Gửi yêu cầu"><span>Gửi yêu cầu</span></a></li>
             <li><a href="#" title="Giới thiệu"><span>Giới thiệu</span></a></li>
             <li><a href="#" title="Liên hệ"><span>Liên hệ</span></a></li>
+            <li><a href="forum.aspx" title="Liên hệ"><span>Diễn đàn</span></a></li>
             <li><a href="admin.aspx" title="Quản trị"><span>Quản trị</span></a></li>
         </ul>
         </div> <!-- end of templatemo_menu -->

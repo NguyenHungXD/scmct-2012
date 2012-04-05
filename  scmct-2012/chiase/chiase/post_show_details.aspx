@@ -23,7 +23,7 @@
     <td>       
         <asp:Repeater ID="showList_comment" runat="server">
         <HeaderTemplate>
-        <table border="0" cellpadding=0 cellspacing=0 width="100%"  style="border:1px solid #CCFFFF;">
+        <table border="0" cellpadding=1 cellspacing=3 width="100%"  style="border:1px solid #CCFFFF;">
         </HeaderTemplate>
         <ItemTemplate>
                     <tr >

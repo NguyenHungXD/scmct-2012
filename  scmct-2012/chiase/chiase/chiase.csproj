@@ -54,6 +54,7 @@
     <Content Include="Admin.aspx" />
     <Content Include="change_password.aspx" />
     <Content Include="App_Data\ServerConfig.txt" />
+    <Content Include="forum.aspx" />
     <Content Include="post_show_details.aspx" />
     <Content Include="show_details.aspx" />
     <Content Include="Styles\content_slider_style.css" />
@@ -176,6 +177,13 @@
     </Compile>
     <Compile Include="App_code\functions.cs" />
     <Compile Include="App_code\Gmail.cs" />
+    <Compile Include="forum.aspx.cs">
+      <DependentUpon>forum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forum.aspx.designer.cs">
+      <DependentUpon>forum.aspx</DependentUpon>
+    </Compile>
     <Compile Include="post_news.aspx.cs">
       <DependentUpon>post_news.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
