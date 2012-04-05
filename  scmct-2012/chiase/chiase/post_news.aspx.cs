@@ -29,12 +29,13 @@ namespace chiase
                 //                 "@V_TRANG_THAI_ID",1,
                 //                 "@V_CHU_DE_ID", Request.QueryString["subjectID"],
                 //                 "@V_SORT", txt_sort.Text);
+                lbl_error.Text = ASPxHtmlEditor1.Html;
                 string date = functions.GetStringDatetime();
                 string memid = functions.LoginMemID(this);
                 BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(txt_title.Text,memid,
                    date, memid,
                    date.ToString(),
-                    txt_content.Text, "1", "", "", Request.QueryString["subjectID"], txt_sort.Text);
+                    ASPxHtmlEditor1.Html, "1", "", "", Request.QueryString["subjectID"], txt_sort.Text);
                 if (bv != null)
                     lbl_error.Text = "Đăng bài thành công";
                 else
@@ -43,6 +44,7 @@ namespace chiase
             catch (Exception ex)
             {
                 lbl_error.Text = ex.ToString();
+                
             }
         }
     }

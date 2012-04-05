@@ -22,3 +22,4 @@ E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\chiase.Objects.dll
 E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\DK2C.DataAccess.dll
 E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\chiase.Objects.pdb
 E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\DK2C.DataAccess.pdb
+E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\obj\Debug\chiase.dll.licenses

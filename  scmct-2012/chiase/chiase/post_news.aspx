@@ -1,5 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="post_news.aspx.cs" Inherits="chiase.post_news"%>
 
+<%@ Register Assembly="DevExpress.Web.ASPxHtmlEditor.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxHtmlEditor" TagPrefix="dx" %>
+
+
+<%@ Register assembly="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxEditors" tagprefix="dx" %>
+<%@ Register assembly="DevExpress.Web.ASPxSpellChecker.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxSpellChecker" tagprefix="dx" %>
+
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
 
@@ -22,15 +29,59 @@
             </td>
     </tr>
      <tr>
-     <td>
-     Nội dung:
-     </td>
-     <td>
+     <td colspan=2 align=right>
 
 
-         <asp:TextBox ID="txt_content" runat="server" TextMode="MultiLine" 
-             class="txtformat_area" Height="462px" Width="849px"></asp:TextBox>
 
+
+     
+
+
+         <dx:ASPxHtmlEditor ID="ASPxHtmlEditor1" runat="server" 
+             CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" Height="533px" 
+             Width="900px" CustomCommand="OnCommandExecute">
+             <Styles CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua">
+                 <ViewArea>
+                     <Border BorderColor="#A3C0E8" />
+                 </ViewArea>
+             </Styles>
+
+
+    <SettingsImageSelector Enabled="True">
+            <CommonSettings RootFolder="~/images/upload/" ThumbnailFolder="~/images/upload/"
+                InitialFolder="upload" />
+            <PermissionSettings>
+
+            </PermissionSettings>
+        </SettingsImageSelector>
+        <SettingsImageUpload UploadImageFolder="~/images/upload/">
+            <ValidationSettings AllowedFileExtensions=".jpe,.jpeg,.jpg,.gif,.png" MaxFileSize="500000">
+            </ValidationSettings>
+        </SettingsImageUpload>
+
+
+<SettingsDocumentSelector>
+<CommonSettings AllowedFileExtensions=".rtf, .pdf, .doc, .docx, .odt, .txt, .xls, .xlsx, .ods, .ppt, .pptx, .odp"></CommonSettings>
+</SettingsDocumentSelector>
+
+       
+
+
+
+
+
+
+             <Images SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
+                 <LoadingPanel Url="~/App_Themes/Aqua/HtmlEditor/Loading.gif">
+                 </LoadingPanel>
+             </Images>
+             <ImagesFileManager>
+                 <FolderContainerNodeLoadingPanel Url="~/App_Themes/Aqua/Web/tvNodeLoading.gif">
+                 </FolderContainerNodeLoadingPanel>
+                 <LoadingPanel Url="~/App_Themes/Aqua/Web/Loading.gif">
+                 </LoadingPanel>
+             </ImagesFileManager>
+         </dx:ASPxHtmlEditor>
     <br>
      </td>
      </tr>
