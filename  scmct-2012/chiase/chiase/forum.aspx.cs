@@ -46,6 +46,21 @@ namespace chiase
 
             showListPost.DataSource = baiviet;
             showListPost.DataBind();
+
+
+        }
+
+        protected static void showListPost_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            //Count viewing times
+            Label cnt_view = (Label)e.Item.FindControl("lbl_cnt_view");
+            DataRowView RowView = (DataRowView)e.Item.DataItem;
+            if (RowView == null) return;
+            long id = (long)RowView.Row[BV_BAI_VIET.cl_BAI_VIET_ID];
+            String sql_cnt = string.Format(@"SELECT count(*) as cnt FROM BV_BAI_VIET WHERE CHU_DE_ID={0} and BAI_VIET_CHA_ID IS NOT NULL", id);
+            DataTable cnt = SQLConnectWeb.GetTable(sql_cnt);
+            cnt_view.Text = cnt.Rows[0]["cnt"].ToString();
+            //New comment, commented by, commented date
         }
     }
 }

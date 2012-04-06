@@ -84,10 +84,10 @@
         <div id="templatemo_menu">
         <ul class=blue>
 	        <li><a href="default.aspx" title="Trang chủ" class="current"><span>Trang chủ</span></a></li>
+            <li><a href="forum.aspx" title="Liên hệ"><span>Diễn đàn</span></a></li>
             <li><a href="request.aspx" title="Gửi yêu cầu"><span>Gửi yêu cầu</span></a></li>
             <li><a href="#" title="Giới thiệu"><span>Giới thiệu</span></a></li>
             <li><a href="#" title="Liên hệ"><span>Liên hệ</span></a></li>
-            <li><a href="forum.aspx" title="Liên hệ"><span>Diễn đàn</span></a></li>
             <li><a href="admin.aspx" title="Quản trị"><span>Quản trị</span></a></li>
         </ul>
         </div> <!-- end of templatemo_menu -->
@@ -116,33 +116,30 @@
 	<div id="templatemo_footer">
     
         <div class="col_w220">
-            <h5>Follow Us</h5>
-            <p>Curabitur enim tellus, iaculis at imperdiet eget, pretium sit amet purus. Nullam eleifend ultricies consequat.</p>
-            
-            <ul id="social_box">
-                <li><a href="http://www.facebook.com/templatemo"><img src="images/facebook.png" alt="Facebook" /></a></li>
-                <li><a href="http://www.facebook.com/templatemo"><img src="images/twitter.png" alt="Twitter" /></a></li>
-                <li><a href="http://www.facebook.com/templatemo"><img src="images/linkedin.png" alt="Linkedin" /></a></li>
-                <li><a href="http://www.facebook.com/templatemo"><img src="images/technorati.png" alt="Technorati" /></a></li>
-                <li><a href="http://www.facebook.com/templatemo"><img src="images/myspace.png" alt="Myspace" /></a></li>                
-            </ul>
-            
+            <h5>Chia sẽ cộng đồng</h5>
+            <p>Cùng nhau phổ biến dự án SCMCT Online trên các trang xã hội</p><BR>
+
+                <a href="http://www.facebook.com/templatemo" title="Zing Me"><img src="images/zing_logo.gif" alt="Zing Me" width=80 height=30/></a>
+                <a href="http://www.facebook.com/templatemo" title="Facebook"><img src="images/facebook.png" alt="Facebook" width=30 height=30 /></a>
+                <a href="http://www.facebook.com/templatemo" title="Google Plus"><img src="images/googleplus.gif" alt="Goolge Plus" width=80 height=30 /></a>      
+
         </div>
         
         <div class="col_w220">
-            <h5>Our Pages</h5>
+            <h5>SCMCT Online</h5>
             <ul class="tmo_list">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="news.html">News</a></li>
-                <li><a href="about.html">About us</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="default.aspx">Trang chủ</a></li>
+                <li><a href="forum.aspx">Diễn đàn</a></li>
+                <li><a href="request.aspx">Gửi yêu cầu</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Liên hệ</a></li>
+              
             </ul>  
  
         </div>
         
         <div class="col_w220">
-            <h5>Partners</h5>
+            <h5>Liên kết web</h5>
 			<ul class="tmo_list">
                 <li><a href="http://www.templatemo.com">Free CSS Templates</a></li>
                 <li><a href="http://www.koflash.com">Websites Gallery</a></li>
@@ -153,24 +150,14 @@
  
         </div>
         
-        <div class="col_w220 col_last">
-            <h5>Links</h5>
-            <ul class="tmo_list">
-                <li><a href="#">Aenean rhoncus leo ut eros</a></li>
-                <li><a href="#">Consectetur adipiscing elit</a></li>
-                <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-                <li><a href="#">Pellentesque vel est ut leo</a></li>
-				<li><a href="#">Sed fringilla sollicitudin nisi</a></li>
-            </ul>    
- 
-        </div>
+
         
         <div class="cleaner"></div>
     </div> <!-- end of footer -->
 	
     <div id="templatemo_copyright">
     
-        Copyright © 2048 <a href="#">Your Company Name</a> | <a href="http://www.iwebsitetemplate.com" target="_parent">Website Templates</a> by <a href="http://www.templatemo.com" target="_parent">Free CSS Templates</a>
+        Copyright © 2012-<%# System.DateTime.Now.Year%> <a href="#">SCMCT Online Group</a> | <a href="#" target="_parent">Trang chủ</a> | <a href="#">Diễn đàn</a> | <a href="#">Liên hệ</a> | <a href="#">Trợ giúp</a>
     
     </div>
 </div>

@@ -79,7 +79,7 @@ namespace chiase
 
                 string date = functions.GetStringDatetime();
                 string memid = functions.LoginMemID(this);
-                BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(bv_info.Rows[0][BV_BAI_VIET.cl_TIEU_DE].ToString(), memid, date, "", "", txt_comment.Text, "1", Request.QueryString["news_id"], "", bv_info.Rows[0][BV_BAI_VIET.cl_CHU_DE_ID].ToString(), "0");
+                BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(bv_info.Rows[0][BV_BAI_VIET.cl_TIEU_DE].ToString(), memid, date, "", "", ASPxHtmlEditor1.Html.Replace("'",""), "1", Request.QueryString["news_id"], "", bv_info.Rows[0][BV_BAI_VIET.cl_CHU_DE_ID].ToString(), "0");
 
                 Response.Redirect("post_show_details.aspx?news_id=" + Request.QueryString["news_id"]);
 

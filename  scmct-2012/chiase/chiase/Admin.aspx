@@ -7,7 +7,7 @@
     <tr>
     <td>
          <fieldset>
-          <legend><b><font size=2 color=white>Quản lí dự án</font></b></legend>
+          <legend>   Quản lí dự án    </legend>
           <table border=0 cellpadding =2 cellspacing=2 width =100%>
           <tr>
           <td>
@@ -32,9 +32,9 @@
                    onselectedindexchanged="dropd_lst_project_SelectedIndexChanged" 
                    AutoPostBack="True">
                             </asp:DropDownList> 
-               <b>
+                 
                <asp:Label ID="lbl_project_name" runat="server" BackColor="#33CCCC" 
-                   BorderStyle="None" BorderWidth="1px" ForeColor="White"></asp:Label></b>
+                   BorderStyle="None" BorderWidth="1px" ForeColor="White"></asp:Label>  
                <asp:Button ID="btn_view" runat="server" Text="Xem" Width="70px" 
                    class="btnformat" Height="25px" />
                <asp:Button ID="btn_update" runat="server" Text="Cập nhật" Width="70px" 
@@ -58,7 +58,7 @@
     <tr>
     <td>
           <fieldset>
-          <legend><b><font size=2 color=white>Quản lí yêu cầu tặng/yêu cầu trợ giúp sách</font></b></legend>
+          <legend>   Quản lí yêu cầu tặng/yêu cầu trợ giúp sách    </legend>
           <table border=0 cellpadding =2 cellspacing=2 width =100%>
           <tr>
           <td>
@@ -83,7 +83,7 @@
     <tr>
     <td>
           <fieldset>
-          <legend><b><font size=2 color=white>Quản lí người dùng</font></b></legend>
+          <legend>   Quản lí người dùng    </legend>
           <table border=0 cellpadding =2 cellspacing=2 width =100%>
           <tr>
           <td>
@@ -110,7 +110,7 @@
 
            <fieldset>
               
-          <legend><b><font size=2 color=white>Quản lí bài viết</font></b></legend>
+          <legend>   Quản lí bài viết    </legend>
           <table border=0 cellpadding =2 cellspacing=2 width =100%>
           <tr>
           <td>
@@ -137,7 +137,7 @@
     <td>
 
            <fieldset>
-          <legend><b><font size=2 color=white>Quản lí kho</font></b></legend>
+          <legend>   Quản lí kho    </legend>
           <table border=0 cellpadding =2 cellspacing=2 width =100%>
           <tr>
           <td>
@@ -164,7 +164,7 @@
     <td>
 
            <fieldset>
-          <legend><b><font size=2 color=white>Quản lí thu chi</font></b></legend>
+          <legend>   Quản lí thu chi    </legend>
           <table border=0 cellpadding =2 cellspacing=2 width =100%>
           <tr>
           <td>
@@ -191,7 +191,7 @@
     <td>
 
            <fieldset>
-          <legend><b><font size=2 color=white>Quản lí quyền truy cập</font></b></legend>
+          <legend>   Quản lí quyền truy cập    </legend>
           <table border=0 cellpadding =2 cellspacing=2 width =100%>
           <tr>
           <td>

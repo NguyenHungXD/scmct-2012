@@ -3,7 +3,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
    <fieldset>
 <legend><font size=2 color=white><b>Tạo chủ đề mới</font></b></legend> 
-<table border=0 cellpadding =1 cellspacing=2 width =100%>
+<table border=2 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td align=center colspan=2><br>
         <font size=3><b><asp:Label ID="lbl_error" runat="server" ForeColor="#0000CC"></asp:Label></font><br>
@@ -65,9 +65,7 @@
 <tr>
     <td colspan=3>
         <asp:Button ID="btn_create_new_subject" runat="server" Text="Tạo chủ đề mới" 
-            onclick="btn_create_new_subject_Click" class="btnformat"/>
-        <asp:Button ID="btn_close" runat="server" Text="Đóng" Width="100px" class="btnformat"/>
-
+            onclick="btn_create_new_subject_Click" class="btnformat"/><asp:Button ID="btn_close" runat="server" Text="Đóng" Width="100px" class="btnformat"/>
     </td>
     </tr>
 <tr>

@@ -59,7 +59,7 @@ namespace chiase
                     //            "@V_LOAI_YC_ID", dropd_request_kind.SelectedValue,
                     //            "@V_NGUOI_YEU_CAU", table.Rows[0]["mem_id"],
                     //            "@V_NGAY_YEU_CAU", DateTime.Now);
-                    YC_YEU_CAU yc = YC_YEU_CAU.Insert_Object(txt_request_subject.Text, txt_content.Text,
+                    YC_YEU_CAU yc = YC_YEU_CAU.Insert_Object(txt_request_subject.Text.Replace("'",""), ASPxHtmlEditor1.Html.Replace(",",""),
                         "1", dropd_request_kind.SelectedValue,memid ,
                       functions.GetStringDatetime(), "", "");
                     if (yc != null)
@@ -73,7 +73,7 @@ namespace chiase
             }
             catch (Exception ex)
             {
-                lbl_result.Text = "Không gửi được yêu cầu" + ex.ToString() + dropd_request_kind.SelectedValue.ToString();
+                lbl_result.Text = String.Format("Không gửi được yêu cầu{0}{1}", ex, dropd_request_kind.SelectedValue);
             }
         }
 

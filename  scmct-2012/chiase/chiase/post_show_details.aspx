@@ -1,5 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="post_show_details.aspx.cs" Inherits="chiase.post_show_details" %>
 
+<%@ Register Assembly="DevExpress.Web.ASPxHtmlEditor.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxHtmlEditor" TagPrefix="dx" %>
+
+<%@ Register assembly="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxEditors" tagprefix="dx" %>
+<%@ Register assembly="DevExpress.Web.ASPxSpellChecker.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxSpellChecker" tagprefix="dx" %>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
 
 
@@ -106,12 +112,57 @@
 </FooterTemplate>
     </asp:Repeater>
     <br>
-    <font color=white>Ý kiến của bạn :</font>
+    <font color=white><b>Ý kiến của bạn :</b></font>
     <table>
     <tr>
     <td>
-            <asp:TextBox ID="txt_comment" runat="server" class="txtformat_area" 
-        Height="103px" TextMode="MultiLine" Width="917px"></asp:TextBox>
+ 
+
+    
+        <dx:ASPxHtmlEditor ID="ASPxHtmlEditor1" runat="server" 
+                CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" 
+                CssPostfix="Office2010Blue" Height="200px" Width="930px">
+            <Styles CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" 
+                CssPostfix="Office2010Blue">
+                <ViewArea>
+                    <Border BorderColor="#859EBF" />
+                </ViewArea>
+            </Styles>
+            <StylesEditors ButtonEditCellSpacing="0">
+            </StylesEditors>
+            <StylesStatusBar>
+                <StatusBar TabSpacing="0px">
+                    <Paddings Padding="0px" />
+                </StatusBar>
+            </StylesStatusBar>
+    <SettingsImageSelector Enabled="True">
+            <CommonSettings RootFolder="~/images/upload/" ThumbnailFolder="~/images/upload/"
+                InitialFolder="upload" />
+            <PermissionSettings>
+
+            </PermissionSettings>
+        </SettingsImageSelector>
+        <SettingsImageUpload UploadImageFolder="~/images/upload/">
+            <ValidationSettings AllowedFileExtensions=".jpe,.jpeg,.jpg,.gif,.png" MaxFileSize="500000">
+            </ValidationSettings>
+        </SettingsImageUpload>
+
+<SettingsDocumentSelector>
+<CommonSettings AllowedFileExtensions=".rtf, .pdf, .doc, .docx, .odt, .txt, .xls, .xlsx, .ods, .ppt, .pptx, .odp"></CommonSettings>
+</SettingsDocumentSelector>
+            <Images SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css">
+                <LoadingPanel Url="~/App_Themes/Office2010Blue/HtmlEditor/Loading.gif">
+                </LoadingPanel>
+            </Images>
+            <ImagesFileManager>
+                <FolderContainerNodeLoadingPanel Url="~/App_Themes/Office2010Blue/Web/tvNodeLoading.gif">
+                </FolderContainerNodeLoadingPanel>
+                <LoadingPanel Url="~/App_Themes/Office2010Blue/Web/Loading.gif">
+                </LoadingPanel>
+            </ImagesFileManager>
+        </dx:ASPxHtmlEditor>
+
+
         <asp:Button ID="btn_comment" runat="server" Text="Gửi" 
         class="btnformat" onclick="btn_comment_Click"/>
     </td>

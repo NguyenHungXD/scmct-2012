@@ -89,12 +89,14 @@
             Text="[Thêm trạng thái]" onclick="btn_add_project_status_Click"></asp:LinkButton><asp:Panel
                 ID="panel_add_new_status" runat="server" BackColor="#0099FF" 
             Direction="LeftToRight" Height="30px" HorizontalAlign="Center" 
-            style="margin-left: 102px" Width="463px">
+            style="margin-left: 102px" Width="550">
 
                 <asp:TextBox ID="txt_status_project" runat="server" class="txtformat"
     Width="300px" Height="22px" BackColor="#CCFFCC"></asp:TextBox>
                 <asp:Button ID="btn_add_stutus_name" runat="server" Text="Thêm trạng thái" 
                     onclick="btn_add_stutus_name_Click" class="btnformat" Width="100px"/>
+                    <asp:Button ID="btn_close" runat="server" Text="Đóng" class="btnformat" 
+                    onclick="btn_close_Click"/>
             </asp:Panel>
         </td>
     </tr>

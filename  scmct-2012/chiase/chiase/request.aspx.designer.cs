@@ -31,13 +31,13 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_request_subject;
         
         /// <summary>
-        /// txt_content control.
+        /// ASPxHtmlEditor1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_content;
+        protected global::DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor ASPxHtmlEditor1;
         
         /// <summary>
         /// dropd_request_kind control.

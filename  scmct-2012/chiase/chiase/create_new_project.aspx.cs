@@ -109,5 +109,10 @@ namespace chiase
                 lbl_error.Text = "Không tạo được dự án mới" + ex.ToString();
             }
         }
+
+        protected void btn_close_Click(object sender, EventArgs e)
+        {
+            panel_add_new_status.Visible = false;
+        }
     }
 }
