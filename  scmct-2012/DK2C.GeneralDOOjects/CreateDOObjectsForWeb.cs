@@ -86,11 +86,11 @@
                     {
                         str3 = str3 + "  =\"+ s" + str4 + " + \"\"; \r\n";
                     }
-                    str3 = (str3 + "          DataTable dt=GetTable(sqlSelect) ;\r\n") + "          return dt; \r\n }" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
+                    str3 = (str3 + "          DataTable dt=GetTable(sqlSelect,sTableName) ;\r\n") + "          return dt; \r\n }" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
                     if (flag)
                     {
                         str11 = str3 + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
-                        str3 = ((((str11 + " public static DataTable SearchBy" + table.Rows[num]["COLUMN_NAME"].ToString() + "(string s" + table.Rows[num]["COLUMN_NAME"].ToString() + ",string sMatch)\r\n{\r\n") + "          string sqlSelect= s_Select()+ \" WHERE " + str4) + "\"+ sMatch +s" + str4 + " + \"\"; \r\n") + "          DataTable dt=GetTable(sqlSelect) ;\r\n") + "          return dt; \r\n }" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
+                        str3 = ((((str11 + " public static DataTable SearchBy" + table.Rows[num]["COLUMN_NAME"].ToString() + "(string s" + table.Rows[num]["COLUMN_NAME"].ToString() + ",string sMatch)\r\n{\r\n") + "          string sqlSelect= s_Select()+ \" WHERE " + str4) + "\"+ sMatch +s" + str4 + " + \"\"; \r\n") + "          DataTable dt=GetTable(sqlSelect,sTableName) ;\r\n") + "          return dt; \r\n }" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n";
                     }
                 }
                 str3 = str3 + " public static DataTable Search(";
@@ -126,7 +126,7 @@
                         str3 = str3 + " =\" + s" + table.Rows[num]["COLUMN_NAME"].ToString() + " ;\r\n";
                     }
                 }
-                str3 = (((str3 + "   sqlselect=sqlselect.Replace(\"WHERE AND\",\"WHERE\");\r\n" + "   int n=sqlselect.IndexOf(\"WHERE\");\r\n") + "   if(n==sqlselect.Length -5) sqlselect=sqlselect.Remove(n,5) ;\r\n" + "   return GetTable(sqlselect);\r\n") + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + " public static " + sTableName + " Insert_Object(\r\n";
+                str3 = (((str3 + "   sqlselect=sqlselect.Replace(\"WHERE AND\",\"WHERE\");\r\n" + "   int n=sqlselect.IndexOf(\"WHERE\");\r\n") + "   if(n==sqlselect.Length -5) sqlselect=sqlselect.Remove(n,5) ;\r\n" + "   return GetTable(sqlselect,sTableName);\r\n") + "}\r\n" + "//───────────────────────────────────────────────────────────────────────────────────────\r\n") + " public static " + sTableName + " Insert_Object(\r\n";
                 List<string> list = new List<string>();
                 for (num = 0; num < table.Rows.Count; num++)
                 {
@@ -221,7 +221,7 @@
                     + "     order = string.Join(\",\", orderFields);\r\n"
                     + "   if (order != \"\")\r\n"
                     + "      sqlSelect += \" ORDER BY \" + order;\r\n"
-                    + "   return GetTable(sqlSelect);\r\n"
+                    + "   return GetTable(sqlSelect,sTableName);\r\n"
                     + "}\r\n"
                     + "//───────────────────────────────────────────────────────────────────────────────────────\r\n"
                     + "//───────────────────────────────────────────────────────────────────────────────────────\r\n" 
@@ -239,7 +239,7 @@
                     + "    order = string.Join(\",\", orderFields);\r\n"
                     + " if (order != \"\")\r\n"
                     + "    sqlSelect += \" ORDER BY \" + order;\r\n"
-                    + " return GetTable(sqlSelect);\r\n"
+                    + " return GetTable(sqlSelect,sTableName);\r\n"
                     + " }\r\n"
                     + " public static DataTable GetTableFields(params string[] fields)\r\n"
                     + " {\r\n"
