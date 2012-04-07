@@ -1,0 +1,23 @@
+<%@ Register TagPrefix="dxe" Namespace="DevExpress.Web.ASPxEditors" Assembly="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" %>
+<dxe:ASPxDropDownEdit runat="server" SkinID="CheckComboBox" SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" 
+    CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange">
+    <ValidationSettings>
+        <ErrorFrameStyle ImageSpacing="4px">
+            <ErrorTextPaddings PaddingLeft="4px"></ErrorTextPaddings>
+        </ErrorFrameStyle>
+    </ValidationSettings>
+    <ButtonStyle Cursor="pointer" Width="11px"></ButtonStyle>
+    <DropDownWindowStyle BackColor="#F9F9F9" />
+    <DropDownButton>
+    </DropDownButton>
+</dxe:ASPxDropDownEdit>
+<dxe:ASPxListBox runat="server" SkinID="CheckComboBoxListBox" CssPostfix="SoftOrange" CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" LoadingPanelText="">
+    <ValidationSettings>
+        <ErrorFrameStyle ImageSpacing="4px">
+            <ErrorTextPaddings PaddingLeft="4px"></ErrorTextPaddings>
+        </ErrorFrameStyle>
+    </ValidationSettings>
+    <Border BorderStyle="None" />
+    <BorderBottom BorderStyle="Solid" BorderWidth="1px" BorderColor="#E0E0E0" />
+    <LoadingPanelImage Url="~/App_Themes/SoftOrange/Editors/Loading.gif"></LoadingPanelImage>
+</dxe:ASPxListBox>
