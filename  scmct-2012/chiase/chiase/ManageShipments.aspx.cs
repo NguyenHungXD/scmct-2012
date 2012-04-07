@@ -12,7 +12,7 @@ using System.Collections;
 
 namespace chiase
 {
-    public partial class ListOfShipments : System.Web.UI.Page
+    public partial class ManageShipments : System.Web.UI.Page
     {
         DataSet dsSoucrceHH = null;
         protected void Page_Load(object sender, EventArgs e)

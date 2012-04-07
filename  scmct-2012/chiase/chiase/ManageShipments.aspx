@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true"
-    CodeBehind="ListOfShipments.aspx.cs" Inherits="chiase.ListOfShipments" %>
+    CodeBehind="ManageShipments.aspx.cs" Inherits="chiase.ManageShipments" %>
 
 <%@ Register Assembly="DevExpress.Web.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxPopupControl" TagPrefix="dx" %>

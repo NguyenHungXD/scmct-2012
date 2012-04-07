@@ -10,7 +10,7 @@
 namespace chiase {
     
     
-    public partial class ListOfShipments {
+    public partial class ManageShipments {
         
         /// <summary>
         /// btn_CreateNew control.

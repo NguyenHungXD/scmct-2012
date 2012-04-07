@@ -9,6 +9,11 @@ E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\chiase.pdb
 E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\obj\Debug\ResolveAssemblyReference.cache
 E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\obj\Debug\chiase.dll
 E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\obj\Debug\chiase.pdb
+E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\chiase.Objects.dll
+E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\DK2C.DataAccess.dll
+E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\chiase.Objects.pdb
+E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\DK2C.DataAccess.pdb
+E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\obj\Debug\chiase.dll.licenses
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\chiase\chiase\bin\chiase.dll
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\chiase\chiase\bin\chiase.pdb
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\chiase\chiase\bin\chiase.Objects.dll
@@ -16,11 +21,6 @@ D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\chiase\chiase\bin\DK2C.DataAccess.dll
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\chiase\chiase\bin\chiase.Objects.pdb
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\chiase\chiase\bin\DK2C.DataAccess.pdb
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\chiase\chiase\obj\Debug\ResolveAssemblyReference.cache
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\chiase\chiase\obj\Debug\chiase.dll.licenses
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\chiase\chiase\obj\Debug\chiase.dll
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\chiase\chiase\obj\Debug\chiase.pdb
-E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\chiase.Objects.dll
-E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\DK2C.DataAccess.dll
-E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\chiase.Objects.pdb
-E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\bin\DK2C.DataAccess.pdb
-E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\chiase\chiase\obj\Debug\chiase.dll.licenses
-D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\chiase\chiase\obj\Debug\chiase.dll.licenses

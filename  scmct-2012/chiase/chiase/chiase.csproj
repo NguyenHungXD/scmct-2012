@@ -65,7 +65,7 @@
     <Content Include="change_password.aspx" />
     <Content Include="App_Data\ServerConfig.txt" />
     <Content Include="forum.aspx" />
-    <Content Include="ListOfShipments.aspx" />
+    <Content Include="ManageShipments.aspx" />
     <Content Include="post_show_details.aspx" />
     <Content Include="show_details.aspx" />
     <Content Include="Styles\content_slider_style.css" />
@@ -92,12 +92,7 @@
     <Content Include="Images\facebook.png" />
     <Content Include="Images\linkedin.png" />
     <Content Include="Images\myspace.png" />
-    <Content Include="Images\Note.png" />
     <Content Include="Images\NoteTitle.png" />
-    <Content Include="Images\onebit_15.png" />
-    <Content Include="Images\onebit_16.png" />
-    <Content Include="Images\onebit_18.png" />
-    <Content Include="Images\onebit_19.png" />
     <Content Include="Images\PostButton.png" />
     <Content Include="Images\technorati.png" />
     <Content Include="Images\templatemo_body.jpg" />
@@ -105,22 +100,10 @@
     <Content Include="Images\templatemo_button_hover.png" />
     <Content Include="Images\templatemo_footer.png" />
     <Content Include="Images\templatemo_footer_top.png" />
-    <Content Include="Images\templatemo_heading_background.jpg" />
-    <Content Include="Images\templatemo_image_01.jpg" />
-    <Content Include="Images\templatemo_image_02.jpg" />
-    <Content Include="Images\templatemo_image_03.jpg" />
-    <Content Include="Images\templatemo_image_04.jpg" />
-    <Content Include="Images\templatemo_image_05.jpg" />
-    <Content Include="Images\templatemo_image_06.jpg" />
-    <Content Include="Images\templatemo_image_07.jpg" />
-    <Content Include="Images\templatemo_image_08.jpg" />
     <Content Include="Images\templatemo_list.png" />
     <Content Include="Images\templatemo_logo.png" />
-    <Content Include="Images\templatemo_menu.png" />
     <Content Include="Images\templatemo_menu_hover.png" />
     <Content Include="Images\templatemo_sp_box.png" />
-    <Content Include="Images\templatemo_wrapper.jpg" />
-    <Content Include="Images\templatemo_wrapper_bottom.jpg" />
     <Content Include="Images\twitter.png" />
     <Content Include="post_news.aspx" />
     <Content Include="register.aspx" />
@@ -195,12 +178,12 @@
     <Compile Include="forum.aspx.designer.cs">
       <DependentUpon>forum.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ListOfShipments.aspx.cs">
-      <DependentUpon>ListOfShipments.aspx</DependentUpon>
+    <Compile Include="ManageShipments.aspx.cs">
+      <DependentUpon>ManageShipments.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ListOfShipments.aspx.designer.cs">
-      <DependentUpon>ListOfShipments.aspx</DependentUpon>
+    <Compile Include="ManageShipments.aspx.designer.cs">
+      <DependentUpon>ManageShipments.aspx</DependentUpon>
     </Compile>
     <Compile Include="post_news.aspx.cs">
       <DependentUpon>post_news.aspx</DependentUpon>

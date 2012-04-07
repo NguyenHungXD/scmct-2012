@@ -63,7 +63,7 @@ namespace chiase
 
         protected void link_Shipments_Man_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ListOfShipments.aspx");
+            Response.Redirect("ManageShipments.aspx");
         }
 
     }
