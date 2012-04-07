@@ -37,7 +37,7 @@ namespace chiase
                 BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(txt_title.Text.Replace("'",""), memid,
                    date, memid,
                    date.ToString(),
-                    ASPxHtmlEditor1.Html.Replace("'",""), "1", "", "", Request.QueryString["subjectID"], txt_sort.Text);
+                    ASPxHtmlEditor1.Html.Replace("'",""), "1", "", "", Request.QueryString["subjectID"], txt_sort.Text,"0");
                 //if (row != 0)
                     lbl_error.Text = "Đăng bài thành công";
                 //else

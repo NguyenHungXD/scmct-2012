@@ -36,10 +36,12 @@
     <Reference Include="DevExpress.Data.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.SpellChecker.v11.1.Core, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxGridView.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.ASPxHtmlEditor.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="DevExpress.Web.ASPxSpellChecker.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.ASPxThemes.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -63,6 +65,7 @@
     <Content Include="change_password.aspx" />
     <Content Include="App_Data\ServerConfig.txt" />
     <Content Include="forum.aspx" />
+    <Content Include="ListOfShipments.aspx" />
     <Content Include="post_show_details.aspx" />
     <Content Include="show_details.aspx" />
     <Content Include="Styles\content_slider_style.css" />
@@ -192,6 +195,13 @@
     <Compile Include="forum.aspx.designer.cs">
       <DependentUpon>forum.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ListOfShipments.aspx.cs">
+      <DependentUpon>ListOfShipments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListOfShipments.aspx.designer.cs">
+      <DependentUpon>ListOfShipments.aspx</DependentUpon>
+    </Compile>
     <Compile Include="post_news.aspx.cs">
       <DependentUpon>post_news.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -206,6 +216,7 @@
     <Compile Include="post_show_details.aspx.designer.cs">
       <DependentUpon>post_show_details.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs" />
     <Compile Include="register.aspx.cs">
       <DependentUpon>register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -262,6 +273,9 @@
       <Project>{07CB399E-1B9D-4FFF-B459-7805848F7644}</Project>
       <Name>DK2C.DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
