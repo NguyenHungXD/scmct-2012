@@ -66,51 +66,51 @@ using System;
  public static DataTable SearchByFEATUREID(string sFEATUREID)
 {
           string sqlSelect= s_Select()+ " WHERE FEATUREID  ="+ sFEATUREID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByFEATUREID(string sFEATUREID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE FEATUREID"+ sMatch +sFEATUREID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByGROUPID(string sGROUPID)
 {
           string sqlSelect= s_Select()+ " WHERE GROUPID  ="+ sGROUPID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByGROUPID(string sGROUPID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE GROUPID"+ sMatch +sGROUPID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByISREAD_BIT(string sISREAD_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE ISREAD_BIT  Like N'%"+ sISREAD_BIT + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByISINSERT_BIT(string sISINSERT_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE ISINSERT_BIT  Like N'%"+ sISINSERT_BIT + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByISUPDATE_BIT(string sISUPDATE_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE ISUPDATE_BIT  Like N'%"+ sISUPDATE_BIT + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByISDELETE_BIT(string sISDELETE_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE ISDELETE_BIT  Like N'%"+ sISDELETE_BIT + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable Search( string sFEATUREID
@@ -137,7 +137,7 @@ using System;
    sqlselect=sqlselect.Replace("WHERE AND","WHERE");
    int n=sqlselect.IndexOf("WHERE");
    if(n==sqlselect.Length -5) sqlselect=sqlselect.Remove(n,5) ;
-   return GetTable(sqlselect);
+   return GetTable(sqlselect,sTableName);
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static PQ_NHOM_DN_CHUC_NANG Insert_Object(
@@ -341,7 +341,7 @@ public static DataTable GetTableAll(string sWhere, params string[] orderFields)
      order = string.Join(",", orderFields);
    if (order != "")
       sqlSelect += " ORDER BY " + order;
-   return GetTable(sqlSelect);
+   return GetTable(sqlSelect,sTableName);
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -359,7 +359,7 @@ public static DataTable GetTableFields(string sWhere, string[] orderFields, para
     order = string.Join(",", orderFields);
  if (order != "")
     sqlSelect += " ORDER BY " + order;
- return GetTable(sqlSelect);
+ return GetTable(sqlSelect,sTableName);
  }
  public static DataTable GetTableFields(params string[] fields)
  {

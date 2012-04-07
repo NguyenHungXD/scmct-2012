@@ -61,52 +61,52 @@ using System;
  public static DataTable SearchByID(string sID)
 {
           string sqlSelect= s_Select()+ " WHERE ID  ="+ sID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE ID"+ sMatch +sID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNAME(string sNAME)
 {
           string sqlSelect= s_Select()+ " WHERE NAME  Like N'%"+ sNAME + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByENABLE_BIT(string sENABLE_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE ENABLE_BIT  Like N'%"+ sENABLE_BIT + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByCREATED_DATE(string sCREATED_DATE)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_DATE  ="+ sCREATED_DATE + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByCREATED_DATE(string sCREATED_DATE,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_DATE"+ sMatch +sCREATED_DATE + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByCREATED_BY(string sCREATED_BY)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_BY  ="+ sCREATED_BY + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByCREATED_BY(string sCREATED_BY,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE CREATED_BY"+ sMatch +sCREATED_BY + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable Search( string sID
@@ -130,7 +130,7 @@ using System;
    sqlselect=sqlselect.Replace("WHERE AND","WHERE");
    int n=sqlselect.IndexOf("WHERE");
    if(n==sqlselect.Length -5) sqlselect=sqlselect.Remove(n,5) ;
-   return GetTable(sqlselect);
+   return GetTable(sqlselect,sTableName);
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DA_DM_TRANG_THAI_DU_AN Insert_Object(
@@ -295,7 +295,7 @@ public static DataTable GetTableAll(string sWhere, params string[] orderFields)
      order = string.Join(",", orderFields);
    if (order != "")
       sqlSelect += " ORDER BY " + order;
-   return GetTable(sqlSelect);
+   return GetTable(sqlSelect,sTableName);
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -313,7 +313,7 @@ public static DataTable GetTableFields(string sWhere, string[] orderFields, para
     order = string.Join(",", orderFields);
  if (order != "")
     sqlSelect += " ORDER BY " + order;
- return GetTable(sqlSelect);
+ return GetTable(sqlSelect,sTableName);
  }
  public static DataTable GetTableFields(params string[] fields)
  {

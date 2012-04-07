@@ -101,149 +101,149 @@ using System;
  public static DataTable SearchByPNK_ID(string sPNK_ID)
 {
           string sqlSelect= s_Select()+ " WHERE PNK_ID  ="+ sPNK_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByPNK_ID(string sPNK_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE PNK_ID"+ sMatch +sPNK_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByMA_PNK(string sMA_PNK)
 {
           string sqlSelect= s_Select()+ " WHERE MA_PNK  Like N'%"+ sMA_PNK + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGUOI_NHAP(string sNGUOI_NHAP)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_NHAP  ="+ sNGUOI_NHAP + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGUOI_NHAP(string sNGUOI_NHAP,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_NHAP"+ sMatch +sNGUOI_NHAP + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGAY_NHAP(string sNGAY_NHAP)
 {
           string sqlSelect= s_Select()+ " WHERE NGAY_NHAP  ="+ sNGAY_NHAP + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGAY_NHAP(string sNGAY_NHAP,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE NGAY_NHAP"+ sMatch +sNGAY_NHAP + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGUOI_CAP_NHAT(string sNGUOI_CAP_NHAT)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_CAP_NHAT  ="+ sNGUOI_CAP_NHAT + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGUOI_CAP_NHAT(string sNGUOI_CAP_NHAT,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_CAP_NHAT"+ sMatch +sNGUOI_CAP_NHAT + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGAY_CAP_NHAT(string sNGAY_CAP_NHAT)
 {
           string sqlSelect= s_Select()+ " WHERE NGAY_CAP_NHAT  ="+ sNGAY_CAP_NHAT + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGAY_CAP_NHAT(string sNGAY_CAP_NHAT,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE NGAY_CAP_NHAT"+ sMatch +sNGAY_CAP_NHAT + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByMEM_ID(string sMEM_ID)
 {
           string sqlSelect= s_Select()+ " WHERE MEM_ID  ="+ sMEM_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByMEM_ID(string sMEM_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE MEM_ID"+ sMatch +sMEM_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByKHO_ID(string sKHO_ID)
 {
           string sqlSelect= s_Select()+ " WHERE KHO_ID  ="+ sKHO_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByKHO_ID(string sKHO_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE KHO_ID"+ sMatch +sKHO_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByDU_AN_ID(string sDU_AN_ID)
 {
           string sqlSelect= s_Select()+ " WHERE DU_AN_ID  ="+ sDU_AN_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByDU_AN_ID(string sDU_AN_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE DU_AN_ID"+ sMatch +sDU_AN_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByLY_DO_NHAP_ID(string sLY_DO_NHAP_ID)
 {
           string sqlSelect= s_Select()+ " WHERE LY_DO_NHAP_ID  ="+ sLY_DO_NHAP_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByLY_DO_NHAP_ID(string sLY_DO_NHAP_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE LY_DO_NHAP_ID"+ sMatch +sLY_DO_NHAP_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByYEU_CAU_ID(string sYEU_CAU_ID)
 {
           string sqlSelect= s_Select()+ " WHERE YEU_CAU_ID  ="+ sYEU_CAU_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByYEU_CAU_ID(string sYEU_CAU_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE YEU_CAU_ID"+ sMatch +sYEU_CAU_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByCHUNG_TU(string sCHUNG_TU)
 {
           string sqlSelect= s_Select()+ " WHERE CHUNG_TU  Like N'%"+ sCHUNG_TU + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByGHI_CHU(string sGHI_CHU)
 {
           string sqlSelect= s_Select()+ " WHERE GHI_CHU  Like N'%"+ sGHI_CHU + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable Search( string sPNK_ID
@@ -291,7 +291,7 @@ using System;
    sqlselect=sqlselect.Replace("WHERE AND","WHERE");
    int n=sqlselect.IndexOf("WHERE");
    if(n==sqlselect.Length -5) sqlselect=sqlselect.Remove(n,5) ;
-   return GetTable(sqlselect);
+   return GetTable(sqlselect,sTableName);
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static KH_PHIEU_NHAP_KHO Insert_Object(
@@ -672,7 +672,7 @@ public static DataTable GetTableAll(string sWhere, params string[] orderFields)
      order = string.Join(",", orderFields);
    if (order != "")
       sqlSelect += " ORDER BY " + order;
-   return GetTable(sqlSelect);
+   return GetTable(sqlSelect,sTableName);
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -690,7 +690,7 @@ public static DataTable GetTableFields(string sWhere, string[] orderFields, para
     order = string.Join(",", orderFields);
  if (order != "")
     sqlSelect += " ORDER BY " + order;
- return GetTable(sqlSelect);
+ return GetTable(sqlSelect,sTableName);
  }
  public static DataTable GetTableFields(params string[] fields)
  {

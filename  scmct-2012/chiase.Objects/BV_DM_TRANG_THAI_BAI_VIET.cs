@@ -51,26 +51,26 @@ using System;
  public static DataTable SearchByID(string sID)
 {
           string sqlSelect= s_Select()+ " WHERE ID  ="+ sID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE ID"+ sMatch +sID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNAME(string sNAME)
 {
           string sqlSelect= s_Select()+ " WHERE NAME  Like N'%"+ sNAME + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByVISIBLE_BIT(string sVISIBLE_BIT)
 {
           string sqlSelect= s_Select()+ " WHERE VISIBLE_BIT  Like N'%"+ sVISIBLE_BIT + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable Search( string sID
@@ -88,7 +88,7 @@ using System;
    sqlselect=sqlselect.Replace("WHERE AND","WHERE");
    int n=sqlselect.IndexOf("WHERE");
    if(n==sqlselect.Length -5) sqlselect=sqlselect.Remove(n,5) ;
-   return GetTable(sqlselect);
+   return GetTable(sqlselect,sTableName);
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static BV_DM_TRANG_THAI_BAI_VIET Insert_Object(
@@ -211,7 +211,7 @@ public static DataTable GetTableAll(string sWhere, params string[] orderFields)
      order = string.Join(",", orderFields);
    if (order != "")
       sqlSelect += " ORDER BY " + order;
-   return GetTable(sqlSelect);
+   return GetTable(sqlSelect,sTableName);
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -229,7 +229,7 @@ public static DataTable GetTableFields(string sWhere, string[] orderFields, para
     order = string.Join(",", orderFields);
  if (order != "")
     sqlSelect += " ORDER BY " + order;
- return GetTable(sqlSelect);
+ return GetTable(sqlSelect,sTableName);
  }
  public static DataTable GetTableFields(params string[] fields)
  {

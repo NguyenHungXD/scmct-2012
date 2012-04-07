@@ -202,7 +202,8 @@ namespace chiase.Objects {
             DU_AN_ID,
             LY_DO_XUAT_ID,
             CHUNG_TU,
-            GHI_CHU
+            GHI_CHU,
+            YEU_CAU_ID
 }
 //──────────────────────────────────────────────────
  public enum tbl_DM_HANG_HOA_NHOM{
@@ -238,7 +239,8 @@ namespace chiase.Objects {
             BAI_VIET_CHA_ID,
             DU_AN_ID,
             CHU_DE_ID,
-            SORT
+            SORT,
+            XEM
 }
 //──────────────────────────────────────────────────
  public enum tbl_TC_PHIEU_CHI{

@@ -22,6 +22,7 @@ using System;
    public string LY_DO_XUAT_ID;
    public string CHUNG_TU;
    public string GHI_CHU;
+   public string YEU_CAU_ID;
    #region DataColumn Name ;
  public static  string cl_PXK_ID="PXK_ID" ;
  public static  string cl_MA_PXK="MA_PXK" ;
@@ -36,6 +37,7 @@ using System;
  public static  string cl_LY_DO_XUAT_ID="LY_DO_XUAT_ID" ;
  public static  string cl_CHUNG_TU="CHUNG_TU" ;
  public static  string cl_GHI_CHU="GHI_CHU" ;
+ public static  string cl_YEU_CAU_ID="YEU_CAU_ID" ;
  #endregion;
 //───────────────────────────────────────────────────────────────────────────────────────
        public KH_PHIEU_XUAT_KHO() {}
@@ -53,7 +55,8 @@ using System;
          string sDU_AN_ID,
          string sLY_DO_XUAT_ID,
          string sCHUNG_TU,
-         string sGHI_CHU){
+         string sGHI_CHU,
+         string sYEU_CAU_ID){
          this.PXK_ID= sPXK_ID;
          this.MA_PXK= sMA_PXK;
          this.NGUOI_XUAT= sNGUOI_XUAT;
@@ -67,6 +70,7 @@ using System;
          this.LY_DO_XUAT_ID= sLY_DO_XUAT_ID;
          this.CHUNG_TU= sCHUNG_TU;
          this.GHI_CHU= sGHI_CHU;
+         this.YEU_CAU_ID= sYEU_CAU_ID;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
        public static KH_PHIEU_XUAT_KHO Create_KH_PHIEU_XUAT_KHO ( string sPXK_ID  ){
@@ -96,147 +100,161 @@ using System;
          this.LY_DO_XUAT_ID= table.Rows[pos]["LY_DO_XUAT_ID"].ToString();
          this.CHUNG_TU= table.Rows[pos]["CHUNG_TU"].ToString();
          this.GHI_CHU= table.Rows[pos]["GHI_CHU"].ToString();
+         this.YEU_CAU_ID= table.Rows[pos]["YEU_CAU_ID"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByPXK_ID(string sPXK_ID)
 {
           string sqlSelect= s_Select()+ " WHERE PXK_ID  ="+ sPXK_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByPXK_ID(string sPXK_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE PXK_ID"+ sMatch +sPXK_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByMA_PXK(string sMA_PXK)
 {
           string sqlSelect= s_Select()+ " WHERE MA_PXK  Like N'%"+ sMA_PXK + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGUOI_XUAT(string sNGUOI_XUAT)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_XUAT  ="+ sNGUOI_XUAT + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGUOI_XUAT(string sNGUOI_XUAT,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_XUAT"+ sMatch +sNGUOI_XUAT + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGAY_XUAT(string sNGAY_XUAT)
 {
           string sqlSelect= s_Select()+ " WHERE NGAY_XUAT  ="+ sNGAY_XUAT + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGAY_XUAT(string sNGAY_XUAT,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE NGAY_XUAT"+ sMatch +sNGAY_XUAT + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGUOI_CAP_NHAT(string sNGUOI_CAP_NHAT)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_CAP_NHAT  ="+ sNGUOI_CAP_NHAT + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGUOI_CAP_NHAT(string sNGUOI_CAP_NHAT,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_CAP_NHAT"+ sMatch +sNGUOI_CAP_NHAT + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGAY_CAP_NHAT(string sNGAY_CAP_NHAT)
 {
           string sqlSelect= s_Select()+ " WHERE NGAY_CAP_NHAT  ="+ sNGAY_CAP_NHAT + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGAY_CAP_NHAT(string sNGAY_CAP_NHAT,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE NGAY_CAP_NHAT"+ sMatch +sNGAY_CAP_NHAT + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByNGUOI_NHAN(string sNGUOI_NHAN)
 {
           string sqlSelect= s_Select()+ " WHERE NGUOI_NHAN  Like N'%"+ sNGUOI_NHAN + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByMEM_ID(string sMEM_ID)
 {
           string sqlSelect= s_Select()+ " WHERE MEM_ID  ="+ sMEM_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByMEM_ID(string sMEM_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE MEM_ID"+ sMatch +sMEM_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByKHO_ID(string sKHO_ID)
 {
           string sqlSelect= s_Select()+ " WHERE KHO_ID  ="+ sKHO_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByKHO_ID(string sKHO_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE KHO_ID"+ sMatch +sKHO_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByDU_AN_ID(string sDU_AN_ID)
 {
           string sqlSelect= s_Select()+ " WHERE DU_AN_ID  ="+ sDU_AN_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByDU_AN_ID(string sDU_AN_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE DU_AN_ID"+ sMatch +sDU_AN_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByLY_DO_XUAT_ID(string sLY_DO_XUAT_ID)
 {
           string sqlSelect= s_Select()+ " WHERE LY_DO_XUAT_ID  ="+ sLY_DO_XUAT_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByLY_DO_XUAT_ID(string sLY_DO_XUAT_ID,string sMatch)
 {
           string sqlSelect= s_Select()+ " WHERE LY_DO_XUAT_ID"+ sMatch +sLY_DO_XUAT_ID + ""; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByCHUNG_TU(string sCHUNG_TU)
 {
           string sqlSelect= s_Select()+ " WHERE CHUNG_TU  Like N'%"+ sCHUNG_TU + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByGHI_CHU(string sGHI_CHU)
 {
           string sqlSelect= s_Select()+ " WHERE GHI_CHU  Like N'%"+ sGHI_CHU + "%'"; 
-          DataTable dt=GetTable(sqlSelect) ;
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
+          return dt; 
+ }//───────────────────────────────────────────────────────────────────────────────────────
+ public static DataTable SearchByYEU_CAU_ID(string sYEU_CAU_ID)
+{
+          string sqlSelect= s_Select()+ " WHERE YEU_CAU_ID  ="+ sYEU_CAU_ID + ""; 
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
+          return dt; 
+ }//───────────────────────────────────────────────────────────────────────────────────────
+//───────────────────────────────────────────────────────────────────────────────────────
+ public static DataTable SearchByYEU_CAU_ID(string sYEU_CAU_ID,string sMatch)
+{
+          string sqlSelect= s_Select()+ " WHERE YEU_CAU_ID"+ sMatch +sYEU_CAU_ID + ""; 
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable Search( string sPXK_ID
@@ -252,6 +270,7 @@ using System;
             , string sLY_DO_XUAT_ID
             , string sCHUNG_TU
             , string sGHI_CHU
+            , string sYEU_CAU_ID
             )
  {
        string sqlselect=s_Select() + " WHERE" ;
@@ -281,10 +300,12 @@ using System;
             sqlselect +=" AND CHUNG_TU LIKE N'%" + sCHUNG_TU +"%'" ;
       if (sGHI_CHU!=null && sGHI_CHU!="") 
             sqlselect +=" AND GHI_CHU LIKE N'%" + sGHI_CHU +"%'" ;
+      if (sYEU_CAU_ID!=null && sYEU_CAU_ID!="") 
+            sqlselect +=" AND YEU_CAU_ID =" + sYEU_CAU_ID ;
    sqlselect=sqlselect.Replace("WHERE AND","WHERE");
    int n=sqlselect.IndexOf("WHERE");
    if(n==sqlselect.Length -5) sqlselect=sqlselect.Remove(n,5) ;
-   return GetTable(sqlselect);
+   return GetTable(sqlselect,sTableName);
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static KH_PHIEU_XUAT_KHO Insert_Object(
@@ -300,6 +321,7 @@ string  sMA_PXK
             ,string  sLY_DO_XUAT_ID
             ,string  sCHUNG_TU
             ,string  sGHI_CHU
+            ,string  sYEU_CAU_ID
             ) 
  { 
               string tem_sMA_PXK=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sMA_PXK,"varchar");
@@ -314,6 +336,7 @@ string  sMA_PXK
               string tem_sLY_DO_XUAT_ID=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sLY_DO_XUAT_ID,"bigint");
               string tem_sCHUNG_TU=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sCHUNG_TU,"nvarchar");
               string tem_sGHI_CHU=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sGHI_CHU,"nvarchar");
+              string tem_sYEU_CAU_ID=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sYEU_CAU_ID,"bigint");
 
              string sqlSave=" INSERT INTO KH_PHIEU_XUAT_KHO("+
                    "MA_PXK," 
@@ -327,7 +350,8 @@ string  sMA_PXK
         +                   "DU_AN_ID," 
         +                   "LY_DO_XUAT_ID," 
         +                   "CHUNG_TU," 
-        +                   "GHI_CHU) VALUES("
+        +                   "GHI_CHU," 
+        +                   "YEU_CAU_ID) VALUES("
  +tem_sMA_PXK+","
  +tem_sNGUOI_XUAT+","
  +tem_sNGAY_XUAT+","
@@ -339,7 +363,8 @@ string  sMA_PXK
  +tem_sDU_AN_ID+","
  +tem_sLY_DO_XUAT_ID+","
  +tem_sCHUNG_TU+","
- +tem_sGHI_CHU +")";
+ +tem_sGHI_CHU+","
+ +tem_sYEU_CAU_ID +")";
              bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
@@ -357,6 +382,7 @@ string  sMA_PXK
               newKH_PHIEU_XUAT_KHO.LY_DO_XUAT_ID=sLY_DO_XUAT_ID;
               newKH_PHIEU_XUAT_KHO.CHUNG_TU=sCHUNG_TU;
               newKH_PHIEU_XUAT_KHO.GHI_CHU=sGHI_CHU;
+              newKH_PHIEU_XUAT_KHO.YEU_CAU_ID=sYEU_CAU_ID;
             return newKH_PHIEU_XUAT_KHO; 
            } 
            else return null ;
@@ -374,6 +400,7 @@ public bool  Save_Object(string sMA_PXK
                 ,string sLY_DO_XUAT_ID
                 ,string sCHUNG_TU
                 ,string sGHI_CHU
+                ,string sYEU_CAU_ID
                 ) 
  { 
               string tem_sMA_PXK=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sMA_PXK,"varchar");
@@ -388,6 +415,7 @@ public bool  Save_Object(string sMA_PXK
               string tem_sLY_DO_XUAT_ID=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sLY_DO_XUAT_ID,"bigint");
               string tem_sCHUNG_TU=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sCHUNG_TU,"nvarchar");
               string tem_sGHI_CHU=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sGHI_CHU,"nvarchar");
+              string tem_sYEU_CAU_ID=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sYEU_CAU_ID,"bigint");
 
  string sqlSave=" UPDATE KH_PHIEU_XUAT_KHO SET "+"MA_PXK ="+tem_sMA_PXK+","
  +"NGUOI_XUAT ="+tem_sNGUOI_XUAT+","
@@ -400,7 +428,8 @@ public bool  Save_Object(string sMA_PXK
  +"DU_AN_ID ="+tem_sDU_AN_ID+","
  +"LY_DO_XUAT_ID ="+tem_sLY_DO_XUAT_ID+","
  +"CHUNG_TU ="+tem_sCHUNG_TU+","
- +"GHI_CHU ="+tem_sGHI_CHU+" WHERE PXK_ID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.PXK_ID,"bigint identity");;
+ +"GHI_CHU ="+tem_sGHI_CHU+","
+ +"YEU_CAU_ID ="+tem_sYEU_CAU_ID+" WHERE PXK_ID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.PXK_ID,"bigint identity");;
               bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
@@ -416,6 +445,7 @@ public bool  Save_Object(string sMA_PXK
                 this.LY_DO_XUAT_ID=sLY_DO_XUAT_ID;
                 this.CHUNG_TU=sCHUNG_TU;
                 this.GHI_CHU=sGHI_CHU;
+                this.YEU_CAU_ID=sYEU_CAU_ID;
            } 
  return OK;  }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -563,6 +593,17 @@ public bool  Save_Object(string sMA_PXK
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
+ public bool Update_YEU_CAU_ID(string sYEU_CAU_ID)
+{
+    string sqlSave= " UPDATE KH_PHIEU_XUAT_KHO SET YEU_CAU_ID='"+ sYEU_CAU_ID+ "' WHERE PXK_ID='"+ this.PXK_ID+"' ";
+ bool OK=Exec(sqlSave)>=1?true:false;
+ if(OK)
+ {
+    this.YEU_CAU_ID=sYEU_CAU_ID;
+ }
+ return OK;
+}
+//───────────────────────────────────────────────────────────────────────────────────────
  #endregion
  #region Update DataColumn  Static 
  public static bool Update_MA_PXK(string sMA_PXK,string s_PXK_ID)
@@ -649,6 +690,13 @@ public bool  Save_Object(string sMA_PXK
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
+ public static bool Update_YEU_CAU_ID(string sYEU_CAU_ID,string s_PXK_ID)
+{
+  string sqlSave= " UPDATE KH_PHIEU_XUAT_KHO SET YEU_CAU_ID='"+sYEU_CAU_ID+"' WHERE PXK_ID='"+ s_PXK_ID+"' ";
+ bool OK=Exec(sqlSave)>=1?true:false;
+ return OK;
+}
+//───────────────────────────────────────────────────────────────────────────────────────
 #endregion
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable GetTableAll() 
@@ -665,7 +713,7 @@ public static DataTable GetTableAll(string sWhere, params string[] orderFields)
      order = string.Join(",", orderFields);
    if (order != "")
       sqlSelect += " ORDER BY " + order;
-   return GetTable(sqlSelect);
+   return GetTable(sqlSelect,sTableName);
 }
 //───────────────────────────────────────────────────────────────────────────────────────
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -683,7 +731,7 @@ public static DataTable GetTableFields(string sWhere, string[] orderFields, para
     order = string.Join(",", orderFields);
  if (order != "")
     sqlSelect += " ORDER BY " + order;
- return GetTable(sqlSelect);
+ return GetTable(sqlSelect,sTableName);
  }
  public static DataTable GetTableFields(params string[] fields)
  {
