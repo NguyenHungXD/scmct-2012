@@ -141,8 +141,8 @@
           <table border=0 cellpadding =2 cellspacing=2 width =100%>
           <tr>
           <td>
-            <asp:LinkButton ID="LinkButton7" runat="server" 
-                Text="Tạo dự án mới" onclick="link_create_new_project_Click"></asp:LinkButton> | 
+            <asp:LinkButton ID="link_Shipments_Man" runat="server" 
+                Text="Quản lý phiếu xuất" onclick="link_Shipments_Man_Click"  ></asp:LinkButton> | 
                         <asp:LinkButton ID="LinkButton8" runat="server" 
                 Text="Cập nhật thành viên cho dự án"></asp:LinkButton> | 
                         <asp:LinkButton ID="LinkButton9" runat="server" 
