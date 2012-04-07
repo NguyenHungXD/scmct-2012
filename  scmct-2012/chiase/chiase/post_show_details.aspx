@@ -8,7 +8,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
 
-
+    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
 <asp:Repeater ID="show_content" runat="server" 
         onitemdatabound="show_content_ItemDataBound" >
 <HeaderTemplate>
@@ -163,7 +163,7 @@
         </dx:ASPxHtmlEditor>
 
 
-        <asp:Button ID="btn_comment" runat="server" Text="Gửi" 
+        <asp:Button ID="btn_comment" runat="server" Text="Phản hồi" 
         class="btnformat" onclick="btn_comment_Click"/>
     </td>
     </tr>

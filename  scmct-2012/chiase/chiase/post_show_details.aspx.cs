@@ -33,10 +33,14 @@ namespace chiase
                 DataTable table = SQLConnectWeb.GetTable(sql);
                 show_content.DataSource = table;
                 show_content.DataBind();
+                //Count viewing times
+                String sql_view = "UPDATE BV_BAI_VIET SET XEM=XEM+1 WHERE BAI_VIET_ID=@BAI_VIET_ID";
+                SQLConnectWeb.ExecuteNonQuery(sql_view,
+                        "@BAI_VIET_ID", Request.QueryString["news_id"]);
             }
             catch (Exception ex)
             {
-               
+                Label1.Text = ex.ToString();
             }
         }
 

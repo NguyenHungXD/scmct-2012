@@ -51,6 +51,20 @@ em { color: #000; }
 .tmo_list li { background: transparent url(/images/templatemo_list.png) no-repeat scroll 0 0px; margin:0 0 20px; padding: 0 0 0 20px; 	line-height: 0.8em; }
 .tmo_list li a { color: #fff; }
 .tmo_list li a:hover { color: #ff4301; }
+
+.like_fm
+{
+    width: 20px;
+    background: url(/images/like_fm.gif) no-repeat;
+}
+.like_text
+{
+    width: 20px;
+    font-weight: bold;
+    background: #FF3300;
+    color: #FFFFFF;
+    font-size: 13px;
+}
 .textformat
 {
     color:#0066FF;

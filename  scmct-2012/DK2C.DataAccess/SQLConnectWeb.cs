@@ -428,7 +428,12 @@
             }
         }
         #region from database
+        public static String ConnectionString = SQLConnectWeb.GetConnectionString();
 
+        public static SqlConnection GetConnections()
+        {
+            return new SqlConnection(ConnectionString);
+        }
         public static DataTable Fill(DataTable table, String sql, params Object[] parameters)
         {
             SqlCommand command = SQLConnectWeb.CreateCommand(sql, parameters);
@@ -437,9 +442,11 @@
 
             return table;
         }
+
         public static SqlCommand CreateCommand(String sql, params Object[] parameters)
         {
-            SqlCommand command = new SqlCommand(sql, SQLConnectWeb.GetConnection());
+            SqlCommand command = new SqlCommand(sql, SQLConnectWeb.GetConnections());
+
             for (int i = 0; i < parameters.Length; i += 2)
             {
                 command.Parameters.AddWithValue(parameters[i].ToString(), parameters[i + 1]);

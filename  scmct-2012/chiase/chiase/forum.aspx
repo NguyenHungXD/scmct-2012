@@ -17,11 +17,12 @@
         
     </tr>
     <tr class="post_news_desc">
-    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("description")%></td><td align=right><%#Eval("created_date", "{0:dd/mm/yyyy hh:mm:ss tt}")%></td></tr></table></td>
+    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("description")%></td><td align=right>Tạo ngày, <%#Eval("created_date", "{0:dd/mm/yyyy hh:mm:ss tt}")%></td></tr></table></td>
     </tr>
     <tr >
     <td>       
-        <asp:Repeater ID="showListPost" runat="server">
+    <asp:Repeater ID="showListPost" runat="server" 
+            onitemdatabound="showListPost_ItemDataBound1">
         <HeaderTemplate>
         <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;">
         <tr class="new_post">
@@ -29,10 +30,11 @@
             Tiêu đề
         </td>
         <td>
-            Bình luận
+            Lượt xem
+            
         </td>
         <td>
-            Lượt xem
+            Bình luận
         </td>
         <td>
             Xếp hạng
@@ -49,13 +51,18 @@
                     
                     <asp:Image ID="img_like" runat="server" ImageUrl="images/new_post.gif" Width=25 Height=20/>
                     </td>
-                    <td with=10%>
-                    
+                    <td with=10% valign=middle align=center>
+                    <div class="like_text">
+                    10
+                    <div>
+                    <div class="like_fm">
+                    &nbsp
+                    <div>
                         </td>
                    
                     <td align=left with=25%><asp:HyperLink ID="link_show_detail" runat="server" NavigateUrl='<%# Eval("bai_viet_id", "post_show_details.aspx?news_id={0}") %>'
-                                        Text='<%# Eval("tieu_de") %>'></asp:HyperLink><br><i>Tạo bởi 
-                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Eval("username", "user_info.aspx?user_id={0}") %>' Text='<%# Eval("username") %>'></asp:HyperLink>, <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%></i></td>
+                                        Text='<%# Eval("tieu_de") %>'></asp:HyperLink><br><font size=-3><i>Tạo bởi 
+                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Eval("username", "user_info.aspx?user_name={0}") %>' Text='<%# Eval("username") %>'></asp:HyperLink>, <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%></font></i></td>
                     <td with=10%>
                     
                         <asp:Label ID="lbl_cnt_comment" runat="server" Text='<%# Eval("xem") %>'></asp:Label>
@@ -74,11 +81,11 @@
                     </td>
                     <td with=25% align=left>
                     
-                        <asp:HyperLink ID="link_comment" runat="server" NavigateUrl='<%# Eval("bai_viet_id", "post_show_details.aspx?news_id={0}") %>'>
-                            <asp:Label ID="lbl_new_comment" runat="server" Text=""></asp:Label>
-                        </asp:HyperLink>
+                        <asp:HyperLink ID="link_comment" runat="server"></asp:HyperLink><br>
+                        <font size=-3>Trả lời bởi, 
+                        <asp:HyperLink ID="link_cm_by" runat="server"></asp:HyperLink>, <asp:Label ID="lbl_date_time" runat="server" Text=""></asp:Label></font>
+
                         
-                    
                     </td>
                     </tr>
         </ItemTemplate>

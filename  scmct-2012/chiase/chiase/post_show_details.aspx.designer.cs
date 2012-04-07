@@ -13,6 +13,15 @@ namespace chiase {
     public partial class post_show_details {
         
         /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
         /// show_content control.
         /// </summary>
         /// <remarks>

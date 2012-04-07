@@ -61,7 +61,7 @@
                    <table cellpadding=1 cellspacing=3 border=0 width=100%>
                    <tr>
                    <td rowspan=2 align=center>
-                    <asp:Image ID="imgUser" runat="server" Height="50px" Width="40px" BorderStyle="Solid" BorderWidth="1px" />
+                    <asp:Image ID="imgUser" runat="server" Height="40px" Width="40px" BorderStyle="Solid" BorderWidth="1px" />
                     </td>
                     <td align=center>
                     Chào mừng <b><asp:Label ID="lbl_username" runat="server" ForeColor="White"/></asp:Label></b>,
