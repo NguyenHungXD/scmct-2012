@@ -60,5 +60,11 @@ namespace chiase
             show_project_name();
         }
 
+
+        protected void link_Shipments_Man_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ListOfShipments.aspx");
+        }
+
     }
 } 
