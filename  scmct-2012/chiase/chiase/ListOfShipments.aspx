@@ -77,7 +77,7 @@
                         <tr>
                             <td>
                                 <fieldset>
-                                    <legend><font color="green" size="2"><b>Thông tin Phiếu xuất</b></font></b></legend>
+                                    <legend><font  size="2"><b>Thông tin Phiếu xuất</b></font></b></legend>
                                     <table style="width: 100%">
                                         <tr>
                                             <td style="width: 107px">
@@ -311,7 +311,7 @@
                         <tr>
                             <td style="height: 286px" valign="top">
                                 <fieldset>
-                                    <legend><font color="green" size="2"><b>Chi tiết phiếu xuất</b></font></legend></font>
+                                    <legend><font size="2"><b>Chi tiết phiếu xuất</b></font></legend></font>
                                     <dx:ASPxGridView ID="gridViewHangHoa" runat="server" AutoGenerateColumns="False"
                                         ClientIDMode="AutoID" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                                         CssPostfix="Office2010Blue" Width="100%" OnRowInserting="gridViewHangHoa_RowInserting"
@@ -447,7 +447,7 @@
         </dx:ASPxPopupControl>
     </fieldset>
     <fieldset>
-        <legend><font size="2" color="white"><b>Điều kiện tìm kiếmiếm</legend>
+        <legend><font size="2"><b>Điều kiện tìm kiếm</legend>
         <table style="height: 34px">
             <tr>
                 <td style="width: 411px; height: 32px;">
@@ -538,7 +538,7 @@
         </b></font>
     </fieldset>
     <fieldset>
-        <legend><font size="2" color="white"><b>Danh sách phiếu xuất</font></b></legend>
+        <legend><font size="2"><b>Danh sách phiếu xuất</font></b></legend>
         <table style="height: 188px; margin-left: 0px;">
             <tr>
                 <td style="width: 921px; height: 115px;">
