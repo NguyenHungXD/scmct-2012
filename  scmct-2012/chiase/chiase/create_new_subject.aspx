@@ -2,8 +2,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
    <fieldset>
-<legend><font size=2 color=white><b>Tạo chủ đề mới</font></b></legend> 
-<table border=2 cellpadding =1 cellspacing=2 width =100%>
+<legend><b>Tạo chủ đề mới</font></b></legend> 
+<table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td align=center colspan=2><br>
         <font size=3><b><asp:Label ID="lbl_error" runat="server" ForeColor="#0000CC"></asp:Label></font><br>

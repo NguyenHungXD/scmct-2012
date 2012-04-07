@@ -15,56 +15,17 @@ namespace chiase
         {
             if(!IsPostBack)
             {
-                display();
+         
             }
         }
-
-
-        public void display()
-        {
-            try
-            {
-                //const String sql = "SELECT * FROM DA_DU_AN";
-                DataTable table = DA_DU_AN.GetTableAll();
-                functions.fill_DropdownList(dropd_lst_project, table, 0, 1);
-                show_project_name();
-            }
-            catch (Exception ex)
-            {
-                lbl_error.Text = ex.ToString();
-
-            }
-        
-        }
-        public void show_project_name()
-        {
-            try
-            {
-                DataTable table = DA_DU_AN.GetTableAll("ID=" + dropd_lst_project.SelectedValue);
-                if (table == null) return;
-                lbl_project_name.Text = table.Rows[0][DA_DU_AN.cl_TEN_DU_AN].ToString();
-            }
-            catch (Exception ex)
-            {
-
-                lbl_error.Text = ex.ToString();
-            }
-        }
-        protected void link_create_new_project_Click(object sender, EventArgs e)
+        protected void btn_add_new_project_Click(object sender, EventArgs e)
         {
             Response.Redirect("create_new_project.aspx");
         }
 
-        protected void dropd_lst_project_SelectedIndexChanged(object sender, EventArgs e)
+        protected void btn_create_new_subject_Click(object sender, EventArgs e)
         {
-            show_project_name();
+            Response.Redirect("create_new_subject.aspx");
         }
-
-
-        protected void link_Shipments_Man_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("ManageShipments.aspx");
-        }
-
     }
 } 

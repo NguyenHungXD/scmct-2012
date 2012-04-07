@@ -114,18 +114,20 @@
 	<div id="footer_top"></div>
 	
 	<div id="templatemo_footer">
-    
-        <div class="col_w220">
+        
+        <table border=0 cellpadding=0 cellspacing=0 width=100%>
+        <tr valign=top>
+        <td>
             <h5>Chia sẽ cộng đồng</h5>
-            <p>Cùng nhau phổ biến dự án SCMCT Online trên các trang xã hội</p><BR>
+            <p>SCMCT Online trên các trang xã hội</p><BR>
 
                 <a href="http://www.facebook.com/templatemo" title="Zing Me"><img src="images/zing_logo.gif" alt="Zing Me" width=80 height=30/></a>
                 <a href="http://www.facebook.com/templatemo" title="Facebook"><img src="images/facebook.png" alt="Facebook" width=30 height=30 /></a>
                 <a href="http://www.facebook.com/templatemo" title="Google Plus"><img src="images/googleplus.gif" alt="Goolge Plus" width=80 height=30 /></a>      
 
-        </div>
-        
-        <div class="col_w220">
+        </td>
+        <td>
+  
             <h5>SCMCT Online</h5>
             <ul class="tmo_list">
                 <li><a href="default.aspx">Trang chủ</a></li>
@@ -135,21 +137,49 @@
                 <li><a href="#">Liên hệ</a></li>
               
             </ul>  
- 
-        </div>
+        </td>
+        <td>
         
         <div class="col_w220">
-            <h5>Liên kết web</h5>
+            <h5>SCMCT Hoạt động</h5>
 			<ul class="tmo_list">
-                <li><a href="http://www.templatemo.com">Free CSS Templates</a></li>
-                <li><a href="http://www.koflash.com">Websites Gallery</a></li>
-                <li><a href="http://www.flashmo.com/store">Premiun Templates</a></li>
-                <li><a href="http://www.templatemo.com/page/1">Website Layouts</a></li>
-				<li><a href="http://www.flashmo.com">Flash Templates</a></li>
+                <li><a href="http://www.templatemo.com">Hình ảnh offline</a></li>
+                <li><a href="http://www.koflash.com">Video offline</a></li>
+ 
             </ul>
  
-        </div>
-        
+        </td>
+        </tr>
+        </table>
+        <table border=0 cellpadding=0 cellspacing=0 width=100%>
+        <tr>
+        <td colspan=3>
+            <h5>Nhà tài trợ</h5>
+        </td>
+        </tr>
+        <tr>
+        <td>
+            <ul class="tmo_list">
+                <li><a href="#">Aenean rhoncus leo ut eros</a></li>
+                <li><a href="#">Consectetur adipiscing elit</a></li>
+
+            </ul>    
+        </td>
+                <td>
+            <ul class="tmo_list">
+                <li><a href="#">Aenean rhoncus leo ut eros</a></li>
+                <li><a href="#">Consectetur adipiscing elit</a></li>
+            </ul>    
+        </td>
+                <td>
+            <ul class="tmo_list">
+                <li><a href="#">Aenean rhoncus leo ut eros</a></li>
+                <li><a href="#">Consectetur adipiscing elit</a></li>
+
+            </ul>    
+        </td>
+        </tr>
+        </table>
 
         
         <div class="cleaner"></div>
