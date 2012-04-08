@@ -15,7 +15,7 @@ namespace chiase
         {
             txt_title.Focus();
         }
-        protected void btn_create_news_Click1(object sender, EventArgs e)
+        protected void btn_post_news_Click(object sender, EventArgs e)
         {
             
             //String sql = "INSERT INTO BV_BAI_VIET(TIEU_DE,NGUOI_TAO,NGAY_TAO,NOI_DUNG,TRANG_THAI_ID,CHU_DE_ID,SORT)VALUES(@V_TIEU_DE,@V_NGUOI_TAO,@V_NGAY_TAO,@V_NOI_DUNG,@V_TRANG_THAI_ID,@V_CHU_DE_ID,@V_SORT)";
@@ -49,5 +49,12 @@ namespace chiase
                 
             }
         }
+
+        protected void btn_back_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("forum.aspx");
+        }
+
+
     }
 }

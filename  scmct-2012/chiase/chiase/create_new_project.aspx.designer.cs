@@ -148,13 +148,13 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_status_project;
         
         /// <summary>
-        /// btn_add_stutus_name control.
+        /// btn_add_stutus_names control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_add_stutus_name;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_add_stutus_names;
         
         /// <summary>
         /// btn_close control.
@@ -163,24 +163,24 @@ namespace chiase {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_close;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_close;
         
         /// <summary>
-        /// btn_create_project control.
+        /// btn_create_projects control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_create_project;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_create_projects;
         
         /// <summary>
-        /// btn_reset control.
+        /// btn_back control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_reset;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_back;
     }
 }

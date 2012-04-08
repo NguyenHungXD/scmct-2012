@@ -75,7 +75,7 @@ namespace chiase
             cm_link.NavigateUrl = string.Format("post_show_details.aspx?news_id={0}",id);
             string str_cm = lasted_cm.Rows[0]["username"].ToString();
             if (str_cm.Length > 50)
-                    str_cm = str_cm.Substring(1,50)+"...";
+                    str_cm = str_cm.Substring(1,30)+"...";
             cm_by.Text = str_cm;
             cm_by.NavigateUrl = string.Format("user_info.aspx?user_name={0}",lasted_cm.Rows[0]["username"]);
             DateTime created_date = (DateTime)lasted_cm.Rows[0]["ngay_tao"];

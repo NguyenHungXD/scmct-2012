@@ -35,9 +35,9 @@ namespace chiase
             }
         }
 
- 
 
-        protected void btn_change_pass_Click1(object sender, EventArgs e)
+
+        protected void btn_changepass_Click(object sender, EventArgs e)
         {
             DataTable table = (DataTable)Session["ThanhVien"];
             String sql_check = "Select * from ND_THONG_TIN_DN where username=@v_username and pwd=@v_password";
@@ -61,10 +61,18 @@ namespace chiase
             }
         }
 
-        protected void btn_close_Click1(object sender, EventArgs e)
+
+
+        protected void btn_back_Click(object sender, EventArgs e)
         {
-            Response.Redirect("default.aspx");
+            object refUrl = ViewState["RefUrl"];
+            if (refUrl != null)
+                Response.Redirect((string)refUrl);
         }
+
+
+
+
 
   
 

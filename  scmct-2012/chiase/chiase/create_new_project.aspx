@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="create_new_project.aspx.cs" Inherits="chiase.create_new_project" %>
+<%@ Register Assembly="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
 
  <fieldset>
@@ -86,27 +88,69 @@
     <td>
         <asp:DropDownList ID="dropd_status" runat="server">
         </asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp<asp:LinkButton ID="btn_add_project_status" runat="server" 
-            Text="[Thêm trạng thái]" onclick="btn_add_project_status_Click"></asp:LinkButton><asp:Panel
+            Text="[Thêm trạng thái]" onclick="btn_add_project_status_Click"></asp:LinkButton>
+            
+            
+            <asp:Panel
                 ID="panel_add_new_status" runat="server" BackColor="#0099FF" 
-            Direction="LeftToRight" Height="30px" HorizontalAlign="Center" 
-            style="margin-left: 102px" Width="550">
+            Direction="LeftToRight" Height="50px" HorizontalAlign="Left" 
+            style="margin-left: 102px" Width="500">
 
-                <asp:TextBox ID="txt_status_project" runat="server" class="txtformat"
+ 
+
+
+                <table border=0 cellpadding=3 cellspacing=3 width=20%>
+                <tr>
+                <td>
+                               <asp:TextBox ID="txt_status_project" runat="server" class="txtformat"
     Width="300px" Height="22px" BackColor="#CCFFCC"></asp:TextBox>
-                <asp:Button ID="btn_add_stutus_name" runat="server" Text="Thêm trạng thái" 
-                    onclick="btn_add_stutus_name_Click" class="btnformat" Width="100px"/>
-                    <asp:Button ID="btn_close" runat="server" Text="Đóng" class="btnformat" 
-                    onclick="btn_close_Click"/>
-            </asp:Panel>
+                </td>
+                <td align=right>
+                    <dx:ASPxButton ID="btn_add_stutus_names" runat="server" Text="Tạo mới" 
+                        CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
+                        SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" Width="80px" 
+                        onclick="btn_add_stutus_names_Click">
+                    </dx:ASPxButton>
+                </td>
+                <td align=left>
+                    <dx:ASPxButton ID="btn_close" runat="server" Text="Đóng" 
+                        CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
+                        onclick="btn_close_Click2" SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" 
+                        Width="80px">
+                    </dx:ASPxButton>
+                </td>
+                </tr>
+                </table>
+
+     </asp:Panel> 
+
+
+
+
+
         </td>
     </tr>
     <tr>
     <td colspan=3 align=left><hr><br>
        
-        <asp:Button ID="btn_create_project" runat="server" Text="Tạo dự án" Width="130px"
-            class="btnformat" onclick="btn_create_project_Click" /> 
-        <asp:Button ID="btn_reset" runat="server" Text="Đóng" Width="100px" 
-            class="btnformat" />
+               <table border=0 cellpadding=3 cellspacing=3 width=20%>
+                <tr>
+                <td align=right>
+                    <dx:ASPxButton ID="btn_create_projects" runat="server" Text="Tạo mới" 
+                        CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                        SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="150px" 
+                        onclick="btn_create_projects_Click">
+                    </dx:ASPxButton>
+                </td>
+                <td align=left>
+                    <dx:ASPxButton ID="btn_back" runat="server" Text="Trở lại" 
+                        CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                        onclick="btn_back_Click" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
+                        Width="150px">
+                    </dx:ASPxButton>
+                </td>
+                </tr>
+                </table>
 </tr>
 <tr>
     <td colspan=3 align=right>

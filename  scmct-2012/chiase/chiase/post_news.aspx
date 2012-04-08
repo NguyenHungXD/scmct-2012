@@ -20,10 +20,9 @@
         </td>
     </tr>
           <tr>
-    <td>
-        Tiêu đề:
-    </td>
-    <td>
+    <td colspan=2><font color=white><b>
+        Tiêu đề: </font></b>
+
         <asp:TextBox ID="txt_title" runat="server"  class="txtformat" Width="614px" 
             Height="23px"></asp:TextBox>
             </td>
@@ -39,7 +38,7 @@
 
          <dx:ASPxHtmlEditor ID="ASPxHtmlEditor1" runat="server" 
              CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" Height="533px" 
-             Width="900px" CustomCommand="OnCommandExecute">
+             Width="930px" CustomCommand="OnCommandExecute">
              <Styles CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua">
                  <ViewArea>
                      <Border BorderColor="#A3C0E8" />
@@ -86,10 +85,9 @@
      </td>
      </tr>
       <tr>
-    <td>
-       Sắp xếp:
-    </td>
-    <td>
+    <td colspan=2>
+     <font color=white><b>  Sắp xếp:</b></font>
+
         <asp:TextBox ID="txt_sort" runat="server"  class="txtformat" Width="74px" 
             Height="22px"></asp:TextBox>
             </td>
@@ -99,15 +97,21 @@
     <br>
     </td>
 </tr>
-    <tr>
-    <td colspan=3 align=left><hr>
-    <br>
-</tr>
 <tr>
-    <td colspan=3>
-        <asp:Button ID="btn_create_news" runat="server" Text="Bài mới" Width="100px" 
-            class="btnformat" onclick="btn_create_news_Click1" />
-        <asp:Button ID="btn_close" runat="server" Text="Đóng" Width="100px" class="btnformat"/>
+        <td align=right>
+        <dx:ASPxButton ID="btn_post_news" runat="server" Text="Đăng bài" 
+                onclick="btn_post_news_Click" 
+                CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="150px">
+        </dx:ASPxButton>
+        </td>
+        <td align=left>
+        <dx:ASPxButton ID="btn_back" runat="server" Text="Hủy" onclick="btn_back_Click" 
+                CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="150px">
+        </dx:ASPxButton>
+
+
     </td>
     </tr>
 <tr>

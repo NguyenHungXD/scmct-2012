@@ -1,4 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="change_password.aspx.cs" Inherits="chiase.change_password" %>
+
+<%@ Register Assembly="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="content_area" runat="server">
     <fieldset>
 <legend><font size=2 color=white><b>Đổi mật khẩu</font></b></legend> 
@@ -68,10 +71,27 @@
     <br>
 
 
-            <asp:Button ID="btn_change_pass" runat="server" Text="Đổi mật khẩu" 
-                onclick="btn_change_pass_Click1" class="btnformat" Width="100px"/>
-            <asp:Button ID="btn_close" runat="server" Text="Đóng" 
-                onclick="btn_close_Click1" class="btnformat"/>
+
+                <table border=0 cellpadding=3 cellspacing=3 width=20%>
+                <tr>
+                <td align=right>
+                    <dx:ASPxButton ID="btn_changepass" runat="server" Text="Đổi mật khẩu" 
+                        CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                        onclick="btn_changepass_Click" 
+                        SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="150px">
+                    </dx:ASPxButton>
+                </td>
+                <td align=left>
+                    <dx:ASPxButton ID="btn_back" runat="server" Text="Trở lại" 
+                        CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                        onclick="btn_back_Click" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
+                        Width="150px">
+                    </dx:ASPxButton>
+                </td>
+                </tr>
+                </table>
+
+
  </td>
 
 </tr>

@@ -49,21 +49,21 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_sort;
         
         /// <summary>
-        /// btn_create_news control.
+        /// btn_post_news control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_create_news;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_post_news;
         
         /// <summary>
-        /// btn_close control.
+        /// btn_back control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_close;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_back;
     }
 }

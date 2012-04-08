@@ -31,7 +31,6 @@
         </td>
         <td>
             Lượt xem
-            
         </td>
         <td>
             Bình luận
@@ -53,7 +52,7 @@
                     </td>
                     <td with=10% valign=middle align=center>
                     <div class="like_text">
-                    10
+                    <%#Eval("liked")%>
                     <div>
                     <div class="like_fm">
                     &nbsp

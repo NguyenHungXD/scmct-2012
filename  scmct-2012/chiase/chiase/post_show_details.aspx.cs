@@ -40,7 +40,7 @@ namespace chiase
             }
             catch (Exception ex)
             {
-                Label1.Text = ex.ToString();
+                
             }
         }
 
@@ -56,14 +56,20 @@ namespace chiase
                 long id = (long)RowView.Row[BV_BAI_VIET.cl_BAI_VIET_ID];
 
                 //nvdat02/04/12 : Get posted_by field --commented-out and replace
-                String sql = string.Format(@"SELECT a.*,b.USERNAME
+                String sql = string.Format(@"SELECT a.*,b.USERNAME,c.heart,c.created_date,c.avatar_path,d.GROUPNAME
                              FROM BV_BAI_VIET a
                             INNER JOIN  ND_THONG_TIN_DN b ON  a.NGUOI_TAO=b.MEM_ID
+                            INNER JOIN  ND_THONG_TIN_ND c ON a.NGUOI_TAO = c.id
+                            INNER JOIN ND_TEN_NHOM_ND d ON c.MEM_GROUP_ID = d.GROUPID
                             WHERE BAI_VIET_CHA_ID={0}", id);
 
                 DataTable comments = SQLConnectWeb.GetTable(sql);
                 showList_comment.DataSource = comments;
                 showList_comment.DataBind();
+
+                //Total Post
+
+
             }
             catch (Exception ex)
             {
@@ -72,7 +78,7 @@ namespace chiase
         }
 
 
-        protected void btn_comment_Click(object sender, EventArgs e)
+        protected void btn_comments_Click(object sender, EventArgs e)
         {
             
             try
@@ -93,5 +99,14 @@ namespace chiase
                
             }
         }
+
+        protected void btn_back_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("forum.aspx");
+        }
+
+
+
+
     }
 }

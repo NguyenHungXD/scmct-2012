@@ -103,21 +103,21 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.HyperLink link_forget_pass;
         
         /// <summary>
-        /// btn_change_pass control.
+        /// btn_changepass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_change_pass;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_changepass;
         
         /// <summary>
-        /// btn_close control.
+        /// btn_back control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_close;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_back;
     }
 }

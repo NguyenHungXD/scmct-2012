@@ -17,6 +17,7 @@ namespace chiase
                 functions.add_date_to_dropd(dropd_day_start, dropd_month_start, dropd_year_start,10);
                 functions.add_date_to_dropd(dropd_day_end, dropd_month_end, dropd_year_end,10);
                 display();
+                
             }
            
             txt_project_name.Focus();
@@ -43,7 +44,7 @@ namespace chiase
             panel_add_new_status.Visible = true;
         }
 
-        protected void btn_add_stutus_name_Click(object sender, EventArgs e)
+        protected void btn_add_stutus_names_Click(object sender, EventArgs e)
         {
             try
             {
@@ -74,7 +75,7 @@ namespace chiase
             }
         }
 
-        protected void btn_create_project_Click(object sender, EventArgs e)
+        protected void btn_create_projects_Click(object sender, EventArgs e)
         {
             try
             {
@@ -110,9 +111,34 @@ namespace chiase
             }
         }
 
-        protected void btn_close_Click(object sender, EventArgs e)
+        protected void btn_close_Click2(object sender, EventArgs e)
         {
             panel_add_new_status.Visible = false;
         }
+
+        protected void btn_back_Click(object sender, EventArgs e)
+        {
+            object refUrl = ViewState["RefUrl"];
+            if (refUrl != null)
+                Response.Redirect((string)refUrl);
+        }
+
+  
+
+ 
+
+        
+
+
+
+
+
+        
+
+
+
+
+
+ 
     }
 }

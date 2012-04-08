@@ -7,8 +7,6 @@
 <%@ Register assembly="DevExpress.Web.ASPxSpellChecker.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxSpellChecker" tagprefix="dx" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
-
-    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
 <asp:Repeater ID="show_content" runat="server" 
         onitemdatabound="show_content_ItemDataBound" >
 <HeaderTemplate>
@@ -19,11 +17,40 @@
     <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("tieu_de")%></td><tr></table> </td></tr>
 
     <tr class="post_news_desc">
-        <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td></td><td align=right>Đăng bởi, nvdat <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%></td></tr></table></td>
+        <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr>
+            <td valign=middle>
+            <b>
+                
+            <a style="cursor:hand;" title="Thích">
+            <asp:Image ID="Image2" runat="server"  ImageUrl="images/like.gif" Width=25 Height=15/>
+            <font color=red>
+             <%#Eval("liked")%>
+             </font>
+             </a>
+             </b>
+            </td>
+            <td align=right>Đăng bởi,  
+                <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="#0099ff" NavigateUrl='<%# Eval("username", "user_info.aspx?user_name={0}") %>' Text='<%# Eval("username") %>'></asp:HyperLink> </asp:Label> <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%></td></tr></table></td>
     </tr>
-
+    
     <tr>
     <td><table border=0 cellpadding=3 cellspacing=3 width=100% bgcolor=white><tr><td><%#Eval("noi_dung")%></td></tr></table></td>
+    </tr>
+    <tr class="post_news_desc">
+        <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr>
+            <td valign=middle>
+            <b>
+                
+            <a style="cursor:hand;" title="Thích">
+            <asp:Image ID="Image4" runat="server"  ImageUrl="images/like.gif" Width=25 Height=15/>
+            <font color=red>
+             <%#Eval("liked")%>
+             </font>
+             </a>
+             </b>
+            </td>
+            <td align=right>Đăng bởi,  
+                <asp:HyperLink ID="HyperLink3" runat="server" ForeColor="#0099ff" NavigateUrl='<%# Eval("username", "user_info.aspx?user_name={0}") %>' Text='<%# Eval("username") %>'></asp:HyperLink> </asp:Label> <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%></td></tr></table></td>
     </tr>
     <tr >
     <td>       
@@ -47,13 +74,12 @@
                         <table border=0 cellpadding=0 cellspacing=0>
                         <tr>
                         <td colspan=2>
-                            <asp:Image ID="user_img" runat="server" ImageUrl="images/user.gif" Width="40" Height="40"/><br>
-                            <asp:Label ID="lbl_username" runat="server" Text="nvdat"></asp:Label>
-                        </td>
-                        </tr>
-                        <tr>
-                        <td colspan=2>
-                            <asp:Label ID="lbl_created_date" runat="server" Text="12/02/2012 08:02:35 AM"></asp:Label>
+                            <asp:Image ID="user_img" runat="server" ImageUrl='<%#Eval("avatar_path", "images/avatars/{0}")%>' Width="40" Height="40" /><br>
+                            <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="#0099ff" NavigateUrl='<%# Eval("username", "user_info.aspx?user_name={0}") %>' Text='<%# Eval("username") %>'>
+                            </asp:HyperLink> <br>
+                            
+                            Tham gia: <%#Eval("created_date", "{0:dd/mm/yyyy}")%>
+
                         </td>
                         </tr>
                         <tr>
@@ -69,7 +95,7 @@
                         Nhóm:
                         </td>
                         <td>
-                            <asp:Label ID="lbl_groupname" runat="server" Text="Admin"></asp:Label>
+                            <asp:Label ID="lbl_groupname" runat="server" Text='<%#Eval("groupname")%>'>'></asp:Label>
                         </td>
                         </tr>
                         <tr>
@@ -77,7 +103,7 @@
                         Tim:
                         </td>
                         <td>
-                            <asp:Label ID="lbl_sum_point" runat="server" Text="100"></asp:Label>
+                            <asp:Label ID="lbl_sum_point" runat="server" Text='<%#Eval("heart")%>'></asp:Label>
                             <asp:Image ID="Image1" runat="server" ImageUrl="images/heart.gif" Width="10" Height="10"/>
                         </td>
                         </tr>
@@ -88,10 +114,29 @@
                     </td>
                     </tr>
                     </table>
+
+                    <table cellpadding=0 cellspacing=2 border=0 width=100%>
+                    <tr align=right>
+                    <td align=right>
+                    <font size=-3><i>
+                        Ngày, <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%>
+                    </font></i>
+                    </td>
+                   <td colspan=2 bgcolor="#FFFFCC">                    
+                   <b>
+                    <a style="cursor:hand;" title="Thích">
+                    <asp:Image ID="Image2" runat="server"  ImageUrl="images/like.gif" Width=20 Height=15/>
+                    <font color=red>
+                     <%#Eval("liked")%>
+                     </font>
+                     </a>
+                     </b>
+                     <td>
+                    </tr>
+                    </table>
                     </div>
                     <div class="comment_format_footer">
                     &nbsp
-
                     <div>
                     </td>
                     </tr>
@@ -101,6 +146,25 @@
         </FooterTemplate>
         </asp:Repeater>
     </td>
+    </tr>
+
+
+
+    <tr class="post_news_desc">
+        <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr>
+            <td valign=middle>
+            <b>
+                
+            <a style="cursor:hand;" title="Thích">
+            <asp:Image ID="Image3" runat="server"  ImageUrl="images/like.gif" Width=25 Height=15/>
+            <font color=red>
+             <%#Eval("liked")%>
+             </font>
+             </a>
+             </b>
+            </td>
+            <td align=right>Đăng bởi,  
+                <asp:HyperLink ID="HyperLink2" runat="server" ForeColor="#0099ff" NavigateUrl='<%# Eval("username", "user_info.aspx?user_name={0}") %>' Text='<%# Eval("username") %>'></asp:HyperLink> </asp:Label> <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%></td></tr></table></td>
     </tr>
 </ItemTemplate>
 <FooterTemplate>
@@ -162,10 +226,26 @@
             </ImagesFileManager>
         </dx:ASPxHtmlEditor>
 
-
-        <asp:Button ID="btn_comment" runat="server" Text="Phản hồi" 
-        class="btnformat" onclick="btn_comment_Click"/>
+        <table cellpadding=3 cellpadding=3 border=0 width=20%>
+        <tr>
+        <td>
+                <dx:ASPxButton ID="btn_comments" runat="server" Text="Bình luận" 
+            CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+            SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="150px" 
+            onclick="btn_comments_Click">
+        </dx:ASPxButton>
+        </td>
+        <td>
+        <dx:ASPxButton ID="btn_back" runat="server" Text="Trở lại" 
+            CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+            onclick="btn_back_Click" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
+            Width="150px">
+        </dx:ASPxButton>
+        </td>
+        </tr>
+        </table>
     </td>
+
     </tr>
     </table>
 
