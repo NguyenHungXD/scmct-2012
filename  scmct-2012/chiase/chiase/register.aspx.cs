@@ -84,7 +84,7 @@ namespace chiase
                         bithday.ToString("yyyy-MM-dd"),
                         rd_sex.SelectedItem.Value, txt_phone_number.Text, "",
                         txt_emaill_address.Text, "", "", "", "", "", "", "Y", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"),
-                        "", "", "");
+                        "", "", "","0");
                     if (nd != null)
                     {
                         //Get Mem ID
