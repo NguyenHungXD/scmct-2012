@@ -231,7 +231,22 @@ namespace chiase
             DataTable dt = KH_DM_LY_DO_XUAT_KHO.GetTableFields(where, new string[] { KH_DM_LY_DO_XUAT_KHO.cl_NAME }, KH_DM_LY_DO_XUAT_KHO.cl_ID, KH_DM_LY_DO_XUAT_KHO.cl_NAME);
             InitCombobox(cbo, dt, KH_DM_LY_DO_XUAT_KHO.cl_ID, KH_DM_LY_DO_XUAT_KHO.cl_NAME);
         }
+        /// <summary>
+        /// Khởi tạo danh sách lý do nhập kho vào control
+        /// </summary>
+        /// <param name="cbo"></param>
+        /// <param name="IsAdd"></param>
+        public static void InitListLyDoNhap(DevExpress.Web.ASPxEditors.ASPxComboBox cbo, bool? IsAdd)
+        {
+            string where = "";
+            if (IsAdd == true)
+            {
+                where += KH_DM_LY_DO_NHAP_KHO.cl_VISIBLE_BIT + "='Y'";
+            }
 
+            DataTable dt = KH_DM_LY_DO_NHAP_KHO.GetTableFields(where, new string[] { KH_DM_LY_DO_NHAP_KHO.cl_NAME }, KH_DM_LY_DO_NHAP_KHO.cl_ID, KH_DM_LY_DO_NHAP_KHO.cl_NAME);
+            InitCombobox(cbo, dt, KH_DM_LY_DO_NHAP_KHO.cl_ID, KH_DM_LY_DO_NHAP_KHO.cl_NAME);
+        }
         public static void InitListDuAn(DevExpress.Web.ASPxGridLookup.ASPxGridLookup gridLookup, bool? IsAdd)
         {
 
