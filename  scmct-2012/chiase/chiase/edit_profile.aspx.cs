@@ -88,7 +88,7 @@ namespace chiase
                 bool ok = nd.Save_Object(txt_full_name.Text, nd.MEM_GROUP_ID, txt_address.Text, functions.GetStringDate(bithday),
                     rd_sex.SelectedItem.Value, txt_phonenumber.Text, txt_faxnumber.Text, txt_email.Text, txt_website.Text,
                    txt_yahoo.Text, txt_skype.Text, nd.TAX_CODE, nd.NOTE, nd.AVATAR_PATH, nd.VISIBLE_BIT, nd.CREATED_DATE, nd.EDITED_BY,
-                   functions.GetStringDatetime(), nd.ID);
+                   functions.GetStringDatetime(), nd.ID,nd.HEART);
                 if (ok)
                     lbl_error.Text = "Cập nhật thông tin cá nhân thành công";
                 else lbl_error.Text = "Cập nhật thông tin cá nhân không thành công, vui lòng kiểm tra lại thông tin!";
