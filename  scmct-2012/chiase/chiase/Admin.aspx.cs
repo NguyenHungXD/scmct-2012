@@ -27,5 +27,15 @@ namespace chiase
         {
             Response.Redirect("create_new_subject.aspx");
         }
+
+        protected void btn_create_new_reciever_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ManageReceive.aspx");
+        }
+
+        protected void btn_issue_to_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ManageShipments.aspx");
+        }
     }
 } 
