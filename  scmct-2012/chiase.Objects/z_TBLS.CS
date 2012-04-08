@@ -301,7 +301,8 @@ namespace chiase.Objects {
             CREATED_DATE,
             CREATED_BY,
             EDITED_DATE,
-            EDITED_BY
+            EDITED_BY,
+            HEART
 }
 //──────────────────────────────────────────────────
  public enum tbl_TC_PHIEU_CHI_CT{

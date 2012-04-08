@@ -29,6 +29,7 @@ using System;
    public string CREATED_BY;
    public string EDITED_DATE;
    public string EDITED_BY;
+   public string HEART;
    #region DataColumn Name ;
  public static  string cl_ID="ID" ;
  public static  string cl_NAME="NAME" ;
@@ -50,6 +51,7 @@ using System;
  public static  string cl_CREATED_BY="CREATED_BY" ;
  public static  string cl_EDITED_DATE="EDITED_DATE" ;
  public static  string cl_EDITED_BY="EDITED_BY" ;
+ public static  string cl_HEART="HEART" ;
  #endregion;
 //───────────────────────────────────────────────────────────────────────────────────────
        public ND_THONG_TIN_ND() {}
@@ -74,7 +76,8 @@ using System;
          string sCREATED_DATE,
          string sCREATED_BY,
          string sEDITED_DATE,
-         string sEDITED_BY){
+         string sEDITED_BY,
+         string sHEART){
          this.ID= sID;
          this.NAME= sNAME;
          this.MEM_GROUP_ID= sMEM_GROUP_ID;
@@ -95,6 +98,7 @@ using System;
          this.CREATED_BY= sCREATED_BY;
          this.EDITED_DATE= sEDITED_DATE;
          this.EDITED_BY= sEDITED_BY;
+         this.HEART= sHEART;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
        public static ND_THONG_TIN_ND Create_ND_THONG_TIN_ND ( string sID  ){
@@ -131,6 +135,7 @@ using System;
          this.CREATED_BY= table.Rows[pos]["CREATED_BY"].ToString();
          this.EDITED_DATE= table.Rows[pos]["EDITED_DATE"].ToString();
          this.EDITED_BY= table.Rows[pos]["EDITED_BY"].ToString();
+         this.HEART= table.Rows[pos]["HEART"].ToString();
 }
 //───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable SearchByID(string sID)
@@ -309,6 +314,19 @@ using System;
           DataTable dt=GetTable(sqlSelect,sTableName) ;
           return dt; 
  }//───────────────────────────────────────────────────────────────────────────────────────
+ public static DataTable SearchByHEART(string sHEART)
+{
+          string sqlSelect= s_Select()+ " WHERE HEART  ="+ sHEART + ""; 
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
+          return dt; 
+ }//───────────────────────────────────────────────────────────────────────────────────────
+//───────────────────────────────────────────────────────────────────────────────────────
+ public static DataTable SearchByHEART(string sHEART,string sMatch)
+{
+          string sqlSelect= s_Select()+ " WHERE HEART"+ sMatch +sHEART + ""; 
+          DataTable dt=GetTable(sqlSelect,sTableName) ;
+          return dt; 
+ }//───────────────────────────────────────────────────────────────────────────────────────
  public static DataTable Search( string sID
             , string sNAME
             , string sMEM_GROUP_ID
@@ -329,6 +347,7 @@ using System;
             , string sCREATED_BY
             , string sEDITED_DATE
             , string sEDITED_BY
+            , string sHEART
             )
  {
        string sqlselect=s_Select() + " WHERE" ;
@@ -372,6 +391,8 @@ using System;
             sqlselect +=" AND EDITED_DATE LIKE '%" + sEDITED_DATE +"%'" ;
       if (sEDITED_BY!=null && sEDITED_BY!="") 
             sqlselect +=" AND EDITED_BY =" + sEDITED_BY ;
+      if (sHEART!=null && sHEART!="") 
+            sqlselect +=" AND HEART =" + sHEART ;
    sqlselect=sqlselect.Replace("WHERE AND","WHERE");
    int n=sqlselect.IndexOf("WHERE");
    if(n==sqlselect.Length -5) sqlselect=sqlselect.Remove(n,5) ;
@@ -398,6 +419,7 @@ string  sNAME
             ,string  sCREATED_BY
             ,string  sEDITED_DATE
             ,string  sEDITED_BY
+            ,string  sHEART
             ) 
  { 
               string tem_sNAME=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sNAME,"nvarchar");
@@ -419,6 +441,7 @@ string  sNAME
               string tem_sCREATED_BY=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sCREATED_BY,"bigint");
               string tem_sEDITED_DATE=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sEDITED_DATE,"datetime");
               string tem_sEDITED_BY=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sEDITED_BY,"bigint");
+              string tem_sHEART=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sHEART,"bigint");
 
              string sqlSave=" INSERT INTO ND_THONG_TIN_ND("+
                    "NAME," 
@@ -439,7 +462,8 @@ string  sNAME
         +                   "CREATED_DATE," 
         +                   "CREATED_BY," 
         +                   "EDITED_DATE," 
-        +                   "EDITED_BY) VALUES("
+        +                   "EDITED_BY," 
+        +                   "HEART) VALUES("
  +tem_sNAME+","
  +tem_sMEM_GROUP_ID+","
  +tem_sADDRESS+","
@@ -458,7 +482,8 @@ string  sNAME
  +tem_sCREATED_DATE+","
  +tem_sCREATED_BY+","
  +tem_sEDITED_DATE+","
- +tem_sEDITED_BY +")";
+ +tem_sEDITED_BY+","
+ +tem_sHEART +")";
              bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
@@ -483,6 +508,7 @@ string  sNAME
               newND_THONG_TIN_ND.CREATED_BY=sCREATED_BY;
               newND_THONG_TIN_ND.EDITED_DATE=sEDITED_DATE;
               newND_THONG_TIN_ND.EDITED_BY=sEDITED_BY;
+              newND_THONG_TIN_ND.HEART=sHEART;
             return newND_THONG_TIN_ND; 
            } 
            else return null ;
@@ -507,6 +533,7 @@ public bool  Save_Object(string sNAME
                 ,string sCREATED_BY
                 ,string sEDITED_DATE
                 ,string sEDITED_BY
+                ,string sHEART
                 ) 
  { 
               string tem_sNAME=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sNAME,"nvarchar");
@@ -528,6 +555,7 @@ public bool  Save_Object(string sNAME
               string tem_sCREATED_BY=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sCREATED_BY,"bigint");
               string tem_sEDITED_DATE=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sEDITED_DATE,"datetime");
               string tem_sEDITED_BY=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sEDITED_BY,"bigint");
+              string tem_sHEART=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sHEART,"bigint");
 
  string sqlSave=" UPDATE ND_THONG_TIN_ND SET "+"NAME ="+tem_sNAME+","
  +"MEM_GROUP_ID ="+tem_sMEM_GROUP_ID+","
@@ -547,7 +575,8 @@ public bool  Save_Object(string sNAME
  +"CREATED_DATE ="+tem_sCREATED_DATE+","
  +"CREATED_BY ="+tem_sCREATED_BY+","
  +"EDITED_DATE ="+tem_sEDITED_DATE+","
- +"EDITED_BY ="+tem_sEDITED_BY+" WHERE ID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.ID,"bigint identity");;
+ +"EDITED_BY ="+tem_sEDITED_BY+","
+ +"HEART ="+tem_sHEART+" WHERE ID="+DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(this.ID,"bigint identity");;
               bool OK = Exec(sqlSave)>=1?true:false;
            if (OK) 
            { 
@@ -570,6 +599,7 @@ public bool  Save_Object(string sNAME
                 this.CREATED_BY=sCREATED_BY;
                 this.EDITED_DATE=sEDITED_DATE;
                 this.EDITED_BY=sEDITED_BY;
+                this.HEART=sHEART;
            } 
  return OK;  }
 //───────────────────────────────────────────────────────────────────────────────────────
@@ -794,6 +824,17 @@ public bool  Save_Object(string sNAME
  return OK;
 }
 //───────────────────────────────────────────────────────────────────────────────────────
+ public bool Update_HEART(string sHEART)
+{
+    string sqlSave= " UPDATE ND_THONG_TIN_ND SET HEART='"+ sHEART+ "' WHERE ID='"+ this.ID+"' ";
+ bool OK=Exec(sqlSave)>=1?true:false;
+ if(OK)
+ {
+    this.HEART=sHEART;
+ }
+ return OK;
+}
+//───────────────────────────────────────────────────────────────────────────────────────
  #endregion
  #region Update DataColumn  Static 
  public static bool Update_NAME(string sNAME,string s_ID)
@@ -925,6 +966,13 @@ public bool  Save_Object(string sNAME
  public static bool Update_EDITED_BY(string sEDITED_BY,string s_ID)
 {
   string sqlSave= " UPDATE ND_THONG_TIN_ND SET EDITED_BY='"+sEDITED_BY+"' WHERE ID='"+ s_ID+"' ";
+ bool OK=Exec(sqlSave)>=1?true:false;
+ return OK;
+}
+//───────────────────────────────────────────────────────────────────────────────────────
+ public static bool Update_HEART(string sHEART,string s_ID)
+{
+  string sqlSave= " UPDATE ND_THONG_TIN_ND SET HEART='"+sHEART+"' WHERE ID='"+ s_ID+"' ";
  bool OK=Exec(sqlSave)>=1?true:false;
  return OK;
 }
