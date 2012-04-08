@@ -30,6 +30,8 @@
             for (var i = 0; i < totalRow; i++) {
                 gridViewHangHoa.DeleteRow(i);
             }
+            if (gridViewHangHoa.IsEditing() == false)
+                gridViewHangHoa.AddNewRow();
             pcPhieuNhap.Show();
         }
 
