@@ -7,6 +7,26 @@
 <%@ Register assembly="DevExpress.Web.ASPxSpellChecker.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxSpellChecker" tagprefix="dx" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
+
+<script type="text/javascript">
+    
+    function like_post(id,val,divid) {
+        
+        var url = "update_like_post.aspx?post_id=" + id;
+        loadXMLUpdate(url);
+        if (divid == 'liked1' || divid == 'liked2' || divid == 'liked3') {
+            document.getElementById('liked1').innerHTML = val + 1;
+            document.getElementById('liked2').innerHTML = val + 1;
+            document.getElementById('liked3').innerHTML = val + 1;
+        }
+        else{
+            document.getElementById(divid).innerHTML = val + 1;
+        }
+
+    }
+</script>
+
+
 <asp:Repeater ID="show_content" runat="server" 
         onitemdatabound="show_content_ItemDataBound" >
 <HeaderTemplate>
@@ -20,17 +40,24 @@
         <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr>
             <td valign=middle>
             <b>
-                
-            <a style="cursor:hand;" title="Thích">
+            <table border=0 cellpadding=2 cellspacing=0>
+            <tr>
+            <td>
+            <a style="cursor:hand;" title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'liked1')>
             <asp:Image ID="Image2" runat="server"  ImageUrl="images/like.gif" Width=25 Height=15/>
+            </td>
+            <td bgcolor=#FFFFFF>
             <font color=red>
-             <%#Eval("liked")%>
+             <div id="liked1"><%#Eval("liked")%></div>
              </font>
              </a>
+             </td>
+             </tr>
+             </table>
              </b>
             </td>
             <td align=right>Đăng bởi,  
-                <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="#0099ff" NavigateUrl='<%# Eval("username", "user_info.aspx?user_name={0}") %>' Text='<%# Eval("username") %>'></asp:HyperLink> </asp:Label> <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%></td></tr></table></td>
+            <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="#0099ff" NavigateUrl='<%# Eval("username", "user_info.aspx?user_name={0}") %>' Text='<%# Eval("username") %>'></asp:HyperLink> </asp:Label> <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%></td></tr></table></td>
     </tr>
     
     <tr>
@@ -40,13 +67,20 @@
         <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr>
             <td valign=middle>
             <b>
-                
-            <a style="cursor:hand;" title="Thích">
+            <table border=0 cellpadding=2 cellspacing=0>
+            <tr>
+            <td>
+            <a style="cursor:hand;" title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'liked2')>
             <asp:Image ID="Image4" runat="server"  ImageUrl="images/like.gif" Width=25 Height=15/>
+            </td>
+            <td bgcolor="#ffffff">
             <font color=red>
-             <%#Eval("liked")%>
+             <div id="liked2"><%#Eval("liked")%></div>
              </font>
              </a>
+             </td>
+             </tr>
+             </table>
              </b>
             </td>
             <td align=right>Đăng bởi,  
@@ -124,12 +158,20 @@
                     </td>
                    <td colspan=2 bgcolor="#FFFFCC">                    
                    <b>
-                    <a style="cursor:hand;" title="Thích">
+                   <table cellpadding=0 cellspacing=2 border=0>
+                   <tr>
+                   <td>
+                   <a style="cursor:hand;" title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'<%#Eval("BAI_VIET_ID","div{0}")%>')>
                     <asp:Image ID="Image2" runat="server"  ImageUrl="images/like.gif" Width=20 Height=15/>
+                    </td>
+                    <td bgcolor=#FFFFFF>
                     <font color=red>
-                     <%#Eval("liked")%>
+                     <div id='<%#Eval("BAI_VIET_ID","div{0}")%>'><%#Eval("liked")%></div>
                      </font>
                      </a>
+                     </td>
+                     </tr>
+                     </table>
                      </b>
                      <td>
                     </tr>
@@ -154,13 +196,20 @@
         <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr>
             <td valign=middle>
             <b>
-                
-            <a style="cursor:hand;" title="Thích">
+            <table cellpadding=0 cellspacing=2 border=0 >  
+            <tr>
+            <td>
+            <a style="cursor:hand;" title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'liked3')>
             <asp:Image ID="Image3" runat="server"  ImageUrl="images/like.gif" Width=25 Height=15/>
+            </td>
+            <td bgcolor=#FFFFFF>
             <font color=red>
-             <%#Eval("liked")%>
+             <div id="liked3"><%#Eval("liked")%></div>
              </font>
              </a>
+             </td>
+             </tr>
+             </table>
              </b>
             </td>
             <td align=right>Đăng bởi,  

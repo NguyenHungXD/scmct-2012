@@ -1,158 +1,170 @@
-	htp.print('<script type="text/javascript">');
 
-	htp.print('	var requpdate;');
-	htp.print('	function loadXMLUpdate(url)');
-	htp.print('{');
-	htp.print('		window.status="Getting data from server.......";');
-	htp.print('		requpdate=null;');
-	htp.print('		if (window.XMLHttpRequest && !(window.ActiveXObject) )');
-	htp.print('  {// code for Firefox, Opera, IE7, etc.');
-	htp.print('    	try {');
-	htp.print('			requpdate = new XMLHttpRequest();');
-	htp.print('        } catch(e) {');
-	htp.print('			requpdate = false;');
-	htp.print('       }');
-	htp.print('  }');
-	htp.print('		else if (window.ActiveXObject)');
-	htp.print('  {// code for IE6, IE5');
-	htp.print('      	try {');
-	htp.print('  			requpdate = new ActiveXObject("Msxml2.XMLHTTP");');
-	htp.print('        } catch(e) {');
-	htp.print('       	try {');
-	htp.print('         		requpdate = new ActiveXObject("Microsoft.XMLHTTP");');
-	htp.print('        	} catch(e) {');
-	htp.print('          		requpdate = false;');
-	htp.print('       	}');
-	htp.print('		}');
-	htp.print('  }');
-	htp.print('		if (requpdate!=null)');
-	htp.print('  {');
-	htp.print('  			requpdate.onreadystatechange=function(){processReqUpdate();}');
-	htp.print('  			requpdate.open("POST",url,true);');
-	htp.print(' 			requpdate.send(null);');	
-	htp.print('		        window.status="Done";');
-	htp.print('  }');
-	htp.print('		else'				);
-	htp.print('  {');
-	htp.print('  		alert("Your browser does not support XMLHTTP.");');
-	htp.print('  }');
-	htp.print('}');	
-	
-	htp.print('function processReqUpdate() {');
-	htp.print('// only if requpdate shows "loaded"');
-	htp.print('if (requpdate.readyState == 4) {');
-	htp.print('// only if "OK"');
-	htp.print('if (requpdate.status == 200) {');
-	htp.print('// ...processing statements go here...');
-	htp.print('		eval(requpdate.responseText);');		
-	htp.print('		window.status="Done";');
-	htp.print('} else {');
-	htp.print('  alert("There was a problem retrieving the XML data:\n" +');
-	htp.print('      requpdate.statusText);');
-	htp.print(' }');
-	htp.print('}');
-	htp.print('}');	
+	 	var requpdate; 
+	 	function loadXMLUpdate(url) 
+	    { 
+	 		window.status="Getting data from server......."; 
+	 		requpdate=null; 
+	 		if (window.XMLHttpRequest && !(window.ActiveXObject) ) 
+	        {// code for Firefox, Opera, IE7, etc. 
+	     	    try
+                { 
+	 			    requpdate = new XMLHttpRequest(); 
+	            } 
+                catch(e) 
+                { 
+	 			                requpdate = false; 
+	            }       
+	        } 
+	 		 else if (window.ActiveXObject) 
+	        {// code for IE6, IE5 
+	       	    try
+                { 
+	   			    requpdate = new ActiveXObject("Msxml2.XMLHTTP"); 
+	            }
+                catch(e)
+                { 
+	        	    try
+                    { 
+	          		    requpdate = new ActiveXObject("Microsoft.XMLHTTP"); 
+	         	    }
+                    catch(e) { 
+	           		    requpdate = false; 
+	        	    } 
+	 		    } 
+	        } 
 
-	htp.print('	var req;');
-	htp.print('	var v_div;');
-	htp.print('function AssignData(url,vdiv)');
-	htp.print('{');
-	htp.print('	v_div = vdiv;');
-	htp.print('		window.status="Getting data from server.......";');
-	htp.print('		req=null;');
-	htp.print('		if (window.XMLHttpRequest && !(window.ActiveXObject) )');
-	htp.print('  {// code for Firefox, Opera, IE7, etc.');
-	htp.print('    	try {');
-	htp.print('			req = new XMLHttpRequest();');
-	htp.print('        } catch(e) {');
-	htp.print('			req = false;');
-	htp.print('       }');
-	htp.print('  }');
-	htp.print('		else if (window.ActiveXObject)');
-	htp.print('  {// code for IE6, IE5');
-	htp.print('      	try {');
-	htp.print('  			req = new ActiveXObject("Msxml2.XMLHTTP");');
-	htp.print('        } catch(e) {');
-	htp.print('       	try {');
-	htp.print('         		req = new ActiveXObject("Microsoft.XMLHTTP");');
-	htp.print('        	} catch(e) {');
-	htp.print('          		req = false;');
-	htp.print('       	}');
-	htp.print('		}');
-	htp.print('  }');
-	htp.print('		if (req!=null)');
-	htp.print('  {');
-	htp.print('  			req.onreadystatechange=function(){processReqChange();}');
+	 		if (requpdate!=null) 
+	        { 
+	   			requpdate.onreadystatechange=function(){processReqUpdate();} 
+	   			requpdate.open("POST",url,true); 
+	  			requpdate.send(null); 	
+	 		        window.status="Done"; 
+	        } 
+	 		else
+	   		    alert("Your browser does not support XMLHTTP."); 
+	   }
 	
-	htp.print('  			req.open("POST",url,true);');
-	htp.print(' 			req.send(null);');	
-	htp.print('		        window.status="Done";');
-	htp.print('  }');
-	htp.print('		else'				);
-	htp.print('  {');
-	htp.print('  		alert("Your browser does not support XMLHTTP.");');
-	htp.print('  }');
-	htp.print('}');	
+	 function processReqUpdate()
+     { 
+	     // only if requpdate shows "loaded" 
+	     if (requpdate.readyState == 4)
+         { 
+	     // only if "OK" 
+	         if (requpdate.status == 200) { 
+	         // ...processing statements go here... 
+	 		        eval(requpdate.responseText); 		
+	 		        window.status="Done"; 
+	         }
+             else
+             { 
+	           alert("There was a problem retrieving the XML data:\n" + 
+	               requpdate.statusText); 
+	          } 
+	     } 
+	 } 	
+    
+	 	var req; 
+	 	var v_div; 
+	 function AssignDataToDIV(url,vdiv) 
+	 { 
+	 	v_div = vdiv; 
+	 		window.status="Getting data from server......."; 
+	 		req=null; 
+	 		if (window.XMLHttpRequest && !(window.ActiveXObject) ) 
+	        {// code for Firefox, Opera, IE7, etc. 
+	     	try
+                { 
+	 			    req = new XMLHttpRequest(); 
+	            }
+             catch(e)
+                    { 
+	 			        req = false; 
+	                } 
+	        } 
+	 		else if (window.ActiveXObject) 
+	        {// code for IE6, IE5 
+	       	    try { 
+	   			    req = new ActiveXObject("Msxml2.XMLHTTP"); 
+	             } catch(e) { 
+	        	    try { 
+	          		    req = new ActiveXObject("Microsoft.XMLHTTP"); 
+	         	    } catch(e) { 
+	           		    req = false; 
+	        	    } 
+	 		} 
+	   } 
+	 		if (req!=null) 
+	   { 
+	   			req.onreadystatechange=function(){processReqChange();} 
 	
-	htp.print('function processReqChange() {');
-	htp.print('// only if req shows "loaded"');
+	   			req.open("POST",url,true); 
+	  			req.send(null); 	
+	 		        window.status="Done"; 
+	   } 
+	 		else
+	   { 
+	   		alert("Your browser does not support XMLHTTP."); 
+	   } 
+	 } 	
 	
-	htp.print('if (req.readyState == 4) {');
-	htp.print('// only if "OK"');
-	htp.print('if (req.status == 200) {');
-	htp.print('// ...processing statements go here...');
-	htp.print('		displayMessages(req.responseText);');		
-	htp.print('		window.status="Done";');
-	htp.print('} else {');
-	htp.print('  alert("There was a problem retrieving the XML data:\n" +');
-	htp.print('      displayErrors(req.statusText);');
+	 function processReqChange() { 
+	 // only if req shows "loaded" 
 	
-	htp.print(' }');
-	htp.print('}');
-	htp.print('}');	
+	 if (req.readyState == 4) { 
+	 // only if "OK" 
+	 if (req.status == 200) { 
+	 // ...processing statements go here... 
+	 		displayMessages(req.responseText); 		
+	 		window.status="Done"; 
+	 } else { 
+	   alert("There was a problem retrieving the XML data:\n" + displayErrors(req.statusText)); 
 	
-	htp.print('// function that displays an error message');
-	htp.print('function displayErrors(message)');
-	htp.print('{');
-  	htp.print('// display error message, with more technical details if debugMode is true');
-  	htp.print('     displayMessages("Error accessing the server! ",v_div);');
-  	htp.print('}');
+	  } 
+	 } 
+	 } 	
+	
+	 // function that displays an error message 
+	 function displayErrors(message) 
+	 { 
+  	 // display error message, with more technical details if debugMode is true 
+  	      displayMessages("Error accessing the server! ",v_div); 
+  	 } 
   	
-  	htp.print('// displays a message');
-	htp.print('function displayMessages(v_message)');
-	htp.print('{');
-	htp.print('	var assigndiv = document.getElementById(v_div);');
-	htp.print('	assigndiv.innerHTML = v_message;');
-	htp.print('}');
+  	 // displays a message 
+	 function displayMessages(v_message) 
+	 { 
+	 	var assigndiv = document.getElementById(v_div); 
+	 	assigndiv.innerHTML = v_message; 
+	 } 
 
 	
-	htp.print('function getValXML(url)');
-	htp.print('{');
-	htp.print('var http = false;');
-	htp.print('if (window.XMLHttpRequest && !(window.ActiveXObject) )');
-	htp.print('  {// code for Firefox, Opera, IE7, etc.');
-	htp.print('    	try {');
-	htp.print('		http = new XMLHttpRequest();');
-	htp.print('        } catch(e) {');
-	htp.print('			http = false;');
-	htp.print('       }');
-	htp.print('  }');
-	htp.print('		else if (window.ActiveXObject)');
-	htp.print('  {// code for IE6, IE5');
-	htp.print('      	try {');
-	htp.print('  			http = new ActiveXObject("Msxml2.XMLHTTP");');
-	htp.print('        } catch(e) {');
-	htp.print('       	try {');
-	htp.print('         		http = new ActiveXObject("Microsoft.XMLHTTP");');
-	htp.print('        	} catch(e) {');
-	htp.print('          		http = false;');
-	htp.print('       	}');
-	htp.print('		}');
-	htp.print('  }');
-	htp.print('  http.open("POST", url, false); ');
-	htp.print('  http.send(null);');
-	htp.print('  var result = http.responseText;');
-	htp.print('  return result.substring(0,result.length-1);'); 
-	htp.print('}');
+	 function getValXML(url) 
+	 { 
+	 var http = false; 
+	 if (window.XMLHttpRequest && !(window.ActiveXObject) ) 
+	   {// code for Firefox, Opera, IE7, etc. 
+	     	try { 
+	 		http = new XMLHttpRequest(); 
+	         } catch(e) { 
+	 			http = false; 
+	        } 
+	   } 
+	 		else if (window.ActiveXObject) 
+	   {// code for IE6, IE5 
+	       	try { 
+	   			http = new ActiveXObject("Msxml2.XMLHTTP"); 
+	         } catch(e) { 
+	        	try { 
+	          		http = new ActiveXObject("Microsoft.XMLHTTP"); 
+	         	} catch(e) { 
+	           		http = false; 
+	        	} 
+	 		} 
+	   } 
+	   http.open("POST", url, false);  
+	   http.send(null); 
+	   var result = http.responseText; 
+	   return result.substring(0,result.length-1);  
+	 } 
 	
-	htp.print('</script>');		
+

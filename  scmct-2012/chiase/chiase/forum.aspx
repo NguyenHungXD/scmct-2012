@@ -3,6 +3,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
 
 
+
 <asp:Repeater ID="show_subject" runat="server" 
         onitemdatabound="show_subject_ItemDataBound1" >
 <HeaderTemplate>
@@ -72,9 +73,9 @@
                     </td>
                     <td with=10%>
                     
-                    <asp:Image ID="Image2" runat="server" ImageUrl="images/star.gif" Width=12 Height=12/>
-                    <asp:Image ID="Image5" runat="server" ImageUrl="images/star.gif" Width=12 Height=12/>
-                    <asp:Image ID="Image6" runat="server" ImageUrl="images/star.gif" Width=12 Height=12/>
+                    <asp:Image ID="Image2" runat="server" ImageUrl="images/star_w.gif" Width=12 Height=12/>
+                    <asp:Image ID="Image5" runat="server" ImageUrl="images/star_w.gif" Width=12 Height=12/>
+                    <asp:Image ID="Image6" runat="server" ImageUrl="images/star_w.gif" Width=12 Height=12/>
                     <asp:Image ID="Image7" runat="server" ImageUrl="images/star_w.gif" Width=12 Height=12/>
                     <asp:Image ID="Image8" runat="server" ImageUrl="images/star_w.gif" Width=12 Height=12/>
                     </td>
@@ -119,6 +120,4 @@
 </table>
 </FooterTemplate>
     </asp:Repeater>
-
-
 </asp:Content>

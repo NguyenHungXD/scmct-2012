@@ -68,6 +68,7 @@
     <Content Include="forum.aspx" />
     <Content Include="ManageShipments.aspx" />
     <Content Include="post_show_details.aspx" />
+    <Content Include="Scripts\ajax_script.js" />
     <Content Include="show_details.aspx" />
     <Content Include="Styles\content_slider_style.css" />
     <Content Include="create_new_project.aspx" />
@@ -119,6 +120,7 @@
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\templatemain_style.css" />
+    <Content Include="update_like_post.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -247,6 +249,13 @@
     </Compile>
     <Compile Include="show_details.aspx.designer.cs">
       <DependentUpon>show_details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="update_like_post.aspx.cs">
+      <DependentUpon>update_like_post.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="update_like_post.aspx.designer.cs">
+      <DependentUpon>update_like_post.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
