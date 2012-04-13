@@ -22,7 +22,6 @@
         else{
             document.getElementById(divid).innerHTML = val + 1;
         }
-
     }
 </script>
 
