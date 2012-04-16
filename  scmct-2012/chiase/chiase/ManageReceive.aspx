@@ -9,6 +9,7 @@
     Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
 <%@ Register Assembly="DevExpress.Web.ASPxGridView.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxGridLookup" TagPrefix="dx" %>
+<%@ Register assembly="DevExpress.Web.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxTreeView" tagprefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Content_slider" runat="server">
     <script language="javascript" type="text/javascript">
 // <![CDATA[
@@ -22,9 +23,9 @@
             cboKhoNhap.SetValue(null);
             cboNhapTu.SetValue(null);
             grlDuAn.SetValue(null);
-            grlPhieuYeuCau.SetValue(null);           
+            grlPhieuYeuCau.SetValue(null);
             dtNgayNhap.SetValue(null);
-           
+
 
             var totalRow = gridViewHangHoa.GetVisibleRowsOnPage();
             for (var i = 0; i < totalRow; i++) {
@@ -34,6 +35,20 @@
                 gridViewHangHoa.AddNewRow();
             pcPhieuNhap.Show();
         }
+           
+      function RowDblClickHandler(s, e) {
+        s.GetRowValues(e.visibleIndex, 'ID;NAME;MA_HH;NHH_ID', OnGetRowValues);
+            
+           
+        }
+        function OnGetRowValues(values) {
+            gridViewHangHoa.SetEditValue("colHHOD", values[0]);
+            gridViewHangHoa.SetEditValue("colTenHangHoa", values[1]);
+            gridViewHangHoa.SetEditValue("colMaHangHoa", values[2]);
+            gridViewHangHoa.SetEditValue("colChungLoai", values[3]);            
+    }
+
+
 
 // ]]>
     </script>
@@ -45,11 +60,9 @@
                 <td>
                     <dx:ASPxButton ID="btn_CreateNew" ClientInstanceName="btn_CreateNew" runat="server"
                         Text="Tạo phiếu nhập" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
-                        CssPostfix="Office2010Blue" 
-                        SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css" 
-                        AutoPostBack="False" >
-                     <ClientSideEvents Click="btn_CreateNew_ClientClick" />
-                     
+                        CssPostfix="Office2010Blue" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
+                        AutoPostBack="False">
+                        <ClientSideEvents Click="btn_CreateNew_ClientClick" />
                     </dx:ASPxButton>
                 </td>
                 <td>
@@ -60,7 +73,6 @@
                 </td>
             </tr>
         </table>
-        
         <br />
         <dx:ASPxPopupControl ID="pcPhieuNhap" runat="server" Height="339px" Width="915px"
             Modal="True" HeaderText="PHIẾU NHẬP HÀNG" PopupHorizontalAlign="WindowCenter"
@@ -79,16 +91,16 @@
                         <tr>
                             <td>
                                 <fieldset>
-                                    <legend><font  size="2"><b>Thông tin Phiếu nhập</b></font></b></legend>
+                                    <legend><font size="2"><b>Thông tin phiếu nhập</b></font></b></legend>
                                     <table style="width: 100%">
                                         <tr>
                                             <td style="width: 107px">
                                                 Mã phiếu nhập:
                                             </td>
                                             <td style="width: 193px">
-                                                <dx:ASPxTextBox ID="txtMaNhap" ClientInstanceName="txtMaPhieuNhap" 
-                                                    runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
-                                                    CssPostfix="Office2010Blue" Height="16px" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
+                                                <dx:ASPxTextBox ID="txtMaNhap" ClientInstanceName="txtMaPhieuNhap" runat="server"
+                                                    CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" CssPostfix="Office2010Blue"
+                                                    Height="16px" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
                                                     Width="180px">
                                                     <ValidationSettings>
                                                         <ErrorFrameStyle ImageSpacing="4px">
@@ -101,11 +113,10 @@
                                                 Người nhập:
                                             </td>
                                             <td style="width: 184px">
-                                                <dx:ASPxComboBox ID="cboNguoiNhap" ClientInstanceName="cboNguoiNhap" 
-                                                    runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
-                                                    CssPostfix="Office2010Blue" LoadingPanelImagePosition="Top" ShowShadow="False"
-                                                    SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css" ValueType="System.String"
-                                                    Width="182px">
+                                                <dx:ASPxComboBox ID="cboNguoiNhap" ClientInstanceName="cboNguoiNhap" runat="server"
+                                                    CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" CssPostfix="Office2010Blue"
+                                                    LoadingPanelImagePosition="Top" ShowShadow="False" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
+                                                    ValueType="System.String" Width="182px">
                                                     <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
                                                     </LoadingPanelImage>
                                                     <DropDownButton>
@@ -319,33 +330,88 @@
                                     <dx:ASPxGridView ID="gridViewHangHoa" runat="server" AutoGenerateColumns="False"
                                         ClientIDMode="AutoID" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                                         CssPostfix="Office2010Blue" Width="100%" OnRowInserting="gridViewHangHoa_RowInserting"
-                                        OnRowDeleting="gridViewHangHoa_RowDeleting" 
-                                        OnRowUpdating="gridViewHangHoa_RowUpdating" 
+                                        OnRowDeleting="gridViewHangHoa_RowDeleting" OnRowUpdating="gridViewHangHoa_RowUpdating"
                                         ClientInstanceName="gridViewHangHoa">
                                         <Columns>
-                                            <dx:GridViewDataComboBoxColumn Caption="Mã hàng" Name="colMaHangHoa" ShowInCustomizationForm="True"
-                                                VisibleIndex="2">
-                                                <PropertiesComboBox ValueType="System.String">
-                                                </PropertiesComboBox>
-                                            </dx:GridViewDataComboBoxColumn>
-                                            <dx:GridViewDataTextColumn Caption="Tên hàng" ShowInCustomizationForm="True" VisibleIndex="3"
-                                                Name="colTenHangHoa">
+                                            <dx:GridViewDataTextColumn Caption="Mã hàng" ShowInCustomizationForm="True" VisibleIndex="6"
+                                                Name="colMaHangHoa">
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn Caption="Chủng loại" ShowInCustomizationForm="True" VisibleIndex="4"
+                                            <dx:GridViewDataTextColumn Caption="PNKCT_ID" Name="colPNKCT_ID" 
+                                                ShowInCustomizationForm="True" Visible="False" VisibleIndex="3">
+                                            </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn Caption="PNK_ID" Name="colPNK_ID" 
+                                                ShowInCustomizationForm="True" Visible="False" VisibleIndex="4">
+                                            </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn Caption="HH_ID" Name="colHHID" 
+                                                ShowInCustomizationForm="True" Visible="False" VisibleIndex="5">
+                                            </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataDropDownEditColumn Caption="Tên hàng" Name="colTenHangHoa" ShowInCustomizationForm="True"
+                                                VisibleIndex="2">
+                                                <PropertiesDropDownEdit>
+                                                    <DropDownWindowTemplate>
+                                                        <dx:ASPxGridView ID="gridViewDMHH" ClientInstanceName="gridViewDMHH" runat="server" OnInit="gridViewDMHH_OnInit"
+                                                         ClientIDMode="AutoID" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                                                        CssPostfix="Office2010Blue" Width="100%"
+                                                        OnRowInserting="gridViewDMHH_RowInserting"
+                                                        >
+                                                            <Columns>
+                                                                <dx:GridViewDataTextColumn Name="colDNHHID" Caption="ID" FieldName="ID" VisibleIndex="0"
+                                                                    Visible="False">
+                                                                </dx:GridViewDataTextColumn>
+                                                                <dx:GridViewDataTextColumn Name="colDMHHMa" Caption="Mã hàng hóa" FieldName="MA_HH"
+                                                                    VisibleIndex="0">
+                                                                </dx:GridViewDataTextColumn>
+                                                                <dx:GridViewDataTextColumn Name="colDMHHName" Caption="Tên hàng hóa" FieldName="NAME"
+                                                                    VisibleIndex="1">
+                                                                </dx:GridViewDataTextColumn>
+                                                                
+                                                                <dx:GridViewDataDropDownEditColumn Name="colDMHHNHom" Caption="Chủng loại" FieldName="NAME"
+                                                                    VisibleIndex="2">
+                                                                <PropertiesDropDownEdit>
+                                                                <DropDownWindowTemplate>
+                                                               <dx:ASPxTreeView>
+                                                               
+                                                               </dx:ASPxTreeView>
+                                                                </DropDownWindowTemplate>
+                                                                </PropertiesDropDownEdit>
+                                                                </dx:GridViewDataDropDownEditColumn>
+                                                                <dx:GridViewDataTextColumn Name="colDMHHMoTa" Caption="Mô tả" FieldName="MO_TA" VisibleIndex="2">
+                                                                </dx:GridViewDataTextColumn>
+                                                                <dx:GridViewCommandColumn Name="colDMHHCommand" VisibleIndex="3">
+                                                                    <EditButton Text="Sửa" Visible="False">
+                                                                    </EditButton>
+                                                                    <NewButton Text="Thêm" Visible="True">
+                                                                    </NewButton>
+                                                                    <CancelButton Text="Hủy">
+                                                                    </CancelButton>
+                                                                    <UpdateButton Text="Lưu">
+                                                                    </UpdateButton>
+                                                                    <CellStyle Wrap="False">
+                                                                    </CellStyle>
+                                                                </dx:GridViewCommandColumn>
+                                                            </Columns>
+                                                             <ClientSideEvents RowDblClick="RowDblClickHandler" />
+
+                                                        </dx:ASPxGridView>
+                                                        
+                                                    </DropDownWindowTemplate>
+                                                </PropertiesDropDownEdit>
+                                            </dx:GridViewDataDropDownEditColumn>
+                                            <dx:GridViewDataTextColumn Caption="Chủng loại" ShowInCustomizationForm="True" VisibleIndex="7"
                                                 Name="colChungLoai">
                                             </dx:GridViewDataTextColumn>
                                             <dx:GridViewDataSpinEditColumn Caption="Số lượng" ShowInCustomizationForm="True"
-                                                VisibleIndex="6" Name="colSoLuong">
+                                                VisibleIndex="8" Name="colSoLuong">
                                                 <PropertiesSpinEdit DisplayFormatString="g">
                                                 </PropertiesSpinEdit>
                                             </dx:GridViewDataSpinEditColumn>
-                                            <dx:GridViewDataSpinEditColumn Caption="Đơn giá" ShowInCustomizationForm="True" VisibleIndex="7"
+                                            <dx:GridViewDataSpinEditColumn Caption="Đơn giá" ShowInCustomizationForm="True" VisibleIndex="9"
                                                 Name="colDonGia">
                                                 <PropertiesSpinEdit DisplayFormatString="g">
                                                 </PropertiesSpinEdit>
                                             </dx:GridViewDataSpinEditColumn>
                                             <dx:GridViewDataSpinEditColumn Caption="Thành tiền" ShowInCustomizationForm="True"
-                                                VisibleIndex="8" Name="colThanhTien">
+                                                VisibleIndex="10" Name="colThanhTien">
                                                 <PropertiesSpinEdit DisplayFormatString="g">
                                                 </PropertiesSpinEdit>
                                             </dx:GridViewDataSpinEditColumn>
@@ -416,6 +482,7 @@
                                             </ProgressBar>
                                         </StylesEditors>
                                     </dx:ASPxGridView>
+                                    
                                 </fieldset>
                             </td>
                         </tr>
@@ -448,95 +515,272 @@
         </dx:ASPxPopupControl>
     </fieldset>
     <fieldset>
-        <legend><font size="2"><b>Điều kiện tìm kiếm</legend>
-        <table style="height: 34px">
+        <legend><font size="2"><b>Điều kiện tìm kiếm</b></font></legend>
+        <table style="width: 100%">
             <tr>
-                <td style="width: 411px; height: 32px;">
+                <td style="width: 107px">
                     Mã phiếu nhập:
                 </td>
-                <td style="width: 219px; height: 32px;">
-                    <asp:TextBox ID="TextBox1" runat="server" Width="181px"></asp:TextBox>
+                <td style="width: 193px">
+                    <dx:ASPxTextBox ID="ASPxTextBox1" ClientInstanceName="txtMaPhieuNhap" runat="server"
+                        CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" CssPostfix="Office2010Blue"
+                        Height="16px" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
+                        Width="180px">
+                        <ValidationSettings>
+                            <ErrorFrameStyle ImageSpacing="4px">
+                                <ErrorTextPaddings PaddingLeft="4px" />
+                            </ErrorFrameStyle>
+                        </ValidationSettings>
+                    </dx:ASPxTextBox>
                 </td>
-                <td style="width: 203px" class="col_w280">
-                    Người nhập
-                </td>
-                <td style="width: 219px; height: 32px;">
-                    <asp:DropDownList ID="DropDownList2" runat="server" Height="28px" Width="176px">
-                    </asp:DropDownList>
-                </td>
-                <td style="width: 325px; height: 32px;">
+                <td style="width: 98px">
                     Ngày nhập từ:
                 </td>
-                <td style="width: 139px; height: 32px;">
-                    &nbsp;
+                <td style="width: 184px">
+                    <dx:ASPxDateEdit ID="ASPxDateEdit2" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                        CssPostfix="Office2010Blue" Height="16px" ShowShadow="False" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
+                        Width="179px" ClientInstanceName="dtNgayNhap">
+                        <CalendarProperties>
+                            <HeaderStyle Spacing="1px" />
+                            <FooterStyle Spacing="17px" />
+                        </CalendarProperties>
+                        <DropDownButton>
+                            <Image>
+                                <SpriteProperties HottrackedCssClass="dxEditors_edtDropDownHover_Aqua" PressedCssClass="dxEditors_edtDropDownPressed_Aqua" />
+                            </Image>
+                        </DropDownButton>
+                        <ValidationSettings>
+                            <ErrorFrameStyle ImageSpacing="4px">
+                                <ErrorTextPaddings PaddingLeft="4px" />
+                            </ErrorFrameStyle>
+                        </ValidationSettings>
+                    </dx:ASPxDateEdit>
+                </td>
+                <td>
+                    đến ngày:
+                </td>
+                <td>
+                    <dx:ASPxDateEdit ID="ASPxDateEdit1" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                        CssPostfix="Office2010Blue" Height="16px" ShowShadow="False" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
+                        Width="179px" ClientInstanceName="dtNgayNhap">
+                        <CalendarProperties>
+                            <HeaderStyle Spacing="1px" />
+                            <FooterStyle Spacing="17px" />
+                        </CalendarProperties>
+                        <DropDownButton>
+                            <Image>
+                                <SpriteProperties HottrackedCssClass="dxEditors_edtDropDownHover_Aqua" PressedCssClass="dxEditors_edtDropDownPressed_Aqua" />
+                            </Image>
+                        </DropDownButton>
+                        <ValidationSettings>
+                            <ErrorFrameStyle ImageSpacing="4px">
+                                <ErrorTextPaddings PaddingLeft="4px" />
+                            </ErrorFrameStyle>
+                        </ValidationSettings>
+                    </dx:ASPxDateEdit>
                 </td>
             </tr>
             <tr>
-                <td style="width: 411px; height: 32px;">
-                    Người nhận:
-                </td>
-                <td style="width: 219px; height: 32px;">
-                    <asp:TextBox ID="TextBox2" runat="server" Width="181px"></asp:TextBox>
-                </td>
-                <td style="width: 203px" class="col_w280">
-                    Kho nhập
-                </td>
-                <td style="width: 219px; height: 32px;">
-                    <asp:DropDownList ID="DropDownList3" runat="server" Height="28px" Width="176px">
-                    </asp:DropDownList>
-                </td>
-                <td style="width: 325px; height: 32px;">
-                    Ngày nhập đến:
-                </td>
-                <td style="width: 139px; height: 32px;">
-                    &nbsp;
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 411px; height: 32px;">
+                <td style="width: 107px; height: 17px;">
                     Loại nhập:
                 </td>
-                <td style="width: 219px; height: 32px;">
-                    <asp:DropDownList ID="DropDownList1" runat="server" Height="28px" Width="176px">
-                    </asp:DropDownList>
+                <td style="width: 193px; height: 17px;">
+                    <dx:ASPxComboBox ID="ASPxComboBox2" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                        CssPostfix="Office2010Blue" LoadingPanelImagePosition="Top" ShowShadow="False"
+                        SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css" ValueType="System.String"
+                        Width="182px" ClientInstanceName="cboLoaiNhap">
+                        <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
+                        </LoadingPanelImage>
+                        <DropDownButton>
+                            <Image>
+                                <SpriteProperties HottrackedCssClass="dxEditors_edtDropDownHover_Aqua" PressedCssClass="dxEditors_edtDropDownPressed_Aqua" />
+                            </Image>
+                        </DropDownButton>
+                        <ValidationSettings>
+                            <ErrorFrameStyle ImageSpacing="4px">
+                                <ErrorTextPaddings PaddingLeft="4px" />
+                            </ErrorFrameStyle>
+                        </ValidationSettings>
+                    </dx:ASPxComboBox>
                 </td>
-                <td style="width: 203px" class="col_w280">
-                    Chứng từ
+                <td style="width: 98px; height: 17px;">
+                    Kho nhập:
                 </td>
-                <td style="width: 219px; height: 32px;">
-                    <asp:TextBox ID="TextBox3" runat="server" Width="181px"></asp:TextBox>
+                <td style="width: 184px; height: 17px;">
+                    <dx:ASPxComboBox ID="ASPxComboBox3" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                        CssPostfix="Office2010Blue" LoadingPanelImagePosition="Top" ShowShadow="False"
+                        SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css" ValueType="System.String"
+                        Width="182px" ClientInstanceName="cboKhoNhap">
+                        <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
+                        </LoadingPanelImage>
+                        <DropDownButton>
+                            <Image>
+                                <SpriteProperties HottrackedCssClass="dxEditors_edtDropDownHover_Aqua" PressedCssClass="dxEditors_edtDropDownPressed_Aqua" />
+                            </Image>
+                        </DropDownButton>
+                        <ValidationSettings>
+                            <ErrorFrameStyle ImageSpacing="4px">
+                                <ErrorTextPaddings PaddingLeft="4px" />
+                            </ErrorFrameStyle>
+                        </ValidationSettings>
+                    </dx:ASPxComboBox>
                 </td>
-                <td style="width: 325px; height: 32px;">
-                    &nbsp; Dự án:
+                <td style="height: 17px">
+                    Dự án:
                 </td>
-                <td style="width: 139px; height: 32px;">
-                    <asp:DropDownList ID="DropDownList4" runat="server" Height="28px" Width="176px">
-                    </asp:DropDownList>
+                <td style="height: 17px">
+                    <dx:ASPxGridLookup ID="ASPxGridLookup1" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                        CssPostfix="Office2010Blue" Height="16px" Spacing="0" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
+                        Width="180px" ClientInstanceName="grlDuAn">
+                        <GridViewProperties>
+                            <SettingsBehavior AllowFocusedRow="True" AllowSelectSingleRowOnly="True" />
+                        </GridViewProperties>
+                        <GridViewImages SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css">
+                            <LoadingPanelOnStatusBar Url="~/App_Themes/Office2010Blue/GridView/Loading.gif">
+                            </LoadingPanelOnStatusBar>
+                            <LoadingPanel Url="~/App_Themes/Office2010Blue/GridView/Loading.gif">
+                            </LoadingPanel>
+                        </GridViewImages>
+                        <GridViewImagesFilterControl>
+                            <LoadingPanel Url="~/App_Themes/Office2010Blue/GridView/Loading.gif">
+                            </LoadingPanel>
+                        </GridViewImagesFilterControl>
+                        <GridViewStyles>
+                            <Header ImageSpacing="5px" SortingImageSpacing="5px">
+                            </Header>
+                            <LoadingPanel ImageSpacing="5px">
+                            </LoadingPanel>
+                        </GridViewStyles>
+                        <GridViewStylesPager>
+                            <PageNumber ForeColor="#3E4846">
+                            </PageNumber>
+                            <Summary ForeColor="#1E395B">
+                            </Summary>
+                        </GridViewStylesPager>
+                        <GridViewStylesEditors ButtonEditCellSpacing="0">
+                            <ProgressBar Height="21px">
+                            </ProgressBar>
+                        </GridViewStylesEditors>
+                        <ButtonStyle Width="13px">
+                        </ButtonStyle>
+                    </dx:ASPxGridLookup>
                 </td>
             </tr>
             <tr>
-                <td style="width: 411px; height: 32px;">
+                <td style="width: 107px">
                     Phiếu yêu cầu:
                 </td>
-                <td style="width: 219px; height: 32px;">
-                    <asp:DropDownList ID="DropDownList5" runat="server" Height="28px" Width="176px">
-                    </asp:DropDownList>
+                <td style="width: 193px">
+                    <dx:ASPxGridLookup ID="ASPxGridLookup2" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                        CssPostfix="Office2010Blue" Height="16px" Spacing="0" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
+                        Width="182px" ClientInstanceName="grlPhieuYeuCau">
+                        <GridViewProperties>
+                            <SettingsBehavior AllowFocusedRow="True" AllowSelectSingleRowOnly="True" />
+                        </GridViewProperties>
+                        <GridViewImages SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css">
+                            <LoadingPanelOnStatusBar Url="~/App_Themes/Office2010Blue/GridView/Loading.gif">
+                            </LoadingPanelOnStatusBar>
+                            <LoadingPanel Url="~/App_Themes/Office2010Blue/GridView/Loading.gif">
+                            </LoadingPanel>
+                        </GridViewImages>
+                        <GridViewImagesFilterControl>
+                            <LoadingPanel Url="~/App_Themes/Office2010Blue/GridView/Loading.gif">
+                            </LoadingPanel>
+                        </GridViewImagesFilterControl>
+                        <GridViewStyles>
+                            <Header ImageSpacing="5px" SortingImageSpacing="5px">
+                            </Header>
+                            <LoadingPanel ImageSpacing="5px">
+                            </LoadingPanel>
+                        </GridViewStyles>
+                        <GridViewStylesPager>
+                            <PageNumber ForeColor="#3E4846">
+                            </PageNumber>
+                            <Summary ForeColor="#1E395B">
+                            </Summary>
+                        </GridViewStylesPager>
+                        <GridViewStylesEditors ButtonEditCellSpacing="0">
+                            <ProgressBar Height="21px">
+                            </ProgressBar>
+                        </GridViewStylesEditors>
+                        <ButtonStyle Width="13px">
+                        </ButtonStyle>
+                    </dx:ASPxGridLookup>
                 </td>
-                <td style="width: 203px" class="col_w280">
+                <td style="width: 98px">
+                    Nhập từ:
+                </td>
+                <td style="width: 184px">
+                    <dx:ASPxComboBox ID="ASPxComboBox4" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                        CssPostfix="Office2010Blue" LoadingPanelImagePosition="Top" ShowShadow="False"
+                        SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css" ValueType="System.String"
+                        Width="182px" ClientInstanceName="cboNhapTu">
+                        <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
+                        </LoadingPanelImage>
+                        <DropDownButton>
+                            <Image>
+                                <SpriteProperties HottrackedCssClass="dxEditors_edtDropDownHover_Aqua" PressedCssClass="dxEditors_edtDropDownPressed_Aqua" />
+                            </Image>
+                        </DropDownButton>
+                        <ValidationSettings>
+                            <ErrorFrameStyle ImageSpacing="4px">
+                                <ErrorTextPaddings PaddingLeft="4px" />
+                            </ErrorFrameStyle>
+                        </ValidationSettings>
+                    </dx:ASPxComboBox>
+                </td>
+                <td>
+                    Chứng từ:
+                </td>
+                <td>
+                    <dx:ASPxTextBox ID="ASPxTextBox2" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                        CssPostfix="Office2010Blue" Height="16px" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
+                        Width="180px" ClientInstanceName="txtChungTu">
+                        <ValidationSettings>
+                            <ErrorFrameStyle ImageSpacing="4px">
+                                <ErrorTextPaddings PaddingLeft="4px" />
+                            </ErrorFrameStyle>
+                        </ValidationSettings>
+                    </dx:ASPxTextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 107px">
+                    Người nhập:
+                </td>
+                <td style="width: 193px">
+                    <dx:ASPxComboBox ID="ASPxComboBox1" ClientInstanceName="cboNguoiNhap" runat="server"
+                        CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" CssPostfix="Office2010Blue"
+                        LoadingPanelImagePosition="Top" ShowShadow="False" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
+                        ValueType="System.String" Width="182px">
+                        <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
+                        </LoadingPanelImage>
+                        <DropDownButton>
+                            <Image>
+                                <SpriteProperties HottrackedCssClass="dxEditors_edtDropDownHover_Aqua" PressedCssClass="dxEditors_edtDropDownPressed_Aqua" />
+                            </Image>
+                        </DropDownButton>
+                        <ValidationSettings>
+                            <ErrorFrameStyle ImageSpacing="4px">
+                                <ErrorTextPaddings PaddingLeft="4px" />
+                            </ErrorFrameStyle>
+                        </ValidationSettings>
+                    </dx:ASPxComboBox>
+                </td>
+                <td style="width: 98px">
                     &nbsp;
                 </td>
-                <td style="width: 219px; height: 32px;">
+                <td style="width: 184px">
                     &nbsp;
                 </td>
-                <td style="width: 325px; height: 32px;">
+                <td>
                     &nbsp;
                 </td>
-                <td style="width: 139px; height: 32px;">
+                <td>
                     &nbsp;
                 </td>
             </tr>
         </table>
-        </b></font>
     </fieldset>
     <fieldset>
         <legend><font size="2"><b>Danh sách phiếu nhập</font></b></legend>

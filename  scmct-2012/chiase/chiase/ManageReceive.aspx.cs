@@ -10,6 +10,7 @@ using DevExpress.Web.ASPxEditors;
 using System.Data;
 using System.Collections;
 using System.Drawing;
+using DK2C.DataAccess.Web;
 
 namespace chiase
 {
@@ -29,9 +30,11 @@ namespace chiase
             {
                 dsSoucrceHH = (DataSet)Session[KH_PHIEU_NHAP_KHO_CT.sTableName];
 
-                    
+
             }
         }
+      
+    
         protected void btn_CreateNew_Click(object sender, EventArgs e)
         {
             //pcPhieuNhap.ShowOnPageLoad = true;
@@ -49,25 +52,26 @@ namespace chiase
             functions.InitListDuAn(grlDuAn, true);
             functions.InitListPhieuYeuCau(grlPhieuYeuCau, true);
         }
+
         private void InitGridOnPopUp()
         {
-            #region Cột mã hàng hóa            
-            
-            GridViewDataComboBoxColumn colMaHangHoa = (GridViewDataComboBoxColumn)gridViewHangHoa.Columns["colMaHangHoa"];
-            DataTable dtHangHoa = DM_HANG_HOA.GetTableAll();
-            functions.AddEmptyRow(dtHangHoa, DM_HANG_HOA.cl_ID);
-            //ListBoxColumn colHH_MaHH = colMaHangHoa.PropertiesComboBox.Columns.Add();
-            //colHH_MaHH.FieldName = DM_HANG_HOA.cl_MA_HH;
-            //colHH_MaHH.Caption = "Mã hàng hóa";
 
-            //ListBoxColumn colHH_TenHH = colMaHangHoa.PropertiesComboBox.Columns.Add();
-            //colHH_TenHH.FieldName = DM_HANG_HOA.cl_NAME;
-            //colHH_TenHH.Caption = "Tên hàng hóa";
-            colMaHangHoa.PropertiesComboBox.DataSource = dtHangHoa;
-            colMaHangHoa.PropertiesComboBox.ValueField = DM_HANG_HOA.cl_ID;
-            colMaHangHoa.PropertiesComboBox.TextField = DM_HANG_HOA.cl_NAME;            
-            colMaHangHoa.FieldName = KH_PHIEU_NHAP_KHO_CT.cl_HH_ID;
-            #endregion
+
+            GridViewDataTextColumn colPNKCT_ID = (GridViewDataTextColumn)gridViewHangHoa.Columns["colPNKCT_ID"];
+            colPNKCT_ID.FieldName = KH_PHIEU_NHAP_KHO_CT.cl_PNK_CT_ID;
+
+
+            GridViewDataTextColumn colPNK_ID = (GridViewDataTextColumn)gridViewHangHoa.Columns["colPNK_ID"];
+            colPNKCT_ID.FieldName = KH_PHIEU_NHAP_KHO_CT.cl_PNK_CT_ID;
+
+
+            GridViewDataTextColumn colHH_ID = (GridViewDataTextColumn)gridViewHangHoa.Columns["colHH_ID"];
+            colPNKCT_ID.FieldName = KH_PHIEU_NHAP_KHO_CT.cl_HH_ID;
+
+            GridViewDataDropDownEditColumn colTenHangHoa = (GridViewDataDropDownEditColumn)gridViewHangHoa.Columns["colTenHangHoa"];
+            colTenHangHoa.FieldName = DM_HANG_HOA.cl_NAME;
+           
+            
             GridViewDataSpinEditColumn colSoLuong = (GridViewDataSpinEditColumn)gridViewHangHoa.Columns["colSoLuong"];
             colSoLuong.FieldName = KH_PHIEU_NHAP_KHO_CT.cl_SO_LUONG;
 
@@ -78,14 +82,15 @@ namespace chiase
             colThanhTien.FieldName = KH_PHIEU_NHAP_KHO_CT.cl_THANH_TIEN;
 
             GridViewDataTextColumn colChungLoai = (GridViewDataTextColumn)gridViewHangHoa.Columns["colChungLoai"];
-            colChungLoai.FieldName = KH_PHIEU_NHAP_KHO_CT.cl_GHI_CHU;
+            colChungLoai.FieldName = DM_HANG_HOA.cl_NHH_ID;
 
 
-            GridViewDataTextColumn colTenHangHoa = (GridViewDataTextColumn)gridViewHangHoa.Columns["colTenHangHoa"];
-            colTenHangHoa.FieldName = KH_PHIEU_NHAP_KHO_CT.cl_GHI_CHU;
+            GridViewDataTextColumn colMaHangHoa = (GridViewDataTextColumn)gridViewHangHoa.Columns["colMaHangHoa"];
+            colMaHangHoa.FieldName = DM_HANG_HOA.cl_MA_HH;
         }
         private void LoadDataControlOnPopUp()
         {
+            
         }
         private void LoadDataGridOnPopUp(string idPhieuNhap)
         {
@@ -99,6 +104,7 @@ namespace chiase
             gridViewHangHoa.KeyFieldName = KH_PHIEU_NHAP_KHO_CT.cl_PNK_CT_ID;
             dtChietTietHangHoa.PrimaryKey = new DataColumn[] { dtChietTietHangHoa.Columns[KH_PHIEU_NHAP_KHO_CT.cl_PNK_CT_ID] };
             gridViewHangHoa.DataBind();
+           
             Session[KH_PHIEU_NHAP_KHO_CT.sTableName] = ds;
         }
 
@@ -175,6 +181,45 @@ namespace chiase
             return -(max + 1);
         }
 
-        
+
+        protected void gridViewDMHH_OnInit(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            DataTable dtHangHoa = DM_HANG_HOA.GetTableAll();
+            functions.AddEmptyRow(dtHangHoa, DM_HANG_HOA.cl_ID);
+            ds.Tables.Add(dtHangHoa);
+            ASPxGridView gridViewDMHH = sender as ASPxGridView;
+            gridViewDMHH.DataSource = ds;
+            gridViewDMHH.DataMember = DM_HANG_HOA.sTableName;
+            gridViewDMHH.KeyFieldName = DM_HANG_HOA.cl_ID;
+            gridViewDMHH.DataBind();
+        }
+        protected void gridViewDMHH_RowInserting(object sender, DevExpress.Web.Data.ASPxDataInsertingEventArgs e)
+        {
+
+
+            //DataSet ds = (DataSet)Session[KH_PHIEU_NHAP_KHO_CT.sTableName];
+            ASPxGridView gridView = (ASPxGridView)sender;
+
+            //if (ds.Tables.Count > 0)
+            //{
+                //DataTable dataTable = ds.Tables[0];
+                //if (gridViewHangHoa.VisibleRowCount == 0) dataTable.Rows.Clear();
+                //DataRow row = dataTable.NewRow();
+                //e.NewValues[KH_PHIEU_NHAP_KHO_CT.cl_PNK_CT_ID] = GetNewId(ds);
+                //IDictionaryEnumerator enumerator = e.NewValues.GetEnumerator();
+                //enumerator.Reset();
+                //while (enumerator.MoveNext())
+                //    row[enumerator.Key.ToString()] = enumerator.Value == null ? DBNull.Value : enumerator.Value;
+
+                gridView.CancelEdit();
+                e.Cancel = true;
+            //    dataTable.Rows.Add(row);
+            //    gridViewHangHoa.DataSource = ds;
+            //    gridViewHangHoa.DataBind();
+            //    gridViewHangHoa.AddNewRow();
+
+            //}
+        }
     }
 }

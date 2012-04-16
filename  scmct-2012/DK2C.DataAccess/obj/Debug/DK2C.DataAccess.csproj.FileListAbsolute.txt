@@ -3,13 +3,13 @@ D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DataAccess\bin\Debug\DK2C.DataAccess.pd
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DataAccess\obj\Debug\ResolveAssemblyReference.cache
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DataAccess\obj\Debug\DK2C.DataAccess.dll
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DataAccess\obj\Debug\DK2C.DataAccess.pdb
-D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\bin\Debug\DK2C.DataAccess.dll
-D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\bin\Debug\DK2C.DataAccess.pdb
-D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\obj\Debug\ResolveAssemblyReference.cache
-D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\obj\Debug\DK2C.DataAccess.dll
-D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\obj\Debug\DK2C.DataAccess.pdb
 E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\DK2C.DataAccess\bin\Debug\DK2C.DataAccess.dll
 E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\DK2C.DataAccess\bin\Debug\DK2C.DataAccess.pdb
 E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\DK2C.DataAccess\obj\Debug\ResolveAssemblyReference.cache
 E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\DK2C.DataAccess\obj\Debug\DK2C.DataAccess.dll
 E:\HocTap\Hoc Ky VI\DOAN\sach\scmct-2012\DK2C.DataAccess\obj\Debug\DK2C.DataAccess.pdb
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\bin\Debug\DK2C.DataAccess.dll
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\bin\Debug\DK2C.DataAccess.pdb
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\obj\Debug\DK2C.DataAccess.dll
+D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\obj\Debug\DK2C.DataAccess.pdb

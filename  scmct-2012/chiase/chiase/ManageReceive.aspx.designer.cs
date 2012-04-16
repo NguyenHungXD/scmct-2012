@@ -148,76 +148,94 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_ClosePX;
         
         /// <summary>
-        /// TextBox1 control.
+        /// ASPxTextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox ASPxTextBox1;
         
         /// <summary>
-        /// DropDownList2 control.
+        /// ASPxDateEdit2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::DevExpress.Web.ASPxEditors.ASPxDateEdit ASPxDateEdit2;
         
         /// <summary>
-        /// TextBox2 control.
+        /// ASPxDateEdit1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::DevExpress.Web.ASPxEditors.ASPxDateEdit ASPxDateEdit1;
         
         /// <summary>
-        /// DropDownList3 control.
+        /// ASPxComboBox2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList3;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox ASPxComboBox2;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// ASPxComboBox3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox ASPxComboBox3;
         
         /// <summary>
-        /// TextBox3 control.
+        /// ASPxGridLookup1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::DevExpress.Web.ASPxGridLookup.ASPxGridLookup ASPxGridLookup1;
         
         /// <summary>
-        /// DropDownList4 control.
+        /// ASPxGridLookup2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList4;
+        protected global::DevExpress.Web.ASPxGridLookup.ASPxGridLookup ASPxGridLookup2;
         
         /// <summary>
-        /// DropDownList5 control.
+        /// ASPxComboBox4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList5;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox ASPxComboBox4;
+        
+        /// <summary>
+        /// ASPxTextBox2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox ASPxTextBox2;
+        
+        /// <summary>
+        /// ASPxComboBox1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox ASPxComboBox1;
         
         /// <summary>
         /// gridShipmments control.
