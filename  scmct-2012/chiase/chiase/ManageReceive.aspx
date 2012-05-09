@@ -10,7 +10,9 @@
 <%@ Register Assembly="DevExpress.Web.ASPxGridView.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxGridLookup" TagPrefix="dx" %>
 <%@ Register assembly="DevExpress.Web.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxTreeView" tagprefix="dx" %>
+<%@ Register assembly="DevExpress.Web.ASPxTreeList.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxTreeList" tagprefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Content_slider" runat="server">
+
     <script language="javascript" type="text/javascript">
 // <![CDATA[
 
@@ -37,17 +39,26 @@
         }
            
       function RowDblClickHandler(s, e) {
-        s.GetRowValues(e.visibleIndex, 'ID;NAME;MA_HH;NHH_ID', OnGetRowValues);
+        s.GetRowValues(e.visibleIndex, 'ID;NAME;MA_HH;NHH_ID;NHH_NAME', OnGetRowValues);
             
            
         }
         function OnGetRowValues(values) {
-            gridViewHangHoa.SetEditValue("colHHOD", values[0]);
+            gridViewHangHoa.SetEditValue("colHHID", values[0]);
             gridViewHangHoa.SetEditValue("colTenHangHoa", values[1]);
             gridViewHangHoa.SetEditValue("colMaHangHoa", values[2]);
-            gridViewHangHoa.SetEditValue("colChungLoai", values[3]);            
+            gridViewHangHoa.SetEditValue("colChungLoaiID", values[3]);
+            gridViewHangHoa.SetEditValue("colChungLoaiName", values[4]);       
     }
+    function ChungLoaiRowDblClickHandler(s, e) {
+      s.GetNodeValues(s.GetFocusedNodeKey(), 'ID;NAME', OnChungLoaiGetRowValues);
+        
 
+    }
+    function OnChungLoaiGetRowValues(values) {
+        gridViewHangHoa.SetEditValue("colChungLoaiID", values[0]);
+        gridViewHangHoa.SetEditValue("colChungLoaiNAME", values[1]);
+    }
 
 
 // ]]>
@@ -352,8 +363,7 @@
                                                         <dx:ASPxGridView ID="gridViewDMHH" ClientInstanceName="gridViewDMHH" runat="server" OnInit="gridViewDMHH_OnInit"
                                                          ClientIDMode="AutoID" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                                                         CssPostfix="Office2010Blue" Width="100%"
-                                                        OnRowInserting="gridViewDMHH_RowInserting"
-                                                        >
+                                                        OnRowInserting="gridViewDMHH_RowInserting">
                                                             <Columns>
                                                                 <dx:GridViewDataTextColumn Name="colDNHHID" Caption="ID" FieldName="ID" VisibleIndex="0"
                                                                     Visible="False">
@@ -365,30 +375,14 @@
                                                                     VisibleIndex="1">
                                                                 </dx:GridViewDataTextColumn>
                                                                 
-                                                                <dx:GridViewDataDropDownEditColumn Name="colDMHHNHom" Caption="Chủng loại" FieldName="NAME"
-                                                                    VisibleIndex="2">
-                                                                <PropertiesDropDownEdit>
-                                                                <DropDownWindowTemplate>
-                                                               <dx:ASPxTreeView>
-                                                               
-                                                               </dx:ASPxTreeView>
-                                                                </DropDownWindowTemplate>
-                                                                </PropertiesDropDownEdit>
-                                                                </dx:GridViewDataDropDownEditColumn>
-                                                                <dx:GridViewDataTextColumn Name="colDMHHMoTa" Caption="Mô tả" FieldName="MO_TA" VisibleIndex="2">
+                                                                <dx:GridViewDataTextColumn Name="colDMHHNHomID" Caption="Chủng loại ID" FieldName="NHH_ID"
+                                                                   Visible="false" VisibleIndex="-1"> 
                                                                 </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewCommandColumn Name="colDMHHCommand" VisibleIndex="3">
-                                                                    <EditButton Text="Sửa" Visible="False">
-                                                                    </EditButton>
-                                                                    <NewButton Text="Thêm" Visible="True">
-                                                                    </NewButton>
-                                                                    <CancelButton Text="Hủy">
-                                                                    </CancelButton>
-                                                                    <UpdateButton Text="Lưu">
-                                                                    </UpdateButton>
-                                                                    <CellStyle Wrap="False">
-                                                                    </CellStyle>
-                                                                </dx:GridViewCommandColumn>
+                                                                <dx:GridViewDataTextColumn Name="colDMHHNHom" Caption="Chủng loại" FieldName="NHH_NAME"
+                                                                    VisibleIndex="2"> 
+                                                                </dx:GridViewDataTextColumn>
+                                                                <dx:GridViewDataTextColumn Name="colDMHHMoTa" Caption="Mô tả" FieldName="MO_TA" VisibleIndex="2">
+                                                                </dx:GridViewDataTextColumn>                                                              
                                                             </Columns>
                                                              <ClientSideEvents RowDblClick="RowDblClickHandler" />
 
@@ -397,23 +391,42 @@
                                                     </DropDownWindowTemplate>
                                                 </PropertiesDropDownEdit>
                                             </dx:GridViewDataDropDownEditColumn>
-                                            <dx:GridViewDataTextColumn Caption="Chủng loại" ShowInCustomizationForm="True" VisibleIndex="7"
-                                                Name="colChungLoai">
+                                             <dx:GridViewDataTextColumn Caption="NHH_ID" Name="colChungLoaiID" 
+                                                ShowInCustomizationForm="True" Visible="False" VisibleIndex="-1">
                                             </dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataDropDownEditColumn Caption="Chủng loại" ShowInCustomizationForm="True" VisibleIndex="7" Name="colChungLoaiName" >
+                                                 <PropertiesDropDownEdit>
+                                                  <DropDownWindowTemplate>
+                                                  <dx:ASPxTreeList ID="treeListChungLoai" ClientInstanceName="treeListChungLoai" runat="server" AutoGenerateColumns="False" 
+                                                   Width="100%" Height="100%"  OnInit="treeListChungLoai_OnInit">                                          
+                                                    <Columns>
+                                                        <dx:TreeListDataColumn FieldName="NAME" Caption="Tên chủng loại" Width="100%" CellStyle-HorizontalAlign="Left" VisibleIndex="0" />                                                        
+                                                        <dx:TreeListDataColumn FieldName="ID" Visible="False" VisibleIndex="-1">                                                           
+                                                        </dx:TreeListDataColumn>
+                                                         <dx:TreeListDataColumn FieldName="ROOT_ID" Visible="False" VisibleIndex="-1">                                                          
+                                                        </dx:TreeListDataColumn>
+                                                        <dx:TreeListDataColumn FieldName="PARENT_ID" Visible="False" VisibleIndex="-1">                                                          
+                                                        </dx:TreeListDataColumn> 
+                                                    </Columns>
+                                                    <SettingsBehavior ExpandCollapseAction="NodeDblClick" />
+                                                    <ClientSideEvents NodeDblClick="ChungLoaiRowDblClickHandler" />
+                                                </dx:ASPxTreeList>
+                                                   </DropDownWindowTemplate>
+                                                  </PropertiesDropDownEdit>
+                                            </dx:GridViewDataDropDownEditColumn>
                                             <dx:GridViewDataSpinEditColumn Caption="Số lượng" ShowInCustomizationForm="True"
                                                 VisibleIndex="8" Name="colSoLuong">
-                                                <PropertiesSpinEdit DisplayFormatString="g">
-                                                </PropertiesSpinEdit>
+                                              
+                                              
                                             </dx:GridViewDataSpinEditColumn>
                                             <dx:GridViewDataSpinEditColumn Caption="Đơn giá" ShowInCustomizationForm="True" VisibleIndex="9"
                                                 Name="colDonGia">
-                                                <PropertiesSpinEdit DisplayFormatString="g">
-                                                </PropertiesSpinEdit>
+                                         
+                                              
                                             </dx:GridViewDataSpinEditColumn>
                                             <dx:GridViewDataSpinEditColumn Caption="Thành tiền" ShowInCustomizationForm="True"
                                                 VisibleIndex="10" Name="colThanhTien">
-                                                <PropertiesSpinEdit DisplayFormatString="g">
-                                                </PropertiesSpinEdit>
+                                               
                                             </dx:GridViewDataSpinEditColumn>
                                             <dx:GridViewCommandColumn ShowInCustomizationForm="True" VisibleIndex="0" Name="colEdit">
                                                 <EditButton Text="Sửa" Visible="True">
@@ -769,6 +782,11 @@
                 </td>
                 <td style="width: 98px">
                     &nbsp;
+                    
+                
+              
+                
+                    
                 </td>
                 <td style="width: 184px">
                     &nbsp;

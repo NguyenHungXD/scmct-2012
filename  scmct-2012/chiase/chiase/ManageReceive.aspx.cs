@@ -12,6 +12,8 @@ using System.Collections;
 using System.Drawing;
 using DK2C.DataAccess.Web;
 
+using DevExpress.Web.ASPxTreeList;
+
 namespace chiase
 {
     public partial class ManageReceive : System.Web.UI.Page
@@ -29,7 +31,6 @@ namespace chiase
             else
             {
                 dsSoucrceHH = (DataSet)Session[KH_PHIEU_NHAP_KHO_CT.sTableName];
-
 
             }
         }
@@ -70,20 +71,22 @@ namespace chiase
 
             GridViewDataDropDownEditColumn colTenHangHoa = (GridViewDataDropDownEditColumn)gridViewHangHoa.Columns["colTenHangHoa"];
             colTenHangHoa.FieldName = DM_HANG_HOA.cl_NAME;
-           
-            
+
+
             GridViewDataSpinEditColumn colSoLuong = (GridViewDataSpinEditColumn)gridViewHangHoa.Columns["colSoLuong"];
             colSoLuong.FieldName = KH_PHIEU_NHAP_KHO_CT.cl_SO_LUONG;
 
             GridViewDataSpinEditColumn colDonGia = (GridViewDataSpinEditColumn)gridViewHangHoa.Columns["colDonGia"];
             colDonGia.FieldName = KH_PHIEU_NHAP_KHO_CT.cl_DON_GIA;
 
-            GridViewDataSpinEditColumn colThanhTien= (GridViewDataSpinEditColumn)gridViewHangHoa.Columns["colThanhTien"];
+            GridViewDataSpinEditColumn colThanhTien = (GridViewDataSpinEditColumn)gridViewHangHoa.Columns["colThanhTien"];
             colThanhTien.FieldName = KH_PHIEU_NHAP_KHO_CT.cl_THANH_TIEN;
 
-            GridViewDataTextColumn colChungLoai = (GridViewDataTextColumn)gridViewHangHoa.Columns["colChungLoai"];
-            colChungLoai.FieldName = DM_HANG_HOA.cl_NHH_ID;
-
+            GridViewDataTextColumn colChungLoaiID = (GridViewDataTextColumn)gridViewHangHoa.Columns["colChungLoaiID"];
+            colChungLoaiID.FieldName = DM_HANG_HOA.cl_NHH_ID;
+           
+            GridViewDataDropDownEditColumn colChungLoaiName = (GridViewDataDropDownEditColumn)gridViewHangHoa.Columns["colChungLoaiName"];
+            colChungLoaiName.FieldName = "NHH_NAME";
 
             GridViewDataTextColumn colMaHangHoa = (GridViewDataTextColumn)gridViewHangHoa.Columns["colMaHangHoa"];
             colMaHangHoa.FieldName = DM_HANG_HOA.cl_MA_HH;
@@ -94,9 +97,13 @@ namespace chiase
         }
         private void LoadDataGridOnPopUp(string idPhieuNhap)
         {
-            string where = "";
-            where = KH_PHIEU_NHAP_KHO_CT.cl_PNK_ID + "=" + (string.IsNullOrEmpty(idPhieuNhap) ? "-1" : idPhieuNhap);
-            DataTable dtChietTietHangHoa = KH_PHIEU_NHAP_KHO_CT.GetTableAll(where);
+            string  where =" where "+ KH_PHIEU_NHAP_KHO_CT.cl_PNK_ID + "=" + (string.IsNullOrEmpty(idPhieuNhap) ? "-1" : idPhieuNhap);
+            string sql = string.Format(@"select ct.*,hh.NAME,hh.MA_HH, hh.NHH_ID, nhh.name NHH_NAME 
+            from KH_PHIEU_NHAP_KHO_CT ct
+            left join dm_hang_hoa hh on hh.id=ct.hh_id
+            left join dm_hang_hoa_nhom nhh on nhh.id=hh.nhh_id
+            {0}", where);
+            DataTable dtChietTietHangHoa = SQLConnectWeb.GetTable(sql, KH_PHIEU_CHUYEN_KHO_CT.sTableName);
             DataSet ds = new DataSet();
             ds.Tables.Add(dtChietTietHangHoa);
             gridViewHangHoa.DataSource = ds;
@@ -108,9 +115,16 @@ namespace chiase
             Session[KH_PHIEU_NHAP_KHO_CT.sTableName] = ds;
         }
 
+        private bool Validate()
+        {
+            return true;
+        }
   
         protected void btn_SavePX_Click(object sender, EventArgs e)
         {
+            if (Validate() == false)
+                return;
+
             
         }
 
@@ -185,7 +199,9 @@ namespace chiase
         protected void gridViewDMHH_OnInit(object sender, EventArgs e)
         {
             DataSet ds = new DataSet();
-            DataTable dtHangHoa = DM_HANG_HOA.GetTableAll();
+            string sql = @"select hh.*, nhh.name NHH_NAME from dm_hang_hoa hh
+            left join dm_hang_hoa_nhom nhh on hh.nhh_id=nhh.id";
+            DataTable dtHangHoa = SQLConnectWeb.GetTable(sql, DM_HANG_HOA.sTableName);
             functions.AddEmptyRow(dtHangHoa, DM_HANG_HOA.cl_ID);
             ds.Tables.Add(dtHangHoa);
             ASPxGridView gridViewDMHH = sender as ASPxGridView;
@@ -193,6 +209,18 @@ namespace chiase
             gridViewDMHH.DataMember = DM_HANG_HOA.sTableName;
             gridViewDMHH.KeyFieldName = DM_HANG_HOA.cl_ID;
             gridViewDMHH.DataBind();
+        }
+        protected void treeListChungLoai_OnInit(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            DataTable dtChungLoai=DM_HANG_HOA_NHOM.GetTableAll();
+            ds.Tables.Add(dtChungLoai);
+            ASPxTreeList treeList=sender as ASPxTreeList;
+            treeList.DataSource=ds;
+            treeList.DataMember=DM_HANG_HOA_NHOM.sTableName;
+            treeList.KeyFieldName=DM_HANG_HOA_NHOM.cl_ID;
+            treeList.ParentFieldName=DM_HANG_HOA_NHOM.cl_PARENT_ID;
+            treeList.DataBind();
         }
         protected void gridViewDMHH_RowInserting(object sender, DevExpress.Web.Data.ASPxDataInsertingEventArgs e)
         {
