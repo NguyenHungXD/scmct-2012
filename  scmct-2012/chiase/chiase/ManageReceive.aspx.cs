@@ -13,6 +13,7 @@ using System.Drawing;
 using DK2C.DataAccess.Web;
 
 using DevExpress.Web.ASPxTreeList;
+using DevExpress.Web.Data;
 
 namespace chiase
 {
@@ -45,16 +46,16 @@ namespace chiase
 
            InitData();
 
-            txtMaNhap.Text = "";
-            txtChungTu.Text = "";
-            cboKhoNhap.SelectedIndex = -1;
-            cboLoaiNhap.SelectedIndex = -1;
-            cboNguoiNhap.SelectedIndex = -1;
-            cboNhapTu.SelectedIndex = -1;
-            grlDuAn.Value = -1;
-            grlPhieuYeuCau.Value = -1;
-            dtNgayNhap.Value = null;
-            IDPhieuNhapKho.Value = "-1";
+           txtMaNhap.Text = "";
+           txtChungTu.Text = "";
+           cboKhoNhap.Value = null;
+           cboLoaiNhap.Value = null;
+           cboNguoiNhap.Value = null;
+           cboNhapTu.Value = null;
+           grlDuAn.Value = null;
+           grlPhieuYeuCau.Value = null;
+           dtNgayNhap.Value = DateTime.Today;
+           lblIDPhieuNhap.Text = "-1";
             if (gridViewHangHoa.IsEditing == false)
                 gridViewHangHoa.AddNewRow();
             pcPhieuNhap.ShowOnPageLoad = true;
@@ -157,9 +158,12 @@ namespace chiase
             if (ds.Tables.Count > 0)
             {
                 DataTable dataTable = ds.Tables[0];
-                if (gridViewHangHoa.VisibleRowCount == 0) dataTable.Rows.Clear();
+                if (gridView.VisibleRowCount == 0) dataTable.Rows.Clear();
                 DataRow row = dataTable.NewRow();
                 e.NewValues[KH_PHIEU_NHAP_KHO_CT.cl_PNK_CT_ID] = GetNewId(ds);
+                string[] obja = txtTemp.Text.Split('@');
+                e.NewValues[KH_PHIEU_NHAP_KHO_CT.cl_HH_ID] = obja[0];
+                e.NewValues[DM_HANG_HOA.cl_NHH_ID] = obja[1];         
                 IDictionaryEnumerator enumerator = e.NewValues.GetEnumerator();
                 enumerator.Reset();
                 while (enumerator.MoveNext())
@@ -226,7 +230,7 @@ namespace chiase
             ASPxGridView gridViewDMHH = sender as ASPxGridView;
             gridViewDMHH.DataSource = ds;
             gridViewDMHH.DataMember = DM_HANG_HOA.sTableName;
-            gridViewDMHH.KeyFieldName = DM_HANG_HOA.cl_ID;
+            gridViewDMHH.KeyFieldName = DM_HANG_HOA.cl_ID;            
             gridViewDMHH.DataBind();
         }
         protected void treeListChungLoai_OnInit(object sender, EventArgs e)

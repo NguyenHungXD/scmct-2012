@@ -31,15 +31,6 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_Search;
         
         /// <summary>
-        /// IDPhieuNhapKho control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden IDPhieuNhapKho;
-        
-        /// <summary>
         /// pcPhieuNhap control.
         /// </summary>
         /// <remarks>
@@ -130,6 +121,15 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtChungTu;
         
         /// <summary>
+        /// txtGhiChu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxMemo txtGhiChu;
+        
+        /// <summary>
         /// gridViewHangHoa control.
         /// </summary>
         /// <remarks>
@@ -155,6 +155,24 @@ namespace chiase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_ClosePX;
+        
+        /// <summary>
+        /// lblIDPhieuNhap control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblIDPhieuNhap;
+        
+        /// <summary>
+        /// txtTemp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtTemp;
         
         /// <summary>
         /// ASPxTextBox1 control.

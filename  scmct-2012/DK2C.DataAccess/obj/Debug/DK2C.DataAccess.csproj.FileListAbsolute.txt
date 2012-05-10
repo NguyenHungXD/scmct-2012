@@ -13,3 +13,8 @@ D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\bin\Debug\DK2C.DataAcce
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\obj\Debug\ResolveAssemblyReference.cache
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\obj\Debug\DK2C.DataAccess.dll
 D:\Khanhdtn\ORTHER\HUI\HUIPro\scmct-2012\DK2C.DataAccess\obj\Debug\DK2C.DataAccess.pdb
+E:\Khanhdtn\HUIPro\ scmct-2012\DK2C.DataAccess\bin\Debug\DK2C.DataAccess.dll
+E:\Khanhdtn\HUIPro\ scmct-2012\DK2C.DataAccess\bin\Debug\DK2C.DataAccess.pdb
+E:\Khanhdtn\HUIPro\ scmct-2012\DK2C.DataAccess\obj\Debug\ResolveAssemblyReference.cache
+E:\Khanhdtn\HUIPro\ scmct-2012\DK2C.DataAccess\obj\Debug\DK2C.DataAccess.dll
+E:\Khanhdtn\HUIPro\ scmct-2012\DK2C.DataAccess\obj\Debug\DK2C.DataAccess.pdb

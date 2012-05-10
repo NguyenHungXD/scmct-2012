@@ -13,6 +13,7 @@
     Namespace="DevExpress.Web.ASPxTreeView" TagPrefix="dx" %>
 <%@ Register Assembly="DevExpress.Web.ASPxTreeList.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxTreeList" TagPrefix="dx" %>
+<%@ Register assembly="DevExpress.Web.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxObjectContainer" tagprefix="dx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="Content_slider" runat="server">
   <script type="text/javascript" src="Scripts/libary.js"></script>
     <script language="javascript" type="text/javascript">
@@ -29,8 +30,7 @@
             grlDuAn.SetValue(null);
             grlPhieuYeuCau.SetValue(null);
             dtNgayNhap.SetValue(null);
-
-
+            
             var totalRow = gridViewHangHoa.GetVisibleRowsOnPage();
             for (var i = 0; i < totalRow; i++) {
                 gridViewHangHoa.DeleteRow(i);
@@ -42,8 +42,6 @@
 
         function RowDblClickHandler(s, e) {
             s.GetRowValues(e.visibleIndex, 'ID;NAME;MA_HH;NHH_ID;NHH_NAME', OnGetRowValues);
-
-
         }
         function OnGetRowValues(values) {
             gridViewHangHoa.SetEditValue("colHHID", values[0]);
@@ -51,47 +49,87 @@
             gridViewHangHoa.SetEditValue("colMaHangHoa", values[2]);
             gridViewHangHoa.SetEditValue("colChungLoaiID", values[3]);
             gridViewHangHoa.SetEditValue("colChungLoaiName", values[4]);
+            txtTemp.SetText(values[0] + "@" + values[3]);
+          
         }
         function ChungLoaiRowDblClickHandler(s, e) {
             s.GetNodeValues(s.GetFocusedNodeKey(), 'ID;NAME', OnChungLoaiGetRowValues);
-
-
         }
+
         function OnChungLoaiGetRowValues(values) {
             gridViewHangHoa.SetEditValue("colChungLoaiID", values[0]);
             gridViewHangHoa.SetEditValue("colChungLoaiNAME", values[1]);
+            txtTemp.SetText(gridViewHangHoa.GetEditValue("colHHID") + "@" + values[3]);
         }
-        function SavePhieuNhapKho(s, e) {
 
+      
+
+        function SavePhieuNhapKho(s, e) {
+            
+            gridViewHangHoa.SelectAllRowsOnPage();
+            gridViewHangHoa.GetSelectedFieldValues('PNK_CT_ID;HH_ID;MA_HH;NAME;NHH_ID;NHH_NAME;SO_LUONG;DON_GIA;THANH_TIEN', OnGetRowValuesToSave);
+            gridViewHangHoa.SelectAllRowsOnPage(false);
+
+        }
+        function OnGetRowValuesToSave(values) {
 
             var nguoinhap = cboNguoiNhap.GetValue();
-            var ngaynhap = "";// dtNgayNhap.GetValue();
-            var loainhap = ""; // cboLoaiNhap.GetValue();
-            var khonhap = ""; //cboKhoNhap.GetValue();
-            var duan = ""; //grlDuAn.GetValue();
-            var yeucau = ""; //grlPhieuYeuCau.GetValue();
-            var nhaptu = ""; //cboNhapTu.GetValue();
-            var chungtu = ""; // txtChungTu.GetText();
-            alert(nguoinhap);
-            alert(cboNguoiNhap.GetSelectedItem());
-            alert(cboNguoiNhap.GetText());
-            alert(cboNguoiNhap.GetSelectedIndex());       
-            var iserror = false;
-            if (nguoinhap == null|| nguoinhap == "" || eval(nguoinhap) == -1) {
-                cboNguoiNhap.SetErrorText("Vui lòng vào thông tin người nhập!");
-                cboNguoiNhap.SetIsValid(false);
-                iserror = true;
-            } else {
-                cboNguoiNhap.SetErrorText("");
-                cboNguoiNhap.SetIsValid(true);
+            var ngaynhap = dtNgayNhap.GetText();
+            var loainhap = cboLoaiNhap.GetValue();
+            var khonhap = cboKhoNhap.GetValue();
+            var duan = grlDuAn.GetGridView().GetSelectedKeysOnPage()[0];
+            var yeucau = grlPhieuYeuCau.GetValue();
+            var nhaptu = cboNhapTu.GetValue();
+            var chungtu = txtChungTu.GetText();
+            var ghiChu = txtGhiChu.GetText();
+
+            var idphieuNhap = lblIDPhieuNhap.GetText();
+
+            // alert(nguoinhap + "@" + ngaynhap + "@" + loainhap + "@" + khonhap + "@" + duan + "@" + yeucau + "@" + nhaptu + "@" + chungtu);
+
+            //            var iserror = false;
+            //            if (nguoinhap == null || nguoinhap == "" || eval(nguoinhap) == -1) {
+            //                cboNguoiNhap.SetErrorText("Vui lòng vào thông tin người nhập!");
+            //                cboNguoiNhap.SetIsValid(false);
+            //                iserror = true;
+            //            } else {
+            //                cboNguoiNhap.SetErrorText("");
+            //                cboNguoiNhap.SetIsValid(true);
+            //            }
+
+            //            if (iserror == true) {
+            //                alert("Thông tin nhập chưa hợp lệ, vui lòng nhập lại theo hướng dẫn!");
+            //                return "";
+            //            }
+
+
+            var list_pnkctid = "";
+            var list_hhid = "";
+            var list_hhname = "";
+            var list_mahh = "";
+            var list_hhChungloaiID = "";
+            var list_hhChungloaiName = "";
+            var list_soluong = "";
+            var list_dongia = "";
+            var list_thanhtien = "";
+
+
+
+
+            if (values.length == 0) return;
+            for (i = 0; i < values.length; i++) {
+
+                list_pnkctid = list_pnkctid + "~" + values[i][0];
+                list_hhid = list_hhid + "~" + values[i][1];
+                list_mahh = list_mahh + "~" + values[i][2];
+                list_hhname = list_hhname + "~" + values[i][3];
+                list_hhChungloaiID = list_hhChungloaiID + "~" + values[i][4];
+                list_hhChungloaiName = list_hhChungloaiName + "~" + values[i][5];
+                list_soluong = list_soluong + "~" + values[i][6];
+                list_dongia = list_dongia + "~" + values[i][7];
+                list_thanhtien = list_thanhtien + "~" + values[i][8];
             }
 
-            if (iserror == true)
-            {
-                alert("Thông tin nhập chưa hợp lệ, vui lòng nhập lại theo hướng dẫn!");
-                return "";
-            }
-           
             xmlHttp = GetMSXmlHttp();
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState == 4) {
@@ -99,20 +137,28 @@
                     if (value == "2") {
                         alert("Bạn đã hết phiên làm việc. Vui lòng đăng nhập lại.");
                         window.close();
-                    }                   
+                    } else if (value == "1") {
+                        alert("Lưu phiếu nhập thành công!");
+                        pcPhieuNhap.Hide();
+                    } else if (value == "-1") {
+                        alert("Lưu phiếu nhập không thành công, vui lòng kiểm tra lại dữ liệu!");
+
+                    } else alert(value);
                 }
             }
-            var idphieuNhap = document.getElementById("IDPhieuNhapKho");
 
             xmlHttp.open("GET", "Ajax.aspx?do=LuuPhieuNhapKho&idphieunhapkho=" + idphieuNhap + "&nguoinhap=" + nguoinhap
             + "&ngaynhap=" + ngaynhap + "&loainhap=" + loainhap + "&khonhap=" + khonhap + "&duan=" + duan
-            + "&yeucau=" + yeucau + "&nhaptu=" + nhaptu + "&chungtu=" + chungtu
-             + "&times=" + Math.random(), true);
+            + "&yeucau=" + yeucau + "&nhaptu=" + nhaptu + "&chungtu=" + chungtu+"&ghichu="+ghiChu
+            + "&list_pnkctid=" + list_pnkctid + "&list_hhid=" + list_hhid + "&list_mahh=" + encodeURIComponent(list_mahh)
+            + "&list_hhname=" + encodeURIComponent(list_hhname) + "&list_hhChungloaiID=" + list_hhChungloaiID + "&list_hhChungloaiName=" + encodeURIComponent(list_hhChungloaiName)
+            + "&list_soluong=" + list_soluong + "&list_dongia=" + list_dongia + "&list_thanhtien=" + list_thanhtien
+            + "&times=" + Math.random(), true);
             xmlHttp.send(null);
 
-
+           
+         
         }
-
 // ]]>
     </script>
 </asp:Content>
@@ -135,12 +181,12 @@
                     </dx:ASPxButton>
                     
                 </td>
-                <td><input id="IDPhieuNhapKho" type="hidden" runat="server" value="-1" />
+                <td><input id="IDPhieuNhapKho" type="hidden" value="-1" />
                 </td>
             </tr>
         </table>
         <br />
-        <dx:ASPxPopupControl ID="pcPhieuNhap" runat="server" Height="339px" Width="915px"
+        <dx:ASPxPopupControl ID="pcPhieuNhap" runat="server" Height="250px" Width="915px"
             Modal="True" HeaderText="PHIẾU NHẬP HÀNG" PopupHorizontalAlign="WindowCenter"
             PopupVerticalAlign="WindowCenter" CloseAction="CloseButton" ScrollBars="Auto"
             CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" CssPostfix="Office2010Blue"
@@ -182,7 +228,7 @@
                                                 <dx:ASPxComboBox ID="cboNguoiNhap" ClientInstanceName="cboNguoiNhap" runat="server"
                                                     CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" CssPostfix="Office2010Blue"
                                                     LoadingPanelImagePosition="Top" ShowShadow="False" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                                                    ValueType="System.Int64" Width="182px" ValueField="ID">
+                                                   Width="182px">
                                                     <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
                                                     </LoadingPanelImage>
                                                     <DropDownButton>
@@ -272,7 +318,7 @@
                                             <td style="height: 17px">
                                                 <dx:ASPxGridLookup ID="grlDuAn" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                                                     CssPostfix="Office2010Blue" Height="16px" Spacing="0" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                                                    Width="180px" ClientInstanceName="grlDuAn">
+                                                    Width="180px" ClientInstanceName="grlDuAn" TextFormatString="{0}">
                                                     <GridViewProperties>
                                                         <SettingsBehavior AllowFocusedRow="True" AllowSelectSingleRowOnly="True" />
                                                     </GridViewProperties>
@@ -314,7 +360,7 @@
                                             <td style="width: 193px">
                                                 <dx:ASPxGridLookup ID="grlPhieuYeuCau" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                                                     CssPostfix="Office2010Blue" Height="16px" Spacing="0" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                                                    Width="182px" ClientInstanceName="grlPhieuYeuCau">
+                                                    Width="182px" ClientInstanceName="grlPhieuYeuCau" TextFormatString="{0}">
                                                     <GridViewProperties>
                                                         <SettingsBehavior AllowFocusedRow="True" AllowSelectSingleRowOnly="True" />
                                                     </GridViewProperties>
@@ -385,6 +431,14 @@
                                                 </dx:ASPxTextBox>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td style="width: 107px" >
+                                                Ghi chú:</td>
+                                            <td style="width: 193px" colspan="5">
+                                                 <dx:ASPxMemo ID="txtGhiChu" ClientInstanceName="txtGhiChu" runat="server" Height="32px" Width="740px"  CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                                                    CssPostfix="Office2010Blue" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css">
+                                                 </dx:ASPxMemo></td>
+                                        </tr>
                                     </table>
                                 </fieldset>
                             </td>
@@ -393,6 +447,7 @@
                             <td style="height: 286px" valign="top">
                                 <fieldset>
                                     <legend><font size="2"><b>Chi tiết phiếu nhập</b></font></legend></font>
+                                 
                                     <dx:ASPxGridView ID="gridViewHangHoa" runat="server" AutoGenerateColumns="False"
                                         ClientIDMode="AutoID" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                                         CssPostfix="Office2010Blue" Width="100%" OnRowInserting="gridViewHangHoa_RowInserting"
@@ -409,10 +464,10 @@
                                                 Visible="False" VisibleIndex="4">
                                             </dx:GridViewDataTextColumn>
                                             <dx:GridViewDataTextColumn Caption="HH_ID" Name="colHHID" ShowInCustomizationForm="True"
-                                                Visible="False" VisibleIndex="5">
+                                                Visible="False"  VisibleIndex="5">
                                             </dx:GridViewDataTextColumn>
                                             <dx:GridViewDataDropDownEditColumn Caption="Tên hàng" Name="colTenHangHoa" ShowInCustomizationForm="True"
-                                                VisibleIndex="2">
+                                                VisibleIndex="2" >
                                                 <PropertiesDropDownEdit>
                                                     <DropDownWindowTemplate>
                                                         <dx:ASPxGridView ID="gridViewDMHH" ClientInstanceName="gridViewDMHH" runat="server"
@@ -429,12 +484,12 @@
                                                                     VisibleIndex="1">
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewDataTextColumn Name="colDMHHNHomID" Caption="Chủng loại ID" FieldName="NHH_ID"
-                                                                    Visible="false" VisibleIndex="-1">
+                                                                    Visible="false" VisibleIndex="2">
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewDataTextColumn Name="colDMHHNHom" Caption="Chủng loại" FieldName="NHH_NAME"
-                                                                    VisibleIndex="2">
+                                                                    VisibleIndex="3">
                                                                 </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewDataTextColumn Name="colDMHHMoTa" Caption="Mô tả" FieldName="MO_TA" VisibleIndex="2">
+                                                                <dx:GridViewDataTextColumn Name="colDMHHMoTa" Caption="Mô tả" FieldName="MO_TA" VisibleIndex="4">
                                                                 </dx:GridViewDataTextColumn>
                                                             </Columns>
                                                             <ClientSideEvents RowDblClick="RowDblClickHandler" />
@@ -443,10 +498,10 @@
                                                 </PropertiesDropDownEdit>
                                             </dx:GridViewDataDropDownEditColumn>
                                             <dx:GridViewDataTextColumn Caption="NHH_ID" Name="colChungLoaiID" ShowInCustomizationForm="True"
-                                                Visible="False" VisibleIndex="-1">
+                                                Visible="False" VisibleIndex="7">
                                             </dx:GridViewDataTextColumn>
                                             <dx:GridViewDataDropDownEditColumn Caption="Chủng loại" ShowInCustomizationForm="True"
-                                                VisibleIndex="7" Name="colChungLoaiName">
+                                                VisibleIndex="8" Name="colChungLoaiName">
                                                 <PropertiesDropDownEdit>
                                                     <DropDownWindowTemplate>
                                                         <dx:ASPxTreeList ID="treeListChungLoai" ClientInstanceName="treeListChungLoai" runat="server"
@@ -468,15 +523,15 @@
                                                 </PropertiesDropDownEdit>
                                             </dx:GridViewDataDropDownEditColumn>
                                             <dx:GridViewDataSpinEditColumn Caption="Số lượng" ShowInCustomizationForm="True"
-                                                VisibleIndex="8" Name="colSoLuong">
+                                                VisibleIndex="9" Name="colSoLuong">
 <PropertiesSpinEdit DisplayFormatString="g"></PropertiesSpinEdit>
                                             </dx:GridViewDataSpinEditColumn>
-                                            <dx:GridViewDataSpinEditColumn Caption="Đơn giá" ShowInCustomizationForm="True" VisibleIndex="9"
+                                            <dx:GridViewDataSpinEditColumn Caption="Đơn giá" ShowInCustomizationForm="True" VisibleIndex="10"
                                                 Name="colDonGia">
 <PropertiesSpinEdit DisplayFormatString="g"></PropertiesSpinEdit>
                                             </dx:GridViewDataSpinEditColumn>
                                             <dx:GridViewDataSpinEditColumn Caption="Thành tiền" ShowInCustomizationForm="True"
-                                                VisibleIndex="10" Name="colThanhTien">
+                                                VisibleIndex="11" Name="colThanhTien">
 <PropertiesSpinEdit DisplayFormatString="g"></PropertiesSpinEdit>
                                             </dx:GridViewDataSpinEditColumn>
                                             <dx:GridViewCommandColumn ShowInCustomizationForm="True" VisibleIndex="0" Name="colEdit">
@@ -496,7 +551,7 @@
                                                 </ClearFilterButton>
                                             </dx:GridViewCommandColumn>
                                         </Columns>
-                                        <SettingsPager PageSize="15" Mode="ShowAllRecords">
+                                        <SettingsPager PageSize="12" Mode="ShowAllRecords">
                                         </SettingsPager>
                                         <SettingsEditing Mode="Inline" />
                                         <Settings ShowVerticalScrollBar="True" VerticalScrollableHeight="250" />
@@ -566,6 +621,16 @@
                                                 Text="Đóng" Width="86px" ClientInstanceName="btn_ClosePX">
                                                 <ClientSideEvents Click="function(s, e) {pcPhieuNhap.Hide();}" />
                                             </dx:ASPxButton>
+                                      
+                                        </td>
+                                        <td>
+                                            <dx:ASPxLabel ID="lblIDPhieuNhap" runat="server" 
+                                                ClientInstanceName="lblIDPhieuNhap" Text="" ClientVisible="false">
+                                            </dx:ASPxLabel>
+                                          <dx:ASPxTextBox ID="txtTemp" runat="server"                                                  
+                                                    Width="0px" ClientInstanceName="txtTemp"  ClientVisible="false" EnableTheming="false" Border-BorderStyle="None">
+<Border BorderStyle="None"></Border>
+                                           </dx:ASPxTextBox>
                                         </td>
                                     </tr>
                                 </table>
@@ -585,7 +650,7 @@
                     Mã phiếu nhập:
                 </td>
                 <td style="width: 193px">
-                    <dx:ASPxTextBox ID="ASPxTextBox1" ClientInstanceName="txtMaPhieuNhap" runat="server"
+                    <dx:ASPxTextBox ID="ASPxTextBox1"  runat="server"
                         CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" CssPostfix="Office2010Blue"
                         Height="16px" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
                         Width="180px">
@@ -602,7 +667,7 @@
                 <td style="width: 184px">
                     <dx:ASPxDateEdit ID="ASPxDateEdit2" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" Height="16px" ShowShadow="False" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                        Width="179px" ClientInstanceName="dtNgayNhap">
+                        Width="179px" >
                         <CalendarProperties>
                             <HeaderStyle Spacing="1px" />
                             <FooterStyle Spacing="17px" />
@@ -625,7 +690,7 @@
                 <td>
                     <dx:ASPxDateEdit ID="ASPxDateEdit1" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" Height="16px" ShowShadow="False" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                        Width="179px" ClientInstanceName="dtNgayNhap">
+                        Width="179px" >
                         <CalendarProperties>
                             <HeaderStyle Spacing="1px" />
                             <FooterStyle Spacing="17px" />
@@ -651,7 +716,7 @@
                     <dx:ASPxComboBox ID="ASPxComboBox2" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" LoadingPanelImagePosition="Top" ShowShadow="False"
                         SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css" ValueType="System.String"
-                        Width="182px" ClientInstanceName="cboLoaiNhap">
+                        Width="182px" >
                         <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
                         </LoadingPanelImage>
                         <DropDownButton>
@@ -673,7 +738,7 @@
                     <dx:ASPxComboBox ID="ASPxComboBox3" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" LoadingPanelImagePosition="Top" ShowShadow="False"
                         SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css" ValueType="System.String"
-                        Width="182px" ClientInstanceName="cboKhoNhap">
+                        Width="182px" >
                         <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
                         </LoadingPanelImage>
                         <DropDownButton>
@@ -694,7 +759,7 @@
                 <td style="height: 17px">
                     <dx:ASPxGridLookup ID="ASPxGridLookup1" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" Height="16px" Spacing="0" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                        Width="180px" ClientInstanceName="grlDuAn">
+                        Width="180px" >
                         <GridViewProperties>
                             <SettingsBehavior AllowFocusedRow="True" AllowSelectSingleRowOnly="True" />
                         </GridViewProperties>
@@ -736,7 +801,7 @@
                 <td style="width: 193px">
                     <dx:ASPxGridLookup ID="ASPxGridLookup2" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" Height="16px" Spacing="0" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                        Width="182px" ClientInstanceName="grlPhieuYeuCau">
+                        Width="182px">
                         <GridViewProperties>
                             <SettingsBehavior AllowFocusedRow="True" AllowSelectSingleRowOnly="True" />
                         </GridViewProperties>
@@ -777,7 +842,7 @@
                     <dx:ASPxComboBox ID="ASPxComboBox4" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" LoadingPanelImagePosition="Top" ShowShadow="False"
                         SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css" ValueType="System.String"
-                        Width="182px" ClientInstanceName="cboNhapTu">
+                        Width="182px" >
                         <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
                         </LoadingPanelImage>
                         <DropDownButton>
@@ -798,7 +863,7 @@
                 <td>
                     <dx:ASPxTextBox ID="ASPxTextBox2" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" Height="16px" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                        Width="180px" ClientInstanceName="txtChungTu">
+                        Width="180px">
                         <ValidationSettings>
                             <ErrorFrameStyle ImageSpacing="4px">
                                 <ErrorTextPaddings PaddingLeft="4px" />
@@ -812,7 +877,7 @@
                     Người nhập:
                 </td>
                 <td style="width: 193px">
-                    <dx:ASPxComboBox ID="ASPxComboBox1" ClientInstanceName="cboNguoiNhap" runat="server"
+                    <dx:ASPxComboBox ID="ASPxComboBox1"  runat="server"
                         CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" CssPostfix="Office2010Blue"
                         LoadingPanelImagePosition="Top" ShowShadow="False" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
                         ValueType="System.String" Width="182px">

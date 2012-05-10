@@ -279,12 +279,19 @@ namespace chiase
             colTrangThai.Caption = "Trạng thái dự án";
             colTrangThai.FieldName = DA_DU_AN.cl_TRANG_THAI_ID;
 
+
+            DevExpress.Web.ASPxGridView.GridViewDataTextColumn colID = new DevExpress.Web.ASPxGridView.GridViewDataTextColumn();
+            colID.Caption = "ID";
+            colID.FieldName = DA_DU_AN.cl_ID;
+            colID.Visible = false;
+
             gridLookup.Columns.Add(colMa);
             gridLookup.Columns.Add(colTenDA);
             gridLookup.Columns.Add(colNgayTao);
             gridLookup.Columns.Add(colNgayBD);
             gridLookup.Columns.Add(colNgayKT);
             gridLookup.Columns.Add(colTrangThai);
+            gridLookup.Columns.Add(colID);
 
           //  gridLookup.GridView.Settings.ShowFilterRow = true;
 
@@ -292,7 +299,7 @@ namespace chiase
             DataTable dtDA= DA_DU_AN.GetTableAll();
             AddEmptyRow(dtDA, DA_DU_AN.cl_ID);
             gridLookup.DataSource = dtDA;
-            gridLookup.KeyFieldName = DA_DU_AN.cl_ID;
+            gridLookup.KeyFieldName = DA_DU_AN.cl_ID;            
             gridLookup.DataBind();
             
         }
@@ -333,6 +340,10 @@ namespace chiase
             colLoaiYC.Caption = "Trạng thái";
             colLoaiYC.FieldName = "TRANG_THAI_YC";
 
+            DevExpress.Web.ASPxGridView.GridViewDataTextColumn colID = new DevExpress.Web.ASPxGridView.GridViewDataTextColumn();
+            colID.Caption = "ID";
+            colID.FieldName = YC_YEU_CAU.cl_YEU_CAU_ID;
+
           
 
             gridLookup.Columns.Add(colTieuDe);
@@ -340,7 +351,7 @@ namespace chiase
             gridLookup.Columns.Add(colNguoiYC);
             gridLookup.Columns.Add(colLoaiYC);
             gridLookup.Columns.Add(colTTYC);
-            
+            gridLookup.Columns.Add(colID);
 
          //   gridLookup.GridView.Settings.ShowFilterRow = true;
             AddEmptyRow(dtYC, YC_YEU_CAU.cl_YEU_CAU_ID);
@@ -350,5 +361,36 @@ namespace chiase
 
         }
         #endregion
+        public static string CheckDate(string strDate)
+        {
+            if (strDate == null || strDate == "")
+            {
+                return "";
+            }
+            string[] arrDDMMYY;
+            arrDDMMYY = strDate.Split('/');
+            int intDay;
+            int intMonth;
+            int intYear;
+            try
+            {
+                intDay = System.Convert.ToInt32(arrDDMMYY[0]);
+                intMonth = System.Convert.ToInt32(arrDDMMYY[1]);
+                intYear = System.Convert.ToInt32(arrDDMMYY[2]);
+                //				DateTime dtmDate = new DateTime(intYear, intMonth, intDay);
+                if (intMonth > 12)
+                {
+                    int temp = intMonth;
+                    intMonth = intDay;
+                    intDay = temp;
+                }
+                return intYear + "/" + intMonth + "/" + intDay;
+                //return intMonth + "/" + intDay + "/" + intYear;
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
     }
 }

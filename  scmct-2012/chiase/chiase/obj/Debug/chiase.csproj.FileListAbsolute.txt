@@ -34,3 +34,13 @@ D:\DOCUMENT\HUIPro\scmct-2012\chiase\chiase\obj\Debug\ResolveAssemblyReference.c
 D:\DOCUMENT\HUIPro\scmct-2012\chiase\chiase\obj\Debug\chiase.dll.licenses
 D:\DOCUMENT\HUIPro\scmct-2012\chiase\chiase\obj\Debug\chiase.dll
 D:\DOCUMENT\HUIPro\scmct-2012\chiase\chiase\obj\Debug\chiase.pdb
+E:\Khanhdtn\HUIPro\ scmct-2012\chiase\chiase\bin\chiase.dll
+E:\Khanhdtn\HUIPro\ scmct-2012\chiase\chiase\bin\chiase.pdb
+E:\Khanhdtn\HUIPro\ scmct-2012\chiase\chiase\bin\chiase.Objects.dll
+E:\Khanhdtn\HUIPro\ scmct-2012\chiase\chiase\bin\DK2C.DataAccess.dll
+E:\Khanhdtn\HUIPro\ scmct-2012\chiase\chiase\bin\chiase.Objects.pdb
+E:\Khanhdtn\HUIPro\ scmct-2012\chiase\chiase\bin\DK2C.DataAccess.pdb
+E:\Khanhdtn\HUIPro\ scmct-2012\chiase\chiase\obj\Debug\ResolveAssemblyReference.cache
+E:\Khanhdtn\HUIPro\ scmct-2012\chiase\chiase\obj\Debug\chiase.dll.licenses
+E:\Khanhdtn\HUIPro\ scmct-2012\chiase\chiase\obj\Debug\chiase.dll
+E:\Khanhdtn\HUIPro\ scmct-2012\chiase\chiase\obj\Debug\chiase.pdb
