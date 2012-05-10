@@ -23,23 +23,42 @@ namespace chiase
         {
             if (!IsPostBack && !IsCallback)
             {
-                InitControlOnPopUp();
-                InitGridOnPopUp();
-                LoadDataControlOnPopUp();
-                LoadDataGridOnPopUp("-1");
+               
             }
+
             else
             {
                 dsSoucrceHH = (DataSet)Session[KH_PHIEU_NHAP_KHO_CT.sTableName];
 
             }
         }
-      
-    
+
+        private void InitData()
+        {
+            InitControlOnPopUp();
+            InitGridOnPopUp();
+            LoadDataControlOnPopUp();
+            LoadDataGridOnPopUp("-1");
+        }
         protected void btn_CreateNew_Click(object sender, EventArgs e)
         {
-            //pcPhieuNhap.ShowOnPageLoad = true;
-           
+
+           InitData();
+
+            txtMaNhap.Text = "";
+            txtChungTu.Text = "";
+            cboKhoNhap.SelectedIndex = -1;
+            cboLoaiNhap.SelectedIndex = -1;
+            cboNguoiNhap.SelectedIndex = -1;
+            cboNhapTu.SelectedIndex = -1;
+            grlDuAn.Value = -1;
+            grlPhieuYeuCau.Value = -1;
+            dtNgayNhap.Value = null;
+            IDPhieuNhapKho.Value = "-1";
+            if (gridViewHangHoa.IsEditing == false)
+                gridViewHangHoa.AddNewRow();
+            pcPhieuNhap.ShowOnPageLoad = true;
+
             
            
            
@@ -124,7 +143,7 @@ namespace chiase
         {
             if (Validate() == false)
                 return;
-
+            
             
         }
 
@@ -249,5 +268,7 @@ namespace chiase
 
             //}
         }
+
+      
     }
 }

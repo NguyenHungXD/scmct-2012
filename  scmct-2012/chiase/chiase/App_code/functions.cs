@@ -148,9 +148,9 @@ namespace chiase
            DataTable dtSource, string ValueField, string DislpayField)
         {
             AddEmptyRow(dtSource, ValueField);
-            cbo.DataSource = dtSource;
+            cbo.DataSource = dtSource;            
             cbo.ValueField = ValueField;
-            cbo.TextField = DislpayField;
+            cbo.TextField = DislpayField;           
             cbo.DataBind();
 
         }
