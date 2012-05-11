@@ -25,7 +25,7 @@ namespace chiase
             if (table != null)
             {
                 //DateTime lasted_access = (DateTime)table.Rows[0]["lasted_access"];
-                //lbl_lasted_access.Text = lasted_access.ToString("dd/mm/yyyy hh:mm:ss tt");
+                //lbl_lasted_access.Text = lasted_access.ToString("dd/MM/yyyy hh:mm:ss tt");
                 //lbl_group_name.Text = (String)table.Rows[0]["groupname"];
                 //img_user.ImageUrl = "Images/User.gif";
             }
@@ -58,7 +58,7 @@ namespace chiase
                 }
                 catch
                 {
-                  //  lbl_error.Text = "Mật khẩu của bạn : " + password;
+                    lbl_error.Text = "Hệ thống đang bận xin vui lòng thử lại sau";
                 }
 
             }

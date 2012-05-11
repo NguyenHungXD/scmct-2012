@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using DK2C.DataAccess.Web;
 
 namespace chiase
 {
@@ -28,7 +29,7 @@ namespace chiase
                 lbl_username.Text = (String)table.Rows[0]["username"];
                 lbl_email.Text = (String)table.Rows[0]["email"];
                 DateTime lasted_access = (DateTime)table.Rows[0]["lasted_access"];
-                lbl_lasted_access.Text = lasted_access.ToString("dd/mm/yyyy hh:mm:ss tt");
+                lbl_lasted_access.Text = lasted_access.ToString("dd/MM/yyyy hh:mm:ss tt");
                 lbl_group_name.Text = (String)table.Rows[0]["groupname"];
                 img_user.ImageUrl = "Images/User.gif";
                 img_user.ImageUrl = "Images/avatars/" + avatar_name;
@@ -44,12 +45,12 @@ namespace chiase
             String username = (String)table.Rows[0]["username"];
             String password = txt_oldpass.Text;
             String new_password = txt_new_pass.Text;
-            DataTable table_check = Database.GetData(sql_check, "@v_username", username, "@v_password", password);
+            DataTable table_check = SQLConnectWeb.GetData(sql_check, "@v_username", username, "@v_password", password);
 
             if (table_check.Rows.Count > 0)
             {
                 string sql_update = "UPDATE ND_THONG_TIN_DN SET PWD=@v_new_pass WHERE USERNAME=@v_username";
-                Database.ExecuteNonQuery(sql_update,
+                SQLConnectWeb.ExecuteNonQuery(sql_update,
                         "@v_new_pass", new_password,
                         "@v_username", username);
 

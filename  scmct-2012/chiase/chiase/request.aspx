@@ -5,8 +5,25 @@
 <%@ Register assembly="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxEditors" tagprefix="dx" %>
 <%@ Register assembly="DevExpress.Web.ASPxSpellChecker.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxSpellChecker" tagprefix="dx" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
+
+    <script type="text/javascript">
+    // <![CDATA[
+        var MaxLength = 50;
+        var CustomErrorText = "Nội dung yêu cầu phải lớn hơn " + MaxLength.toString() + " ký tự.";
+        function ValidationHandler(s, e) {
+            if (e.html.length < MaxLength) {
+                e.isValid = false;
+                e.errorText = CustomErrorText;
+            }
+        }
+        function HtmlChangedHandler(s, e) {
+            ContentLength.SetText(s.GetHtml().length);
+        }
+    // ]]> 
+    </script>
+
     <fieldset>
-<legend><font size=2 color=white><b>Gửi yêu cầu</font></b></legend>    
+<legend>Gửi yêu cầu</legend>    
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td align=center colspan=2>
@@ -20,9 +37,11 @@
     <td>
     Tiêu đề:
     </td>
-    <td>
+    <td align="left">
         <asp:TextBox ID="txt_request_subject" runat="server"  class="txtformat"  Width="449px" 
             Height="23px"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="txt_request_subject" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Nhập tiêu đề"></asp:RequiredFieldValidator>
+    
     </td>
     </tr>
      <tr>
@@ -31,7 +50,9 @@
 
 
         <dx:ASPxHtmlEditor ID="ASPxHtmlEditor1" runat="server" 
-            CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" Width="900px">
+            CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+            Width="900px" Height="300px">
+            <ClientSideEvents HtmlChanged="HtmlChangedHandler" />
             <Styles CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua">
                 <ViewArea>
                     <Border BorderColor="#A3C0E8" />
@@ -48,8 +69,13 @@
             <ValidationSettings AllowedFileExtensions=".jpe,.jpeg,.jpg,.gif,.png" MaxFileSize="500000">
             </ValidationSettings>
         </SettingsImageUpload>
-
+                      <SettingsValidation>
+                    <RequiredField IsRequired="True" ErrorText="Yêu cầu chưa có nội dung" />
+                </SettingsValidation>
 <SettingsDocumentSelector>
+
+
+
 <CommonSettings AllowedFileExtensions=".rtf, .pdf, .doc, .docx, .odt, .txt, .xls, .xlsx, .ods, .ppt, .pptx, .odp"></CommonSettings>
 </SettingsDocumentSelector>
             <Images SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
@@ -63,13 +89,13 @@
                 </LoadingPanel>
             </ImagesFileManager>
         </dx:ASPxHtmlEditor>
-
-
+       
+       <font color="white">Số ký tự bạn đã nhập(ký tự): <dx:ASPxLabel ID="lblContentLength" runat="server" ClientInstanceName="ContentLength" Text="0" Font-Bold="True"></dx:ASPxLabel></font>
             </td>
     </tr>
     <tr>
     <td>
-    Loại yêu cầu:
+    Yêu cầu:
     </td>
     <td>
 
@@ -122,21 +148,38 @@
     </td>
     <td>
         <asp:TextBox ID="txt_emaill_address" runat="server" class="txtformat" Width="250px" Height="22px"></asp:TextBox>
+         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_emaill_address" runat="server" ErrorMessage="Nhập địa chỉ email"></asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_emaill_address" ErrorMessage="Địa chỉ email chưa đúng" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>   
     </td>
     </tr>
     </asp:Panel>
     <tr>
-    <td colspan=3 align=left><hr><br>
-            <asp:Button ID="btn_request" runat="server" Text="Gửi yêu cầu" 
-            onclick="btn_request_Click" class="btnformat"/>
-            <asp:Button ID="btn_close" runat="server" Text="Đóng" 
-            onclick="btn_close_Click" class="btnformat"/>
+    <td colspan=3 align=left><hr>
+    </td>
+    </tr>
+    <tr>
+    <td align="right">
+        <dx:ASPxButton ID="btn_requests" runat="server" Text="Gửi yêu cầu" 
+            onclick="btn_request_Click" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
+            CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
+            Width="120px">
+        </dx:ASPxButton>
+    </td>
+    <td>
+        <dx:ASPxButton ID="ASPxButton2" runat="server" Text="Đóng" 
+            onclick="btn_close_Click" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
+            CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
+            Width="120px">
+                                                         <ClientSideEvents Click="function(s, e) {
+                            window.location.href='default.aspx'
+                    }" />
+        </dx:ASPxButton>
     </td>
         
     </tr>
     <tr>
     <td colspan=3 align=right>
-    <br>&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/mm/yyyy hh:mm:ss tt") %>
+    <br>&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %>
     </td>
     </tr>
     </table>

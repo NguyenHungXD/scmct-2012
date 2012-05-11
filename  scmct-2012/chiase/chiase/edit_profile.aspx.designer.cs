@@ -40,13 +40,13 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.FileUpload upload_img;
         
         /// <summary>
-        /// btn_avatar control.
+        /// btn_avatars control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_avatar;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_avatars;
         
         /// <summary>
         /// lbl_lasted_access control.
@@ -175,6 +175,24 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_email;
         
         /// <summary>
+        /// RequiredFieldValidator4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        
+        /// <summary>
+        /// RegularExpressionValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        
+        /// <summary>
         /// txt_faxnumber control.
         /// </summary>
         /// <remarks>
@@ -220,21 +238,21 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_note;
         
         /// <summary>
-        /// btn_updateprofile control.
+        /// btn_updateprofiles control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_updateprofile;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_updateprofiles;
         
         /// <summary>
-        /// btn_close control.
+        /// btn_closes control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_close;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_closes;
     }
 }

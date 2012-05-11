@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.IO;
 using chiase.Objects;
+using DK2C.DataAccess.Web;
 namespace chiase
 {
     public partial class edit_profile : System.Web.UI.Page
@@ -34,7 +35,7 @@ namespace chiase
                     if (table.Rows[0].ToString() != "")
                     {
                         DateTime lasted_access = (DateTime)table.Rows[0][ND_THONG_TIN_DN.cl_LASTED_ACCESS];
-                        lbl_lasted_access.Text = lasted_access.ToString("dd/mm/yyyy hh:mm:ss tt");
+                        lbl_lasted_access.Text = lasted_access.ToString("dd/MM/yyyy hh:mm:ss tt");
                     }
                     else
                     {
@@ -95,7 +96,7 @@ namespace chiase
             }
             catch (Exception ex)
             {
-                lbl_error.Text = "Cập nhật thông tin cá không thành công" + ex.ToString();
+                lbl_error.Text = "Cập nhật thông tin cá không thành công" ;
             }
         }
 
@@ -114,11 +115,10 @@ protected void btn_avatar_Click(object sender, EventArgs e)
 
                     //Update to database
 
-                    //String sql = "UPDATE ND_THONG_TIN_ND SET AVATAR_PATH=@v_AVATAR_PATH WHERE ID=@V_MEM_ID";
-                    //Database.ExecuteNonQuery(sql,
-                    //        "@v_AVATAR_PATH", avatar_name,
-                    //        "@V_MEM_ID", table.Rows[0]["mem_id"]);
-                    if (ND_THONG_TIN_ND.Update_AVATAR_PATH(avatar_name,memid))
+                    String sql = "UPDATE ND_THONG_TIN_ND SET AVATAR_PATH=@v_AVATAR_PATH WHERE ID=@V_MEM_ID";
+                    if (SQLConnectWeb.ExecuteNonQuery(sql,
+                            "@v_AVATAR_PATH", avatar_name,
+                            "@V_MEM_ID", memid)==1)
                     {
                         const String path = "images/avatars/";
                         File.Delete(MapPath(path) + avatar_name);
@@ -131,7 +131,6 @@ protected void btn_avatar_Click(object sender, EventArgs e)
                     {
                         lbl_error.Text = "Cập nhật avatar không thành công, vui lòng kiểm tra lại thông tin!";
                     }
-
                 }
                 else 
                 {

@@ -13,6 +13,24 @@ namespace chiase {
     public partial class create_new_project {
         
         /// <summary>
+        /// Head1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+        
+        /// <summary>
+        /// form1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        
+        /// <summary>
         /// lbl_error control.
         /// </summary>
         /// <remarks>
@@ -20,6 +38,15 @@ namespace chiase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_error;
+        
+        /// <summary>
+        /// btn_create_projects control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_create_projects;
         
         /// <summary>
         /// txt_project_code control.
@@ -40,13 +67,22 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_project_name;
         
         /// <summary>
-        /// txt_project_details control.
+        /// ASPxHtmlEditor1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_project_details;
+        protected global::DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor ASPxHtmlEditor1;
+        
+        /// <summary>
+        /// lblContentLength control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblContentLength;
         
         /// <summary>
         /// dropd_day_start control.
@@ -166,21 +202,12 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_close;
         
         /// <summary>
-        /// btn_create_projects control.
+        /// txt_book control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_create_projects;
-        
-        /// <summary>
-        /// btn_back control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_back;
+        protected global::System.Web.UI.WebControls.TextBox txt_book;
     }
 }

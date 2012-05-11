@@ -1,8 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="edit_profile.aspx.cs" Inherits="chiase.edit_profile" %>
 
+<%@ Register Assembly="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
+
 <asp:Content ID="register" ContentPlaceHolderID="content_area" Runat="Server">
     <fieldset>
-<legend><font size=2 color=white><b>Cập nhật thông tin cá nhân</font></b></legend>    
+<legend>Cập nhật thông tin cá nhân</legend>    
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td align=center colspan=2>
@@ -20,8 +23,15 @@
                 Text="Chọn hình" class="btnformat" BorderColor="White" BorderStyle="Solid" 
                 BorderWidth="1px" Height="21px" ToolTip="Chọn hình" Width="300px"/>
         </div>
-        <asp:Button ID="btn_avatar" runat="server" Text="Cập nhật Avatar" 
-            class="btnformat" onclick="btn_avatar_Click"/>
+
+        <dx:ASPxButton ID="btn_avatars" runat="server" Text="Cập nhật Avatar" 
+            onclick="btn_avatar_Click" CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" 
+            CssPostfix="SoftOrange" 
+            SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" Width="150px">
+        </dx:ASPxButton>
+
+
+
         <br>
         <i>Truy cập lần cuối, <asp:Label ID="lbl_lasted_access" runat="server" ForeColor="White"></asp:Label></i><br>
         <asp:Label ID="lbl_group_name" runat="server" Text=""></asp:Label>
@@ -85,7 +95,7 @@
         <asp:DropDownList ID="dropd_month" runat="server">
         </asp:DropDownList>
         <asp:DropDownList ID="dropd_year" runat="server">
-        </asp:DropDownList>(dd/mm/yyyy)
+        </asp:DropDownList>(dd/MM/yyyy)
     </td>
     </tr>
     <tr>
@@ -119,6 +129,8 @@
     <td>
         <asp:TextBox ID="txt_email" runat="server"  class="txtformat"  Width="250px" 
             Height="22px"></asp:TextBox>
+          <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_email" runat="server" ErrorMessage="Nhập địa chỉ email"></asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_email" ErrorMessage="Địa chỉ email chưa đúng" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>   
             </td>
             </tr>
     <tr>
@@ -169,16 +181,32 @@
            &nbsp;</td>
     </tr>
     <tr>
-    <td colspan=3 align="left"/><hr/><br/>
-    
-        <asp:Button ID="btn_updateprofile" runat="server" Text="Lưu thay đổi" 
-            onclick="btn_updateprofile_Click" class="btnformat" Width="100px"/>
-        <asp:Button ID="btn_close" runat="server" Text="Đóng" 
-            onclick="btn_close_Click1" class="btnformat"/>
+    <td colspan=3 align="left"/><hr/>
+    </td>
+    </tr>
+    <tr>
+    <td align="right">
+        <dx:ASPxButton ID="btn_updateprofiles" runat="server" Text="Lưu thay đổi" 
+            onclick="btn_updateprofile_Click" 
+            CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+            SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="123px">
+        </dx:ASPxButton>
+    </td>
+    <td>
+        <dx:ASPxButton ID="btn_closes" runat="server" Text="Đóng" 
+            onclick="btn_close_Click1" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
+            CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
+            Width="111px">
+
+                     <ClientSideEvents Click="function(s, e) {
+                            window.location.href='default.aspx'
+                    }" />
+
+        </dx:ASPxButton>
 </tr>
 <tr>
     <td colspan=3 align=right>
-    <br>&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/mm/yyyy hh:mm:ss tt") %>
+    <br>&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %>
     </td>
     </tr>
      </table>

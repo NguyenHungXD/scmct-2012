@@ -5,6 +5,10 @@
 
 <%@ Register assembly="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxEditors" tagprefix="dx" %>
 <%@ Register assembly="DevExpress.Web.ASPxSpellChecker.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxSpellChecker" tagprefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
+    <%@ Register Assembly="DevExpress.Web.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxPopupControl" TagPrefix="dx" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
 
@@ -25,6 +29,21 @@
     }
 </script>
 
+    <script type="text/javascript">
+    // <![CDATA[
+        var MaxLength = 50;
+        var CustomErrorText = "Nội dung phản hồi phải lớn hơn " + MaxLength.toString() + " ký tự.";
+        function ValidationHandler(s, e) {
+            if (e.html.length < MaxLength) {
+                e.isValid = false;
+                e.errorText = CustomErrorText;
+            }
+        }
+        function HtmlChangedHandler(s, e) {
+            ContentLength.SetText(s.GetHtml().length);
+        }
+    // ]]> 
+    </script>
 
 <asp:Repeater ID="show_content" runat="server" 
         onitemdatabound="show_content_ItemDataBound" >
@@ -40,14 +59,14 @@
             <td valign=middle>
             <b>
             <table border=0 cellpadding=2 cellspacing=0>
-            <tr>
+            <tr bgcolor="#0033ff" style="cursor:pointer;">
             <td>
-            <a style="cursor:hand;" title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'liked1')>
+            <a title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'liked1')>
             <asp:Image ID="Image2" runat="server"  ImageUrl="images/like.gif" Width=25 Height=15/>
             </td>
-            <td bgcolor=#FFFFFF>
-            <font color=red>
-             <div id="liked1"><%#Eval("liked")%></div>
+            <td>
+            <font color="#FFFFFF">
+             <div id="liked1"><%#Eval("liked")%>&nbsp</div>
              </font>
              </a>
              </td>
@@ -55,8 +74,36 @@
              </table>
              </b>
             </td>
-            <td align=right>Đăng bởi,  
-            <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="#0099ff" NavigateUrl='<%# Eval("username", "user_info.aspx?user_name={0}") %>' Text='<%# Eval("username") %>'></asp:HyperLink> </asp:Label> <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%></td></tr></table></td>
+            <td align=right >Đăng bởi,  
+                <a href="#" ID='<%#Eval("username", "username{0}") %>'><font color="blue"><%#Eval("username") %></font>,</a> <%#Eval("ngay_tao", "{0:dd/MM/yyyy hh:mm:ss tt}")%>
+            
+            
+            <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" 
+                    AllowDragging="True" AllowResize="True"
+                            CloseAction="CloseButton" ContentUrl='<%#Eval("username", "user_info.aspx?user_name={0}") %>'
+                            EnableViewState="False" PopupElementID='<%#Eval("username", "username{0}") %>'
+                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            Height="730px" FooterText=""
+                            HeaderText="" ClientInstanceName="FeedPopupControl" 
+                            EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
+                            CssPostfix="Aqua" LoadingPanelImagePosition="Top" 
+                            SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
+                            <LoadingPanelImage Url="~/App_Themes/Aqua/Web/Loading.gif">
+                            </LoadingPanelImage>
+                            <ContentStyle VerticalAlign="Top">
+                            </ContentStyle>
+                            <ContentCollection>
+                                <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server" SupportsDisabledAttribute="True">
+                                </dx:PopupControlContentControl>
+                            </ContentCollection>
+                            </dx:ASPxPopupControl>
+            
+            
+            
+            </td></tr></table></td>
+    
+                    
+    
     </tr>
     
     <tr>
@@ -66,24 +113,27 @@
         <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr>
             <td valign=middle>
             <b>
-            <table border=0 cellpadding=2 cellspacing=0>
-            <tr>
+
+
+             <table border=0 cellpadding=2 cellspacing=0>
+            <tr bgcolor="#0033ff" style="cursor:pointer;">
             <td>
-            <a style="cursor:hand;" title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'liked2')>
-            <asp:Image ID="Image4" runat="server"  ImageUrl="images/like.gif" Width=25 Height=15/>
+            <a title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'liked1')>
+            <asp:Image ID="Image5" runat="server"  ImageUrl="images/like.gif" Width=25 Height=15/>
             </td>
-            <td bgcolor="#ffffff">
-            <font color=red>
-             <div id="liked2"><%#Eval("liked")%></div>
+            <td>
+            <font color="#FFFFFF">
+             <div id="liked2"><%#Eval("liked")%>&nbsp</div>
              </font>
              </a>
              </td>
              </tr>
              </table>
+
+
              </b>
             </td>
-            <td align=right>Đăng bởi,  
-                <asp:HyperLink ID="HyperLink3" runat="server" ForeColor="#0099ff" NavigateUrl='<%# Eval("username", "user_info.aspx?user_name={0}") %>' Text='<%# Eval("username") %>'></asp:HyperLink> </asp:Label> <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%></td></tr></table></td>
+            </tr></table></td>
     </tr>
     <tr >
     <td>       
@@ -103,15 +153,38 @@
                     <div class="comment_format">
                     <table border=0 cellpadding=1 cellspacing=1 width=100% bgcolor="#ede7fe">
                     <tr>
-                    <td width=20% bgcolor="#FFFFCC" VALIGN="top">
+                    <td width=20% bgcolor="#ecfce4" VALIGN="top">
                         <table border=0 cellpadding=0 cellspacing=0>
                         <tr>
                         <td colspan=2>
                             <asp:Image ID="user_img" runat="server" ImageUrl='<%#Eval("avatar_path", "images/avatars/{0}")%>' Width="40" Height="40" /><br>
-                            <asp:HyperLink ID="HyperLink1" runat="server" ForeColor="#0099ff" NavigateUrl='<%# Eval("username", "user_info.aspx?user_name={0}") %>' Text='<%# Eval("username") %>'>
-                            </asp:HyperLink> <br>
+                           
+                           
+                            <a style="cursor:pointer;" ID='<%#Eval("BAI_VIET_ID", "username{0}") %>'><font color="blue"><%#Eval("username") %></font></a>
                             
-                            Tham gia: <%#Eval("created_date", "{0:dd/mm/yyyy}")%>
+
+                   <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" 
+                    AllowDragging="True" AllowResize="True"
+                            CloseAction="CloseButton" ContentUrl='<%#Eval("username", "user_info.aspx?user_name={0}") %>'
+                            EnableViewState="False" PopupElementID='<%#Eval("BAI_VIET_ID", "username{0}") %>'
+                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            Height="730px" FooterText=""
+                            HeaderText="" ClientInstanceName="FeedPopupControl" 
+                            EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
+                            CssPostfix="Aqua" LoadingPanelImagePosition="Top" 
+                            SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
+                            <LoadingPanelImage Url="~/App_Themes/Aqua/Web/Loading.gif">
+                            </LoadingPanelImage>
+                            <ContentStyle VerticalAlign="Top">
+                            </ContentStyle>
+                            <ContentCollection>
+                                <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server" SupportsDisabledAttribute="True">
+                                </dx:PopupControlContentControl>
+                            </ContentCollection>
+                            </dx:ASPxPopupControl>
+
+                            <br>
+                            Tham gia: <%#Eval("created_date", "{0:dd/MM/yyyy}")%>
 
                         </td>
                         </tr>
@@ -142,7 +215,7 @@
                         </tr>
                         </table>
                     </td>
-                    <td width=80% bgcolor="#FFFFCC" VALIGN="top">
+                    <td width=80% VALIGN="top" bgcolor="#ffffff">
                         <%#Eval("noi_dung")%>
                     </td>
                     </tr>
@@ -152,20 +225,20 @@
                     <tr align=right>
                     <td align=right>
                     <font size=-3><i>
-                        Ngày, <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%>
+                        Ngày, <%#Eval("ngay_tao", "{0:dd/MM/yyyy hh:mm:ss tt}")%>
                     </font></i>
                     </td>
-                   <td colspan=2 bgcolor="#FFFFCC">                    
+                   <td colspan=2>                    
                    <b>
-                   <table cellpadding=0 cellspacing=2 border=0>
-                   <tr>
+                   <table cellpadding=0 cellspacing=0 border=0>
+                   <tr bgcolor="#0033ff" style="cursor:pointer;">
                    <td>
-                   <a style="cursor:hand;" title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'<%#Eval("BAI_VIET_ID","div{0}")%>')>
+                   <a title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'<%#Eval("BAI_VIET_ID","div{0}")%>')>
                     <asp:Image ID="Image2" runat="server"  ImageUrl="images/like.gif" Width=20 Height=15/>
                     </td>
-                    <td bgcolor=#FFFFFF>
-                    <font color=red>
-                     <div id='<%#Eval("BAI_VIET_ID","div{0}")%>'><%#Eval("liked")%></div>
+                    <td>
+                    <font color="#FFFFFFF">
+                     <div id='<%#Eval("BAI_VIET_ID","div{0}")%>'>&nbsp;&nbsp<%#Eval("liked")%>&nbsp</div>
                      </font>
                      </a>
                      </td>
@@ -195,15 +268,15 @@
         <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr>
             <td valign=middle>
             <b>
-            <table cellpadding=0 cellspacing=2 border=0 >  
-            <tr>
+            <table border=0 cellpadding=2 cellspacing=0>
+            <tr bgcolor="#0033ff" style="cursor:pointer;">
             <td>
-            <a style="cursor:hand;" title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'liked3')>
+            <a title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'liked1')>
             <asp:Image ID="Image3" runat="server"  ImageUrl="images/like.gif" Width=25 Height=15/>
             </td>
-            <td bgcolor=#FFFFFF>
-            <font color=red>
-             <div id="liked3"><%#Eval("liked")%></div>
+            <td>
+            <font color="#FFFFFF">
+             <div id="liked3"><%#Eval("liked")%>&nbsp</div>
              </font>
              </a>
              </td>
@@ -211,8 +284,8 @@
              </table>
              </b>
             </td>
-            <td align=right>Đăng bởi,  
-                <asp:HyperLink ID="HyperLink2" runat="server" ForeColor="#0099ff" NavigateUrl='<%# Eval("username", "user_info.aspx?user_name={0}") %>' Text='<%# Eval("username") %>'></asp:HyperLink> </asp:Label> <%#Eval("ngay_tao", "{0:dd/mm/yyyy hh:mm:ss tt}")%></td></tr></table></td>
+            <td align=right>
+                </td></tr></table></td>
     </tr>
 </ItemTemplate>
 <FooterTemplate>
@@ -224,7 +297,7 @@
 </FooterTemplate>
     </asp:Repeater>
     <br>
-    <font color=white><b>Ý kiến của bạn :</b></font>
+<fieldset>
     <table>
     <tr>
     <td>
@@ -233,7 +306,8 @@
     
         <dx:ASPxHtmlEditor ID="ASPxHtmlEditor1" runat="server" 
                 CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" 
-                CssPostfix="Office2010Blue" Height="200px" Width="930px">
+                CssPostfix="Office2010Blue" Height="200px" Width="920px">
+                <ClientSideEvents HtmlChanged="HtmlChangedHandler" />
             <Styles CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" 
                 CssPostfix="Office2010Blue">
                 <ViewArea>
@@ -258,7 +332,9 @@
             <ValidationSettings AllowedFileExtensions=".jpe,.jpeg,.jpg,.gif,.png" MaxFileSize="500000">
             </ValidationSettings>
         </SettingsImageUpload>
-
+                <SettingsValidation>
+                    <RequiredField IsRequired="True" ErrorText="Nội dung phản hồi trống" />
+                </SettingsValidation>
 <SettingsDocumentSelector>
 <CommonSettings AllowedFileExtensions=".rtf, .pdf, .doc, .docx, .odt, .txt, .xls, .xlsx, .ods, .ppt, .pptx, .odp"></CommonSettings>
 </SettingsDocumentSelector>
@@ -273,21 +349,22 @@
                 </LoadingPanel>
             </ImagesFileManager>
         </dx:ASPxHtmlEditor>
-
+        <font color="white">Số ký tự bạn đã nhập(ký tự): <dx:ASPxLabel ID="lblContentLength" runat="server" ClientInstanceName="ContentLength" Text="0" Font-Bold="True"></dx:ASPxLabel></font>
+</fieldset>
         <table cellpadding=3 cellpadding=3 border=0 width=20%>
         <tr>
         <td>
                 <dx:ASPxButton ID="btn_comments" runat="server" Text="Bình luận" 
-            CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-            SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="150px" 
+            CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
+            SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" Width="110px" 
             onclick="btn_comments_Click">
         </dx:ASPxButton>
         </td>
         <td>
         <dx:ASPxButton ID="btn_back" runat="server" Text="Trở lại" 
-            CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-            onclick="btn_back_Click" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
-            Width="150px">
+            CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
+            onclick="btn_back_Click" SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" 
+            Width="110px">
         </dx:ASPxButton>
         </td>
         </tr>
@@ -298,4 +375,4 @@
     </table>
 
 
-</asp:Content>
+    </fieldset></asp:Content>

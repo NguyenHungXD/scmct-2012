@@ -15,6 +15,7 @@ namespace chiase
             if(!IsPostBack)
             {
                 display();
+                ASPxHtmlEditor1.ClientSideEvents.Validation = "ValidationHandler";
             }
             txt_title.Focus();
 
@@ -45,7 +46,10 @@ namespace chiase
                 //                        "@V_CREATED_DATE", DateTime.Now,
                 //                        "@V_CREATED_BY", table.Rows[0]["mem_id"]);
                 BV_DM_CHU_DE_BV bv = BV_DM_CHU_DE_BV.Insert_Object(txt_title.Text,"Y", txt_sort.Text, dropd_status.SelectedValue,
-                      txt_description.Text, functions.GetStringDatetime(), functions.LoginMemID(this),"","");
+                      ASPxHtmlEditor1.Html.Replace("'", ""), functions.GetStringDatetime(), functions.LoginMemID(this), "", "");
+                
+                
+                
                 if (bv != null)
                     lbl_error.Text = "Chủ đề mới đã được tạo thành công";
                 else lbl_error.Text = "Chủ đề mới đã được tạo không thành công, vui lòng kiểm tra lại thông tin";

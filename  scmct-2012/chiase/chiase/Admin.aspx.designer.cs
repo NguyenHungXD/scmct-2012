@@ -13,318 +13,57 @@ namespace chiase {
     public partial class Admin {
         
         /// <summary>
-        /// btn_add_new_project control.
+        /// ASPxPopupControl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_add_new_project;
+        protected global::DevExpress.Web.ASPxPopupControl.ASPxPopupControl ASPxPopupControl1;
         
         /// <summary>
-        /// btn_update_project control.
+        /// PopupControlContentControl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_update_project;
+        protected global::DevExpress.Web.ASPxPopupControl.PopupControlContentControl PopupControlContentControl1;
         
         /// <summary>
-        /// btn_update_member control.
+        /// ASPxPopupControl2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_update_member;
+        protected global::DevExpress.Web.ASPxPopupControl.ASPxPopupControl ASPxPopupControl2;
         
         /// <summary>
-        /// btn_find control.
+        /// PopupControlContentControl2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_find;
+        protected global::DevExpress.Web.ASPxPopupControl.PopupControlContentControl PopupControlContentControl2;
         
         /// <summary>
-        /// btn_create_new_request control.
+        /// ASPxPopupControl3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_create_new_request;
+        protected global::DevExpress.Web.ASPxPopupControl.ASPxPopupControl ASPxPopupControl3;
         
         /// <summary>
-        /// btn_update_request control.
+        /// PopupControlContentControl3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_update_request;
-        
-        /// <summary>
-        /// btn_create_new_request_status control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_create_new_request_status;
-        
-        /// <summary>
-        /// btn_update_request_status control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_update_request_status;
-        
-        /// <summary>
-        /// btn_find_request control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_find_request;
-        
-        /// <summary>
-        /// btn_create_new_user control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_create_new_user;
-        
-        /// <summary>
-        /// btn_update_user control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_update_user;
-        
-        /// <summary>
-        /// btn_create_new_user_group control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_create_new_user_group;
-        
-        /// <summary>
-        /// btn_update_user_group control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_update_user_group;
-        
-        /// <summary>
-        /// btn_find_user control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_find_user;
-        
-        /// <summary>
-        /// btn_create_new_subject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_create_new_subject;
-        
-        /// <summary>
-        /// btn_update_subject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_update_subject;
-        
-        /// <summary>
-        /// btn_post_news control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_post_news;
-        
-        /// <summary>
-        /// btn_manage_post control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_manage_post;
-        
-        /// <summary>
-        /// btn_manage_cm control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_manage_cm;
-        
-        /// <summary>
-        /// btn_find_subject control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_find_subject;
-        
-        /// <summary>
-        /// btn_create_new_reciever control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_create_new_reciever;
-        
-        /// <summary>
-        /// btn_issue_to control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_issue_to;
-        
-        /// <summary>
-        /// btn_pass_stock control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_pass_stock;
-        
-        /// <summary>
-        /// btn_adjust_stock control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_adjust_stock;
-        
-        /// <summary>
-        /// btn_create_new_stock control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_create_new_stock;
-        
-        /// <summary>
-        /// btn_seach_stock control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_seach_stock;
-        
-        /// <summary>
-        /// btn_pt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_pt;
-        
-        /// <summary>
-        /// btn_pc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_pc;
-        
-        /// <summary>
-        /// btn_update_pt control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_update_pt;
-        
-        /// <summary>
-        /// btn_update_pc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_update_pc;
-        
-        /// <summary>
-        /// btn_find_ptpc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_find_ptpc;
-        
-        /// <summary>
-        /// btn_module control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_module;
-        
-        /// <summary>
-        /// btn_update_module control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_update_module;
-        
-        /// <summary>
-        /// btn_set_right control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_set_right;
-        
-        /// <summary>
-        /// btn_find_module control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_find_module;
+        protected global::DevExpress.Web.ASPxPopupControl.PopupControlContentControl PopupControlContentControl3;
     }
 }

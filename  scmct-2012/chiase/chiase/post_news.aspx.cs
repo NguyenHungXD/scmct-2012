@@ -14,6 +14,8 @@ namespace chiase
         protected void Page_Load(object sender, EventArgs e)
         {
             txt_title.Focus();
+          
+            ASPxHtmlEditor1.ClientSideEvents.Validation = "ValidationHandler";
         }
         protected void btn_post_news_Click(object sender, EventArgs e)
         {
@@ -21,6 +23,7 @@ namespace chiase
             //String sql = "INSERT INTO BV_BAI_VIET(TIEU_DE,NGUOI_TAO,NGAY_TAO,NOI_DUNG,TRANG_THAI_ID,CHU_DE_ID,SORT)VALUES(@V_TIEU_DE,@V_NGUOI_TAO,@V_NGAY_TAO,@V_NOI_DUNG,@V_TRANG_THAI_ID,@V_CHU_DE_ID,@V_SORT)";
             try
             {
+                
                 //DataTable table = (DataTable)Session["ThanhVien"];
                 //string memid = functions.LoginMemID(this);
                 //Database.ExecuteNonQuery(sql,
@@ -37,7 +40,7 @@ namespace chiase
                 BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(txt_title.Text.Replace("'",""), memid,
                    date, memid,
                    date.ToString(),
-                    ASPxHtmlEditor1.Html.Replace("'",""), "1", "", "", Request.QueryString["subjectID"], txt_sort.Text,"0");
+                    ASPxHtmlEditor1.Html.Replace("'", ""), "1", "", Request.QueryString["projectID"], Request.QueryString["subjectID"], txt_sort.Text, "0");
                 //if (row != 0)
                     lbl_error.Text = "Đăng bài thành công";
                 //else

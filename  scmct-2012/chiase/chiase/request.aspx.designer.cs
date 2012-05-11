@@ -31,6 +31,15 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_request_subject;
         
         /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        
+        /// <summary>
         /// ASPxHtmlEditor1 control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace chiase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor ASPxHtmlEditor1;
+        
+        /// <summary>
+        /// lblContentLength control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblContentLength;
         
         /// <summary>
         /// dropd_request_kind control.
@@ -94,21 +112,39 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_emaill_address;
         
         /// <summary>
-        /// btn_request control.
+        /// RequiredFieldValidator4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_request;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
         
         /// <summary>
-        /// btn_close control.
+        /// RegularExpressionValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_close;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        
+        /// <summary>
+        /// btn_requests control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_requests;
+        
+        /// <summary>
+        /// ASPxButton2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton ASPxButton2;
     }
 }

@@ -31,6 +31,15 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor ASPxHtmlEditor1;
         
         /// <summary>
+        /// lblContentLength control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblContentLength;
+        
+        /// <summary>
         /// btn_comments control.
         /// </summary>
         /// <remarks>

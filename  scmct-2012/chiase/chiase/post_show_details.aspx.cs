@@ -12,12 +12,15 @@ namespace chiase
 {
     public partial class post_show_details : System.Web.UI.Page
     {
+        public static int idpopup = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            idpopup = 0;
             if (!IsPostBack)
             {
 
                 display();
+                ASPxHtmlEditor1.ClientSideEvents.Validation = "ValidationHandler";
             }
         }
 
@@ -29,7 +32,7 @@ namespace chiase
                 String sql = string.Format(@"SELECT a.*,b.USERNAME
                          FROM BV_BAI_VIET a
                         INNER JOIN  ND_THONG_TIN_DN b ON  a.NGUOI_TAO=b.MEM_ID
-                        WHERE BAI_VIET_ID={0} Order by sort", Request.QueryString["news_id"]);
+                        WHERE BAI_VIET_ID={0} Order by sort,BAI_VIET_ID", Request.QueryString["news_id"]);
                 DataTable table = SQLConnectWeb.GetTable(sql);
                 show_content.DataSource = table;
                 show_content.DataBind();
@@ -40,7 +43,7 @@ namespace chiase
             }
             catch (Exception ex)
             {
-                
+         
             }
         }
 
@@ -61,7 +64,7 @@ namespace chiase
                             INNER JOIN  ND_THONG_TIN_DN b ON  a.NGUOI_TAO=b.MEM_ID
                             INNER JOIN  ND_THONG_TIN_ND c ON a.NGUOI_TAO = c.id
                             INNER JOIN ND_TEN_NHOM_ND d ON c.MEM_GROUP_ID = d.GROUPID
-                            WHERE BAI_VIET_CHA_ID={0}", id);
+                            WHERE BAI_VIET_CHA_ID={0} order by BAI_VIET_ID", id);
 
                 DataTable comments = SQLConnectWeb.GetTable(sql);
                 showList_comment.DataSource = comments;
@@ -89,7 +92,7 @@ namespace chiase
 
                 string date = functions.GetStringDatetime();
                 string memid = functions.LoginMemID(this);
-                BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(bv_info.Rows[0][BV_BAI_VIET.cl_TIEU_DE].ToString(), memid, date, "", "", ASPxHtmlEditor1.Html.Replace("'",""), "1", Request.QueryString["news_id"], "", bv_info.Rows[0][BV_BAI_VIET.cl_CHU_DE_ID].ToString(), "0","0");
+                BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(bv_info.Rows[0][BV_BAI_VIET.cl_TIEU_DE].ToString(), memid, date, "", "", ASPxHtmlEditor1.Html.Replace("'", ""), "1", Request.QueryString["news_id"], bv_info.Rows[0][BV_BAI_VIET.cl_DU_AN_ID].ToString(), bv_info.Rows[0][BV_BAI_VIET.cl_CHU_DE_ID].ToString(), "0", "0");
 
                 Response.Redirect("post_show_details.aspx?news_id=" + Request.QueryString["news_id"]);
 

@@ -15,6 +15,7 @@ namespace chiase
             if (!IsPostBack)
             {
                 display();
+                ASPxHtmlEditor1.ClientSideEvents.Validation = "ValidationHandler";
             }
             txt_request_subject.Focus();
         }

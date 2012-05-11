@@ -1,255 +1,391 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="slideshow.aspx.cs" Inherits="chiase.slideshow" %>
+
+<%@ Register Assembly="DevExpress.Web.ASPxHtmlEditor.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxHtmlEditor" TagPrefix="dx" %>
+<%@ Register Assembly="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
+    <%@ Register Assembly="DevExpress.Web.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxPopupControl" TagPrefix="dx" %>
+
+<%@ Register assembly="DevExpress.Web.ASPxSpellChecker.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxSpellChecker" tagprefix="dx" %>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
+
+    <asp:HiddenField ID="vusername" runat="server" />
+    <asp:HiddenField ID="imgpath" runat="server" />
+
 <script type="text/javascript">
-	document.write('<style>.noscript { display: none; }</style>');
+    document.write('<style>.noscript { display: none; }</style>');
+
+                                                                var id_next = 0;
+                                                                function forcusit(divid) {
+                                                                    document.getElementById(divid).focus();
+                                                                }
+                                                                function getTime() {
+                                                                    return '<%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %>';
+                                                                }
+                                                                function update_cm(id,divid,dividmain) {
+                                                                    var cm = document.getElementById(divid).value;
+                                                                    var username = document.all["<%=vusername.ClientID%>"].value;
+                                                                    var images = document.all["<%=imgpath.ClientID%>"].value;
+                                                                    if (cm != "" && username != "") {
+                                                                        var url = "update_img_comment.aspx?imgid=" + id + "&content_cm=" + cm;
+                                                                        loadXMLUpdate(url);
+                                                                        // Append content to div
+                                                                        var divappend = document.getElementById(dividmain);
+                                                                        var divIdName = 'divNEW' + id_next;
+                                                                        var newdiv = document.createElement("div");
+                                                                        newdiv.setAttribute("id", divIdName);
+
+                                                                        var content = "<div id=" + divIdName + ">" +
+                                                                                        "<table cellpadding=0 cellspacing=1 border=0 width=100%>" +
+                                                                                        "<tr style=background-color:#FBFBFC;font-style:italic;>" +
+                                                                                        "<td rowspan=2 width=5%><img src=images\\avatars\\" + images + " width=40 height=40></td>" +
+                                                                                        "<td align=left>" + username + '(' + getTime() + ')' +
+                                                                                        "</td>" +
+                                                                                        "</tr>" +
+                                                                                        "<tr>" +
+                                                                                        "<td colspan=2 style=color:#330066>&nbsp;&nbsp" + cm +
+                                                                                        "</td>" +
+                                                                                        "</tr>" +
+                                                                                        "</table>" +
+                                                                                        "</div>";
+
+                                                                        newdiv.innerHTML = content;
+                                                                        divappend.appendChild(newdiv);
+                                                                        id_next = id_next + 1;
+
+                                                                        document.getElementById(divid).value = "";
+                                                                        document.getElementById(divid).focus();
+
+                                                                    } else {
+
+                                                                        document.getElementById(divid).focus();
+                                                                        if(username=="")
+                                                                            alert("Đăng nhập để bình luận ảnh!");
+                                                                    }
+                                                                }
+                                                                function showhide(divshow, divcontent) {
+
+                                                                    var divid = document.getElementById(divshow);
+                                                                    var divid_content = document.getElementById(divcontent);
+                                                                    if (divid.style.display == "none") {
+                                                                        divid.style.display = "block";
+                                                                        divid_content.innerHTML = "<a><b>-</b> Ẩn bình luận</a>";
+                                                                    } else {
+                                                                        divid.style.display = "none";
+                                                                        divid_content.innerHTML = "<a><b>+</b> Xem bình luận</a>";
+                                                                    }
+
+                                                                }
+                                                                function update_img_liked(allbumid,val) {
+                                                                    var divid = document.getElementById("allbumidimg");
+                                                                    var liked = val + 1;
+                                                                    divid.innerHTML = '(' + liked + ')';
+                                                                    var url = "update_like_post.aspx?allbum_id=" + allbumid +"&mode=3";
+                                                                    loadXMLUpdate(url);
+                                                                }
+
 </script>
 
+    <script type="text/javascript">
+    // <![CDATA[
+        var MaxLength = 50;
+        var CustomErrorText = "Nội dung phản hồi phải lớn hơn " + MaxLength.toString() + " ký tự.";
+        function ValidationHandler(s, e) {
+            if (e.html.length < MaxLength) {
+                e.isValid = false;
+                e.errorText = CustomErrorText;
+            }
+        }
+        function HtmlChangedHandler(s, e) {
+            ContentLength.SetText(s.GetHtml().length);
+        }
+    // ]]> 
+    </script>
+<fieldset>
 <div id="page">
+
 			<div id="container">
 				<!-- Start Advanced Gallery Html Containers -->
+                
 				<div id="gallery" class="content">
 					<div id="controls" class="controls"></div>
 					<div class="slideshow-container">
 						<div id="loading" class="loader"></div>
 						<div id="slideshow" class="slideshow"></div>
 					</div>
-					<div id="caption" class="caption-container"></div>
+					
 				</div>
 				<div id="thumbs" class="navigation">
 					<ul class="thumbs noscript">
-
-
-
-
-						<li>
-							<a class="thumb" name="leaf" href="http://farm4.static.flickr.com/3261/2538183196_8baf9a8015.jpg" title="Title #0">
-								<img src="http://farm4.static.flickr.com/3261/2538183196_8baf9a8015_s.jpg" alt="Title #0" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm4.static.flickr.com/3261/2538183196_8baf9a8015_b.jpg">Xem ảnh góc</a>
-								</div>
-								<div class="image-title">Title #0</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" name="drop" href="http://farm3.static.flickr.com/2404/2538171134_2f77bc00d9.jpg" title="Title #1">
-								<img src="http://farm3.static.flickr.com/2404/2538171134_2f77bc00d9_s.jpg" alt="Title #1" />
-							</a>
-							<div class="caption">
-								Any html can be placed here ...
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" name="bigleaf" href="http://farm3.static.flickr.com/2093/2538168854_f75e408156.jpg" title="Title #2">
-								<img src="http://farm3.static.flickr.com/2093/2538168854_f75e408156_s.jpg" alt="Title #2" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm3.static.flickr.com/2093/2538168854_f75e408156_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #2</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" name="lizard" href="http://farm4.static.flickr.com/3153/2538167690_c812461b7b.jpg" title="Title #3">
-								<img src="http://farm4.static.flickr.com/3153/2538167690_c812461b7b_s.jpg" alt="Title #3" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm4.static.flickr.com/3153/2538167690_c812461b7b_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #3</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm4.static.flickr.com/3150/2538167224_0a6075dd18.jpg" title="Title #4">
-								<img src="http://farm4.static.flickr.com/3150/2538167224_0a6075dd18_s.jpg" alt="Title #4" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm4.static.flickr.com/3150/2538167224_0a6075dd18_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #4</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm4.static.flickr.com/3204/2537348699_bfd38bd9fd.jpg" title="Title #5">
-								<img src="http://farm4.static.flickr.com/3204/2537348699_bfd38bd9fd_s.jpg" alt="Title #5" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm4.static.flickr.com/3204/2537348699_bfd38bd9fd_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #5</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm4.static.flickr.com/3124/2538164582_b9d18f9d1b.jpg" title="Title #6">
-								<img src="http://farm4.static.flickr.com/3124/2538164582_b9d18f9d1b_s.jpg" alt="Title #6" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm4.static.flickr.com/3124/2538164582_b9d18f9d1b_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #6</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm4.static.flickr.com/3205/2538164270_4369bbdd23.jpg" title="Title #7">
-								<img src="http://farm4.static.flickr.com/3205/2538164270_4369bbdd23_s.jpg" alt="Title #7" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm4.static.flickr.com/3205/2538164270_c7d1646ecf_o.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #7</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm4.static.flickr.com/3211/2538163540_c2026243d2.jpg" title="Title #8">
-								<img src="http://farm4.static.flickr.com/3211/2538163540_c2026243d2_s.jpg" alt="Title #8" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm4.static.flickr.com/3211/2538163540_c2026243d2_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #8</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm3.static.flickr.com/2315/2537343449_f933be8036.jpg" title="Title #9">
-								<img src="http://farm3.static.flickr.com/2315/2537343449_f933be8036_s.jpg" alt="Title #9" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm3.static.flickr.com/2315/2537343449_f933be8036_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #9</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm3.static.flickr.com/2167/2082738157_436d1eb280.jpg" title="Title #10">
-								<img src="http://farm3.static.flickr.com/2167/2082738157_436d1eb280_s.jpg" alt="Title #10" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm3.static.flickr.com/2167/2082738157_436d1eb280_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #10</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm3.static.flickr.com/2342/2083508720_fa906f685e.jpg" title="Title #11">
-								<img src="http://farm3.static.flickr.com/2342/2083508720_fa906f685e_s.jpg" alt="Title #11" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm3.static.flickr.com/2342/2083508720_fa906f685e_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #11</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm3.static.flickr.com/2132/2082721339_4b06f6abba.jpg" title="Title #12">
-								<img src="http://farm3.static.flickr.com/2132/2082721339_4b06f6abba_s.jpg" alt="Title #12" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm3.static.flickr.com/2132/2082721339_4b06f6abba_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #12</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm3.static.flickr.com/2139/2083503622_5b17f16a60.jpg" title="Title #13">
-								<img src="http://farm3.static.flickr.com/2139/2083503622_5b17f16a60_s.jpg" alt="Title #13" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm3.static.flickr.com/2139/2083503622_5b17f16a60_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #13</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm3.static.flickr.com/2041/2083498578_114e117aab.jpg" title="Title #14">
-								<img src="http://farm3.static.flickr.com/2041/2083498578_114e117aab_s.jpg" alt="Title #14" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm3.static.flickr.com/2041/2083498578_114e117aab_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #14</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm3.static.flickr.com/2149/2082705341_afcdda0663.jpg" title="Title #15">
-								<img src="http://farm3.static.flickr.com/2149/2082705341_afcdda0663_s.jpg" alt="Title #15" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm3.static.flickr.com/2149/2082705341_afcdda0663_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #15</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						<li>
-							<a class="thumb" href="http://farm3.static.flickr.com/2014/2083478274_26775114dc.jpg" title="Title #16">
-								<img src="http://farm3.static.flickr.com/2014/2083478274_26775114dc_s.jpg" alt="Title #16" />
-							</a>
-							<div class="caption">
-								<div class="download">
-									<a href="http://farm3.static.flickr.com/2014/2083478274_26775114dc_b.jpg">Download Original</a>
-								</div>
-								<div class="image-title">Title #16</div>
-								<div class="image-desc">Description</div>
-							</div>
-						</li>
-
-						
-
-
-
-
+                        <asp:Repeater ID="showImageList" runat="server" 
+                            onitemdatabound="showImageList_ItemDataBound">
+                        <HeaderTemplate>
+                                </HeaderTemplate>
+                                <ItemTemplate>
+						                        <li>
+							                        <a class="thumb" name=<%#Eval("allbum_name")%> href=<%#Eval("path") %> title=<%#Eval("title") %>>
+								                        <img src='<%#Eval("path") %>' alt='<%#Eval("title") %>' width="75" height="75"/>
+							                        </a>
+							                        <div class="caption">
+                                                       
+								                        <div class="download">
+									                        <a href='<%#Eval("path") %>' target=_blank>Xem ảnh góc</a>
+								                        </div>
+								                        <div class="image-title"><%#Eval("title") %></div>
+                                                        <div class="image-desc"><%#Eval("description") %></div>
+                                
+                                                        <div style="background-color: #FFFFCC;color:Green;border: 1px solid #FFFFFF;cursor:pointer;"><table cellpadding=0 cellspacing=0 border=0 width=100%><tr><td width=25% align="right"><a onclick=forcusit('<%#Eval("img_id","txt_comment{0}")%>')>Bình luận</a> | <a onclick=update_img_liked('<%#Eval("allbum_id") %>',<%#Eval("liked") %>)>Thích</a></td><td width='20%' id='allbumidimg'>(<%#Eval("liked") %>)</td><td align=right id='<%#Eval("img_id","showhide{0}")%>' onclick=showhide('<%#Eval("img_id","divid{0}")%>','<%#Eval("img_id","showhide{0}")%>')><a>+ Xem bình luận</a></td><td>&nbsp(<asp:Label ID="cnt_cm" runat="server" Text=""></asp:Label>&nbsp bình luận)</td></tr></table></div>
+                                                        <div id='<%#Eval("img_id","divid{0}")%>' style="background-color: #F2F2F2;color:#009933;display:none;"> 
+                                                            
+                                                        <asp:Repeater ID="showcomment" runat="server">
+                                                        <HeaderTemplate>
+                                                        </HeaderTemplate>
+                                                        <ItemTemplate>
+                                                            <div id='<%#Eval("ID","divchil{0}") %>'>
+                                                                <table cellpadding="0" cellspacing="1" border="0" width="100%">
+                                                                <tr style="background-color:#FBFBFC;font-style:italic;" >
+                                                                <td rowspan="2" width="5%">
+                                                                    <img src='<%#Eval("avatar_path","images\\avatars\\{0}") %>' width="40" Height="40"/>
+                                                                </td>
+                                                                <td align="left">
+                                                                    <%#Eval("username") %>(<%#Eval("commented_date", "{0:dd/MM/yyyy hh:mm:ss tt}")%>)
+                                                                </td>
+                                                                </tr>
+                                                                <tr>
+                                                                <td colspan="2" style="color:#330066">&nbsp;&nbsp
+                                                                <%#Eval("comment") %>
+                                                                </td>
+                                                                </tr>
+                                                                </table>
+                                                            </div>
+                                                   </ItemTemplate>
+                                                    <FooterTemplate>   
+                                                    </FooterTemplate>       
+                                                    </asp:Repeater>  
+                                                    </div> 
+                                                    <div style="border:1px solid #E3E0EA;background-color: #FFFFCC;">
+                                                    <textarea id='<%#Eval("img_id","txt_comment{0}")%>' cols="60" rows="3" name="myname" class="txtformat_area"></textarea>
+                                                    <input id='btn_comment' type='button' value='Bình luận' class='btn' onclick=update_cm('<%#Eval("img_id")%>','<%#Eval("img_id","txt_comment{0}")%>','<%#Eval("img_id","divid{0}")%>') />
+                                                    </div>
+                                                    
+						                        </li>
+                                           
+                                </ItemTemplate>
+                                <FooterTemplate>
+                                </FooterTemplate>
+                                </asp:Repeater>   
+                                
+                                <div id="caption" class="caption-container"></div>
 					</ul>
 				</div>
 				<!-- End Advanced Gallery Html Containers -->
 				<div style="clear: both;"></div>
 			</div>
+            
+
+
+
+
+
 		</div>
-		<div id="footer">&copy; SCMCT Online</div>
+        <br><br>&nbsp
+
+    <asp:Repeater ID="showList_comment" runat="server">
+        <HeaderTemplate>
+        <table border="0" cellpadding=1 cellspacing=3 width="100%"  style="border:0px solid #CCFFFF;">
+        </HeaderTemplate>
+        <ItemTemplate>
+                    <tr >
+                    <td>
+                    &nbsp;&nbsp
+                    </td>
+                    <td>
+                    <div class="comment_format_header">
+                    &nbsp
+                    <div>
+                    <div class="comment_format">
+                    <table border=0 cellpadding=1 cellspacing=1 width=100% bgcolor="#ede7fe">
+                    <tr>
+                    <td width=20% bgcolor="#ecfce4" VALIGN="top">
+                        <table border=0 cellpadding=0 cellspacing=0>
+                        <tr>
+                        <td colspan=2>
+                            <asp:Image ID="user_img" runat="server" ImageUrl='<%#Eval("avatar_path", "images/avatars/{0}")%>' Width="40" Height="40" /><br>
+                           
+                           
+                            <a style="cursor:pointer;" ID='<%#Eval("id", "username{0}") %>'><font color="blue"><%#Eval("username") %></font></a>
+                            
+
+                   <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" 
+                    AllowDragging="True" AllowResize="True"
+                            CloseAction="CloseButton" ContentUrl='<%#Eval("username", "user_info.aspx?user_name={0}") %>'
+                            EnableViewState="False" PopupElementID='<%#Eval("ID", "username{0}") %>'
+                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            Height="730px" FooterText=""
+                            HeaderText="" ClientInstanceName="FeedPopupControl" 
+                            EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
+                            CssPostfix="Aqua" LoadingPanelImagePosition="Top" 
+                            SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
+                            <LoadingPanelImage Url="~/App_Themes/Aqua/Web/Loading.gif">
+                            </LoadingPanelImage>
+                            <ContentStyle VerticalAlign="Top">
+                            </ContentStyle>
+                            <ContentCollection>
+                                <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server" SupportsDisabledAttribute="True">
+                                </dx:PopupControlContentControl>
+                            </ContentCollection>
+                            </dx:ASPxPopupControl>
+
+                            <br>
+                            Tham gia: <%#Eval("created_date", "{0:dd/MM/yyyy}")%>
+
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>
+                        Bài gửi :
+                        </td>
+                        <td>
+                            <asp:Label ID="lbl_sum" runat="server" Text="80"></asp:Label>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>
+                        Nhóm:
+                        </td>
+                        <td>
+                            <asp:Label ID="lbl_groupname" runat="server" Text='<%#Eval("groupname")%>'>'></asp:Label>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td>
+                        Tim:
+                        </td>
+                        <td>
+                            <asp:Label ID="lbl_sum_point" runat="server" Text='<%#Eval("heart")%>'></asp:Label>
+                            <asp:Image ID="Image1" runat="server" ImageUrl="images/heart.gif" Width="10" Height="10"/>
+                        </td>
+                        </tr>
+                        </table>
+                    </td>
+                    <td width=80% VALIGN="top" bgcolor="#ffffff">
+                        <%#Eval("comment")%>
+                    </td>
+                    </tr>
+                    </table>
+
+                    <table cellpadding=0 cellspacing=2 border=0 width=100%>
+                    <tr align=right>
+                    <td align=right>
+                    <font size=-3><i>
+                        Ngày, <%#Eval("commented_date", "{0:dd/MM/yyyy hh:mm:ss tt}")%>
+                    </font></i>
+                    </td>
+                   <td colspan=2>                    
+                   <b>
+                   <table cellpadding=0 cellspacing=0 border=0>
+                   <tr bgcolor="#0033ff" style="cursor:pointer;">
+                   <td>
+                   
+                    
+                    </td>
+                    <td>
+                    <font color="#FFFFFFF">
+                     
+                     </font>
+                     </a>
+                     </td>
+                     </tr>
+                     </table>
+                     </b>
+                     <td>
+                    </tr>
+                    </table>
+                    </div>
+                    <div class="comment_format_footer">
+                    &nbsp
+                    <div>
+                    </td>
+                    </tr>
+        </ItemTemplate>
+        <FooterTemplate>
+        </table>
+        </FooterTemplate>
+        </asp:Repeater>
+
+
+
+  <dx:ASPxHtmlEditor ID="ASPxHtmlEditor1" runat="server" 
+                CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" 
+                CssPostfix="Office2010Blue" Height="200px" Width="920px">
+                <ClientSideEvents HtmlChanged="HtmlChangedHandler" />
+            <Styles CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" 
+                CssPostfix="Office2010Blue">
+                <ViewArea>
+                    <Border BorderColor="#859EBF" />
+                </ViewArea>
+            </Styles>
+            <StylesEditors ButtonEditCellSpacing="0">
+            </StylesEditors>
+            <StylesStatusBar>
+                <StatusBar TabSpacing="0px">
+                    <Paddings Padding="0px" />
+                </StatusBar>
+            </StylesStatusBar>
+    <SettingsImageSelector Enabled="True">
+            <CommonSettings RootFolder="~/images/upload/" ThumbnailFolder="~/images/upload/"
+                InitialFolder="upload" />
+            <PermissionSettings>
+
+            </PermissionSettings>
+        </SettingsImageSelector>
+        <SettingsImageUpload UploadImageFolder="~/images/upload/">
+            <ValidationSettings AllowedFileExtensions=".jpe,.jpeg,.jpg,.gif,.png" MaxFileSize="500000">
+            </ValidationSettings>
+        </SettingsImageUpload>
+                <SettingsValidation>
+                    <RequiredField IsRequired="True" ErrorText="Nội dung phản hồi trống" />
+                </SettingsValidation>
+<SettingsDocumentSelector>
+<CommonSettings AllowedFileExtensions=".rtf, .pdf, .doc, .docx, .odt, .txt, .xls, .xlsx, .ods, .ppt, .pptx, .odp"></CommonSettings>
+</SettingsDocumentSelector>
+            <Images SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css">
+                <LoadingPanel Url="~/App_Themes/Office2010Blue/HtmlEditor/Loading.gif">
+                </LoadingPanel>
+            </Images>
+            <ImagesFileManager>
+                <FolderContainerNodeLoadingPanel Url="~/App_Themes/Office2010Blue/Web/tvNodeLoading.gif">
+                </FolderContainerNodeLoadingPanel>
+                <LoadingPanel Url="~/App_Themes/Office2010Blue/Web/Loading.gif">
+                </LoadingPanel>
+            </ImagesFileManager>
+        </dx:ASPxHtmlEditor>    
+      <font color="white">Số ký tự bạn đã nhập(ký tự): <dx:ASPxLabel ID="lblContentLength" runat="server" ClientInstanceName="ContentLength" Text="0" Font-Bold="True"></dx:ASPxLabel></font>
+      <table cellpadding=3 cellpadding=3 border=0 width=20%>
+        <tr>
+        <td>
+        <dx:ASPxButton ID="btn_comments" runat="server" Text="Bình luận" 
+            CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
+            SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" Width="110px" 
+                onclick="btn_comments_Click">
+        </dx:ASPxButton>
+        </td>
+        <td>
+        <dx:ASPxButton ID="btn_back" runat="server" Text="Trở lại" 
+            CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
+            SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" 
+            Width="110px">
+        </dx:ASPxButton>
+        </td>
+        </tr>
+        </table>
+      
+       
+        
+		<div id="footer" style="color:#FFFFFF;">&copy; SCMCT Online</div>
+</fieldset>
 		<script type="text/javascript">
 		    jQuery(document).ready(function ($) {
 		        // We only want these styles applied when javascript is enabled

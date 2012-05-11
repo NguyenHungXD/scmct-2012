@@ -9,9 +9,10 @@ using chiase.Objects;
 
 namespace chiase
 {
+   
     public static class functions
     {
-
+        public static System.Web.UI.Page pages;
         public static void add_date_to_dropd(DropDownList objday, DropDownList objmonth, DropDownList objyear, int addyear)
         {
             //Day
@@ -65,6 +66,7 @@ namespace chiase
             {
                 if (lst.Value == val)
                 {
+                    obj.SelectedIndex = indexInt;
                     return indexInt;
                 }
                 indexInt++;
@@ -79,6 +81,12 @@ namespace chiase
         public static string LoginMemID(System.Web.UI.Page page)
         {
             DataTable table = (DataTable)page.Session["ThanhVien"];
+            if (table == null || table.Rows.Count == 0) return "";
+            return table.Rows[0][ND_THONG_TIN_DN.cl_MEM_ID].ToString();
+        }
+        public static string LoginMemIDs()
+        {
+            DataTable table = (DataTable)pages.Session["ThanhVien"];
             if (table == null || table.Rows.Count == 0) return "";
             return table.Rows[0][ND_THONG_TIN_DN.cl_MEM_ID].ToString();
         }
@@ -148,9 +156,9 @@ namespace chiase
            DataTable dtSource, string ValueField, string DislpayField)
         {
             AddEmptyRow(dtSource, ValueField);
-            cbo.DataSource = dtSource;            
+            cbo.DataSource = dtSource;
             cbo.ValueField = ValueField;
-            cbo.TextField = DislpayField;           
+            cbo.TextField = DislpayField;
             cbo.DataBind();
 
         }

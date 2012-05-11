@@ -31,6 +31,15 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_username;
         
         /// <summary>
+        /// CustomValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator1;
+        
+        /// <summary>
         /// txt_email control.
         /// </summary>
         /// <remarks>
@@ -40,21 +49,30 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_email;
         
         /// <summary>
-        /// btn_getpassword control.
+        /// RegularExpressionValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_getpassword;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
-        /// btn_close control.
+        /// btn_getpasswords control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_close;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_getpasswords;
+        
+        /// <summary>
+        /// btn_closes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_closes;
     }
 }

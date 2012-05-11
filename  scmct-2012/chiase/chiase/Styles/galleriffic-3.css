@@ -2,11 +2,12 @@ div.content {
 	/* The display of content is enabled using jQuery so that the slideshow content won't display unless javascript is enabled. */
 	display: none;
 	float: right;
-	width: 550px; 
+	width: 550px;
+
 }
 div.content a, div.navigation a {
 	text-decoration: none;
-	color: #777;
+	color: #0740FA;
 }
 div.content a:focus, div.content a:hover, div.content a:active {
 	text-decoration: underline;
@@ -67,13 +68,14 @@ div.download {
 }
 div.caption-container {
 	position: relative;
-	clear: left;
-	height: 75px;
+	float: right;
+	height: 100px;
+	margin: 420px 0px 0px 0;
 }
 span.image-caption {
 	display: block;
 	position: absolute;
-	width: 550px;
+	width: 500px;
 	top: 0;
 	left: 0;
 }
@@ -82,11 +84,15 @@ div.caption {
 }
 div.image-title {
 	font-weight: bold;
-	font-size: 1.4em;
+	font-size: 1.1em;
 }
-div.image-desc {
+div.image-desc 
+{
+    color:Blue;
 	line-height: 1.3em;
-	padding-top: 12px;
+	font-size: 1.4em;
+	padding-top: 13px;
+	font-weight:bold;
 }
 div.navigation {
 	/* The navigation style is set using jQuery so that the javascript specific styles won't be applied unless javascript is enabled. */
@@ -108,12 +114,14 @@ a.thumb {
 	border: 1px solid #ccc;
 }
 ul.thumbs li.selected a.thumb {
-	background: #000;
+	background: #FF33FF;
 }
 a.thumb:focus {
 	outline: none;
 }
-ul.thumbs img {
+ul.thumbs img 
+{
+
 	border: none;
 	display: block;
 }
