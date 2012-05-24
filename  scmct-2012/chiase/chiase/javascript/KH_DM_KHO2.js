@@ -1,5 +1,6 @@
 
-         $(document).ready(function() {
+$(document).ready(function () {
+            Find(document.getElementById("timKiem"));
              $('input[id^=luuTable]').click(function () {
                 $(this).LuuTable({ajax:"../ajax/KH_DM_KHO_ajax2.aspx?do=luuTable",tablename:"gridTable"});
              });
