@@ -264,11 +264,11 @@ namespace chiase
                 DataProcess process = s_KH_PHIEU_XUAT_KHO();
                 process.Page = Request.QueryString["page"];
                 DataTable table = process.Search(@"select STT=row_number() over (order by T.PXK_ID),T.*
-                   ,A.NAME
-                   ,B.NAME
-                   ,C.NAME
+                   ,A.NAME NX_NAME
+                   ,B.NAME XC_NAME
+                   ,C.NAME KH_NAME
                    ,D.MA_DU_AN
-                   ,E.NAME
+                   ,E.NAME LX_NAME
                    ,F.TIEU_DE
                                from KH_PHIEU_XUAT_KHO T
                     left join ND_THONG_TIN_ND  A on T.NGUOI_XUAT=A.ID
@@ -287,7 +287,7 @@ namespace chiase
                 html += "<th>" + DictionaryDB.sGetValueLanguage("NGUOI_XUAT") + "</th>";
                 html += "<th>" + DictionaryDB.sGetValueLanguage("NGAY_XUAT") + "</th>";
                 html += "<th>" + DictionaryDB.sGetValueLanguage("NGUOI_NHAN") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("MEM_ID") + "</th>";
+                html += "<th>" + DictionaryDB.sGetValueLanguage("MEM_ID_PXK") + "</th>";
                 html += "<th>" + DictionaryDB.sGetValueLanguage("KHO_ID") + "</th>";
                 html += "<th>" + DictionaryDB.sGetValueLanguage("DU_AN_ID") + "</th>";
                 html += "<th>" + DictionaryDB.sGetValueLanguage("LY_DO_XUAT_ID") + "</th>";
@@ -301,20 +301,20 @@ namespace chiase
                     {
                         for (int i = 0; i < table.Rows.Count; i++)
                         {
-                            html += "<tr style='cursor:pointer;' onclick=\"setControlFind('" + table.Rows[i]["PXK_ID"].ToString() + "')\">";
+                            html += "<tr style='cursor:pointer;' onclick=\"openPhieu('" + table.Rows[i]["PXK_ID"].ToString() + "')\">";
                             html += "<td>" + table.Rows[i]["stt"].ToString() + "</td>";
                             html += "<td>" + table.Rows[i]["MA_PXK"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["NAME"].ToString() + "</td>";
+                            html += "<td>" + table.Rows[i]["NX_NAME"].ToString() + "</td>";
                             if (table.Rows[i]["NGAY_XUAT"].ToString() != "")
                             {
                                 html += "<td>" + DateTime.Parse(table.Rows[i]["NGAY_XUAT"].ToString()).ToString("dd/MM/yyyy") + "</td>";
                             }
                             else { html += "<td>" + table.Rows[i]["NGAY_XUAT"].ToString() + "</td>"; }
                             html += "<td>" + table.Rows[i]["NGUOI_NHAN"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["NAME"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["NAME"].ToString() + "</td>";
+                            html += "<td>" + table.Rows[i]["XC_NAME"].ToString() + "</td>";
+                            html += "<td>" + table.Rows[i]["KH_NAME"].ToString() + "</td>";
                             html += "<td>" + table.Rows[i]["MA_DU_AN"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["NAME"].ToString() + "</td>";
+                            html += "<td>" + table.Rows[i]["LX_NAME"].ToString() + "</td>";
                             html += "<td>" + table.Rows[i]["CHUNG_TU"].ToString() + "</td>";
                             html += "<td>" + table.Rows[i]["GHI_CHU"].ToString() + "</td>";
                             html += "<td>" + table.Rows[i]["TIEU_DE"].ToString() + "</td>";

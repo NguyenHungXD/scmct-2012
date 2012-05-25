@@ -219,9 +219,9 @@ namespace chiase
                 DataProcess process = s_KH_PHIEU_CHUYEN_KHO();
                 process.Page = Request.QueryString["page"];
                 DataTable table = process.Search(@"select STT=row_number() over (order by T.PCK_ID),T.*
-                   ,A.NAME
-                   ,B.NAME
-                   ,C.NAME
+                   ,A.NAME NC_NAME
+                   ,B.NAME KX_NAME
+                   ,C.NAME KN_NAME
                    ,D.MA_DU_AN
                                from KH_PHIEU_CHUYEN_KHO T
                     left join ND_THONG_TIN_ND  A on T.NGUOI_CHUYEN=A.ID
@@ -248,17 +248,17 @@ namespace chiase
                     {
                         for (int i = 0; i < table.Rows.Count; i++)
                         {
-                            html += "<tr style='cursor:pointer;' onclick=\"setControlFind('" + table.Rows[i]["PCK_ID"].ToString() + "')\">";
+                            html += "<tr style='cursor:pointer;' onclick=\"openPhieu('" + table.Rows[i]["PCK_ID"].ToString() + "')\">";
                             html += "<td>" + table.Rows[i]["stt"].ToString() + "</td>";
                             html += "<td>" + table.Rows[i]["MA_PCK"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["NAME"].ToString() + "</td>";
+                            html += "<td>" + table.Rows[i]["NC_NAME"].ToString() + "</td>";
                             if (table.Rows[i]["NGAY_CHUYEN"].ToString() != "")
                             {
                                 html += "<td>" + DateTime.Parse(table.Rows[i]["NGAY_CHUYEN"].ToString()).ToString("dd/MM/yyyy") + "</td>";
                             }
                             else { html += "<td>" + table.Rows[i]["NGAY_CHUYEN"].ToString() + "</td>"; }
-                            html += "<td>" + table.Rows[i]["NAME"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["NAME"].ToString() + "</td>";
+                            html += "<td>" + table.Rows[i]["KX_NAME"].ToString() + "</td>";
+                            html += "<td>" + table.Rows[i]["KN_NAME"].ToString() + "</td>";
                             html += "<td>" + table.Rows[i]["MA_DU_AN"].ToString() + "</td>";
                             html += "<td>" + table.Rows[i]["GHI_CHU"].ToString() + "</td>";
                             html += "</tr>";

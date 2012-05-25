@@ -311,7 +311,7 @@
          html += "<th>" + DictionaryDB.sGetValueLanguage("NGUOI_XUAT") + "</th>";
          html += "<th>" + DictionaryDB.sGetValueLanguage("NGAY_XUAT") + "</th>";
          html += "<th>" + DictionaryDB.sGetValueLanguage("NGUOI_NHAN") + "</th>";
-         html += "<th>" + DictionaryDB.sGetValueLanguage("MEM_ID") + "</th>";
+         html += "<th>" + DictionaryDB.sGetValueLanguage("MEM_ID_PXK") + "</th>";
          html += "<th>" + DictionaryDB.sGetValueLanguage("KHO_ID") + "</th>";
          html += "<th>" + DictionaryDB.sGetValueLanguage("DU_AN_ID") + "</th>";
          html += "<th>" + DictionaryDB.sGetValueLanguage("LY_DO_XUAT_ID") + "</th>";

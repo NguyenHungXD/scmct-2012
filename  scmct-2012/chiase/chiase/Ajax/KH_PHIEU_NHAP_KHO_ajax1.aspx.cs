@@ -275,7 +275,7 @@ using chiase.Objects;
          html += "<th>" + DictionaryDB.sGetValueLanguage("MA_PNK") + "</th>";
          html += "<th>" + DictionaryDB.sGetValueLanguage("NGUOI_NHAP") + "</th>";
          html += "<th>" + DictionaryDB.sGetValueLanguage("NGAY_NHAP") + "</th>";
-         html += "<th>" + DictionaryDB.sGetValueLanguage("MEM_ID") + "</th>";
+         html += "<th>" + DictionaryDB.sGetValueLanguage("MEM_ID_PNK") + "</th>";
          html += "<th>" + DictionaryDB.sGetValueLanguage("KHO_ID") + "</th>";
          html += "<th>" + DictionaryDB.sGetValueLanguage("DU_AN_ID") + "</th>";
          html += "<th>" + DictionaryDB.sGetValueLanguage("LY_DO_NHAP_ID") + "</th>";
