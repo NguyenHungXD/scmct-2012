@@ -7,46 +7,14 @@
     <script type="text/javascript" src="../js/treeview.js">
 
     </script>
-    <style type="text/css">
-        .treeview ul
-        {
-            /*CSS for Simple Tree Menu*/
-            margin: 0;
-            padding: 0;
-        }
-        .treeview li
-        {
-            /*Style for LI elements in general (excludes an LI that contains sub lists)*/
-            background: white url(../images/list.gif) no-repeat left center;
-            list-style-type: none;
-            padding-left: 22px;
-            margin-bottom: 3px;
-        }
-        .treeview li.submenu
-        {
-            /* Style for LI that contains sub lists (other ULs). */
-            background: white url(../images/closed.gif) no-repeat left 1px;
-            cursor: hand !important;
-            cursor: pointer !important;
-        }
-        .treeview li.submenu ul
-        {
-            /*Style for ULs that are children of LIs (submenu) */
-            display: none; /*Hide them by default. Don't delete. */
-        }
-        .treeview .submenu ul li
-        {
-            /*Style for LIs of ULs that are children of LIs (submenu) */
-            cursor: default;
-        }
-    </style>
+    
 </head>
 <body>
     <form id="form1" runat="server">
     <a href="javascript:ddtreemenu.flatten('treemenu1', 'expand')">Mở rộng</a> | <a href="javascript:ddtreemenu.flatten('treemenu1', 'contact')">
         Thu hẹp</a>
     <ul id="treemenu1" class="treeview">
-        <li>Folder 1
+        <li><a>Folder 1</a>
             <ul>
                 <li><a href="#">Sub Item 1.1</a></li>
                 <li><a href="#">Sub Item 1.2</a></li>
@@ -54,11 +22,11 @@
         </li>
         <li>Folder 2
             <ul>
-                <li><a href="#">Sub Item 2.1</a></li>
+                <li><a href="#" style="background-image:'../images/close.gif'" >Sub Item 2.1</a></li>
                 <li><a href="#">Sub Item 2.2</a></li>
                 <li><a href="#">Sub Item 2.3</a></li>
-                <li><a href="#">Sub Item 2.4</a></li
-                <li><input type="text" /></li>
+                <li><a href="#">Sub Item 2.4</a></li>
+             
             </ul>
         </li>
         <li>Folder 3

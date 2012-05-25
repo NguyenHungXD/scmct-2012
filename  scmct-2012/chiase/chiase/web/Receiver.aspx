@@ -42,7 +42,7 @@
             </div>
             <div class="div-Out">
                 <h4>
-                    <%=GetCaption("MEM_ID")%>
+                    <%=GetCaption("MEM_ID_PNK")%>
                 </h4>
                 <p>
                     <input mkv="true" id="MEM_ID" type="hidden" />

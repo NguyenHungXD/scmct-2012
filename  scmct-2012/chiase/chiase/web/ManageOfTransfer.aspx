@@ -20,7 +20,7 @@
          }
          function opening(s, e) {
 
-             var contentUrl = "Shipment.aspx";
+             var contentUrl = "Transfer.aspx";
              if (pnk_ID != "") contentUrl = contentUrl + "#idkhoachinh=" + pnk_ID;
              s.SetContentUrl(contentUrl);
 
