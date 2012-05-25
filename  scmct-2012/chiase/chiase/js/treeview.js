@@ -1,7 +1,7 @@
 ﻿var persisteduls = new Object()
 var ddtreemenu = new Object()
-ddtreemenu.closefolder = "../images/open.gif"
-ddtreemenu.openfolder = "../images/open.gif"
+ddtreemenu.closefolder = "../images/expand.gif"
+ddtreemenu.openfolder = "../images/collapse.gif"
 ddtreemenu.createTree = function (treeid, enablepersist, persistdays) {
     var ultags = document.getElementById(treeid).getElementsByTagName("ul")
     if (typeof persisteduls[treeid] == "undefined")

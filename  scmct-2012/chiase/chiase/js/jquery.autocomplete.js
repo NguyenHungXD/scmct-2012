@@ -23,6 +23,28 @@ $(document).ready(function () {
         $(this).after($("<img onmouseout='this.style.backgroundColor=\"\";this.style.border=\"0\";' onmouseover='this.style.backgroundColor=\"#ece9d8\"' src='../images/asc.gif' style='position:absolute;margin-left:-25px;margin-top:6px;padding:5px 0 5px 0;border:none;' onclick=\"$(this).parents('table').find('tr').eq($(this).parent().parent().index()).find('#"+$(this).attr("id")+"').abc();\"/>"));
      });
 });
+
+function removeHTMLTags(htmlString){
+        if(htmlString)        {
+          var mydiv = document.createElement("div");
+           mydiv.innerHTML = htmlString;
+ 
+            if (document.all) // IE Stuff
+            {
+                return mydiv.innerText;
+               
+            }   
+            else // Mozilla does not work with innerText
+            {
+                return mydiv.textContent;
+            }      
+             document.removeChild(mydiv);              
+      }
+     
+      return htmlString;
+}
+   
+
 function laydautien(obj,urls) {
     if(layfirst)
 	{
@@ -255,13 +277,14 @@ $.Autocompleter = function(input, options) {
 		}
 	});
 	
-	
+	 
+
 	function selectCurrent() {
 		var selected = select.selected();
 		if( !selected )
 			return false;
 		
-		var v = selected.result;
+		var v = removeHTMLTags( selected.result);//khanhdtn
 		previousValue = v;
 		
 		if ( options.multiple ) {
