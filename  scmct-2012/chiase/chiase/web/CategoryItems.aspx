@@ -29,15 +29,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="Server">
     <p class="header-div">
         <%=GetCaption("DM_HANG_HOA")%></p>
-    <br />
-       <br />   <br />  
+       
     <table width="100%">
         <tr valign="top">
             <td style="width: 25%">             
                 <div id="divtree" runat="server">
                    
-                </div>
-              
+                </div>              
             </td>
             <td style="width: 70%">
                 <div class="body-div">
