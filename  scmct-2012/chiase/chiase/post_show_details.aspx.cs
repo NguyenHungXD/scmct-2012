@@ -13,22 +13,41 @@ namespace chiase
     public partial class post_show_details : System.Web.UI.Page
     {
         public static int idpopup = 0;
+        public static string username;
         protected void Page_Load(object sender, EventArgs e)
         {
             idpopup = 0;
             if (!IsPostBack)
             {
-
-                display();
+                if (Request.QueryString["vmode"] == "del")
+                {
+                    del_news();
+                
+                }else
+                    display();
                 ASPxHtmlEditor1.ClientSideEvents.Validation = "ValidationHandler";
             }
         }
 
-
+        public void del_news()
+        {
+            try
+            {
+                string sql = @"update BV_BAI_VIET set deleted ='Y' where BAI_VIET_ID =@BAI_VIET_ID";
+                SQLConnectWeb.ExecuteNonQuery(sql, "@BAI_VIET_ID", Request.QueryString["id"]);
+            }
+            catch
+            {
+            }
+        }
         public void display()
         {
             try
             {
+                username = functions.LoginMemID(this);
+                vusername.Value = username;
+                bai_viet_ids.Value = Request.QueryString["news_id"];
+
                 String sql = string.Format(@"SELECT a.*,b.USERNAME
                          FROM BV_BAI_VIET a
                         INNER JOIN  ND_THONG_TIN_DN b ON  a.NGUOI_TAO=b.MEM_ID
@@ -64,7 +83,7 @@ namespace chiase
                             INNER JOIN  ND_THONG_TIN_DN b ON  a.NGUOI_TAO=b.MEM_ID
                             INNER JOIN  ND_THONG_TIN_ND c ON a.NGUOI_TAO = c.id
                             INNER JOIN ND_TEN_NHOM_ND d ON c.MEM_GROUP_ID = d.GROUPID
-                            WHERE BAI_VIET_CHA_ID={0} order by BAI_VIET_ID", id);
+                            WHERE BAI_VIET_CHA_ID={0} and a.deleted is null order by BAI_VIET_ID", id);
 
                 DataTable comments = SQLConnectWeb.GetTable(sql);
                 showList_comment.DataSource = comments;
@@ -86,16 +105,19 @@ namespace chiase
             
             try
             {
-                DataTable bv_info = BV_BAI_VIET.GetTableAll("BAI_VIET_ID=" + Request.QueryString["news_id"]);
-
-                
-
-                string date = functions.GetStringDatetime();
                 string memid = functions.LoginMemID(this);
-                BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(bv_info.Rows[0][BV_BAI_VIET.cl_TIEU_DE].ToString(), memid, date, "", "", ASPxHtmlEditor1.Html.Replace("'", ""), "1", Request.QueryString["news_id"], bv_info.Rows[0][BV_BAI_VIET.cl_DU_AN_ID].ToString(), bv_info.Rows[0][BV_BAI_VIET.cl_CHU_DE_ID].ToString(), "0", "0");
+                if (memid != "")
+                {
+                    DataTable bv_info = BV_BAI_VIET.GetTableAll("BAI_VIET_ID=" + Request.QueryString["news_id"]);
 
-                Response.Redirect("post_show_details.aspx?news_id=" + Request.QueryString["news_id"]);
 
+
+                    string date = functions.GetStringDatetime();
+
+                    BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(bv_info.Rows[0][BV_BAI_VIET.cl_TIEU_DE].ToString(), memid, date, "", "", ASPxHtmlEditor1.Html.Replace("'", ""), "1", Request.QueryString["news_id"], bv_info.Rows[0][BV_BAI_VIET.cl_DU_AN_ID].ToString(), bv_info.Rows[0][BV_BAI_VIET.cl_CHU_DE_ID].ToString(), "0", "0");
+
+                    Response.Redirect("post_show_details.aspx?news_id=" + Request.QueryString["news_id"]);
+                }
             }
             catch (Exception ex)
             {

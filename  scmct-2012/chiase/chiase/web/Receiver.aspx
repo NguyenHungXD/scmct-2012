@@ -4,6 +4,63 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="header" runat="Server">
     <script type="text/javascript" src="../javascript/KH_PHIEU_NHAP_KHO3.js">
     </script>
+    <script type="text/javascript">
+        function afterSelectHH(ctrl, hhid) {
+
+            var tr = ctrl.parentNode.parentNode;
+            var hhName = tr.cells[3].childNodes["HH_NAME"];
+            var nhhID = tr.cells[4].childNodes["NHH_ID"];
+            var nhhName = tr.cells[4].childNodes["mkv_NHH_ID"];
+            hhName.value = "";
+            nhhID.value = "";
+            nhhName.value = "";
+            var xmlHttp = GetMSXmlHttp();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4) {
+                    if (xmlHttp.responseText.length > 0) {
+                        var rs = xmlHttp.responseText;
+                        hhName.value = readXMLFormat(rs, "<HH_NAME>", "</HH_NAME>");
+                        nhhID.value = readXMLFormat(rs, "<NHH_ID>", "</NHH_ID>");
+                        nhhName.value = readXMLFormat(rs, "<NHH_NAME>", "</NHH_NAME>");
+                        hhName.disabled = true;
+                        nhhName.disabled = true;
+                    }
+                }
+            }
+            xmlHttp.open("GET", "../ajax/DM_HANG_HOA_ajax2.aspx?do=getHH&HH_ID=" + hhid + "&times=" + Math.random(), true);
+            xmlHttp.send(null);
+        }
+
+        function txtChangeHH(ctrl) {
+            var tr = ctrl.parentNode.parentNode;
+            var hhID = tr.cells[2].childNodes["HH_ID"];
+            var hhName = tr.cells[3].childNodes["HH_NAME"];
+            var nhhID = tr.cells[4].childNodes["NHH_ID"];
+            var nhhName = tr.cells[4].childNodes["mkv_NHH_ID"];
+            hhID.value = "";
+            hhName.value = "";
+            nhhID.value = "";
+            nhhName.value = "";
+            hhName.disabled = false;
+            nhhName.disabled = false;
+
+        }
+
+        function txtClearHH(rowIndex) {
+            var table = document.getElementById("gridTable");
+            var tr = table.rows[rowIndex];
+            var hhID = tr.cells[2].childNodes["HH_ID"];
+            var hhName = tr.cells[3].childNodes["HH_NAME"];
+            var nhhID = tr.cells[4].childNodes["NHH_ID"];
+            var nhhName = tr.cells[4].childNodes["mkv_NHH_ID"];
+            hhID.value = "";
+            hhName.value = "";
+            nhhID.value = "";
+            nhhName.value = "";
+            hhName.disabled = false;
+            nhhName.disabled = false;
+        }
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
     <div class="body-div">

@@ -7,6 +7,7 @@ body {
 	font-size: 13px;
 	line-height: 1.5em; 
 	background: #3BB9FF;
+	/*background: url(/images/grid_medblue.gif) repeat;*/
 	background-repeat: repeat-x;
 	background-position: top;
 }
@@ -17,22 +18,26 @@ a:hover { text-decoration: underline;color:#FFFF00;font-weight:bold; }
 p { margin: 0px; padding: 0; }
 img { border: none; }
 
-h1, h2, h3, h4, h5, h6 { color: #183544; }
+h1, h2, h3, h4, h5, h6 { color: #1313F7; }
 h1 { font-size: 40px; font-weight: normal; margin: 0 0 30px 0; padding: 5px 0; }
 h2 { font-size: 28px; font-weight: normal; margin: 0 0 30px 0; padding: 0; }
 h2 span { font-weight: bold; }
-h3 { font-size: 21px; margin: 0 0 15px 0; padding: 0; padding: 0; color: #000; font-weight: normal; }
+h3 { font-size: 21px; margin: 0 0 15px 0; padding: 0; padding: 0;font-weight: normal; }
 h4 { font-size: 18px; margin: 0 0 15px 0; padding: 0; }
-h5 { font-size: 14px; margin: 0 0 10px 0; padding: 0; color: #FFFFFF; }
-h6 { font-size: 14px; margin: 0 0 5px 0; padding: 0; color:#0099FF; text-align: center;}
+h5 { font-size: 14px; margin: 0 0 10px 0; padding: 0; }
+h6 { font-size: 14px; margin: 0 0 5px 0; padding: 0; text-align: center;}
 
 .tmo_list { margin: 20px 0 20px 20px; padding: 0; list-style: none; }
-.tmo_list li { background: transparent url(/images/templatemo_list.png) no-repeat scroll 0 0px; margin:0 0 20px; padding: 0 0 0 20px; 	line-height: 0.8em; }
-.tmo_list li a { color: #fff; }
+.tmo_list li { background: #FFFFFF url(/images/templatemo_list.png) no-repeat scroll 0 0px; margin:0 0 20px; padding: 0 0 0 20px; 	line-height: 0.8em; }
+.tmo_list li a { color: #0033FF; }
 .tmo_list li a:hover { color: #ff4301; }
+.selects
+{
+    padding:2px;border: 1px solid #009999;background-color:#FB01F2;color:#FFFFFF;font-weight:lighter;
+    }
 .project_detail
 {
-    background: #0099FF;
+    background: #0066FF;
     border: 1px solid #FFFFCC;
     color: #FFFFFF;
     padding: 3px 3px 3px 30px;
@@ -46,15 +51,16 @@ h6 { font-size: 14px; margin: 0 0 5px 0; padding: 0; color:#0099FF; text-align: 
 margin: 1px;
 padding: 1px 5px;
 border: 1px solid #FFFFFF;
-border-radius: 3px;
-background-color: #0066FF;
+border-radius: 10px;
+background-color: #0066FF; /*background-color: #0066FF;*/
+background-color: #0099FF;
 text-decoration: none;
 cursor:pointer;
 color:#FFFFFF;
 }
 
 .btn:hover {
-	background-color:#F62BF4;
+	background-color:#F10505;
 	text-decoration: none;
 }
 .btn:active {
@@ -62,11 +68,64 @@ color:#FFFFFF;
 	top:1px;
 }
 
+.link_back {
+margin: 0px;
+padding: 3px 10px 3px 10px;
+border-radius: 10px;
+background-color: #0066FF;
+text-decoration: none;
+color:#CC00CC;
+}
+
+ .link_back a
+  {
+        color: #0099FF; text-decoration: none;font-weight:bold;
+        
+   }
+.link_back a:hover {
+	color:#F10505;
+	text-decoration:underline;
+}
+   
+   .admin {
+margin: 0px;
+padding: 3px 10px 3px 10px;
+border-radius: 10px;
+background-color: #FFFFFF;
+text-decoration: none;
+color:#0033FF;
+}
+
+   
+.btn_project {
+margin: 1px;
+padding: 5px 5px;
+margin-top:0px;
+margin-bottom:7px;
+border: 1px solid #FFFFFF;
+border-radius: 15px;
+background-color: #FFFFFF;
+text-decoration: none;
+color:#FFFFFF;
+}
+
+.btn_forum {
+margin: 1px;
+padding: 1px 1px;
+margin-top:0px;
+margin-bottom:7px;
+border: 1px solid #FFFFFF;
+border-radius: 5px;
+background-color: #FFFFFF;
+text-decoration: none;
+color:#FFFFFF;
+}
+
 .btn_img {
 margin: 1px;
 padding: 1px 5px;
 border: 1px solid #FFFFFF;
-border-radius: 6px;
+border-radius: 8px;
 background-color: Green;
 text-decoration: none;
 cursor:pointer;
@@ -82,6 +141,50 @@ color:#FFFFFF;
 	top:1px;
 }
 
+
+
+
+.btn_admin {
+margin: 1px;
+padding: 4px 10px 4px 10px;
+border: 2px solid #99FF00;
+border-radius: 8px;
+background-color: #29D606;
+text-decoration: none;
+cursor:pointer;
+color:#FFFFFF;
+font-weight:bold;
+}
+
+.btn_admin:hover {
+	background-color:#FA0628;
+	color:#FFFFFF;
+	font-weight:lighter;
+	font-weight:bold;
+	text-decoration: none;
+}
+.btn_admin:active {
+	position:relative;
+	top:1px;
+}
+
+
+.bottom_ses {
+margin: 1px;
+padding: 5px 5px;
+margin-top:0px;
+margin-bottom:7px;
+border: 1px solid #FFFFFF;
+border-radius: 15px;
+background-color: #FFFFFF;
+text-decoration: none;
+color:#0066FF;
+}
+.bottom_ses a
+{
+    color:#0066FF;
+    
+    }
 .select_gridview
 {
 border: 1px solid #FFFFFF;
@@ -105,13 +208,13 @@ padding: 3px;
 {
     width: 20px;
     font-weight: bold;
-    background: #0033FF;
+    background: #0099FF;
     color: #FFFFFF;
-    font-size: 13px;
+    font-size: 12px;
 }
 .textformat
 {
-    color:#0066FF;
+    color:#FFFFFF;
     font-size: 12px;
     }
 .btn_more a {
@@ -128,7 +231,7 @@ padding: 3px;
 }
 
 .txtformat_area {
-     display: block;
+     
      padding: 2px;
      border: 1px solid #0099FF;
      background: url(/images/grid_medblue.gif) repeat;
@@ -156,7 +259,7 @@ padding: 3px;
        background: url(/images/post_news.gif) repeat;
        color:#FFFFFF;
        	padding: 10px 10px 10px 50px;
-	    font-size: 13px;
+	    font-size: 14px;
 	    text-align: left;
 	    font-weight: bold;
 	    text-decoration: none;
@@ -165,9 +268,9 @@ padding: 3px;
   {
         text-align: center;
         background: url(/images/main_header.png) repeat;
-        color:#0099FF;
+        color:#000000;
        	padding: 0px 0px 0px 0px;
-	    font-size: 12px;
+	    font-size: 13px;
 	    font-weight: bold;
 	    text-decoration: none;
 	    border:2px solid #FFFFFF;
@@ -176,15 +279,37 @@ padding: 3px;
    }
         .new_post_details
   {
-         background: url(/images/post_news1.gif) repeat;
-        color:#000066;
+        background: url(/images/post_news1.gif) repeat;
+        /*background: url(/images/grid_medblue.gif) repeat;
+        background:#CCFFFF;*/
+        color:#000000;
        	padding: 0px 0px 0px 0px;
 	    font-size: 12px;
 	    text-align: center;
 	    
 	    text-decoration: none;
-	    border:2px solid #FFFFFF; 
+	    border:1px solid #FFFFFF;
    }
+        .new_post_details_4rum
+  {
+        /*background: url(/images/grid_medblue.gif) repeat;
+        background: url(/images/grid_medblue.gif) repeat;
+        background:#CCFFFF;*/
+        background:#04A1FB;
+        color:#FFFFFF;
+       	padding: 0px 0px 0px 0px;
+	    font-size: 12px;
+	    text-align: center;
+	    
+	    text-decoration: none;
+	    border:2px solid #0033FF;
+   }
+   
+    .new_post_details_4rum a
+  {
+        color: #FFFFFF; text-decoration: none;font-weight:bold;
+   }
+.new_post_details_4rum a:hover { text-decoration: underline;color:#CCFF00;font-weight:bold; }
    
    .comment_format
    {
@@ -213,7 +338,7 @@ padding: 3px;
    }
  .new_post_details a
   {
-        color: #0066FF; text-decoration: none; font-weight: bold;
+        color: #0099FF; text-decoration: none;font-weight:bold;
    }
 .new_post_details a:hover { text-decoration: underline;color:#FF00FF;font-weight:bold; }
    
@@ -284,7 +409,7 @@ BACKGROUND-COLOR: #ffffff";
 	padding: 0 0px;
 	margin: 0 auto;
 	margin-top: 0px;
-	background: #38ACEC;
+	background: url(/images/banner.png) no-repeat top right;
 }
 #templatemo_header_flash {
  Z-INDEX: 1;
@@ -345,9 +470,9 @@ BACKGROUND-COLOR: #ffffff";
 	display: inline-block;
 	width: 480px;
 	height: 58px;
-	margin-right:0px;
-	margin-top:0px;
-	background: url(/images/login_bg.gif) center no-repeat;
+	margin-right:2px;
+	margin-top:2px;
+	background: url(/images/login_bg1.gif) center no-repeat;
 }
 
 #templatemo_menu ul {
@@ -370,12 +495,12 @@ BACKGROUND-COLOR: #ffffff";
 	float:left;
 	color: #FFFFFF;
 	cursor: pointer;
-	font: 600 13px/22px "Arial", Helvetica, sans-serif;
+	font: 600 14px/24px "Arial", Helvetica, sans-serif;
 }
 
 #templatemo_menu ul li a span {
 	margin: 0 10px 0 -10px;
-	padding: 1px 8px 5px 18px;
+	padding: 1px 10px 5px 18px;
 	position: relative; 
 	float:left;
 }
@@ -421,8 +546,8 @@ legend.no-expand-all
     } 
 legend
 {
-       padding:4px 5px 4px 5px;
-       margin:4px 0 5px 5px;
+       padding:0px 0px 0px 0px;
+       margin:0px 0 0px 0px;
        margin-top:0px;
        font-size:x-small;
        color: White;
@@ -436,9 +561,10 @@ fieldset {
     _padding-bottom : 15px;
     _display : block;
     border : 1px solid #FFFFFF;
-    background-color: Orange;
+    /*background-color: Orange;*/
+    background-color:#2B65EC;
     margin-bottom : 15px;
-    
+    color:White;
 }
 .header
 {
@@ -617,7 +743,7 @@ fieldset {
 }
 
 #templatemo_footer .tmo_list li a {
-	color: #000;
+	color: #085EFB;
 }
 
 #footer_top {

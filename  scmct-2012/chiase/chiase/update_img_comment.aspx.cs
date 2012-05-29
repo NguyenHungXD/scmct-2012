@@ -26,9 +26,13 @@ namespace chiase
                             "@IMG_ID", Request.QueryString["imgid"],
                              "@COMMENTED_BY", functions.LoginMemID(this),
                             "@COMMENTED_DATE",DateTime.Now ,
-                            "@COMMENT", Request.QueryString["content_cm"],
+                            "@COMMENT", Request.QueryString["content_cm"].Replace("\n","<br>"),
                             "@STATUS", 1
                             );
+                    String sql_cm = "UPDATE IMG_ALLBUM SET COMMENTS=COMMENTS+1 WHERE ALLBUM_ID=(select allbum_id from IMG_ALLBUM_DETAIL where img_id=@IMG_ID)";
+                    SQLConnectWeb.ExecuteNonQuery(sql_cm,
+                            "@IMG_ID", Request.QueryString["imgid"]);
+
                 }
             
             catch (Exception ex)

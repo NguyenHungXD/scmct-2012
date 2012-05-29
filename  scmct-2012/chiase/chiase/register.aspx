@@ -26,12 +26,12 @@
 </script>
 
 <fieldset>
-<legend>Đăng ký thành viên</legend>    
+<!--<legend>Đăng ký thành viên</legend>    -->
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td align=center colspan=2>
-        <font size=3><b><asp:Label ID="lbl_result" runat="server" ForeColor="#0000CC"></asp:Label></b></font>
-        <p align="left"><font color=red><i>* - Là thông tin bắt buột khi đăng ký tài khoản mới</i></font></p>
+        <font size=3><b><asp:Label ID="lbl_result" runat="server" ></asp:Label></b></font>
+        <p align="left"><font color=red><i>* - Là thông tin bắt buộc khi đăng ký tài khoản mới</i></font></p>
         <hr>
         </td>
     <td rowspan=9><br>
@@ -49,6 +49,7 @@
             ControlToValidate="txt_user_name" runat="server" 
             ErrorMessage="Nhập tên đăng nhập" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
             <asp:CustomValidator ID="CustomValidator2" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Tên đăng nhập ít nhất 4 ký tự" ClientValidationFunction="ValidateLenTDN"></asp:CustomValidator>
+    
     </td>
     </tr>
     <tr>

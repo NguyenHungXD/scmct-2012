@@ -64,21 +64,25 @@
          }
          function HH_IDSearch(obj)
          {
-             $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_NHAP_KHO_ajax3.aspx?do=HH_IDSearch",{
-             minChars:0,
-             width:350,
-             scroll:true,
-             formatItem:function (data) {
-                  return data[0];
-             }}).result(function(event,data){
-                 if($(obj).parents("#gridTable").attr("id") != null){
-                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#"+obj.id.replace("mkv_","")).val(data[1]);
+             $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_NHAP_KHO_ajax3.aspx?do=HH_IDSearch", {
+                 minChars: 0,
+                 width: 400,
+                 scroll: true,
+                 formatItem: function (data) {
+                     return data[0];
+                 },
+                 triggerDelete: "txtClearHH("+ $(obj).parent().parent().index() + ")"
+             }).result(function (event, data) {
+                 if ($(obj).parents("#gridTable").attr("id") != null) {
+                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id.replace("mkv_", "")).val(data[1]);
+                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id).val(removeHTMLTags(data[0]).split('-')[0]);
                      if ($("#gridTable").find("tr").eq($(obj).parent().parent().index() + 1).find("td:eq(1)").find("a:first").length == 0)
                          $.mkv.themDongTable("gridTable");
+                     afterSelectHH(obj, data[1]);
                  }
                  setTimeout(function () {
                      obj.focus();
-                 },100);
+                 }, 100);
              });
          }
          function NGUOI_NHAPSearch(obj)
@@ -150,7 +154,8 @@
              formatItem:function (data) {
                   return data[0];
              }}).result(function(event,data){
-                     $("#"+obj.id.replace("mkv_","")).val(data[1]);
+                 $("#" + obj.id.replace("mkv_", "")).val(data[1]);
+                
                  setTimeout(function () {
                      obj.focus();
                  },100);
@@ -169,5 +174,26 @@
                  setTimeout(function () {
                      obj.focus();
                  },100);
+             });
+         }
+         function NHH_IDSearch(obj) {
+             $(obj).unautocomplete().autocomplete("../ajax/DM_HANG_HOA_ajax2.aspx?do=NHH_IDSearch", {
+                 minChars: 0,
+                 width: 350,
+                 scroll: true,
+                 formatItem: function (data) {
+                     return data[0];
+                 }
+             }).result(function (event, data) {
+                 if ($(obj).parents("#gridTable").attr("id") != null) {
+                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id.replace("mkv_", "")).val(data[1]);
+                     if ($("#gridTable").find("tr").eq($(obj).parent().parent().index() + 1).find("td:eq(1)").find("a:first").length == 0)
+                         $.mkv.themDongTable("gridTable");
+                 } else {
+                     $("#" + obj.id.replace("mkv_", "")).val(data[1]);
+                 }
+                 setTimeout(function () {
+                     obj.focus();
+                 }, 100);
              });
          }

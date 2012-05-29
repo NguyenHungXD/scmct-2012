@@ -19,7 +19,7 @@
 </HeaderTemplate>
 <ItemTemplate>
     <tr class="post_news">
-    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("title")%></td><td align=right>
+    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td valign="middle"><img src="images/subject.png" width="40" height="25"><%#Eval("title")%></td><td align=right>
         <a href='<%#Eval("id","post_news.aspx?subjectID={0}") %>' class="btn">Bài mới</a>
     </td><tr></table> </td>
         
@@ -32,7 +32,7 @@
     <asp:Repeater ID="showListPost" runat="server" 
             onitemdatabound="showListPost_ItemDataBound1">
         <HeaderTemplate>
-        <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;">
+        <table border="0" cellpadding=4 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;background-color:#3BB9FF" class="btn_forum">
         <tr class="new_post">
         <td colspan=3>
             Tiêu đề
@@ -53,7 +53,7 @@
         </HeaderTemplate>
         <ItemTemplate>
 
-                    <tr class="new_post_details">
+                    <tr class="new_post_details_4rum">
                     <td with=10%>
                     
                     <asp:Image ID="img_like" runat="server" ImageUrl="images/new_post.gif" Width=25 Height=20/>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="like_fm">
                     &nbsp
-                    <div>
+                    </div>
                     </td>
 
                     <td align=left with=25%><asp:HyperLink ID="link_show_detail" runat="server" NavigateUrl='<%# Eval("bai_viet_id", "post_show_details.aspx?news_id={0}") %>'
@@ -79,7 +79,7 @@
                             CloseAction="CloseButton" ContentUrl='<%#Eval("username", "user_info.aspx?user_name={0}") %>'
                             EnableViewState="False" PopupElementID='<%#Eval("BAI_VIET_ID", "username{0}") %>'
                             PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
-                            Height="730px" FooterText=""
+                            Height="600px" FooterText=""
                             HeaderText="" ClientInstanceName="FeedPopupControl" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
                             CssPostfix="Aqua" LoadingPanelImagePosition="Top" 

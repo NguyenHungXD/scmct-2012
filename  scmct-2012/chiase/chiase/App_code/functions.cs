@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using chiase.Objects;
+using System.Collections;
+using System.Text;
 
 namespace chiase
 {
@@ -43,13 +45,36 @@ namespace chiase
         public static void fill_DropdownList(DropDownList obj, DataTable table, int v_Index, int v_Text)
         {
 
-            int i = 0;
+            int i = 1;
+            obj.Items.Clear();
+            obj.Items.Insert(0, new ListItem("Chọn", "None"));
             if (table.Rows.Count > 0)
             {
-                obj.Items.Clear();
+                
                 foreach (DataRow dr in table.Rows)
                 {
                     String valValue = dr[v_Index].ToString();
+                    String valText = dr[v_Text].ToString();
+                    obj.Items.Insert(i, new ListItem(valText, valValue));
+                    i++;
+                }
+
+            }
+
+
+        }
+        public static void fill_DropdownList(DropDownList obj, DataTable table, int v_Index, int v_Text,string addMore)
+        {
+
+            int i = 1;
+            obj.Items.Clear();
+            obj.Items.Insert(0, new ListItem("Chọn", "None"));
+            if (table.Rows.Count > 0)
+            {
+
+                foreach (DataRow dr in table.Rows)
+                {
+                    String valValue = String.Format("{0};{1}", addMore, dr[v_Index]);
                     String valText = dr[v_Text].ToString();
                     obj.Items.Insert(i, new ListItem(valText, valValue));
                     i++;
@@ -136,7 +161,146 @@ namespace chiase
             return GetStringDate(DateTime.Now);
         }
 
+        public static string getNo(string currentNo,int vmode)
+        {
+            string result = "";
+            int nextNo = 0;
+            //Phieu thu : PT-NO.000001,PT-NO.000002,....
+            if (vmode == 1)
+            { 
+                string[] vTemp = currentNo.Split('.');
+                nextNo = Convert.ToInt32(vTemp[1]);
+                nextNo += 1;
+                string temp = "000000" + nextNo;
+                result = "PT-NO." + temp.Substring(1, 6);
+            }
+            //Phieu thu : PC-NO.000001,PC-NO.000002,....
+            if (vmode == 2) 
+
+            {
+                string[] vTemp = currentNo.Split('.');
+                nextNo = Convert.ToInt32(vTemp[1]);
+                nextNo += 1;
+                string temp = "000000" + nextNo;
+                result = "PC-NO." + temp.Substring(1, 6);
+            }
+            return result;
+        }
+
+         
+
+        public static string conVertToText(double number)
+        {
+            string s = number.ToString("#");
+            string[] so = new string[] { "không", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín" };
+            string[] hang = new string[] { "", "nghìn", "triệu", "tỷ" };
+            int i, j, donvi, chuc, tram;
+            string str = " ";
+            bool booAm = false;
+            double decS = 0;
+            try
+            {
+                decS = Convert.ToDouble(s);
+            }
+            catch
+            {
+            }
+            if (decS < 0)
+            {
+                decS = -decS;
+                s = decS.ToString();
+                booAm = true;
+            }
+            i = s.Length;
+            if (i == 0)
+                str = so[0] + str;
+            else
+            {
+                j = 0;
+                while (i > 0)
+                {
+                    donvi = Convert.ToInt32(s.Substring(i - 1, 1));
+                    i--;
+                    if (i > 0)
+                        chuc = Convert.ToInt32(s.Substring(i - 1, 1));
+                    else
+                        chuc = -1;
+                    i--;
+                    if (i > 0)
+                        tram = Convert.ToInt32(s.Substring(i - 1, 1));
+                    else
+                        tram = -1;
+                    i--;
+                    if ((donvi > 0) || (chuc > 0) || (tram > 0) || (j == 3))
+                        str = hang[j] + str;
+                    j++;
+                    if (j > 3) j = 1;
+                    if ((donvi == 1) && (chuc > 1))
+                        str = "một " + str;
+                    else
+                    {
+                        if ((donvi == 5) && (chuc > 0))
+                            str = "lăm " + str;
+                        else if (donvi > 0)
+                            str = String.Format("{0} {1}", so[donvi], str);
+                    }
+                    if (chuc < 0)
+                        break;
+                    else
+                    {
+                        if ((chuc == 0) && (donvi > 0)) str = "lẻ " + str;
+                        if (chuc == 1) str = "mười " + str;
+                        if (chuc > 1) str = String.Format("{0} mươi {1}", so[chuc], str);
+                    }
+                    if (tram < 0) break;
+                    else
+                    {
+                        if ((tram > 0) || (chuc > 0) || (donvi > 0)) str = String.Format("{0} trăm {1}", so[tram], str);
+                    }
+                    str = " " + str;
+                }
+            }
+            if (booAm) str = "Âm " + str;
+                return str + "đồng chẵn.";
+        }
+
+
+
         #region Khanhdtn
+
+        public static string CheckDate(string strDate)
+        {
+            if (strDate == null || strDate == "")
+            {
+                return "";
+            }
+            string[] arrDDMMYY;
+            arrDDMMYY = strDate.Split('/');
+            int intDay;
+            int intMonth;
+            int intYear;
+            try
+            {
+                intDay = System.Convert.ToInt32(arrDDMMYY[0]);
+                intMonth = System.Convert.ToInt32(arrDDMMYY[1]);
+                intYear = System.Convert.ToInt32(arrDDMMYY[2]);
+                //    DateTime dtmDate = new DateTime(intYear, intMonth, intDay);
+                if (intMonth > 12)
+                {
+                    int temp = intMonth;
+                    intMonth = intDay;
+                    intDay = temp;
+                }
+                return intYear + "/" + intMonth + "/" + intDay;
+                //return intMonth + "/" + intDay + "/" + intYear;
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
+
         public static void AddEmptyRow(DataTable dtSource, string KeyFieldNam)
         {
             DataRow r = dtSource.NewRow();
@@ -293,6 +457,7 @@ namespace chiase
             colID.FieldName = DA_DU_AN.cl_ID;
             colID.Visible = false;
 
+            gridLookup.Columns.Clear();
             gridLookup.Columns.Add(colMa);
             gridLookup.Columns.Add(colTenDA);
             gridLookup.Columns.Add(colNgayTao);
@@ -321,7 +486,7 @@ namespace chiase
             yc.TIEU_DE,yc.NGAY_YEU_CAU,
             lyc.TEN_LOAI_YC,
             ttyc.[NAME] TRANG_THAI_YC,
-            nd.[NAME] NGUOI_YC
+            nd.[NAME] NGUOI_YC,yc.NGUOI_YEU_CAU
             FROM YC_YEU_CAU yc
             LEFT JOIN ND_THONG_TIN_ND nd ON nd.ID=yc.NGUOI_YEU_CAU
             LEFT JOIN YC_DM_LOAI_YEU_CAU lyc ON lyc.ID=yc.LOAI_YC_ID
@@ -351,54 +516,103 @@ namespace chiase
             DevExpress.Web.ASPxGridView.GridViewDataTextColumn colID = new DevExpress.Web.ASPxGridView.GridViewDataTextColumn();
             colID.Caption = "ID";
             colID.FieldName = YC_YEU_CAU.cl_YEU_CAU_ID;
+            colID.Visible = false;
 
-          
+            DevExpress.Web.ASPxGridView.GridViewDataTextColumn colNguoiYCID = new DevExpress.Web.ASPxGridView.GridViewDataTextColumn();
+            colNguoiYCID.Caption = "NGUOI_YC_ID";
+            colNguoiYCID.FieldName = YC_YEU_CAU.cl_NGUOI_YEU_CAU;
+            colNguoiYCID.Visible = false;
 
+            gridLookup.Columns.Clear();
             gridLookup.Columns.Add(colTieuDe);
             gridLookup.Columns.Add(colNgayYC);
             gridLookup.Columns.Add(colNguoiYC);
             gridLookup.Columns.Add(colLoaiYC);
             gridLookup.Columns.Add(colTTYC);
             gridLookup.Columns.Add(colID);
-
+            gridLookup.Columns.Add(colNguoiYCID);
          //   gridLookup.GridView.Settings.ShowFilterRow = true;
             AddEmptyRow(dtYC, YC_YEU_CAU.cl_YEU_CAU_ID);
             gridLookup.DataSource = dtYC;
             gridLookup.KeyFieldName = YC_YEU_CAU.cl_YEU_CAU_ID;
             gridLookup.DataBind();
 
+        }        
+      
+        private static Hashtable m_executingPages = new Hashtable();
+
+        public static void ShowMessage(string sMessage)
+        {
+            // If this is the first time a page has called this method then
+            if (!m_executingPages.Contains(HttpContext.Current.Handler))
+            {
+                // Attempt to cast HttpHandler as a Page.
+                Page executingPage = HttpContext.Current.Handler as Page;
+                if (executingPage != null)
+                {
+                    // Create a Queue to hold one or more messages.
+                    Queue messageQueue = new Queue();
+
+                    // Add our message to the Queue
+                    messageQueue.Enqueue(sMessage);
+
+                    // Add our message queue to the hash table. Use our page reference
+                    // (IHttpHandler) as the key.
+                    m_executingPages.Add(HttpContext.Current.Handler, messageQueue);
+
+                    // Wire up Unload event so that we can inject some JavaScript for the alerts.
+                    executingPage.Unload += new EventHandler(ExecutingPage_Unload);
+                }
+            }
+            else
+            {
+                // If were here then the method has allready been called from the executing Page.
+                // We have allready created a message queue and stored a reference to it in our hastable. 
+                Queue queue = (Queue)m_executingPages[HttpContext.Current.Handler];
+
+                // Add our message to the Queue
+                queue.Enqueue(sMessage);
+            }
+        }
+
+        // Our page has finished rendering so lets output the JavaScript to produce the alert's
+        private static void ExecutingPage_Unload(object sender, EventArgs e)
+        {
+            // Get our message queue from the hashtable
+            Queue queue = (Queue)m_executingPages[HttpContext.Current.Handler];
+
+            if (queue != null)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                // How many messages have been registered?
+                int iMsgCount = queue.Count;
+
+                // Use StringBuilder to build up our client slide JavaScript.
+                sb.Append("<script language='javascript'>");
+
+                // Loop round registered messages
+                string sMsg;
+                while (iMsgCount-- > 0)
+                {
+                    sMsg = (string)queue.Dequeue();
+                    sMsg = sMsg.Replace("\n", "\\n");
+                    sMsg = sMsg.Replace("\"", "'");
+                    sb.Append(@"alert( """ + sMsg + @""" );");
+                }
+
+                // Close our JS
+                sb.Append(@"</script>");
+
+                // Were done, so remove our page reference from the hashtable
+                m_executingPages.Remove(HttpContext.Current.Handler);
+
+                // Write the JavaScript to the end of the response stream.
+                HttpContext.Current.Response.Write(sb.ToString());
+            }
         }
         #endregion
-        public static string CheckDate(string strDate)
-        {
-            if (strDate == null || strDate == "")
-            {
-                return "";
-            }
-            string[] arrDDMMYY;
-            arrDDMMYY = strDate.Split('/');
-            int intDay;
-            int intMonth;
-            int intYear;
-            try
-            {
-                intDay = System.Convert.ToInt32(arrDDMMYY[0]);
-                intMonth = System.Convert.ToInt32(arrDDMMYY[1]);
-                intYear = System.Convert.ToInt32(arrDDMMYY[2]);
-                //				DateTime dtmDate = new DateTime(intYear, intMonth, intDay);
-                if (intMonth > 12)
-                {
-                    int temp = intMonth;
-                    intMonth = intDay;
-                    intDay = temp;
-                }
-                return intYear + "/" + intMonth + "/" + intDay;
-                //return intMonth + "/" + intDay + "/" + intYear;
-            }
-            catch (Exception)
-            {
-                return "";
-            }
-        }
+
+
     }
 }

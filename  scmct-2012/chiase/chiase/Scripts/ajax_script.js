@@ -1,4 +1,4 @@
-
+﻿
 	 	var requpdate; 
 	 	function loadXMLUpdate(url) 
 	    { 
@@ -44,13 +44,15 @@
 	   		    alert("Your browser does not support XMLHTTP."); 
 	   }
 	
-	 function processReqUpdate()
-     { 
+	 function processReqUpdate() { 
+     try
+                { 
 	     // only if requpdate shows "loaded" 
 	     if (requpdate.readyState == 4)
          { 
 	     // only if "OK" 
-	         if (requpdate.status == 200) { 
+             if (requpdate.status == 200) { 
+
 	         // ...processing statements go here... 
 	 		        eval(requpdate.responseText); 		
 	 		        window.status="Done"; 
@@ -61,6 +63,10 @@
 	               requpdate.statusText); 
 	          } 
 	     } 
+         }
+catch (e) {
+    return;
+} 
 	 } 	
     
 	 	var req; 
@@ -164,7 +170,23 @@
 	   http.open("POST", url, false);  
 	   http.send(null); 
 	   var result = http.responseText; 
-	   return result.substring(0,result.length-1);  
+	   return result.substring(0,result.length);  
 	 } 
 	
 
+function readXMLFormat(content,tagNameStart,tagNameEnd)
+{
+    var startIndex = content.indexOf(tagNameStart) + tagNameStart.length ;
+    var endIndex =  content.indexOf(tagNameEnd);
+    if(endIndex>0) 
+        return content.substring(startIndex,endIndex);
+    else
+        return "";
+}
+
+
+
+
+
+
+ 

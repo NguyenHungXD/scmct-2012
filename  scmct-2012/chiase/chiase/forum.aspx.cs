@@ -17,14 +17,19 @@ namespace chiase
             if (!IsPostBack)
             {
                 display();
+                Session["current"] = "2"; //[1.Trang chu 2.Dien Dan 3.Hinh Anh 4.Gui Yeu Cau 5.Gioi Thieu 6.Lien He 7.Quan Tri]
+                Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='forum.aspx' title='Diễn đàn'>Diễn đàn</a> ";
             }
         }
         public void display()
         {
             try
             {
-                DataTable table = BV_DM_CHU_DE_BV.GetTableFields(new string[] { BV_DM_CHU_DE_BV.cl_SORT },
-                    BV_DM_CHU_DE_BV.cl_ID, BV_DM_CHU_DE_BV.cl_TITLE, BV_DM_CHU_DE_BV.cl_DESCRIPTION, BV_DM_CHU_DE_BV.cl_CREATED_DATE);
+                //DataTable table = BV_DM_CHU_DE_BV.GetTableFields(new string[] { BV_DM_CHU_DE_BV.cl_SORT },
+                //    BV_DM_CHU_DE_BV.cl_ID, BV_DM_CHU_DE_BV.cl_TITLE, BV_DM_CHU_DE_BV.cl_DESCRIPTION, BV_DM_CHU_DE_BV.cl_CREATED_DATE);
+
+                string sql = @"select * from BV_DM_CHU_DE_BV where deleted is null";
+                DataTable table = SQLConnectWeb.GetTable(sql);
                 show_subject.DataSource = table;
                 show_subject.DataBind();
 
@@ -50,7 +55,7 @@ namespace chiase
                 String sql = string.Format(@"SELECT a.*,b.USERNAME
                          FROM BV_BAI_VIET a
                         INNER JOIN  ND_THONG_TIN_DN b ON  a.NGUOI_TAO=b.MEM_ID
-                        WHERE CHU_DE_ID={0} and BAI_VIET_CHA_ID IS NULL", id);
+                        WHERE CHU_DE_ID={0} and BAI_VIET_CHA_ID IS NULL and a.deleted is null", id);
                 DataTable baiviet = SQLConnectWeb.GetTable(sql);
                 //DataTable baiviet = BV_BAI_VIET.GetTableFields(BV_BAI_VIET.cl_CHU_DE_ID + "=" + id,
                 //    new string[] { BV_BAI_VIET.cl_SORT }, BV_BAI_VIET.cl_TIEU_DE, BV_BAI_VIET.cl_NOI_DUNG);

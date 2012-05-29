@@ -478,8 +478,11 @@
 
             return value;
         }
-
-        #endregion
+        public static DataTable GetData(String sql, params Object[] parameters)
+        {
+            return SQLConnectWeb.Fill(new DataTable(), sql, parameters);
+        }
+#endregion
     }
 }
 

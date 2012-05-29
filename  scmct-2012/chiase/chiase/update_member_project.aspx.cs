@@ -19,6 +19,25 @@ namespace chiase
 
             if (Request.QueryString["vmode"] == "del")
                 del_member_project();
+
+            if (Request.QueryString["vmode"] == "approve")
+                approve_member_project();
+        }
+
+        public void approve_member_project()
+        {
+            try
+            {
+                    String sql = "UPDATE DA_NHAN_SU SET status=1,EDITED_BY=@EDITED_BY,EDITED_DATE=@EDITED_DATE WHERE ID=@ID";
+                    SQLConnectWeb.ExecuteNonQuery(sql,
+                            "@ID", Request.QueryString["id"],
+                            "@EDITED_BY", functions.LoginMemID(this),
+                            "@EDITED_DATE", DateTime.Now
+                            );
+                }
+            catch (Exception ex)
+            {
+            }
         }
 
         public void lock_member_project()

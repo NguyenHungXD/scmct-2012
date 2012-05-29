@@ -26,6 +26,7 @@ public class Upload : IHttpHandler {
             string[] arrays = id.Split(';');
             userid = arrays[1];
             allbumid = arrays[0];
+            
             string filename = postedFile.FileName;
             string path = tempPath + @"/" + filename;
             savepath = context.Server.MapPath(tempPath);
@@ -33,6 +34,8 @@ public class Upload : IHttpHandler {
                 Directory.CreateDirectory(savepath);
             postedFile.SaveAs(savepath + @"/" + filename);
 
+            
+            
             //save images path to database
             string sql = @"insert into IMG_ALLBUM_DETAIL (allbum_id,path,title,status,posted_by,posted_date,liked) values(@allbum_id,@path,@title,@status,@posted_by,@posted_date,@liked)";
             SQLConnectWeb.ExecuteNonQuery(sql,
@@ -41,8 +44,10 @@ public class Upload : IHttpHandler {
                         "@title", filename,
                         "@status", 1,
                         "@posted_by", userid,
-                        "@posted_date", DateTime.Now,
+                        "@posted_date", functions.GetStringDatetime(),
                         "@liked", 0);
+            
+            
             
             context.Response.Write(tempPath + "/" + filename);
             context.Response.StatusCode = 200;

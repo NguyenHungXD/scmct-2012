@@ -88,11 +88,13 @@ div.image-title {
 }
 div.image-desc 
 {
-    color:Blue;
+    color:#0066CC;
 	line-height: 1.3em;
 	font-size: 1.4em;
 	padding-top: 13px;
 	font-weight:bold;
+
+
 }
 div.navigation {
 	/* The navigation style is set using jQuery so that the javascript specific styles won't be applied unless javascript is enabled. */

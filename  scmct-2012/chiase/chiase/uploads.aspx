@@ -2,8 +2,6 @@
 
 <%@ Register Assembly="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title></title>
@@ -14,7 +12,34 @@
 <body>
 <fieldset>
 <form id="form1" runat="server">
-<asp:Panel ID="Panel1" runat="server" Visible="true">
+
+
+<asp:Panel ID="Panel3" runat="server" Visible="false">
+
+  <table border=0 cellpadding=3 cellspacing=3 width=100%>
+        <tr>
+        <td>
+        Tên allbum:
+        </td>
+        <td>
+            <b><%= allbum_name %></b>
+        </td>
+        </tr>
+        <tr>
+        <td valign="top">
+        Chi tiết:
+        </td>
+        <td>
+           <b><%= allbum_detail %></b>
+        </td>         
+        </tr>
+        </table>
+
+
+</asp:Panel>
+
+
+<asp:Panel ID="Panel1" runat="server" Visible="false">
   <table border=0 cellpadding=3 cellspacing=3 width=100%>
         <tr>
         <td>
@@ -48,6 +73,8 @@
         </tr>
         </table>
          </asp:Panel>
+
+
             <asp:Label ID="lbl_error" runat="server"></asp:Label>
             <br>
  
@@ -73,7 +100,7 @@
 </body>
 </html>
 <script type = "text/javascript">
-    var allbul_id = document.all["<%=allbum_id.ClientID%>"].value;
+    var allbum_id = document.all["<%=allbum_id.ClientID%>"].value;
     var user_id = document.all["<%=user_id.ClientID%>"].value;
 
     $(window).load(
@@ -82,7 +109,7 @@
             'uploader': 'scripts/uploader.swf',
             'cancelImg': 'images/cancel.png',
             'buttonText': 'Chon hinh...',
-            'script': 'Upload.ashx?id='+ allbul_id + ';' + user_id+';',
+            'script': 'Upload.ashx?id=' + allbum_id + ';' + user_id + ';',
             'fileDesc': 'Image Files',
             'fileExt': '*.jpg;*.jpeg;*.gif;*.png',
             'multi': true,
@@ -91,4 +118,3 @@
     }
 );
 </script> 
-

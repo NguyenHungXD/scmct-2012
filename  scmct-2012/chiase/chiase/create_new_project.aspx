@@ -40,7 +40,7 @@
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td align="center" colspan=2>
-        <font size=3><b><asp:Label ID="lbl_error" runat="server" ForeColor="#0000CC"></asp:Label></b></font>
+        <font size=3><b><asp:Label ID="lbl_error" runat="server" ></asp:Label></b></font>
         </td>
         <td valign="middle" align="right">
                             <dx:ASPxButton ID="btn_create_projects" runat="server" Text="Lưu dự án" 
@@ -63,6 +63,7 @@
         <asp:TextBox ID="txt_project_code" runat="server"  class="txtformat" 
             Width="150px" Height="22px" BackColor="#CCFFCC">
             </asp:TextBox> <i><font color="#0000CC">(Bạn nên thay đổi mã dự án phù hợp)</font></i>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" Display="Dynamic" ForeColor="Red" ControlToValidate="txt_project_code" runat="server" ErrorMessage="Nhập mã dự án"></asp:RequiredFieldValidator>
     </td>
     </tr>
     <tr>
@@ -72,6 +73,7 @@
     <td>
         <asp:TextBox ID="txt_project_name" runat="server"  class="txtformat" 
             Width="300px" Height="22px" BackColor="#CCFFCC"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" Display="Dynamic" ForeColor="Red" ControlToValidate="txt_project_name" runat="server" ErrorMessage="Nhập tên dự án"></asp:RequiredFieldValidator>
     </td>
     </tr>
     </table>
@@ -147,7 +149,6 @@
     <tr>
        <td>
            Ghi chú:
-
     </td>
     <td>
     <asp:TextBox ID="txt_notes" runat="server" class="txtformat_area"
@@ -160,10 +161,13 @@
     </td>
     <td>
         <asp:DropDownList ID="dropd_status" runat="server">
-        </asp:DropDownList>&nbsp;&nbsp;&nbsp;&nbsp<asp:LinkButton ID="btn_add_project_status" runat="server" 
+        </asp:DropDownList>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="dropd_status" Display="Dynamic" InitialValue="None" ForeColor="REd" runat="server" ErrorMessage="Chọn trạng thái"></asp:RequiredFieldValidator>
+
+        &nbsp;&nbsp;&nbsp;&nbsp<asp:LinkButton ID="btn_add_project_status" runat="server" 
             Text="[Thêm trạng thái]" onclick="btn_add_project_status_Click"></asp:LinkButton>
             
-            
+        
             <asp:Panel
                 ID="panel_add_new_status" runat="server" BackColor="#0099FF" 
             Direction="LeftToRight" Height="50px" HorizontalAlign="Left" 
@@ -196,6 +200,7 @@
                 </table>
 
      </asp:Panel> 
+
         </td>
     </tr>
     <tr>
@@ -205,6 +210,10 @@
     <td>
         <asp:TextBox ID="txt_book" runat="server"  class="txtformat" 
             Width="150px" Height="22px" BackColor="#CCFFCC"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" 
+            ControlToValidate="txt_book" Display="Dynamic" runat="server" 
+            ErrorMessage="Nhập số sách cần cho dự án" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_book" ValidationExpression="^\d+$" runat="server" ErrorMessage=" Số lượng sách phải là số"></asp:RegularExpressionValidator>
     </td>
     </tr>
     <tr>

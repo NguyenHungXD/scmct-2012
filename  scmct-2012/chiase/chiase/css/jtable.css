@@ -61,7 +61,7 @@ h2
         text-align:center;
         margin-top:1em;
         color:#333;
-        text-transform:uppercase;
+        text-transform:none;
         letter-spacing:1px;
         font-size:1.2em;
         }
@@ -108,7 +108,7 @@ table.jtable tr th
         border-bottom: 1px solid #C1DAD7;
         border-top: 1px solid #C1DAD7;
         letter-spacing: 1px;
-        text-transform: uppercase;
+        text-transform: none;
         text-align: left;
         padding: 8px 12px 4px 12px;
         background: #3090c7 url(./images/bg_header.jpg) no-repeat;

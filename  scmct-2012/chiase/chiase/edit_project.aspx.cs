@@ -33,7 +33,7 @@ namespace chiase
                     DataTable table_status = DA_DM_TRANG_THAI_DU_AN.GetTableAll();
                     functions.fill_DropdownList(dropd_status, table_status, 0, 1);
 
-                    String sql = @"select a.*,b.name 
+                    String sql = @"select a.*,b.name ,b.id as tt_id
                             from da_du_an a 
                             inner join DA_DM_TRANG_THAI_DU_AN b on a.TRANG_THAI_ID = B.ID Where a.id=@v_id ";
 
@@ -47,7 +47,7 @@ namespace chiase
                         txt_book.Text = book.ToString();
                         txt_notes.Text = (String)table.Rows[0]["GHI_CHU"];
                         ASPxHtmlEditor1.Html = (String)table.Rows[0]["CHI_TIET"];
-                        functions.selectedDropdown(dropd_status, (String)table.Rows[0]["NAME"]);
+                        functions.selectedDropdown(dropd_status, table.Rows[0]["tt_id"].ToString());
                         DateTime start_date = (DateTime)table.Rows[0]["ngay_bat_dau"];
                         DateTime end_date = (DateTime)table.Rows[0]["ngay_ket_thuc"];
 
@@ -80,7 +80,7 @@ namespace chiase
                 //Database.ExecuteNonQuery(sql,
                 //            "@v_NAME", txt_status_project.Text,
                 //            "@V_ENABLE_BIT", 'Y',
-                //            "@V_CREATED_DATE", DateTime.Now,
+                //            "@V_CREATED_DATE", functions.GetStringDatetime(),
                 //            "@V_CREATED_BY", table.Rows[0]["mem_id"]);
 
                 DA_DM_TRANG_THAI_DU_AN ttda = DA_DM_TRANG_THAI_DU_AN.Insert_Object(txt_status_project.Text, "Y",
@@ -123,7 +123,7 @@ namespace chiase
                 int done = SQLConnectWeb.ExecuteNonQuery(sql,
                                             "@V_MA_DU_AN",txt_project_code.Text,
                                             "@V_TEN_DU_AN", txt_project_name.Text,
-                                            "@V_NGAY_CAP_NHAT", DateTime.Now,
+                                            "@V_NGAY_CAP_NHAT", functions.GetStringDatetime(),
                                             "@V_NGUOI_CAP_NHAT", functions.LoginMemID(this),
                                             "@V_NGAY_BAT_DAU", start_date,
                                             "@V_NGAY_KET_THUC", end_date,

@@ -21,15 +21,22 @@
                                                                 function forcusit(divid) {
                                                                     document.getElementById(divid).focus();
                                                                 }
+                                                                function validate() { 
+                                                                    var username = document.all["<%=vusername.ClientID%>"].value;
+                                                                    if (username == "") {
+                                                                        alert("Đăng nhập để bình luận allbum!")
+                                                                        return;
+                                                                    }
+                                                                }
                                                                 function getTime() {
                                                                     return '<%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %>';
                                                                 }
-                                                                function update_cm(id,divid,dividmain) {
+                                                                function update_cm(id, divid, dividmain, divshow, divcontent) {
                                                                     var cm = document.getElementById(divid).value;
                                                                     var username = document.all["<%=vusername.ClientID%>"].value;
                                                                     var images = document.all["<%=imgpath.ClientID%>"].value;
                                                                     if (cm != "" && username != "") {
-                                                                        var url = "update_img_comment.aspx?imgid=" + id + "&content_cm=" + cm;
+                                                                        var url = "update_img_comment.aspx?imgid=" + id + "&content_cm=" + encodeURIComponent(cm);
                                                                         loadXMLUpdate(url);
                                                                         // Append content to div
                                                                         var divappend = document.getElementById(dividmain);
@@ -38,14 +45,14 @@
                                                                         newdiv.setAttribute("id", divIdName);
 
                                                                         var content = "<div id=" + divIdName + ">" +
-                                                                                        "<table cellpadding=0 cellspacing=1 border=0 width=100%>" +
+                                                                                        "<table cellpadding=3 cellspacing=1 border=0 width=100%>" +
                                                                                         "<tr style=background-color:#FBFBFC;font-style:italic;>" +
-                                                                                        "<td rowspan=2 width=5%><img src=images\\avatars\\" + images + " width=40 height=40></td>" +
+                                                                                        "<td rowspan=2 width=5%><img src=images\\avatars\\" + images + " width=40 height=40 style='border:2px solid #FFFFFF'></td>" +
                                                                                         "<td align=left>" + username + '(' + getTime() + ')' +
                                                                                         "</td>" +
                                                                                         "</tr>" +
                                                                                         "<tr>" +
-                                                                                        "<td colspan=2 style=color:#330066>&nbsp;&nbsp" + cm +
+                                                                                        "<td colspan=2 style=color:#330066>" + cm.replace(/\n/g, '<br>') +
                                                                                         "</td>" +
                                                                                         "</tr>" +
                                                                                         "</table>" +
@@ -57,6 +64,14 @@
 
                                                                         document.getElementById(divid).value = "";
                                                                         document.getElementById(divid).focus();
+
+
+                                                                        var divid = document.getElementById(divshow);
+                                                                        var divid_content = document.getElementById(divcontent);
+                                                                        if (divid.style.display == "none") {
+                                                                            divid.style.display = "block";
+                                                                            divid_content.innerHTML = "<a><b>-</b> Ẩn bình luận</a>";
+                                                                        }
 
                                                                     } else {
 
@@ -78,12 +93,27 @@
                                                                     }
 
                                                                 }
-                                                                function update_img_liked(allbumid,val) {
+                                                                function update_img_liked(imgid,val) {
+                                                                    var divid = document.getElementById("imageidimg");
+                                                                    var liked = val + 1;
+                                                                    divid.innerHTML = '(' + liked + ')';
+                                                                    var url = "update_like_post.aspx?img_id=" + imgid + "&mode=3";
+                                                                    loadXMLUpdate(url);
+                                                                }
+                                                                function update_allbum_liked(allbumid, val) {
                                                                     var divid = document.getElementById("allbumidimg");
                                                                     var liked = val + 1;
                                                                     divid.innerHTML = '(' + liked + ')';
-                                                                    var url = "update_like_post.aspx?allbum_id=" + allbumid +"&mode=3";
+                                                                    var url = "update_like_post.aspx?allbum_id=" + allbumid + "&mode=4";
                                                                     loadXMLUpdate(url);
+                                                                }
+
+                                                                function like_post(id, val, divid) {
+
+                                                                    var url = "update_like_post.aspx?comment_id=" + id + "&mode=5";
+                                                                    loadXMLUpdate(url);
+                                                                    document.getElementById(divid).innerHTML = val + 1;
+                                                                    
                                                                 }
 
 </script>
@@ -125,18 +155,24 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
 						                        <li>
-							                        <a class="thumb" name=<%#Eval("allbum_name")%> href=<%#Eval("path") %> title=<%#Eval("title") %>>
+							                        <a class="thumb" name=<%#Eval("allbum_name")%> href=<%#Eval("path") %> title='<%#Eval("title") %>'>
 								                        <img src='<%#Eval("path") %>' alt='<%#Eval("title") %>' width="75" height="75"/>
 							                        </a>
 							                        <div class="caption">
                                                        
 								                        <div class="download">
+                                                        
 									                        <a href='<%#Eval("path") %>' target=_blank>Xem ảnh góc</a>
 								                        </div>
-								                        <div class="image-title"><%#Eval("title") %></div>
-                                                        <div class="image-desc"><%#Eval("description") %></div>
-                                
-                                                        <div style="background-color: #FFFFCC;color:Green;border: 1px solid #FFFFFF;cursor:pointer;"><table cellpadding=0 cellspacing=0 border=0 width=100%><tr><td width=25% align="right"><a onclick=forcusit('<%#Eval("img_id","txt_comment{0}")%>')>Bình luận</a> | <a onclick=update_img_liked('<%#Eval("allbum_id") %>',<%#Eval("liked") %>)>Thích</a></td><td width='20%' id='allbumidimg'>(<%#Eval("liked") %>)</td><td align=right id='<%#Eval("img_id","showhide{0}")%>' onclick=showhide('<%#Eval("img_id","divid{0}")%>','<%#Eval("img_id","showhide{0}")%>')><a>+ Xem bình luận</a></td><td>&nbsp(<asp:Label ID="cnt_cm" runat="server" Text=""></asp:Label>&nbsp bình luận)</td></tr></table></div>
+								                        <div class="image-title" style="color:Green"><%#Eval("title") %></div>
+                                                        <div class="image-desc">
+                                                        <table cellpadding=0 cellspacing=0 border=0 width=100%><tr><td><%#Eval("description") %></td></tr></table>
+                                                        </div>
+
+                                                        
+
+
+                                                        <div style="background-color: #FFFFCC;color:Green;border: 1px solid #FFFFFF;cursor:pointer;"><table cellpadding=0 cellspacing=0 border=0 width=100%><tr><td width=25% align="right"><a onclick=forcusit('<%#Eval("img_id","txt_comment{0}")%>')>Bình luận</a> | <a onclick=update_img_liked('<%#Eval("img_id") %>',<%#Eval("imgLiked") %>)>Thích</a></td><td width='20%' id='imageidimg'>(<%#Eval("imgLiked")%>)</td><td align=right id='<%#Eval("img_id","showhide{0}")%>' onclick=showhide('<%#Eval("img_id","divid{0}")%>','<%#Eval("img_id","showhide{0}")%>')><a>+ Xem bình luận</a></td><td>&nbsp(<asp:Label ID="cnt_cm" runat="server" Text=""></asp:Label>&nbsp bình luận)</td></tr></table></div>
                                                         <div id='<%#Eval("img_id","divid{0}")%>' style="background-color: #F2F2F2;color:#009933;display:none;"> 
                                                             
                                                         <asp:Repeater ID="showcomment" runat="server">
@@ -144,17 +180,17 @@
                                                         </HeaderTemplate>
                                                         <ItemTemplate>
                                                             <div id='<%#Eval("ID","divchil{0}") %>'>
-                                                                <table cellpadding="0" cellspacing="1" border="0" width="100%">
+                                                                <table cellpadding="3" cellspacing="1" border="0" width="100%">
                                                                 <tr style="background-color:#FBFBFC;font-style:italic;" >
                                                                 <td rowspan="2" width="5%">
-                                                                    <img src='<%#Eval("avatar_path","images\\avatars\\{0}") %>' width="40" Height="40"/>
+                                                                    <img src='<%#Eval("avatar_path","images\\avatars\\{0}") %>' width="40" Height="40" style="border:2px solid #FFFFFF"/>
                                                                 </td>
                                                                 <td align="left">
                                                                     <%#Eval("username") %>(<%#Eval("commented_date", "{0:dd/MM/yyyy hh:mm:ss tt}")%>)
                                                                 </td>
                                                                 </tr>
                                                                 <tr>
-                                                                <td colspan="2" style="color:#330066">&nbsp;&nbsp
+                                                                <td colspan="2" style="color:#330066">
                                                                 <%#Eval("comment") %>
                                                                 </td>
                                                                 </tr>
@@ -167,13 +203,13 @@
                                                     </div> 
                                                     <div style="border:1px solid #E3E0EA;background-color: #FFFFCC;">
                                                     <textarea id='<%#Eval("img_id","txt_comment{0}")%>' cols="60" rows="3" name="myname" class="txtformat_area"></textarea>
-                                                    <input id='btn_comment' type='button' value='Bình luận' class='btn' onclick=update_cm('<%#Eval("img_id")%>','<%#Eval("img_id","txt_comment{0}")%>','<%#Eval("img_id","divid{0}")%>') />
+                                                    <input id='btn_comment' type='button' value='Bình luận' class='btn' onclick=update_cm('<%#Eval("img_id")%>','<%#Eval("img_id","txt_comment{0}")%>','<%#Eval("img_id","divid{0}")%>','<%#Eval("img_id","divid{0}")%>','<%#Eval("img_id","showhide{0}")%>') />
                                                     </div>
                                                     
 						                        </li>
-                                           
                                 </ItemTemplate>
                                 <FooterTemplate>
+
                                 </FooterTemplate>
                                 </asp:Repeater>   
                                 
@@ -191,10 +227,24 @@
 
 		</div>
         <br><br>&nbsp
-
+    
     <asp:Repeater ID="showList_comment" runat="server">
         <HeaderTemplate>
         <table border="0" cellpadding=1 cellspacing=3 width="100%"  style="border:0px solid #CCFFFF;">
+        <tr>
+        <td colspan=2>
+        <table style="border:1px solid #CCFFFF;background-color:Green;color:White;font-weight:bold;cursor:pointer;">
+        <tr>
+        <td>
+            <a onclick=update_allbum_liked('<%=allbum_id%>',<%=v_liked%>)>Thích</a>
+        </td>
+        <td>
+            <div id='allbumidimg'>(<%=v_liked%>)</div>
+            </td>
+            </tr>
+            </table>
+        </td>
+        </tr>
         </HeaderTemplate>
         <ItemTemplate>
                     <tr >
@@ -282,24 +332,27 @@
                     <font size=-3><i>
                         Ngày, <%#Eval("commented_date", "{0:dd/MM/yyyy hh:mm:ss tt}")%>
                     </font></i>
+
+
                     </td>
                    <td colspan=2>                    
                    <b>
-                   <table cellpadding=0 cellspacing=0 border=0>
-                   <tr bgcolor="#0033ff" style="cursor:pointer;">
-                   <td>
-                   
-                    
-                    </td>
-                    <td>
-                    <font color="#FFFFFFF">
-                     
-                     </font>
-                     </a>
-                     </td>
-                     </tr>
-                     </table>
-                     </b>
+                                      <b>
+                                       <table cellpadding=0 cellspacing=0 border=0>
+                                       <tr bgcolor="#0033ff" style="cursor:pointer;">
+                                       <td>
+                                       <a title="Thích" onclick=like_post(<%# Eval("id")%>,<%#Eval("liked")%>,'<%#Eval("id","div{0}")%>')>
+                                        <asp:Image ID="Image2" runat="server"  ImageUrl="images/like.gif" Width=20 Height=15/>
+                                        </td>
+                                        <td>
+                                        <font color="#FFFFFFF">
+                                         <div id='<%#Eval("id","div{0}")%>'>&nbsp;&nbsp<%#Eval("liked")%>&nbsp</div>
+                                         </font>
+                                         </a>
+                                         </td>
+                                         </tr>
+                                         </table>
+                                         </b>
                      <td>
                     </tr>
                     </table>
@@ -370,6 +423,9 @@
             CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
             SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" Width="110px" 
                 onclick="btn_comments_Click">
+                <ClientSideEvents Click="function(s, e) {
+                                    validate();
+                    }" />
         </dx:ASPxButton>
         </td>
         <td>
@@ -377,6 +433,9 @@
             CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
             SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" 
             Width="110px">
+            <ClientSideEvents Click="function(s, e) {
+                            window.location.href='show_allbum.aspx'
+                    }" />
         </dx:ASPxButton>
         </td>
         </tr>

@@ -5,11 +5,11 @@
 
 <asp:Content ID="register" ContentPlaceHolderID="content_area" Runat="Server">
     <fieldset>
-<legend>Cập nhật thông tin cá nhân</legend>    
+<!--<legend>Cập nhật thông tin cá nhân</legend>  -->  
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td align=center colspan=2>
-        <font size=3><b><asp:Label ID="lbl_error" runat="server" ForeColor="#0000CC"></asp:Label></b></font>
+        <font size=3><b><asp:Label ID="lbl_error" runat="server" ForeColor="White"></asp:Label></b></font>
         </td>
     </tr>
     <tr>

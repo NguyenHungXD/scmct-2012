@@ -12,6 +12,9 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
 
+<asp:HiddenField ID="vusername" runat="server" />
+<asp:HiddenField ID="bai_viet_ids" runat="server" />
+
 <script type="text/javascript">
     
     function like_post(id,val,divid) {
@@ -23,10 +26,35 @@
             document.getElementById('liked2').innerHTML = val + 1;
             document.getElementById('liked3').innerHTML = val + 1;
         }
-        else{
-            document.getElementById(divid).innerHTML = val + 1;
+        else {
+            var result = val + 1;
+            document.getElementById(divid).innerHTML = "&nbsp(" +result + ")&nbsp";
         }
     }
+
+    function validate() {
+        var username = document.all["<%=vusername.ClientID%>"].value;
+        if (username == "") {
+            alert("Đăng nhập để bình luận allbum!")
+            return;
+        }
+    }
+    function deletes(id,vmode) {
+
+        var url = "post_show_details.aspx?id=" + id + "&vmode=del";
+        loadXMLUpdate(url);
+
+        if (vmode != "comments") {
+            window.location = "forum.aspx";
+            alert("Bài viết đã được xóa");
+        }
+        else {
+            var bv_id = document.all["<%=bai_viet_ids.ClientID%>"].value;
+            window.location = "post_show_details.aspx?news_id=" + bv_id;
+            alert("Bình luận đã được xóa");
+        }
+        }
+    
 </script>
 
     <script type="text/javascript">
@@ -52,7 +80,8 @@
 </HeaderTemplate>
 <ItemTemplate>
     <tr class="post_news">
-    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("tieu_de")%></td><tr></table> </td></tr>
+    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("tieu_de")%></td><td align="right"> 
+        <a href="<%#Eval("BAI_VIET_ID","post_news.aspx?post_id={0}")%>" class="btn">Sửa bài</a>  <a style="cursor:hand" onclick=deletes('<%#Eval("BAI_VIET_ID")%>') class="btn">Xóa bài</a></td><tr></table> </td></tr>
 
     <tr class="post_news_desc">
         <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr>
@@ -83,7 +112,7 @@
                             CloseAction="CloseButton" ContentUrl='<%#Eval("username", "user_info.aspx?user_name={0}") %>'
                             EnableViewState="False" PopupElementID='<%#Eval("username", "username{0}") %>'
                             PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
-                            Height="730px" FooterText=""
+                            Height="600px" FooterText=""
                             HeaderText="" ClientInstanceName="FeedPopupControl" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
                             CssPostfix="Aqua" LoadingPanelImagePosition="Top" 
@@ -168,7 +197,7 @@
                             CloseAction="CloseButton" ContentUrl='<%#Eval("username", "user_info.aspx?user_name={0}") %>'
                             EnableViewState="False" PopupElementID='<%#Eval("BAI_VIET_ID", "username{0}") %>'
                             PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
-                            Height="730px" FooterText=""
+                            Height="600px" FooterText=""
                             HeaderText="" ClientInstanceName="FeedPopupControl" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
                             CssPostfix="Aqua" LoadingPanelImagePosition="Top" 
@@ -230,15 +259,15 @@
                     </td>
                    <td colspan=2>                    
                    <b>
-                   <table cellpadding=0 cellspacing=0 border=0>
-                   <tr bgcolor="#0033ff" style="cursor:pointer;">
+                   <table cellpadding=0 cellspacing=0 border="0">
+                   <tr  style="cursor:pointer;"><td bgcolor="#FFFFFF" valign="bottom" align="center"> <a onclick=deletes('<%# Eval("BAI_VIET_ID")%>','comments') style='cursor:pointer' id="new_project"><image src="images/delete.png" width="20" height="20"></a>&nbsp;&nbsp</td>
                    <td>
                    <a title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'<%#Eval("BAI_VIET_ID","div{0}")%>')>
                     <asp:Image ID="Image2" runat="server"  ImageUrl="images/like.gif" Width=20 Height=15/>
                     </td>
                     <td>
-                    <font color="#FFFFFFF">
-                     <div id='<%#Eval("BAI_VIET_ID","div{0}")%>'>&nbsp;&nbsp<%#Eval("liked")%>&nbsp</div>
+                    <font color="#0033ff">
+                     <div id='<%#Eval("BAI_VIET_ID","div{0}")%>'>&nbsp(<%#Eval("liked")%>)&nbsp</div>
                      </font>
                      </a>
                      </td>
@@ -358,6 +387,9 @@
             CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
             SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" Width="110px" 
             onclick="btn_comments_Click">
+            <ClientSideEvents Click="function(s, e) {
+                                    validate();
+                    }" />
         </dx:ASPxButton>
         </td>
         <td>
@@ -365,6 +397,9 @@
             CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
             onclick="btn_back_Click" SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" 
             Width="110px">
+           <ClientSideEvents Click="function(s, e) {
+                            window.location.href='show_allbum.aspx'
+           }" />
         </dx:ASPxButton>
         </td>
         </tr>

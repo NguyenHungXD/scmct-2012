@@ -14,77 +14,61 @@
      <div id="templatemo_slider">
 		<div id="featured" >
 			<ul class="ui-tabs-nav">
-				<li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-1"><a href="#fragment-1"><img src="images/content_slider/image1-small.jpg" alt="Image1small" /><span>Những cuốn sách của bạn có thể mang lại một cơ hội mới cho các em nhỏ</span></a></li>
-				<li class="ui-tabs-nav-item" id="nav-fragment-2"><a href="#fragment-2"><img src="images/content_slider/image2-small.jpg" alt="Image2small" /><span>Chương trình Quyên góp 3000 sách cho trẻ em nghèo</span></a></li>
+                <asp:Repeater ID="Repeater1" runat="server">
+                <ItemTemplate>
+                    <li class="ui-tabs-nav-item" id='<%#Eval("ID","nav-fragment-{0}") %>'><a href='<%#Eval("ID","#fragment-{0}") %>' ><img src='<%#Eval("img_path") %>' alt="" width="80" height="45"/><span><%#Eval("title") %></span></a></li>
+                </ItemTemplate>
+                </asp:Repeater>
+            <!--
+                <li class="ui-tabs-nav-item" id="nav-fragment-1"><a href="#fragment-1"><img src="images/content_slider/image2-small.jpg" alt="Image2small" /><span>Chương trình Quyên góp 3000 sách cho trẻ em nghèo</span></a></li>
+                <li class="ui-tabs-nav-item" id="nav-fragment-2"><a href="#fragment-2"><img src="images/content_slider/image2-small.jpg" alt="Image2small" /><span>Chương trình Quyên góp 3000 sách cho trẻ em nghèo</span></a></li>
 				<li class="ui-tabs-nav-item" id="nav-fragment-3"><a href="#fragment-3"><img src="images/content_slider/image3-small.jpg" alt="Image3small" /><span>Cờ Đỏ là một huyện vùng ven TP Cần Thơ...</span></a></li>
 				<li class="ui-tabs-nav-item" id="nav-fragment-4"><a href="#fragment-4"><img src="images/content_slider/image4-small.jpg" alt="Image4small" /><span>Kêu gọi ủng hộ trẻ em nghèo</span></a></li>
-			</ul>
+		    -->
+            </ul>
 
-			<!-- First Content -->
-			<div id="fragment-1" class="ui-tabs-panel" style="">
-				<img src="images/content_slider/image1.jpg" alt="Image 1" />
+           <asp:Repeater ID="Repeater2" runat="server">
+           <ItemTemplate>
+            <div id='<%#Eval("ID","fragment-{0}") %>' class="ui-tabs-panel" style="">
+				<img src='<%#Eval("img_path") %>' width="580" height="250" alt="" />
 				<div class="info" >
-					<h2><a href="#" >Những cuốn sách của bạn có thể mang lại một cơ hội mới cho các em nhỏ</a></h2>
-					<p>Những cuốn sách của bạn có thể mang lại một cơ hội mới cho các em nhỏ. Hãy san sẻ những con đường cho các em, bạn nhé, để các em có những cơ hội vượt thoát lên hoàn cảnh khó khăn....<a href="#" >read more</a></p>
+					<h2><a href='<%#Eval("post_id","post_show_details.aspx?news_id={0}") %>' ><%#Eval("title") %></a></h2>
+					<p><%#Eval("contents") %>....<a href='<%#Eval("post_id","post_show_details.aspx?news_id={0}") %>'>[Đọc thêm]</a></p>
 				</div>
 			</div>
-
-			<!-- Second Content -->
-			<div id="fragment-2" class="ui-tabs-panel ui-tabs-hide" style="">
-				<img src="images/content_slider/image2.jpg" alt="Image 2" />
-				<div class="info" >
-					<h2><a href="#" >Chương trình Quyên góp 3000 sách cho trẻ em nghèo</a></h2>
-					<p>Chương trình Quyên góp 3000 sách cho trẻ em nghèo hiếu học tỉnh Bến Tre....<a href="#" >read more</a></p>
-				</div>
-			</div>
-
-			<!-- Third Content -->
-			<div id="fragment-3" class="ui-tabs-panel ui-tabs-hide" style="">
-				<img src="images/content_slider/image3.jpg" alt="Image 3" />
-				<div class="info" >
-					<h2><a href="#" >CHUYẾN TỪ THIỆN CHO TRẺ EM NGHÈO HIẾU HỌC</a></h2>
-					<p>Cờ Đỏ là một huyện vùng ven TP Cần Thơ, cách trung tâm thành phố 40km....<a href="#" >read more</a></p>
-				</div>
-			</div>
-
-			<!-- Fourth Content -->
-			<div id="fragment-4" class="ui-tabs-panel ui-tabs-hide" style="">
-				<img src="images/content_slider/image4.jpg" alt="Image 4" />
-				<div class="info" >
-					<h2><a href="#" >Kêu gọi ủng hộ trẻ em nghèo</a></h2>
-					<p>Năm 2011, nhờ sự tài trợ của các tập thể, cá nhân hảo tâm, Quỹ Bảo trợ trẻ em Hà Nội đã hỗ trợ....<a href="#" >read more</a></p>
-				</div>
-			</div>
+            </ItemTemplate>
+            </asp:Repeater>
 		</div>
 </div> <!-- end of templatemo_slider -->
 </asp:Content>
 
 <asp:Content ID="register" ContentPlaceHolderID="content_area" Runat="Server">
- <asp:Repeater ID="showListProject" runat="server">
+    <asp:Repeater ID="showListProject" runat="server" 
+        onitemdatabound="showListProject_ItemDataBound">
         <HeaderTemplate>
-        <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;">
-        <tr class="new_post">
-        <td >
-            &nbsp<!--<asp:Image ID="img_status" runat="server" ImageUrl="images/projecticon.gif" width="20" Height="20"/>-->
-        </td>
-        <td>
-            Mã dự án
-        </td>
-        <td>
-            Tên dự án
-        </td>
-        <td>
-            Ngày
-        </td>
-        <td>
-            Bài viết mới
-        </td>
-        <td>
-            Trạng thái
-        </td>
-        </tr>
         </HeaderTemplate>
         <ItemTemplate>
+            <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;" class="btn_project">
+            <tr class="new_post">
+            <td >
+                &nbsp
+            </td>
+            <td>
+                Mã dự án
+            </td>
+            <td>
+                Tên dự án
+            </td>
+            <td>
+                Ngày
+            </td>
+            <td>
+                Bài viết mới
+            </td>
+            <td>
+                Trạng thái
+            </td>
+            </tr>
                     <tr class="new_post_details">
                     <td with=5% valign="middle" align="center" style="cursor:pointer;"  onclick=like_post(<%# Eval("ID")%>,<%#Eval("liked")%>,'<%#Eval("ID","div{0}")%>')>
                     <div id='<%#Eval("ID","div{0}")%>' class="like_text">
@@ -107,7 +91,9 @@
                     Kết thúc: <%#Eval("NGAY_KET_THUC", "{0:dd/MM/yyyy }")%>
                     </td>
                     <td with=30% valign=middle align="center">
-                        Bài viết mới
+
+                        <asp:HyperLink ID="link_new_post" runat="server"></asp:HyperLink>
+                        <asp:Label ID="lbl_posted_by" runat="server" Text=""></asp:Label>
                     </td>
                     <td with=10% valign=middle align="center">
                         <%#Eval("NAME")%>
@@ -125,8 +111,8 @@
                     <td><asp:Image ID="img_status" runat="server" ImageUrl="images/heart.gif" width="10" Height="10"/>
                         Số sách cần quyên góp cho dự án: <b><%#Eval("BOOK")%></b> quyển
                     </td>
-                    <td rowspan=7>
-                        <a href="request.aspx" class="btn">Tặng sách</a>  <a href="#" class="btn">Tham gia dự án</a> <a href='<%#Eval("ID","post_news.aspx?projectID={0}")%>' class="btn">Viết bài</a>  <a href="show_allbum.aspx" class="btn">Hình ảnh</a>
+                    <td rowspan=7 align=right>
+                        <a href="request.aspx" class="btn_admin">Tặng sách</a>  <a href="#" class="btn_admin">Tham gia dự án</a> <a href='<%#Eval("ID","post_news.aspx?projectID={0}")%>' class="btn_admin">Viết bài</a>  <a href="show_allbum.aspx" class="btn_admin">Hình ảnh</a>
                     </td>
                     </tr>
                     <tr>
@@ -157,9 +143,10 @@
                     </div>
                     </td>
                     </tr>
+                     </table>
         </ItemTemplate>
         <FooterTemplate>
-        </table>
+       
         </FooterTemplate>
         </asp:Repeater>   
 </asp:Content>

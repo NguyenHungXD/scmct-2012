@@ -25,11 +25,11 @@
     // ]]> 
     </script>
    <fieldset>
-<legend>Đăng bài mới</legend>
+<!--<legend>Đăng bài mới</legend>-->
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td align=center colspan=2><br>
-        <font size=3><b><asp:Label ID="lbl_error" runat="server" ForeColor="#0000CC"></asp:Label></font><br>
+        <font size=3><b><asp:Label ID="lbl_error" runat="server" ></asp:Label></font><br>
         <hr>
         </td>
     </tr>
@@ -114,7 +114,7 @@
 </tr>
 <tr>
         <td align=right>
-        <dx:ASPxButton ID="btn_post_news" runat="server" Text="Đăng bài" 
+        <dx:ASPxButton ID="btn_post_news" runat="server" Text="Lưu bài viết" 
                 onclick="btn_post_news_Click" 
                 CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
                 SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px">

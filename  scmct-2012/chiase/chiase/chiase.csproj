@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,9 +42,7 @@
     </Reference>
     <Reference Include="DevExpress.Web.ASPxSpellChecker.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.ASPxThemes.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Web.ASPxTreeList.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
+    <Reference Include="DevExpress.Web.ASPxTreeList.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraTreeList.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,36 +63,75 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="about.aspx" />
+    <Content Include="add_member_project.aspx" />
     <Content Include="Admin.aspx" />
     <Content Include="Ajax.aspx" />
-    <Content Include="Scripts\libary.js" />
-    <Content Include="upload.aspx" />
+    <Content Include="Ajax\AjaxControlToolkit.dll" />
+    <Content Include="Ajax\DM_HANG_HOA_ajax2.aspx" />
+    <Content Include="Ajax\KH_DM_KHO_ajax2.aspx" />
+    <Content Include="Ajax\KH_PHIEU_CHUYEN_KHO_ajax1.aspx" />
+    <Content Include="Ajax\KH_PHIEU_CHUYEN_KHO_ajax3.aspx" />
+    <Content Include="Ajax\KH_PHIEU_NHAP_KHO_ajax1.aspx" />
+    <Content Include="Ajax\KH_PHIEU_NHAP_KHO_ajax3.aspx" />
+    <Content Include="Ajax\KH_PHIEU_XUAT_KHO_ajax1.aspx" />
+    <Content Include="Ajax\KH_PHIEU_XUAT_KHO_ajax3.aspx" />
+    <Content Include="App_Data\IsBothWriteType.txt" />
+    <Content Include="App_Data\SystemLanguage.txt" />
+    <Content Include="App_Data\SystemLanguage_IsShort.txt" />
     <Content Include="change_password.aspx" />
     <Content Include="App_Data\ServerConfig.txt" />
+    <Content Include="contact.aspx" />
     <Content Include="create_new_allbum.aspx" />
-    <Content Include="ManageReceive.aspx" />
-    <Content Include="forum.aspx" />
-    <Content Include="ManageShipments.aspx" />
-    <Content Include="post_show_details.aspx" />
-    <Content Include="Scripts\ajax_script.js" />
-    <Content Include="Scripts\jquery.galleriffic.js" />
-    <Content Include="Scripts\jquery.history.js" />
-    <Content Include="Scripts\jquery.opacityrollover.js" />
-    <Content Include="Scripts\jquery.uploadify.js" />
-    <Content Include="Scripts\jush.js" />
-    <Content Include="show_allbum.aspx" />
-    <Content Include="show_details.aspx" />
-    <Content Include="slideshow.aspx" />
-    <Content Include="Styles\basic.css" />
-    <Content Include="Styles\content_slider_style.css" />
-    <Content Include="create_new_project.aspx" />
-    <Content Include="create_new_subject.aspx" />
-    <Content Include="edit_profile.aspx" />
-    <Content Include="Flash\header.swf" />
-    <Content Include="Flash\hieuung.swf" />
-    <Content Include="forget_password.aspx" />
+    <Content Include="create_new_kind_request.aspx" />
+    <Content Include="create_new_status_news.aspx" />
+    <Content Include="create_new_status_project.aspx" />
+    <Content Include="create_new_status_request.aspx" />
+    <Content Include="css\Default.css" />
+    <Content Include="css\Default1.css" />
+    <Content Include="css\ie-css3.htc" />
+    <Content Include="css\jquery-ui.css" />
+    <Content Include="css\jquery.autocomplete.css" />
+    <Content Include="css\jtable.css" />
+    <Content Include="css\timepicker.css" />
+    <Content Include="css\treeview.css" />
+    <Content Include="edit_project.aspx" />
+    <Content Include="edit_request.aspx" />
+    <Content Include="get_data_detail.aspx" />
+    <Content Include="hot_news.aspx" />
+    <Content Include="Images\add_member.png" />
+    <Content Include="Images\asc.gif" />
+    <Content Include="Images\avatars\28.gif" />
+    <Content Include="Images\avatars\28.jpg" />
+    <Content Include="Images\avatars\default_img.gif" />
+    <Content Include="Images\avatars\User.gif" />
+    <Content Include="Images\banner.png" />
+    <Content Include="Images\bg.gif" />
     <Content Include="Images\bg_b.gif" />
+    <Content Include="Images\bg_header.jpg" />
+    <Content Include="Images\bg_header_down.jpg" />
+    <Content Include="Images\bg_header_sortable.jpg" />
+    <Content Include="Images\bg_header_up.jpg" />
+    <Content Include="Images\bg_legend.gif" />
+    <Content Include="Images\blue.png" />
+    <Content Include="Images\blue_bg.png" />
+    <Content Include="Images\bullet1.gif" />
+    <Content Include="Images\bullet2.gif" />
     <Content Include="Images\Calendar_scheduleHS.png" />
+    <Content Include="Images\cancel.png" />
+    <Content Include="Images\close.gif" />
+    <Content Include="Images\collapse.gif" />
+    <Content Include="Images\col_alt.jpg" />
+    <Content Include="Images\commentList-title-border.jpg" />
+    <Content Include="Images\commentList-title.jpg" />
+    <Content Include="Images\comment_bg.gif" />
+    <Content Include="Images\comment_bg_footer.gif" />
+    <Content Include="Images\comment_bg_header.gif" />
+    <Content Include="Images\comment_bg_main.gif" />
+    <Content Include="Images\content_slider\1.jpg" />
+    <Content Include="Images\content_slider\2.jpg" />
+    <Content Include="Images\content_slider\3.jpg" />
+    <Content Include="Images\content_slider\4.jpg" />
     <Content Include="Images\content_slider\image1-small.jpg" />
     <Content Include="Images\content_slider\image1.jpg" />
     <Content Include="Images\content_slider\image2-small.jpg" />
@@ -107,11 +144,76 @@
     <Content Include="Images\content_slider\transparent-bg.gif" />
     <Content Include="Images\content_slider\transparent-bg.png" />
     <Content Include="Images\content_slider\ui-tabs-nav-bg.png" />
+    <Content Include="Images\createnewallbum.png" />
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\deleteicon.gif" />
+    <Content Include="Images\delete_icon.png" />
+    <Content Include="Images\desc.gif" />
+    <Content Include="Images\down.gif" />
+    <Content Include="Images\down.png" />
+    <Content Include="Images\edit.gif" />
+    <Content Include="Images\edit_icon.gif" />
+    <Content Include="Images\error.png" />
+    <Content Include="Images\expand.gif" />
     <Content Include="Images\facebook.png" />
+    <Content Include="Images\first.gif" />
+    <Content Include="Images\folder_documents.png" />
+    <Content Include="Images\folder_home.png" />
+    <Content Include="Images\form_bg.jpg" />
+    <Content Include="Images\googleplus.gif" />
+    <Content Include="Images\grid_medblue.gif" />
+    <Content Include="Images\header.gif" />
+    <Content Include="Images\heart.gif" />
+    <Content Include="Images\help.gif" />
+    <Content Include="Images\help_contents.png" />
+    <Content Include="Images\home_page.png" />
+    <Content Include="Images\icon-down.gif" />
+    <Content Include="Images\icon-up.gif" />
+    <Content Include="Images\icon_down.gif" />
+    <Content Include="Images\important.gif" />
+    <Content Include="Images\info.gif" />
+    <Content Include="Images\info.png" />
+    <Content Include="Images\iphone_down_icon.png" />
+    <Content Include="Images\last.gif" />
+    <Content Include="Images\like.gif" />
+    <Content Include="Images\like_fm.gif" />
+    <Content Include="Images\like_text.gif" />
     <Content Include="Images\linkedin.png" />
+    <Content Include="Images\list.gif" />
+    <Content Include="Images\loading-bar.gif" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\lock.gif" />
+    <Content Include="Images\lockicon.gif" />
+    <Content Include="Images\login_bg - Copy.gif" />
+    <Content Include="Images\login_bg.gif" />
+    <Content Include="Images\login_bg1.gif" />
+    <Content Include="Images\login_bgss.gif" />
+    <Content Include="Images\logo.gif" />
+    <Content Include="Images\logo_print.png" />
+    <Content Include="Images\main_header.gif" />
+    <Content Include="Images\main_header.png" />
+    <Content Include="Images\menu_bg.gif" />
     <Content Include="Images\myspace.png" />
+    <Content Include="Images\new_post.gif" />
+    <Content Include="Images\new_reply.gif" />
+    <Content Include="Images\next.gif" />
     <Content Include="Images\NoteTitle.png" />
+    <Content Include="Images\open.gif" />
+    <Content Include="Images\post.png" />
     <Content Include="Images\PostButton.png" />
+    <Content Include="Images\post_news.gif" />
+    <Content Include="Images\post_news1.gif" />
+    <Content Include="Images\preferences_desktop_user_password.png" />
+    <Content Include="Images\prev.gif" />
+    <Content Include="Images\processing.gif" />
+    <Content Include="Images\projecticon.gif" />
+    <Content Include="Images\reload.gif" />
+    <Content Include="Images\sprite.png" />
+    <Content Include="Images\star.gif" />
+    <Content Include="Images\star_w.gif" />
+    <Content Include="Images\subject.png" />
+    <Content Include="Images\success.png" />
+    <Content Include="Images\tagCloud-title.jpg" />
     <Content Include="Images\technorati.png" />
     <Content Include="Images\templatemo_body.jpg" />
     <Content Include="Images\templatemo_button.png" />
@@ -122,7 +224,180 @@
     <Content Include="Images\templatemo_logo.png" />
     <Content Include="Images\templatemo_menu_hover.png" />
     <Content Include="Images\templatemo_sp_box.png" />
+    <Content Include="Images\time.gif" />
+    <Content Include="Images\top.gif" />
+    <Content Include="Images\top.png" />
     <Content Include="Images\twitter.png" />
+    <Content Include="Images\ui-bg_diagonals-medium_20_d34d17_40x40.png" />
+    <Content Include="Images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Images\ui-bg_flat_30_cccccc_40x100.png" />
+    <Content Include="Images\ui-bg_flat_50_5c5c5c_40x100.png" />
+    <Content Include="Images\ui-bg_flat_55_999999_40x100.png" />
+    <Content Include="Images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Images\ui-bg_glass_45_0078ae_1x400.png" />
+    <Content Include="Images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="Images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Images\ui-bg_glass_55_fcf0ba_1x400.png" />
+    <Content Include="Images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Images\ui-bg_glass_75_79c9ec_1x400.png" />
+    <Content Include="Images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Images\ui-bg_gloss-wave_100_ece8da_500x100.png" />
+    <Content Include="Images\ui-bg_gloss-wave_45_817865_500x100.png" />
+    <Content Include="Images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="Images\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+    <Content Include="Images\ui-bg_gloss-wave_60_fece2f_500x100.png" />
+    <Content Include="Images\ui-bg_gloss-wave_70_ffdd57_500x100.png" />
+    <Content Include="Images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
+    <Content Include="Images\ui-bg_gloss-wave_90_fff9e5_500x100.png" />
+    <Content Include="Images\ui-bg_highlight-hard_100_f5f3e5_1x100.png" />
+    <Content Include="Images\ui-bg_highlight-hard_100_fafaf4_1x100.png" />
+    <Content Include="Images\ui-bg_highlight-hard_15_459e00_1x100.png" />
+    <Content Include="Images\ui-bg_highlight-hard_95_cccccc_1x100.png" />
+    <Content Include="Images\ui-bg_highlight-soft_100_feeebd_1x100.png" />
+    <Content Include="Images\ui-bg_highlight-soft_25_67b021_1x100.png" />
+    <Content Include="Images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Images\ui-bg_highlight-soft_95_ffedad_1x100.png" />
+    <Content Include="Images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Images\ui-bg_inset-soft_15_2b2922_1x100.png" />
+    <Content Include="Images\ui-bg_inset-soft_30_ffffff_1x100.png" />
+    <Content Include="Images\ui-icons_0078ae_256x240.png" />
+    <Content Include="Images\ui-icons_056b93_256x240.png" />
+    <Content Include="Images\ui-icons_222222_256x240.png" />
+    <Content Include="Images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Images\ui-icons_3d3d3d_256x240.png" />
+    <Content Include="Images\ui-icons_454545_256x240.png" />
+    <Content Include="Images\ui-icons_808080_256x240.png" />
+    <Content Include="Images\ui-icons_847e71_256x240.png" />
+    <Content Include="Images\ui-icons_888888_256x240.png" />
+    <Content Include="Images\ui-icons_8dc262_256x240.png" />
+    <Content Include="Images\ui-icons_bd7b00_256x240.png" />
+    <Content Include="Images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Images\ui-icons_d19405_256x240.png" />
+    <Content Include="Images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Images\ui-icons_e0fdff_256x240.png" />
+    <Content Include="Images\ui-icons_eb990f_256x240.png" />
+    <Content Include="Images\ui-icons_ed9f26_256x240.png" />
+    <Content Include="Images\ui-icons_eeeeee_256x240.png" />
+    <Content Include="Images\ui-icons_f5e175_256x240.png" />
+    <Content Include="Images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="Images\ui-icons_fadc7a_256x240.png" />
+    <Content Include="Images\ui-icons_fcd113_256x240.png" />
+    <Content Include="Images\ui-icons_ffe180_256x240.png" />
+    <Content Include="Images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Images\undeleteicon.gif" />
+    <Content Include="Images\unlockicon.gif" />
+    <Content Include="Images\uploader.swf" />
+    <Content Include="Images\upload\1.jpg" />
+    <Content Include="Images\upload\1_1.jpg" />
+    <Content Include="Images\upload\1_1_1.jpg" />
+    <Content Include="Images\upload\1_1_1_1.jpg" />
+    <Content Include="Images\upload\1_1_1_1_1.jpg" />
+    <Content Include="Images\upload\1_1_1_1_1_1.jpg" />
+    <Content Include="Images\upload\1_1_1_1_1_1_1.jpg" />
+    <Content Include="Images\upload\1_1_1_1_1_1_1_1.jpg" />
+    <Content Include="Images\upload\1_1_1_1_1_1_3.jpg" />
+    <Content Include="Images\upload\1_1_1_1_1_2.jpg" />
+    <Content Include="Images\upload\1_1_1_1_1_3.jpg" />
+    <Content Include="Images\upload\1_1_1_1_2.jpg" />
+    <Content Include="Images\upload\1_1_1_1_3.jpg" />
+    <Content Include="Images\upload\1_1_1_1_4.jpg" />
+    <Content Include="Images\upload\1_1_1_2.jpg" />
+    <Content Include="Images\upload\1_1_1_3.jpg" />
+    <Content Include="Images\upload\1_1_1_4.jpg" />
+    <Content Include="Images\upload\1_1_2.jpg" />
+    <Content Include="Images\upload\1_1_3.jpg" />
+    <Content Include="Images\upload\1_1_4.jpg" />
+    <Content Include="Images\upload\1_2.jpg" />
+    <Content Include="Images\upload\1_28.gif" />
+    <Content Include="Images\upload\1_28.jpg" />
+    <Content Include="Images\upload\1_3.jpg" />
+    <Content Include="Images\upload\1_4.jpg" />
+    <Content Include="Images\upload\1_default_img.gif" />
+    <Content Include="Images\upload\1_hot.jpg" />
+    <Content Include="Images\upload\1_User.gif" />
+    <Content Include="Images\upload\2.jpg" />
+    <Content Include="Images\upload\28.gif" />
+    <Content Include="Images\upload\28.jpg" />
+    <Content Include="Images\upload\3.jpg" />
+    <Content Include="Images\upload\4.jpg" />
+    <Content Include="Images\upload\800px-Digital_Signature_diagram.svg.png" />
+    <Content Include="Images\upload\default_img.gif" />
+    <Content Include="Images\upload\User.gif" />
+    <Content Include="Images\User.gif" />
+    <Content Include="Images\views.gif" />
+    <Content Include="Images\warning.png" />
+    <Content Include="Images\zing_logo.gif" />
+    <Content Include="javascript\DM_HANG_HOA2.js" />
+    <Content Include="javascript\KH_DM_KHO2.js" />
+    <Content Include="javascript\KH_PHIEU_CHUYEN_KHO1.js" />
+    <Content Include="javascript\KH_PHIEU_CHUYEN_KHO3.js" />
+    <Content Include="javascript\KH_PHIEU_NHAP_KHO1.js" />
+    <Content Include="javascript\KH_PHIEU_NHAP_KHO3.js" />
+    <Content Include="javascript\KH_PHIEU_XUAT_KHO1.js" />
+    <Content Include="javascript\KH_PHIEU_XUAT_KHO3.js" />
+    <Content Include="js\jquery-1.6.1.min.js" />
+    <Content Include="js\jquery-ui.js" />
+    <Content Include="js\jquery.autocomplete.js" />
+    <Content Include="js\jquery.validate.js" />
+    <Content Include="js\myscript.jqr.js" />
+    <Content Include="js\myscript.jqr.onlyview.js" />
+    <Content Include="js\myscript.js" />
+    <Content Include="js\myscriptvalid.js" />
+    <Content Include="js\timepicker.js" />
+    <Content Include="js\treeview.js" />
+    <Content Include="web\CategoryWarehouse.aspx" />
+    <Content Include="web\CategoryItems.aspx" />
+    <Content Include="web\CategoryGroupItems.aspx" />
+    <Content Include="web\ManageOfTransfer.aspx" />
+    <Content Include="web\Transfer.aspx" />
+    <Content Include="web\ManageOfShipments.aspx" />
+    <Content Include="web\Shipment.aspx" />
+    <Content Include="web\ManageOfReceiver.aspx" />
+    <Content Include="web\Receiver.aspx" />
+    <Content Include="ManageReceive.aspx" />
+    <Content Include="forum.aspx" />
+    <Content Include="ManageShipments.aspx" />
+    <Content Include="member_list_project.aspx" />
+    <Content Include="my_page.aspx" />
+    <Content Include="phieu_chi.aspx" />
+    <Content Include="phieu_chi_view.aspx" />
+    <Content Include="phieu_thu.aspx" />
+    <Content Include="phieu_thu_view.aspx" />
+    <Content Include="post_show_details.aspx" />
+    <Content Include="project_detail.aspx" />
+    <Content Include="project_detail_popup.aspx" />
+    <Content Include="Scripts\ajax_script.js" />
+    <Content Include="Scripts\jquery.galleriffic.js" />
+    <Content Include="Scripts\jquery.history.js" />
+    <Content Include="Scripts\jquery.opacityrollover.js" />
+    <Content Include="Scripts\jquery.uploadify.js" />
+    <Content Include="Scripts\jush.js" />
+    <Content Include="Scripts\libary.js" />
+    <Content Include="search_kind_request.aspx" />
+    <Content Include="search_phieu_chi.aspx" />
+    <Content Include="search_phieu_thu.aspx" />
+    <Content Include="search_post_news.aspx" />
+    <Content Include="search_project.aspx" />
+    <Content Include="search_project_member.aspx" />
+    <Content Include="search_request.aspx" />
+    <Content Include="search_status_news.aspx" />
+    <Content Include="search_status_project.aspx" />
+    <Content Include="search_status_request.aspx" />
+    <Content Include="search_subject.aspx" />
+    <Content Include="show_allbum.aspx" />
+    <Content Include="show_details.aspx" />
+    <Content Include="slideshow.aspx" />
+    <Content Include="Styles\basic.css" />
+    <Content Include="Styles\content_slider_style.css" />
+    <Content Include="create_new_project.aspx" />
+    <Content Include="create_new_subject.aspx" />
+    <Content Include="edit_profile.aspx" />
+    <Content Include="Flash\header.swf" />
+    <Content Include="Flash\hieuung.swf" />
+    <Content Include="forget_password.aspx" />
     <Content Include="post_news.aspx" />
     <Content Include="register.aspx" />
     <Content Include="request.aspx" />
@@ -138,16 +413,45 @@
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\templatemain_style.css" />
     <Content Include="Styles\uploadify.css" />
+    <Content Include="update_allbum.aspx" />
+    <Content Include="update_allbum_imgs.aspx" />
+    <Content Include="update_allbum_imgs_save.aspx" />
+    <Content Include="update_allbum_info.aspx" />
+    <Content Include="update_img_comment.aspx" />
     <Content Include="update_like_post.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="update_member_project.aspx" />
+    <Content Include="update_project.aspx" />
+    <Content Include="update_view.aspx" />
+    <Content Include="uploads.aspx" />
+    <Content Include="upload_images.aspx" />
+    <Content Include="user_info.aspx" />
+    <Content Include="view_request.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="web\Test.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="about.aspx.cs">
+      <DependentUpon>about.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="about.aspx.designer.cs">
+      <DependentUpon>about.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="add_member_project.aspx.cs">
+      <DependentUpon>add_member_project.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="add_member_project.aspx.designer.cs">
+      <DependentUpon>add_member_project.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin.aspx.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -162,10 +466,356 @@
     <Compile Include="Ajax.aspx.designer.cs">
       <DependentUpon>Ajax.aspx</DependentUpon>
     </Compile>
-    <Compile Include="upload.aspx.cs">
-      <DependentUpon>upload.aspx</DependentUpon>
+    <Compile Include="Ajax\DM_HANG_HOA_ajax2.aspx.cs">
+      <DependentUpon>DM_HANG_HOA_ajax2.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Ajax\KH_DM_KHO_ajax2.aspx.cs">
+      <DependentUpon>KH_DM_KHO_ajax2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\KH_PHIEU_CHUYEN_KHO_ajax1.aspx.cs">
+      <DependentUpon>KH_PHIEU_CHUYEN_KHO_ajax1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\KH_PHIEU_CHUYEN_KHO_ajax3.aspx.cs">
+      <DependentUpon>KH_PHIEU_CHUYEN_KHO_ajax3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\KH_PHIEU_NHAP_KHO_ajax1.aspx.cs">
+      <DependentUpon>KH_PHIEU_NHAP_KHO_ajax1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\KH_PHIEU_NHAP_KHO_ajax3.aspx.cs">
+      <DependentUpon>KH_PHIEU_NHAP_KHO_ajax3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\KH_PHIEU_XUAT_KHO_ajax1.aspx.cs">
+      <DependentUpon>KH_PHIEU_XUAT_KHO_ajax1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ajax\KH_PHIEU_XUAT_KHO_ajax3.aspx.cs">
+      <DependentUpon>KH_PHIEU_XUAT_KHO_ajax3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="App_code\DataProcess.cs" />
+    <Compile Include="App_code\Dictionary.cs" />
+    <Compile Include="App_code\DictionaryDB.cs" />
+    <Compile Include="App_code\DictionaryOption.cs" />
+    <Compile Include="App_code\IUDCollections.cs" />
+    <Compile Include="App_code\ObjectIud.cs" />
+    <Compile Include="App_code\Qly_Session.cs" />
+    <Compile Include="App_code\UserLogin.cs" />
+    <Compile Include="contact.aspx.cs">
+      <DependentUpon>contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="contact.aspx.designer.cs">
+      <DependentUpon>contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage3.master.cs">
+      <DependentUpon>MasterPage3.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage2.master.cs">
+      <DependentUpon>MasterPage2.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage2.Master.designer.cs">
+      <DependentUpon>MasterPage2.master</DependentUpon>
+    </Compile>
+    <Compile Include="web\CategoryItems.aspx.cs">
+      <DependentUpon>CategoryItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="web\CategoryGroupItems.aspx.cs">
+      <DependentUpon>CategoryGroupItems.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="web\CategoryGroupItems.aspx.designer.cs">
+      <DependentUpon>CategoryGroupItems.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\ManageOfTransfer.aspx.cs">
+      <DependentUpon>ManageOfTransfer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="web\CategoryItems.aspx.designer.cs">
+      <DependentUpon>CategoryItems.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\Transfer.aspx.cs">
+      <DependentUpon>Transfer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="web\ManageOfShipments.aspx.cs">
+      <DependentUpon>ManageOfShipments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="web\Shipment.aspx.cs">
+      <DependentUpon>Shipment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="web\ManageOfReceiver.aspx.cs">
+      <DependentUpon>ManageOfReceiver.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="web\Receiver.aspx.cs">
+      <DependentUpon>Receiver.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="create_new_kind_request.aspx.cs">
+      <DependentUpon>create_new_kind_request.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="create_new_kind_request.aspx.designer.cs">
+      <DependentUpon>create_new_kind_request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="create_new_status_news.aspx.cs">
+      <DependentUpon>create_new_status_news.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="create_new_status_news.aspx.designer.cs">
+      <DependentUpon>create_new_status_news.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="create_new_status_project.aspx.cs">
+      <DependentUpon>create_new_status_project.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="create_new_status_project.aspx.designer.cs">
+      <DependentUpon>create_new_status_project.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="create_new_status_request.aspx.cs">
+      <DependentUpon>create_new_status_request.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="create_new_status_request.aspx.designer.cs">
+      <DependentUpon>create_new_status_request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="edit_request.aspx.cs">
+      <DependentUpon>edit_request.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="edit_request.aspx.designer.cs">
+      <DependentUpon>edit_request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="get_data_detail.aspx.cs">
+      <DependentUpon>get_data_detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="get_data_detail.aspx.designer.cs">
+      <DependentUpon>get_data_detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="globalVariable.cs" />
+    <Compile Include="hot_news.aspx.cs">
+      <DependentUpon>hot_news.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="hot_news.aspx.designer.cs">
+      <DependentUpon>hot_news.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\CategoryWarehouse.aspx.cs">
+      <DependentUpon>CategoryWarehouse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="member_list_project.aspx.cs">
+      <DependentUpon>member_list_project.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="member_list_project.aspx.designer.cs">
+      <DependentUpon>member_list_project.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="my_page.aspx.cs">
+      <DependentUpon>my_page.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="my_page.aspx.designer.cs">
+      <DependentUpon>my_page.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="phieu_chi.aspx.cs">
+      <DependentUpon>phieu_chi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="phieu_chi.aspx.designer.cs">
+      <DependentUpon>phieu_chi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="phieu_chi_view.aspx.cs">
+      <DependentUpon>phieu_chi_view.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="phieu_chi_view.aspx.designer.cs">
+      <DependentUpon>phieu_chi_view.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="phieu_thu.aspx.cs">
+      <DependentUpon>phieu_thu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="phieu_thu.aspx.designer.cs">
+      <DependentUpon>phieu_thu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="phieu_thu_view.aspx.cs">
+      <DependentUpon>phieu_thu_view.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="phieu_thu_view.aspx.designer.cs">
+      <DependentUpon>phieu_thu_view.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="project_detail.aspx.cs">
+      <DependentUpon>project_detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="project_detail.aspx.designer.cs">
+      <DependentUpon>project_detail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="project_detail_popup.aspx.cs">
+      <DependentUpon>project_detail_popup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="project_detail_popup.aspx.designer.cs">
+      <DependentUpon>project_detail_popup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="search_kind_request.aspx.cs">
+      <DependentUpon>search_kind_request.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search_kind_request.aspx.designer.cs">
+      <DependentUpon>search_kind_request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="search_phieu_chi.aspx.cs">
+      <DependentUpon>search_phieu_chi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search_phieu_chi.aspx.designer.cs">
+      <DependentUpon>search_phieu_chi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="search_phieu_thu.aspx.cs">
+      <DependentUpon>search_phieu_thu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search_phieu_thu.aspx.designer.cs">
+      <DependentUpon>search_phieu_thu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="search_post_news.aspx.cs">
+      <DependentUpon>search_post_news.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search_post_news.aspx.designer.cs">
+      <DependentUpon>search_post_news.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="search_request.aspx.cs">
+      <DependentUpon>search_request.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search_request.aspx.designer.cs">
+      <DependentUpon>search_request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="search_status_news.aspx.cs">
+      <DependentUpon>search_status_news.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search_status_news.aspx.designer.cs">
+      <DependentUpon>search_status_news.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="search_status_project.aspx.cs">
+      <DependentUpon>search_status_project.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search_status_project.aspx.designer.cs">
+      <DependentUpon>search_status_project.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="search_status_request.aspx.cs">
+      <DependentUpon>search_status_request.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search_status_request.aspx.designer.cs">
+      <DependentUpon>search_status_request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="search_subject.aspx.cs">
+      <DependentUpon>search_subject.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search_subject.aspx.designer.cs">
+      <DependentUpon>search_subject.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="update_allbum.aspx.cs">
+      <DependentUpon>update_allbum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="update_allbum.aspx.designer.cs">
+      <DependentUpon>update_allbum.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="update_allbum_imgs.aspx.cs">
+      <DependentUpon>update_allbum_imgs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="update_allbum_imgs.aspx.designer.cs">
+      <DependentUpon>update_allbum_imgs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="update_allbum_imgs_save.aspx.cs">
+      <DependentUpon>update_allbum_imgs_save.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="update_allbum_imgs_save.aspx.designer.cs">
+      <DependentUpon>update_allbum_imgs_save.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="update_allbum_info.aspx.cs">
+      <DependentUpon>update_allbum_info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="update_allbum_info.aspx.designer.cs">
+      <DependentUpon>update_allbum_info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="update_img_comment.aspx.cs">
+      <DependentUpon>update_img_comment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="update_img_comment.aspx.designer.cs">
+      <DependentUpon>update_img_comment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="update_view.aspx.cs">
+      <DependentUpon>update_view.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="update_view.aspx.designer.cs">
+      <DependentUpon>update_view.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="uploads.aspx.cs">
+      <DependentUpon>uploads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="uploads.aspx.designer.cs">
+      <DependentUpon>uploads.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="upload_images.aspx.cs">
+      <DependentUpon>upload_images.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="upload_images.aspx.designer.cs">
+      <DependentUpon>upload_images.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="user_info.aspx.cs">
+      <DependentUpon>user_info.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="user_info.aspx.designer.cs">
+      <DependentUpon>user_info.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="view_request.aspx.cs">
+      <DependentUpon>view_request.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="view_request.aspx.designer.cs">
+      <DependentUpon>view_request.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\Receiver.aspx.designer.cs">
+      <DependentUpon>Receiver.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="web\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="web\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Content Include="App_code\Database.cs" />
     <Compile Include="change_password.aspx.cs">
       <DependentUpon>change_password.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -179,6 +829,13 @@
     </Compile>
     <Compile Include="create_new_allbum.aspx.designer.cs">
       <DependentUpon>create_new_allbum.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="edit_project.aspx.cs">
+      <DependentUpon>edit_project.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="edit_project.aspx.designer.cs">
+      <DependentUpon>edit_project.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManageReceive.aspx.cs">
       <DependentUpon>ManageReceive.aspx</DependentUpon>
@@ -260,7 +917,6 @@
     <Compile Include="request.aspx.designer.cs">
       <DependentUpon>request.aspx</DependentUpon>
     </Compile>
-    <Compile Include="App_code\Database.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -279,6 +935,20 @@
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="search_project.aspx.cs">
+      <DependentUpon>search_project.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search_project.aspx.designer.cs">
+      <DependentUpon>search_project.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="search_project_member.aspx.cs">
+      <DependentUpon>search_project_member.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="search_project_member.aspx.designer.cs">
+      <DependentUpon>search_project_member.aspx</DependentUpon>
+    </Compile>
     <Compile Include="show_allbum.aspx.cs">
       <DependentUpon>show_allbum.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -306,6 +976,20 @@
     </Compile>
     <Compile Include="update_like_post.aspx.designer.cs">
       <DependentUpon>update_like_post.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="update_member_project.aspx.cs">
+      <DependentUpon>update_member_project.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="update_member_project.aspx.designer.cs">
+      <DependentUpon>update_member_project.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="update_project.aspx.cs">
+      <DependentUpon>update_project.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="update_project.aspx.designer.cs">
+      <DependentUpon>update_project.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -941,11 +1625,13 @@
     <Content Include="App_Themes\Youthful\ASPxTreeView.skin" />
     <Content Include="App_Themes\Youthful\ASPxUploadControl.skin" />
     <Content Include="App_Themes\Youthful\Demo.skin" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
-    </None>
-    <Content Include="upload.ashx" />
+    <Content Include="MasterPage2.master" />
+    <Content Include="MasterPage3.master" />
+    <None Include="Images\banner.psd" />
+    <None Include="Images\Thumbs.db" />
+    <None Include="Images\uploader.fla" />
+    <None Include="Properties\Settings.settings" />
+    <Content Include="Upload.ashx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Themes\Aqua\Demo\ChartDemoToolbar\" />
@@ -981,6 +1667,7 @@
     <Folder Include="App_Themes\Youthful\Demo\ChartDemoToolbar\" />
     <Folder Include="App_Themes\Youthful\Demo\NavBarNavigation\" />
     <Folder Include="App_Themes\Youthful\Demo\RoundPanelNavigation\" />
+    <Folder Include="Images\Smiles\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -990,7 +1677,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>23703</DevelopmentServerPort>
+          <DevelopmentServerPort>35623</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

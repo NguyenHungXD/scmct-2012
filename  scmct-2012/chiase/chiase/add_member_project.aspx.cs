@@ -69,7 +69,7 @@ namespace chiase
                                                            "@MEM_ID", mem_da_id.ToString(),
                                                            "@POSITION", pos_da_id.ToString(),
                                                            "@EDITED_BY", functions.LoginMemID(this),
-                                                           "@EDITED_DATE", DateTime.Now);
+                                                           "@EDITED_DATE", functions.GetStringDatetime());
                     if (done == 1)
                     {
                         lbl_error.Text = "Cập nhật thành công";
@@ -89,7 +89,7 @@ namespace chiase
                                                             "@ACTIVE", "Y",
                                                             "@POSITION", (long)ASPxGridLookup2.Value,
                                                             "@ADDED_BY", functions.LoginMemID(this),
-                                                            "@ADDED_DATE", DateTime.Now,
+                                                            "@ADDED_DATE", functions.GetStringDatetime(),
                                                             "@STATUS", 1); // [1 : Approved (Was added by addmin)] | [0 : Wating for approval (Register by members)]
 
                     if (done == 1)
@@ -130,20 +130,19 @@ namespace chiase
                 else
                     user_id = ASPxGridLookup1.Value.ToString();
 
-                    String sql_list_member = @"select a.id,a.active,a.du_an_id,a.mem_id,b.name,a.added_date,c.groupname,d.post_name,e.name as added_name,f.username,
-                                            case when status=1 then 'Đã duyêt' else 'Chờ duyêt' end as status,
-                                           case when a.active='N' then 'unlockicon.gif' else 'lockicon.gif' end as img_lock,
-                                            case when a.active='N' then N'Mở khóa' else N'Khóa' end as img_lock_alt,
-                                           case when a.active='D' then 'undeleteicon.gif' else 'deleteicon.gif' end as img_del,
-                                            case when a.active='D' then N'Phục hồi' else N'Xóa' end as img_del_alt
-                                            from da_nhan_su a
-                                            inner join nd_thong_tin_nd b on a.mem_id = b.id
-                                            inner join nd_ten_nhom_nd c on b.mem_group_id = c.groupid
-                                            inner join da_position d on a.position=d.pos_id
-                                            inner join nd_thong_tin_nd e on a.added_by = e.id
-                                            left join ND_THONG_TIN_DN f on a.mem_id = f.mem_id where a.du_an_id like '" + project_id + "' and a.position like '" + pos_id + "' and a.mem_id like '" + user_id + "'"; 
-                                         
-
+                String sql_list_member = String.Format(@"select a.id,a.active,a.du_an_id,a.mem_id,b.name,a.added_date,c.groupname,d.post_name,e.name as added_name,f.username,
+                                                                                         case when status=1 then N'Đã duyêt' else N'Chờ duyêt' end as status,
+                                                                                         case when status=1 then N'Đã duyêt' else '<input id=' + convert(nvarchar,a.id) + ' name=chk type=checkbox value=' + convert(nvarchar,a.id) + ' /><label for=' + convert(nvarchar,a.id) + N'>Duyệt</label>' end as status1,
+                                                                                        case when a.active='N' then 'unlockicon.gif' else 'lockicon.gif' end as img_lock,
+                                                                                         case when a.active='N' then N'Mở khóa' else N'Khóa' end as img_lock_alt,
+                                                                                        case when a.active='D' then 'undeleteicon.gif' else 'deleteicon.gif' end as img_del,
+                                                                                         case when a.active='D' then N'Phục hồi' else N'Xóa' end as img_del_alt
+                                                                                         from da_nhan_su a
+                                                                                         inner join nd_thong_tin_nd b on a.mem_id = b.id
+                                                                                         inner join nd_ten_nhom_nd c on b.mem_group_id = c.groupid
+                                                                                         inner join da_position d on a.position=d.pos_id
+                                                                                         inner join nd_thong_tin_nd e on a.added_by = e.id
+                                                                                         left join ND_THONG_TIN_DN f on a.mem_id = f.mem_id where a.du_an_id like '{0}' and a.position like '{1}' and a.mem_id like '{2}'", project_id, pos_id, user_id); 
                     DataTable table_list_member = SQLConnectWeb.GetData(sql_list_member);
                     showListmember.DataSource = table_list_member;
                     showListmember.DataBind();

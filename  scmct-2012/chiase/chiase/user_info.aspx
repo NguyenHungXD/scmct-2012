@@ -14,152 +14,154 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
     <fieldset> 
-<table cellpadding="3" cellspacing="1" border="0" bgcolor="#CCFFCC" width="100%" style="color:#FFFF33">
-<tr bgcolor="#ff6600">
+<table cellpadding="1" cellspacing="1" border="0" bgcolor="#0099CC"  width="100%" style="color:#000000">
+<tr bgcolor="White">
 <td colspan="2" align="left">
-    <asp:Image ID="img_user" runat="server" width="120" Height="120" 
+    <asp:Image ID="img_user" runat="server" width="120" Height="120" BorderWidth="1" BorderColor="#0099ff"
         style="text-align: left"/><br>
+</td>
+</tr>
+<tr bgcolor="White">
+<td align="right" class="style1">
+    Tên đăng nhập:
+        </td>
+    <td width="60%">
     <b><asp:Label ID="user_name" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Tên
+    Tên:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_hoten" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Sinh nhật
+    Sinh nhật:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_ngaysinh" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Địa chỉ
+    Địa chỉ:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_diachi" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    SDT
+    SDT:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_sodienthoai" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Email
+    Email:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_email" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Skype
+    Skype:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_skype" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White" >
 <td align="right" class="style1">
-    Yahoo
+    Yahoo:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_yahoo" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Website
+    Website:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_website" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Tham gia
+    Tham gia:
     </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_thamgia" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Nhóm
+    Nhóm:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_nhom" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Tim
+    Tim:
         </td>
-    <td width="80%">
+    <td width="60%">
 <b><asp:Label ID="lbl_sum_point" runat="server" Text='<%#Eval("heart")%>'></asp:Label></b>
 <asp:Image ID="Image1" runat="server" ImageUrl="images/heart.gif" Width="10" Height="10"/>
 
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Số bài viết
+    Số bài viết:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_baidang" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Dự án tham gia
+    Dự án tham gia:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_duan" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Số sách ủng hộ
+    Số sách ủng hộ:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_sach" runat="server" Text="100"></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Truy cập lần cuối
+    Truy cập lần cuối:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_truycap" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="#ff6600">
+<tr bgcolor="White">
 <td align="right" class="style1">
-    Trạng thái
+    Trạng thái:
         </td>
-    <td width="80%">
+    <td width="60%">
     <b><asp:Label ID="lbl_trangthai" runat="server" Text="Online"></asp:Label></b>
 </td>
 </tr>
 
-<tr>
-<td colspan="2">
 
-</td>
-</tr>
 </table>
 </fieldset> 
 

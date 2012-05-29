@@ -5,6 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
     <title></title>
+
+    <script type="text/javascript" src="../Scripts/ajax_script.js" ></script>
         <script src="../js/jquery-1.6.1.min.js" type="text/javascript"></script>
     <script src="../js/jquery-ui.js" type="text/javascript"></script>
 	<script src="../js/jquery.autocomplete.js" type="text/javascript"></script>    

@@ -38,23 +38,52 @@
          loadXMLUpdate(url);
 
          if (enable == 'N')
-             document.getElementById(divid).innerHTML = "<a href=# title='Khóa'><img src=images/lockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'Y','" + divid + "') /></a>";
+             document.getElementById(divid).innerHTML = "<a style=cursor:pointer title='Khóa'><img src=images/lockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'Y','" + divid + "') /></a>";
          else
-             document.getElementById(divid).innerHTML = "<a href=# title='Mở khóa'><img src=images/unlockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'N','" + divid + "') /></a>";
+             document.getElementById(divid).innerHTML = "<a style=cursor:pointer title='Mở khóa'><img src=images/unlockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'N','" + divid + "') /></a>";
      }
      function del_project(id, enable, divid, dividlock) {
          var url = "update_member_project.aspx?id=" + id + "&enable=" + enable + "&vmode=del";
          loadXMLUpdate(url);
          if (enable == 'D') {
-             document.getElementById(divid).innerHTML = "<a href=# title='Xóa'><img src=images/deleteicon.gif width=20 height=20 alt='Phục hồi' onclick=del_project(" + id + ",'Y','" + divid + "','" + dividlock + "') /></a>";
-             document.getElementById(dividlock).innerHTML = "<a href=# title='Khóa'><img src=images/lockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'Y','" + dividlock + "') /></a>";
+             document.getElementById(divid).innerHTML = "<a style=cursor:pointer title='Xóa'><img src=images/deleteicon.gif width=20 height=20 alt='Phục hồi' onclick=del_project(" + id + ",'Y','" + divid + "','" + dividlock + "') /></a>";
+             document.getElementById(dividlock).innerHTML = "<a style=cursor:pointer title='Khóa'><img src=images/lockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'Y','" + dividlock + "') /></a>";
          }
          else {
-             document.getElementById(divid).innerHTML = "<a href=# title='Phục hồi'><img src=images/undeleteicon.gif width=20 height=20 alt=Xóa onclick=del_project(" + id + ",'D','" + divid + "','" + dividlock + "') /></a>";
-             document.getElementById(dividlock).innerHTML = "<a href=# title='Khóa'><img src=images/lockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'D','" + dividlock + "') /></a>";
+             document.getElementById(divid).innerHTML = "<a style=cursor:pointer title='Phục hồi'><img src=images/undeleteicon.gif width=20 height=20 alt=Xóa onclick=del_project(" + id + ",'D','" + divid + "','" + dividlock + "') /></a>";
+             document.getElementById(dividlock).innerHTML = "<a style=cursor:pointer title='Khóa'><img src=images/lockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'D','" + dividlock + "') /></a>";
          }
      }
 
+     function do_update() {
+         var obj = document.forms["form1"];
+         var checked = false;
+         if (typeof (obj.chk) == "undefined") return;
+         if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để hủy.")) 
+         {
+             if (obj.chk.length > 0) {
+                 for (i = 0; i < obj.chk.length; i++) {
+                     if (obj.chk[i].checked == true) {
+                         var url = "update_member_project.aspx?id=" + obj.chk[i].value + "&vmode=approve";
+                         loadXMLUpdate(url);
+                         checked = true;
+                     }
+                 }
+             }
+             else {
+                 if (obj.chk.checked == true) {
+                     var url = "update_member_project.aspx?id=" + obj.chk.value + "&vmode=approve";
+                     loadXMLUpdate(url);
+                     checked = true;
+                 }
+             }
+             if (checked == false)
+                 document.getElementById("stausinfo").innerHTML = "Bạn chưa chọn thành viên để xét duyệt cho dự án!"
+             else
+                 document.getElementById("stausinfo").innerHTML = "Cập nhật thành công!"
+         }
+
+     }
     </script>
 
 
@@ -63,7 +92,7 @@
     <tr>
     <td colspan=3 align="center">
 
-        <font size=3><b><asp:Label ID="lbl_error" runat="server" ForeColor="#0000CC"></asp:Label></b></font>
+        <font size=3><b><asp:Label ID="lbl_error" runat="server" ></asp:Label></b></font>
 
         <hr>
 
@@ -546,10 +575,11 @@
         <ItemTemplate>
                     <tr class="new_post_details">
                     <td align="center">
-                            <table cellpadding=1 cellspacing=1 border=0><tr>
-                            <td><a href="#" title="Cập nhật"><img src="images/edit.gif" width="20" height="20" alt="Cập nhật dự án"/></a></td>
-                            <td id=<%# Eval("id","'idlock{0}'")%>><a href="#" title='<%#Eval("img_lock_alt")%>'><img src=<%#Eval("img_lock","images/{0}")%> width="20" height="20" alt=""  onclick="lock_project(<%# Eval("id")%>,<%# Eval("active","'{0}'")%>,<%# Eval("id","'idlock{0}'")%>)"/></a></td>
-                            <td id=<%# Eval("id","'iddel{0}'")%> ><a href="#" title='<%#Eval("img_del_alt")%>'><img src=<%#Eval("img_del","images/{0}")%> width="20" height="20" alt="" onclick="del_project(<%# Eval("id")%>,<%# Eval("active","'{0}'")%>,<%# Eval("id","'iddel{0}'")%>,<%# Eval("id","'idlock{0}'")%>)" /></a></td>
+                            <table cellpadding=1 cellspacing=1 border=0>
+                            <tr>
+                            
+                            <td id=<%# Eval("id","'idlock{0}'")%>><a style=cursor:pointer title='<%#Eval("img_lock_alt")%>'><img src=<%#Eval("img_lock","images/{0}")%> width="20" height="20" alt=""  onclick="lock_project(<%# Eval("id")%>,<%# Eval("active","'{0}'")%>,<%# Eval("id","'idlock{0}'")%>)"/></a></td>
+                            <td id=<%# Eval("id","'iddel{0}'")%> ><a style=cursor:pointer title='<%#Eval("img_del_alt")%>'><img src=<%#Eval("img_del","images/{0}")%> width="20" height="20" alt="" onclick="del_project(<%# Eval("id")%>,<%# Eval("active","'{0}'")%>,<%# Eval("id","'iddel{0}'")%>,<%# Eval("id","'idlock{0}'")%>)" /></a></td>
                             </tr>
                             </table>
                      </td>
@@ -573,7 +603,7 @@
                         <%#Eval("added_name")%>
                     </td>
                     <td valign=middle align="center">
-                        <%#Eval("status")%>
+                        <%# Eval("status1")%>
                     </td>
                     </tr>
                     <tr>
@@ -584,9 +614,15 @@
         <FooterTemplate>
         </table>
         </FooterTemplate>
-        </asp:Repeater>   
+        </asp:Repeater>
+        <br>
+        <font color="ButtonHighlight" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
+        <p align="right">
+        <font color="ButtonHighlight"><b>*-Chọn thành viên cần duyệt cho dự án</b></font><br>   
+  
 
-
+        <input id="Button2" type="button" value="Duyệt thành viên" onclick="do_update();" class="btn" style="width:130px;height:30px"/>
+        </p>
         </fieldset>
 
 

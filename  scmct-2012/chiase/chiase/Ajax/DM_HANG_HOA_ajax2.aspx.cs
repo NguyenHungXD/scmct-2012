@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using chiase.Objects;
+using DK2C.DataAccess.Web;
 
 namespace chiase
 {
@@ -35,9 +36,25 @@ namespace chiase
                 case "TimKiem": TimKiem(); break;
                 case "NHH_IDSearch": NHH_IDSearch(); break;
                 case "loadNhomHH": loadNhomHangHoa(); break;
+                case "getHH": getHH(); break;
+
             }
         }
+        private void getHH()
+        {
+            string sql = @"SELECT HH.ID,HH.MA_HH,HH.[NAME],HH.NHH_ID,NHH.[NAME] NHH_NAME
+                      FROM DM_HANG_HOA HH                    
+                    LEFT JOIN DM_HANG_HOA_NHOM NHH ON NHH.ID=HH.NHH_ID
+                    WHERE HH.ID='" + Request.QueryString["HH_ID"] + "'";
 
+            DataTable dt = SQLConnectWeb.GetTable(sql);
+            Response.Clear();
+            string rs = "<HH_NAM>{0}</HH_NAME><NHH_ID>{1}</NHH_ID><NHH_NAME>{2}</NHH_NAME>";
+            if (dt != null && dt.Rows.Count > 0)
+                Response.Write(string.Format(rs, dt.Rows[0]["NAME"], dt.Rows[0]["NHH_ID"], dt.Rows[0]["NHH_NAME"]));
+            else
+                Response.Write(string.Format(rs, "", "", ""));
+        }
         private void loadNhomHangHoa()
         {
             DataTable table = DM_HANG_HOA_NHOM.GetTableAll();

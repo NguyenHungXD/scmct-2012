@@ -225,7 +225,7 @@ string  sTIEU_DE
             ,string  sNGUOI_YEU_CAU
             ,string  sNGAY_YEU_CAU
             ,string  sNGUOI_CAP_NHAT
-            ,string  sNGAYC_CAP_NHAT
+            ,string  sNGAY_CAP_NHAT
             ) 
  { 
               string tem_sTIEU_DE=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sTIEU_DE,"nvarchar");
@@ -234,8 +234,8 @@ string  sTIEU_DE
               string tem_sLOAI_YC_ID=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sLOAI_YC_ID,"bigint");
               string tem_sNGUOI_YEU_CAU=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sNGUOI_YEU_CAU,"bigint");
               string tem_sNGAY_YEU_CAU=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sNGAY_YEU_CAU,"datetime");
-              string tem_sNGUOI_CAP_NHAT=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sNGUOI_CAP_NHAT,"datetime");
-              string tem_sNGAYC_CAP_NHAT=DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sNGAYC_CAP_NHAT,"bigint");
+              string tem_sNGUOI_CAP_NHAT = DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sNGUOI_CAP_NHAT, "bigint");
+              string tem_sNGAYC_CAP_NHAT = DK2C.DataAccess.Web.SQLToolWeb.GetSaveValue(sNGAY_CAP_NHAT, "datetime");
 
              string sqlSave=" INSERT INTO YC_YEU_CAU("+
                    "TIEU_DE," 
@@ -266,7 +266,7 @@ string  sTIEU_DE
               newYC_YEU_CAU.NGUOI_YEU_CAU=sNGUOI_YEU_CAU;
               newYC_YEU_CAU.NGAY_YEU_CAU=sNGAY_YEU_CAU;
               newYC_YEU_CAU.NGUOI_CAP_NHAT=sNGUOI_CAP_NHAT;
-              newYC_YEU_CAU.NGAYC_CAP_NHAT=sNGAYC_CAP_NHAT;
+              newYC_YEU_CAU.NGAYC_CAP_NHAT=sNGAY_CAP_NHAT;
             return newYC_YEU_CAU; 
            } 
            else return null ;

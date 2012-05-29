@@ -16,7 +16,7 @@ namespace chiase
             if(!IsPostBack)
             {
                 Display();
-            
+                Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='change_password.aspx' title='Đổi mật khẩu'>Đổi mật khẩu</a> ";
             }
         }
         public void Display()

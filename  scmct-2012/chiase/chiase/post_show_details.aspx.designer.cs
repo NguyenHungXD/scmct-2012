@@ -13,6 +13,24 @@ namespace chiase {
     public partial class post_show_details {
         
         /// <summary>
+        /// vusername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField vusername;
+        
+        /// <summary>
+        /// bai_viet_ids control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField bai_viet_ids;
+        
+        /// <summary>
         /// show_content control.
         /// </summary>
         /// <remarks>

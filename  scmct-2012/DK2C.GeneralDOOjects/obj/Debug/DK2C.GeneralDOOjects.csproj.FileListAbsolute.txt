@@ -38,3 +38,14 @@ E:\Khanhdtn\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GenerateResource.r
 E:\Khanhdtn\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GenerateResource.write.1.tlog
 E:\Khanhdtn\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GeneralDOOjects.exe
 E:\Khanhdtn\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GeneralDOOjects.pdb
+d:\DOCUMENT\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\bin\Debug\GeneralDOOjects.exe.config
+d:\DOCUMENT\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\bin\Debug\GeneralDOOjects.exe
+d:\DOCUMENT\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\bin\Debug\GeneralDOOjects.pdb
+d:\DOCUMENT\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\bin\Debug\DK2C.DataAccess.dll
+d:\DOCUMENT\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\bin\Debug\DK2C.DataAccess.pdb
+d:\DOCUMENT\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\obj\Debug\ResolveAssemblyReference.cache
+d:\DOCUMENT\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\obj\Debug\DK2C.GeneralDOOjects.frmMain.resources
+d:\DOCUMENT\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GenerateResource.read.1.tlog
+d:\DOCUMENT\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GenerateResource.write.1.tlog
+d:\DOCUMENT\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GeneralDOOjects.exe
+d:\DOCUMENT\HUIPro\ scmct-2012\DK2C.GeneralDOOjects\obj\Debug\GeneralDOOjects.pdb

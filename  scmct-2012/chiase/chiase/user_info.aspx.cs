@@ -21,11 +21,25 @@ namespace chiase
         {
             try
             {
-                String sql = string.Format(@"SELECT a.username,b.*,c.groupname
+                string sql;
+                if (Request.QueryString["user_name"] != null)
+                {
+                     sql = string.Format(@"SELECT a.username,b.*,c.groupname
                             FROM ND_THONG_TIN_DN a
                             INNER JOIN ND_THONG_TIN_ND b ON a.MEM_ID = b.ID
                             INNER JOIN ND_TEN_NHOM_ND c ON b.MEM_GROUP_ID =c.GROUPID
                             WHERE a.username='{0}'", Request.QueryString["user_name"]);
+                }
+                else
+                {
+                     sql = string.Format(@"SELECT a.username,b.*,c.groupname
+                            FROM ND_THONG_TIN_DN a
+                            INNER JOIN ND_THONG_TIN_ND b ON a.MEM_ID = b.ID
+                            INNER JOIN ND_TEN_NHOM_ND c ON b.MEM_GROUP_ID =c.GROUPID
+                            WHERE a.MEM_ID='{0}'", Request.QueryString["id"]);
+                
+                }
+
                 DataTable info = SQLConnectWeb.GetTable(sql);
 
                 img_user.ImageUrl= string.Format("images/avatars/{0}",info.Rows[0]["avatar_path"]);

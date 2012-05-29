@@ -18,6 +18,7 @@ namespace chiase
             {
                 txt_user_name.Focus();
                 functions.add_date_to_dropd(dropd_day, dropd_month, dropd_year,0);
+                Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='register.aspx' title='Đăng ký'>Đăng ký</a> ";
             }
         }
         
@@ -72,7 +73,7 @@ namespace chiase
                     //                        "@v_SEX",rd_sex.SelectedItem.Value,
                     //                        "@v_PHONE", txt_phone_number.Text,
                     //                        "@v_EMAIL", txt_emaill_address.Text,
-                    //                        "@v_CREATED_DATE", DateTime.Now,
+                    //                        "@v_CREATED_DATE", functions.GetStringDatetime(),
                     //                        "@v_VISIBLE_BIT", 'Y');
 
                    
@@ -94,8 +95,8 @@ namespace chiase
                         //Database.ExecuteNonQuery(sql_insert_ttdn,
                         //                        "@v_USERNAME", txt_user_name.Text,
                         //                        "@v_PWD", txt_pass_word.Text,
-                        //                        "@v_LASTED_ACCESS", DateTime.Now,
-                        //                        "@v_CREATED_DATE", DateTime.Now,
+                        //                        "@v_LASTED_ACCESS", functions.GetStringDatetime(),
+                        //                        "@v_CREATED_DATE", functions.GetStringDatetime(),
                         //                        "@v_ISCHANGEPWD_BIT", 'Y',
                         //                        "@v_ISACTIVE_BIT", 'Y',
                         //                        "@v_MEM_ID", v_memID);
@@ -125,7 +126,7 @@ namespace chiase
                 // chuyen sang trang thong bao loi
                 //Response.Redirect("error_page.aspx");
               // Response.Write(ex);
-                lbl_result.Text = "Đăng ký thành viên không thành công !" +ex.ToString();
+                lbl_result.Text = "Đăng ký thành viên không thành công !";
                 
             }
            

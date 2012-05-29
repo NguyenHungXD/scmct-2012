@@ -5,6 +5,7 @@
     Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
 <%@ Register Assembly="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
+<%@ Register assembly="DevExpress.Web.ASPxSpellChecker.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.Web.ASPxSpellChecker" tagprefix="dx" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -31,11 +32,19 @@
     </script>
 
 
+    <style type="text/css">
+        .style1
+        {
+            width: 91px;
+        }
+    </style>
+
+
 </head>
 <body>
 <form id="form1" runat="server">
    <fieldset>
-<legend><b>Tạo chủ đề mới</font></b></legend> 
+<!--<legend><b>Tạo chủ đề mới</font></b></legend> -->
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td colspan="3" align="right">
@@ -50,27 +59,24 @@
     </tr>
     <tr>
     <td align=center colspan=2><br>
-        <font size=3><b><asp:Label ID="lbl_error" runat="server" ForeColor="#0000CC"></asp:Label></font><br>
+        <font size=3><b><asp:Label ID="lbl_error" runat="server" ></asp:Label></font><br>
         <hr>
         </td>
     </tr>
 
           <tr>
-    <td>
+    <td colspan="2">
         Tiêu đề:
-    </td>
-    <td>
-        <asp:TextBox ID="txt_title" runat="server"  class="txtformat" Width="614px" 
+
+        <asp:TextBox ID="txt_title" runat="server"  class="txtformat" Width="642px" 
             Height="23px"></asp:TextBox>
         <asp:RequiredFieldValidator ForeColor="Red" Display="Dynamic" ControlToValidate="txt_title" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Nhập tiêu đề"></asp:RequiredFieldValidator>
             </td>
     </tr>
       <tr>
-    <td>
-        Chi tiết:
-    </td>
-    <td>
-<dx:ASPxHtmlEditor ID="ASPxHtmlEditor1" runat="server" Width="817px" 
+    <td colspan="2">
+
+<dx:ASPxHtmlEditor ID="ASPxHtmlEditor1" runat="server" Width="700px" 
                 CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
                 Height="308px">
                 <ClientSideEvents HtmlChanged="HtmlChangedHandler" />
@@ -107,7 +113,7 @@
             </td>
     </tr>
       <tr>
-    <td>
+    <td class="style1">
        Sắp xếp:
     </td>
     <td>
@@ -118,7 +124,7 @@
 
    
       <tr>
-    <td>
+    <td class="style1">
        Trạng thái:
     </td>
     <td>

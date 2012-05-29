@@ -494,8 +494,9 @@
             // This function is garaunteed to be called anytime a gallery slide changes.
             // @param {Object} imageData An object holding the image metadata of the image to navigate to.
             gotoImage: function (imageData) {
+                
                 var index = imageData.index;
-
+               
                 if (this.onSlideChange)
                     this.onSlideChange(this.currentImage.index, index);
 
@@ -924,10 +925,12 @@
         if (initFirstImage)
             this.gotoIndex(0, false, true);
 
+            /*
         // Setup Keyboard Navigation
         if (this.enableKeyboardNavigation) {
             $(document).keydown(function (e) {
                 var key = e.charCode ? e.charCode : e.keyCode ? e.keyCode : 0;
+              
                 switch (key) {
                     case 32: // space
                         gallery.next();
@@ -958,9 +961,10 @@
                         e.preventDefault();
                         break;
                 }
+                
             });
         }
-
+        */
         // Auto start the slideshow
         if (this.autoStart)
             this.play();

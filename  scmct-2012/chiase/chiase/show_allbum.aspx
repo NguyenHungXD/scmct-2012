@@ -7,11 +7,26 @@
     Namespace="DevExpress.Web.ASPxPopupControl" TagPrefix="dx" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
+<script type="text/javascript">
+    function update_view(allbum_id) {
+        var url = "update_view.aspx?allbumid="+allbum_id;
+        loadXMLUpdate(url);
+    }
+    function del_allbum(allbum_id) {
+        if (confirm("Bạn thực sự muốn xóa allbum ảnh này?\n Chọn [Ok] để xóa, [Cancel] để hủy.")) {
+            var url = "update_allbum_imgs_save.aspx?allbum_id=" + allbum_id + "&mode=4";
+            loadXMLUpdate(url);
+            alert("Allbum ảnh đã được xóa thành công!");
+            window.location = "show_allbum.aspx";
+        }
+    }
 
+</script>
 
 
 <fieldset style="background-color:#4CC417;">
 <div class="upload">
+<% if(username!=""){%>
 <table id="popupArea" bgcolor=green cellpadding=3 cellspacing=3 style="border: 1px solid #fff;">
 <tr style="cursor:pointer;" title="Tạo allbum ảnh mới">
 <td align="center" valign="middle" style="cursor:hand;">
@@ -20,8 +35,9 @@
 </td>
 </tr>
 </table>
+<%} %>
      <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" AllowDragging="True" AllowResize="True"
-        CloseAction="CloseButton" ContentUrl="uploads.aspx"
+        CloseAction="CloseButton" ContentUrl="upload_images.aspx"
         EnableViewState="False" PopupElementID="popupArea"
         PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
         Height="500px" FooterText="Thêm ảnh cho allbum - bạn nhấn Shift hoặc Ctrl để chọn nhiều ảnh"
@@ -37,27 +53,29 @@
             <dx:PopupControlContentControl ID="PopupControlContentControl1" runat="server" SupportsDisabledAttribute="True">
             </dx:PopupControlContentControl>
         </ContentCollection>
+                                                <ClientSideEvents CloseUp="function(s, e) {       
+	                                            location.reload(true);
+                                        }" />
+
+
     </dx:ASPxPopupControl>
     <br>
-    <asp:DataList ID="DataList1"  RepeatLayout="Table" RepeatColumns="4"  
+    <asp:DataList ID="DataList1"  RepeatLayout="Table" RepeatColumns="2"  
         RepeatDirection="Horizontal" runat="server" 
         onitemdatabound="DataList1_ItemDataBound">
           <ItemTemplate>
                 <fieldset  class="btn_img">
-                <table cellpadding="0" cellspacing="0" border="0" style="color:White;">
+                <table cellpadding="1" cellspacing="0" border="0" style="color:White;">
                 <tr>
-                <td>
-                    
-                <asp:Image ID="img_fist" runat="server" />
-                </td>
-                </tr>
-                <tr>
-                <td>
+                <td colspan="2" align="right">
      
                 <b><asp:Label ID="lbl_allbum_name" runat="server" Text='<%# Eval("allbum_name") %>'></asp:Label></b>
                 </td>
                 </tr>
                 <tr>
+                <td rowspan="8">
+                    <asp:Image ID="img_first" runat="server" Width="160" Height="160" BorderColor="White" BorderWidth="1"/>
+                </td>
                 <td>
                 Số lượng: <b><asp:Label ID="lbl_cnt_img" runat="server" Text="20"></asp:Label></b> ảnh
                 </td>
@@ -70,7 +88,7 @@
                 </tr>
                 <tr>
                 <td>
-                Ngày, <b><asp:Label ID="lbl_created_date" runat="server" Text='<%#Eval("created_date") %>'></asp:Label></b>
+                Ngày, <b><asp:Label ID="lbl_created_date" runat="server" Text='<%#Eval("created_date","{0:dd/MM/yyyy hh:mm:ss tt }") %>'></asp:Label></b>
                 </td>
                 </tr>
                 <tr>
@@ -84,8 +102,18 @@
                 </td>
                 </tr>
                 <tr>
+                <td>
+                Bình luận: <b><asp:Label ID="lbl_commemt" Text='<%#Eval("comments") %>' runat="server"></asp:Label></b>
+                </td>
+                </tr>
+                <tr>
+                <td>
+                Cập nhật: <b><asp:Label ID="lbl_update" Text='<%#Eval("edited_date","{0:dd/MM/yyyy hh:mm:ss tt}") %>' runat="server"></asp:Label></b>
+                </td>
+                </tr>
+                <tr>
                 <td align="center" valign="middle" style="cursor:hand;">
-                    <a href='<%#Eval("allbum_id","slideshow.aspx?allbumid={0}") %>' ><b>Xem allbum</b></a> | <a href='<%#Eval("allbum_id","slideshow.aspx?allbumid={0}") %>' ><b>Cập nhật</b></a>
+                    <a href='<%#Eval("allbum_id","slideshow.aspx?allbumid={0}") %>' onclick=update_view('<%#Eval("allbum_id")%>')><b>Xem allbum</b></a> | <a href='<%#Eval("allbum_id","update_allbum.aspx?allbum_id={0}") %>' ><b>Sửa allbum</b></a> | <a style="cursor:pointer" onclick=del_allbum('<%#Eval("allbum_id")%>') ><b>Xóa allbum</b></a>
                 </td>
                 </tr>
                 </table>

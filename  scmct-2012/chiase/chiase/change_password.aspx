@@ -12,7 +12,7 @@
     }
 </script>
     <fieldset>
-<legend>Đổi mật khẩu</legend> 
+<!--<legend>Đổi mật khẩu</legend> -->
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td align=center colspan=2>

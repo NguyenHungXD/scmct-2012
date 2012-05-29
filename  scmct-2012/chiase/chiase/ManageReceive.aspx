@@ -2,6 +2,9 @@
     CodeBehind="ManageReceive.aspx.cs" Inherits="chiase.ManageReceive" %>
 
 <%@ Register Assembly="DevExpress.Web.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxHiddenField" TagPrefix="dx" %>
+
+<%@ Register Assembly="DevExpress.Web.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxPopupControl" TagPrefix="dx" %>
 <%@ Register Assembly="DevExpress.Web.ASPxGridView.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxGridView" TagPrefix="dx" %>
@@ -53,21 +56,41 @@
           
         }
         function ChungLoaiRowDblClickHandler(s, e) {
-            s.GetNodeValues(s.GetFocusedNodeKey(), 'ID;NAME', OnChungLoaiGetRowValues);
-        }
+            s.GetNodeValues(e.nodeKey, 'ID;NAME', OnChungLoaiGetNodeValues);       }
 
-        function OnChungLoaiGetRowValues(values) {
-            gridViewHangHoa.SetEditValue("colChungLoaiID", values[0]);
-            gridViewHangHoa.SetEditValue("colChungLoaiNAME", values[1]);
-            txtTemp.SetText(gridViewHangHoa.GetEditValue("colHHID") + "@" + values[3]);
-        }
+       function OnChungLoaiGetNodeValues(values) {
+           //alert(values[0]+ values[1]+ gridViewHangHoa.GetEditValue("colHHID"));
+           gridViewHangHoa.SetEditValue("colChungLoaiID", values[0]);
+           gridViewHangHoa.SetEditValue("colChungLoaiName", values[1]);
+           var text = txtTemp.GetValue();
+           //alert(text);
+           if (text == null || text == "") {
 
-      
+               txtTemp.SetText("@" + values[0]);
+               //alert(txtTemp.GetText());
+           }
+           else {
+             //  alert(text);
+               var hhid = text.substr(0, text.indexOf("@"));
+               //alert(hhid);
+               txtTemp.SetText(hhid + "@" + values[0]);
+              // alert(hhid + "--" + txtTemp.GetText());
+           }
+       }
 
         function SavePhieuNhapKho(s, e) {
-            
+
             gridViewHangHoa.SelectAllRowsOnPage();
-            gridViewHangHoa.GetSelectedFieldValues('PNK_CT_ID;HH_ID;MA_HH;NAME;NHH_ID;NHH_NAME;SO_LUONG;DON_GIA;THANH_TIEN', OnGetRowValuesToSave);
+            if (gridViewHangHoa.IsEditing()==true) {
+            alert("Vui lòng hoàn thành thao tác đang nhập trên chi tiết phiếu nhập!");
+            return;
+            }            
+            if(gridViewHangHoa.GetSelectedRowCount() == 0) {
+                alert("Vui lòng vào thông tin chi tiết phiếu nhập!");
+                return;
+            }
+
+            gridViewHangHoa.GetSelectedFieldValues('PNK_CT_ID;HH_ID;MA_HH;NAME;NHH_ID;SO_LUONG;DON_GIA;THANH_TIEN', OnGetRowValuesToSave);
             gridViewHangHoa.SelectAllRowsOnPage(false);
 
         }
@@ -77,30 +100,42 @@
             var ngaynhap = dtNgayNhap.GetText();
             var loainhap = cboLoaiNhap.GetValue();
             var khonhap = cboKhoNhap.GetValue();
-            var duan = grlDuAn.GetGridView().GetSelectedKeysOnPage()[0];
-            var yeucau = grlPhieuYeuCau.GetValue();
             var nhaptu = cboNhapTu.GetValue();
             var chungtu = txtChungTu.GetText();
             var ghiChu = txtGhiChu.GetText();
-
             var idphieuNhap = lblIDPhieuNhap.GetText();
+
+            var gridduan = grlDuAn.GetGridView();
+            var duan = gridduan.GetRowKey(gridduan.GetFocusedRowIndex());
+            
+            var gridyeucau = grlPhieuYeuCau.GetGridView();
+            var yeucau = gridyeucau.GetRowKey(gridyeucau.GetFocusedRowIndex());
+        
 
             // alert(nguoinhap + "@" + ngaynhap + "@" + loainhap + "@" + khonhap + "@" + duan + "@" + yeucau + "@" + nhaptu + "@" + chungtu);
 
-            //            var iserror = false;
-            //            if (nguoinhap == null || nguoinhap == "" || eval(nguoinhap) == -1) {
-            //                cboNguoiNhap.SetErrorText("Vui lòng vào thông tin người nhập!");
-            //                cboNguoiNhap.SetIsValid(false);
-            //                iserror = true;
-            //            } else {
-            //                cboNguoiNhap.SetErrorText("");
-            //                cboNguoiNhap.SetIsValid(true);
-            //            }
+            var iserror = false;
 
-            //            if (iserror == true) {
-            //                alert("Thông tin nhập chưa hợp lệ, vui lòng nhập lại theo hướng dẫn!");
-            //                return "";
-            //            }
+            cboNguoiNhap.Validate();
+            dtNgayNhap.Validate();
+            cboLoaiNhap.Validate();
+            cboKhoNhap.Validate();
+            cboNhapTu.Validate();
+         
+            if(cboNguoiNhap.GetIsValid()==false)
+                iserror=true;
+            if (dtNgayNhap.GetIsValid() == false)
+                iserror = true;
+            if (cboLoaiNhap.GetIsValid() == false)
+                iserror = true;
+            if (cboKhoNhap.GetIsValid() == false)
+                iserror = true;
+            if (cboNhapTu.GetIsValid() == false)
+                iserror = true;
+            if (iserror == true) {
+                alert("Thông tin nhập phiếu nhập chưa hợp lệ, vui lòng nhập lại theo hướng dẫn!");
+                return "";
+            }
 
 
             var list_pnkctid = "";
@@ -108,7 +143,7 @@
             var list_hhname = "";
             var list_mahh = "";
             var list_hhChungloaiID = "";
-            var list_hhChungloaiName = "";
+           
             var list_soluong = "";
             var list_dongia = "";
             var list_thanhtien = "";
@@ -123,24 +158,20 @@
                 list_hhid = list_hhid + "~" + values[i][1];
                 list_mahh = list_mahh + "~" + values[i][2];
                 list_hhname = list_hhname + "~" + values[i][3];
-                list_hhChungloaiID = list_hhChungloaiID + "~" + values[i][4];
-                list_hhChungloaiName = list_hhChungloaiName + "~" + values[i][5];
-                list_soluong = list_soluong + "~" + values[i][6];
-                list_dongia = list_dongia + "~" + values[i][7];
-                list_thanhtien = list_thanhtien + "~" + values[i][8];
+                list_hhChungloaiID = list_hhChungloaiID + "~" + values[i][4];              
+                list_soluong = list_soluong + "~" + values[i][5];
+                list_dongia = list_dongia + "~" + values[i][6];
+                list_thanhtien = list_thanhtien + "~" + values[i][7];
             }
 
             xmlHttp = GetMSXmlHttp();
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState == 4) {
                     var value = xmlHttp.responseText;
-                    if (value == "2") {
-                        alert("Bạn đã hết phiên làm việc. Vui lòng đăng nhập lại.");
-                        window.close();
-                    } else if (value == "1") {
+                    if (value.indexOf("Success")!=-1) {
                         alert("Lưu phiếu nhập thành công!");
                         pcPhieuNhap.Hide();
-                    } else if (value == "-1") {
+                    } else if (value.indexOf("Fail")!=-1) {
                         alert("Lưu phiếu nhập không thành công, vui lòng kiểm tra lại dữ liệu!");
 
                     } else alert(value);
@@ -151,14 +182,30 @@
             + "&ngaynhap=" + ngaynhap + "&loainhap=" + loainhap + "&khonhap=" + khonhap + "&duan=" + duan
             + "&yeucau=" + yeucau + "&nhaptu=" + nhaptu + "&chungtu=" + chungtu+"&ghichu="+ghiChu
             + "&list_pnkctid=" + list_pnkctid + "&list_hhid=" + list_hhid + "&list_mahh=" + encodeURIComponent(list_mahh)
-            + "&list_hhname=" + encodeURIComponent(list_hhname) + "&list_hhChungloaiID=" + list_hhChungloaiID + "&list_hhChungloaiName=" + encodeURIComponent(list_hhChungloaiName)
+            + "&list_hhname=" + encodeURIComponent(list_hhname) + "&list_hhChungloaiID=" + list_hhChungloaiID 
             + "&list_soluong=" + list_soluong + "&list_dongia=" + list_dongia + "&list_thanhtien=" + list_thanhtien
             + "&times=" + Math.random(), true);
             xmlHttp.send(null);
 
-           
-         
         }
+        function YeuCauSelectedChange(s, e) {
+            var gr = s.GetGridView();            
+            gr.GetRowValues(gr.GetFocusedRowIndex(),"NGUOI_YEU_CAU;YEU_CAU_ID;", YeuCauSelectedValues);
+            
+        }
+        function YeuCauSelectedValues(selectedValues) {
+
+            if (selectedValues.length == 0) return;
+            cboNhapTu.SetValue(selectedValues[0]);
+
+        }
+        function OnValidate(s, e) {
+        if(e.value==null||e.value==""||eval(e.value)==-1)
+            e.isValid=false;
+    }
+    function OnFocusedRowChange(s, e) {
+        alert(gridViewHangHoa.GetFocusedRowIndex());
+    }
 // ]]>
     </script>
 </asp:Content>
@@ -186,7 +233,7 @@
             </tr>
         </table>
         <br />
-        <dx:ASPxPopupControl ID="pcPhieuNhap" runat="server" Height="250px" Width="915px"
+        <dx:ASPxPopupControl ID="pcPhieuNhap" runat="server" Height="500px" Width="915px"
             Modal="True" HeaderText="PHIẾU NHẬP HÀNG" PopupHorizontalAlign="WindowCenter"
             PopupVerticalAlign="WindowCenter" CloseAction="CloseButton" ScrollBars="Auto"
             CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" CssPostfix="Office2010Blue"
@@ -213,7 +260,7 @@
                                                 <dx:ASPxTextBox ID="txtMaNhap" ClientInstanceName="txtMaPhieuNhap" runat="server"
                                                     CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" CssPostfix="Office2010Blue"
                                                     Height="16px" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                                                    Width="180px">
+                                                    Width="180px" Enabled="False">
                                                     <ValidationSettings>
                                                         <ErrorFrameStyle ImageSpacing="4px">
                                                             <ErrorTextPaddings PaddingLeft="4px" />
@@ -235,12 +282,11 @@
                                                         <Image>
                                                             <SpriteProperties HottrackedCssClass="dxEditors_edtDropDownHover_Aqua" PressedCssClass="dxEditors_edtDropDownPressed_Aqua" />
                                                         </Image>
-                                                    </DropDownButton>
-                                                    <ValidationSettings>
-                                                        <ErrorFrameStyle ImageSpacing="4px">
-                                                            <ErrorTextPaddings PaddingLeft="4px" />
-                                                        </ErrorFrameStyle>
+                                                    </DropDownButton>                                               
+                                                    <ValidationSettings ErrorDisplayMode="ImageWithTooltip" SetFocusOnError="True" ErrorText="Vui lòng vào thông tin người nhập!"
+                                                        ValidateOnLeave="False">
                                                     </ValidationSettings>
+                                                    <ClientSideEvents Validation="OnValidate" />
                                                 </dx:ASPxComboBox>
                                             </td>
                                             <td>
@@ -259,11 +305,10 @@
                                                             <SpriteProperties HottrackedCssClass="dxEditors_edtDropDownHover_Aqua" PressedCssClass="dxEditors_edtDropDownPressed_Aqua" />
                                                         </Image>
                                                     </DropDownButton>
-                                                    <ValidationSettings>
-                                                        <ErrorFrameStyle ImageSpacing="4px">
-                                                            <ErrorTextPaddings PaddingLeft="4px" />
-                                                        </ErrorFrameStyle>
+                                                     <ValidationSettings ErrorDisplayMode="ImageWithTooltip" SetFocusOnError="True" ErrorText="Vui lòng vào thông tin ngày nhập!"
+                                                        ValidateOnLeave="False">
                                                     </ValidationSettings>
+                                                    <ClientSideEvents Validation="OnValidate" />
                                                 </dx:ASPxDateEdit>
                                             </td>
                                         </tr>
@@ -283,11 +328,10 @@
                                                             <SpriteProperties HottrackedCssClass="dxEditors_edtDropDownHover_Aqua" PressedCssClass="dxEditors_edtDropDownPressed_Aqua" />
                                                         </Image>
                                                     </DropDownButton>
-                                                    <ValidationSettings>
-                                                        <ErrorFrameStyle ImageSpacing="4px">
-                                                            <ErrorTextPaddings PaddingLeft="4px" />
-                                                        </ErrorFrameStyle>
+                                                    <ValidationSettings ErrorDisplayMode="ImageWithTooltip" SetFocusOnError="True" ErrorText="Vui lòng vào thông tin loại nhập!"
+                                                        ValidateOnLeave="False">
                                                     </ValidationSettings>
+                                                    <ClientSideEvents Validation="OnValidate" />
                                                 </dx:ASPxComboBox>
                                             </td>
                                             <td style="width: 72px; height: 17px;">
@@ -305,11 +349,10 @@
                                                             <SpriteProperties HottrackedCssClass="dxEditors_edtDropDownHover_Aqua" PressedCssClass="dxEditors_edtDropDownPressed_Aqua" />
                                                         </Image>
                                                     </DropDownButton>
-                                                    <ValidationSettings>
-                                                        <ErrorFrameStyle ImageSpacing="4px">
-                                                            <ErrorTextPaddings PaddingLeft="4px" />
-                                                        </ErrorFrameStyle>
+                                                    <ValidationSettings ErrorDisplayMode="ImageWithTooltip" SetFocusOnError="True" ErrorText="Vui lòng vào thông tin kho nhập!"
+                                                        ValidateOnLeave="False">
                                                     </ValidationSettings>
+                                                    <ClientSideEvents Validation="OnValidate" />
                                                 </dx:ASPxComboBox>
                                             </td>
                                             <td style="height: 17px">
@@ -321,6 +364,8 @@
                                                     Width="180px" ClientInstanceName="grlDuAn" TextFormatString="{0}">
                                                     <GridViewProperties>
                                                         <SettingsBehavior AllowFocusedRow="True" AllowSelectSingleRowOnly="True" />
+                                                        <SettingsPager PageSize="12" Mode="ShowAllRecords"/>
+                                                        <Settings ShowFilterRow="True" />  
                                                     </GridViewProperties>
                                                     <GridViewImages SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css">
                                                         <LoadingPanelOnStatusBar Url="~/App_Themes/Office2010Blue/GridView/Loading.gif">
@@ -363,6 +408,8 @@
                                                     Width="182px" ClientInstanceName="grlPhieuYeuCau" TextFormatString="{0}">
                                                     <GridViewProperties>
                                                         <SettingsBehavior AllowFocusedRow="True" AllowSelectSingleRowOnly="True" />
+                                                        <SettingsPager PageSize="12" Mode="ShowAllRecords"/>
+                                                        <Settings ShowFilterRow="True" />                                        
                                                     </GridViewProperties>
                                                     <GridViewImages SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css">
                                                         <LoadingPanelOnStatusBar Url="~/App_Themes/Office2010Blue/GridView/Loading.gif">
@@ -390,8 +437,10 @@
                                                         <ProgressBar Height="21px">
                                                         </ProgressBar>
                                                     </GridViewStylesEditors>
+                                                   
                                                     <ButtonStyle Width="13px">
                                                     </ButtonStyle>
+                                                    <ClientSideEvents ValueChanged="YeuCauSelectedChange" />
                                                 </dx:ASPxGridLookup>
                                             </td>
                                             <td style="width: 72px">
@@ -409,11 +458,10 @@
                                                             <SpriteProperties HottrackedCssClass="dxEditors_edtDropDownHover_Aqua" PressedCssClass="dxEditors_edtDropDownPressed_Aqua" />
                                                         </Image>
                                                     </DropDownButton>
-                                                    <ValidationSettings>
-                                                        <ErrorFrameStyle ImageSpacing="4px">
-                                                            <ErrorTextPaddings PaddingLeft="4px" />
-                                                        </ErrorFrameStyle>
+                                                   <ValidationSettings ErrorDisplayMode="ImageWithTooltip" SetFocusOnError="True" ErrorText="Vui lòng vào thông tin nhập từ!"
+                                                        ValidateOnLeave="False">
                                                     </ValidationSettings>
+                                                    <ClientSideEvents Validation="OnValidate" />
                                                 </dx:ASPxComboBox>
                                             </td>
                                             <td>
@@ -452,27 +500,29 @@
                                         ClientIDMode="AutoID" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                                         CssPostfix="Office2010Blue" Width="100%" OnRowInserting="gridViewHangHoa_RowInserting"
                                         OnRowDeleting="gridViewHangHoa_RowDeleting" OnRowUpdating="gridViewHangHoa_RowUpdating"
-                                        ClientInstanceName="gridViewHangHoa">
+                                        ClientInstanceName="gridViewHangHoa" 
+                                        OnRowValidating="gridViewHangHoa_RowValidating" >
+                                        <ClientSideEvents FocusedRowChanged= "OnFocusedRowChange" />                                        
                                         <Columns>
                                             <dx:GridViewDataTextColumn Caption="Mã hàng" ShowInCustomizationForm="True" VisibleIndex="6"
                                                 Name="colMaHangHoa">
                                             </dx:GridViewDataTextColumn>
                                             <dx:GridViewDataTextColumn Caption="PNKCT_ID" Name="colPNKCT_ID" ShowInCustomizationForm="True"
-                                                Visible="False" VisibleIndex="3">
+                                                Visible="False" VisibleIndex="2">
                                             </dx:GridViewDataTextColumn>
                                             <dx:GridViewDataTextColumn Caption="PNK_ID" Name="colPNK_ID" ShowInCustomizationForm="True"
-                                                Visible="False" VisibleIndex="4">
+                                                Visible="False" VisibleIndex="3">
                                             </dx:GridViewDataTextColumn>
                                             <dx:GridViewDataTextColumn Caption="HH_ID" Name="colHHID" ShowInCustomizationForm="True"
-                                                Visible="False"  VisibleIndex="5">
+                                                Visible="False"  VisibleIndex="4">
                                             </dx:GridViewDataTextColumn>
                                             <dx:GridViewDataDropDownEditColumn Caption="Tên hàng" Name="colTenHangHoa" ShowInCustomizationForm="True"
-                                                VisibleIndex="2" >
+                                                VisibleIndex="5" >
                                                 <PropertiesDropDownEdit>
                                                     <DropDownWindowTemplate>
                                                         <dx:ASPxGridView ID="gridViewDMHH" ClientInstanceName="gridViewDMHH" runat="server"
                                                             OnInit="gridViewDMHH_OnInit" ClientIDMode="AutoID" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
-                                                            CssPostfix="Office2010Blue" Width="100%" OnRowInserting="gridViewDMHH_RowInserting">
+                                                            CssPostfix="Office2010Blue" Width="100%" >
                                                             <Columns>
                                                                 <dx:GridViewDataTextColumn Name="colDNHHID" Caption="ID" FieldName="ID" VisibleIndex="0"
                                                                     Visible="False">
@@ -494,14 +544,14 @@
                                                             </Columns>
                                                             <ClientSideEvents RowDblClick="RowDblClickHandler" />
                                                         </dx:ASPxGridView>
-                                                    </DropDownWindowTemplate>
-                                                </PropertiesDropDownEdit>
+                                                    </DropDownWindowTemplate>                                              
+                                                </PropertiesDropDownEdit>                                                
                                             </dx:GridViewDataDropDownEditColumn>
                                             <dx:GridViewDataTextColumn Caption="NHH_ID" Name="colChungLoaiID" ShowInCustomizationForm="True"
                                                 Visible="False" VisibleIndex="7">
                                             </dx:GridViewDataTextColumn>
                                             <dx:GridViewDataDropDownEditColumn Caption="Chủng loại" ShowInCustomizationForm="True"
-                                                VisibleIndex="8" Name="colChungLoaiName">
+                                                VisibleIndex="8" Name="colChungLoaiName" ReadOnly="True">
                                                 <PropertiesDropDownEdit>
                                                     <DropDownWindowTemplate>
                                                         <dx:ASPxTreeList ID="treeListChungLoai" ClientInstanceName="treeListChungLoai" runat="server"
@@ -516,15 +566,16 @@
                                                                 <dx:TreeListDataColumn FieldName="PARENT_ID" Visible="False" VisibleIndex="-1">
                                                                 </dx:TreeListDataColumn>
                                                             </Columns>
-                                                            <SettingsBehavior ExpandCollapseAction="NodeDblClick" />
+                                                            <SettingsBehavior ExpandCollapseAction="Button" AutoExpandAllNodes="true" />
                                                             <ClientSideEvents NodeDblClick="ChungLoaiRowDblClickHandler" />
+                                                            
                                                         </dx:ASPxTreeList>
                                                     </DropDownWindowTemplate>
                                                 </PropertiesDropDownEdit>
                                             </dx:GridViewDataDropDownEditColumn>
                                             <dx:GridViewDataSpinEditColumn Caption="Số lượng" ShowInCustomizationForm="True"
                                                 VisibleIndex="9" Name="colSoLuong">
-<PropertiesSpinEdit DisplayFormatString="g"></PropertiesSpinEdit>
+<PropertiesSpinEdit DisplayFormatString="g" MaxValue="9999999999" MinValue="1"></PropertiesSpinEdit>
                                             </dx:GridViewDataSpinEditColumn>
                                             <dx:GridViewDataSpinEditColumn Caption="Đơn giá" ShowInCustomizationForm="True" VisibleIndex="10"
                                                 Name="colDonGia">
@@ -551,11 +602,13 @@
                                                 </ClearFilterButton>
                                             </dx:GridViewCommandColumn>
                                         </Columns>
+                                        <SettingsBehavior ConfirmDelete="True" />
                                         <SettingsPager PageSize="12" Mode="ShowAllRecords">
                                         </SettingsPager>
                                         <SettingsEditing Mode="Inline" />
                                         <Settings ShowVerticalScrollBar="True" VerticalScrollableHeight="250" />
-                                        <SettingsText CommandDelete="Xóa" />
+                                        <SettingsText CommandDelete="Xóa" 
+                                            ConfirmDelete="Bạn có chắc là muốn xóa dòng dữ liệu này?" />
                                         <SettingsLoadingPanel ImagePosition="Top" Mode="Disabled" />
                                         <Images SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css">
                                             <LoadingPanelOnStatusBar Url="~/App_Themes/Aqua/GridView/gvLoadingOnStatusBar.gif">
@@ -626,6 +679,7 @@
                                         <td>
                                             <dx:ASPxLabel ID="lblIDPhieuNhap" runat="server" 
                                                 ClientInstanceName="lblIDPhieuNhap" Text="" ClientVisible="false">
+                                                
                                             </dx:ASPxLabel>
                                           <dx:ASPxTextBox ID="txtTemp" runat="server"                                                  
                                                     Width="0px" ClientInstanceName="txtTemp"  ClientVisible="false" EnableTheming="false" Border-BorderStyle="None">
@@ -650,10 +704,10 @@
                     Mã phiếu nhập:
                 </td>
                 <td style="width: 193px">
-                    <dx:ASPxTextBox ID="ASPxTextBox1"  runat="server"
+                    <dx:ASPxTextBox ID="txtMaPhieuNhap_M"  runat="server"
                         CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" CssPostfix="Office2010Blue"
                         Height="16px" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                        Width="180px">
+                        Width="180px" ClientInstanceName="txtMaPhieuNhap_M">
                         <ValidationSettings>
                             <ErrorFrameStyle ImageSpacing="4px">
                                 <ErrorTextPaddings PaddingLeft="4px" />
@@ -665,9 +719,9 @@
                     Ngày nhập từ:
                 </td>
                 <td style="width: 184px">
-                    <dx:ASPxDateEdit ID="ASPxDateEdit2" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                    <dx:ASPxDateEdit ID="dtNgayNhapTu_M" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" Height="16px" ShowShadow="False" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                        Width="179px" >
+                        Width="179px" ClientInstanceName="dtNgayNhapTu_M" >
                         <CalendarProperties>
                             <HeaderStyle Spacing="1px" />
                             <FooterStyle Spacing="17px" />
@@ -688,9 +742,9 @@
                     đến ngày:
                 </td>
                 <td>
-                    <dx:ASPxDateEdit ID="ASPxDateEdit1" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                    <dx:ASPxDateEdit ID="dtNgayNhapDen_M" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" Height="16px" ShowShadow="False" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                        Width="179px" >
+                        Width="179px" ClientInstanceName="dtNgayNhapDen_M" >
                         <CalendarProperties>
                             <HeaderStyle Spacing="1px" />
                             <FooterStyle Spacing="17px" />
@@ -713,10 +767,10 @@
                     Loại nhập:
                 </td>
                 <td style="width: 193px; height: 17px;">
-                    <dx:ASPxComboBox ID="ASPxComboBox2" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                    <dx:ASPxComboBox ID="cboLoaiNhap_M" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" LoadingPanelImagePosition="Top" ShowShadow="False"
                         SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css" ValueType="System.String"
-                        Width="182px" >
+                        Width="182px" ClientInstanceName="cboLoaiNhap_M" >
                         <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
                         </LoadingPanelImage>
                         <DropDownButton>
@@ -735,10 +789,10 @@
                     Kho nhập:
                 </td>
                 <td style="width: 184px; height: 17px;">
-                    <dx:ASPxComboBox ID="ASPxComboBox3" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                    <dx:ASPxComboBox ID="cboKhoNhap_M" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" LoadingPanelImagePosition="Top" ShowShadow="False"
                         SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css" ValueType="System.String"
-                        Width="182px" >
+                        Width="182px" ClientInstanceName="cboKhoNhap_M" >
                         <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
                         </LoadingPanelImage>
                         <DropDownButton>
@@ -757,9 +811,9 @@
                     Dự án:
                 </td>
                 <td style="height: 17px">
-                    <dx:ASPxGridLookup ID="ASPxGridLookup1" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                    <dx:ASPxGridLookup ID="grlDuAn_M" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" Height="16px" Spacing="0" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                        Width="180px" >
+                        Width="180px" ClientInstanceName="grlDuAn_M" >
                         <GridViewProperties>
                             <SettingsBehavior AllowFocusedRow="True" AllowSelectSingleRowOnly="True" />
                         </GridViewProperties>
@@ -799,9 +853,9 @@
                     Phiếu yêu cầu:
                 </td>
                 <td style="width: 193px">
-                    <dx:ASPxGridLookup ID="ASPxGridLookup2" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                    <dx:ASPxGridLookup ID="grlYeuCau_M" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" Height="16px" Spacing="0" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                        Width="182px">
+                        Width="182px" ClientInstanceName="grlYeuCau_M">
                         <GridViewProperties>
                             <SettingsBehavior AllowFocusedRow="True" AllowSelectSingleRowOnly="True" />
                         </GridViewProperties>
@@ -839,10 +893,10 @@
                     Nhập từ:
                 </td>
                 <td style="width: 184px">
-                    <dx:ASPxComboBox ID="ASPxComboBox4" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                    <dx:ASPxComboBox ID="cboNhapTu_M" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" LoadingPanelImagePosition="Top" ShowShadow="False"
                         SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css" ValueType="System.String"
-                        Width="182px" >
+                        Width="182px" ClientInstanceName="cboNhapTu_M" >
                         <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
                         </LoadingPanelImage>
                         <DropDownButton>
@@ -861,9 +915,9 @@
                     Chứng từ:
                 </td>
                 <td>
-                    <dx:ASPxTextBox ID="ASPxTextBox2" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                    <dx:ASPxTextBox ID="txtChungTu_M" runat="server" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
                         CssPostfix="Office2010Blue" Height="16px" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                        Width="180px">
+                        Width="180px" ClientInstanceName="txtChungTu_M">
                         <ValidationSettings>
                             <ErrorFrameStyle ImageSpacing="4px">
                                 <ErrorTextPaddings PaddingLeft="4px" />
@@ -877,10 +931,10 @@
                     Người nhập:
                 </td>
                 <td style="width: 193px">
-                    <dx:ASPxComboBox ID="ASPxComboBox1"  runat="server"
+                    <dx:ASPxComboBox ID="cboNguoiNhap_M"  runat="server"
                         CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css" CssPostfix="Office2010Blue"
                         LoadingPanelImagePosition="Top" ShowShadow="False" SpriteCssFilePath="~/App_Themes/Office2010Blue/{0}/sprite.css"
-                        ValueType="System.String" Width="182px">
+                        ValueType="System.String" Width="182px" ClientInstanceName="cboNguoiNhap_M" >
                         <LoadingPanelImage Url="~/App_Themes/Aqua/Editors/Loading.gif">
                         </LoadingPanelImage>
                         <DropDownButton>
@@ -911,34 +965,84 @@
         </table>
     </fieldset>
     <fieldset>
-        <legend><font size="2"><b>Danh sách phiếu nhập</font></b></legend>
+        <legend><font size="2"><b>Danh sách phiếu nhập</b></font></legend>
         <table style="height: 188px; margin-left: 0px;">
             <tr>
-                <td style="width: 921px; height: 115px;">
-                    <asp:GridView ID="gridShipmments" runat="server" Height="169px" Width="100%" AutoGenerateColumns="False"
-                        CellPadding="3" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px">
+                <td style="width: 921px; height: 115px;" valign="top">
+                    <dx:ASPxGridView ID="gridViewManage" ClientInstanceName="gridViewManage" 
+                        runat="server" AutoGenerateColumns="False" 
+                        Width="100%" ClientIDMode="AutoID" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"
+                                        CssPostfix="Office2010Blue" 
+                        onrowcommand="gridViewManage_RowCommand"
+                      OnRowDeleting="gridViewManage_RowDeleting"
+                       >
                         <Columns>
-                            <asp:CommandField CancelText="Hủy" DeleteText="Xóa" EditText="Sửa" ShowEditButton="True" />
-                            <asp:CommandField DeleteText="Xóa" ShowDeleteButton="True" />
-                            <asp:BoundField HeaderText="Mã phiếu nhập" />
-                            <asp:BoundField HeaderText="Ngày nhập" />
-                            <asp:BoundField HeaderText="Người nhập" />
-                            <asp:BoundField HeaderText="Chứng từ" />
-                            <asp:BoundField HeaderText="Kho nhập" />
-                            <asp:BoundField HeaderText="Dự án" />
-                            <asp:BoundField HeaderText="Loại nhập" />
-                            <asp:BoundField HeaderText="Ghi chú" />
+                        
+                            <dx:GridViewDataTextColumn Caption="#" ShowInCustomizationForm="True" 
+                                VisibleIndex="1">
+                                <DataItemTemplate>
+                                    <dx:ASPxButton ID="btnEdit" runat="server" ClientInstanceName="btnEdit" 
+                                        CommandArgument="edit" CommandName="edit" Cursor="pointer" 
+                                        EnableDefaultAppearance="False" EnableTheming="False" EnableViewState="False" 
+                                        ForeColor="#0066CC" Height="10px" Text="Sửa" ViewStateMode="Disabled" 
+                                        Width="20px">
+                                        <HoverStyle Font-Bold="True" Font-Underline="True" 
+                                            ForeColor="#0066CC">
+                                        </HoverStyle>
+                                    </dx:ASPxButton>
+                                </DataItemTemplate>
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewCommandColumn VisibleIndex="2">
+                                <DeleteButton Text="Xóa" Visible="True">
+                                </DeleteButton>
+                                <ClearFilterButton Visible="True">
+                                </ClearFilterButton>
+                            </dx:GridViewCommandColumn>
+                            <dx:GridViewDataTextColumn Name="colMaPhieuNhap" Caption="Mã phiếu nhập" 
+                                VisibleIndex="3">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn Name="colNgayNhap" Caption="Ngày nhập" 
+                                VisibleIndex="4">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn Name="colNguoiNhap" Caption="Người nhập" 
+                                VisibleIndex="5">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn Name="colLoaiNhap" Caption="Loại nhập" 
+                                VisibleIndex="6">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn Name="colKhoNhap" Caption="Kho nhập" 
+                                VisibleIndex="7">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn Name="colDuAn" Caption="Dự án" VisibleIndex="8">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn Name="colYeuCau" Caption="Phiếu yêu cầu" 
+                                VisibleIndex="9">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn Name="colNhapTu" Caption="Nhập từ" VisibleIndex="10">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn Name="colChungTu" Caption="Chứng từ" 
+                                VisibleIndex="11">
+                            </dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn Name="colGhiChu" Caption="Ghi chú" VisibleIndex="12">
+                            </dx:GridViewDataTextColumn>
+                        
+                            <dx:GridViewDataTextColumn Caption="PNK_ID" Name="colPNKID" 
+                                ShowInCustomizationForm="True" Visible="False" VisibleIndex="13">
+                            </dx:GridViewDataTextColumn>
+                        
                         </Columns>
-                        <FooterStyle BackColor="White" ForeColor="#000066" />
-                        <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
-                        <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                        <RowStyle ForeColor="#000066" />
-                        <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                        <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                        <SortedAscendingHeaderStyle BackColor="#007DBB" />
-                        <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                        <SortedDescendingHeaderStyle BackColor="#00547E" />
-                    </asp:GridView>
+                        <SettingsBehavior ConfirmDelete="True" />
+                        <SettingsPager Mode="ShowAllRecords" PageSize="100">
+                        </SettingsPager>
+                     
+                        <Settings ShowFilterRow="True" />
+                     
+                        <SettingsText CommandDelete="Xóa" 
+                            ConfirmDelete="Bạn có chắc là muốn xóa phiếu nhập này?" />
+                     
+<Styles CssPostfix="Office2010Blue" CssFilePath="~/App_Themes/Office2010Blue/{0}/styles.css"></Styles>
+                        
+                    </dx:ASPxGridView>
                 </td>
             </tr>
         </table>

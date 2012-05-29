@@ -175,102 +175,102 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtTemp;
         
         /// <summary>
-        /// ASPxTextBox1 control.
+        /// txtMaPhieuNhap_M control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox ASPxTextBox1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtMaPhieuNhap_M;
         
         /// <summary>
-        /// ASPxDateEdit2 control.
+        /// dtNgayNhapTu_M control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxDateEdit ASPxDateEdit2;
+        protected global::DevExpress.Web.ASPxEditors.ASPxDateEdit dtNgayNhapTu_M;
         
         /// <summary>
-        /// ASPxDateEdit1 control.
+        /// dtNgayNhapDen_M control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxDateEdit ASPxDateEdit1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxDateEdit dtNgayNhapDen_M;
         
         /// <summary>
-        /// ASPxComboBox2 control.
+        /// cboLoaiNhap_M control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox ASPxComboBox2;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cboLoaiNhap_M;
         
         /// <summary>
-        /// ASPxComboBox3 control.
+        /// cboKhoNhap_M control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox ASPxComboBox3;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cboKhoNhap_M;
         
         /// <summary>
-        /// ASPxGridLookup1 control.
+        /// grlDuAn_M control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxGridLookup.ASPxGridLookup ASPxGridLookup1;
+        protected global::DevExpress.Web.ASPxGridLookup.ASPxGridLookup grlDuAn_M;
         
         /// <summary>
-        /// ASPxGridLookup2 control.
+        /// grlYeuCau_M control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxGridLookup.ASPxGridLookup ASPxGridLookup2;
+        protected global::DevExpress.Web.ASPxGridLookup.ASPxGridLookup grlYeuCau_M;
         
         /// <summary>
-        /// ASPxComboBox4 control.
+        /// cboNhapTu_M control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox ASPxComboBox4;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cboNhapTu_M;
         
         /// <summary>
-        /// ASPxTextBox2 control.
+        /// txtChungTu_M control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox ASPxTextBox2;
+        protected global::DevExpress.Web.ASPxEditors.ASPxTextBox txtChungTu_M;
         
         /// <summary>
-        /// ASPxComboBox1 control.
+        /// cboNguoiNhap_M control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox ASPxComboBox1;
+        protected global::DevExpress.Web.ASPxEditors.ASPxComboBox cboNguoiNhap_M;
         
         /// <summary>
-        /// gridShipmments control.
+        /// gridViewManage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gridShipmments;
+        protected global::DevExpress.Web.ASPxGridView.ASPxGridView gridViewManage;
     }
 }

@@ -60,7 +60,7 @@ namespace chiase
                 //Database.ExecuteNonQuery(sql,
                 //            "@v_NAME", txt_status_project.Text,
                 //            "@V_ENABLE_BIT", 'Y',
-                //            "@V_CREATED_DATE", DateTime.Now,
+                //            "@V_CREATED_DATE", functions.GetStringDatetime(),
                 //            "@V_CREATED_BY", table.Rows[0]["mem_id"]);
 
                 DA_DM_TRANG_THAI_DU_AN ttda = DA_DM_TRANG_THAI_DU_AN.Insert_Object(txt_status_project.Text, "Y",
@@ -93,7 +93,7 @@ namespace chiase
                 int done = SQLConnectWeb.ExecuteNonQuery(sql,
                                             "@V_MA_DU_AN", txt_project_code.Text,
                                             "@V_TEN_DU_AN", txt_project_name.Text,
-                                            "@V_NGAY_TAO", DateTime.Now,
+                                            "@V_NGAY_TAO", functions.GetStringDatetime(),
                                             "@V_NGUOI_TAO", functions.LoginMemID(this),
                                             "@V_NGAY_BAT_DAU", start_date,
                                             "@V_NGAY_KET_THUC", end_date,

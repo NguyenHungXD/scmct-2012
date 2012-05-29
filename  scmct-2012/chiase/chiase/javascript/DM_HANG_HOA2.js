@@ -35,7 +35,8 @@ function NHH_IDSearch(obj) {
         scroll: true,
         formatItem: function (data) {
             return data[0];
-        } 
+        } ,
+      
     }).result(function (event, data) {
         if ($(obj).parents("#gridTable").attr("id") != null) {
             $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id.replace("mkv_", "")).val(data[1]);

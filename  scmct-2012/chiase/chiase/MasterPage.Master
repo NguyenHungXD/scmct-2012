@@ -37,11 +37,11 @@
 <div id="templatemo_headers_flash">
 <embed src="flash/hieuung.swf" width="800" height="100" wmode="transparent" align="left"> 
 </div>
-<!--
+
 <div id="templatemo_header_flash">
-<embed src="Flash/header.swf" width="400" height="500" wmode="transparent" align="left">
+<!--<embed src="Flash/header.swf" width="400" height="500" wmode="transparent" align="left"> -->
 </div> 
--->
+
     <div id="templatemo_header">
     	<div id="site_title">
         
@@ -49,33 +49,22 @@
         </div> <!-- end of site_title -->
 		<div id="templatemo_login" class="textformat">
             <asp:MultiView ID="MultiView1" runat="server">
-
-            <asp:View ID="View1" runat="server">
-            <table cellpadding="3" cellspacing="0" border="0">
-            <tr>
-            <td>
+                <asp:View ID="View1" runat="server">
                      Tài khoản:<asp:TextBox ID="txtUserID" runat="server" class="txtformat" 
-                         Width="95px" Height="18px"></asp:TextBox>
+                         Width="95px"></asp:TextBox>
                     &nbsp;Mật khẩu:<asp:TextBox ID="txtPassWord" runat="server" class="txtformat" 
-                         Width="95px" TextMode="Password" Height="18px"></asp:TextBox>
-                    <asp:Button ID="btn_login" runat="server" Text="Đăng nhập" 
-                         onclick="btn_login_Click1"  Height="20px" Width="90px" 
-                         style="font-size: 10px;cursor: pointer;" class="btn"/>
-                    <asp:CheckBox ID="chk_remember" runat="server" checked="true" /> Nhớ
-            </td>
-            </tr>
-            <tr> 
-            <td>   
+                         Width="95px" TextMode="Password"></asp:TextBox>
 
+                    <asp:Button ID="btn_login" runat="server" Text="Đăng nhập" 
+                         onclick="btn_login_Click1" class="btnformat" Height="20px" Width="90px"/>
+                    <asp:CheckBox ID="chk_remember" runat="server" checked="true"/>Ghi nhớ
+                
+                    <br>
                     <!--<p align=center>Quên mật khẩu ? | Đăng ký</p>-->
                     <p align=right><b><font color=red size=-2><asp:Label ID="lblError" runat="server" ForeColor="#FF3300"></asp:Label></b></font> <asp:HyperLink ID="link_forget_pass" runat="server" 
                 Text="Quên mật khẩu?" NavigateUrl="forget_password.aspx"></asp:HyperLink> | 
                         <asp:HyperLink ID="register_link" runat="server" Text="Đăng ký" NavigateUrl="~/register.aspx" title="Đăng ký thành viên"></asp:HyperLink>&nbsp</p>
-            </td>
-            </tr>
-            </table>
                 </asp:View>
-                
                 <asp:View ID="View2" runat="server">
                    <table cellpadding=1 cellspacing=3 border=0 width=100%>
                    <tr>
@@ -102,7 +91,7 @@
 
         <div id="templatemo_menu">
         <ul class=blue>
-	        <li><a href="default.aspx" title="Trang chủ" class='<%if(1==1){%>current'<%}else{%>no'<%}%> ><span>Trang chủ</span></a></li>
+	        <li><a href="default.aspx" title="Trang chủ" class="current"><span>Trang chủ</span></a></li>
             <li><a href="forum.aspx" title="Diễn đàn"><span>Diễn đàn</span></a></li>
             <li><a href="show_allbum.aspx" title="Hình ảnh"><span>Hình ảnh</span></a></li>
             <li><a href="request.aspx" title="Gửi yêu cầu"><span>Gửi yêu cầu</span></a></li>
@@ -111,7 +100,6 @@
             <li><a href="admin.aspx" title="Quản trị"><span>Quản trị</span></a></li>
         </ul>
         </div> <!-- end of templatemo_menu -->
-
     </div> <!-- end of templatemo_header -->
 </div>  <!-- end of templatemo_header_main -->
  <div id="templatemo_wrapper_outer">
@@ -181,21 +169,21 @@
         <tr>
         <td>
             <ul class="tmo_list">
-                <li><a href="#">Cty ABC</a></li>
-                <li><a href="#">Cty TNHH ABC</a></li>
+                <li><a href="#">Aenean rhoncus leo ut eros</a></li>
+                <li><a href="#">Consectetur adipiscing elit</a></li>
 
             </ul>    
         </td>
                 <td>
             <ul class="tmo_list">
-                <li><a href="#">Cty TNHH ABC</a></li>
-                <li><a href="#">Cty TNHH ABC</a></li>
+                <li><a href="#">Aenean rhoncus leo ut eros</a></li>
+                <li><a href="#">Consectetur adipiscing elit</a></li>
             </ul>    
         </td>
                 <td>
             <ul class="tmo_list">
-                <li><a href="#">Cty TNHH ABC</a></li>
-                <li><a href="#">Cty TNHH ABC</a></li>
+                <li><a href="#">Aenean rhoncus leo ut eros</a></li>
+                <li><a href="#">Consectetur adipiscing elit</a></li>
 
             </ul>    
         </td>

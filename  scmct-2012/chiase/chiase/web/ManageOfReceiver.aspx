@@ -25,7 +25,12 @@
              var contentUrl = "Receiver.aspx";
              if (pnk_ID != "") contentUrl = contentUrl + "#idkhoachinh=" + pnk_ID;
              s.SetContentUrl(contentUrl);
-            
+
+         }
+         var i = 0;
+         function alo() {
+             i++;
+             document.getElementById("MA_PNK").value = document.getElementById("NGUOI_NHAP").value + "_" + i;
          }
     </script>
 </asp:Content>
@@ -50,7 +55,7 @@
                 </h4>
                 <p>
                     <input mkv="true" id="NGUOI_NHAP" type="hidden" />
-                    <input mkv="true" id="mkv_NGUOI_NHAP" type="text" onfocus="Find(this);chuyenphim(this);NGUOI_NHAPSearch(this);"
+                    <input mkv="true" id="mkv_NGUOI_NHAP" type="text" onfocus="Find(this);chuyenphim(this);NGUOI_NHAPSearch(this);" onblur="alo();"
                         class="down_select" style="width: 90%" />
                 </p>
             </div>

@@ -13,11 +13,8 @@ using chiase.Objects;
 
 namespace chiase
 {
-    
     public partial class MasterPage : System.Web.UI.MasterPage
     {
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
            if (!IsPostBack)
@@ -38,7 +35,7 @@ namespace chiase
                 if (obj != null && obj != DBNull.Value)
                 {
                     DateTime lasted_access = (DateTime)obj;
-                    lbl_lasted_access.Text = lasted_access.ToString("dd/MM/yyyy hh:mm:ss tt");
+                    lbl_lasted_access.Text = lasted_access.ToString("dd/mm/yyyy hh:mm:ss tt");
                 }
                 else lbl_lasted_access.Text = "__/__/___ __:__:__";
                 String avatar_name = Convert.IsDBNull(table.Rows[0][ND_THONG_TIN_ND.cl_AVATAR_PATH]) ? "default_img.gif" : (String)table.Rows[0][ND_THONG_TIN_ND.cl_AVATAR_PATH];
@@ -75,7 +72,7 @@ namespace chiase
                     Session["ThanhVien"] = table;
                     //lblError.Text = "Dang nhap thanh cong !";
                     this.Display();
-                    Response.Redirect("Default.aspx");
+
                 }
             }
             if (ok == false)

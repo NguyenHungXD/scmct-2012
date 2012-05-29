@@ -20,9 +20,9 @@
         loadXMLUpdate(url);
 
         if (enable == 'N')
-            document.getElementById(divid).innerHTML = "<a href=# title='Khóa'><img src=images/lockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'Y','" + divid + "') /></a>";
+            document.getElementById(divid).innerHTML = "<a style=cursor:pointer title='Khóa'><img src=images/lockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'Y','" + divid + "') /></a>";
         else
-            document.getElementById(divid).innerHTML = "<a href=# title='Mở khóa'><img src=images/unlockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'N','" + divid + "') /></a>";
+            document.getElementById(divid).innerHTML = "<a style=cursor:pointer title='Mở khóa'><img src=images/unlockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'N','" + divid + "') /></a>";
             
        
     }
@@ -30,13 +30,13 @@
         var url = "update_project.aspx?id=" + id + "&enable=" + enable + "&vmode=del";
         loadXMLUpdate(url);
         if (enable == 'D') {
-            document.getElementById(divid).innerHTML = "<a href=# title='Xóa'><img src=images/deleteicon.gif width=20 height=20 alt='Phục hồi' onclick=del_project(" + id + ",'Y','" + divid + "','" + dividlock + "') /></a>";
-            document.getElementById(dividlock).innerHTML = "<a href=# title='Khóa'><img src=images/lockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'Y','" + dividlock + "') /></a>";
+            document.getElementById(divid).innerHTML = "<a style=cursor:pointer title='Xóa'><img src=images/deleteicon.gif width=20 height=20 alt='Phục hồi' onclick=del_project(" + id + ",'Y','" + divid + "','" + dividlock + "') /></a>";
+            document.getElementById(dividlock).innerHTML = "<a  style=cursor:pointer title='Khóa'><img src=images/lockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'Y','" + dividlock + "') /></a>";
         }
         else
         {
-            document.getElementById(divid).innerHTML = "<a href=# title='Phục hồi'><img src=images/undeleteicon.gif width=20 height=20 alt=Xóa onclick=del_project(" + id + ",'D','" + divid + "','" + dividlock + "') /></a>";
-            document.getElementById(dividlock).innerHTML = "<a href=# title='Khóa'><img src=images/lockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'D','" + dividlock + "') /></a>";
+            document.getElementById(divid).innerHTML = "<a style=cursor:pointer title='Phục hồi'><img src=images/undeleteicon.gif width=20 height=20 alt=Xóa onclick=del_project(" + id + ",'D','" + divid + "','" + dividlock + "') /></a>";
+            document.getElementById(dividlock).innerHTML = "<a style=cursor:pointer title='Khóa'><img src=images/lockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'D','" + dividlock + "') /></a>";
         }
     }
 
@@ -57,7 +57,7 @@
 
 </script>
 <fieldset>
-<i><font color="blue">*-Tìm kiếm theo điều kiện tương đối - bạn có thể để trống điều kiện bạn không quan tâm.</font></i>
+<i><font color="white">*-Tìm kiếm theo điều kiện tương đối - bạn có thể để trống điều kiện bạn không quan tâm.</font></i>
 <br>&nbsp
 <table cellpadding="3" cellspacing="3" border="0" width="100%">
     <tr>
@@ -65,13 +65,13 @@
     Mã dự án:
     </td>
     <td colspan="5">
-    <asp:TextBox ID="txt_maduan" runat="server" class="txtformat"></asp:TextBox>
+    <asp:TextBox ID="txt_maduan" runat="server" class="txtformat" Height="25px"></asp:TextBox>
 
     &nbsp;&nbsp;
 
     Tên dự án:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
 
-    <asp:TextBox ID="txt_tenduan" runat="server" class="txtformat" Width="372px"></asp:TextBox>
+    <asp:TextBox ID="txt_tenduan" runat="server" class="txtformat" Height="25px" Width="372px"></asp:TextBox>
     </td>
     </tr>
     
@@ -84,10 +84,10 @@
         <table cellpadding="0" cellspacing="0" border="0" width="55%">
         <tr>
         <td style="width: 123px">
-        <dx:ASPxDateEdit ID="start_date" runat="server" Width="120px" 
-            ClientInstanceName="clientEdtStart" 
+        <dx:ASPxDateEdit ID="start_date" runat="server" Width="150px" 
+            ClientInstanceName="clientEdtStart" Height="25px"
             CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-            ShowShadow="False" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
+            ShowShadow="False" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" EditFormat="Custom" EditFormatString="dd/MM/yyyy">
             <CalendarProperties>
                 <HeaderStyle Spacing="1px" />
                 <FooterStyle Spacing="17px" />
@@ -111,10 +111,10 @@
         Ngày kết thúc:
         </td>
         <td>
-        <dx:ASPxDateEdit ID="end_date" runat="server" Width="120px" 
-            ClientInstanceName="clientEdtEnd" 
+        <dx:ASPxDateEdit ID="end_date" runat="server" Width="150px" 
+            ClientInstanceName="clientEdtEnd" Height="25px"
             CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-            ShowShadow="False" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
+            ShowShadow="False" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" EditFormat="Custom" EditFormatString="dd/MM/yyyy">
                                 <CalendarProperties>
                                     <HeaderStyle Spacing="1px" />
                                     <FooterStyle Spacing="17px" />
@@ -143,7 +143,7 @@
     Trạng thái:
     </td>
     <td colspan="3">
-        <asp:DropDownList ID="dropd_status" runat="server" Height="25px" Width="119px">
+        <asp:DropDownList ID="dropd_status" runat="server" Height="25px" Width="150px">
         </asp:DropDownList>
     </td>
     </tr>
@@ -152,7 +152,7 @@
     </td>
     <td align="left"><br>
             <dx:ASPxButton ID="btn_search" runat="server" Text="Tìm kiếm" 
-                    CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                    CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" Width="120px" Height="25px"
                     SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
             onclick="btn_search_Click">
             </dx:ASPxButton>
@@ -163,8 +163,8 @@
 </table>
 </fieldset>
 <fieldset>
-<legend><b><font size=2 color=white>Danh sách dự án</font></b></legend>
- <p align="right"><a href="#" class="btn" id="new_project" title="Tạo dự án mới">Tạo dự án mới</a></p>
+<!--<legend><b><font size=2 color=white>Danh sách dự án</font></b></legend>-->
+ <p align="right"><a style="cursor:pointer" class="btn" id="new_project" title="Tạo dự án mới">Tạo dự án mới</a></p>
 
                  <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" 
                     AllowDragging="True" AllowResize="True"
@@ -188,9 +188,9 @@
 
 
 
-<asp:Repeater ID="showListProject" runat="server">
+<asp:Repeater ID="showListProject" runat="server" >
         <HeaderTemplate>
-        <table border="0" cellpadding="0" cellspacing="1" width="60%"  style="border:0px solid #CCFFFF;"><tr>
+        <table border="0" cellpadding="2" cellspacing="1" width="60%"  style="border:0px solid #CCFFFF;"><tr>
         <td valign="middle" align="center"><img src="images/edit.gif" width="25" height="25">: Sửa</td>
         <td valign="middle" align="center"><img src="images/deleteicon.gif" width="25" height="25">: Xóa</td>
         <td valign="middle" align="center"><img src="images/undeleteicon.gif" width="25" height="25">: Phục hồi</td>
@@ -211,10 +211,10 @@
             <h6>Tên dự án</h6>
         </td>
         <td>
-            <h6>Ngày</h6>
+            <h6>Ngày bắt đầu/Kết thúc</h6>
         </td>
         <td>
-            <h6>Bài viết mới</h6>
+            <h6>Người tạo/Ngày tạo</h6>
         </td>
         <td>
             <h6>Trạng thái</h6>
@@ -225,10 +225,10 @@
                     <tr class="new_post_details">
                     <td with=5% valign="middle" align="center" >
                         <table cellpadding=1 cellspacing=1 border=0><tr>
-                        <td id='<%#Eval("MA_DU_AN","add_mem{0}")%>'><a href="#" title="Thêm thành viên cho dự án"><img src="images/add_member.png" width="20" height="20"></a></td>
-                        <td><a href="#" title="Cập nhật"><img src="images/edit.gif" width="20" height="20" alt="Cập nhật dự án"/ id='<%#Eval("MA_DU_AN")%>'></a></td>
-                        <td id=<%# Eval("id","'idlock{0}'")%>><a href="#" title='<%#Eval("img_lock_alt")%>'><img src=<%#Eval("img_lock","images/{0}")%> width="20" height="20" alt=""  onclick="lock_project(<%# Eval("id")%>,<%# Eval("enable_bit","'{0}'")%>,<%# Eval("id","'idlock{0}'")%>)"/></a></td>
-                        <td id=<%# Eval("id","'iddel{0}'")%> ><a href="#" title='<%#Eval("img_del_alt")%>'><img src=<%#Eval("img_del","images/{0}")%> width="20" height="20" alt="" onclick="del_project(<%# Eval("id")%>,<%# Eval("enable_bit","'{0}'")%>,<%# Eval("id","'iddel{0}'")%>,<%# Eval("id","'idlock{0}'")%>)" /></a></td>
+                        <td id='<%#Eval("MA_DU_AN","add_mem{0}")%>'><a style="cursor:pointer" title="Thêm thành viên cho dự án"><img src="images/add_member.png" width="20" height="20"></a></td>
+                        <td><a style="cursor:pointer" title="Cập nhật"><img src="images/edit.gif" width="20" height="20" alt="Cập nhật dự án"/ id='<%#Eval("MA_DU_AN")%>'></a></td>
+                        <td id=<%# Eval("id","'idlock{0}'")%>><a style="cursor:pointer" title='<%#Eval("img_lock_alt")%>'><img src=<%#Eval("img_lock","images/{0}")%> width="20" height="20" alt=""  onclick="lock_project(<%# Eval("id")%>,<%# Eval("enable_bit","'{0}'")%>,<%# Eval("id","'idlock{0}'")%>)"/></a></td>
+                        <td id=<%# Eval("id","'iddel{0}'")%> ><a style="cursor:pointer" title='<%#Eval("img_del_alt")%>'><img src=<%#Eval("img_del","images/{0}")%> width="20" height="20" alt="" onclick="del_project(<%# Eval("id")%>,<%# Eval("enable_bit","'{0}'")%>,<%# Eval("id","'iddel{0}'")%>,<%# Eval("id","'idlock{0}'")%>)" /></a></td>
                         </tr>
                         </table>
 
@@ -277,17 +277,18 @@
                     <td with=5% valign=middle align="center">
                     <%#Eval("MA_DU_AN")%>
                     <br>
-                    <asp:HyperLink ID="link_more" runat="server" Text="Xem chi tiết" style="cursor:pointer;"></asp:HyperLink>
+                    <asp:HyperLink ID="link_more" runat="server" Text="Xem chi tiết" Target="_blank" NavigateUrl='<%#Eval("id","project_detail.aspx?id={0}") %>' style="cursor:pointer;"></asp:HyperLink>
                     </td>
                     <td with=10% valign=middle align="center">
                     <%#Eval("TEN_DU_AN")%>
                     </td>
                     <td with=10% valign=middle align="center">
-                    Bắt đầu: <%#Eval("NGAY_BAT_DAU", "{0:dd/MM/yyyy }")%><br>
-                    Kết thúc: <%#Eval("NGAY_KET_THUC", "{0:dd/MM/yyyy }")%>
+                    <%#Eval("NGAY_BAT_DAU", "{0:dd/MM/yyyy }")%><br>
+                    <%#Eval("NGAY_KET_THUC", "{0:dd/MM/yyyy }")%>
                     </td>
                     <td with=30% valign=middle align="center">
-                        Bài viết mới
+                        <%#Eval("ten_nguoi_tao")%><br>
+                        <%#Eval("ngay_tao", "{0:dd/MM/yyyy hh:mm:ss tt}")%>
                     </td>
                     <td with=10% valign=middle align="center">
                         <%#Eval("NAME")%>
@@ -302,10 +303,32 @@
         </table>
         </FooterTemplate>
         </asp:Repeater>   
+        <br>
+<fieldset style="background-color:White">
+    <asp:Label ID="Label1" runat="server" style="font-weight:bold;color:Blue"></asp:Label>
+    <asp:Repeater ID="rptPages" Runat="server" onitemcommand="rptPages_ItemCommand">
+    <HeaderTemplate>
+    <table cellpadding="0" cellspacing="0" border="0">
+    <tr class="text">
+    <td><b>Trang : </b>
+    <td style="font-weight:bold;font-size:larger;color:Red">
+    </HeaderTemplate>
+    <ItemTemplate>
+    [<asp:LinkButton ID="btnPage" CommandName="Page" CommandArgument="<%#Container.DataItem %>" Runat="server" style="font-weight:bold;color:Blue"><%# Container.DataItem %>
+    </asp:LinkButton>]
+        
+    </ItemTemplate>
+    <FooterTemplate>
+    
+    </td>
+    </tr>
+    </table>
+    </FooterTemplate>
+    </asp:Repeater>
+    
+    </fieldset>
+    
 
-
-
-
-
+    
         </fieldset>
 </asp:Content>

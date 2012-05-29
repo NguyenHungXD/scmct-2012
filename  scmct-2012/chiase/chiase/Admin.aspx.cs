@@ -15,7 +15,8 @@ namespace chiase
         {
             if(!IsPostBack)
             {
-         
+                Session["current"] = "7"; //[1.Trang chu 2.Dien Dan 3.Hinh Anh 4.Gui Yeu Cau 5.Gioi Thieu 6.Lien He 7.Quan Tri]
+                Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> ";
             }
         }
         protected void btn_add_new_project_Click(object sender, EventArgs e)

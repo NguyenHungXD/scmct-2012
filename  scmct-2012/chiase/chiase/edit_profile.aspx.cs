@@ -18,7 +18,7 @@ namespace chiase
             {
                 functions.add_date_to_dropd(dropd_day, dropd_month, dropd_year,0);
                 display_info();
-                
+                Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='edit_profife.aspx' title='Cập nhật thông tin cá nhân'>Cập nhật thông tin cá nhân</a> ";
             }
         }
 
@@ -32,14 +32,14 @@ namespace chiase
                     ND_THONG_TIN_ND nd = new ND_THONG_TIN_ND(table, 0);
                     String avatar_name = nd.AVATAR_PATH == "" ? "default_img.gif" : nd.AVATAR_PATH;
                     txt_username.Text = (String)table.Rows[0][ND_THONG_TIN_DN.cl_USERNAME];
-                    if (table.Rows[0].ToString() != "")
+                    if (table.Rows[0][ND_THONG_TIN_DN.cl_LASTED_ACCESS].ToString() != null)
                     {
                         DateTime lasted_access = (DateTime)table.Rows[0][ND_THONG_TIN_DN.cl_LASTED_ACCESS];
                         lbl_lasted_access.Text = lasted_access.ToString("dd/MM/yyyy hh:mm:ss tt");
                     }
                     else
                     {
-                        lbl_lasted_access.Text = "__/__/____ __:__:__ __";
+                        lbl_lasted_access.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
 
                     }
 
@@ -88,7 +88,7 @@ namespace chiase
                 DateTime bithday = Convert.ToDateTime(String.Format("{0}/{1}/{2}", dropd_month.Text, dropd_day.Text, dropd_year.Text));               
                 bool ok = nd.Save_Object(txt_full_name.Text, nd.MEM_GROUP_ID, txt_address.Text, functions.GetStringDate(bithday),
                     rd_sex.SelectedItem.Value, txt_phonenumber.Text, txt_faxnumber.Text, txt_email.Text, txt_website.Text,
-                   txt_yahoo.Text, txt_skype.Text, nd.TAX_CODE, nd.NOTE, nd.AVATAR_PATH, nd.VISIBLE_BIT, nd.CREATED_DATE, nd.EDITED_BY,
+                   txt_yahoo.Text, txt_skype.Text, nd.TAX_CODE, nd.NOTE, nd.AVATAR_PATH, nd.VISIBLE_BIT,functions.CheckDate(nd.CREATED_DATE), nd.EDITED_BY,
                    functions.GetStringDatetime(), nd.ID,nd.HEART);
                 if (ok)
                     lbl_error.Text = "Cập nhật thông tin cá nhân thành công";
