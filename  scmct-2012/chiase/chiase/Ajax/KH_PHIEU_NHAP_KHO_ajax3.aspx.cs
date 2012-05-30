@@ -33,7 +33,7 @@ namespace chiase
             KH_PHIEU_NHAP_KHO.data("GHI_CHU", Request.QueryString["GHI_CHU"]);
             return KH_PHIEU_NHAP_KHO;
         }
-        protected DataProcess s_KH_PHIEU_NHAP_KHO_CT()
+        protected DataProcess s_KH_PHIEU_NHAP_KHO_CT(bool isLoad)
         {
             DataProcess KH_PHIEU_NHAP_KHO_CT = new DataProcess("KH_PHIEU_NHAP_KHO_CT");
             KH_PHIEU_NHAP_KHO_CT.data("PNK_CT_ID", Request.QueryString["idkhoachinh"]);
@@ -43,9 +43,11 @@ namespace chiase
             KH_PHIEU_NHAP_KHO_CT.data("DON_GIA", Request.QueryString["DON_GIA"]);
             KH_PHIEU_NHAP_KHO_CT.data("THANH_TIEN", Request.QueryString["THANH_TIEN"]);
             KH_PHIEU_NHAP_KHO_CT.data("GHI_CHU", Request.QueryString["GHI_CHU"]);
-            KH_PHIEU_NHAP_KHO_CT.data("HH_NAME", Request.QueryString["HH_NAME"]);
-            KH_PHIEU_NHAP_KHO_CT.data("NHH_ID", Request.QueryString["NHH_ID"]);
-            KH_PHIEU_NHAP_KHO_CT.data("NHH_NAME", Request.QueryString["NHH_NAME"]);
+            if (isLoad)
+            {
+                KH_PHIEU_NHAP_KHO_CT.data("HH_NAME", Request.QueryString["HH_NAME"]);
+                KH_PHIEU_NHAP_KHO_CT.data("NHH_ID", Request.QueryString["NHH_ID"]);
+            }
             return KH_PHIEU_NHAP_KHO_CT;
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -259,7 +261,7 @@ namespace chiase
         {
             try
             {
-                DataProcess process = s_KH_PHIEU_NHAP_KHO_CT();
+                DataProcess process = s_KH_PHIEU_NHAP_KHO_CT(false);
                 bool ok = process.Delete();
                 if (ok)
                 {
@@ -414,6 +416,8 @@ namespace chiase
                 }
                 else
                 {
+                    string mpn = functions.NewMaPhieuNhap();
+                    process.data("MA_PNK", mpn);
                     bool ok = process.Insert();
                     if (ok)
                     {
@@ -431,7 +435,20 @@ namespace chiase
         {
             try
             {
-                DataProcess process = s_KH_PHIEU_NHAP_KHO_CT();
+                DataProcess process = s_KH_PHIEU_NHAP_KHO_CT(false);
+
+                if (string.IsNullOrEmpty(process.getData("HH_ID")))
+                {
+
+                    DM_HANG_HOA hh = DM_HANG_HOA.Insert_Object(Request.QueryString["mkv_HH_ID"],
+                             Request.QueryString["HH_NAME"],
+                             Request.QueryString["NHH_ID"], "", "Y"
+                             );
+                    if (hh != null)
+                        process.data("HH_ID", hh.ID);
+                }
+
+
                 if (process.getData("PNK_CT_ID") != null && process.getData("PNK_CT_ID") != "")
                 {
                     bool ok = process.Update();
@@ -477,7 +494,7 @@ namespace chiase
             bool search = UserLogin.HavePermision(this, "KH_PHIEU_NHAP_KHO_CT_Search");
             if (search)
             {
-                DataProcess process = s_KH_PHIEU_NHAP_KHO_CT();
+                DataProcess process = s_KH_PHIEU_NHAP_KHO_CT(false);
                 process.Page = Request.QueryString["page"];
                 DataTable table = process.Search(@"select STT=row_number() over (order by T.PNK_CT_ID),T.*
                    ,A.MA_PNK
@@ -516,7 +533,7 @@ namespace chiase
                 html += "<td><a onclick='xoaontable(this)'>" + DictionaryDB.sGetValueLanguage("delete") + "</a></td>";
                 html += "<td><input mkv='true' id='HH_ID' type='hidden' value=''/><input mkv='true' id='mkv_HH_ID' type='text' value=''  onchange='txtChangeHH(this);' onfocus='HH_IDSearch(this);'  class=\"down_select\"/></td>";
                 html += "<td><input mkv='true' id='HH_NAME' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='' /></td>";
-                html += "<td><input mkv='true' id='NHH_ID' type='hidden' value=''><input mkv='true' id='mkv_NHH_ID' type='text' value='' onfocus='NHH_IDSearch(this);' class=\"down_select\"></td>";                        
+                html += "<td><input mkv='true' id='NHH_ID' type='hidden' value=''><input mkv='true' id='mkv_NHH_ID' type='text' value='' onfocus='NHH_IDSearch(this);' class=\"down_select\"/></td>";                        
                 html += "<td><input mkv='true' id='SO_LUONG' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='' onblur='TestSo(this,false,false);' /></td>";
                 html += "<td><input mkv='true' id='DON_GIA' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='' onblur='TestSo(this,false,false);' /></td>";
                 html += "<td><input mkv='true' id='THANH_TIEN' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='' onblur='TestSo(this,false,false);' /></td>";

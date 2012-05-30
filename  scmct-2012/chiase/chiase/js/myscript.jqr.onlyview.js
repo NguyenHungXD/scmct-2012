@@ -154,7 +154,7 @@
         return list
     } 
     });
-    $.defaults = { width: "700px", height: "300px", ajax: "", idkhoachinh: "idkhoachinh", title: "Danh sách dữ liệu", Frame: ".body-div .in-a", tablename: "", valueBtLuu: "Lưu/Dừng", ctlLuu: 'luu', ctlXoa: 'xoa', ctlMoi: 'moi', valLuu: "Lưu", valSua: "Sửa", ajaxLuu: "", ajaxSua: "", keyCode: "", defaultVal: "- Select One -", valMesComplete: "Đã Hoàn thành", valueMesLuu: "Lưu thành công.", valueErLuu: "Lưu thất bại.", valueMesSua: "Cập nhật thành công.", valueErSua: "Cập nhật thất bại.", valueMesXoa: "Xóa thành công.", valueErXoa: "Xóa thất bại.", valueConfirm: "Xác nhận.", readMKV: true, ctlSaveOnFrame: function (opt) {
+    $.defaults = { width: "700px", height: "300px", ajax: "", idkhoachinh: "idkhoachinh", title: "Danh sÃ¡ch dá»¯ liá»‡u", Frame: ".body-div .in-a", tablename: "", valueBtLuu: "LÆ°u/Dá»«ng", ctlLuu: 'luu', ctlXoa: 'xoa', ctlMoi: 'moi', valLuu: "LÆ°u", valSua: "Sá»­a", ajaxLuu: "", ajaxSua: "", keyCode: "", defaultVal: "- Select One -", valMesComplete: "ÄÃ£ HoÃ n thÃ nh", valueMesLuu: "LÆ°u thÃ nh cÃ´ng.", valueErLuu: "LÆ°u tháº¥t báº¡i.", valueMesSua: "Cáº­p nháº­t thÃ nh cÃ´ng.", valueErSua: "Cáº­p nháº­t tháº¥t báº¡i.", valueMesXoa: "XÃ³a thÃ nh cÃ´ng.", valueErXoa: "XÃ³a tháº¥t báº¡i.", valueConfirm: "XÃ¡c nháº­n.", readMKV: true, ctlSaveOnFrame: function (opt) {
         opt = $.extend({}, $.defaults, opt);
         var list = "&" + opt.idkhoachinh + "=" + $.mkv.queryString(opt.idkhoachinh);
         if (opt.readMKV) {
@@ -431,7 +431,7 @@
                 $("<p onscroll=\"$.mkv.scrollyactive('" + $(control).attr("id") + "')\" id=\"divSetTimKiem\" />").css({ 'background': '#fff', 'width': '99.5%', 'height': '97%', 'float': 'right', 'margin-top': '-11px', 'overflow': 'scroll', 'text-align': 'center', 'border': '1px solid #cfcfcf' }).appendTo("#divTimKiem");
                 $("<img onclick=\"$.mkv.dongtimkiem('" + $(control).attr("id") + "');\" src=\"../images/close.gif\" />").css({ 'float': 'right', 'cursor': 'pointer', 'padding-right': '5px', 'top': '2px', 'right': '0', 'position': 'absolute' }).appendTo("#divTimKiemTitle")
             }
-            $("#divSetTimKiem").html("Đang tìm dữ liệu ...");
+            $("#divSetTimKiem").html("Äang tÃ¬m dá»¯ liá»‡u ...");
             $.ajax({ type: "GET", cache: false, dataType: "text", url: opt.ajax + $.mkv.controlfind, success: function (value) {
                 $("#divSetTimKiem").html(value);
                 if ($("#divSetTimKiem").find("table").find("tr").length < 3)
@@ -443,7 +443,7 @@
                 if (data.responseText.length)
                     $.mkv.myerror(data.responseText);
                 else
-                    $.mkv.myalert("Không tìm thấy dữ liệu !", 2000, "info")
+                    $.mkv.myalert("KhÃ´ng tÃ¬m tháº¥y dá»¯ liá»‡u !", 2000, "info")
             } 
             })
         }
@@ -812,7 +812,7 @@
                     $.mkv.row2 = control.parent().parent().index();
                 else {
                     control.checked = false;
-                    alert("Đã chọn dòng " + $.mkv.row1 + " --> " + $.mkv.row2 + " !")
+                    alert("ÄÃ£ chá»n dÃ²ng " + $.mkv.row1 + " --> " + $.mkv.row2 + " !")
                 }
             }
         } else {
@@ -889,7 +889,7 @@
         var datePat = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
         var matchArray = dateStr.match(datePat);
         if (matchArray == null) {
-            $.mkv.myerror("Ngày tháng không hợp lệ: " + dateStr);
+            $.mkv.myerror("NgÃ y thÃ¡ng khÃ´ng há»£p lá»‡: " + dateStr);
             return false
         }
         var day = matchArray[1];
@@ -897,21 +897,21 @@
         var year = matchArray[5];
         var flag = true;
         if (month < 1 || month > 12) {
-            $.mkv.myerror("Tháng phải giữa 1 và 12.");
+            $.mkv.myerror("ThÃ¡ng pháº£i giá»¯a 1 vÃ  12.");
             flag = false
         }
         if (day < 1 || day > 31) {
-            $.mkv.myerror("Ngày phải giữa 1 và 31 ngày.");
+            $.mkv.myerror("NgÃ y pháº£i giá»¯a 1 vÃ  31 ngÃ y.");
             flag = false
         }
         if ((month == 4 || month == 6 || month == 9 || month == 11) && day == 31) {
-            $.mkv.myerror("Tháng " + month + " không có 31 ngày!");
+            $.mkv.myerror("ThÃ¡ng " + month + " khÃ´ng cÃ³ 31 ngÃ y!");
             flag = false
         }
         if (month == 2) {
             var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
             if (day > 29 || (day == 29 && !isleap)) {
-                $.mkv.myerror("Tháng 2 năm " + year + " không có " + day + " ngày!");
+                $.mkv.myerror("ThÃ¡ng 2 nÄƒm " + year + " khÃ´ng cÃ³ " + day + " ngÃ y!");
                 flag = false
             }
         }

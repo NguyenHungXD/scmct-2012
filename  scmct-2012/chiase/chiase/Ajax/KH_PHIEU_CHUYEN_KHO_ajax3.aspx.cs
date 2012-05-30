@@ -27,7 +27,7 @@ using chiase.Objects;
              KH_PHIEU_CHUYEN_KHO.data("GHI_CHU",Request.QueryString["GHI_CHU"]);
             return KH_PHIEU_CHUYEN_KHO;
      }
-     protected DataProcess s_KH_PHIEU_CHUYEN_KHO_CT()
+     protected DataProcess s_KH_PHIEU_CHUYEN_KHO_CT(bool isLoad)
      {
              DataProcess KH_PHIEU_CHUYEN_KHO_CT = new DataProcess("KH_PHIEU_CHUYEN_KHO_CT"); 
              KH_PHIEU_CHUYEN_KHO_CT.data("PCK_CT_ID",Request.QueryString["idkhoachinh"]);
@@ -38,6 +38,12 @@ using chiase.Objects;
              KH_PHIEU_CHUYEN_KHO_CT.data("THANH_TIEN",Request.QueryString["THANH_TIEN"]);
              KH_PHIEU_CHUYEN_KHO_CT.data("GHI_CHU",Request.QueryString["GHI_CHU"]);
              KH_PHIEU_CHUYEN_KHO_CT.data("PNK_CT_ID",Request.QueryString["PNK_CT_ID"]);
+             if (isLoad)
+             {
+                 KH_PHIEU_CHUYEN_KHO_CT.data("HH_NAME", Request.QueryString["HH_NAME"]);
+                 KH_PHIEU_CHUYEN_KHO_CT.data("NHH_ID", Request.QueryString["NHH_ID"]);
+
+             }
             return KH_PHIEU_CHUYEN_KHO_CT;
      }
      protected void Page_Load(object sender, EventArgs e)
@@ -179,7 +185,7 @@ using chiase.Objects;
      {
          try
          {
-                DataProcess process = s_KH_PHIEU_CHUYEN_KHO_CT();
+                DataProcess process = s_KH_PHIEU_CHUYEN_KHO_CT(false);
                   bool ok = process.Delete();
              if (ok)
              {
@@ -334,7 +340,7 @@ using chiase.Objects;
      {
          try
          {
-              DataProcess process = s_KH_PHIEU_CHUYEN_KHO_CT();
+              DataProcess process = s_KH_PHIEU_CHUYEN_KHO_CT(false);
              if (process.getData("PCK_CT_ID") != null && process.getData("PCK_CT_ID") != "")
              {
              bool ok = process.Update();
@@ -378,13 +384,13 @@ using chiase.Objects;
  bool add = UserLogin.HavePermision(this, "KH_PHIEU_CHUYEN_KHO_CT_Add");
  bool search = UserLogin.HavePermision(this, "KH_PHIEU_CHUYEN_KHO_CT_Search");
          if (search){
-                DataProcess process = s_KH_PHIEU_CHUYEN_KHO_CT();
+                DataProcess process = s_KH_PHIEU_CHUYEN_KHO_CT(true);
          process.Page = Request.QueryString["page"];
                  DataTable table = process.Search(@"select STT=row_number() over (order by T.PCK_CT_ID),T.*
                    ,A.MA_PCK
                    ,B.MA_HH
                    ,C.PNK_ID
-                               from KH_PHIEU_CHUYEN_KHO_CT T
+                    from KH_PHIEU_CHUYEN_KHO_CT T
                     left join KH_PHIEU_CHUYEN_KHO  A on T.PCK_ID=A.PCK_ID
                     left join DM_HANG_HOA  B on T.HH_ID=B.ID
                     left join KH_PHIEU_NHAP_KHO_CT  C on T.PNK_CT_ID=C.PNK_CT_ID

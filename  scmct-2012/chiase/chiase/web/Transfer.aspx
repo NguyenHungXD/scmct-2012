@@ -16,8 +16,8 @@
                     <%=GetCaption("MA_PCK")%>
                 </h4>
                 <p>
-                    <input mkv="true" id="MA_PCK" type="text" onfocus="Find(this);chuyenphim(this);"
-                        style="width: 90%" />
+                    <input mkv="true" id="MA_PCK" readonly="readonly" type="text" onfocus="Find(this);chuyenphim(this);"
+                        style="width: 90%; background-color:#DCDCDC" />
                 </p>
             </div>
             <div class="div-Out">

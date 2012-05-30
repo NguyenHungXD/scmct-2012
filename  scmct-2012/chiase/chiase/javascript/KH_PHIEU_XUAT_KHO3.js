@@ -62,19 +62,24 @@ $(document).ready(function () {
                     }
              });
          }
-         function HH_IDSearch(obj)
-         {
+         function HH_IDSearch(obj) {
+
+           
              $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_XUAT_KHO_ajax3.aspx?do=HH_IDSearch",{
              minChars:0,
              width:350,
              scroll:true,
              formatItem:function (data) {
                   return data[0];
-             }}).result(function(event,data){
+              },
+              triggerDelete: "txtClearHH(" + $(obj).parent().parent().index() + ")"
+             }).result(function(event,data){
                  if($(obj).parents("#gridTable").attr("id") != null){
                      $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#"+obj.id.replace("mkv_","")).val(data[1]);
+                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id).val(removeHTMLTags(data[0]).split('-')[0]);
                      if ($("#gridTable").find("tr").eq($(obj).parent().parent().index() + 1).find("td:eq(1)").find("a:first").length == 0)
                          $.mkv.themDongTable("gridTable");
+                     afterSelectHH(obj, data[1]);
                  }
                  setTimeout(function () {
                      obj.focus();
@@ -83,15 +88,21 @@ $(document).ready(function () {
          }
          function PNK_CT_IDSearch(obj)
          {
-             $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_XUAT_KHO_ajax3.aspx?do=PNK_CT_IDSearch",{
+
+             var tr = obj.parentNode.parentNode;
+             var hhID = tr.cells[2].childNodes["HH_ID"];
+             var duan = document.getElementById("DU_AN_ID");
+             var kho = document.getElementById("KHO_ID");
+             $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_XUAT_KHO_ajax3.aspx?do=PNK_CT_IDSearch&sHH_ID=" + hhID.value + "&sDU_AN_ID=" + duan.value + "&sKHO_ID=" + kho.value, {
              minChars:0,
-             width:350,
+             width:650,
              scroll:true,
              formatItem:function (data) {
                   return data[0];
              }}).result(function(event,data){
                  if($(obj).parents("#gridTable").attr("id") != null){
-                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#"+obj.id.replace("mkv_","")).val(data[1]);
+                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id.replace("mkv_", "")).val(data[1]);
+                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id).val(removeHTMLTags(data[0]).split('-')[0]);
                      if ($("#gridTable").find("tr").eq($(obj).parent().parent().index() + 1).find("td:eq(1)").find("a:first").length == 0)
                          $.mkv.themDongTable("gridTable");
                  }

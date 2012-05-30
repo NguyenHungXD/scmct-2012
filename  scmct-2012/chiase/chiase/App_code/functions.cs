@@ -8,6 +8,7 @@ using System.Data;
 using chiase.Objects;
 using System.Collections;
 using System.Text;
+using DK2C.DataAccess.Web;
 
 namespace chiase
 {
@@ -611,8 +612,69 @@ namespace chiase
                 HttpContext.Current.Response.Write(sb.ToString());
             }
         }
+        public static string NewMaPhieuNhap()
+        {
+            DateTime date = SQLConnectWeb.GetSystemDatetime();
+            string prefix = "PN";
+            string sql = @"SELECT MAX(CONVERT(INT, RIGHT(p.MA_PNK,LEN(p.MA_PNK)-CHARINDEX('-',p.MA_PNK))))
+            FROM KH_PHIEU_NHAP_KHO p
+            WHERE CONVERT (VARCHAR (10),p.NGAY_NHAP,103)='" + date.ToString("dd/MM/yyyy") + "'";
+            DataTable dt = SQLConnectWeb.GetTable(sql);
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                return prefix + date.ToString("yyyyMMdd") + "-" + 1.ToString("000");
+            }
+            else
+            {
+                int num = dt.Rows[0][0].ToString() == "" ? 0 : Int32.Parse(dt.Rows[0][0].ToString());
+                if (num <= 0) num = 0;
+                num++;
+                return prefix + date.ToString("yyyyMMdd") + "-" + num.ToString("000");
+            }
+        }
+        public static string NewMaPhieuXuat()
+        {
+            DateTime date = SQLConnectWeb.GetSystemDatetime();
+            string prefix = "PX";
+            string sql = @"SELECT MAX(CONVERT(INT, RIGHT(p.MA_PXK,LEN(p.MA_PXK)-CHARINDEX('-',p.MA_PXK))))
+            FROM KH_PHIEU_XUAT_KHO  p
+            WHERE CONVERT (VARCHAR (10),p.NGAY_XUAT,103)'" + date.ToString("dd/MM/yyyy") + "'";
+            DataTable dt = SQLConnectWeb.GetTable(sql);
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                return prefix + date.ToString("yyyyMMdd") + "-" + 1.ToString("000");
+            }
+            else
+            {
+                int num = dt.Rows[0][0].ToString() == "" ? 0 : Int32.Parse(dt.Rows[0][0].ToString());
+                if (num <= 0) num = 0;
+                num++;
+                return prefix + date.ToString("yyyyMMdd") + "-" + num.ToString("000");
+            }
+        }
+        public static string NewMaPhieuChuyen()
+        {
+            DateTime date = SQLConnectWeb.GetSystemDatetime();
+            string prefix = "PC";
+            string sql = @"SELECT MAX(CONVERT(INT, RIGHT(p.MA_PCK,LEN(p.MA_PCK)-CHARINDEX('-',p.MA_PCK))))
+            FROM KH_PHIEU_CHUYEN_KHO p
+            WHERE CONVERT (VARCHAR (10),p.NGAY_CHUYEN,103)'" + date.ToString("dd/MM/yyyy") + "'";
+            DataTable dt = SQLConnectWeb.GetTable(sql);
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                return prefix + date.ToString("yyyyMMdd") + "-" + 1.ToString("000");
+            }
+            else
+            {
+                int num = dt.Rows[0][0].ToString() == "" ? 0 : Int32.Parse(dt.Rows[0][0].ToString());
+                if (num <= 0) num = 0;
+                num++;
+                return prefix + date.ToString("yyyyMMdd") + "-" + num.ToString("000");
+            }
+        }
+        
         #endregion
-
+        
 
     }
 }

@@ -338,6 +338,7 @@
     <Content Include="javascript\KH_PHIEU_NHAP_KHO3.js" />
     <Content Include="javascript\KH_PHIEU_XUAT_KHO1.js" />
     <Content Include="javascript\KH_PHIEU_XUAT_KHO3.js" />
+    <Content Include="js\myscript.jqr.bk.js" />
     <Content Include="js\jquery-1.6.1.min.js" />
     <Content Include="js\jquery-ui.js" />
     <Content Include="js\jquery.autocomplete.js" />

@@ -4,6 +4,51 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="header" runat="Server">
     <script type="text/javascript" src="../javascript/KH_PHIEU_XUAT_KHO3.js">
     </script>
+    <script type="text/javascript">
+        function afterSelectHH(ctrl, hhid) {
+
+            var tr = ctrl.parentNode.parentNode;
+            var hhName = tr.cells[3].childNodes["HH_NAME"];          
+            var nhhName = tr.cells[4].childNodes["NHH_NAME"];
+            hhName.value = "";          
+            nhhName.value = "";
+            var xmlHttp = GetMSXmlHttp();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4) {
+                    if (xmlHttp.responseText.length > 0) {
+                        var rs = xmlHttp.responseText;
+                        hhName.value = readXMLFormat(rs, "<HH_NAME>", "</HH_NAME>");                      
+                        nhhName.value = readXMLFormat(rs, "<NHH_NAME>", "</NHH_NAME>");                      
+                    }
+                }
+            }
+            xmlHttp.open("GET", "../ajax/DM_HANG_HOA_ajax2.aspx?do=getHH&HH_ID=" + hhid + "&times=" + Math.random(), true);
+            xmlHttp.send(null);
+        }
+
+        function txtChangeHH(ctrl) {
+            var tr = ctrl.parentNode.parentNode;
+            var hhID = tr.cells[2].childNodes["HH_ID"];
+            var hhName = tr.cells[3].childNodes["HH_NAME"];           
+            var nhhName = tr.cells[4].childNodes["NHH_NAME"];
+            hhID.value = "";
+            hhName.value = "";          
+            nhhName.value = "";
+          
+
+        }
+
+        function txtClearHH(rowIndex) {
+            var table = document.getElementById("gridTable");
+            var tr = table.rows[rowIndex];
+            var hhID = tr.cells[2].childNodes["HH_ID"];
+            var hhName = tr.cells[3].childNodes["HH_NAME"];       
+            var nhhName = tr.cells[4].childNodes["NHH_NAME"];
+            hhID.value = "";
+            hhName.value = "";          
+            nhhName.value = "";            
+        }
+        </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
     <div class="body-div">
@@ -16,8 +61,8 @@
                     <%=GetCaption("MA_PXK")%>
                 </h4>
                 <p>
-                    <input mkv="true" id="MA_PXK" type="text" onfocus="Find(this);chuyenphim(this);"
-                        style="width: 90%" />
+                    <input mkv="true" readonly="readonly" id="MA_PXK" type="text" onfocus="Find(this);chuyenphim(this);"
+                        style="width: 90%; background-color:#DCDCDC" />
                 </p>
             </div>
             <div class="div-Out">
