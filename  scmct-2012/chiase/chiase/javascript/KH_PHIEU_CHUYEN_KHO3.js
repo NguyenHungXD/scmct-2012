@@ -65,39 +65,51 @@
          function HH_IDSearch(obj)
          {
              $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=HH_IDSearch",{
-             minChars:0,
-             width:350,
-             scroll:true,
-             formatItem:function (data) {
-                  return data[0];
-             }}).result(function(event,data){
-                 if($(obj).parents("#gridTable").attr("id") != null){
-                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#"+obj.id.replace("mkv_","")).val(data[1]);
+                 minChars: 0,
+                 width: 350,
+                 scroll: true,
+                 formatItem: function (data) {
+                     return data[0];
+                 },
+                 triggerDelete: "txtClearHH(" + $(obj).parent().parent().index() + ")"
+             }).result(function (event, data) {
+                 if ($(obj).parents("#gridTable").attr("id") != null) {
+                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id.replace("mkv_", "")).val(data[1]);
+                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id).val(removeHTMLTags(data[0]).split('-')[0]);
                      if ($("#gridTable").find("tr").eq($(obj).parent().parent().index() + 1).find("td:eq(1)").find("a:first").length == 0)
                          $.mkv.themDongTable("gridTable");
+                     afterSelectHH(obj, data[1]);
                  }
                  setTimeout(function () {
                      obj.focus();
-                 },100);
+                 }, 100);
              });
          }
          function PNK_CT_IDSearch(obj)
          {
-             $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=PNK_CT_IDSearch",{
-             minChars:0,
-             width:350,
-             scroll:true,
-             formatItem:function (data) {
-                  return data[0];
-             }}).result(function(event,data){
-                 if($(obj).parents("#gridTable").attr("id") != null){
-                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#"+obj.id.replace("mkv_","")).val(data[1]);
+
+             var tr = obj.parentNode.parentNode;
+             var hhID = tr.cells[2].childNodes["HH_ID"];
+             var duan = document.getElementById("DU_AN_ID");
+             var kho = document.getElementById("KHO_XUAT_ID");
+             $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=PNK_CT_IDSearch&sHH_ID=" + hhID.value + "&sDU_AN_ID=" + duan.value + "&sKHO_ID=" + kho.value, {
+                 minChars: 0,
+                 width: 650,
+                 scroll: true,
+                 formatItem: function (data) {
+                     return data[0];
+                 } 
+             }).result(function (event, data) {
+                 if ($(obj).parents("#gridTable").attr("id") != null) {
+                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id.replace("mkv_", "")).val(data[1]);
+                     var mps=removeHTMLTags(data[0]).split('-');
+                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id).val(mps[0]+"-"+mps[1]);
                      if ($("#gridTable").find("tr").eq($(obj).parent().parent().index() + 1).find("td:eq(1)").find("a:first").length == 0)
                          $.mkv.themDongTable("gridTable");
                  }
                  setTimeout(function () {
                      obj.focus();
-                 },100);
+                 }, 100);
              });
          }
          function NGUOI_CHUYENSearch(obj)

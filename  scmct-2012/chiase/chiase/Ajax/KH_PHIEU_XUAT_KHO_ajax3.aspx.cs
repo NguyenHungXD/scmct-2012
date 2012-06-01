@@ -185,19 +185,50 @@ namespace chiase
         }
         private void HH_IDSearch()
         {
-            DataTable table = DM_HANG_HOA.GetTableAll();
+            // DataTable table = DM_HANG_HOA.GetTableAll();
+            DataTable table = SQLConnectWeb.GetTable(@"SELECT HH.ID,HH.MA_HH,HH.[NAME],HH.NHH_ID,NHH.[NAME] NHH_NAME
+                      FROM DM_HANG_HOA HH                    
+                    LEFT JOIN DM_HANG_HOA_NHOM NHH ON NHH.ID=HH.NHH_ID");
             string html = "";
-            if (table != null)
+            if (table != null && table.Rows.Count > 0)
             {
-                if (table.Rows.Count > 0)
+
+
+                int mlmhh = table.Rows[0][DM_HANG_HOA.cl_MA_HH].ToString().Trim().Length;
+                int mlnhh = table.Rows[0][DM_HANG_HOA.cl_NAME].ToString().Trim().Length;
+                foreach (DataRow r in table.Rows)
                 {
-                    for (int i = 0; i < table.Rows.Count; i++)
-                    {
+                    if (r[DM_HANG_HOA.cl_MA_HH].ToString().Trim().Length > mlmhh)
+                        mlmhh = r[DM_HANG_HOA.cl_MA_HH].ToString().Trim().Length;
 
-                        html += table.Rows[i][1].ToString() + "|" + table.Rows[i][0].ToString() + Environment.NewLine;
+                    if (r[DM_HANG_HOA.cl_NAME].ToString().Trim().Length > mlnhh)
+                        mlnhh = r[DM_HANG_HOA.cl_NAME].ToString().Trim().Length;
 
-                    }
                 }
+
+                int step = 40;
+
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    int l1 = (mlmhh - table.Rows[i][DM_HANG_HOA.cl_MA_HH].ToString().Trim().Length) * 2;
+                    int l2 = (mlnhh - table.Rows[i][DM_HANG_HOA.cl_NAME].ToString().Trim().Length) * 2;
+
+
+                    html += table.Rows[i][DM_HANG_HOA.cl_MA_HH].ToString()
+                        + "<span style=\"margin-left:" + (step - l1) + "px\"> - "
+                         + "</span >"
+                        + "<span style=\"margin-left:" + (step) + "px\">"
+                        + table.Rows[i][DM_HANG_HOA.cl_NAME].ToString()
+                        + "</span >"
+                        + "<span style=\"margin-left:" + (step - l2) + "px\"> - "
+                        + "</span >"
+                        + "<span style=\"margin-left:" + (step) + "px\">"
+                        + table.Rows[i]["NHH_NAME"].ToString()
+
+                        + "</span >"
+                        + "|" + table.Rows[i][DM_HANG_HOA.cl_ID].ToString() + Environment.NewLine;
+                }
+
             }
             Response.Clear(); Response.Write(html);
         }
@@ -219,12 +250,12 @@ namespace chiase
 
             }
             string sql = string.Format(@"SELECT pnct.PNK_CT_ID,pn.MA_PNK,CONVERT (VARCHAR(10),pn.NGAY_NHAP,103) NGAY_NHAP,
-kh.[NAME] KHO_NHAP,da.MA_DU_AN, pnct.SO_LUONG
-FROM KH_PHIEU_NHAP_KHO_CT pnct
-INNER JOIN KH_PHIEU_NHAP_KHO pn ON pn.PNK_ID = pnct.PNK_ID
-LEFT JOIN KH_DM_KHO kh ON kh.ID=pn.KHO_ID
-LEFT JOIN DA_DU_AN da ON da.ID=pn.DU_AN_ID
-{0}", where);
+            kh.[NAME] KHO_NHAP,da.MA_DU_AN, pnct.SO_LUONG
+            FROM KH_PHIEU_NHAP_KHO_CT pnct
+            INNER JOIN KH_PHIEU_NHAP_KHO pn ON pn.PNK_ID = pnct.PNK_ID
+            LEFT JOIN KH_DM_KHO kh ON kh.ID=pn.KHO_ID
+            LEFT JOIN DA_DU_AN da ON da.ID=pn.DU_AN_ID
+            {0}", where);
             DataTable table = SQLConnectWeb.GetTable(sql);
             string html = "";
             if (table != null)
@@ -446,6 +477,8 @@ LEFT JOIN DA_DU_AN da ON da.ID=pn.DU_AN_ID
                 }
                 else
                 {
+                    string mp = functions.NewMaPhieuXuat();
+                    process.data("MA_PXK", mp);
                     bool ok = process.Insert();
                     if (ok)
                     {
@@ -505,8 +538,7 @@ LEFT JOIN DA_DU_AN da ON da.ID=pn.DU_AN_ID
             html += "<th>" + DictionaryDB.sGetValueLanguage("SO_LUONG") + "</th>";
             html += "<th>" + DictionaryDB.sGetValueLanguage("DON_GIA") + "</th>";
             html += "<th>" + DictionaryDB.sGetValueLanguage("THANH_TIEN") + "</th>";
-            html += "<th>" + DictionaryDB.sGetValueLanguage("GHI_CHU") + "</th>";
-      
+            html += "<th>" + DictionaryDB.sGetValueLanguage("GHI_CHU") + "</th>";      
             html += "<th></th>";
             html += "</tr>";
             bool add = UserLogin.HavePermision(this, "KH_PHIEU_XUAT_KHO_CT_Add");

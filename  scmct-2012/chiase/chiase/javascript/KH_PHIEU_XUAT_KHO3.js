@@ -102,7 +102,8 @@ $(document).ready(function () {
              }}).result(function(event,data){
                  if($(obj).parents("#gridTable").attr("id") != null){
                      $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id.replace("mkv_", "")).val(data[1]);
-                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id).val(removeHTMLTags(data[0]).split('-')[0]);
+                     var mps = removeHTMLTags(data[0]).split('-');
+                     $("#gridTable").find("tr").eq($(obj).parent().parent().index()).find("#" + obj.id).val(mps[0] + "-" + mps[1]);
                      if ($("#gridTable").find("tr").eq($(obj).parent().parent().index() + 1).find("td:eq(1)").find("a:first").length == 0)
                          $.mkv.themDongTable("gridTable");
                  }
