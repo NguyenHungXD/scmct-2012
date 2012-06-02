@@ -18,6 +18,9 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 display();
                 Session["current"] = "3"; //[1.Trang chu 2.Dien Dan 3.Hinh Anh 4.Gui Yeu Cau 5.Gioi Thieu 6.Lien He 7.Quan Tri]
             }
@@ -80,10 +83,6 @@ namespace chiase
                     else
                         img.ImageUrl = table_img.Rows[0]["path"].ToString();
                 }
-
-
-                
-
                 String sql_detail = @"select a.*,b.*,b.Liked as imgLiked
                             from IMG_ALLBUM a 
                             inner join IMG_ALLBUM_DETAIL b on a.allbum_id = b.allbum_id
@@ -94,9 +93,28 @@ namespace chiase
 
                 dt_list.DataSource = table_detail;
                 dt_list.DataBind();
+                //
+                Label lbl_add = (Label)e.Item.FindControl("lbl_add_img");
+                Label lbl_edit = (Label)e.Item.FindControl("lbl_edit_img");
+                Label lbl_del = (Label)e.Item.FindControl("lbl_del_img");
 
+                if (functions.checkOwnSection(functions.LoginMemID(this), id.ToString(), "IMG_ALLBUM", "CREATED_BY", "ALLBUM_ID"))
+                {
+                    lbl_add.Visible = true;
+                    lbl_edit.Visible = true;
+                    lbl_del.Visible = true;
+                }
+                else
+                {
+                    lbl_add.Visible = functions.checkPrivileges("44", functions.LoginMemID(this), "C");
+                    lbl_edit.Visible = functions.checkPrivileges("44", functions.LoginMemID(this), "E");
+                    lbl_del.Visible = functions.checkPrivileges("44", functions.LoginMemID(this), "D");
+                
+                }
+                
 
-            }
+                }
+                
             catch
             { }
         }

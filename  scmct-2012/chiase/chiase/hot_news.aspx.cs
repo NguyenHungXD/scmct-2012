@@ -15,6 +15,9 @@ namespace chiase
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 display();
                 Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='hot_news.aspx' title='Cập nhật bài viết nổi bật'>Bài viết nổi bật</a>";
         }
@@ -39,9 +42,15 @@ namespace chiase
                 functions.selectedDropdown(DropDownList3, table_hotnews.Rows[2]["post_id"].ToString());
                 functions.selectedDropdown(DropDownList4, table_hotnews.Rows[3]["post_id"].ToString());
                 //Content c = this.FindControl("Content2") as Content;
-            
+
+                Boolean check = functions.checkPrivileges("23", functions.LoginMemID(this), "E");
+                lbl_edit_hot_news.Visible = check;
+
                     for (int i = 1; i < 5; i++)
                     {
+                        Label lb = (Label)content.FindControl("Label" + i);
+                        lb.Visible = check;
+
                         TextBox title = (TextBox)content.FindControl("TextBox" + i);
                         title.Text = (String)table_hotnews.Rows[i - 1]["title"];
 

@@ -104,7 +104,7 @@
     <font color="ButtonHighlight" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
         *-Bạn có thể xóa hoặc sửa yêu cầu nếu yêu cầu đang chờ duyệt.<br>
         *-Chọn yêu cầu bạn muốn xóa.<br><br>
-        <input id="Button1" type="button" value="Xóa yêu cầu" class="btn" style="width:120px;height:30px" onclick="delete_request();"/><input id="Button2" type="button" value="Hủy" style="width:120px;height:30px" class="btn" onclick="backs();"/><br>&nbsp
+        <input id="Button1" type="button" value="Xóa yêu cầu" class="btn" style="width:120px;height:25px" onclick="delete_request();"/><input id="Button2" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
     </td>
     </tr>
     </table>
@@ -121,7 +121,7 @@
                     AllowDragging="True" AllowResize="True" ClientInstanceName="divpopup"
                             CloseAction="CloseButton" 
                             EnableViewState="False" PopupElementID='divdetail'
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
                             Height="680px" FooterText=""
                             HeaderText="Cập nhật yêu cầu" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 

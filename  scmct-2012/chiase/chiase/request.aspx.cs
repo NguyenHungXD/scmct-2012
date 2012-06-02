@@ -22,6 +22,7 @@ namespace chiase
                 ASPxHtmlEditor1.ClientSideEvents.Validation = "ValidationHandler";
                 if (Request.QueryString["vmode"] == "admin")
                 {
+                    lbl_create_new_request.Visible = functions.checkPrivileges("12", functions.LoginMemID(this), "C");
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='request.aspx' title='Gửi yêu cầu'>Gửi yêu cầu</a> ";
                     Session["current"] = "7";
                     Panel2.Visible = true;
@@ -54,6 +55,12 @@ namespace chiase
                 functions.fill_DropdownList(dropd_request_kind, table_request_kind, 0, 1);
                 functions.selectedDropdown(dropd_request_kind, "1");
 
+                String sql_project = @"select a.*,b.name 
+                            from da_du_an a 
+                            inner join DA_DM_TRANG_THAI_DU_AN b on a.TRANG_THAI_ID = B.ID where b.id in (2,3) and a.Enable_bit='Y' order by b.id";
+                DataTable dt = SQLConnectWeb.GetData(sql_project);
+                functions.fill_DropdownList(dropd_project, dt, 0, 1);
+                functions.selectedDropdown(dropd_project, Request.QueryString["id"]);
 
                 String sql = @"SELECT b.id,'[' + a.username + ']-[' + b.name +']-['+ b.address +']-['+ c.groupname +']' as info
                          FROM ND_THONG_TIN_DN a
@@ -83,10 +90,11 @@ namespace chiase
                 {
                     if (Request.QueryString["vmode"] == "admin")
                         memid = member_list.SelectedValue;
-                    String sql = "INSERT INTO YC_YEU_CAU(TIEU_DE,NOI_DUNG,TRANG_THAI_ID,LOAI_YC_ID,NGUOI_YEU_CAU,NGAY_YEU_CAU,NGUOI_CAP_NHAT,NGAY_CAP_NHAT) VALUES(@V_TIEU_DE,@V_NOI_DUNG,@V_TRANG_THAI_ID,@V_LOAI_YC_ID,@V_NGUOI_YEU_CAU,@V_NGAY_YEU_CAU,@NGUOI_CAP_NHAT,@NGAY_CAP_NHAT)";
+                    String sql = "INSERT INTO YC_YEU_CAU(TIEU_DE,NOI_DUNG,DU_AN_ID,TRANG_THAI_ID,LOAI_YC_ID,NGUOI_YEU_CAU,NGAY_YEU_CAU,NGUOI_CAP_NHAT,NGAY_CAP_NHAT) VALUES(@V_TIEU_DE,@V_NOI_DUNG,@DU_AN_ID,@V_TRANG_THAI_ID,@V_LOAI_YC_ID,@V_NGUOI_YEU_CAU,@V_NGAY_YEU_CAU,@NGUOI_CAP_NHAT,@NGAY_CAP_NHAT)";
                     int yc= SQLConnectWeb.ExecuteNonQuery(sql,
                                 "@V_TIEU_DE", txt_request_subject.Text,
                                 "@V_NOI_DUNG", ASPxHtmlEditor1.Html.Replace(",", ""),
+                                "@DU_AN_ID",dropd_project.SelectedValue,
                                 "@V_TRANG_THAI_ID", '1',
                                 "@V_LOAI_YC_ID", dropd_request_kind.SelectedValue,
                                 "@V_NGUOI_YEU_CAU", memid,

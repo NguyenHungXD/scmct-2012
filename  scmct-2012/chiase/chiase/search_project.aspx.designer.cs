@@ -58,13 +58,31 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.DropDownList dropd_status;
         
         /// <summary>
-        /// btn_search control.
+        /// pn_view_project control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_search;
+        protected global::System.Web.UI.WebControls.Panel pn_view_project;
+        
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
+        
+        /// <summary>
+        /// pn_create_new_project control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pn_create_new_project;
         
         /// <summary>
         /// ASPxPopupControl1 control.
@@ -76,6 +94,51 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxPopupControl.ASPxPopupControl ASPxPopupControl1;
         
         /// <summary>
+        /// showListProject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater showListProject;
+        
+        /// <summary>
+        /// lbl_add_member control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_add_member;
+        
+        /// <summary>
+        /// lbl_edit_project control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_edit_project;
+        
+        /// <summary>
+        /// lbl_lock_project control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_lock_project;
+        
+        /// <summary>
+        /// lbl_del_project control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_del_project;
+        
+        /// <summary>
         /// PopupControlContentControl1 control.
         /// </summary>
         /// <remarks>
@@ -85,13 +148,13 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxPopupControl.PopupControlContentControl PopupControlContentControl1;
         
         /// <summary>
-        /// showListProject control.
+        /// link_more control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater showListProject;
+        protected global::System.Web.UI.WebControls.HyperLink link_more;
         
         /// <summary>
         /// Label1 control.

@@ -13,6 +13,10 @@
         }else
             args.IsValid = true;
     }
+
+    function backs() {
+        window.location = "default.aspx";
+    }
 </script>
 
    <fieldset>
@@ -43,29 +47,27 @@
 
             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_email" ErrorMessage="Địa chỉ email chưa đúng" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
     </tr>
+
+        <tr>
+    <td>
+        Mã xác nhận:&nbsp 
+    </td>
+    <td><asp:Label ID="txt_random" runat="server" Text="" style="color:Yellow;font-weight:bold;font-size:x-large"></asp:Label>
+        <asp:TextBox ID="txt_confirm" style="color:Red;font-weight:bold;font-size:x-large" runat="server" class="txtformat" Width="80px" Height="27px"></asp:TextBox>
+          <asp:RequiredFieldValidator ID="RequiredFieldValidator5" Display="Dynamic" ForeColor="Red" ControlToValidate="txt_confirm" runat="server" ErrorMessage="Nhập mã xác nhận"></asp:RequiredFieldValidator>
+    </td>
+    </tr>
+
+
     <tr>
     <td colspan=3 align=left><hr>
     </td>
     <tr>
     <td align="right">
-
-        <dx:ASPxButton ID="btn_getpasswords" runat="server" Text="Lấy lại mật khẩu" 
-            onclick="btn_getpassword_Click" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
-            CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
-            Width="142px">
-        </dx:ASPxButton>
+    <asp:Button ID="Button2" runat="server" Text="Lấy lại mật khẩu" class="btn" Height="25px" Width="120px" onclick="btn_getpassword_Click"/>
         </td>
         <td>
-        <dx:ASPxButton ID="btn_closes" runat="server" Text="Đóng" 
-            onclick="btn_close_Click" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
-            CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
-            Width="120px">
-
-                    <ClientSideEvents Click="function(s, e) {
-                            window.location.href='default.aspx'
-                    }" />
-
-        </dx:ASPxButton>
+ <input id="Button3" type="button" value="Hủy" onclick="backs();" style="width:120px;height:25px" class="btn"/>
         </td>
 </tr>
 <tr>

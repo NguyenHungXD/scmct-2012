@@ -18,6 +18,9 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 if (Request.QueryString["vmode"] == "del")
                 {
                     del_request();
@@ -35,6 +38,8 @@ namespace chiase
                 }
                 else
                 {
+                    lbl_search_request.Visible = lbl_search_request.Visible = functions.checkPrivileges("14", functions.LoginMemID(this), "V");
+                    lbl_del_request.Visible = lbl_search_request.Visible = functions.checkPrivileges("14", functions.LoginMemID(this), "D");
                     display();
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_request.aspx' title='Cập nhật yêu cầu'>Cập nhật yêu cầu</a>";
                 }
@@ -177,6 +182,29 @@ namespace chiase
                 DataTable table_kind_request = SQLConnectWeb.GetData(sql_kind_request);
                 functions.fill_DropdownList(kind_request, table_kind_request, 0, 1, request_id.ToString());
                 functions.selectedDropdown(kind_request, String.Format("{0};{1}", request_id, kind_request_id));
+
+                Label lbl_edit_request = (Label)e.Item.FindControl("lbl_edit_request");
+                Label lbl_edit_kind_request = (Label)e.Item.FindControl("lbl_edit_kind_request");
+                Label kind_requests = (Label)e.Item.FindControl("kind_request");
+                Label lbl_status_request = (Label)e.Item.FindControl("lbl_status_request");
+                Label status_request = (Label)e.Item.FindControl("status_request");
+
+                if (functions.checkPrivileges("14", functions.LoginMemID(this), "E"))
+                {
+                    lbl_edit_request.Visible = true;
+                    lbl_edit_kind_request.Visible = true;
+                    lbl_status_request.Visible = true;
+                }
+                else 
+                {
+                    lbl_edit_request.Visible = false;
+                    lbl_edit_kind_request.Visible = false;
+                    lbl_status_request.Visible = false;
+                    kind_requests.Text = kind_request.SelectedItem.Text;
+                    status_request.Text = dropd_status.SelectedItem.Text;
+                }
+
+
             }
             catch
             { 

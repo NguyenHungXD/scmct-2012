@@ -3,6 +3,26 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
 
+
+        <table border="0" cellpadding="4" cellspacing="1" width="100%"  style="color:White;font-weight:bold;" class="btn_project_head">
+        <tr>
+        <td width="10%">
+        Mã dự án:   
+        </td>
+        <td>
+        <asp:Label ID="lbl_ma_du_an" runat="server"></asp:Label>
+        </td>
+        </tr>
+        <tr>
+        <td width="10%">
+        Tên dự án:  
+        </td>
+        <td>
+        <asp:Label ID="lbl_ten_du_an" runat="server"></asp:Label>
+        </td>
+        </tr>
+        <tr>
+        <td colspan="2">
 <asp:Repeater ID="showListmember" runat="server">
         
         <HeaderTemplate>
@@ -20,14 +40,13 @@
         <td>
             <h6>Nhóm</h6>
         </td>
-
         <td>
             <h6>Vị trí</h6>
         </td>
          <td>
             <h6>Tim</h6>
         </td>
-                <td>
+        <td>
             <h6>Tham gia</h6>
         </td>
         <td>
@@ -36,7 +55,7 @@
         </tr>
         </HeaderTemplate>
         <ItemTemplate>
-                    <tr class="new_post_details">
+                    <tr class="new_post_details_4rum">
                     <td valign=middle align="center">
                     <%= noofcnt++%>
                     </td>
@@ -71,11 +90,17 @@
                     </tr>
         </ItemTemplate>
         <FooterTemplate>
+
         </table>
         </FooterTemplate>
-        </asp:Repeater>   
+        </asp:Repeater>  
+        
+        
+         <br>
+        <hr>
+        <p align="right" style="color:White">&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %><br>&nbsp</p>
 
-
-
-
+        </td>
+        </tr>
+        </table>
 </asp:Content>

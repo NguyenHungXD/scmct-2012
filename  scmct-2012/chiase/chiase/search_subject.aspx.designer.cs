@@ -67,13 +67,22 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.DropDownList dropd_status;
         
         /// <summary>
-        /// btn_search control.
+        /// lbl_search_subject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_search;
+        protected global::System.Web.UI.WebControls.Label lbl_search_subject;
+        
+        /// <summary>
+        /// Button2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
         /// subject_list control.
@@ -83,6 +92,15 @@ namespace chiase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater subject_list;
+        
+        /// <summary>
+        /// lbl_del_subject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_del_subject;
         
         /// <summary>
         /// ASPxPopupControl1 control.

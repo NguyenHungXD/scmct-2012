@@ -13,22 +13,13 @@ namespace chiase {
     public partial class show_allbum {
         
         /// <summary>
-        /// Image1 control.
+        /// lbl_create_allbum control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
-        
-        /// <summary>
-        /// ASPxPopupControl1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxPopupControl.ASPxPopupControl ASPxPopupControl1;
+        protected global::System.Web.UI.WebControls.Label lbl_create_allbum;
         
         /// <summary>
         /// PopupControlContentControl1 control.

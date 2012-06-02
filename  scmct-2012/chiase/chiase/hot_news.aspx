@@ -10,11 +10,9 @@
     function showDetail(obj, index) {
     /*
         for (i = 1; i < 5; i++) {
-
             var div = "TextBox" + i;
             var titles = document.getElementById(div);
             alert(titles.value);
-
         }
 */
         switch (index) {
@@ -39,13 +37,15 @@
                 var divid = document.getElementById("id4");
                 break;
         }
-
         var url = "get_data_detail.aspx?post_id=" + obj.value;
         var content = getValXML(url);
         divid.innerHTML = "<a href='post_show_details.aspx?news_id=" + obj.value + "' style='color:#CC00FF' target='_blank'>Xem chi tiết</a>";
         title.value = readXMLFormat(content, "[start1]", "[endstart1]");
         shortcontent.value = readXMLFormat(content, "[start2]", "[endstart2]");
 
+    }
+    function backs() {
+        window.location = "admin.aspx";
     }
 </script>
 
@@ -83,9 +83,11 @@ Chọn bài viết 1:<asp:DropDownList ID="DropDownList1" runat="server"
 </td>
 <td align="right">
     <asp:Image ID="Image1" runat="server" Width="120px" Height="50px" style="border:2px solid #FFFFFF"/>
+<asp:Label ID="Label1" runat="server">
     <asp:FileUpload ID="FileUpload1" runat="server" BackColor="#CCCCCC" 
                 Text="Chọn hình" BorderColor="White" BorderStyle="Solid" 
                 BorderWidth="1px" Height="21px" ToolTip="Chọn hình" Width="175px"/>
+</asp:Label>
 </td>
 <td style="background-color:Red">
     <asp:CheckBox ID="CheckBox1" runat="server" Checked="true"/>
@@ -109,9 +111,11 @@ Chọn bài viết 2:<asp:DropDownList ID="DropDownList2" runat="server"
         class="txtformat_area" Width="350px" Height="50px"></asp:TextBox>
 </td>
 <td align="right"><asp:Image ID="Image2" runat="server" Width="120" Height="50" style="border:2px solid #FFFFFF"/>
+<asp:Label ID="Label2" runat="server">
     <asp:FileUpload ID="FileUpload2" runat="server" BackColor="#CCCCCC" 
                 Text="Chọn hình" BorderColor="White" BorderStyle="Solid" 
                 BorderWidth="1px" Height="21px" ToolTip="Chọn hình" Width="175px"/>
+</asp:Label>
                 </td>
 <td style="background-color:Red">
     <asp:CheckBox ID="CheckBox2" runat="server" Checked="true"/>
@@ -134,9 +138,11 @@ Chọn bài viết 3:<asp:DropDownList ID="DropDownList3" runat="server"
         class="txtformat_area" Width="350px" Height="50px"></asp:TextBox>
 </td>
 <td align="right"><asp:Image ID="Image3" runat="server" Width="120" Height="50" style="border:2px solid #FFFFFF"/>
+<asp:Label ID="Label3" runat="server">
     <asp:FileUpload ID="FileUpload3" runat="server" BackColor="#CCCCCC" 
                 Text="Chọn hình" BorderColor="White" BorderStyle="Solid" 
                 BorderWidth="1px" Height="21px" ToolTip="Chọn hình" Width="175px"/>
+</asp:Label>
                 </td>
 <td style="background-color:Red">
     <asp:CheckBox ID="CheckBox3" runat="server" Checked="true"/>
@@ -160,10 +166,11 @@ Chọn bài viết 4:<asp:DropDownList ID="DropDownList4" runat="server"
         class="txtformat_area" Width="350px" Height="50px"></asp:TextBox>
 </td>
 <td align="right"><asp:Image ID="Image4" runat="server" Width="120" Height="50" style="border:2px solid #FFFFFF"/>
+<asp:Label ID="Label4" runat="server">
     <asp:FileUpload ID="FileUpload4" runat="server" BackColor="#CCCCCC" 
                 Text="Chọn hình" BorderColor="White" BorderStyle="Solid" 
                 BorderWidth="1px" Height="21px" ToolTip="Chọn hình" Width="175px"/>
-
+</asp:Label>
 </td>
 <td style="background-color:Red">
     <asp:CheckBox ID="CheckBox4" runat="server" Checked="true" />
@@ -173,24 +180,14 @@ Chọn bài viết 4:<asp:DropDownList ID="DropDownList4" runat="server"
 </tr>
 <tr style="background-color:#FFFFCC">
 <td align="right">&nbsp
-    <dx:ASPxButton ID="btn_save" runat="server" Text="Lưu thông tin" 
-        CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
-        SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" Width="175px" 
-        onclick="btn_save_Click1">
-    </dx:ASPxButton>
+
+<asp:Label ID="lbl_edit_hot_news" runat="server">
+    <asp:Button ID="Button2" runat="server" Text="Lưu thông tin" class="btn" Height="25px" Width="120px" onclick="btn_save_Click1"/>
+</asp:Label>
 </td>
 
 <td align="left">&nbsp
-    <dx:ASPxButton ID="btn_close" runat="server" Text="Đóng" 
-        CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
-        SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" Width="120px" 
-        onclick="btn_close_Click">
-                             <ClientSideEvents Click="function(s, e) {
-                            window.location='Admin.aspx'
-                           
-                    }" />
-
-    </dx:ASPxButton>
+    <input id="Button3" type="button" value="Hủy" onclick="backs();" style="width:120px;height:25px" class="btn"/>
 </td>
 <td colspan="2" align="left" style="color:Red">&nbsp <b>Chọn bài viết cần thay đổi<br>Kích thước ảnh 580x250 pixel</b>
 </td>

@@ -518,18 +518,15 @@
         <table border="0" cellpadding="2" cellspacing="0" width="80%">
         <tr>
         <td valign="middle" align="right" width="40%">
-                                    <dx:ASPxButton ID="find" runat="server" Text="Tìm kiếm" 
-                        CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                        SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px" onclick="find_Click" >
-                        </dx:ASPxButton>
+            <asp:Label ID="lbl_view_member_project" runat="server">
+                        <asp:Button ID="Button3" runat="server" Text="Tìm kiếm" class="btn" Height="25px" Width="120px" onclick="find_Click"/>
+                        </asp:Label>
         </td>
         <td  valign="middle" align="left" width="60%">
                     
-                            <dx:ASPxButton ID="btn_create_projects" runat="server" Text="Lưu thông tin" 
-                        CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                        SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px" 
-                                onclick="btn_create_projects_Click">
-                    </dx:ASPxButton>
+            <asp:Label ID="lbl_add_member_project" runat="server">
+                    <asp:Button ID="Button1" runat="server" Text="Lưu thông tin" class="btn" Height="25px" Width="120px" onclick="btn_create_projects_Click"/>
+            </asp:Label>
         </td>
         </tr>
         </table>
@@ -541,7 +538,8 @@
 
     <fieldset>
     <legend>Dự án:<asp:Label ID="lbl_project" runat="server" Text=""></asp:Label></legend>   
-    <asp:Repeater ID="showListmember" runat="server">
+    <asp:Repeater ID="showListmember" runat="server" 
+            onitemdatabound="showListmember_ItemDataBound">
         
         <HeaderTemplate>
         <table border="0" cellpadding="0" cellspacing="1" width="100%"  style="border:1px solid #CCFFFF;">
@@ -577,9 +575,11 @@
                     <td align="center">
                             <table cellpadding=1 cellspacing=1 border=0>
                             <tr>
+                                
+                            <td id=<%# Eval("id","'idlock{0}'")%>> <asp:Label ID="lbl_member_del" runat="server"><a style=cursor:pointer title='<%#Eval("img_lock_alt")%>'><img src=<%#Eval("img_lock","images/{0}")%> width="20" height="20" alt=""  onclick="lock_project(<%# Eval("id")%>,<%# Eval("active","'{0}'")%>,<%# Eval("id","'idlock{0}'")%>)"/></a> </asp:Label> </td>
+                                
+                            <td id=<%# Eval("id","'iddel{0}'")%> > <asp:Label ID="lbl_member_lock" runat="server"> <a style=cursor:pointer title='<%#Eval("img_del_alt")%>'><img src=<%#Eval("img_del","images/{0}")%> width="20" height="20" alt="" onclick="del_project(<%# Eval("id")%>,<%# Eval("active","'{0}'")%>,<%# Eval("id","'iddel{0}'")%>,<%# Eval("id","'idlock{0}'")%>)" /></a> </asp:Label> </td>
                             
-                            <td id=<%# Eval("id","'idlock{0}'")%>><a style=cursor:pointer title='<%#Eval("img_lock_alt")%>'><img src=<%#Eval("img_lock","images/{0}")%> width="20" height="20" alt=""  onclick="lock_project(<%# Eval("id")%>,<%# Eval("active","'{0}'")%>,<%# Eval("id","'idlock{0}'")%>)"/></a></td>
-                            <td id=<%# Eval("id","'iddel{0}'")%> ><a style=cursor:pointer title='<%#Eval("img_del_alt")%>'><img src=<%#Eval("img_del","images/{0}")%> width="20" height="20" alt="" onclick="del_project(<%# Eval("id")%>,<%# Eval("active","'{0}'")%>,<%# Eval("id","'iddel{0}'")%>,<%# Eval("id","'idlock{0}'")%>)" /></a></td>
                             </tr>
                             </table>
                      </td>
@@ -620,8 +620,9 @@
         <p align="right">
         <font color="ButtonHighlight"><b>*-Chọn thành viên cần duyệt cho dự án</b></font><br>   
   
-
-        <input id="Button2" type="button" value="Duyệt thành viên" onclick="do_update();" class="btn" style="width:130px;height:30px"/>
+        <asp:Label ID="lbl_approve_member" runat="server">
+            <input id="Button2" type="button" value="Duyệt thành viên" onclick="do_update();" class="btn" style="width:130px;height:25px"/>
+        </asp:Label>
         </p>
         </fieldset>
 

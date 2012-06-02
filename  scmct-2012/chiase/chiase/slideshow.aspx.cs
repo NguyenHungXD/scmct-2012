@@ -18,19 +18,65 @@ namespace chiase
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack){
+
+                if (functions.ValidateUserLogin(functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this)))
+                {
+
+                    lbl_comment_allbum.Visible = true;
+                    if (Request.QueryString["vmode"] == "del_cm_allbum")
+                    {
+                        del_comment_allbum();
+                    }
+                    else if (Request.QueryString["vmode"] == "del_cm_img")
+                    {
+                        del_comment_img();
+                    }
+
+                }else{
+
+                    lbl_text.Text = "<b>Đăng nhập để bình luận</b>";
+                    lbl_comment_allbum.Visible = false;
+                }
+
+                
+
                 dispplay();
                 show_commemt();
                 ASPxHtmlEditor1.ClientSideEvents.Validation = "ValidationHandler";
             }
         }
 
+        public void del_comment_allbum()
+        {
+            try
+            {
 
+                string sql = @"update IMG_ALLBUM_COMMENT set deleted='Y' where id=" + Request.QueryString["id"] + " and allbum_id=" +Request.QueryString["allbum_id"];
+                SQLConnectWeb.ExecuteNonQuery(sql);
+            }
+            catch(Exception ex)
+            {
+                lbl_text.Text = ex.ToString();
+            }
+        
+        }
+        public void del_comment_img()
+        {
+            try
+            {
+                string sql = @"update IMG_ALLBUM_COMMENT set deleted='Y' where id=@id and img_id=@img_id ";
+                SQLConnectWeb.ExecuteNonQuery(sql, "@id", Request.QueryString["id"], "@img_id", Request.QueryString["img_id"]);
+            }
+            catch
+            {
+            }
 
+        }
         public void show_commemt()
         {
             try
             {
-                String sql = string.Format(@"SELECT a.*,b.USERNAME,c.heart,c.created_date,c.avatar_path,d.GROUPNAME
+                String sql = string.Format(@"SELECT a.*,b.USERNAME,c.heart,c.created_date,case when c.avatar_path is null then 'default_img.gif' else c.avatar_path end as avatar_path,d.GROUPNAME
                              FROM IMG_ALLBUM_COMMENT a
                             INNER JOIN  ND_THONG_TIN_DN b ON  a.commented_by=b.MEM_ID
                             INNER JOIN  ND_THONG_TIN_ND c ON a.commented_by = c.id
@@ -93,14 +139,12 @@ namespace chiase
                 Repeater showcm = (Repeater)e.Item.FindControl("showcomment");
                 if (RowView == null) return;
                 long id = (long)RowView.Row["img_id"];
-                String sql = @"select a.*,a.img_id as imgids,b.username,c.avatar_path from IMG_ALLBUM_COMMENT a
+                String sql = @"select a.*,a.img_id as imgids,b.username,case when c.avatar_path is null then 'default_img.gif' else c.avatar_path end as avatar_path from IMG_ALLBUM_COMMENT a
                             inner join ND_THONG_TIN_DN b on a.commented_by = b.mem_id
                             inner join ND_THONG_TIN_ND c on b.mem_id = c.id
                             where a.img_id = @img_id and a.deleted is null
                             order by commented_date";
                 DataTable table = SQLConnectWeb.GetData(sql, "@img_id", id);
-
-
                 showcm.DataSource = table;
                 showcm.DataBind();
 
@@ -112,9 +156,7 @@ namespace chiase
             }
             catch
             { }
-
         }
-
         protected void btn_comments_Click(object sender, EventArgs e)
         {
             try
@@ -130,11 +172,9 @@ namespace chiase
                             "@STATUS", 1,
                             "@LIKED", 0
                             );
-
                     String sql_cm = "UPDATE IMG_ALLBUM SET COMMENTS=COMMENTS+1 WHERE ALLBUM_ID=@ALLBUM_ID";
                     SQLConnectWeb.ExecuteNonQuery(sql_cm,
                             "@ALLBUM_ID", Request.QueryString["allbumid"]);
-
                     Response.Redirect("slideshow.aspx?allbumid=" + Request.QueryString["allbumid"]);
                 }
                 
@@ -143,6 +183,49 @@ namespace chiase
             { 
             
             }
+        }
+
+        protected void showcomment_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                DataRowView RowView = (DataRowView)e.Item.DataItem;
+                if (RowView == null) return;
+                long id = (long)RowView.Row["id"];
+                Label lb_del_cm = (Label)e.Item.FindControl("lbl_del_comment");
+                if (functions.checkOwnSection(functions.LoginMemID(this), id.ToString(), "IMG_ALLBUM_COMMENT", "commented_by", "id") || functions.checkPrivileges("44", functions.LoginMemID(this), "E") || functions.checkPrivileges("44", functions.LoginMemID(this), "D"))
+                {
+                    lb_del_cm.Visible = true;
+                }else
+                {
+                    lb_del_cm.Visible = false;
+                }
+
+            }
+            catch
+            { }
+        }
+
+        protected void showList_comment_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                DataRowView RowView = (DataRowView)e.Item.DataItem;
+                if (RowView == null) return;
+                long id = (long)RowView.Row["id"];
+                Label lb_del_cm = (Label)e.Item.FindControl("lbl_del_cm_allbum");
+                if (functions.checkOwnSection(functions.LoginMemID(this), id.ToString(), "IMG_ALLBUM_COMMENT", "commented_by", "id") || functions.checkPrivileges("44", functions.LoginMemID(this), "E") || functions.checkPrivileges("44", functions.LoginMemID(this), "D"))
+                {
+                    lb_del_cm.Visible = true;
+                }
+                else
+                {
+                    lb_del_cm.Visible = false;
+                }
+
+            }
+            catch
+            { }
         }
     }
 }

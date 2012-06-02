@@ -16,8 +16,16 @@ namespace chiase
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
-                    display();
+            if (!IsPostBack)
+            {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+                if (functions.checkOwnSection(functions.LoginMemID(this), Request.QueryString["allbumid"], "IMG_ALLBUM", "CREATED_BY", "ALLBUM_ID") || functions.checkPrivileges("44", functions.LoginMemID(this), "E"))
+                    lbl_edit_allbum.Visible = true;
+                else
+                    lbl_edit_allbum.Visible = false;
+                display();
+            }
         }
 
         public void display()

@@ -27,8 +27,10 @@
     </tr>
         <tr>
         <td valign="middle" align="right">
+            <asp:Label ID="lbl_create_kind_request" runat="server">
             <asp:Button ID="btn_saves" runat="server" Text="Lưu loại yêu cầu" class="btn" 
                 Width="120px" Height="25" onclick="btn_saves_Click"/>
+                </asp:Label>
         </td>
     </tr>
     <tr>

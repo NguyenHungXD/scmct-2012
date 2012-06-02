@@ -184,6 +184,15 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.LinkButton logout;
         
         /// <summary>
+        /// pn_admin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pn_admin;
+        
+        /// <summary>
         /// Content_slider control.
         /// </summary>
         /// <remarks>

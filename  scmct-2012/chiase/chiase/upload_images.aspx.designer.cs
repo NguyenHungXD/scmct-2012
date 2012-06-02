@@ -64,7 +64,7 @@ namespace chiase {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_save_allbum;
+        protected global::System.Web.UI.WebControls.Button btn_save_allbum;
         
         /// <summary>
         /// lbl_error control.

@@ -17,6 +17,9 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 if (Request.QueryString["vmode"] == "del")
                 {
                     del_kind_request();
@@ -26,6 +29,8 @@ namespace chiase
                 }
                 else
                 {
+                    lbl_search_kind_request.Visible = functions.checkPrivileges("18", functions.LoginMemID(this), "V");
+                    lbl_del_kind_request.Visible = functions.checkPrivileges("18", functions.LoginMemID(this), "D");
                     display();
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_kind_request.aspx' title='Cập nhật loại yêu cầu'>Cập nhật loại yêu cầu</a>";
 
@@ -115,6 +120,18 @@ namespace chiase
             try
             {
                 display();
+            }
+            catch
+            {
+            }
+        }
+
+        protected void kind_list_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                Label lb_edit = (Label)e.Item.FindControl("lbl_search_kind_request");
+                lb_edit.Visible = functions.checkPrivileges("18", functions.LoginMemID(this), "D");
             }
             catch
             {

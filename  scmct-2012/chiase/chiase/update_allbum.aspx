@@ -27,7 +27,7 @@
         onitemdatabound="DataList1_ItemDataBound">
           <ItemTemplate>
                 <fieldset >
-                <table cellpadding="1" cellspacing="0" border="0" style="color:Black" width="880px">
+                <table cellpadding="1" cellspacing="0" border="0" width="880px">
                 <tr>
                 <td rowspan="9">
                     <asp:Image ID="img_first" runat="server" Width="160" Height="160" BorderColor="White" BorderWidth="1"/>
@@ -73,14 +73,28 @@
                 Cập nhật: <b><asp:Label ID="lbl_update" Text='<%#Eval("edited_date","{0:dd/MM/yyyy hh:mm:ss tt}") %>' runat="server"></asp:Label></b>
                 </td>
                 </tr>
+                   
                 <tr>
                 <td align="center" valign="middle" style="cursor:hand;">
-                    <a href='<%#Eval("allbum_id","slideshow.aspx?allbumid={0}") %>' onclick=update_view('<%#Eval("allbum_id")%>')><b>Xem allbum</b></a> | <a id="popupArea" style="cursor:pointer"><b>Thêm ảnh</b></a> | <a id="update_allbum_info" style="cursor:pointer"><b>Sửa thông tin allbum</b></a> | <b><a href="<%#Eval("allbum_id","update_allbum_imgs.aspx?allbum_id={0}") %>"<b>Sửa ảnh</b></a></b> | <a style="cursor:pointer" onclick=del_allbum('<%#Eval("allbum_id")%>') ><b>Xóa allbum</b></a>
-                
+                   <img src="images/view.gif" width="15" height="18"> <a href='<%#Eval("allbum_id","slideshow.aspx?allbumid={0}") %>' onclick=update_view('<%#Eval("allbum_id")%>')><b>Xem allbum</b></a> 
+                  
+                   <asp:Label ID="lbl_add_img" runat="server"> 
+                        | <img src="images/add_img.png" width="15" height="15"> <a id="popupArea" style="cursor:pointer"><b>Thêm ảnh</b></a> 
+                   </asp:Label>
+
+                   <asp:Label ID="lbl_edit_img" runat="server"> 
+                        | <img src="images/edit.png" width="15" height="15"> <a id="update_allbum_info" style="cursor:pointer"><b>Sửa thông tin allbum</b></a> 
+                        | <img src="images/edit_img.png" width="15" height="15"> <a href="<%#Eval("allbum_id","update_allbum_imgs.aspx?allbum_id={0}") %>"><b>Sửa ảnh</b></a>
+                   </asp:Label>
+
+                   <asp:Label ID="lbl_del_img" runat="server"> 
+                        | <img src="images/deletes.png" width="15" height="15"> <a style="cursor:pointer" onclick=del_allbum('<%#Eval("allbum_id")%>') ><b>Xóa allbum</b></a>
+                   </asp:Label>
+
         <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" AllowDragging="True" AllowResize="True"
         CloseAction="CloseButton" ContentUrl='<%#Eval("allbum_id","upload_images.aspx?allbumid={0}") %>'
         EnableViewState="False" PopupElementID="popupArea"
-        PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+        PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
         Height="600px" FooterText="Thêm ảnh cho allbum - bạn nhấn Shift hoặc Ctrl để chọn nhiều ảnh"
         HeaderText="Thêm hình cho allbum ảnh" ClientInstanceName="FeedPopupControl" 
         EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
@@ -99,13 +113,10 @@
                                         }" />
 
     </dx:ASPxPopupControl>
-
-
-                 
         <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" AllowDragging="True" AllowResize="True"
         CloseAction="CloseButton" ContentUrl='<%#Eval("allbum_id","update_allbum_info.aspx?allbumid={0}") %>'
         EnableViewState="False" PopupElementID="update_allbum_info"
-        PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+        PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
         Height="500px" FooterText=""
         HeaderText="Sửa thông tin allbum" ClientInstanceName="FeedPopupControl" 
         EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 

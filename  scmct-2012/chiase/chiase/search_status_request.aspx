@@ -61,7 +61,7 @@
     </script>
 
 <fieldset>
-    <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;">
+    <table border="0" cellpadding=3 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;">
         <tr style="color:White;font-weight:bold"><td colspan="8"><font size=3><p align="center">Tìm kiếm trạng thái yêu cầu</p></font><br>*-Bạn có thể bỏ qua điều kiện bạn không quan tâm.</td></tr>
         <tr>
                     <td>
@@ -72,9 +72,7 @@
                 <asp:DropDownList ID="dropd_status" runat="server" Width="250px" Height="25px">
                 </asp:DropDownList>
         </td>
-        </tr>
-        
-        <tr>
+  
         <td>
             Tên trạng thái:
             </td>
@@ -84,7 +82,7 @@
         </td>
         </tr>
         <tr>
-        <td width="15%">
+        <td >
             Từ ngày:
             </td>
             <td>
@@ -111,9 +109,8 @@
             </ValidationSettings>
         </dx:ASPxDateEdit>
         </td>
-        </tr>
-        <tr>
-                <td width="10%">
+
+                <td >
             Đến ngày:
             </td>
             <td>
@@ -154,19 +151,16 @@
         
         <tr>
         <td>&nbsp</td><td colspan="3">&nbsp
-        
+            <asp:Label ID="lbl_search_status_request" runat="server">
             <asp:Button ID="btn_search" runat="server" Text="Tìm kiếm" class="btn" 
-                Height="30px" onclick="btn_search_Click" Width="120px"  />
-        
+                Height="25px" onclick="btn_search_Click" Width="120px"  />
+        </asp:Label>
         </td>
         </tr>
         </table>
 </fieldset>
 <hr>
 
-
-    <asp:Repeater ID="status_list" runat="server">
-    <HeaderTemplate>
     <table border="0" cellpadding=3 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;color:Black">
         <tr bgcolor="#990099" style="color:White;font-weight:bold"><td align="center" colspan="6">Danh sách trạng thái yêu cầu</td></tr>
         <tr class="new_post">
@@ -183,12 +177,17 @@
             Ngày tạo
         </td>
         </tr>
+    <asp:Repeater ID="status_list" runat="server" 
+        onitemdatabound="status_list_ItemDataBound">
+    <HeaderTemplate>
+
     </HeaderTemplate>
     <ItemTemplate>
         <tr bgcolor='#<%# Eval("bgcolors")%>' align="center">
                 <td valign="middle" align="center">
             <%=vNo++ %>. 
-            <input name="chk" value="<%#Eval("id") %>" type="checkbox" /> | <a style=cursor:pointer title='Sửa yêu cầu' onclick=update_request('<%#Eval("id") %>')><img src=images/edit.gif width=20 height=20 alt='Cập nhật chủ đề'>
+            <input name="chk" value="<%#Eval("id") %>" type="checkbox" /><asp:Label ID="lbl_edit_status_request"
+                runat="server"> | <a style=cursor:pointer title='Sửa yêu cầu' onclick=update_request('<%#Eval("id") %>')><img src=images/edit.gif width=20 height=20 alt='Cập nhật chủ đề'></asp:Label>
         </td>
         <td align="left">
             <%# Eval("name")%>
@@ -202,21 +201,22 @@
         </tr>
     </ItemTemplate>
     <FooterTemplate>
-    <tr>
+    </FooterTemplate>
+    </asp:Repeater>
+        <tr>
     <td colspan="6" style="color:white;font-weight:bold"><br>
         *-Trạng thái có nền màu xám là trạng thái đã xóa.<br>
         *-Chọn trạng thái bạn muốn xóa/phục hồi.<br><br>
         <font color="ButtonHighlight" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
-
-        <input id="Button1" type="button" value="Xóa trạng thái" class="btn" style="width:125px;height:30px" onclick="deletes('del')"/>
-        <input id="Button3" type="button" value="Phục hồi trạng thái" class="btn" style="width:125px;height:30px" onclick="deletes('undel')"/>
-        <input id="Button2" type="button" value="Hủy" style="width:120px;height:30px" class="btn" onclick="backs();"/><br>&nbsp
+        <asp:Label ID="lbl_del_status_request" runat="server">
+            <input id="Button1" type="button" value="Xóa trạng thái" class="btn" style="width:125px;height:25px" onclick="deletes('del')"/>
+            <input id="Button3" type="button" value="Phục hồi trạng thái" class="btn" style="width:125px;height:25px" onclick="deletes('undel')"/>
+        </asp:Label>
+        <input id="Button2" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
         
     </td>
     </tr>
     </table>
-    </FooterTemplate>
-    </asp:Repeater>
      <table width="100%">
      <tr align="right">
     <td colspan=3 align=right style="color:White">
@@ -228,7 +228,7 @@
                     AllowDragging="True" AllowResize="True" ClientInstanceName="divpopup"
                             CloseAction="CloseButton" 
                             EnableViewState="False" PopupElementID='divdetail'
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="400px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="400px"
                             Height="340px" FooterText=""
                             HeaderText="Cập nhật trạng thái yêu cầu" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 

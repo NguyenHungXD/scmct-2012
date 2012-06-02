@@ -7,37 +7,57 @@ using System.Web.UI.WebControls;
 using System.Data;
 using chiase.Objects;
 using DK2C.DataAccess.Web;
-
 namespace chiase
 {
     public partial class show_allbum : System.Web.UI.Page
     {
         public static string username;
+        public static string v_project_id;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+                lbl_create_allbum.Visible = functions.ValidateUserLogin(functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
                 display();
                 Session["current"] = "3"; //[1.Trang chu 2.Dien Dan 3.Hinh Anh 4.Gui Yeu Cau 5.Gioi Thieu 6.Lien He 7.Quan Tri]
-                Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='show_allbum.aspx' title='Hình ảnh'>Hình ảnh</a> ";
+
+                if (Request.QueryString["projectid"] == null)
+                    Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='show_allbum.aspx' title='Hình ảnh'>Hình ảnh</a> ";
+                else
+                {
+                    Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='show_allbum.aspx?projectid=" + Request.QueryString["projectid"] + "'>Hình ảnh</a>";
+                    v_project_id = Request.QueryString["projectid"];
+                }
             }
         }
         public void display()
         {
             try
             {
+                DataTable table;
                 username = functions.LoginMemID(this);
                 //Remove all allbum without any images uploaded
                 String sql_del = "Delete from IMG_ALLBUM where allbum_id not in (select allbum_id from IMG_ALLBUM_DETAIL)";
                 SQLConnectWeb.ExecuteNonQuery(sql_del);
-
-                String sql = @"select a.*,b.name,c.username
+                if (Request.QueryString["projectid"] == null)
+                {
+                    String sql = @"select a.*,b.name,c.username
                             from IMG_ALLBUM a 
                             inner join ND_THONG_TIN_ND b on a.created_by = b.ID
                             inner join ND_THONG_TIN_DN c on c.mem_id = b.ID where a.deleted is null
                             order by allbum_id";
-                DataTable table = SQLConnectWeb.GetData(sql);
-
+                    table = SQLConnectWeb.GetData(sql);
+                }
+                else
+                {
+                    String sql = @"select a.*,b.name,c.username
+                            from IMG_ALLBUM a 
+                            inner join ND_THONG_TIN_ND b on a.created_by = b.ID
+                            inner join ND_THONG_TIN_DN c on c.mem_id = b.ID where a.deleted is null and a.project_id=" + Request.QueryString["projectid"] + " order by allbum_id";
+                    table = SQLConnectWeb.GetData(sql);
+                }
+                if (table.Rows.Count == 0)
+                    return;
                 DataList1.DataSource = table;
                 DataList1.DataBind();
             }
@@ -82,6 +102,29 @@ namespace chiase
                     }
                     else
                         img.ImageUrl = table_img.Rows[0]["path"].ToString();
+                }
+
+                //
+                Label lbl_edit_allbum = (Label)e.Item.FindControl("lbl_edit_allbum");
+                Label lbl_del_allbum = (Label)e.Item.FindControl("lbl_del_allbum");
+
+                if (functions.ValidateUserLogin(functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this)))
+                {
+                    if (functions.checkOwnSection(functions.LoginMemID(this), id.ToString(), "IMG_ALLBUM", "CREATED_BY", "ALLBUM_ID"))
+                    {
+                        lbl_edit_allbum.Visible = true;
+                        lbl_del_allbum.Visible = true;
+                    }
+                    else
+                    {
+                        lbl_edit_allbum.Visible = functions.checkPrivileges("44", functions.LoginMemID(this), "E");
+                        lbl_del_allbum.Visible = functions.checkPrivileges("44", functions.LoginMemID(this), "D");
+                    }
+                }
+                else
+                {
+                    lbl_edit_allbum.Visible = false;
+                    lbl_del_allbum.Visible = false;
                 }
             }
             catch

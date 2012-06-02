@@ -64,19 +64,11 @@
         <td>
             Mã phiếu chi: 
             </td><td colspan="3">
-            <asp:DropDownList ID="dropd_ma_pc" AutoPostBack="false" runat="server" Height="25px" Width="150px" style="font-size:larger">
+            <asp:DropDownList ID="dropd_ma_pc" AutoPostBack="false" runat="server" Height="30px" Width="250px" style="font-size:larger">
             </asp:DropDownList>
         </td>
         </tr>
-        <tr>
-        <td>
-            Người lập:
-            </td>
-            <td colspan="3">
-        <asp:TextBox ID="txt_nguoilap" runat="server" class="txtformat" Height="25px" 
-                    Width="250px"></asp:TextBox>
-        </td>
-        </tr>
+
         <tr>
         <td width="15%">
             Từ ngày:
@@ -151,32 +143,29 @@
                     Width="250px"></asp:TextBox>
         </td>
         </tr>
+        <tr>
         <td >
-            Mã dự án:
+            Dự án:
             </td>
           <td>  
-            <asp:TextBox ID="txt_maduan" runat="server" class="txtformat" Height="25px" 
+            <asp:TextBox ID="txt_duan" runat="server" class="txtformat" Height="25px" 
                   Width="250px"></asp:TextBox>
             </td>
-            <td>
-            Tên dự án:
-            
-                        </td>
-            <td>
-            <asp:TextBox ID="txt_tenduan" runat="server" class="txtformat" Height="25px" 
+        <td>
+            Người lập:
+            </td>
+            <td colspan="3">
+        <asp:TextBox ID="txt_nguoilap" runat="server" class="txtformat" Height="25px" 
                     Width="250px"></asp:TextBox>
         </td>
         </tr>
-        
         <tr>
         <td>&nbsp</td><td colspan="3">&nbsp
         
-            <dx:ASPxButton ID="btn_search" runat="server" Text="Tìm kiếm" 
-                CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="149px" 
-                onclick="btn_search_Click">
-            </dx:ASPxButton>
+            <asp:Label ID="lbl_search_pc" runat="server">
         
+            <asp:Button ID="Button4" runat="server"  Text="Tìm kiếm" class="btn" onclick="btn_search_Click" Height="25px" Width="100px"/>
+            </asp:Label>
         </td>
         </tr>
         </table>
@@ -184,7 +173,8 @@
 <hr>
 
 
-<asp:Repeater ID="phieu_chi_list" runat="server">
+<asp:Repeater ID="phieu_chi_list" runat="server" 
+        onitemdatabound="phieu_chi_list_ItemDataBound">
     <HeaderTemplate>
     <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;color:Black">
         <tr bgcolor="#990099" style="color:White;font-weight:bold"><td align="center" colspan="6">Danh sách phiếu chi</td></tr>
@@ -215,7 +205,8 @@
         <tr bgcolor='#<%# Eval("bgcolors")%>'>
                 <td valign="middle" align="center">
             <%= no++ %>.
-                    <input name="chk" value="<%#Eval("pc_id") %>" type="checkbox" /> | <img src="images/edit.gif" width="25" height="25" style="cursor:pointer"  onclick=return_link('<%#Eval("pc_id") %>') title='<%#Eval("ma_pc","Sửa phiếu thu {0}") %>'>
+                    <input name="chk" value="<%#Eval("pc_id") %>" type="checkbox" /><asp:Label ID="lbl_edit_pc"
+                        runat="server">  | <img src="images/edit.gif" width="25" height="25" style="cursor:pointer"  onclick=return_link('<%#Eval("pc_id") %>') title='<%#Eval("ma_pc","Sửa phiếu thu {0}") %>'></asp:Label>
         </td>
            <td align="center" >
              <asp:HyperLink style="color:Blue" ID="HyperLink1" runat="server" Target="_blank" title='<%#Eval("ma_pc","Xem phiếu chi {0}") %>' NavigateUrl=<%#Eval("ma_pc","phieu_chi_view.aspx?ma_pc={0}") %>><%# Eval("ma_pc")%></asp:HyperLink>
@@ -236,6 +227,9 @@
         </tr>
     </ItemTemplate>
     <FooterTemplate>
+    </FooterTemplate>
+    </asp:Repeater>
+
     <tr>
     <td colspan="6" style="color:white;font-weight:bold">
     
@@ -243,15 +237,17 @@
     <font color="white"><i><br>*-Phiếu chi đã xóa có nền màu xám</i></font><br>
     <font color="ButtonHighlight" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
     <br>
+        <asp:Label ID="lbl_del_pc" runat="server">
+            <input id="Button1" type="button" value="Xóa phiếu chi" class="btn" style="width:120px;height:25px" onclick="deletes('del');"/>
+            <input id="Button3" type="button" value="Phục hồi" class="btn" style="width:120px;height:25px" onclick="deletes('undel');"/>
+        </asp:Label>
 
-        <input id="Button1" type="button" value="Xóa phiếu chi" class="btn" style="width:120px;height:30px" onclick="deletes('del');"/>
-        <input id="Button3" type="button" value="Phục hồi" class="btn" style="width:120px;height:30px" onclick="deletes('undel');"/>
-        <input id="Button2" type="button" value="Hủy" style="width:120px;height:30px" class="btn" onclick="backs();"/><br>&nbsp
+
+        <input id="Button2" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
     </td>
     </tr>
     </table>
-    </FooterTemplate>
-    </asp:Repeater>
+
      <table width="100%">
      <tr align="right">
     <td colspan=3 align=right style="color:White">

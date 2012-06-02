@@ -44,12 +44,12 @@
         {
             width: 700px;
             height: 30px;
-            background-color:#1E90FF;
-            color:White;
+            background-color:#FFFFFF;
+            color:#990099;
         }
         .inputs:hover {
-                border: 2px solid #FFFF00;
-                background: #FFFFFF;
+                border: 1px solid #FFFFFF;
+                background: #99FF00;
                 cursor:pointer;
                 color:Black;
             }
@@ -63,7 +63,7 @@
 
 
 
-  <table border=0 cellpadding=3 cellspacing=3 width=100%>
+  <table border=0 cellpadding=3 cellspacing=3 width=100% style="color:White">
         <tr>
         <td>
         Tên allbum:
@@ -80,7 +80,7 @@
            <b><%= allbum_detail %></b>
         </td>         
         </tr>
-        </table>
+</table>
 
 
 </asp:Panel>
@@ -111,10 +111,10 @@
         </td>
         <td>
 
-            <dx:ASPxButton ID="btn_save_allbum" runat="server" Text="Lưu allbum" 
-                CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px" OnClick="btn_save_allbum_Click">
-            </dx:ASPxButton>
+
+
+            <asp:Button ID="btn_save_allbum" runat="server" Text="Lưu allbum" class="btn" Height="25px" Width="120px" OnClick="btn_save_allbum_Click"/>
+
 
         </td>
         </tr>
@@ -122,16 +122,17 @@
          </asp:Panel>
 
             <br>
-            <asp:Label ID="lbl_error" runat="server" style="font-size:medium"></asp:Label>
+            <asp:Label ID="lbl_error" runat="server" style="font-size:medium" 
+     ForeColor="White"></asp:Label>
             <br>
             <br>
 <asp:Panel ID="Panel2" runat="server" Visible="false">
- <fieldset style="background-color:#FFFF99">
+ <fieldset style="background-color:#0099FF">
     <table cellpadding="0" cellspacing="0" border="0" width="100%">
     <tr>
     <td class="style1">
-    <i><font color="red">*-Cho phép upload hình ảnh có định dạng: .JPG, .GIF, .PNG</font></i><br>
-    <i><font color="red">*-Chọn thêm ảnh để upload nhiều ảnh</font></i>
+    <i><font color="ButtonHighlight">*-Cho phép upload hình ảnh có định dạng: <b>.JPG, .GIF, .PNG</b></font></i><br>
+    <i><font color="ButtonHighlight">*-Chọn thêm ảnh để upload nhiều ảnh</font></i><br>
     <div id="uploadArea" style="border:1px solid #CCFF00;background-color:White">
         <input type="file" id="File1" runat="server" class="inputs"/>
     </div>
@@ -140,17 +141,18 @@
 
     <tr>
     <td align="right" class="style2"><br>
-    <input type="button" value="Thêm hình" onclick="AddFileUploadControl();" class="btn_img" style="width:120px;height:30px"/>
+    <input type="button" value="Thêm hình" onclick="AddFileUploadControl();" class="btn" style="width:120px;height:25px"/>
     </td>
     </tr>
         <tr>
     <td>
-    <asp:Button ID="btnUploadFiles" runat="server" OnClick="btnUploadFiles_Click" Text="Đăng ảnh" class="btn_img" Width="120" Height="40"/>
+    <asp:Button ID="btnUploadFiles" runat="server" OnClick="btnUploadFiles_Click" Text="Đăng ảnh" class="btn" Width="120" Height="25"/>
     </td>
     </tr>
             <tr>
-    <td>
+    <td align="center"><font color="white">
     <asp:Literal ID="litResult" runat="server"></asp:Literal>
+    </font>
     </td>
     </tr>
     </table>

@@ -18,6 +18,9 @@ namespace chiase
         {
             if(!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 if (Request.QueryString["vmode"] == "getdata_fullname")
                 {
                     pull_fullname();
@@ -28,6 +31,7 @@ namespace chiase
                 }
                 else
                 {
+                    lbl_create_new_pt.Visible = functions.checkPrivileges("28", functions.LoginMemID(this), "C");
                     display();
                 }
                 Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='phieu_thu.aspx' title='Phiếu thu'>Phiếu thu</a>";
@@ -88,9 +92,9 @@ namespace chiase
                 string sql_get_next_no = @"select MA_PT from TC_PHIEU_THU where PT_ID = (select max(PT_ID) from TC_PHIEU_THU)";
                 DataTable table_next_no = SQLConnectWeb.GetData(sql_get_next_no);
                 if(table_next_no.Rows.Count>0)
-                    vNo = functions.getNo(table_next_no.Rows[0]["MA_PT"].ToString(), 1);
+                    vNo = functions.getNo(table_next_no.Rows[0]["MA_PT"].ToString());
                 else
-                    vNo = functions.getNo("PT-No.000000", 1); //The first time run the application
+                    vNo = functions.getNo("PT-No.000000"); //The first time run the application
 
                 String sqls = @"select a.id,a.ma_du_an,a.ten_du_an 
                             from da_du_an a 
@@ -174,9 +178,9 @@ namespace chiase
                     string sql_get_next_no = @"select MA_PT from TC_PHIEU_THU where PT_ID = (select max(PT_ID) from TC_PHIEU_THU)";
                     DataTable table_next_no = SQLConnectWeb.GetData(sql_get_next_no);
                     if (table_next_no.Rows.Count > 0)
-                        vNo = functions.getNo(table_next_no.Rows[0]["MA_PT"].ToString(), 1);
+                        vNo = functions.getNo(table_next_no.Rows[0]["MA_PT"].ToString());
                     else
-                        vNo = functions.getNo("PT-No.000000", 1); //The first time run the application
+                        vNo = functions.getNo("PT-No.000000"); //The first time run the application
                     string sql = @"insert into tc_phieu_thu (MA_PT,NGUOI_THU,NGAY_THU,TONG_TIEN,DU_AN_ID,DOI_TUONG_THU,MEM_ID,YEU_CAU_ID,GHI_CHU) values (@MA_PT,@NGUOI_THU,@NGAY_THU,@TONG_TIEN,@DU_AN_ID,@DOI_TUONG_THU,@MEM_ID,@YEU_CAU_ID,@GHI_CHU)";
                     SQLConnectWeb.ExecuteNonQuery(sql,
                              "@MA_PT", vNo,

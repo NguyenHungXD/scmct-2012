@@ -37,10 +37,38 @@ namespace chiase
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
+            {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
 
+                pn_create_new_project.Visible = functions.checkPrivileges("6", functions.LoginMemID(this), "V");
+                pn_view_project.Visible = functions.checkPrivileges("8", functions.LoginMemID(this), "V");
                 display();
-            Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_project.aspx' title='Cập nhật dự án'>Cập nhật dự án</a>";
+                Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_project.aspx' title='Cập nhật dự án'>Cập nhật dự án</a>";
+            }
+            }
+
+
+        protected void showListProject_ItemDataBound1(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                Label lb_add_member = (Label)e.Item.FindControl("lbl_add_member");
+                Label lb_edit_pro = (Label)e.Item.FindControl("lbl_edit_project");
+                Label lb_lock_pro = (Label)e.Item.FindControl("lbl_lock_project");
+                Label lb_del_pro = (Label)e.Item.FindControl("lbl_del_project");
+
+                lb_add_member.Visible = functions.checkPrivileges("11", functions.LoginMemID(this), "V");
+                lb_edit_pro.Visible = functions.checkPrivileges("8", functions.LoginMemID(this), "E");
+                lb_lock_pro.Visible = functions.checkPrivileges("8", functions.LoginMemID(this), "L");
+                lb_del_pro.Visible = functions.checkPrivileges("8", functions.LoginMemID(this), "D");
+
+            }
+            catch
+            { }
         }
+
+
         public void display()
         {
             try

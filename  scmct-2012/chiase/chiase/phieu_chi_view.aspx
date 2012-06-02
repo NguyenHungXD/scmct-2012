@@ -2,8 +2,25 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Content_slider" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area" runat="server">
+<script type="text/javascript">
 
 
+
+    function PrintContent(div) {
+        var DocumentContainer = document.getElementById(div);
+        var WindowObject = window.open('', "TrackHistoryData",
+                              "toolbars=no,scrollbars=no,status=no,resizable=no");
+        WindowObject.document.write(DocumentContainer.innerHTML);
+        //alert(ctrl);
+        WindowObject.document.close();
+        WindowObject.focus();
+        WindowObject.print();
+        WindowObject.close();
+    }
+
+</script>
+
+<div id="mydiv">
 <fieldset style="font-size:15px">
 <table cellpadding=5 cellspacing=0 style="border:1px solid #FFFFFF" width=100% >
 <tr style="background-color:#F8F7F7">
@@ -21,7 +38,7 @@
 
 
     <td valign="middle" align="center" colspan="2"><b>
-    <p><font size="3px">Nhóm tình nguyện viên SCMCCT</font><br>
+    <p><font size="3px">Nhóm tình nguyện viên SCMCT</font><br>
     CỔNG THÔNG TIN QUYÊN GÓP SÁCH ONLINE</b>
     </p>
     </td>
@@ -113,7 +130,7 @@
     </tr>
 
     <tr>
-    <td>&nbsp</td><td colspan="3" style="font-weight:bold">(Viết bằng chữ)  :<t style="font-weight:normal"><i><asp:Label ID="lbl_text_money" runat="server" Text=""></asp:Label></i></t>
+    <td>&nbsp</td><td colspan="3" style="font-weight:bold">(Viết bằng chữ)  :<t style="font-weight:normal"><i>&nbsp<asp:Label ID="lbl_text_money" runat="server" Text=""></asp:Label></i></t>
     </td>
     </tr>
 
@@ -149,7 +166,7 @@
     </table>
 
     </table><p align="right">
-        <input id="Button2" type="button" value="In phiếu chi" class="btn" style="width:100px;height:30px" />
+        <input id="Button2" type="button" value="In phiếu chi" class="btn" style="width:100px;height:25px" onclick="PrintContent('mydiv')"/>
         </p>
 
 
@@ -161,5 +178,7 @@
 </tr>
 </table>
 </fieldset>
+
+</div>
 
 </asp:Content>

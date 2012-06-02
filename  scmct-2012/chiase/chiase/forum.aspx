@@ -18,35 +18,38 @@
 <table border="0"  cellpadding=0 cellspacing=0  width="100%" >
 </HeaderTemplate>
 <ItemTemplate>
+
+
+
     <tr class="post_news">
     <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td valign="middle"><img src="images/subject.png" width="40" height="25"><%#Eval("title")%></td><td align=right>
-        <a href='<%#Eval("id","post_news.aspx?subjectID={0}") %>' class="btn">Bài mới</a>
+            <asp:Label ID="lbl_post_new" runat="server" ><asp:HyperLink style="cursor:pointer" ID="linkPostnew" NavigateUrl='<%#Eval("id","post_news.aspx?subjectID={0}") %>' runat="server">  <img src="images/post_new.png" width="20" height="20"> Bài mới</asp:HyperLink></asp:Label>
     </td><tr></table> </td>
-        
     </tr>
     <tr class="post_news_desc">
-    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("description")%></td><td align=right>Tạo ngày, <%#Eval("created_date", "{0:dd/MM/yyyy hh:mm:ss tt}")%></td></tr></table></td>
+    <td><i><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("description")%></td><td align=right>Tạo ngày, <%#Eval("created_date", "{0:dd/MM/yyyy hh:mm:ss tt}")%></td></tr></table></i></td>
     </tr>
-    <tr >
-    <td>       
+    <tr>
+    <td>     
+
     <asp:Repeater ID="showListPost" runat="server" 
             onitemdatabound="showListPost_ItemDataBound1">
         <HeaderTemplate>
         <table border="0" cellpadding=4 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;background-color:#3BB9FF" class="btn_forum">
         <tr class="new_post">
-        <td colspan=3>
+        <td colspan=3 width=30%>
             Tiêu đề
         </td>
-        <td>
+        <td width=10%>
             Lượt xem
         </td>
-        <td>
+        <td width=10%>
             Bình luận
         </td>
-        <td>
+        <td width=10%>
             Xếp hạng
         </td>
-        <td>
+        <td width=40%>
             Bình luận mới
         </td>
         </tr>
@@ -67,18 +70,14 @@
                     </div>
                     </td>
 
-                    <td align=left with=25%><asp:HyperLink ID="link_show_detail" runat="server" NavigateUrl='<%# Eval("bai_viet_id", "post_show_details.aspx?news_id={0}") %>'
-                                        Text='<%# Eval("tieu_de") %>'></asp:HyperLink><br><font size=-3><i>Tạo bởi 
-
-
-                                        <a href="#" ID='<%#Eval("BAI_VIET_ID", "username{0}") %>'><font color="blue"><%#Eval("username") %></font></a>
+                    <td align=left with=25%><img src="<%# Eval("avatar_path","images/avatars/{0}") %>" width="30px" height="30px">&nbsp<asp:HyperLink ID="link_show_detail" runat="server" Text='<%# Eval("tieu_de") %>'></asp:HyperLink><br><font size=-3><i>Tạo bởi 
+                                        <a style="cursor:pointer" ID='<%#Eval("BAI_VIET_ID", "username{0}") %>'><font color="Yellow"><%#Eval("username") %></font></a>
                                         , <%#Eval("ngay_tao", "{0:dd/MM/yyyy hh:mm:ss tt}")%></font></i>
-                                        
-                                                    <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" 
+                    <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" 
                     AllowDragging="True" AllowResize="True"
                             CloseAction="CloseButton" ContentUrl='<%#Eval("username", "user_info.aspx?user_name={0}") %>'
                             EnableViewState="False" PopupElementID='<%#Eval("BAI_VIET_ID", "username{0}") %>'
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
                             Height="600px" FooterText=""
                             HeaderText="" ClientInstanceName="FeedPopupControl" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
@@ -92,12 +91,8 @@
                                 <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server" SupportsDisabledAttribute="True">
                                 </dx:PopupControlContentControl>
                             </ContentCollection>
-                            </dx:ASPxPopupControl>
-                                        
-                                        
-                                        
-                                        
-                                        </td>
+                   </dx:ASPxPopupControl>              
+                    </td>
                     <td with=10%>
                     
                         <asp:Label ID="lbl_cnt_comment" runat="server" Text='<%# Eval("xem") %>'></asp:Label>
@@ -117,13 +112,8 @@
                     <td with=25% align=left>
                     
                         <asp:HyperLink ID="link_comment" runat="server"></asp:HyperLink><br>
-                        <font size=-3>Trả lời bởi, 
-                        <asp:Label ID="_cm_by" runat="server" Text=""></asp:Label>, <asp:Label ID="lbl_date_time" runat="server" Text=""></asp:Label></font>
-
-                        
-
-
-
+                        <font size=-3><asp:Label ID="lbl_text" runat="server"></asp:Label>
+                        <asp:Label ID="_cm_by" runat="server" Text=""></asp:Label> <asp:Label ID="lbl_date_time" runat="server" Text=""></asp:Label></font>
                     </td>
                     </tr>
         </ItemTemplate>
@@ -137,7 +127,7 @@
 <FooterTemplate>
 <tr>
 <td>
-    <table cellpadding=3 cellspacing=3>
+    <table cellpadding=3 cellspacing=3 style="color:White">
     <tr>
     <td>
         <asp:Image ID="Image1" runat="server" ImageUrl="images/new_post.gif" /> Bài mới đăng

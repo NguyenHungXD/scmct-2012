@@ -10,13 +10,17 @@
         } else
             args.IsValid = true;
     }
+
+    function backs() {
+        window.location = "default.aspx";
+    }
 </script>
     <fieldset>
 <!--<legend>Đổi mật khẩu</legend> -->
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
-    <td align=center colspan=2>
-        <asp:Label ID="lbl_error" runat="server" ForeColor="#006600"></asp:Label>
+    <td align=center colspan=2><br>
+        <b><asp:Label ID="lbl_error" runat="server" Text="Sau khi đổi mật khẩu thành công bạn sẽ phải đăng nhập lại với mật khẩu mới"></asp:Label></b>
         </td>
     </tr>
     <tr>
@@ -25,7 +29,7 @@
         <br />
         <i>Truy cập lần cuối, <asp:Label ID="lbl_lasted_access" runat="server" ForeColor="White"></asp:Label></i>
         <br>
-        <asp:Label ID="lbl_group_name" runat="server" Text=""></asp:Label>
+        <b><asp:Label ID="lbl_group_name" runat="server" Text=""></asp:Label></b>
         <hr>
     </td>
     </tr>
@@ -87,21 +91,16 @@
                 <table border=0 cellpadding=3 cellspacing=3 width=20%>
                 <tr>
                 <td align=right>
-                    <dx:ASPxButton ID="btn_changepass" runat="server" Text="Đổi mật khẩu" 
-                        CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                        onclick="btn_changepass_Click" 
-                        SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px">
-                    </dx:ASPxButton>
+
+
+                    <asp:Button ID="Button2" runat="server" Text="Lưu thay đổi" class="btn" Height="25px" Width="120px" onclick="btn_changepass_Click"/>
+
                 </td>
                 <td align=left>
-                    <dx:ASPxButton ID="btn_back" runat="server" Text="Trở lại" 
-                        CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                        onclick="btn_back_Click" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
-                        Width="120px">
-                                             <ClientSideEvents Click="function(s, e) {
-                            window.location.href='default.aspx'
-                    }" />
-                    </dx:ASPxButton>
+
+                <input id="Button3" type="button" value="Hủy" onclick="backs();" style="width:120px;height:25px" class="btn"/>
+
+
                 </td>
                 </tr>
                 </table>

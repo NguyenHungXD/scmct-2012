@@ -166,42 +166,10 @@
         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ControlToValidate="dropd_status" Display="Dynamic" InitialValue="None" ForeColor="REd" runat="server" ErrorMessage="Chọn trạng thái"></asp:RequiredFieldValidator>
         
         
-        &nbsp;&nbsp;&nbsp;&nbsp<asp:LinkButton ID="btn_add_project_status" runat="server" 
-            Text="[Thêm trạng thái]" onclick="btn_add_project_status_Click"></asp:LinkButton>
+       
             
             
-            <asp:Panel
-                ID="panel_add_new_status" runat="server" BackColor="#0099FF" 
-            Direction="LeftToRight" Height="50px" HorizontalAlign="Left" 
-            style="margin-left: 102px" Width="500">
 
- 
-
-
-                <table border=0 cellpadding=3 cellspacing=3 width=20%>
-                <tr>
-                <td>
-                               <asp:TextBox ID="txt_status_project" runat="server" class="txtformat"
-    Width="300px" Height="22px" BackColor="#CCFFCC"></asp:TextBox>
-                </td>
-                <td align=right>
-                    <dx:ASPxButton ID="btn_add_stutus_names" runat="server" Text="Tạo mới" 
-                        CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
-                        SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" Width="80px" 
-                        onclick="btn_add_stutus_names_Click">
-                    </dx:ASPxButton>
-                </td>
-                <td align=left>
-                    <dx:ASPxButton ID="btn_close" runat="server" Text="Đóng" 
-                        CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
-                        onclick="btn_close_Click2" SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" 
-                        Width="80px">
-                    </dx:ASPxButton>
-                </td>
-                </tr>
-                </table>
-
-     </asp:Panel> 
         </td>
     </tr>
     <tr>

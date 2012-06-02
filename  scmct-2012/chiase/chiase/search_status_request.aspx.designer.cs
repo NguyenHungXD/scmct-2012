@@ -58,6 +58,15 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_created_by;
         
         /// <summary>
+        /// lbl_search_status_request control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_search_status_request;
+        
+        /// <summary>
         /// btn_search control.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,15 @@ namespace chiase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater status_list;
+        
+        /// <summary>
+        /// lbl_del_status_request control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_del_status_request;
         
         /// <summary>
         /// ASPxPopupControl1 control.

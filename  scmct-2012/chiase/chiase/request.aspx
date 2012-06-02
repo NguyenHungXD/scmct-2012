@@ -30,9 +30,13 @@
                 var windowIndex = 1;
                 var window = divpopup.GetWindow(windowIndex);
                 divpopup.SetWindowContentUrl(window, contentUrl);
-            
-                
-        }
+
+
+            }
+
+            function backs() {
+                window.location = "default.aspx";
+            }
     // ]]> 
     </script>
 
@@ -106,12 +110,26 @@
        <font color="white">Số ký tự bạn đã nhập(ký tự): <dx:ASPxLabel ID="lblContentLength" runat="server" ClientInstanceName="ContentLength" Text="0" Font-Bold="True"></dx:ASPxLabel></font>
             </td>
     </tr>
+     
+ <tr>
+    <td>
+    Dự án:
+    </td>
+    <td>
+       <asp:DropDownList ID="dropd_project" runat="server">
+        </asp:DropDownList>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" Display="Dynamic" ControlToValidate="dropd_project" ForeColor="Red" InitialValue="None" runat="server" ErrorMessage="Chọn dự án"></asp:RequiredFieldValidator>
+    </td>
+    </tr>
+
+
     <tr>
     <td>
     Yêu cầu:
     </td>
     <td>
 
+      
     
         <asp:DropDownList ID="dropd_request_kind" runat="server">
         </asp:DropDownList>
@@ -147,7 +165,7 @@
                     AllowDragging="True" AllowResize="True" ClientInstanceName="divpopup"
                             CloseAction="CloseButton" 
                             EnableViewState="False" PopupElementID='divdetail'
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
                             Height="600px" FooterText=""
                             HeaderText="" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
@@ -220,21 +238,12 @@
     </tr>
     <tr>
     <td align="right">
-        <dx:ASPxButton ID="btn_requests" runat="server" Text="Gửi yêu cầu" 
-            onclick="btn_request_Click" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
-            CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
-            Width="120px">
-        </dx:ASPxButton>
+        <asp:Label ID="lbl_create_new_request" runat="server">
+        <asp:Button ID="Button2" runat="server" Text="Gửi yêu cầu" class="btn" Height="25px" Width="120px" onclick="btn_request_Click"/>
+        </asp:Label>
     </td>
     <td>
-        <dx:ASPxButton ID="ASPxButton2" runat="server" Text="Đóng" 
-            onclick="btn_close_Click" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
-            CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
-            Width="120px">
-                    <ClientSideEvents Click="function(s, e) {
-                            window.location.href='default.aspx'
-                    }" />
-        </dx:ASPxButton>
+<input id="Button3" type="button" value="Hủy" onclick="backs();" style="width:120px;height:25px" class="btn"/>
     </td>
         
     </tr>

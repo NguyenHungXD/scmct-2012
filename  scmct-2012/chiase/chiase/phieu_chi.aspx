@@ -134,7 +134,7 @@
     <td colspan="3" align="center"><br>
         <p>
         <font size="5px"><b>PHẾU CHI</b></font><i> Số:<b> 
-            <asp:Label ID="lbl_mapc" runat="server" Text="Label"></asp:Label></b><br>
+            <asp:Label ID="lbl_mapc" runat="server" ></asp:Label></b><br>
         Ngày..<asp:Label ID="lbl_day" runat="server" Text=""></asp:Label>..tháng..<asp:Label ID="lbl_month" runat="server" Text=""></asp:Label>..năm <asp:Label ID="lbl_year" runat="server" Text=""></asp:Label></i><br>
             
         Quyển số:....................</i>
@@ -160,9 +160,9 @@
                     AllowDragging="True" AllowResize="True" ClientInstanceName="divpopup"
                             CloseAction="CloseButton" 
                             EnableViewState="False" PopupElementID='divdetail'
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
                             Height="600px" FooterText=""
-                            HeaderText="" 
+                            HeaderText="SCMCT-Thông tin chi tiết thành viên" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
                             CssPostfix="Aqua" LoadingPanelImagePosition="Top" 
                             SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
@@ -271,9 +271,13 @@
     </table>
 
     </table><p align="right">
+
+<asp:Label ID="lbl_create_new_pc" runat="server">
         <asp:Button ID="btn_save" runat="server" Text="Lưu phiếu chi" class="btn" 
-                Height="30px" Width="120px" onclick="btn_save_Click" />
-        <input id="Button2" type="button" value="Hủy" class="btn" style="width:100px;height:30px" onclick="return Button2_onclick()" />
+                Height="25px" Width="120px" onclick="btn_save_Click" />
+</asp:Label>
+
+        <input id="Button2" type="button" value="Hủy" class="btn" style="width:100px;height:25px" onclick="return Button2_onclick()" />
         </p>
 
 

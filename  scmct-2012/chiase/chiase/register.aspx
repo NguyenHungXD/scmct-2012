@@ -23,6 +23,9 @@
         } else
             args.IsValid = true;
     }
+    function backs() {
+        window.location = "default.aspx";
+    }
 </script>
 
 <fieldset>
@@ -44,7 +47,7 @@
     <td>
 
         <asp:TextBox ID="txt_user_name" runat="server"  class="txtformat" 
-            Width="200px" Height="22px"></asp:TextBox><font color=red>*</font>
+            Width="250px" Height="22px"></asp:TextBox><font color=red>*</font>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" 
             ControlToValidate="txt_user_name" runat="server" 
             ErrorMessage="Nhập tên đăng nhập" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
@@ -57,7 +60,7 @@
     Mật khẩu:
     </td>
     <td>
-        <asp:TextBox ID="txt_pass_word" runat="server"  class="txtformat"  Width="200px" 
+        <asp:TextBox ID="txt_pass_word" runat="server"  class="txtformat"  Width="250px" 
             Height="22px" TextMode="Password"></asp:TextBox><font color=red>*</font>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_pass_word" runat="server" ErrorMessage="Nhập mật khẩu"></asp:RequiredFieldValidator>
         <asp:CustomValidator ID="CustomValidator3" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Mật khẩu ít nhất 4 ký tự" ClientValidationFunction="ValidateLenMK"></asp:CustomValidator>
@@ -68,7 +71,7 @@
     Xác nhận mật khẩu:
     </td>
     <td>
-        <asp:TextBox ID="txt_pass_word_re" runat="server"  class="txtformat"  Width="200px" 
+        <asp:TextBox ID="txt_pass_word_re" runat="server"  class="txtformat"  Width="250px" 
             Height="22px" TextMode="Password"></asp:TextBox><font color=red>*</font>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_pass_word_re" runat="server" ErrorMessage="Xác nhận mật khẩu"></asp:RequiredFieldValidator>
         <asp:CompareValidator ID="CompareValidator1" runat="server" 
@@ -111,7 +114,6 @@
             <asp:ListItem Selected="True" Value="0">Nam</asp:ListItem>
             <asp:ListItem Value="1">Nữ</asp:ListItem>
         </asp:RadioButtonList>
-
         </td>
     </tr>
     <tr>
@@ -142,10 +144,19 @@
             Width="250px" Height="22px"></asp:TextBox>
         </td>
     </tr>
+    <tr>
+    <td>
+        Mã xác nhận:&nbsp 
+    </td>
+    <td><asp:Label ID="txt_random" runat="server" Text="" style="color:Yellow;font-weight:bold;font-size:x-large"></asp:Label>
+        <asp:TextBox ID="txt_confirm" style="color:Red;font-weight:bold;font-size:x-large" runat="server" class="txtformat" Width="80px" Height="27px"></asp:TextBox>
+          <asp:RequiredFieldValidator ID="RequiredFieldValidator5" Display="Dynamic" ForeColor="Red" ControlToValidate="txt_confirm" runat="server" ErrorMessage="Nhập mã xác nhận"></asp:RequiredFieldValidator>
+    </td>
+    </tr>
      <tr>
        <td colspan=2>
-    <asp:CheckBox ID="chk" runat="server"/><b><font color="ButtonHighlight">
-        Tôi đồng ý thỏa thuận thành viên của cổng thông tin CSMCT </font></b>- [<a href="#">Thỏa thuận</a>]
+    <asp:CheckBox ID="chk" ClientIDMode="Static" runat="server" /><label for="chk"><b><font color="ButtonHighlight">
+        Tôi đồng ý thỏa thuận thành viên của cổng thông tin CSMCT</label> </font></b>- [<a href="roles.aspx?id=3" target="_blank">Thỏa thuận</a>]
            <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="Bạn phải đồng ý thỏa thuận thành viên" ClientValidationFunction="ValidateChecked" ForeColor="#FF3300"></asp:CustomValidator>
            </td>
     </tr>
@@ -155,20 +166,19 @@
     <table cellpadding="0" cellspacing="3" border="0" width="80%">
     <tr>
     <td align="right">
-        <dx:ASPxButton ID="btn_registers" onclick="btn_register_Click" runat="server" 
-            Text="Đăng ký" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-            SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="100px">
-        </dx:ASPxButton>
+    <asp:Button ID="Button2" runat="server" Text="Đăng ký" class="btn" Height="25px" Width="120px" onclick="btn_register_Click"/>
+
+
         </td>
         <td>
 
-        <dx:ASPxButton ID="btn_closes" onclick="btn_close_Click1" runat="server" AutoPostBack="False" UseSubmitBehavior="False"
-                Text="Đóng" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="100px">
-                     <ClientSideEvents Click="function(s, e) {
-                            window.location.href='default.aspx'
-                    }" />
-        </dx:ASPxButton>
+            <input id="Button3" type="button" value="Hủy" onclick="backs();" style="width:120px;height:25px" class="btn"/>
+            
+
+
+
+
+
 
     </td>
     </tr>

@@ -80,7 +80,7 @@
     </script>
 
     <fieldset>
-    <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;">
+    <table border="0" cellpadding=3 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;">
         <tr style="color:White;font-weight:bold"><td colspan="8"><font size=3><p align="center">Tìm kiếm chủ đề</p></font><br>*-Bạn có thể bỏ qua điều kiện bạn không quan tâm.</td></tr>
 
 
@@ -158,15 +158,7 @@
         </td>
         </tr>
 
-        <tr>
-        <td >
-            Người tạo:
-            </td>
-            <td colspan="3">
-            <asp:TextBox ID="txt_created_by" runat="server" class="txtformat" Height="25px" 
-                    Width="250px"></asp:TextBox>
-            </td>
-            </tr>
+
             <tr>
             <td>
             Loại yêu cầu:
@@ -185,26 +177,26 @@
                 </asp:DropDownList>
         </td>
         </tr>
-        
+                <tr>
+        <td >
+            Người tạo:
+            </td>
+            <td colspan="3">
+            <asp:TextBox ID="txt_created_by" runat="server" class="txtformat" Height="25px" 
+                    Width="250px"></asp:TextBox>
+            </td>
+            </tr>
         <tr>
-        <td>&nbsp</td><td colspan="3">&nbsp
-        
-            <dx:ASPxButton ID="btn_search" runat="server" Text="Tìm kiếm" 
-                CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="149px" 
-                onclick="btn_search_Click" >
-            </dx:ASPxButton>
-        
+        <td>&nbsp</td><td colspan="3">&nbsp<br>
+        <asp:Label ID="lbl_search_request" runat="server">
+                <asp:Button ID="Button2" runat="server" Text="Tìm kiếm" class="btn" Height="25px" Width="120px" onclick="btn_search_Click"/>
+        </asp:Label>
         </td>
         </tr>
         </table>
 </fieldset>
 <hr>
-
-    <asp:Repeater ID="request_list" runat="server" 
-        onitemdatabound="request_list_ItemDataBound">
-    <HeaderTemplate>
-    <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;color:Black">
+   <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;color:Black">
         <tr bgcolor="#990099" style="color:White;font-weight:bold"><td align="center" colspan="7">Danh sách yêu cầu</td></tr>
         <tr class="new_post">
         <td width="10%">
@@ -231,12 +223,17 @@
             Trạng thái
         </td>
         </tr>
+    <asp:Repeater ID="request_list" runat="server" 
+        onitemdatabound="request_list_ItemDataBound">
+    <HeaderTemplate>
+ 
     </HeaderTemplate>
     <ItemTemplate>
         <tr bgcolor='#<%# Eval("bgcolors")%>'>
                 <td valign="middle" align="center">
             <%= no++ %>. 
-            <input name="chk" value="<%#Eval("yeu_cau_id") %>" type="checkbox" /> | <a style=cursor:pointer title='Sửa yêu cầu' onclick=update_request('<%#Eval("yeu_cau_id") %>')><img src=images/edit.gif width=20 height=20 alt='Cập nhật yêu cầu'>
+             <asp:Label ID="lbl_edit_request" runat="server"> <input name="chk" value="<%#Eval("yeu_cau_id") %>" type="checkbox" /> | 
+                   <a style=cursor:pointer title='Sửa yêu cầu' onclick=update_request('<%#Eval("yeu_cau_id") %>')><img src=images/edit.gif width=20 height=20 alt='Cập nhật yêu cầu'></asp:Label>
         </td>
         <td>
             <%# Eval("tieu_de")%>
@@ -251,37 +248,43 @@
             <%# Eval("ngay_yeu_cau","{0:dd/MM/yyyy hh:mm:ss tt}")%>
         </td>
         <td align="center">
-     
-            <asp:DropDownList ID="dropd_kind_request" runat="server" class="selects" onchange="updates(this,'1');">
-            </asp:DropDownList>
+            <asp:Label ID="lbl_edit_kind_request" runat="server">
+                <asp:DropDownList ID="dropd_kind_request" runat="server" class="selects" onchange="updates(this,'1');">
+                </asp:DropDownList>
+            </asp:Label>
+            <asp:Label ID="kind_request" runat="server" Text=""></asp:Label>
         </td>
      
 
 
 
         <td align="center">
+        <asp:Label ID="lbl_status_request" runat="server">
             <asp:DropDownList ID="dropd_status" runat="server" class="selects" onchange="updates(this,'2');">
             </asp:DropDownList>
-
+        </asp:Label>
+        <asp:Label ID="status_request" runat="server" Text=""></asp:Label>
         </td>
         </tr>
     </ItemTemplate>
     <FooterTemplate>
-    <tr>
+
+    </FooterTemplate>
+    </asp:Repeater>
+        <tr>
     <td colspan="6" style="color:white;font-weight:bold"><br>
         *-Yêu cầu có nền màu xám là yêu cầu đã xóa.<br>
         *-Chọn yêu cầu bạn muốn xóa.<br><br>
         <font color="ButtonHighlight" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
-
-        <input id="Button1" type="button" value="Xóa yêu cầu" class="btn" style="width:120px;height:30px" onclick="deletes('del')"/>
-        <input id="Button3" type="button" value="Phục hồi yêu cầu" class="btn" style="width:120px;height:30px" onclick="deletes('undel')"/>
-        <input id="Button2" type="button" value="Hủy" style="width:120px;height:30px" class="btn" onclick="backs();"/><br>&nbsp
+        <asp:Label ID="lbl_del_request" runat="server">
+            <input id="Button1" type="button" value="Xóa yêu cầu" class="btn" style="width:120px;height:25px" onclick="deletes('del')"/>
+            <input id="Button3" type="button" value="Phục hồi yêu cầu" class="btn" style="width:120px;height:25px" onclick="deletes('undel')"/>
+        </asp:Label>
+        <input id="Button1" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
         
     </td>
     </tr>
     </table>
-    </FooterTemplate>
-    </asp:Repeater>
      <table width="100%">
      <tr align="right">
     <td colspan=3 align=right style="color:White">
@@ -293,7 +296,7 @@
                     AllowDragging="True" AllowResize="True" ClientInstanceName="divpopup"
                             CloseAction="CloseButton" 
                             EnableViewState="False" PopupElementID='divdetail'
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
                             Height="680px" FooterText=""
                             HeaderText="Cập nhật yêu cầu" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 

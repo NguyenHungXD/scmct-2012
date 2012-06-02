@@ -21,6 +21,9 @@ namespace chiase
         {
             if(!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 display();
             
             }

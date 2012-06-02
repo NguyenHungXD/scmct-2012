@@ -71,8 +71,6 @@
             var windowIndex = 1;
             var window = divpopup1.GetWindow(windowIndex);
             divpopup1.SetWindowContentUrl(window, contentUrl);
-
-
             var url = "phieu_thu.aspx?id=" + obj.value + "&vmode=getdata_project";
             var content = getValXML(url);
             
@@ -178,7 +176,7 @@
                     AllowDragging="True" AllowResize="True" ClientInstanceName="divpopup"
                             CloseAction="CloseButton" 
                             EnableViewState="False" PopupElementID='divdetail'
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
                             Height="600px" FooterText=""
                             HeaderText="" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
@@ -370,9 +368,12 @@
     
     
     <p align="right" style="display: block;" id="btn_">
+        <asp:Label ID="lbl_create_new_pt" runat="server">
         <asp:Button ID="btn_save" runat="server" ClientIDMode="Static" Text="Lưu phiếu thu" class="btn"
-                Height="30px" Width="120px" onclick="btn_save_Click" />
-                <input id="Button2" type="button" value="Hủy" class="btn" style="width:100px;height:30px" onclick="return Button2_onclick()"/>
+                Height="25px" Width="120px" onclick="btn_save_Click" />
+        </asp:Label>
+
+                <input id="Button2" type="button" value="Hủy" class="btn" style="width:100px;height:25px" onclick="return Button2_onclick()"/>
         </p>
 
 

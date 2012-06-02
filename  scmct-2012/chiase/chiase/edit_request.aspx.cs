@@ -15,6 +15,10 @@ namespace chiase
         {
             if(!IsPostBack)
             {
+                //Check LogIn session
+                
+
+                lbl_edit_request.Visible = functions.checkPrivileges("14", functions.LoginMemID(this), "E");
                 ASPxHtmlEditor1.ClientSideEvents.Validation = "ValidationHandler";
                 display();
             }
@@ -30,6 +34,16 @@ namespace chiase
                 DataTable table_request_kind = YC_DM_LOAI_YEU_CAU.GetTableFields(YC_DM_LOAI_YEU_CAU.cl_ID, YC_DM_LOAI_YEU_CAU.cl_TEN_LOAI_YC);
                 functions.fill_DropdownList(dropd_request_kind, table_request_kind, 0, 1);
                 functions.selectedDropdown(dropd_request_kind, table_detail.Rows[0]["loai_yc_id"].ToString());
+
+
+                String sql_project = @"select a.*,b.name 
+                            from da_du_an a 
+                            inner join DA_DM_TRANG_THAI_DU_AN b on a.TRANG_THAI_ID = B.ID where b.id in (2,3) and a.Enable_bit='Y' order by b.id";
+                DataTable dt = SQLConnectWeb.GetData(sql_project);
+
+                functions.fill_DropdownList(dropd_project, dt, 0, 1);
+                functions.selectedDropdown(dropd_project, table_detail.Rows[0]["du_an_id"].ToString());
+
             }
             catch
             { 

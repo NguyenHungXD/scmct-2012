@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeBehind="Default.aspx.cs" Inherits="chiase._Default" %>
+    CodeBehind="default.aspx.cs" Inherits="chiase._Default" %>
+        <%@ Register Assembly="DevExpress.Web.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
+    Namespace="DevExpress.Web.ASPxPopupControl" TagPrefix="dx" %>
+
  <asp:Content ID="Content1" ContentPlaceHolderID="content_slider" Runat="Server">
 
  <script type="text/javascript">
@@ -9,6 +12,16 @@
          loadXMLUpdate(url);
          document.getElementById(divid).innerHTML = val + 1;
      }
+
+     function return_link(val) {
+
+         var contentUrl = "join_project.aspx?id=" + val;
+         alert(contentUrl);
+         var windowIndex = 1;
+         var window = divpopup.GetWindow(windowIndex);
+         divpopup.SetWindowContentUrl(window, contentUrl);
+     }
+
 </script>
      
      <div id="templatemo_slider">
@@ -31,7 +44,7 @@
            <ItemTemplate>
             <div id='<%#Eval("ID","fragment-{0}") %>' class="ui-tabs-panel" style="">
 				<img src='<%#Eval("img_path") %>' width="580" height="250" alt="" />
-				<div class="info" >
+				<div class="info">
 					<h2><a href='<%#Eval("post_id","post_show_details.aspx?news_id={0}") %>' ><%#Eval("title") %></a></h2>
 					<p><%#Eval("contents") %>....<a href='<%#Eval("post_id","post_show_details.aspx?news_id={0}") %>'>[Đọc thêm]</a></p>
 				</div>
@@ -41,8 +54,10 @@
 		</div>
 </div> <!-- end of templatemo_slider -->
 </asp:Content>
-
 <asp:Content ID="register" ContentPlaceHolderID="content_area" Runat="Server">
+
+
+
     <asp:Repeater ID="showListProject" runat="server" 
         onitemdatabound="showListProject_ItemDataBound">
         <HeaderTemplate>
@@ -112,7 +127,27 @@
                         Số sách cần quyên góp cho dự án: <b><%#Eval("BOOK")%></b> quyển
                     </td>
                     <td rowspan=7 align=right>
-                        <a href="request.aspx" class="btn_admin">Tặng sách</a>  <a href="#" class="btn_admin">Tham gia dự án</a> <a href='<%#Eval("ID","post_news.aspx?projectID={0}")%>' class="btn_admin">Viết bài</a>  <a href="show_allbum.aspx" class="btn_admin">Hình ảnh</a>
+                        <a href="<%#Eval("ID","request.aspx?id={0}")%>" class="btn_admin">Tặng sách</a>  <a class="btn_admin" id='<%#Eval("id","divpopup{0}") %>'>Tham gia dự án</a> <a href='<%#Eval("ID","post_news.aspx?projectID={0}")%>' class="btn_admin">Viết bài</a>  <a href='<%#Eval("id","show_allbum.aspx?projectid={0}") %>' class="btn_admin">Hình ảnh</a>
+                    
+                    <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" ContentUrl='<%#Eval("id","join_project.aspx?id={0}")%>'
+                    AllowDragging="True" AllowResize="True"
+                            CloseAction="CloseButton" 
+                            EnableViewState="False" PopupElementID='<%#Eval("id","divpopup{0}") %>'
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
+                            Height="700px" FooterText=""
+                            HeaderText="Gửi yêu cầu tham gia dự án" 
+                            EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
+                            CssPostfix="Aqua" LoadingPanelImagePosition="Top" 
+                            SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
+                            <LoadingPanelImage Url="~/App_Themes/Aqua/Web/Loading.gif">
+                            </LoadingPanelImage>
+                            <ContentStyle VerticalAlign="Top">
+                            </ContentStyle>
+                            <ContentCollection>
+                                <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server" SupportsDisabledAttribute="True">
+                                </dx:PopupControlContentControl>
+                            </ContentCollection>
+                            </dx:ASPxPopupControl>
                     </td>
                     </tr>
                     <tr>
@@ -122,17 +157,17 @@
                     </tr>
                     <tr>
                     <td class="link_format"><asp:Image ID="Image2" runat="server" ImageUrl="images/heart.gif" width="10" Height="10"/>
-                        Danh sách quyên góp: [<a href="#" >xem</a>]
+                        Danh sách quyên góp: [<a href="#" target="_blank">xem</a>]
                     </td>
                     </tr>
                     <tr>
                     <td class="link_format"><asp:Image ID="Image4" runat="server" ImageUrl="images/heart.gif" width="10" Height="10"/>
-                        Danh sách tham gia dự án: [<a href='<%#Eval("ID","member_list_project.aspx?id={0}")%>' >xem</a>]
+                        Danh sách tham gia dự án: [<a href='<%#Eval("ID","member_list_project.aspx?id={0}")%>' target="_blank">xem</a>]
                     </td>
                     </tr>
                     <tr>
                     <td class="link_format"><asp:Image ID="Image5" runat="server" ImageUrl="images/heart.gif" width="10" Height="10"/>
-                        Báo cáo tổng kết dự án: [<a href="#" >xem</a>]
+                        Báo cáo tổng kết dự án: [<a href="#" target="_blank">xem</a>]
                     </td>
                     </tr>
                     <tr>
@@ -146,7 +181,9 @@
                      </table>
         </ItemTemplate>
         <FooterTemplate>
-       
+       <div style="height:1px">&nbsp</div>
         </FooterTemplate>
+        
         </asp:Repeater>   
+
 </asp:Content>

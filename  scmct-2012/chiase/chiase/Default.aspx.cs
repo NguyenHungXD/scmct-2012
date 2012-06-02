@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using chiase.Objects;
 using DK2C.DataAccess.Web;
+using System.Web;
 
 namespace chiase
 {
@@ -16,9 +16,13 @@ namespace chiase
         {
             if(!IsPostBack)
             {
+
+
+                
                display();
                Session["current"] = "1"; //[1.Trang chu 2.Dien Dan 3.Hinh Anh 4.Gui Yeu Cau 5.Gioi Thieu 6.Lien He 7.Quan Tri]
                Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a>";
+               
             }
         }
 
@@ -28,7 +32,7 @@ namespace chiase
             {
                 String sql = @"select a.*,b.name 
                             from da_du_an a 
-                            inner join DA_DM_TRANG_THAI_DU_AN b on a.TRANG_THAI_ID = B.ID where b.id in (2,3) order by b.id";
+                            inner join DA_DM_TRANG_THAI_DU_AN b on a.TRANG_THAI_ID = B.ID where b.id in (2,3) and a.Enable_bit='Y' order by b.id";
                 DataTable table = SQLConnectWeb.GetData(sql);
 
                 showListProject.DataSource = table;

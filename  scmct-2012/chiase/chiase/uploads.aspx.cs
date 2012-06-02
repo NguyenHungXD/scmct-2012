@@ -21,6 +21,9 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 if (Request.QueryString["allbumid"] == null)
                 {
                     txt_allbum_name.Text = "Allbum ảnh " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");

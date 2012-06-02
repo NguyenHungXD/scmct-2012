@@ -64,14 +64,14 @@
     <td>
     Mã dự án:
     </td>
-    <td colspan="5">
-    <asp:TextBox ID="txt_maduan" runat="server" class="txtformat" Height="25px"></asp:TextBox>
-
-    &nbsp;&nbsp;
-
-    Tên dự án:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
-
-    <asp:TextBox ID="txt_tenduan" runat="server" class="txtformat" Height="25px" Width="372px"></asp:TextBox>
+    <td>
+    <asp:TextBox ID="txt_maduan" runat="server" class="txtformat" Height="25px" Width="250"></asp:TextBox>
+    </td>
+    <td>
+    Tên dự án:
+    </td>
+    <td>
+    <asp:TextBox ID="txt_tenduan" runat="server" class="txtformat" Height="25px" Width="250"></asp:TextBox>
     </td>
     </tr>
     
@@ -79,12 +79,8 @@
     <td>
         Ngày bắt đầu:
     </td>
-    <td colspan="5">
-
-        <table cellpadding="0" cellspacing="0" border="0" width="55%">
-        <tr>
-        <td style="width: 123px">
-        <dx:ASPxDateEdit ID="start_date" runat="server" Width="150px" 
+    <td>
+        <dx:ASPxDateEdit ID="start_date" runat="server" Width="250" 
             ClientInstanceName="clientEdtStart" Height="25px"
             CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
             ShowShadow="False" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" EditFormat="Custom" EditFormatString="dd/MM/yyyy">
@@ -106,12 +102,13 @@
             </ValidationSettings>
         </dx:ASPxDateEdit>
         </td>
+
         <td>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp
         Ngày kết thúc:
         </td>
+
         <td>
-        <dx:ASPxDateEdit ID="end_date" runat="server" Width="150px" 
+        <dx:ASPxDateEdit ID="end_date" runat="server" Width="250"
             ClientInstanceName="clientEdtEnd" Height="25px"
             CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
             ShowShadow="False" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" EditFormat="Custom" EditFormatString="dd/MM/yyyy">
@@ -134,16 +131,14 @@
                             </dx:ASPxDateEdit>
             </td>
             </tr>
-            </table>
 
-            </td>
-    </tr>
+
     <tr>
     <td>
     Trạng thái:
     </td>
-    <td colspan="3">
-        <asp:DropDownList ID="dropd_status" runat="server" Height="25px" Width="150px">
+    <td>
+        <asp:DropDownList ID="dropd_status" runat="server" Height="25px" Width="250">
         </asp:DropDownList>
     </td>
     </tr>
@@ -151,26 +146,28 @@
     <td>&nbsp
     </td>
     <td align="left"><br>
-            <dx:ASPxButton ID="btn_search" runat="server" Text="Tìm kiếm" 
-                    CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" Width="120px" Height="25px"
-                    SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
-            onclick="btn_search_Click">
-            </dx:ASPxButton>
+        
+        
+
+            <asp:Panel ID="pn_view_project" runat="server"><asp:Button ID="Button2" runat="server" Text="Tìm kiếm" class="btn" Height="25px" Width="120px" onclick="btn_search_Click"/></asp:Panel>
+
     </td>
     <td colspan="2">&nbsp
     </td>
     </tr>
 </table>
+
 </fieldset>
 <fieldset>
 <!--<legend><b><font size=2 color=white>Danh sách dự án</font></b></legend>-->
- <p align="right"><a style="cursor:pointer" class="btn" id="new_project" title="Tạo dự án mới">Tạo dự án mới</a></p>
-
+    <asp:Panel ID="pn_create_new_project" runat="server">
+ <p align="right"><a style="cursor:pointer;height:25px;width:120px;font-weight:bold" class="btn" id="new_project" title="Tạo dự án mới">Tạo dự án mới</a></p>
+  </asp:Panel>
                  <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" 
                     AllowDragging="True" AllowResize="True"
                             CloseAction="CloseButton" ContentUrl="create_new_project.aspx"
                             EnableViewState="False" PopupElementID="new_project"
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
                             Height="738px" FooterText=""
                             HeaderText="" ClientInstanceName="FeedPopupControl" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
@@ -181,14 +178,13 @@
                             <ContentStyle VerticalAlign="Top">
                             </ContentStyle>
                             <ContentCollection>
-                                <dx:PopupControlContentControl ID="PopupControlContentControl1" runat="server" SupportsDisabledAttribute="True">
-                                </dx:PopupControlContentControl>
+  
                             </ContentCollection>
                             </dx:ASPxPopupControl>
 
 
 
-<asp:Repeater ID="showListProject" runat="server" >
+<asp:Repeater ID="showListProject" runat="server"  onitemdatabound="showListProject_ItemDataBound1">
         <HeaderTemplate>
         <table border="0" cellpadding="2" cellspacing="1" width="60%"  style="border:0px solid #CCFFFF;"><tr>
         <td valign="middle" align="center"><img src="images/edit.gif" width="25" height="25">: Sửa</td>
@@ -222,13 +218,25 @@
         </tr>
         </HeaderTemplate>
         <ItemTemplate>
-                    <tr class="new_post_details">
+                    <tr style="background-color:white;color:Black">
                     <td with=5% valign="middle" align="center" >
                         <table cellpadding=1 cellspacing=1 border=0><tr>
-                        <td id='<%#Eval("MA_DU_AN","add_mem{0}")%>'><a style="cursor:pointer" title="Thêm thành viên cho dự án"><img src="images/add_member.png" width="20" height="20"></a></td>
-                        <td><a style="cursor:pointer" title="Cập nhật"><img src="images/edit.gif" width="20" height="20" alt="Cập nhật dự án"/ id='<%#Eval("MA_DU_AN")%>'></a></td>
-                        <td id=<%# Eval("id","'idlock{0}'")%>><a style="cursor:pointer" title='<%#Eval("img_lock_alt")%>'><img src=<%#Eval("img_lock","images/{0}")%> width="20" height="20" alt=""  onclick="lock_project(<%# Eval("id")%>,<%# Eval("enable_bit","'{0}'")%>,<%# Eval("id","'idlock{0}'")%>)"/></a></td>
-                        <td id=<%# Eval("id","'iddel{0}'")%> ><a style="cursor:pointer" title='<%#Eval("img_del_alt")%>'><img src=<%#Eval("img_del","images/{0}")%> width="20" height="20" alt="" onclick="del_project(<%# Eval("id")%>,<%# Eval("enable_bit","'{0}'")%>,<%# Eval("id","'iddel{0}'")%>,<%# Eval("id","'idlock{0}'")%>)" /></a></td>
+                            
+
+                            <td id='<%#Eval("MA_DU_AN","add_mem{0}")%>'><asp:Label ID="lbl_add_member" runat="server" ><a style="cursor:pointer" title="Thêm thành viên cho dự án"><img src="images/add_member.png" width="20" height="20"></a></asp:Label></td>
+                        
+                        
+                            <td><asp:Label ID="lbl_edit_project" runat="server" > <a style="cursor:pointer" title="Cập nhật"><img src="images/edit.gif" width="20" height="20" alt="Cập nhật dự án"/ id='<%#Eval("MA_DU_AN")%>'></a> </asp:Label> </td>
+                        
+
+                        
+                            <td id=<%# Eval("id","'idlock{0}'")%>> <asp:Label ID="lbl_lock_project" runat="server" > <a style="cursor:pointer" title='<%#Eval("img_lock_alt")%>'><img src=<%#Eval("img_lock","images/{0}")%> width="20" height="20" alt=""  onclick="lock_project(<%# Eval("id")%>,<%# Eval("enable_bit","'{0}'")%>,<%# Eval("id","'idlock{0}'")%>)"/></a></asp:Label></td>
+                        
+                        
+                            <td id=<%# Eval("id","'iddel{0}'")%> > <asp:Label ID="lbl_del_project" runat="server" > <a style="cursor:pointer" title='<%#Eval("img_del_alt")%>'><img src=<%#Eval("img_del","images/{0}")%> width="20" height="20" alt="" onclick="del_project(<%# Eval("id")%>,<%# Eval("enable_bit","'{0}'")%>,<%# Eval("id","'iddel{0}'")%>,<%# Eval("id","'idlock{0}'")%>)" /></a></asp:Label></td>
+                        
+
+                            
                         </tr>
                         </table>
 
@@ -236,7 +244,7 @@
                     AllowDragging="True" AllowResize="True"
                             CloseAction="CloseButton" ContentUrl="add_member_project.aspx"
                             EnableViewState="False" PopupElementID='<%#Eval("MA_DU_AN","add_mem{0}")%>'
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="1000px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="1000px"
                             Height="738px" FooterText=""
                             HeaderText="" ClientInstanceName="FeedPopupControl" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
@@ -255,7 +263,7 @@
                          <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" AllowDragging="True" AllowResize="True"
                             CloseAction="CloseButton" ContentUrl='<%#Eval("id","edit_project.aspx?id={0}") %>'
                             EnableViewState="False" PopupElementID='<%#Eval("MA_DU_AN")%>'
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
                             Height="748px" FooterText=<%#Eval("TEN_DU_AN","{0}") %>
                             HeaderText='<%#Eval("MA_DU_AN","Dự án: {0}") %>' ClientInstanceName="FeedPopupControl" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
@@ -275,9 +283,9 @@
                          </dx:ASPxPopupControl>
                      </td>
                     <td with=5% valign=middle align="center">
-                    <%#Eval("MA_DU_AN")%>
+                    <b><%#Eval("MA_DU_AN")%></b>
                     <br>
-                    <asp:HyperLink ID="link_more" runat="server" Text="Xem chi tiết" Target="_blank" NavigateUrl='<%#Eval("id","project_detail.aspx?id={0}") %>' style="cursor:pointer;"></asp:HyperLink>
+                    <asp:HyperLink ID="link_more" runat="server" Text="Xem chi tiết" Target="_blank" NavigateUrl='<%#Eval("id","project_detail.aspx?id={0}") %>' style="cursor:pointer;color:Blue"></asp:HyperLink>
                     </td>
                     <td with=10% valign=middle align="center">
                     <%#Eval("TEN_DU_AN")%>

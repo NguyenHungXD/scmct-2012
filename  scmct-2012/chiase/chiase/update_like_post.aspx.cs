@@ -14,6 +14,9 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 if (Request.QueryString["mode"] == "2")
                     update_liked_project();
                 else if (Request.QueryString["mode"] == "3")

@@ -8,7 +8,31 @@
         window.location = "update_allbum.aspx?allbum_id=" + id;
     }
 
-
+    function checkalls(div)
+    {
+        var obj = document.forms["chiase"];
+        var divid = document.getElementById(div);
+        if (obj.chk_del.length > 0) 
+        {
+            if (divid.checked == true) {
+                    for (i = 0; i < obj.chk_del.length; i++) 
+                    {
+                        obj.chk_del[i].checked = true;
+                        }
+                    }else{
+                       for (i = 0; i < obj.chk_del.length; i++) {
+                           obj.chk_del[i].checked = false;
+                        }
+                    }
+                }
+                else {
+                    if (divid.checked == true)
+                        obj.chk_del.checked = true;
+                    else
+                        obj.chk_del.checked = false;
+                }
+     }
+    
 
     function save_info() {
 
@@ -56,10 +80,17 @@ Allbum:<b> <%= allbumname%></b><br>
 Chi tiết: <b><%= allbum_description%></b>
 <br>
 <hr>
-<fieldset style="background-color:white">
+<fieldset style="background-color:white;color:Blue">
 <asp:Repeater ID="showListimg" runat="server" >
         <HeaderTemplate>
-        <table cellpadding="3" cellspacing="3" border="0" width="100%">
+        <table cellpadding="3" cellspacing="1" border="0" width="90%">
+        <tr bgcolor="#A619CF" style="color:White">
+        <td colspan="3">
+        </td>
+        <td align="left">
+        <input style="cursor:pointer" id="delall" type="checkbox" onclick="checkalls('delall');" /><label for="delall"><b>Xóa tất cả</b></label>
+        </td>
+        </tr>
         </HeaderTemplate>
         <ItemTemplate>
         <tr>
@@ -69,18 +100,33 @@ Chi tiết: <b><%= allbum_description%></b>
         <td>
         Chi tiết ảnh:<br>
             <textarea id="txt_title" rows="2" cols="50" class="txtformat_area"><%#Eval("title") %></textarea>
-            <input name="rd_mainimg" id="<%#Eval("img_id") %>" type="radio" value="<%= allbumid %>"/> <label for="<%#Eval("img_id") %>">Làm ảnh bìa allbum</label> | <input name="chk_del" id="<%#Eval("img_id","chk{0}") %>" type="checkbox" value="<%#Eval("img_id") %>"/><label for="<%#Eval("img_id","chk{0}") %>">Xóa ảnh</label>
+        </td>
+        <td><br>
+            <input style="cursor:pointer" name="rd_mainimg" id="<%#Eval("img_id") %>" type="radio" value="<%= allbumid %>"/> <label for="<%#Eval("img_id") %>">Làm ảnh bìa allbum</label> 
+        </td>
+        <td><br>
+            <input style="cursor:pointer" name="chk_del" id="<%#Eval("img_id","chk{0}") %>" type="checkbox" value="<%#Eval("img_id") %>"/><label for="<%#Eval("img_id","chk{0}") %>">Xóa ảnh</label>
         </td>
         </tr>
         </ItemTemplate>
         <FooterTemplate>
-        <tr><td colspan="3" id="divinfo" align="center"><br>&nbsp</td></tr>
+                <tr bgcolor="#A619CF" style="color:White">
+        <td colspan="3">
+        </td>
+        <td align="left">
+        <input style="cursor:pointer"  id="delall1" type="checkbox" onclick="checkalls('delall1');" /><label for="delall1"><b>Xóa tất cả</b></label>
+        </td>
+        </tr>
+        <tr><td colspan="3" id="Td1" align="left"><font color=red>*-Allbum không có ảnh sẽ tự động xóa khỏi hệ thống</font></td></tr>
+        <tr><td colspan="3" id="divinfo" align="center">&nbsp</td></tr>
+
+        
         <tr>
         <td align="right">
-            <input id="Button1" type="button" value="Lưu thông tin" class="btn" style="width:120px;height:30px" onClick="save_info()"/>
+            <input id="Button1" type="button" value="Lưu thông tin" class="btn" style="width:120px;height:25px" onClick="save_info()"/>
         </td>
         <td>
-            <input id="Button2" type="button" value="Bỏ qua" class="btn" style="width:120px;height:30px" onClick="close_page('<%=allbumid %>')"/>
+            <input id="Button2" type="button" value="Bỏ qua" class="btn" style="width:120px;height:25px" onClick="close_page('<%=allbumid %>')"/>
         </td>
         </tr>
         </table>

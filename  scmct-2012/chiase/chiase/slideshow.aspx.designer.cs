@@ -67,6 +67,15 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblContentLength;
         
         /// <summary>
+        /// lbl_comment_allbum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_comment_allbum;
+        
+        /// <summary>
         /// btn_comments control.
         /// </summary>
         /// <remarks>
@@ -76,12 +85,12 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_comments;
         
         /// <summary>
-        /// btn_back control.
+        /// lbl_text control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_back;
+        protected global::System.Web.UI.WebControls.Label lbl_text;
     }
 }

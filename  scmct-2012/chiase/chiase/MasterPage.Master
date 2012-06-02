@@ -37,11 +37,11 @@
 <div id="templatemo_headers_flash">
 <embed src="flash/hieuung.swf" width="800" height="100" wmode="transparent" align="left"> 
 </div>
-
+<!--
 <div id="templatemo_header_flash">
-<!--<embed src="Flash/header.swf" width="400" height="500" wmode="transparent" align="left"> -->
+<embed src="Flash/header.swf" width="400" height="500" wmode="transparent" align="left">
 </div> 
-
+-->
     <div id="templatemo_header">
     	<div id="site_title">
         
@@ -49,21 +49,30 @@
         </div> <!-- end of site_title -->
 		<div id="templatemo_login" class="textformat">
             <asp:MultiView ID="MultiView1" runat="server">
-                <asp:View ID="View1" runat="server">
-                     Tài khoản:<asp:TextBox ID="txtUserID" runat="server" class="txtformat" 
-                         Width="95px"></asp:TextBox>
-                    &nbsp;Mật khẩu:<asp:TextBox ID="txtPassWord" runat="server" class="txtformat" 
-                         Width="95px" TextMode="Password"></asp:TextBox>
 
+            <asp:View ID="View1" runat="server">
+            <table cellpadding="3" cellspacing="1" border="0">
+            <tr>
+            <td>
+                     Tài khoản:<asp:TextBox ID="txtUserID" runat="server" class="txtformat" 
+                         Width="95px" Height="18px"></asp:TextBox>
+                    &nbsp;Mật khẩu:<asp:TextBox ID="txtPassWord" runat="server" class="txtformat" 
+                         Width="95px" TextMode="Password" Height="18px"></asp:TextBox>
                     <asp:Button ID="btn_login" runat="server" Text="Đăng nhập" 
-                         onclick="btn_login_Click1" class="btnformat" Height="20px" Width="90px"/>
-                    <asp:CheckBox ID="chk_remember" runat="server" checked="true"/>Ghi nhớ
-                
-                    <br>
+                         onclick="btn_login_Click1"  Height="20px" Width="90px" 
+                         style="font-size: 10px;cursor: pointer;" class="btn"/>
+                    <asp:CheckBox ID="chk_remember" runat="server" checked="true" /> Nhớ
+            </td>
+            </tr>
+            <tr> 
+            <td>   
                     <!--<p align=center>Quên mật khẩu ? | Đăng ký</p>-->
                     <p align=right><b><font color=red size=-2><asp:Label ID="lblError" runat="server" ForeColor="#FF3300"></asp:Label></b></font> <asp:HyperLink ID="link_forget_pass" runat="server" 
                 Text="Quên mật khẩu?" NavigateUrl="forget_password.aspx"></asp:HyperLink> | 
                         <asp:HyperLink ID="register_link" runat="server" Text="Đăng ký" NavigateUrl="~/register.aspx" title="Đăng ký thành viên"></asp:HyperLink>&nbsp</p>
+            </td>
+            </tr>
+            </table>
                 </asp:View>
                 <asp:View ID="View2" runat="server">
                    <table cellpadding=1 cellspacing=3 border=0 width=100%>
@@ -78,7 +87,7 @@
                     <tr>
                     <td align=center>
                     <p align=center class="textformat"> 
-                        <asp:HyperLink ID="link_member_page" runat="server" Text="Trang của tôi" NavigateUrl="index.aspx"></asp:HyperLink> | <asp:HyperLink ID="update_profile" runat="server" Text="Cập nhật thông tin cá nhân"  NavigateUrl="~/edit_profile.aspx"></asp:HyperLink> | 
+                        <asp:HyperLink ID="link_member_page" runat="server" Text="Trang của tôi" NavigateUrl="my_page.aspx?id="></asp:HyperLink> | <asp:HyperLink ID="update_profile" runat="server" Text="Cập nhật thông tin cá nhân"  NavigateUrl="~/edit_profile.aspx"></asp:HyperLink> | 
                         <asp:HyperLink ID="link_changepass" runat="server" Text="Đổi mật khẩu" NavigateUrl="change_password.aspx" title="Đổi mật khẩ"></asp:HyperLink> | 
                         <asp:LinkButton ID="logout" runat="server" onclick="logout_Click">Thoát</asp:LinkButton> </p>
                     </td>
@@ -91,15 +100,19 @@
 
         <div id="templatemo_menu">
         <ul class=blue>
-	        <li><a href="default.aspx" title="Trang chủ" class="current"><span>Trang chủ</span></a></li>
-            <li><a href="forum.aspx" title="Diễn đàn"><span>Diễn đàn</span></a></li>
-            <li><a href="show_allbum.aspx" title="Hình ảnh"><span>Hình ảnh</span></a></li>
-            <li><a href="request.aspx" title="Gửi yêu cầu"><span>Gửi yêu cầu</span></a></li>
-            <li><a href="#" title="Giới thiệu"><span>Giới thiệu</span></a></li>
-            <li><a href="#" title="Liên hệ"><span>Liên hệ</span></a></li>
-            <li><a href="admin.aspx" title="Quản trị"><span>Quản trị</span></a></li>
+	        <li><a href="default.aspx" title="Trang chủ" class='<%if(Session["current"]=="1"){%>current'<%}else{%>no'<%}%> ><span>Trang chủ</span></a></li>
+            <li><a href="forum.aspx" title="Diễn đàn" class='<%if(Session["current"]=="2"){%>current'<%}else{%>no'<%}%> ><span>Diễn đàn</span></a></li>
+            <li><a href="show_allbum.aspx" title="Hình ảnh" class='<%if(Session["current"]=="3"){%>current'<%}else{%>no'<%}%> ><span>Hình ảnh</span></a></li>
+            <li><a href="request.aspx" title="Gửi yêu cầu" class='<%if(Session["current"]=="4"){%>current'<%}else{%>no'<%}%>><span>Gửi yêu cầu</span></a></li>
+            <li><a href="roles.aspx?id=1" title="Giới thiệu" class='<%if(Session["current"]=="5"){%>current'<%}else{%>no'<%}%>><span>Giới thiệu</span></a></li>
+            <li><a href="roles.aspx?id=4" title="Liên hệ" class='<%if(Session["current"]=="6"){%>current'<%}else{%>no'<%}%>><span>Liên hệ</span></a></li>
+            <li><a href="roles.aspx?id=2" title="Trợ giúp" class='<%if(Session["current"]=="8"){%>current'<%}else{%>no'<%}%>><span>Trợ giúp</span></a></li>
+            <li><asp:Panel ID="pn_admin" runat="server" Visible="false"><a href="admin.aspx" title="Quản trị" class='<%if(Session["current"]=="7"){%>current'<%}else{%>no'<%}%>><span>Quản trị</span></a> </asp:Panel></li>
         </ul>
+            
+            
         </div> <!-- end of templatemo_menu -->
+
     </div> <!-- end of templatemo_header -->
 </div>  <!-- end of templatemo_header_main -->
  <div id="templatemo_wrapper_outer">
@@ -109,89 +122,89 @@
 	<div id="footer_top1">&nbsp 
     </div>	
     <div id="templatemo_content">
+    <div style="background-color:White;border:0px; margin-bottom:3px;" class="link_back">
+
+    <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td valign="middle" align="left"><image src="images/home_page.png" width="30" height="20"> <%= Session["current_link"] %></td><td width="60%"><MARQUEE onmouseover="this.stop();" onmouseout="this.start();">Chào mừng bạn đến với SCMCT online - Cổng quyên góp sách cho miền cát trắng - Chung tay chấp cách những ước mơ...<a href="register.aspx"><i><font size=-1 color="red">tham gia ngay</font></i></a>...</MARQUEE></td></tr></table>
+    
+    </div>
+
      <asp:ContentPlaceHolder ID="content_area" runat="server">
+     
     </asp:ContentPlaceHolder>
     <div class="cleaner"></div>
     </div> <!--End div content-->
    
    
-	<div class="cleaner"></div>
+	
 <!--</div> -->
 <!--</div> -->
 
 <div id="templatemo_footer_wrapper">
-	<div id="footer_top"></div>
+
 	
-	<div id="templatemo_footer">
+	<div id="templatemo_footer" >
         
-        <table border=0 cellpadding=0 cellspacing=0 width=100%>
-        <tr valign=top>
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="bottom_ses" >
+        <tr valign=top width="25%">
         <td>
-            <h5>Chia sẽ cộng đồng</h5>
-            <p>SCMCT Online trên các trang xã hội</p><BR>
-
-                <a href="http://www.facebook.com/templatemo" title="Zing Me"><img src="images/zing_logo.gif" alt="Zing Me" width=80 height=30/></a>
-                <a href="http://www.facebook.com/templatemo" title="Facebook"><img src="images/facebook.png" alt="Facebook" width=30 height=30 /></a>
-                <a href="http://www.facebook.com/templatemo" title="Google Plus"><img src="images/googleplus.gif" alt="Goolge Plus" width=80 height=30 /></a>      
-
+            <h5  >Chia sẻ cộng đồng</h5>
+            <p  >SCMCT Online trên các trang xã hội</p><BR>
+                <a href="http://www.facebook.com" title="Zing Me"><img src="images/zing_logo.gif" alt="Zing Me" width=80 height=30/></a>
+                <a href="http://www.facebook.com" title="Facebook"><img src="images/facebook.png" alt="Facebook" width=30 height=30 /></a>
+                <a href="http://www.facebook.com" title="Google Plus"><img src="images/googleplus.gif" alt="Goolge Plus" width=80 height=30 /></a>      
         </td>
-        <td>
-  
-            <h5>SCMCT Online</h5>
+        <td width="25%">
+            <h5  >SCMCT Online</h5>
             <ul class="tmo_list">
                 <li><a href="default.aspx">Trang chủ</a></li>
                 <li><a href="forum.aspx">Diễn đàn</a></li>
                 <li><a href="request.aspx">Gửi yêu cầu</a></li>
-                <li><a href="#">Giới thiệu</a></li>
-                <li><a href="#">Liên hệ</a></li>
+                <li><a href="roles.aspx?id=1">Giới thiệu</a></li>
+                <li><a href="roles.aspx?id=2">Trợ giúp</a></li>
+                <li><a href="contact.aspx">Liên hệ</a></li>
               
             </ul>  
         </td>
-        <td>
+        <td width="25%">
         
         <div class="col_w220">
-            <h5>SCMCT Hoạt động</h5>
+            <h5  >SCMCT Hoạt động</h5>
 			<ul class="tmo_list">
-                <li><a href="http://www.templatemo.com">Hình ảnh offline</a></li>
-                <li><a href="http://www.koflash.com">Video offline</a></li>
+                <li><a href="show_allbum.aspx">Hình ảnh offline</a></li>
+                <li><a href="#">Video offline</a></li>
  
             </ul>
  
         </td>
-        </tr>
-        </table>
-        <table border=0 cellpadding=0 cellspacing=0 width=100%>
+
+
+         <td width="25%">
+&nbsp
+        </td>
+                </tr>
         <tr>
         <td colspan=3>
-            <h5>Nhà tài trợ</h5>
+            <h5  >Nhà tài trợ</h5>
         </td>
         </tr>
         <tr>
         <td>
-            <ul class="tmo_list">
-                <li><a href="#">Aenean rhoncus leo ut eros</a></li>
-                <li><a href="#">Consectetur adipiscing elit</a></li>
-
-            </ul>    
+Website nhà tài trợ  
         </td>
-                <td>
-            <ul class="tmo_list">
-                <li><a href="#">Aenean rhoncus leo ut eros</a></li>
-                <li><a href="#">Consectetur adipiscing elit</a></li>
-            </ul>    
+        <td>
+Website nhà tài trợ  
         </td>
-                <td>
-            <ul class="tmo_list">
-                <li><a href="#">Aenean rhoncus leo ut eros</a></li>
-                <li><a href="#">Consectetur adipiscing elit</a></li>
-
-            </ul>    
+        <td>
+Website nhà tài trợ  
+        </td>
+        <td>
+Website nhà tài trợ  
         </td>
         </tr>
         </table>
 
         
-        <div class="cleaner"></div>
+     
     </div> <!-- end of footer -->
 	
     <div id="templatemo_copyright">
@@ -203,8 +216,8 @@
 </div> <!-- templatemo_wrapper -->
 </div><!-- templatemo_wrapper_outer -->
 </form>
-<a href="#" style="display:scroll;position:fixed;bottom:35px;right:5px;" title="Go to Top"><img src="images/top.gif"></a>  
+<a href="#" style="display:scroll;position:fixed;bottom:37px;right:5px;" title="Tới đầu trang"><img src="images/top.png" width=30 height=30></a>  
 <a name="bottom"></a>  
-<a href="#bottom" style="display:scroll;position:fixed;bottom:5px;right:5px;" title="Go to Bottom"><img src="images/down.gif"></a>
+<a href="#bottom" style="display:scroll;position:fixed;bottom:5px;right:5px;" title="Tới cuối trang"><img src="images/down.png" width=30 height=30></a>
 </body>
 </html>

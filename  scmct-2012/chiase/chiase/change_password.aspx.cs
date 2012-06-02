@@ -55,6 +55,10 @@ namespace chiase
                         "@v_username", username);
 
                 lbl_error.Text = "Mật khẩu đã được đổi thành công !";
+
+
+                Session.Remove("ThanhVien");
+                Response.Redirect("Default.aspx");
             }
             else
             {

@@ -13,11 +13,17 @@ namespace chiase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["vmode"] == "lock")
-                lock_project();
+            if (!IsPostBack)
+            {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
 
-            if (Request.QueryString["vmode"] == "del")
-                del_project();
+                if (Request.QueryString["vmode"] == "lock")
+                    lock_project();
+
+                if (Request.QueryString["vmode"] == "del")
+                    del_project();
+            }
         }
         public void lock_project()
         {

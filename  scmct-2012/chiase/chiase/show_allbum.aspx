@@ -25,21 +25,23 @@
 
 
 <fieldset style="background-color:#4CC417;">
-<div class="upload">
+<div class="upload" >
+    <asp:Label ID="lbl_create_allbum" runat="server">
 <% if(username!=""){%>
-<table id="popupArea" bgcolor=green cellpadding=3 cellspacing=3 style="border: 1px solid #fff;">
-<tr style="cursor:pointer;" title="Tạo allbum ảnh mới">
-<td align="center" valign="middle" style="cursor:hand;">
-    <asp:Image ID="Image1" runat="server"  ImageUrl="images/createnewallbum.png" 
-        Height="20px" Width="20px" /> <font color=white><b>Tạo allbum mới</b></font>
+<table cellpadding=3 cellspacing=3 style="border: 0px solid #fff;" width="100%">
+<tr  title="Tạo allbum ảnh mới">
+<td align="right" valign="middle" style="cursor:hand;">
+    <input style="cursor:pointer;" id="popupArea" type="button" value="Tạo allbum ảnh mới" class="btn" style="width:150px;height:25px" />
 </td>
 </tr>
 </table>
 <%} %>
+</asp:Label>
+<hr>
      <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" AllowDragging="True" AllowResize="True"
-        CloseAction="CloseButton" ContentUrl="upload_images.aspx"
+        CloseAction="CloseButton" ContentUrl='<%="upload_images.aspx?projectid=" + v_project_id %>'
         EnableViewState="False" PopupElementID="popupArea"
-        PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+        PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
         Height="500px" FooterText="Thêm ảnh cho allbum - bạn nhấn Shift hoặc Ctrl để chọn nhiều ảnh"
         HeaderText="Tạo allbum ảnh" ClientInstanceName="FeedPopupControl" 
         EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
@@ -65,6 +67,7 @@
         onitemdatabound="DataList1_ItemDataBound">
           <ItemTemplate>
                 <fieldset  class="btn_img">
+
                 <table cellpadding="1" cellspacing="0" border="0" style="color:White;">
                 <tr>
                 <td colspan="2" align="right">
@@ -74,7 +77,7 @@
                 </tr>
                 <tr>
                 <td rowspan="8">
-                    <asp:Image ID="img_first" runat="server" Width="160" Height="160" BorderColor="White" BorderWidth="1"/>
+                    <a href='<%#Eval("allbum_id","slideshow.aspx?allbumid={0}") %>' onclick=update_view('<%#Eval("allbum_id")%>') title='Xem allbum ảnh'><asp:Image ID="img_first" runat="server" Width="160" Height="160" BorderColor="White" BorderWidth="1"/></a>
                 </td>
                 <td>
                 Số lượng: <b><asp:Label ID="lbl_cnt_img" runat="server" Text="20"></asp:Label></b> ảnh
@@ -113,7 +116,17 @@
                 </tr>
                 <tr>
                 <td align="center" valign="middle" style="cursor:hand;">
-                    <a href='<%#Eval("allbum_id","slideshow.aspx?allbumid={0}") %>' onclick=update_view('<%#Eval("allbum_id")%>')><b>Xem allbum</b></a> | <a href='<%#Eval("allbum_id","update_allbum.aspx?allbum_id={0}") %>' ><b>Sửa allbum</b></a> | <a style="cursor:pointer" onclick=del_allbum('<%#Eval("allbum_id")%>') ><b>Xóa allbum</b></a>
+
+                    <img src="images/view.gif" width="15" height="18"><a href='<%#Eval("allbum_id","slideshow.aspx?allbumid={0}") %>' onclick=update_view('<%#Eval("allbum_id")%>') title='Xem allbum ảnh'><b>Xem</b></a> 
+                    
+                    <asp:Label ID="lbl_edit_allbum" runat="server">
+                        | <img src="images/edit.png" width="15" height="15"><a href='<%#Eval("allbum_id","update_allbum.aspx?allbum_id={0}") %>' title='Sửa allbum ảnh'><b>Sửa</b></a> 
+                    </asp:Label>
+
+                    <asp:Label ID="lbl_del_allbum" runat="server">
+                        | <img src="images/deletes.png" width="15" height="15"><a style="cursor:pointer" onclick=del_allbum('<%#Eval("allbum_id")%>') title='Xóa allbum ảnh'><b>Xóa </b></a>
+                    </asp:Label>
+
                 </td>
                 </tr>
                 </table>
@@ -122,5 +135,8 @@
     </asp:DataList>
     <br>
 </div>
+<hr>
+<p align="right">&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %></p>
 </fieldset>
+
 </asp:Content>

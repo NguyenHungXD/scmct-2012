@@ -16,6 +16,9 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 functions.add_date_to_dropd(dropd_day, dropd_month, dropd_year,0);
                 display_info();
                 Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='edit_profife.aspx' title='Cập nhật thông tin cá nhân'>Cập nhật thông tin cá nhân</a> ";
@@ -57,15 +60,15 @@ namespace chiase
                     txt_yahoo.Text = nd.YAHOO;
                     DateTime birthday = DateTime.Parse(nd.BIRTH_DAY);
 
-                    dropd_day.SelectedIndex = functions.selectedDropdown(dropd_day, birthday.Day.ToString());
-                    dropd_month.SelectedIndex =  functions.selectedDropdown(dropd_month, birthday.Month.ToString());
-                    dropd_year.SelectedIndex = functions.selectedDropdown(dropd_year, birthday.Year.ToString());
+                    functions.selectedDropdown(dropd_day, birthday.Day.ToString());
+                    functions.selectedDropdown(dropd_month, birthday.Month.ToString());
+                    functions.selectedDropdown(dropd_year, birthday.Year.ToString());
 
                     rd_sex.Items[int.Parse(nd.SEX)].Selected = true;
 
                     lbl_group_name.Text = (String)table.Rows[0][ND_TEN_NHOM_ND.cl_GROUPNAME];
                     txt_note.Text = nd.NOTE;
-
+                    
                 }
             }
             catch (Exception ex) {

@@ -17,6 +17,9 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 if (Request.QueryString["vmode"] == "del")
                 {
                     del_status();
@@ -26,6 +29,8 @@ namespace chiase
                 }
                 else
                 {
+                    lbl_search_status_request.Visible = functions.checkPrivileges("16", functions.LoginMemID(this), "V");
+                    lbl_del_status_request.Visible = functions.checkPrivileges("16", functions.LoginMemID(this), "D");
                     display();
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_status_request.aspx' title='Cập nhật trạng thái yêu cầu'>Cập nhật trạng thái</a>";
 
@@ -118,6 +123,20 @@ namespace chiase
             }
             catch
             {
+            }
+        }
+
+        protected void status_list_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                Label lb_edit = (Label)e.Item.FindControl("lbl_edit_status_request");
+                lb_edit.Visible = functions.checkPrivileges("16", functions.LoginMemID(this), "E");
+                
+                
+            }
+            catch
+            { 
             }
         }
     }

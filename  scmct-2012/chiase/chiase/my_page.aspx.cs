@@ -17,6 +17,9 @@ namespace chiase
         {
             if(!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='my_page.aspx' title='Trang của tôi'>Trang của tôi</a> ";
                 if (Request.QueryString["vmode"] == "del")
                     delete_request();

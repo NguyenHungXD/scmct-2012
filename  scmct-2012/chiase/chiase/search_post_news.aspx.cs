@@ -18,6 +18,9 @@ namespace chiase
 
             if (!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 if (Request.QueryString["vmode"] == "del")
                 {
                     del_news();
@@ -31,6 +34,8 @@ namespace chiase
                 }
                 else
                 {
+                    lbl_search_news.Visible = functions.checkPrivileges("22", functions.LoginMemID(this), "V");
+                    lbl_del_news.Visible = functions.checkPrivileges("22", functions.LoginMemID(this), "D");
                     display();
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_post_news.aspx' title='Cập nhật bài viết'>Cập nhật bài viết</a>";
 
@@ -115,9 +120,9 @@ namespace chiase
                     sWhere += " and d.title like N'%" + txt_subject.Text + "%'";
                 if (txt_project.Text != "")
                     //vProject = String.Format("%{0}%", txt_project.Text);
-                    sWhere += " and e.ma_du_an like N'%" + txt_project.Text + "%'";
+                    sWhere += " and (e.ma_du_an like N'%" + txt_project.Text + "%' or e.ten_du_an like N'%" + txt_project.Text + "%')";
 
-                string sql = @"select a.*,b.id as status_id,b.name as status_name,c.name as ten_nguoi_tao,d.title as chu_de,'<b>'+e.ma_du_an + '</b><br>' + e. ten_du_an as du_an,
+                string sql = @"select a.*,b.id as status_id,b.name as status_name,c.name as ten_nguoi_tao,d.title as chu_de,'<b>'+e.ma_du_an + '</b><br>' + e.ten_du_an as du_an,
                                         case when a.deleted is null then 'FFFFFF' else 'CCCCCC' end as bgcolors
                                         from BV_BAI_VIET a 
                                         inner join BV_DM_TRANG_THAI_BAI_VIET b on a.trang_thai_id = b.id
@@ -171,6 +176,24 @@ namespace chiase
                 functions.fill_DropdownList(drop_status, table_status, 0, 1, news_id.ToString());
                 functions.selectedDropdown(drop_status, String.Format("{0};{1}", news_id, status_id));
 
+
+                Label lb_edit = (Label)e.Item.FindControl("lbl_edit_news");
+                Label lbl_edit_status_news = (Label)e.Item.FindControl("lbl_edit_status_news");
+                Label lbl_edit_status = (Label)e.Item.FindControl("lbl_edit_status");
+
+                //lb_edit.Visible = functions.checkPrivileges("22", functions.LoginMemID(this), "E");
+
+                if (functions.checkPrivileges("22", functions.LoginMemID(this), "E"))
+                {
+                    lb_edit.Visible = true;
+                    lbl_edit_status_news.Visible = true;
+                }
+                else
+                {
+                    lb_edit.Visible = false;
+                    lbl_edit_status_news.Visible = false;
+                    lbl_edit_status.Text = drop_status.SelectedItem.Text;
+                }
 
 
             }

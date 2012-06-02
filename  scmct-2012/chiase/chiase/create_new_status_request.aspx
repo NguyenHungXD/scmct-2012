@@ -27,11 +27,14 @@
     </tr>
         <tr>
         <td valign="middle" align="right">
+        <asp:Label ID="lbl_create_new_status_request" runat="server">
             <asp:Button ID="btn_saves" runat="server" Text="Lưu trạng thái" class="btn" 
                 Width="100px" Height="25" onclick="btn_saves_Click"/>
+                </asp:Label>
         </td>
     </tr>
     <tr>
+        
     <td align=right><hr>
     <br>&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %>
     </td>

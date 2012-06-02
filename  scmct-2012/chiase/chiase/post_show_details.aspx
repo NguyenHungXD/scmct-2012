@@ -39,27 +39,30 @@
             return;
         }
     }
-    function deletes(id,vmode) {
+    function deletes(id, vmode) {
+        if (confirm("Bạn có thực sự muốn xóa không?\nChọn [Ok] để xóa, [Cancel] để hủy")) {
+            var url = "post_show_details.aspx?id=" + id + "&vmode=del";
+            loadXMLUpdate(url);
+            if (vmode != "comments") {
+                window.location = "forum.aspx";
+                alert("Bài viết đã được xóa");
+            }
+            else {
+                var bv_id = document.all["<%=bai_viet_ids.ClientID%>"].value;
+                window.location = "post_show_details.aspx?news_id=" + bv_id;
+                alert("Bình luận đã được xóa");
+            }
+        }
 
-        var url = "post_show_details.aspx?id=" + id + "&vmode=del";
-        loadXMLUpdate(url);
-
-        if (vmode != "comments") {
+        }
+        function backs() {
             window.location = "forum.aspx";
-            alert("Bài viết đã được xóa");
         }
-        else {
-            var bv_id = document.all["<%=bai_viet_ids.ClientID%>"].value;
-            window.location = "post_show_details.aspx?news_id=" + bv_id;
-            alert("Bình luận đã được xóa");
-        }
-        }
-    
 </script>
 
     <script type="text/javascript">
     // <![CDATA[
-        var MaxLength = 50;
+        var MaxLength = 20;
         var CustomErrorText = "Nội dung phản hồi phải lớn hơn " + MaxLength.toString() + " ký tự.";
         function ValidationHandler(s, e) {
             if (e.html.length < MaxLength) {
@@ -78,11 +81,14 @@
 <HeaderTemplate>
 <table border="0"  cellpadding=0 cellspacing=0  width="100%" >
 </HeaderTemplate>
+    
 <ItemTemplate>
     <tr class="post_news">
     <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><%#Eval("tieu_de")%></td><td align="right"> 
-        <a href="<%#Eval("BAI_VIET_ID","post_news.aspx?post_id={0}")%>" class="btn">Sửa bài</a>  <a style="cursor:hand" onclick=deletes('<%#Eval("BAI_VIET_ID")%>') class="btn">Xóa bài</a></td><tr></table> </td></tr>
-
+        
+        <asp:Label ID="lbl_post_new" runat="server" ><asp:HyperLink style="cursor:pointer" ID="linkPostnew" runat="server">  <img src="images/post_new.png" width="20" height="20"> Bài mới</asp:HyperLink> </asp:Label>  
+        <asp:Label ID="lbl_edit_post" runat="server"> | <a style="cursor:pointer" href="<%#Eval("BAI_VIET_ID","post_news.aspx?post_id={0}")%>"><img src="images/edit_post.png" width="20" height="20">  Sửa bài</a> </asp:Label>  <asp:Label ID="lbl_del_post" runat="server"> | <a style="cursor:pointer" onclick=deletes('<%#Eval("BAI_VIET_ID")%>') ><img src="images/del_post.png" width="20" height="20"> Xóa bài</a></asp:Label></td><tr></table> </td></tr>
+    
     <tr class="post_news_desc">
         <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr>
             <td valign=middle>
@@ -103,15 +109,15 @@
              </table>
              </b>
             </td>
-            <td align=right >Đăng bởi,  
-                <a href="#" ID='<%#Eval("username", "username{0}") %>'><font color="blue"><%#Eval("username") %></font>,</a> <%#Eval("ngay_tao", "{0:dd/MM/yyyy hh:mm:ss tt}")%>
+            <td align=right ><i>Đăng bởi,  
+                <a href="#" ID='<%#Eval("username", "username{0}") %>'><font color="blue"><%#Eval("username") %></font>,</a> <%#Eval("ngay_tao", "{0:dd/MM/yyyy hh:mm:ss tt}")%></i>
             
             
             <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" 
                     AllowDragging="True" AllowResize="True"
                             CloseAction="CloseButton" ContentUrl='<%#Eval("username", "user_info.aspx?user_name={0}") %>'
                             EnableViewState="False" PopupElementID='<%#Eval("username", "username{0}") %>'
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
                             Height="600px" FooterText=""
                             HeaderText="" ClientInstanceName="FeedPopupControl" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
@@ -166,12 +172,12 @@
     </tr>
     <tr >
     <td>       
-        <asp:Repeater ID="showList_comment" runat="server">
+        <asp:Repeater ID="showList_comment" runat="server" onitemdatabound="showList_comment_ItemDataBound">
         <HeaderTemplate>
         <table border="0" cellpadding=1 cellspacing=3 width="100%"  style="border:1px solid #CCFFFF;">
         </HeaderTemplate>
         <ItemTemplate>
-                    <tr >
+                    <tr>
                     <td>
                     &nbsp;&nbsp
                     </td>
@@ -190,13 +196,11 @@
                            
                            
                             <a style="cursor:pointer;" ID='<%#Eval("BAI_VIET_ID", "username{0}") %>'><font color="blue"><%#Eval("username") %></font></a>
-                            
-
                    <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" 
                     AllowDragging="True" AllowResize="True"
                             CloseAction="CloseButton" ContentUrl='<%#Eval("username", "user_info.aspx?user_name={0}") %>'
                             EnableViewState="False" PopupElementID='<%#Eval("BAI_VIET_ID", "username{0}") %>'
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="800px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
                             Height="600px" FooterText=""
                             HeaderText="" ClientInstanceName="FeedPopupControl" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
@@ -260,7 +264,8 @@
                    <td colspan=2>                    
                    <b>
                    <table cellpadding=0 cellspacing=0 border="0">
-                   <tr  style="cursor:pointer;"><td bgcolor="#FFFFFF" valign="bottom" align="center"> <a onclick=deletes('<%# Eval("BAI_VIET_ID")%>','comments') style='cursor:pointer' id="new_project"><image src="images/delete.png" width="20" height="20"></a>&nbsp;&nbsp</td>
+                   <tr  style="cursor:pointer;"><td bgcolor="#FFFFFF" valign="bottom" align="center">
+                       <asp:Label ID="lbl_del_comment" runat="server"><a onclick=deletes('<%# Eval("BAI_VIET_ID")%>','comments') style='cursor:pointer' id="new_project" title="Xóa bình luận"><image src="images/delete.png" width="20" height="20"></a>&nbsp;&nbsp </asp:Label></td>
                    <td>
                    <a title="Thích" onclick=like_post(<%# Eval("BAI_VIET_ID")%>,<%#Eval("liked")%>,'<%#Eval("BAI_VIET_ID","div{0}")%>')>
                     <asp:Image ID="Image2" runat="server"  ImageUrl="images/like.gif" Width=20 Height=15/>
@@ -380,27 +385,26 @@
         </dx:ASPxHtmlEditor>
         <font color="white">Số ký tự bạn đã nhập(ký tự): <dx:ASPxLabel ID="lblContentLength" runat="server" ClientInstanceName="ContentLength" Text="0" Font-Bold="True"></dx:ASPxLabel></font>
 </fieldset>
-        <table cellpadding=3 cellpadding=3 border=0 width=20%>
+        <table cellpadding=3 cellpadding=3 border=0 width=30%>
         <tr>
         <td>
-                <dx:ASPxButton ID="btn_comments" runat="server" Text="Bình luận" 
-            CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
-            SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" Width="110px" 
-            onclick="btn_comments_Click">
-            <ClientSideEvents Click="function(s, e) {
-                                    validate();
-                    }" />
-        </dx:ASPxButton>
+
+
+ 
+            <asp:Label ID="lbl_comment" runat="server" >
+
+                    
+                <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Bình luận" 
+                onclick="btn_comments_Click" 
+                CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120" Height="25">
+                </dx:ASPxButton>
+            </asp:Label>
+            <asp:Label ID="lbl_info" runat="server" ForeColor="Yellow" ></asp:Label>
+
         </td>
         <td>
-        <dx:ASPxButton ID="btn_back" runat="server" Text="Trở lại" 
-            CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
-            onclick="btn_back_Click" SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" 
-            Width="110px">
-           <ClientSideEvents Click="function(s, e) {
-                            window.location.href='show_allbum.aspx'
-           }" />
-        </dx:ASPxButton>
+
         </td>
         </tr>
         </table>

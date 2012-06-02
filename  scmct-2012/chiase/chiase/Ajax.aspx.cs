@@ -13,6 +13,9 @@ namespace chiase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Check LogIn session
+            functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
             string action = Request.QueryString["do"];
             switch (action)
             {

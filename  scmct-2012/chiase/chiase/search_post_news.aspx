@@ -149,15 +149,7 @@
         </td>
         </tr>
 
-        <tr>
-        <td >
-            Người đăng:
-            </td>
-            <td>
-            <asp:TextBox ID="txt_created_by" runat="server" class="txtformat" Height="25px" 
-                    Width="250px"></asp:TextBox>
-            </td>
-            </tr>
+
             <tr>
             <td>
             Chủ đề:
@@ -167,8 +159,6 @@
                 <asp:TextBox ID="txt_subject" runat="server" class="txtformat" Height="25px" 
                     Width="250px"></asp:TextBox>
         </td>
-                    </tr>
-            <tr>
                     <td>
             Dự án:
             </td>
@@ -187,12 +177,20 @@
                 <asp:DropDownList ID="dropd_status" runat="server" Width="250px" Height="25px">
                 </asp:DropDownList>
         </td>
-        </tr>
-        
+        <td >
+            Người đăng:
+            </td>
+            <td>
+            <asp:TextBox ID="txt_created_by" runat="server" class="txtformat" Height="25px" 
+                    Width="250px"></asp:TextBox>
+            </td>
+            </tr>
         <tr>
         <td>&nbsp</td><td colspan="3"><br>&nbsp
+            <asp:Label ID="lbl_search_news" runat="server" >
             <asp:Button ID="Button4" runat="server" Text="Tìm kiếm" class="btn" 
-                Width="120px" Height="30px" onclick="Button4_Click"/>
+                Width="120px" Height="25px" onclick="Button4_Click"/>
+                </asp:Label>
         </td>
         </tr>
         </table>
@@ -233,7 +231,8 @@
         <tr bgcolor='#<%# Eval("bgcolors")%>'>
                 <td valign="middle" align="center">
             <%=vNo++ %>. 
-            <input name="chk" value="<%#Eval("bai_viet_id") %>" type="checkbox" /> | <a style=cursor:pointer title='Sửa yêu cầu' onclick=update_request('<%#Eval("bai_viet_id") %>')><img src=images/edit.gif width=20 height=20 alt='Sửa bài viết'>
+            <input name="chk" value="<%#Eval("bai_viet_id") %>" type="checkbox" /> 
+                    <asp:Label ID="lbl_edit_news" runat="server"> | <a style=cursor:pointer title='Sửa yêu cầu' onclick=update_request('<%#Eval("bai_viet_id") %>')><img src=images/edit.gif width=20 height=20 alt='Sửa bài viết'></asp:Label>
         </td>
         <td>
             <asp:HyperLink ForeColor="Blue" ID="HyperLink1" runat="server" Target="_blank" NavigateUrl='<%#Eval("bai_viet_id","post_show_details.aspx?news_id={0}") %>'><%# Eval("tieu_de")%></asp:HyperLink>
@@ -255,28 +254,34 @@
         </td>
 
         <td align="center">
+
+        <asp:Label ID="lbl_edit_status_news" runat="server">
             <asp:DropDownList ID="dropd_status" runat="server" class="selects" onchange="updates(this);">
             </asp:DropDownList>
+       </asp:Label>
+
+       <asp:Label ID="lbl_edit_status" runat="server" ></asp:Label>
 
         </td>
         </tr>
     </ItemTemplate>
     <FooterTemplate>
-    <tr>
+    </FooterTemplate>
+    </asp:Repeater>
+      <tr>
     <td colspan="6" style="color:white;font-weight:bold"><br>
         *-Chủ đề bài viết có nền màu xám là yêu cầu đã xóa.<br>
         *-Chọn chủ đề bạn muốn xóa.<br><br>
         <font color="ButtonHighlight" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
-
-        <input id="Button1" type="button" value="Xóa bài viết" class="btn" style="width:120px;height:30px" onclick="deletes('del')"/>
-        <input id="Button3" type="button" value="Phục hồi bài viết" class="btn" style="width:120px;height:30px" onclick="deletes('undel')"/>
-        <input id="Button2" type="button" value="Hủy" style="width:120px;height:30px" class="btn" onclick="backs();"/><br>&nbsp
+        <asp:Label ID="lbl_del_news" runat="server">
+            <input id="Button1" type="button" value="Xóa bài viết" class="btn" style="width:120px;height:25px" onclick="deletes('del')"/>
+            <input id="Button3" type="button" value="Phục hồi bài viết" class="btn" style="width:120px;height:25px" onclick="deletes('undel')"/>
+        </asp:Label>
+        <input id="Button2" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
         
     </td>
     </tr>
     </table>
-    </FooterTemplate>
-    </asp:Repeater>
      <table width="100%">
      <tr align="right">
     <td colspan=3 align=right style="color:White">

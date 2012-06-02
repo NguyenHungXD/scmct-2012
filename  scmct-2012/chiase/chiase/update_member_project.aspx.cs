@@ -14,14 +14,20 @@ namespace chiase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["vmode"] == "lock")
-                lock_member_project();
+            if (!IsPostBack)
+            {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
 
-            if (Request.QueryString["vmode"] == "del")
-                del_member_project();
+                if (Request.QueryString["vmode"] == "lock")
+                    lock_member_project();
 
-            if (Request.QueryString["vmode"] == "approve")
-                approve_member_project();
+                if (Request.QueryString["vmode"] == "del")
+                    del_member_project();
+
+                if (Request.QueryString["vmode"] == "approve")
+                    approve_member_project();
+            }
         }
 
         public void approve_member_project()

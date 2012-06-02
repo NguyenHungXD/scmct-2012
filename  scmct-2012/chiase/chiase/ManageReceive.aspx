@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true"
-    CodeBehind="ManageReceive.aspx.cs" Inherits="chiase.ManageReceive" %>
+    CodeBehind="manageReceive.aspx.cs" Inherits="chiase.ManageReceive" %>
 
 <%@ Register Assembly="DevExpress.Web.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"
     Namespace="DevExpress.Web.ASPxHiddenField" TagPrefix="dx" %>

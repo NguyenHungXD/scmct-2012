@@ -171,12 +171,10 @@
         <tr>
         <td>&nbsp</td><td colspan="3">&nbsp
         
-            <dx:ASPxButton ID="btn_search" runat="server" Text="Tìm kiếm" 
-                CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="149px" 
-                onclick="btn_search_Click" >
-            </dx:ASPxButton>
-        
+        <asp:Label ID="lbl_search_subject" runat="server" >
+            <asp:Button ID="Button2" runat="server" Text="Tìm kiếm" class="btn" Height="25px" Width="120px" onclick="btn_search_Click"/>
+        </asp:Label>
+
         </td>
         </tr>
         </table>
@@ -214,7 +212,8 @@
         <tr bgcolor='#<%# Eval("bgcolors")%>'>
                 <td valign="middle" align="center">
             <%=vNo++ %>. 
-            <input name="chk" value="<%#Eval("id") %>" type="checkbox" /> | <a style=cursor:pointer title='Sửa yêu cầu' onclick=update_request('<%#Eval("id") %>')><img src=images/edit.gif width=20 height=20 alt='Cập nhật chủ đề'>
+            <input name="chk" value="<%#Eval("id") %>" type="checkbox" /><asp:Label ID="lbl_edit_subject"
+                runat="server" > | <a style=cursor:pointer title='Sửa yêu cầu' onclick=update_request('<%#Eval("id") %>')><img src=images/edit.gif width=20 height=20 alt='Cập nhật chủ đề'></asp:Label> 
         </td>
         <td>
             <%# Eval("title")%>
@@ -230,28 +229,33 @@
         </td>
 
         <td align="center">
+            <asp:Label ID="lbl_edit_status_subject" runat="server" >
             <asp:DropDownList ID="dropd_status" runat="server" class="selects" onchange="updates(this);">
             </asp:DropDownList>
+            </asp:Label>
+
+            <asp:Label ID="lbl_status_subject" runat="server" Text=""></asp:Label>
 
         </td>
         </tr>
     </ItemTemplate>
     <FooterTemplate>
-    <tr>
+    </FooterTemplate>
+    </asp:Repeater>
+        <tr>
     <td colspan="6" style="color:white;font-weight:bold"><br>
         *-Chủ đề bài viết có nền màu xám là yêu cầu đã xóa.<br>
         *-Chọn chủ đề bạn muốn xóa.<br><br>
         <font color="ButtonHighlight" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
-
-        <input id="Button1" type="button" value="Xóa chủ đề" class="btn" style="width:120px;height:30px" onclick="deletes('del')"/>
-        <input id="Button3" type="button" value="Phục hồi chủ đề" class="btn" style="width:120px;height:30px" onclick="deletes('undel')"/>
-        <input id="Button2" type="button" value="Hủy" style="width:120px;height:30px" class="btn" onclick="backs();"/><br>&nbsp
+        <asp:Label ID="lbl_del_subject" runat="server" >
+        <input id="Button1" type="button" value="Xóa chủ đề" class="btn" style="width:120px;height:25px" onclick="deletes('del')"/>
+        <input id="Button3" type="button" value="Phục hồi chủ đề" class="btn" style="width:120px;height:25px" onclick="deletes('undel')"/>
+        </asp:Label>
+        <input id="Button1" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
         
     </td>
     </tr>
     </table>
-    </FooterTemplate>
-    </asp:Repeater>
      <table width="100%">
      <tr align="right">
     <td colspan=3 align=right style="color:White">
@@ -263,7 +267,7 @@
                     AllowDragging="True" AllowResize="True" ClientInstanceName="divpopup"
                             CloseAction="CloseButton" 
                             EnableViewState="False" PopupElementID='divdetail'
-                            PopupVerticalAlign="Middle" ShowFooter="True" Width="765px"
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="765px"
                             Height="738px" FooterText=""
                             HeaderText="Cập nhật chủ đề bài viết" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 

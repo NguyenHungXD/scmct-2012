@@ -22,15 +22,6 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.DropDownList dropd_ma_pc;
         
         /// <summary>
-        /// txt_nguoilap control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_nguoilap;
-        
-        /// <summary>
         /// tu_ngay control.
         /// </summary>
         /// <remarks>
@@ -67,31 +58,40 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_dia_chi;
         
         /// <summary>
-        /// txt_maduan control.
+        /// txt_duan control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_maduan;
+        protected global::System.Web.UI.WebControls.TextBox txt_duan;
         
         /// <summary>
-        /// txt_tenduan control.
+        /// txt_nguoilap control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_tenduan;
+        protected global::System.Web.UI.WebControls.TextBox txt_nguoilap;
         
         /// <summary>
-        /// btn_search control.
+        /// lbl_search_pc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_search;
+        protected global::System.Web.UI.WebControls.Label lbl_search_pc;
+        
+        /// <summary>
+        /// Button4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button4;
         
         /// <summary>
         /// phieu_chi_list control.
@@ -101,6 +101,15 @@ namespace chiase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater phieu_chi_list;
+        
+        /// <summary>
+        /// lbl_del_pc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_del_pc;
         
         /// <summary>
         /// lbl_error control.

@@ -49,15 +49,6 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxEditors.ASPxDateEdit den_ngay;
         
         /// <summary>
-        /// txt_created_by control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_created_by;
-        
-        /// <summary>
         /// txt_subject control.
         /// </summary>
         /// <remarks>
@@ -85,6 +76,24 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.DropDownList dropd_status;
         
         /// <summary>
+        /// txt_created_by control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_created_by;
+        
+        /// <summary>
+        /// lbl_search_news control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_search_news;
+        
+        /// <summary>
         /// Button4 control.
         /// </summary>
         /// <remarks>
@@ -101,5 +110,14 @@ namespace chiase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater news_list;
+        
+        /// <summary>
+        /// lbl_del_news control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_del_news;
     }
 }

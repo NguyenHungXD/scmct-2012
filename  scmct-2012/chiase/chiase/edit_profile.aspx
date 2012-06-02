@@ -4,6 +4,12 @@
     Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dx" %>
 
 <asp:Content ID="register" ContentPlaceHolderID="content_area" Runat="Server">
+
+<script language="javascript" type="text/javascript">
+    function backs() {
+        window.location = "default.aspx";
+    }
+</script>
     <fieldset>
 <!--<legend>Cập nhật thông tin cá nhân</legend>  -->  
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
@@ -17,24 +23,26 @@
         &nbsp;<asp:Image 
             ID="img_user" runat="server" Height="50px" Width="50px" BorderColor="White" 
             BorderStyle="Solid" BorderWidth="1px" />
-        &nbsp;<div id ="update_avatar">
-            Avatar mới:<br> 
+        &nbsp;<table cellpadding=0 cellspacing=0 border=0 width=55%><td>
+        
+        
+            Avatar mới:</td> <td>
+            <div id ="update_avatar">
             <asp:FileUpload ID="upload_img" runat="server" BackColor="#67C9FF" 
                 Text="Chọn hình" class="btnformat" BorderColor="White" BorderStyle="Solid" 
                 BorderWidth="1px" Height="21px" ToolTip="Chọn hình" Width="300px"/>
-        </div>
-
-        <dx:ASPxButton ID="btn_avatars" runat="server" Text="Cập nhật Avatar" 
-            onclick="btn_avatar_Click" CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" 
-            CssPostfix="SoftOrange" 
-            SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" Width="150px">
-        </dx:ASPxButton>
+            </div>
+            </td>
+            <td>
 
 
-
+        <asp:Button ID="Button1" runat="server" Text="Cập nhật avatar" Height="20" Width="120" class="btn" onclick="btn_avatar_Click"/>
+        </td>
+        </tr>
+        </table>
         <br>
         <i>Truy cập lần cuối, <asp:Label ID="lbl_lasted_access" runat="server" ForeColor="White"></asp:Label></i><br>
-        <asp:Label ID="lbl_group_name" runat="server" Text=""></asp:Label>
+        Nhóm:&nbsp<b><asp:Label ID="lbl_group_name" runat="server" Text=""></asp:Label></b>
         <hr>
     </td>
     </tr>
@@ -186,23 +194,12 @@
     </tr>
     <tr>
     <td align="right">
-        <dx:ASPxButton ID="btn_updateprofiles" runat="server" Text="Lưu thay đổi" 
-            onclick="btn_updateprofile_Click" 
-            CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-            SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="123px">
-        </dx:ASPxButton>
+
+        <asp:Button ID="Button2" runat="server" Text="Lưu thông tin" class="btn" Height="25px" Width="120px" onclick="btn_updateprofile_Click"/>
     </td>
     <td>
-        <dx:ASPxButton ID="btn_closes" runat="server" Text="Đóng" 
-            onclick="btn_close_Click1" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
-            CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
-            Width="111px">
 
-                     <ClientSideEvents Click="function(s, e) {
-                            window.location.href='default.aspx'
-                    }" />
-
-        </dx:ASPxButton>
+    <input id="Button3" type="button" value="Hủy" onclick="backs();" style="width:120px;height:25px" class="btn"/>
 </tr>
 <tr>
     <td colspan=3 align=right>

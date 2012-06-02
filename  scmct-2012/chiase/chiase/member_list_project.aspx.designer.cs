@@ -13,6 +13,24 @@ namespace chiase {
     public partial class member_list_project {
         
         /// <summary>
+        /// lbl_ma_du_an control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_ma_du_an;
+        
+        /// <summary>
+        /// lbl_ten_du_an control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_ten_du_an;
+        
+        /// <summary>
         /// showListmember control.
         /// </summary>
         /// <remarks>

@@ -19,6 +19,9 @@ namespace chiase
             
             if (!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 if (Request.QueryString["vmode"] == "del")
                 {
                      del_subject();
@@ -32,6 +35,8 @@ namespace chiase
                 }
                 else
                 {
+                    lbl_del_subject.Visible = functions.checkPrivileges("21", functions.LoginMemID(this), "D");
+                    lbl_search_subject.Visible = functions.checkPrivileges("21", functions.LoginMemID(this), "V");
                     display();
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_subject.aspx' title='Cập nhật chủ đề'>Cập nhật chủ đề</a>";
 
@@ -146,8 +151,20 @@ namespace chiase
                 functions.fill_DropdownList(drop_status,table_status, 0, 1,subject_id.ToString());
                 functions.selectedDropdown(drop_status, String.Format("{0};{1}", subject_id, status_id));
 
-
-
+                Label lbl_edit = (Label)e.Item.FindControl("lbl_edit_subject");
+                Label lbl_edit_status = (Label)e.Item.FindControl("lbl_edit_status_subject");
+                Label lbl_status = (Label)e.Item.FindControl("lbl_status_subject");
+                if (functions.checkPrivileges("21", functions.LoginMemID(this), "E"))
+                {
+                    lbl_edit.Visible = true;
+                    lbl_edit_status.Visible = true;
+                }
+                else
+                { 
+                    lbl_edit.Visible = false;
+                    lbl_edit_status.Visible = false;
+                    lbl_status.Text = drop_status.SelectedItem.Text;
+                }
             }
             catch
             { }

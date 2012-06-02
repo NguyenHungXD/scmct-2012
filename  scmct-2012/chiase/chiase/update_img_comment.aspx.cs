@@ -15,7 +15,34 @@ namespace chiase
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                update_img_comments();
+            {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
+                if (Request.QueryString["vmode"] == "getmaxid")
+                {
+                    getIDNext();
+                }
+                else
+                {
+                    update_img_comments();
+                }
+
+            }
+        }
+        public void getIDNext()
+        {
+            try
+            {
+                string sql = @"select id from IMG_ALLBUM_COMMENT where id=(select max(id) from IMG_ALLBUM_COMMENT where commented_by=" + functions.LoginMemID(this) + " and img_id=" + Request.QueryString["imgid"] + ")";
+                DataTable dttb = SQLConnectWeb.GetData(sql);
+                HttpContext.Current.Response.Write(dttb.Rows[0]["id"].ToString());
+            }
+            catch
+            { 
+            
+            }
+        
         }
         public void update_img_comments()
         {

@@ -22,6 +22,11 @@
         function HtmlChangedHandler(s, e) {
             ContentLength.SetText(s.GetHtml().length);
         }
+
+        function backs() {
+            window.location = "forum.aspx";
+        }
+
     // ]]> 
     </script>
    <fieldset>
@@ -44,6 +49,7 @@
     </tr>
      <tr>
      <td colspan=2 align=right>
+
          <dx:ASPxHtmlEditor ID="ASPxHtmlEditor1" runat="server" 
              CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" Height="533px" 
              Width="906px" CustomCommand="OnCommandExecute">
@@ -75,12 +81,6 @@
               <SettingsValidation>
                     <RequiredField IsRequired="True" ErrorText="Bài viết chưa có nội dung" />
                 </SettingsValidation>
-
-
-
-
-
-
              <Images SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
                  <LoadingPanel Url="~/App_Themes/Aqua/HtmlEditor/Loading.gif">
                  </LoadingPanel>
@@ -93,6 +93,7 @@
              </ImagesFileManager>
 
          </dx:ASPxHtmlEditor>
+
          <div style="margin: 8px 0;">
         <font color="white">Số ký tự bạn đã nhập(ký tự): <dx:ASPxLabel ID="lblContentLength" runat="server" ClientInstanceName="ContentLength" Text="0" Font-Bold="True"></dx:ASPxLabel></font>
     </div>
@@ -101,10 +102,17 @@
      </tr>
       <tr>
     <td colspan=2>
+
+
+    <asp:Label ID="lbl_sort" runat="server">
      <font color=white><b>  Sắp xếp:</b></font>
 
         <asp:TextBox ID="txt_sort" runat="server"  class="txtformat" Width="74px" 
             Height="22px"></asp:TextBox>
+
+        </asp:Label>
+
+
             </td>
     </tr>
     <tr>
@@ -113,23 +121,19 @@
     </td>
 </tr>
 <tr>
-        <td align=right>
-        <dx:ASPxButton ID="btn_post_news" runat="server" Text="Lưu bài viết" 
+        <td align=left>
+            <asp:Label ID="lbl_post_news" runat="server">
+                <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Lưu bài viết" 
                 onclick="btn_post_news_Click" 
                 CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px">
-        </dx:ASPxButton>
+                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120" Height="25">
+                </dx:ASPxButton>
+            </asp:Label>
         </td>
         <td align=left style="width: 470px">
-        <dx:ASPxButton ID="btn_back" runat="server" Text="Hủy" onclick="btn_back_Click" 
-                CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px">
 
-                                                                         <ClientSideEvents Click="function(s, e) {
-                            window.location.href='forum.aspx'
-                    }" />
 
-        </dx:ASPxButton>
+            <!--<input id="Button2" type="button" value="Hủy" class="btn" style="width:120px;height:25px;" onclick="backs()"/>-->
 
 
     </td>

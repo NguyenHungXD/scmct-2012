@@ -54,24 +54,14 @@
 
 <fieldset>
 <fieldset>
-    <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;">
+    <table border="0" cellpadding=3 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;">
         <tr style="color:White;font-weight:bold"><td colspan="8"><font size=3><p align="center">Tìm kiếm phiếu thu</p></font><br>*-Bạn có thể bỏ qua điều kiện bạn không quan tâm.</td></tr>
         <tr>
         <td >
             Mã phiếu thu: 
             </td><td colspan="3">
-            <asp:DropDownList ID="dropd_ma_pt" AutoPostBack="false" runat="server" Height="25px" Width="150px" style="font-size:larger">
+            <asp:DropDownList ID="dropd_ma_pt" AutoPostBack="false" runat="server" Height="30px" Width="250px" style="font-size:larger">
             </asp:DropDownList>
-        </td>
-        </tr>
-
-        <tr>
-        <td>
-            Người lập:
-            </td>
-            <td colspan="3">
-        <asp:TextBox ID="txt_nguoilap" runat="server" class="txtformat" Height="25px" 
-                    Width="250px"></asp:TextBox>
         </td>
         </tr>
         <tr>
@@ -152,29 +142,30 @@
        <td >
             Người giao tiền:
          </td>
-         <td colspan="3">   
+         <td>   
             <asp:TextBox ID="txt_nguoi_giao" runat="server" class="txtformat" Height="25px" 
                  Width="250px"></asp:TextBox>
         </td>
-        <tr>
 
-        <td >
-            Mã dự án:
-            </td>
-          <td>  
-            <asp:TextBox ID="txt_maduan" runat="server" class="txtformat" Height="25px" 
-                  Width="250px"></asp:TextBox>
+        <td>
+            Người lập:
             </td>
             <td>
-            Tên dự án:
-            
-                        </td>
-            <td>
-            <asp:TextBox ID="txt_tenduan" runat="server" class="txtformat" Height="25px" 
+        <asp:TextBox ID="txt_nguoilap" runat="server" class="txtformat" Height="25px" 
                     Width="250px"></asp:TextBox>
         </td>
         </tr>
         <tr>
+
+        <td >
+            Dự án:
+            </td>
+          <td>  
+            <asp:TextBox ID="txt_duan" runat="server" class="txtformat" Height="25px" 
+                  Width="250px"></asp:TextBox>
+            </td>
+
+
         <td >
             Yêu cầu:
                         </td>
@@ -186,19 +177,17 @@
         </tr>
         <tr>
         <td>&nbsp</td><td colspan="3">&nbsp
-        
-            <dx:ASPxButton ID="btn_search" runat="server" Text="Tìm kiếm" 
-                CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="149px" 
-                onclick="btn_search_Click">
-            </dx:ASPxButton>
-        
+       
+            <asp:Label ID="lbl_search_pt" runat="server">
+         <asp:Button ID="Button4" runat="server"  Text="Tìm kiếm" class="btn" onclick="btn_search_Click" Height="25px" Width="100px"/>
+         </asp:Label>
         </td>
         </tr>
         </table>
 </fieldset>
 <hr>
-<asp:Repeater ID="phieu_thu_list" runat="server">
+<asp:Repeater ID="phieu_thu_list" runat="server" 
+        onitemdatabound="phieu_thu_list_ItemDataBound">
     <HeaderTemplate>
     <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;color:Black">
         <tr bgcolor="#990099" style="color:White;font-weight:bold"><td align="center" colspan="8">Danh sách phiếu thu</td></tr>
@@ -235,7 +224,8 @@
         <tr bgcolor='#<%# Eval("bgcolors")%>'>
                 <td valign="middle" align="center">
             <%= no++ %>.
-                    <input name="chk" value="<%#Eval("pt_id") %>" type="checkbox" /> <img src="images/edit.gif" width="25" height="25" style="cursor:pointer"  onclick=return_link('<%#Eval("pt_id") %>') title='<%#Eval("ma_pt","Sửa phiếu thu {0}") %>'>
+                    <input name="chk" value="<%#Eval("pt_id") %>" type="checkbox" /> 
+                    <asp:Label ID="lbl_edit_pt" runat="server" > | <img src="images/edit.gif" width="25" height="25" style="cursor:pointer"  onclick=return_link('<%#Eval("pt_id") %>') title='<%#Eval("ma_pt","Sửa phiếu thu {0}") %>'></asp:Label>
 
 
 
@@ -259,7 +249,7 @@
              <%# Eval("tong_tien", "{0:###,###,###,###,##0}")%>
         </td>
         <td align="center">
-             <%# Eval("maduan")%><br><%# Eval("tenduan")%>
+             <b><%# Eval("maduan")%></b><br><%# Eval("tenduan")%>
         </td>
         <td align="center">
              <%# Eval("tieude")%>
@@ -267,22 +257,25 @@
         </tr>
     </ItemTemplate>
     <FooterTemplate>
-    <tr>
+  
+    </FooterTemplate>
+    </asp:Repeater>
+      <tr>
     <td colspan="6" style="color:white;font-weight:bold">
     
     <font color="white"><i>*-Chọn phiếu thu cần xóa/phục hồi</i></font>
     <font color="white"><i><br>*-Phiếu thu đã xóa có nền màu xám</i></font><br>
     <font color="ButtonHighlight" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
     <br>
+        <asp:Label ID="lbl_del_pt" runat="server">
+        <input id="Button1" type="button" value="Xóa phiếu thu" class="btn" style="width:120px;height:25px" onclick="deletes('del');"/>
+        <input id="Button3" type="button" value="Phục hồi" class="btn" style="width:120px;height:25px" onclick="deletes('undel');"/>
+        </asp:Label>
 
-        <input id="Button1" type="button" value="Xóa phiếu thu" class="btn" style="width:120px;height:30px" onclick="deletes('del');"/>
-        <input id="Button3" type="button" value="Phục hồi" class="btn" style="width:120px;height:30px" onclick="deletes('undel');"/>
-        <input id="Button2" type="button" value="Hủy" style="width:120px;height:30px" class="btn" onclick="backs();"/><br>&nbsp
+        <input id="Button2" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
     </td>
     </tr>
     </table>
-    </FooterTemplate>
-    </asp:Repeater>
      <table width="100%">
      <tr align="right">
     <td colspan=3 align=right style="color:White">

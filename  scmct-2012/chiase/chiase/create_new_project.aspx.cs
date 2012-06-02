@@ -15,14 +15,18 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 functions.add_date_to_dropd(dropd_day_start, dropd_month_start, dropd_year_start,10);
                 functions.add_date_to_dropd(dropd_day_end, dropd_month_end, dropd_year_end,20);
                 display();
                 ASPxHtmlEditor1.ClientSideEvents.Validation = "ValidationHandler";
+                pn_create_new_project.Visible = functions.checkPrivileges("6", functions.LoginMemID(this), "C");//Display button to create a new project
             }
            
             txt_project_name.Focus();
-            panel_add_new_status.Visible = false;
+           
         }
         public void display()
         {
@@ -45,12 +49,8 @@ namespace chiase
             }
         
         }
-        
-        protected void btn_add_project_status_Click(object sender, EventArgs e)
-        {
-            panel_add_new_status.Visible = true;
-        }
-
+  
+        /*
         protected void btn_add_stutus_names_Click(object sender, EventArgs e)
         {
             try
@@ -81,7 +81,7 @@ namespace chiase
                 lbl_error.Text = "Không tạo được trạng thái mới";
             }
         }
-
+        */
         protected void btn_create_projects_Click(object sender, EventArgs e)
         {
             try
@@ -119,12 +119,12 @@ namespace chiase
                 lbl_error.Text = "Không tạo được dự án mới" ;
             }
         }
-
+        /*
         protected void btn_close_Click2(object sender, EventArgs e)
         {
             panel_add_new_status.Visible = false;
         }
-
+        */
         protected void btn_back_Click(object sender, EventArgs e)
         {
             //object refUrl = ViewState["RefUrl"];

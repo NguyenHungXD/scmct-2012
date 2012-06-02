@@ -49,6 +49,15 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_desc;
         
         /// <summary>
+        /// lbl_edit_allbum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_edit_allbum;
+        
+        /// <summary>
         /// btn_save_allbum control.
         /// </summary>
         /// <remarks>

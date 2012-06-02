@@ -15,6 +15,14 @@ namespace chiase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Check LogIn session
+            functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
+            lbl_add_member_project.Visible = functions.checkPrivileges("11", functions.LoginMemID(this), "C");
+            lbl_view_member_project.Visible = functions.checkPrivileges("11", functions.LoginMemID(this), "V");
+            lbl_approve_member.Visible = functions.checkPrivileges("11", functions.LoginMemID(this), "E");
+
+
                 display();
         }
         public void display()
@@ -158,6 +166,22 @@ namespace chiase
         protected void find_Click(object sender, EventArgs e)
         {
             seach();
+        }
+
+        protected void showListmember_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            try
+            {
+                Label lbl_member_del = (Label)e.Item.FindControl("lbl_member_del");
+                Label lbl_member_lock = (Label)e.Item.FindControl("lbl_member_lock");
+
+                lbl_member_del.Visible = functions.checkPrivileges("11", functions.LoginMemID(this), "D");
+                lbl_member_lock.Visible = functions.checkPrivileges("11", functions.LoginMemID(this), "L");
+
+            }
+            catch
+            { 
+            }
         }
     }
 }

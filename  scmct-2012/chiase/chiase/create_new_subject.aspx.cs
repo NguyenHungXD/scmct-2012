@@ -16,7 +16,10 @@ namespace chiase
         {
             if(!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
 
+                lbl_create_new_subject.Visible = functions.checkPrivileges("20", functions.LoginMemID(this), "C");
                 display();
                 ASPxHtmlEditor1.ClientSideEvents.Validation = "ValidationHandler";
             }

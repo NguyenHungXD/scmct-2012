@@ -18,9 +18,17 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
                 if (Request.QueryString["id"] != null)
                 {
+                    lbl_create_new_status_request.Visible = functions.checkPrivileges("16", functions.LoginMemID(this), "E");
                     display();
+                }
+                else
+                {
+                    lbl_create_new_status_request.Visible = functions.checkPrivileges("15", functions.LoginMemID(this), "C");
                 }
             }
         }

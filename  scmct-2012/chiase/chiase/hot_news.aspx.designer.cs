@@ -67,6 +67,15 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
         /// FileUpload1 control.
         /// </summary>
         /// <remarks>
@@ -128,6 +137,15 @@ namespace chiase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image Image2;
+        
+        /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// FileUpload2 control.
@@ -193,6 +211,15 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.Image Image3;
         
         /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
+        
+        /// <summary>
         /// FileUpload3 control.
         /// </summary>
         /// <remarks>
@@ -256,6 +283,15 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.Image Image4;
         
         /// <summary>
+        /// Label4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4;
+        
+        /// <summary>
         /// FileUpload4 control.
         /// </summary>
         /// <remarks>
@@ -274,22 +310,22 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.CheckBox CheckBox4;
         
         /// <summary>
-        /// btn_save control.
+        /// lbl_edit_hot_news control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_save;
+        protected global::System.Web.UI.WebControls.Label lbl_edit_hot_news;
         
         /// <summary>
-        /// btn_close control.
+        /// Button2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_close;
+        protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
         /// lbl_error control.

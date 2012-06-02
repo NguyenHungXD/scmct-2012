@@ -43,11 +43,13 @@
         <font size=3><b><asp:Label ID="lbl_error" runat="server" ></asp:Label></b></font>
         </td>
         <td valign="middle" align="right">
-                            <dx:ASPxButton ID="btn_create_projects" runat="server" Text="Lưu dự án" 
-                        CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                        SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px" 
-                        onclick="btn_create_projects_Click">
-                    </dx:ASPxButton>
+            <asp:Panel ID="pn_create_new_project" runat="server">
+                <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Lưu dự án" 
+                onclick="btn_create_projects_Click" 
+                CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120" Height="25">
+                </dx:ASPxButton>
+            </asp:Panel>
         </td>
     </tr>
     <tr>
@@ -62,7 +64,7 @@
     <td>
         <asp:TextBox ID="txt_project_code" runat="server"  class="txtformat" 
             Width="150px" Height="22px" BackColor="#CCFFCC">
-            </asp:TextBox> <i><font color="#0000CC">(Bạn nên thay đổi mã dự án phù hợp)</font></i>
+            </asp:TextBox> <i>(Bạn nên thay đổi mã dự án phù hợp)</font>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" Display="Dynamic" ForeColor="Red" ControlToValidate="txt_project_code" runat="server" ErrorMessage="Nhập mã dự án"></asp:RequiredFieldValidator>
     </td>
     </tr>
@@ -164,42 +166,10 @@
         </asp:DropDownList>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="dropd_status" Display="Dynamic" InitialValue="None" ForeColor="REd" runat="server" ErrorMessage="Chọn trạng thái"></asp:RequiredFieldValidator>
 
-        &nbsp;&nbsp;&nbsp;&nbsp<asp:LinkButton ID="btn_add_project_status" runat="server" 
-            Text="[Thêm trạng thái]" onclick="btn_add_project_status_Click"></asp:LinkButton>
+
             
         
-            <asp:Panel
-                ID="panel_add_new_status" runat="server" BackColor="#0099FF" 
-            Direction="LeftToRight" Height="50px" HorizontalAlign="Left" 
-            style="margin-left: 102px" Width="500">
-
- 
-
-
-                <table border=0 cellpadding=3 cellspacing=3 width=20%>
-                <tr>
-                <td>
-                               <asp:TextBox ID="txt_status_project" runat="server" class="txtformat"
-    Width="300px" Height="22px" BackColor="#CCFFCC"></asp:TextBox>
-                </td>
-                <td align=right>
-                    <dx:ASPxButton ID="btn_add_stutus_names" runat="server" Text="Tạo mới" 
-                        CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
-                        SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" Width="80px" 
-                        onclick="btn_add_stutus_names_Click">
-                    </dx:ASPxButton>
-                </td>
-                <td align=left>
-                    <dx:ASPxButton ID="btn_close" runat="server" Text="Đóng" 
-                        CssFilePath="~/App_Themes/SoftOrange/{0}/styles.css" CssPostfix="SoftOrange" 
-                        onclick="btn_close_Click2" SpriteCssFilePath="~/App_Themes/SoftOrange/{0}/sprite.css" 
-                        Width="80px">
-                    </dx:ASPxButton>
-                </td>
-                </tr>
-                </table>
-
-     </asp:Panel> 
+          
 
         </td>
     </tr>

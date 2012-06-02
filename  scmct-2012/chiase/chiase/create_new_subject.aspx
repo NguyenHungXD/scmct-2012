@@ -49,12 +49,13 @@
     <tr>
     <td colspan="3" align="right">
 
-        <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Lưu chủ đề" 
-            CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-            SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px" onclick="btn_create_new_subject_Click">
-        </dx:ASPxButton>
-
-
+        <asp:Label ID="lbl_create_new_subject" runat="server">
+                <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Lưu chủ đề" 
+                onclick="btn_create_new_subject_Click"
+                CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120" Height="25">
+                </dx:ASPxButton>
+        </asp:Label>
     </td>
     </tr>
     <tr>

@@ -28,8 +28,15 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                //Check LogIn session
+                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+
+
+                //txt_allbum_name.Text = Request.QueryString["projectid"];
+                lbl_error.Text = Request.QueryString["projectid"];
                 if (Request.QueryString["allbumid"] == null)
                 {
+                    
                     txt_allbum_name.Text = "Allbum ảnh " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
                     Panel1.Visible = true;
 

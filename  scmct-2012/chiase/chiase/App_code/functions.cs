@@ -8,14 +8,134 @@ using System.Data;
 using chiase.Objects;
 using System.Collections;
 using System.Text;
+using System.IO;
+using chiase.Objects;
 using DK2C.DataAccess.Web;
-
 namespace chiase
 {
    
     public static class functions
     {
         public static System.Web.UI.Page pages;
+        public static void checkLogIn(System.Web.UI.Page p, string userid, string vsessionid, string ipaddress)
+        {
+            if (!ValidateUserLogin(userid, vsessionid, ipaddress))
+            {
+                p.Response.Redirect("error_page.aspx");
+            }
+        }
+
+        public static Boolean checkOwnSection(string userid,string secid, string section, string fields, string fieldwhere)
+        {
+            try
+            {
+
+                string sql = String.Format(@"select count({0}) as cnt from {1} where {0}= {2} and {3}= {4}", fields, section, userid, fieldwhere, secid);
+
+
+                using (DataTable table = SQLConnectWeb.GetData(sql))
+                {
+                    int vcnt = int.Parse(table.Rows[0]["cnt"].ToString());
+                    if (vcnt > 0)
+                        return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        
+        }
+
+        public static Boolean checkPrivileges(string vmoduleid, string userid,string kind)
+        {
+            try
+            {
+                
+                //[V: view] | [C: Create] | [E: Edit] | [L: Lock] | [D: Delete]
+                string sWhere = "";
+                if (kind == "V")
+                    sWhere += "and isread='Y'";
+                if (kind == "C")
+                    sWhere += "and isinsert='Y'";
+                if (kind == "E")
+                    sWhere += "and isupdate='Y'";
+                if (kind == "L")
+                    sWhere += "and islock='Y'";
+                if (kind == "D")
+                    sWhere += "and isdelete='Y'";
+
+                string sql = @"select count(id) as cnt from PQ_PHAN_QUYEN_ND_CN where userid=@userid and moduleid=@moduleid " +sWhere;
+                using (DataTable table = SQLConnectWeb.GetData(sql, "@userid", userid, "@moduleid", vmoduleid))
+                {
+                    int vcnt = int.Parse(table.Rows[0]["cnt"].ToString());
+                    if (vcnt > 0)
+                        return true;
+                }
+                //Next check
+                string sql_next = @"select count(a.id) as cnt from PQ_PHAN_QUYEN_NHOM_CN a
+                              inner join ND_THONG_TIN_ND b on a.groupid =b.MEM_GROUP_ID
+                                    where b.id=@userid and a.moduleid=@moduleid " + sWhere;
+                using (DataTable table_next = SQLConnectWeb.GetData(sql_next, "@userid", userid, "@moduleid", vmoduleid))
+                {
+                    int vcnt_next = int.Parse(table_next.Rows[0]["cnt"].ToString());
+                    if (vcnt_next > 0)
+                        return true;
+                }
+                //else
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static Boolean ValidateUserLogin(string userid,string vsessionid,string ipaddress)
+        {
+            try
+            {
+                string sql = @"select count(id) as cnt from ND_LOG_IN_SESSION where userid=@userid and sessionid=@sessionid and ipaddress=@ipaddress";
+                using (DataTable table = SQLConnectWeb.GetData(sql, "@userid", userid, "@sessionid", vsessionid, "@ipaddress", ipaddress))
+                {
+                    int vcnt = int.Parse(table.Rows[0]["cnt"].ToString());
+                    if (vcnt > 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }catch
+            {
+                return false;
+            }
+        }
+
+        public static string getIPAddress()
+        {
+                HttpRequest currentRequest = System.Web.HttpContext.Current.Request;
+                string ipAddress = currentRequest.ServerVariables["HTTP_X_FORWARDED_FOR"];
+                if (ipAddress == null || ipAddress.ToLower() == "unknown")
+                    ipAddress = currentRequest.ServerVariables["REMOTE_ADDR"];
+                return ipAddress;
+        }
+        public static string randomstring(int length)
+        {
+            char[] chars = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+            string password = string.Empty;
+            Random random = new Random();
+
+            for (int i = 0; i < length; i++)
+            {
+                int x = random.Next(1, chars.Length);
+                //Don't Allow Repetation of Characters
+                if (!password.Contains(chars.GetValue(x).ToString()))
+                    password += chars.GetValue(x);
+                else
+                    i--;
+            }
+            return password;
+        }
+
         public static void add_date_to_dropd(DropDownList objday, DropDownList objmonth, DropDownList objyear, int addyear)
         {
             //Day
@@ -110,6 +230,18 @@ namespace chiase
             if (table == null || table.Rows.Count == 0) return "";
             return table.Rows[0][ND_THONG_TIN_DN.cl_MEM_ID].ToString();
         }
+        public static string LoginSession(System.Web.UI.Page page)
+        {
+            DataTable table = (DataTable)page.Session["ThanhVien"];
+            if (table == null || table.Rows.Count == 0) return "";
+            return table.Rows[0]["Sessionid"].ToString();
+        }
+        public static string LoginIPaddress(System.Web.UI.Page page)
+        {
+            DataTable table = (DataTable)page.Session["ThanhVien"];
+            if (table == null || table.Rows.Count == 0) return "";
+            return table.Rows[0]["ipaddress"].ToString();
+        }
         public static string LoginMemIDs()
         {
             DataTable table = (DataTable)pages.Session["ThanhVien"];
@@ -162,30 +294,14 @@ namespace chiase
             return GetStringDate(DateTime.Now);
         }
 
-        public static string getNo(string currentNo,int vmode)
+        public static string getNo(string currentNo)
         {
-            string result = "";
             int nextNo = 0;
-            //Phieu thu : PT-NO.000001,PT-NO.000002,....
-            if (vmode == 1)
-            { 
-                string[] vTemp = currentNo.Split('.');
-                nextNo = Convert.ToInt32(vTemp[1]);
-                nextNo += 1;
-                string temp = "000000" + nextNo;
-                result = "PT-NO." + temp.Substring(1, 6);
-            }
-            //Phieu thu : PC-NO.000001,PC-NO.000002,....
-            if (vmode == 2) 
-
-            {
-                string[] vTemp = currentNo.Split('.');
-                nextNo = Convert.ToInt32(vTemp[1]);
-                nextNo += 1;
-                string temp = "000000" + nextNo;
-                result = "PC-NO." + temp.Substring(1, 6);
-            }
-            return result;
+            string[] vTemp = currentNo.Split('.');
+            nextNo = Convert.ToInt32(vTemp[1]);
+            nextNo += 1;
+            string temp = "000000" + nextNo;
+            return String.Format("{0}.{1}", vTemp[0], temp.Substring(1, 6));
         }
 
          
@@ -264,7 +380,6 @@ namespace chiase
             if (booAm) str = "Âm " + str;
                 return str + "đồng chẵn.";
         }
-
 
 
         #region Khanhdtn
@@ -674,7 +789,5 @@ namespace chiase
         }
         
         #endregion
-        
-
     }
 }

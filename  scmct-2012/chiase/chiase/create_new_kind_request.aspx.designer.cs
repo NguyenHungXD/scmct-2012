@@ -58,6 +58,15 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_name;
         
         /// <summary>
+        /// lbl_create_kind_request control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_create_kind_request;
+        
+        /// <summary>
         /// btn_saves control.
         /// </summary>
         /// <remarks>

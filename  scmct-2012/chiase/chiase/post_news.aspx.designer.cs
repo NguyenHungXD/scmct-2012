@@ -58,6 +58,15 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblContentLength;
         
         /// <summary>
+        /// lbl_sort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_sort;
+        
+        /// <summary>
         /// txt_sort control.
         /// </summary>
         /// <remarks>
@@ -67,21 +76,21 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_sort;
         
         /// <summary>
-        /// btn_post_news control.
+        /// lbl_post_news control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_post_news;
+        protected global::System.Web.UI.WebControls.Label lbl_post_news;
         
         /// <summary>
-        /// btn_back control.
+        /// ASPxButton1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_back;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton ASPxButton1;
     }
 }

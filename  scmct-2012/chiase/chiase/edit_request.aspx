@@ -111,6 +111,18 @@
        <font color="white">Số ký tự bạn đã nhập(ký tự): <dx:ASPxLabel ID="lblContentLength" runat="server" ClientInstanceName="ContentLength" Text="0" Font-Bold="True"></dx:ASPxLabel></font>
             </td>
     </tr>
+
+     <tr>
+    <td>
+    Dự án:
+    </td>
+    <td>
+       <asp:DropDownList ID="dropd_project" runat="server">
+        </asp:DropDownList>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator8" Display="Dynamic" ControlToValidate="dropd_project" ForeColor="Red" InitialValue="None" runat="server" ErrorMessage="Chọn dự án"></asp:RequiredFieldValidator>
+    </td>
+    </tr>
+
     <tr>
     <td colspan="2">
     Yêu cầu:
@@ -122,10 +134,9 @@
     </tr>
     <tr>
     <td align="right" colspan="2"><br>
-        <dx:ASPxButton ID="btn_requests" runat="server" Text="Lưu thông tin" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
-            CssPostfix="Aqua" SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" 
-            Width="120px" onclick="btn_requests_Click">
-        </dx:ASPxButton>
+        <asp:Label ID="lbl_edit_request" runat="server">
+            <asp:Button ID="Button1" runat="server" Text="Lưu thông tin" onclick="btn_requests_Click" class="btn" Width="120px" Height ="25px"  />
+        </asp:Label>
     </td>
     </tr>
     <tr>

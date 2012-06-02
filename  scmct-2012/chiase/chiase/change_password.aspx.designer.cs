@@ -139,21 +139,12 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.HyperLink link_forget_pass;
         
         /// <summary>
-        /// btn_changepass control.
+        /// Button2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_changepass;
-        
-        /// <summary>
-        /// btn_back control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_back;
+        protected global::System.Web.UI.WebControls.Button Button2;
     }
 }

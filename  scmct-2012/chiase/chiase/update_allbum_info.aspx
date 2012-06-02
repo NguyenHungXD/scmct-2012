@@ -18,10 +18,10 @@
     <form id="form1" runat="server">
 
                 <br>
-            <asp:Label ID="lbl_error" runat="server" style="font-size:medium"></asp:Label>
+            <asp:Label ID="lbl_error" runat="server" style="font-size:medium" ForeColor="White"></asp:Label>
             <br>
             <br>
-<table border=0 cellpadding=3 cellspacing=3 width=100%>
+<table border=0 cellpadding=3 cellspacing=3 width=100% style="color:White">
         <tr>
 
         <td>
@@ -45,10 +45,12 @@
         <td>&nbsp
         </td>
         <td>
-            <dx:ASPxButton ID="btn_save_allbum" runat="server" Text="Lưu allbum" 
-                CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px" OnClick="btn_save_allbum_Click">
-            </dx:ASPxButton>
+            <asp:Label ID="lbl_edit_allbum" runat="server">
+                <dx:ASPxButton ID="btn_save_allbum" runat="server" Text="Lưu allbum" 
+                    CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+                    SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px" OnClick="btn_save_allbum_Click">
+                </dx:ASPxButton>
+            </asp:Label>
 
         </td>
         </tr>
