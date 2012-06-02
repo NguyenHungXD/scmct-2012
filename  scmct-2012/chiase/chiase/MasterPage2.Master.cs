@@ -40,8 +40,8 @@ namespace chiase
                 }
                 else lbl_lasted_access.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
                 String avatar_name = Convert.IsDBNull(table.Rows[0][ND_THONG_TIN_ND.cl_AVATAR_PATH]) ? "default_img.gif" : (String)table.Rows[0][ND_THONG_TIN_ND.cl_AVATAR_PATH];
-                imgUser.ImageUrl = "../Images/avatars/" + avatar_name;
-                link_member_page.NavigateUrl = "../my_page.aspx?id=" + table.Rows[0]["id"];
+                imgUser.ImageUrl = "~/Images/avatars/" + avatar_name;
+                link_member_page.NavigateUrl = "~/~/my_page.aspx?id=" + table.Rows[0]["id"];
             }
         }
 
