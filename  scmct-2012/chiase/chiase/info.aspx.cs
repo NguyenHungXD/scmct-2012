@@ -15,7 +15,8 @@ namespace chiase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-      
+
+                Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='info.aspx' title='Cập nhật thông tin khác'>Cập nhật thông tin khác</a>";
                 resetColor();
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));

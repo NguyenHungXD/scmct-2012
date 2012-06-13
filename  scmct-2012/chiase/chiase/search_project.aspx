@@ -24,7 +24,6 @@
         else
             document.getElementById(divid).innerHTML = "<a style=cursor:pointer title='Mở khóa'><img src=images/unlockicon.gif width=20 height=20 onclick=lock_project(" + id + ",'N','" + divid + "') /></a>";
             
-       
     }
     function del_project(id, enable,divid,dividlock) {
         var url = "update_project.aspx?id=" + id + "&enable=" + enable + "&vmode=del";
@@ -52,14 +51,17 @@
                 clientEdtEnd.SetDate(new Date(startDate.valueOf() + monthDuration));
             }
         }
-
+        function backs() {
+            window.location = "admin.aspx";
+        }
 
 
 </script>
 <fieldset>
 <i><font color="white">*-Tìm kiếm theo điều kiện tương đối - bạn có thể để trống điều kiện bạn không quan tâm.</font></i>
-<br>&nbsp
+
 <table cellpadding="3" cellspacing="3" border="0" width="100%">
+    <tr><td colspan=5><hr></td></tr>
     <tr>
     <td>
     Mã dự án:
@@ -142,15 +144,19 @@
         </asp:DropDownList>
     </td>
     </tr>
+    <tr><td colspan=5><hr></td></tr>
     <tr>
     <td>&nbsp
     </td>
-    <td align="left"><br>
+    <td align="left">
         
-        
+   
 
-            <asp:Panel ID="pn_view_project" runat="server"><asp:Button ID="Button2" runat="server" Text="Tìm kiếm" class="btn" Height="25px" Width="120px" onclick="btn_search_Click"/></asp:Panel>
-
+     
+<asp:Label ID="pn_view_project" runat="server" Text="">
+            <asp:Button ID="Button2" runat="server" Text="Tìm kiếm" class="btn" Height="25px" Width="120px" onclick="btn_search_Click"/>
+</asp:Label>
+            <input id="Button1" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/>
     </td>
     <td colspan="2">&nbsp
     </td>
@@ -161,7 +167,7 @@
 <fieldset>
 <!--<legend><b><font size=2 color=white>Danh sách dự án</font></b></legend>-->
     <asp:Panel ID="pn_create_new_project" runat="server">
- <p align="right"><a style="cursor:pointer;height:25px;width:120px;font-weight:bold" class="btn" id="new_project" title="Tạo dự án mới">Tạo dự án mới</a></p>
+ <p align="right"><a style="cursor:pointer;height:25px;width:120px;font-weight:bold;padding:5px 5px 5px 5px" class="btn" id="new_project" title="Tạo dự án mới"><img src="images/add.gif" width=20 height=20>Tạo dự án mới</a></p>
   </asp:Panel>
                  <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" 
                     AllowDragging="True" AllowResize="True"
@@ -187,38 +193,38 @@
 <asp:Repeater ID="showListProject" runat="server"  onitemdatabound="showListProject_ItemDataBound1">
         <HeaderTemplate>
         <table border="0" cellpadding="2" cellspacing="1" width="60%"  style="border:0px solid #CCFFFF;"><tr>
-        <td valign="middle" align="center"><img src="images/edit.gif" width="25" height="25">: Sửa</td>
-        <td valign="middle" align="center"><img src="images/deleteicon.gif" width="25" height="25">: Xóa</td>
-        <td valign="middle" align="center"><img src="images/undeleteicon.gif" width="25" height="25">: Phục hồi</td>
-        <td valign="middle" align="center"><img src="images/lockicon.gif" width="25" height="25">: Khóa</td>
-        <td valign="middle" align="center"><img src="images/unlockicon.gif" width="25" height="25">: Mở khóa</td>
-        <td valign="middle" align="center"><img src="images/add_member.png" width="25" height="25">: Thêm thành viên</td>
+        <td valign="middle" align="center"><img src="images/edit.gif" width="25" height="25"> Sửa</td>
+        <td valign="middle" align="center"><img src="images/deleteicon.gif" width="25" height="25"> Xóa</td>
+        <td valign="middle" align="center"><img src="images/undeleteicon.gif" width="25" height="25"> Phục hồi</td>
+        <td valign="middle" align="center"><img src="images/lockicon.gif" width="25" height="25"> Khóa</td>
+        <td valign="middle" align="center"><img src="images/unlockicon.gif" width="25" height="25"> Mở khóa</td>
+        <td valign="middle" align="center"><img src="images/add_member.png" width="25" height="25"> Thêm thành viên</td>
         </tr>
         </table>
         <table border="0" cellpadding="0" cellspacing="1" width="100%"  style="border:1px solid #CCFFFF;">
-        <tr class="new_post">
+        <tr class="btn_project" style="text-align:center;font-weight:bold;">
         <td>
-            <img src="images/edit_icon.gif" width="20" height="20" alt="Cập nhật dự án"/>
+           <p>&nbsp</p>
         </td>
         <td>
-            <h6>Mã dự án</h6>
+            Mã dự án
         </td>
         <td>
-            <h6>Tên dự án</h6>
+            Tên dự án
         </td>
         <td>
-            <h6>Ngày bắt đầu/Kết thúc</h6>
+            Ngày bắt đầu/Kết thúc
         </td>
         <td>
-            <h6>Người tạo/Ngày tạo</h6>
+            Người tạo/Ngày tạo
         </td>
         <td>
-            <h6>Trạng thái</h6>
+            Trạng thái
         </td>
         </tr>
         </HeaderTemplate>
         <ItemTemplate>
-                    <tr style="background-color:white;color:Black">
+                    <tr style="background-color:#1E90FF;color:white">
                     <td with=5% valign="middle" align="center" >
                         <table cellpadding=1 cellspacing=1 border=0><tr>
                             

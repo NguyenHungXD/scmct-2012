@@ -14,7 +14,7 @@
         function deletes(vmode) {
             var obj = document.forms["chiase"];
             var checked = false;
-            if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để hủy.")) {
+            if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để Đóng.")) {
                 if (obj.chk.length > 0) {
                     for (i = 0; i < obj.chk.length; i++) {
                         if (obj.chk[i].checked == true) {
@@ -56,6 +56,7 @@
 <fieldset>
     <table border="0" cellpadding=3 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;">
         <tr style="color:White;font-weight:bold"><td colspan="8"><font size=3><p align="center">Tìm kiếm phiếu thu</p></font><br>*-Bạn có thể bỏ qua điều kiện bạn không quan tâm.</td></tr>
+        <tr><td colspan=8><hr></td></tr>
         <tr>
         <td >
             Mã phiếu thu: 
@@ -175,45 +176,47 @@
                     Width="250px"></asp:TextBox>
         </td>
         </tr>
+        <tr><td colspan=8><hr></td></tr>
         <tr>
         <td>&nbsp</td><td colspan="3">&nbsp
        
             <asp:Label ID="lbl_search_pt" runat="server">
          <asp:Button ID="Button4" runat="server"  Text="Tìm kiếm" class="btn" onclick="btn_search_Click" Height="25px" Width="100px"/>
          </asp:Label>
+         <input id="Button5" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/>
         </td>
         </tr>
         </table>
 </fieldset>
-<hr>
+
 <asp:Repeater ID="phieu_thu_list" runat="server" 
         onitemdatabound="phieu_thu_list_ItemDataBound">
     <HeaderTemplate>
     <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;color:Black">
-        <tr bgcolor="#990099" style="color:White;font-weight:bold"><td align="center" colspan="8">Danh sách phiếu thu</td></tr>
-        <tr class="new_post">
+        <tr bgcolor="#1A15FB" style="color:White;font-weight:bold"><td align="center" colspan="8">DANH SÁCH PHIẾU THU</td></tr>
+        <tr class="btn_project" style="text-align:center;font-weight:bold;">
         <td width="7%">
-            STT
+            <p>STT</p>
         </td>
         <td width="10%">
             Mã phiếu thu
         </td>
         <td width="10%">
-            Người lập/Ngày lập
+            Người lập
         </td>
 
 
         <td width="10%">
-            Người nộp tiền/Địa chỉ
+            Người nộp tiền
         </td>
        <td width="10%">
             Nhận tiền từ
         </td>
-               <td width="5%">
-            Tổng cộng(VNĐ)
+               <td width="10%">
+            Tổng tiền(VNĐ)
         </td>
         <td width="10%">
-            Mã dự án/Tên dự án
+            Dự án
         </td>
         <td width="10%">
             Yêu cầu
@@ -272,7 +275,7 @@
         <input id="Button3" type="button" value="Phục hồi" class="btn" style="width:120px;height:25px" onclick="deletes('undel');"/>
         </asp:Label>
 
-        <input id="Button2" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
+        <input id="Button2" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
     </td>
     </tr>
     </table>

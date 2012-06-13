@@ -22,15 +22,15 @@ namespace chiase
                 else if (Request.QueryString["mode"] == "3")
                     update_liked_img();
                 else if (Request.QueryString["mode"] == "4")
-                    update_liked_allbum();
+                    update_liked_album();
                 else if (Request.QueryString["mode"] == "5")
-                    update_liked_allbum_comment();
+                    update_liked_album_comment();
                 else
                     update_liked_post();
             }
         }
 
-        public void update_liked_allbum_comment()
+        public void update_liked_album_comment()
         {
             try
             {
@@ -50,7 +50,7 @@ namespace chiase
                                             "@user_id", nd.Rows[0]["id"],
                                             "@mode", '5');
 
-                    String sql_view = "UPDATE IMG_ALLBUM_COMMENT SET LIKED=LIKED+1 WHERE id=@comment_id";
+                    String sql_view = "UPDATE IMG_album_COMMENT SET LIKED=LIKED+1 WHERE id=@comment_id";
                     SQLConnectWeb.ExecuteNonQuery(sql_view,
                             "@comment_id", Request.QueryString["comment_id"]);
 
@@ -65,7 +65,6 @@ namespace chiase
 
         public void update_liked_img()
         {
-
             try
             {
                 DataTable nd = (DataTable)Session["ThanhVien"];
@@ -84,7 +83,7 @@ namespace chiase
                                             "@user_id", nd.Rows[0]["id"],
                                             "@mode", '3');
 
-                    String sql_view = "UPDATE IMG_ALLBUM_DETAIL SET LIKED=LIKED+1 WHERE img_id=@img_id";
+                    String sql_view = "UPDATE IMG_album_DETAIL SET LIKED=LIKED+1 WHERE img_id=@img_id";
                     SQLConnectWeb.ExecuteNonQuery(sql_view,
                             "@img_id", Request.QueryString["img_id"]);
                    
@@ -95,29 +94,29 @@ namespace chiase
             }
 
         }
-        public void update_liked_allbum()
+        public void update_liked_album()
         {
             try
             {
                 DataTable nd = (DataTable)Session["ThanhVien"];
                 String sql = string.Format(@"SELECT count(*) cnt
                          FROM BV_VOTE a
-                        WHERE bai_viet_id={0} and user_id={1} and mode=4", Request.QueryString["allbum_id"], nd.Rows[0]["id"]);
+                        WHERE bai_viet_id={0} and user_id={1} and mode=4", Request.QueryString["album_id"], nd.Rows[0]["id"]);
                 DataTable table = SQLConnectWeb.GetTable(sql);
 
                 int cnt = (int)table.Rows[0]["cnt"];
 
                 if (cnt == 0)
                 {
-                    String sql_insert = "insert into bv_vote (bai_viet_id,user_id,mode)values(@allbum_id,@user_id,@mode)";
+                    String sql_insert = "insert into bv_vote (bai_viet_id,user_id,mode)values(@album_id,@user_id,@mode)";
                     SQLConnectWeb.ExecuteNonQuery(sql_insert,
-                                            "@allbum_id", Request.QueryString["allbum_id"],
+                                            "@album_id", Request.QueryString["album_id"],
                                             "@user_id", nd.Rows[0]["id"],
                                             "@mode", '4');
 
-                    String sql_view = "UPDATE IMG_ALLBUM SET LIKED=LIKED+1 WHERE ALLBUM_ID=@ALLBUM_ID";
+                    String sql_view = "UPDATE IMG_album SET LIKED=LIKED+1 WHERE album_ID=@album_ID";
                     SQLConnectWeb.ExecuteNonQuery(sql_view,
-                            "@ALLBUM_ID", Request.QueryString["allbum_id"]);
+                            "@album_ID", Request.QueryString["album_id"]);
                 }
             }
             catch (Exception ex)

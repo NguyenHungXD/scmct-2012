@@ -107,8 +107,8 @@ namespace chiase
                     //    "1", dropd_request_kind.SelectedValue,memid ,
                     //  functions.GetStringDatetime(), "", "");
                     if (yc >0)
-                        lbl_result.Text = String.Format("Đã gửi yêu cầu thành công. Bạn có thể xem trạng thái yêu cầu của mình trong <font color=red><a href=my_page.aspx?id={0}>trang của tôi</a></font>", memid);
-                    else lbl_result.Text = "Yêu cầu gửi không thành công, vui lòng kiểm tra lại thông tin!";
+                        lbl_result.Text = String.Format("Đã gửi yêu cầu thành công. Bạn có thể xem trạng thái yêu cầu của mình trong <font color=red><a href=my_page.aspx?id={0}>trang của tôi</a></font><br>", memid);
+                    else lbl_result.Text = "Yêu cầu gửi không thành công, vui lòng kiểm tra lại thông tin!<br>";
                 }
                 else
                 {

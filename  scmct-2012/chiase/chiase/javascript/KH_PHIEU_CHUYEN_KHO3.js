@@ -1,12 +1,23 @@
-         $(document).ready(function() {
+﻿         $(document).ready(function() {
                  $.mkv.moveUpandDown("#tablefind");
-               setControlFind($.mkv.queryString("idkhoachinh"));
+                 var idkhoachinh = $.mkv.queryString("idkhoachinh");
+                 if (idkhoachinh != "" && idkhoachinh != null) {
+                     setControlFind(idkhoachinh);
+                 }
+                 else {
+                     setDefaultValues();
+                     loadTableAjaxKH_PHIEU_CHUYEN_KHO_CT();
+                 }
+                 setPerrmission(idkhoachinh);
                  $("#luu").click(function () {
+                     var btnluu = document.getElementById("luu");
+                     if (btnluu != null && validateOnSave() == false)
+                         return;
                    $(this).Luu({
-                         ajax:"../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=Luu"
+                         ajax:"ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=Luu"
                       },null,function () {
                            $.LuuTable({
-                                 ajax:"../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=luuTableKH_PHIEU_CHUYEN_KHO_CT&PCK_ID=" + $.mkv.queryString("idkhoachinh"),
+                                 ajax:"ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=luuTableKH_PHIEU_CHUYEN_KHO_CT&PCK_ID=" + $.mkv.queryString("idkhoachinh"),
                                  tablename:"gridTable"
                            });
                       });
@@ -17,7 +28,7 @@
                 });
                 $("#xoa").click(function () {
                    $(this).Xoa({
-                         ajax:"../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=xoa"
+                         ajax:"ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=xoa"
                     },null,function () {
                          loadTableAjaxKH_PHIEU_CHUYEN_KHO_CT('');
                      });
@@ -25,35 +36,37 @@
                 $("#timKiem").click(function () {
                     Find($(this)); 
                  });
-         });
+            });
+
            function setControlFind(idkhoatimkiem) {
               if(idkhoatimkiem != "" && idkhoatimkiem != null){
-                 $.BindFind({ajax:"../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=setTimKiem&idkhoachinh="+idkhoatimkiem},null,function () {
+                 $.BindFind({ajax:"ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=setTimKiem&idkhoachinh="+idkhoatimkiem},null,function () {
                      loadTableAjaxKH_PHIEU_CHUYEN_KHO_CT($.mkv.queryString("idkhoachinh"));                    
                  });
-              }else{loadTableAjaxKH_PHIEU_CHUYEN_KHO_CT();}         
-            }
+              }else{loadTableAjaxKH_PHIEU_CHUYEN_KHO_CT();}
+         }
+
           function Find(control,page) {
               if(page == null)page = "1";
               $(control).TimKiem({
-                     ajax:"../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=TimKiem&page="+page
+                     ajax:"ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=TimKiem&page="+page
                });
           }
          function xoaontable(control,bool){
            if(bool || bool == null)
               $(control).XoaRow({
-                 ajax:"../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=xoaKH_PHIEU_CHUYEN_KHO_CT"
+                 ajax:"ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=xoaKH_PHIEU_CHUYEN_KHO_CT"
               });
          }
          function loadTableAjaxKH_PHIEU_CHUYEN_KHO_CT(idkhoa,page)
          {
              if(idkhoa == null) idkhoa = "";
                  if(page == null) page = "1";
-                 $("#tableAjax_KH_PHIEU_CHUYEN_KHO_CT").html('<img src="../images/loading-bar.gif" style="margin:0 41%;padding:10px 0 10px 0"/>'); 
+                 $("#tableAjax_KH_PHIEU_CHUYEN_KHO_CT").html('<img src="images/loading-bar.gif" style="margin:0 41%;padding:10px 0 10px 0"/>'); 
                   $.ajax({
                  type:"GET",
                  cache:false,
-                 url:"../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=loadTableKH_PHIEU_CHUYEN_KHO_CT&PCK_ID="+idkhoa+"&page="+page,
+                 url:"ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=loadTableKH_PHIEU_CHUYEN_KHO_CT&PCK_ID="+idkhoa+"&page="+page,
                   success: function (value){
                          document.getElementById("tableAjax_KH_PHIEU_CHUYEN_KHO_CT").innerHTML=value;
                         $("table.jtable tr:nth-child(odd)").addClass("odd");
@@ -62,9 +75,9 @@
                     }
              });
          }
-         function HH_IDSearch(obj)
-         {
-             $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=HH_IDSearch",{
+         function HH_IDSearch(obj) {
+         
+             $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=HH_IDSearch",{
                  minChars: 0,
                  width: 350,
                  scroll: true,
@@ -84,15 +97,18 @@
                      obj.focus();
                  }, 100);
              });
+            
          }
-         function PNK_CT_IDSearch(obj)
-         {
+         function PNK_CT_IDSearch(obj) {
 
              var tr = obj.parentNode.parentNode;
-             var hhID = tr.cells[2].childNodes["HH_ID"];
-             var duan = document.getElementById("DU_AN_ID");
+             var hhID = tr.cells[2].childNodes[0];           
              var kho = document.getElementById("KHO_XUAT_ID");
-             $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=PNK_CT_IDSearch&sHH_ID=" + hhID.value + "&sDU_AN_ID=" + duan.value + "&sKHO_ID=" + kho.value, {
+             var error = document.getElementById("show_eror");
+             error.innerHTML = "";
+
+
+             $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=PNK_CT_IDSearch&sHH_ID=" + hhID.value + "&sKHO_ID=" + kho.value, {
                  minChars: 0,
                  width: 650,
                  scroll: true,
@@ -112,9 +128,10 @@
                  }, 100);
              });
          }
+
          function NGUOI_CHUYENSearch(obj)
          {
-             $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=NGUOI_CHUYENSearch",{
+             $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=NGUOI_CHUYENSearch",{
              minChars:0,
              width:350,
              scroll:true,
@@ -129,7 +146,7 @@
          }
          function KHO_XUAT_IDSearch(obj)
          {
-             $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=KHO_XUAT_IDSearch",{
+             $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=KHO_XUAT_IDSearch",{
              minChars:0,
              width:350,
              scroll:true,
@@ -144,7 +161,7 @@
          }
          function KHO_NHAP_IDSearch(obj)
          {
-             $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=KHO_NHAP_IDSearch",{
+             $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=KHO_NHAP_IDSearch",{
              minChars:0,
              width:350,
              scroll:true,
@@ -159,7 +176,7 @@
          }
          function DU_AN_IDSearch(obj)
          {
-             $(obj).unautocomplete().autocomplete("../ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=DU_AN_IDSearch",{
+             $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=DU_AN_IDSearch",{
              minChars:0,
              width:350,
              scroll:true,

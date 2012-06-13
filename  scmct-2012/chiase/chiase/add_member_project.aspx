@@ -59,7 +59,7 @@
          var obj = document.forms["form1"];
          var checked = false;
          if (typeof (obj.chk) == "undefined") return;
-         if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để hủy.")) 
+         if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để Đóng.")) 
          {
              if (obj.chk.length > 0) {
                  for (i = 0; i < obj.chk.length; i++) {
@@ -84,6 +84,11 @@
          }
 
      }
+
+     function backs() {
+         window.location = "admin.aspx";
+     }
+
     </script>
 
 
@@ -527,6 +532,8 @@
             <asp:Label ID="lbl_add_member_project" runat="server">
                     <asp:Button ID="Button1" runat="server" Text="Lưu thông tin" class="btn" Height="25px" Width="120px" onclick="btn_create_projects_Click"/>
             </asp:Label>
+
+            <%--<input id="Button4" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/>--%>
         </td>
         </tr>
         </table>
@@ -542,36 +549,43 @@
             onitemdatabound="showListmember_ItemDataBound">
         
         <HeaderTemplate>
+        <table border="0" cellpadding="2" cellspacing="1" width="40%"  style="border:0px solid #CCFFFF;"><tr>
+        <td valign="middle" align="center"><img src="images/deleteicon.gif" width="25" height="25"> Xóa</td>
+        <td valign="middle" align="center"><img src="images/undeleteicon.gif" width="25" height="25"> Phục hồi</td>
+        <td valign="middle" align="center"><img src="images/lockicon.gif" width="25" height="25"> Khóa</td>
+        <td valign="middle" align="center"><img src="images/unlockicon.gif" width="25" height="25"> Mở khóa</td>
+        </tr>
+        </table>
         <table border="0" cellpadding="0" cellspacing="1" width="100%"  style="border:1px solid #CCFFFF;">
-        <tr class="new_post">
+        <tr class="btn_project" style="text-align:center;font-weight:bold;">
         <td >
-            &nbsp
+           <p> &nbsp</p>
         </td>
         <td>
-            <h6>Tên đăng nhập</h6>
+           <p>  Tên đăng nhập </p>
         </td>
         <td>
-            <h6>Tên thành viên</h6>
+            Tên thành viên
         </td>
         <td>
-            <h6>Nhóm</h6>
+            Nhóm
         </td>
         <td>
-            <h6>Tham gia</h6>
+            Tham gia
         </td>
         <td>
-            <h6>Vị trí</h6>
+            Vị trí
         </td>
          <td>
-            <h6>Người tạo</h6>
+            Người tạo
         </td>
         <td>
-            <h6>Trạng thái</h6>
+            <p>Trạng thái</p>
         </td>
         </tr>
         </HeaderTemplate>
         <ItemTemplate>
-                    <tr class="new_post_details">
+                    <tr style="background-color:#1E90FF;color:#FFFFFF">
                     <td align="center">
                             <table cellpadding=1 cellspacing=1 border=0>
                             <tr>

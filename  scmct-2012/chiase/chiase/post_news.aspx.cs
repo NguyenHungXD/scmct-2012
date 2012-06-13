@@ -134,7 +134,7 @@ namespace chiase
 
                         //else
                         //    lbl_error.Text = "Đăng bài không thành công";
-                        string sqlgetmaxID = @"select BAI_VIET_ID from BV_BAI_VIET where BAI_VIET_ID=(select max(BAI_VIET_ID) from BV_BAI_VIET where nguoi_tao=@nguoi_tao and bai_viet_cha is null)";
+                        string sqlgetmaxID = @"select BAI_VIET_ID from BV_BAI_VIET where BAI_VIET_ID=(select max(BAI_VIET_ID) from BV_BAI_VIET where nguoi_tao=@nguoi_tao and bai_viet_cha_id is null)";
                         DataTable dt = SQLConnectWeb.GetData(sqlgetmaxID, "@nguoi_tao", memid);
                         Response.Redirect("post_show_details.aspx?news_id=" + dt.Rows[0]["BAI_VIET_ID"]);
                     }

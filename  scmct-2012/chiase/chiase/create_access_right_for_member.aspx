@@ -91,7 +91,7 @@
             var obj = document.forms["chiase"];
             var checked = false;
             var vuserid = document.getElementById("divuserid").value;
-            if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để hủy.")) {
+            if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để Đóng.")) {
                 if (obj.chk_all.length > 0) {
                     for (i = 0; i < obj.chk_all.length; i++) {
                         var vView = returnvalChecked(obj.chk_view[i]);
@@ -119,7 +119,7 @@
 
                 if (vmode == "create_new") {
                     var error = "Bạn chưa chọn quyền để xét cho thành viên!";
-                    var result = "Cập nhật quyền cho nhóm thành thành công!";
+                    var result = "Cập nhật quyền cho thành thành công!";
                 }
 
                 if (checked == false)
@@ -131,7 +131,7 @@
         }
 
         function backs() {
-            window.location = "admin.aspx";
+            window.close();
         }
 
     </script>
@@ -170,10 +170,10 @@
         <tr>
         <td>&nbsp</td>
         <td align="left">
-
-            <asp:Button ID="Button3" runat="server" Text="Tìm kiếm" class="btn" 
-                Height="25px" Width="120px" onclick="Button3_Click" />
-
+            <asp:Label id="lbl_search" runat="server" Text="">
+                <asp:Button ID="Button3" runat="server" Text="Tìm kiếm" class="btn" Height="25px" Width="120px" onclick="Button3_Click" />
+            </asp:Label>
+                <input id="Button4" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/>
         </td>
         </tr>
                 <tr>
@@ -182,16 +182,16 @@
         </tr>
         </table>
 </fieldset>
-<hr>
+
     <asp:Repeater ID="module_list" runat="server" 
         onitemdatabound="module_list_ItemDataBound">
     <HeaderTemplate>
     <table border="0" cellpadding=3 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;color:Black">
-        <tr bgcolor="#990099" style="color:White;font-weight:bold"><td align="center" colspan="8">Danh sách chức năng</td></tr>
-        <tr class="new_post">
+        <tr bgcolor="#1A15FB" style="color:White;font-weight:bold"><td align="center" colspan="8">DANH SÁCH CHỨC NĂNG HỆ THỐNG</td></tr>
+        <tr class="btn_project" style="text-align:center;font-weight:bold;">
         <td width="10%">
             
-            Setup code<br>Mã chức năng
+            Mã chức năng
         </td>
                         <td width="15%">
             Tên chức năng
@@ -256,18 +256,20 @@
         </tr>
     </ItemTemplate>
     <FooterTemplate>
-    <tr>
+    </FooterTemplate>
+    </asp:Repeater>
+        <tr>
     <td colspan="6" style="color:white;font-weight:bold"><br>
     <i>*-Chọn quyền cần xét cho nhóm thành viên</i>
-    <i><br>*-Nhóm thành viên đã xóa có nền màu vàng</i><font color="ButtonHighlight" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
+    <i><br>*-Nhóm thành viên đã xóa có nền màu vàng</i><font color="white" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
+    <asp:Label id="lbl_save" runat="server" Text="">
     <input id="Button1" type="button" value="Lưu thông tin" class="btn" style="width:125px;height:25px" onclick="updates('create_new')"/>
-    <input id="Button2" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
+    </asp:Label>
+    <input id="Button2" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
         
     </td>
     </tr>
     </table>
-    </FooterTemplate>
-    </asp:Repeater>
      <table width="100%">
      <tr align="right">
     <td colspan=3 align=right style="color:White">

@@ -20,11 +20,12 @@
 </script>
 
    <fieldset>
-<legend>Quên mật khẩu -  Nhập tên đăng nhập hoặc địa chỉ email</legend> 
+
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
     <td align=center colspan=2><br>
         <font size=3><b><asp:Label ID="lbl_error" runat="server" ></asp:Label></font><br>
+        <p align="left">Nhập tên đăng nhập hoặc địa chỉ email</p>
         <hr>
         </td>
     </tr>
@@ -67,7 +68,7 @@
     <asp:Button ID="Button2" runat="server" Text="Lấy lại mật khẩu" class="btn" Height="25px" Width="120px" onclick="btn_getpassword_Click"/>
         </td>
         <td>
- <input id="Button3" type="button" value="Hủy" onclick="backs();" style="width:120px;height:25px" class="btn"/>
+ <input id="Button3" type="button" value="Đóng" onclick="backs();" style="width:120px;height:25px" class="btn"/>
         </td>
 </tr>
 <tr>

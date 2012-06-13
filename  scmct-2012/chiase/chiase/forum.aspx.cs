@@ -56,7 +56,7 @@ namespace chiase
                          FROM BV_BAI_VIET a
                         INNER JOIN  ND_THONG_TIN_DN b ON  a.NGUOI_TAO=b.MEM_ID
                         INNER JOIN  ND_THONG_TIN_ND c ON  a.NGUOI_TAO=c.ID
-                        WHERE CHU_DE_ID={0} and BAI_VIET_CHA_ID IS NULL and a.deleted is null", id);
+                        WHERE CHU_DE_ID={0} and BAI_VIET_CHA_ID IS NULL and a.deleted is null and a.trang_thai_id=1", id);
                 DataTable baiviet = SQLConnectWeb.GetTable(sql);
                 //DataTable baiviet = BV_BAI_VIET.GetTableFields(BV_BAI_VIET.cl_CHU_DE_ID + "=" + id,
                 //    new string[] { BV_BAI_VIET.cl_SORT }, BV_BAI_VIET.cl_TIEU_DE, BV_BAI_VIET.cl_NOI_DUNG);

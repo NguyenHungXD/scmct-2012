@@ -21,7 +21,7 @@
         function deletes(vmode) {
             var obj = document.forms["chiase"];
             var checked = false;
-            if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để hủy.")) {
+            if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để Đóng.")) {
                 if (obj.chk.length > 0) {
                     for (i = 0; i < obj.chk.length; i++) {
                         if (obj.chk[i].checked == true) {
@@ -158,6 +158,7 @@
             <asp:Button ID="btn_search" runat="server" Text="Tìm kiếm" class="btn" 
                 Height="25px" onclick="btn_search_Click" Width="120px"  />
         </asp:Label>
+        <input id="Button6" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/>
         </td>
         </tr>
         </table>
@@ -222,7 +223,7 @@
             <input id="Button4" type="button" value="Khóa nhóm" class="btn" style="width:125px;height:25px" onclick="deletes('lock')"/>
             <input id="Button5" type="button" value="Mở khóa nhóm" class="btn" style="width:125px;height:25px" onclick="deletes('unlock')"/>
         </asp:Label>
-        <input id="Button2" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
+        <input id="Button2" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
         
     </td>
     </tr>

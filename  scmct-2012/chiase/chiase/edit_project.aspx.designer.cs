@@ -85,6 +85,15 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
+        /// upload_img control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload upload_img;
+        
+        /// <summary>
         /// ASPxHtmlEditor1 control.
         /// </summary>
         /// <remarks>

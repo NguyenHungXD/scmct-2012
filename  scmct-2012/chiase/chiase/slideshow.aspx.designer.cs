@@ -67,13 +67,13 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblContentLength;
         
         /// <summary>
-        /// lbl_comment_allbum control.
+        /// lbl_comment_album control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_comment_allbum;
+        protected global::System.Web.UI.WebControls.Label lbl_comment_album;
         
         /// <summary>
         /// btn_comments control.

@@ -7,6 +7,26 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="content_area"  runat="server">
 <script type="text/javascript">
 
+    //removeHTMLTags(string) in "js/jquery.autocomplete.js" khanhdtn
+    function removeHTMLTags(htmlString) {
+        if (htmlString) {
+            var mydiv = document.createElement("div");
+            mydiv.innerHTML = htmlString;
+
+            if (document.all) // IE Stuff
+            {
+                return mydiv.innerText;
+
+            }
+            else // Mozilla does not work with innerText
+            {
+                return mydiv.textContent;
+            }
+            document.removeChild(mydiv);
+        }
+
+        return htmlString;
+    }
     function showDetail(obj, index) {
     /*
         for (i = 1; i < 5; i++) {
@@ -40,8 +60,8 @@
         var url = "get_data_detail.aspx?post_id=" + obj.value;
         var content = getValXML(url);
         divid.innerHTML = "<a href='post_show_details.aspx?news_id=" + obj.value + "' style='color:#CC00FF' target='_blank'>Xem chi tiết</a>";
-        title.value = readXMLFormat(content, "[start1]", "[endstart1]");
-        shortcontent.value = readXMLFormat(content, "[start2]", "[endstart2]");
+        title.value = removeHTMLTags(readXMLFormat(content, "[start1]", "[endstart1]"));
+        shortcontent.value = removeHTMLTags(readXMLFormat(content, "[start2]", "[endstart2]"));
 
     }
     function backs() {
@@ -53,15 +73,16 @@
 <div id="content" runat="server">
 
 <br><br>&nbsp
-<table cellpadding="0" cellspacing="1" border="0" width="100%" style="background-color:#FFFFFF;color:Black">
-<tr style="background-color:#9933FF;font-weight:bold;color:#FFFFFF;" align="center">
+<table cellpadding="3" cellspacing="1" border="0" width="100%" style="background-color:#FFFFFF;color:Black">
+<tr bgcolor="#1A15FB" style="color:White;font-weight:bold"><td align="center" colspan="5">DANH SÁCH BÀI VIẾT NỔI BẬT</td></tr>
+<tr class="btn_project" style="text-align:center;font-weight:bold;">
 <td>
-Tiêu đề
+<P>Tiêu đề</P>
 </td>
 <td>
 Nội dung rút gọn
 </td>
-<td colspan="2">
+<td colspan="3">
 Hình ảnh đại diện
 </td>
 </tr>
@@ -74,12 +95,12 @@ Chọn bài viết 1:<asp:DropDownList ID="DropDownList1" runat="server"
 </tr>
 <tr >
 <td>
-    <asp:TextBox ID="TextBox1" ClientIDMode="Static" runat="server" class="txtformat" Width="350px" 
+    <asp:TextBox ID="TextBox1" ClientIDMode="Static" runat="server" class="txtformat" Width="340px" 
         Height="30px"></asp:TextBox>
 </td>
 <td>
     <asp:TextBox ID="TextBox11"  runat="server" TextMode="MultiLine" 
-        class="txtformat_area" Width="350px" Height="50px"></asp:TextBox>
+        class="txtformat_area" Width="340px" Height="50px"></asp:TextBox>
 </td>
 <td align="right">
     <asp:Image ID="Image1" runat="server" Width="120px" Height="50px" style="border:2px solid #FFFFFF"/>
@@ -103,12 +124,12 @@ Chọn bài viết 2:<asp:DropDownList ID="DropDownList2" runat="server"
 </tr>
 <tr style="background-color:#E4DFDF">
 <td>
-<asp:TextBox ID="TextBox2" ClientIDMode="Static" runat="server" class="txtformat" Width="350px" 
+<asp:TextBox ID="TextBox2" ClientIDMode="Static" runat="server" class="txtformat" Width="340px" 
         Height="30px"></asp:TextBox>
 </td>
 <td>
     <asp:TextBox ID="TextBox22" runat="server" TextMode="MultiLine" 
-        class="txtformat_area" Width="350px" Height="50px"></asp:TextBox>
+        class="txtformat_area" Width="340px" Height="50px"></asp:TextBox>
 </td>
 <td align="right"><asp:Image ID="Image2" runat="server" Width="120" Height="50" style="border:2px solid #FFFFFF"/>
 <asp:Label ID="Label2" runat="server">
@@ -130,12 +151,12 @@ Chọn bài viết 3:<asp:DropDownList ID="DropDownList3" runat="server"
 </tr>
 <tr style="background-color:#E4DFDF">
 <td>
-<asp:TextBox ID="TextBox3" ClientIDMode="Static" runat="server" class="txtformat" Width="350px" 
+<asp:TextBox ID="TextBox3" ClientIDMode="Static" runat="server" class="txtformat" Width="340px" 
         Height="30px"></asp:TextBox>
 </td>
 <td>
     <asp:TextBox ID="TextBox33" runat="server" TextMode="MultiLine" 
-        class="txtformat_area" Width="350px" Height="50px"></asp:TextBox>
+        class="txtformat_area" Width="340px" Height="50px"></asp:TextBox>
 </td>
 <td align="right"><asp:Image ID="Image3" runat="server" Width="120" Height="50" style="border:2px solid #FFFFFF"/>
 <asp:Label ID="Label3" runat="server">
@@ -158,12 +179,12 @@ Chọn bài viết 4:<asp:DropDownList ID="DropDownList4" runat="server"
 </tr>
 <tr style="background-color:#E4DFDF">
 <td>
-<asp:TextBox ID="TextBox4" ClientIDMode="Static" runat="server" class="txtformat" Width="350px" 
+<asp:TextBox ID="TextBox4" ClientIDMode="Static" runat="server" class="txtformat" Width="340px" 
         Height="30px"></asp:TextBox>
 </td>
 <td>
     <asp:TextBox ID="TextBox44" runat="server" TextMode="MultiLine" 
-        class="txtformat_area" Width="350px" Height="50px"></asp:TextBox>
+        class="txtformat_area" Width="340px" Height="50px"></asp:TextBox>
 </td>
 <td align="right"><asp:Image ID="Image4" runat="server" Width="120" Height="50" style="border:2px solid #FFFFFF"/>
 <asp:Label ID="Label4" runat="server">
@@ -187,7 +208,7 @@ Chọn bài viết 4:<asp:DropDownList ID="DropDownList4" runat="server"
 </td>
 
 <td align="left">&nbsp
-    <input id="Button3" type="button" value="Hủy" onclick="backs();" style="width:120px;height:25px" class="btn"/>
+    <input id="Button3" type="button" value="Đóng" onclick="backs();" style="width:120px;height:25px" class="btn"/>
 </td>
 <td colspan="2" align="left" style="color:Red">&nbsp <b>Chọn bài viết cần thay đổi<br>Kích thước ảnh 580x250 pixel</b>
 </td>

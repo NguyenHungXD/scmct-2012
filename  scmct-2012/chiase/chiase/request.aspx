@@ -243,7 +243,7 @@
         </asp:Label>
     </td>
     <td>
-<input id="Button3" type="button" value="Hủy" onclick="backs();" style="width:120px;height:25px" class="btn"/>
+<input id="Button3" type="button" value="Đóng" onclick="backs();" style="width:120px;height:25px" class="btn"/>
     </td>
         
     </tr>

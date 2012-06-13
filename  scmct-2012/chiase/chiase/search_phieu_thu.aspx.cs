@@ -21,19 +21,23 @@ namespace chiase
             {
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+                Boolean isDel = functions.checkPrivileges("29", functions.LoginMemID(this), "D");
+                Boolean isView = functions.checkPrivileges("29", functions.LoginMemID(this), "V");
 
-                if (Request.QueryString["vmode"] == "del")
+
+                if (Request.QueryString["vmode"] == "del" && isDel)
                 {
                     del_phieu_thu();
                 }
-                else if (Request.QueryString["vmode"] == "undel")
+                else if (Request.QueryString["vmode"] == "undel" && isDel)
                 {
                     undel_phieu_thu();
                 }
                 else
                 {
-                    lbl_del_pt.Visible = functions.checkPrivileges("29", functions.LoginMemID(this), "D");
-                    lbl_search_pt.Visible = functions.checkPrivileges("29", functions.LoginMemID(this), "V");
+                    lbl_del_pt.Visible = isDel;
+                    phieu_thu_list.Visible = isView;
+                    lbl_search_pt.Visible = isView;
 
                     no = 1;
                     display();
@@ -112,7 +116,7 @@ namespace chiase
                                     case when a.deleted is null then 'FFFFFF' else 'CCCCCCC' end as bgcolors
                                     from TC_PHIEU_THU a
                                     inner join ND_THONG_TIN_ND b on b.id = a.nguoi_thu
-                                    inner join ND_THONG_TIN_ND c on c.id = a.doi_tuong_thu
+                                    inner join ND_THONG_TIN_ND c on c.id = a.mem_id
                                     inner join ND_THONG_TIN_ND d on d.id = a.mem_id
                                     left join YC_YEU_CAU e on e.yeu_cau_id = a.yeu_cau_id
                                     inner join DA_DU_AN f on f.id = a.du_an_id" + sWhere;

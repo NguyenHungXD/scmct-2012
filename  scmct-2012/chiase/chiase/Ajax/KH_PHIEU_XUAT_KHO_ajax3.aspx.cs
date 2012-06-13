@@ -333,7 +333,7 @@ namespace chiase
         }
         private void setTimKiem()
         {
-            if (UserLogin.HavePermision(this, "KH_PHIEU_XUAT_KHO_Search"))
+            if (PermissionXuatKho.IsView(this))
             {
                 string idkhoachinh = Request.QueryString["idkhoachinh"].ToString();
                 DataTable table = KH_PHIEU_XUAT_KHO.SearchByPXK_ID(idkhoachinh);
@@ -378,14 +378,14 @@ namespace chiase
             }
             else
             {
-                Response.Write("Bạn không có quyền xem dữ liệu");
+                Response.Write("<font color='red'>" + functions.GetValueLanguage("MssgNotPerView") + "</font>");
                 Response.StatusCode = 500;
             }
         }
 
         private void TimKiem()
         {
-            if (UserLogin.HavePermision(this, "KH_PHIEU_XUAT_KHO_Search"))
+            if (PermissionXuatKho.IsView(this))
             {
                 DataProcess process = s_KH_PHIEU_XUAT_KHO();
                 process.Page = Request.QueryString["page"];
@@ -407,18 +407,18 @@ namespace chiase
                 string html = "";
                 html += "<table class='jtable' id=\"tablefind\">";
                 html += "<tr>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("PXK_ID") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("MA_PXK") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("NGUOI_XUAT") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("NGAY_XUAT") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("NGUOI_NHAN") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("MEM_ID_PXK") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("KHO_ID") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("DU_AN_ID") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("LY_DO_XUAT_ID") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("CHUNG_TU") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("GHI_CHU") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("YEU_CAU_ID") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("PXK_ID") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("MA_PXK") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("NGUOI_XUAT") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("NGAY_XUAT") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("NGUOI_NHAN") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("MEM_ID_PXK") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("KHO_ID") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("DU_AN_ID") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("LY_DO_XUAT_ID") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("CHUNG_TU") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("GHI_CHU") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("YEU_CAU_ID") + "</th>";
                 html += "</tr>";
                 if (table != null)
                 {
@@ -457,7 +457,7 @@ namespace chiase
             }
             else
             {
-                Response.Write("Bạn không có quyền xem dữ liệu.");
+                Response.Write("<font color='red'>" + functions.GetValueLanguage("MssgNotPerView") + "</font>");
             }
         }
 
@@ -530,19 +530,20 @@ namespace chiase
             html += "<table class='jtable' id=\"gridTable\">";
             html += "<tr>";
             html += "<th>STT</th>";
-            html += "<th></th>";
-            html += "<th>" + DictionaryDB.sGetValueLanguage("HH_ID") + "</th>";
-            html += "<th>" + DictionaryDB.sGetValueLanguage("HH_NAME") + "</th>";
-            html += "<th>" + DictionaryDB.sGetValueLanguage("NNH_NAME") + "</th>";
-            html += "<th>" + DictionaryDB.sGetValueLanguage("MA_PNK") + "</th>";        
-            html += "<th>" + DictionaryDB.sGetValueLanguage("SO_LUONG") + "</th>";
-            html += "<th>" + DictionaryDB.sGetValueLanguage("DON_GIA") + "</th>";
-            html += "<th>" + DictionaryDB.sGetValueLanguage("THANH_TIEN") + "</th>";
-            html += "<th>" + DictionaryDB.sGetValueLanguage("GHI_CHU") + "</th>";      
-            html += "<th></th>";
+            html += "<th></th>"; 
+            html += "<th>" + functions.GetValueLanguage("MA_HANG") + "</th>";
+            html += "<th>" + functions.GetValueLanguage("TEN_HANG") + "</th>";
+            html += "<th>"+ functions.GetValueLanguage("CHUNG_LOAI") + "</th>";
+            html += "<th>"+ functions.GetValueLanguage("PHIEU_NHAP")+"</th>";
+            html += "<th>" + functions.GetValueLanguage("SO_LUONG") + "</th>";
+            html += "<th>" + functions.GetValueLanguage("DON_GIA") + "</th>";
+            html += "<th>" + functions.GetValueLanguage("THANH_TIEN") + "</th>";
+            html += "<th>" + functions.GetValueLanguage("GHI_CHU") + "</th>";  
+
+            //html += "<th></th>";
             html += "</tr>";
-            bool add = UserLogin.HavePermision(this, "KH_PHIEU_XUAT_KHO_CT_Add");
-            bool search = UserLogin.HavePermision(this, "KH_PHIEU_XUAT_KHO_CT_Search");
+            bool add = PermissionXuatKho.IsAdd(this);
+            bool search =PermissionXuatKho.IsView(this);
             if (search)
             {
                 DataProcess process = s_KH_PHIEU_XUAT_KHO_CT(true);
@@ -561,23 +562,23 @@ namespace chiase
                 if (table.Rows.Count > 0)
                 {
                     paging = process.Paging("KH_PHIEU_XUAT_KHO_CT");
-                    bool delete = UserLogin.HavePermision(this, "KH_PHIEU_XUAT_KHO_CT_Delete");
-                    bool edit = UserLogin.HavePermision(this, "KH_PHIEU_XUAT_KHO_CT_Edit");
+                    bool delete =PermissionXuatKho.IsDelete(this);
+                    bool edit = PermissionXuatKho.IsEdit(this);
                     for (int i = 0; i < table.Rows.Count; i++)
                     {
                         html += "<tr>";
                         html += "<td>" + table.Rows[i]["stt"].ToString() + "</td>";
-                        html += "<td><a style='color:" + (!delete ? "#cfcfcf" : "") + "' onclick=\"xoaontable(this," + delete.ToString().ToLower() + ");\">" + DictionaryDB.sGetValueLanguage("delete") + "</a></td>";
-                        html += "<td><input mkv='true' id='HH_ID' type='hidden' value='" + table.Rows[i]["HH_ID"] + "'/><input mkv='true' id='mkv_HH_ID' type='text' value='" + table.Rows[i]["MA_HH"].ToString() + "' onfocus='HH_IDSearch(this);' class=\"down_select\" " + (!edit ? "disabled" : "") + "/></td>";
-                        html += "<td><input mkv='true' id='HH_NAME' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='" + table.Rows[i]["HH_NAME"].ToString() + "' " + "disabled" + "/></td>";
-                        html += "<td><input mkv='true' id='NHH_NAME' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='" + table.Rows[i]["NHH_NAME"].ToString() + "' " + "disabled" + "/></td>";
-                        html += "<td><input mkv='true' id='PNK_CT_ID' type='hidden' value='" + table.Rows[i]["PNK_CT_ID"] + "'/><input mkv='true' id='mkv_PNK_CT_ID' type='text' value='" + table.Rows[i]["MA_PNK"].ToString() + "' onfocus='PNK_CT_IDSearch(this);' class=\"down_select\" " + (!edit ? "disabled" : "") + "/></td>";
-                        html += "<td><input mkv='true' id='SO_LUONG' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='" + table.Rows[i]["SO_LUONG"].ToString() + "' onblur='TestSo(this,false,false);' " + (!edit ? "disabled" : "") + "/></td>";
-                        html += "<td><input mkv='true' id='DON_GIA' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='" + table.Rows[i]["DON_GIA"].ToString() + "' onblur='TestSo(this,false,false);' " + (!edit ? "disabled" : "") + "/></td>";
-                        html += "<td><input mkv='true' id='THANH_TIEN' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='" + table.Rows[i]["THANH_TIEN"].ToString() + "' onblur='TestSo(this,false,false);' " + (!edit ? "disabled" : "") + "/></td>";
-                        html += "<td><input mkv='true' id='GHI_CHU' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='" + table.Rows[i]["GHI_CHU"].ToString() + "' " + (!edit ? "disabled" : "") + "/></td>";
+                        html += "<td><a style='color:" + (!delete ? "#cfcfcf" : "") + "' onclick=\"xoaontable(this," + delete.ToString().ToLower() + ");\">Xóa</a></td>"; //" + functions.sGetValueLanguage("delete") + "
+                        html += "<td><input style='width:82px' mkv='true' id='HH_ID' type='hidden' value='" + table.Rows[i]["HH_ID"] + "'/><input style='width:82px' mkv='true' id='mkv_HH_ID' type='text' value='" + table.Rows[i]["MA_HH"].ToString() + "' onfocus='HH_IDSearch(this);' class=\"down_select\" " + (!edit ? "disabled" : "") + "/></td>";
+                        html += "<td><input style='width:82px' mkv='true' id='HH_NAME' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='" + table.Rows[i]["HH_NAME"].ToString() + "' " + "disabled" + "/></td>";
+                        html += "<td><input style='width:82px' mkv='true' id='NHH_NAME' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='" + table.Rows[i]["NHH_NAME"].ToString() + "' " + "disabled" + "/></td>";
+                        html += "<td><input style='width:82px' mkv='true' id='PNK_CT_ID' type='hidden' value='" + table.Rows[i]["PNK_CT_ID"] + "'/><input style='width:82px' mkv='true' id='mkv_PNK_CT_ID' type='text' value='" + table.Rows[i]["MA_PNK"].ToString() + "' onfocus='PNK_CT_IDSearch(this);' class=\"down_select\" " + (!edit ? "disabled" : "") + "/></td>";
+                        html += "<td><input style='width:82px' mkv='true' id='SO_LUONG' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='" + table.Rows[i]["SO_LUONG"].ToString() + "' onblur='TestSo(this,true,false,1);TinhTien(this);' " + (!edit ? "disabled" : "") + "/></td>";
+                        html += "<td><input style='width:82px' mkv='true' id='DON_GIA' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='" + table.Rows[i]["DON_GIA"].ToString() + "' onblur='TestSo(this,true,false);TinhTien(this);' " + (!edit ? "disabled" : "") + "/></td>";
+                        html += "<td><input style='width:82px' mkv='true' id='THANH_TIEN' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='" + table.Rows[i]["THANH_TIEN"].ToString() + "' onblur='TestSo(this,true,false);TinhDonGia(this);' " + (!edit ? "disabled" : "") + "/></td>";
+                        html += "<td><input style='width:82px' mkv='true' id='GHI_CHU' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='" + table.Rows[i]["GHI_CHU"].ToString() + "' " + (!edit ? "disabled" : "") + "/> <input mkv='true' id='idkhoachinh' type='hidden' value='" + table.Rows[i]["PXK_CT_ID"].ToString() + "'/></td>";
 
-                        html += "<td><input mkv='true' id='idkhoachinh' type='hidden' value='" + table.Rows[i]["PXK_CT_ID"].ToString() + "'/></td>";
+                        //html += "<td></td>";
                         html += "</tr>";
                     }
                 }
@@ -585,23 +586,23 @@ namespace chiase
             if (add)
             {
                 html += "<tr>";
-                html += "<td>1</td>";
-                html += "<td><a onclick='xoaontable(this)'>" + DictionaryDB.sGetValueLanguage("delete") + "</a></td>";
-                html += "<td><input mkv='true' id='HH_ID' type='hidden' value=''/><input mkv='true' id='mkv_HH_ID' type='text' value='' onfocus='HH_IDSearch(this);' class=\"down_select\"/></td>";
-                html += "<td><input mkv='true' id='HH_NAME' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' disabled value='' /></td>";
-                html += "<td><input mkv='true' id='NHH_NAME' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' disabled'  value=''/></td>";
-                html += "<td><input mkv='true' id='PNK_CT_ID' type='hidden' value=''/><input mkv='true' id='mkv_PNK_CT_ID' type='text' value='' onfocus='PNK_CT_IDSearch(this);' class=\"down_select\"/></td>";
-                html += "<td><input mkv='true' id='SO_LUONG' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='' onblur='TestSo(this,false,false);' /></td>";
-                html += "<td><input mkv='true' id='DON_GIA' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='' onblur='TestSo(this,false,false);' /></td>";
-                html += "<td><input mkv='true' id='THANH_TIEN' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='' onblur='TestSo(this,false,false);' /></td>";
-                html += "<td><input mkv='true' id='GHI_CHU' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='' /></td>";
-                html += "<td><input mkv='true' id='idkhoachinh' type='hidden' value=''/></td>";
+                html += "<td>&nbsp</td>";
+                html += "<td><a onclick='xoaontable(this)'>Xóa</a></td>"; //" + functions.sGetValueLanguage("delete") + "
+                html += "<td><input style='width:82px' mkv='true' id='HH_ID' type='hidden' value=''/><input style='width:82px' mkv='true' id='mkv_HH_ID' type='text' value='' onfocus='HH_IDSearch(this);' class=\"down_select\"/></td>";
+                html += "<td><input style='width:82px' mkv='true' id='HH_NAME' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' disabled value='' /></td>";
+                html += "<td><input style='width:82px' mkv='true' id='NHH_NAME' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' disabled  value=''/></td>";
+                html += "<td><input style='width:82px' mkv='true' id='PNK_CT_ID' type='hidden' value=''/><input style='width:82px' mkv='true' id='mkv_PNK_CT_ID' type='text' value='' onfocus='PNK_CT_IDSearch(this);' class=\"down_select\"/></td>";
+                html += "<td><input style='width:82px' mkv='true' id='SO_LUONG' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='' onblur='TestSo(this,true,false,1);TinhTien(this);' /></td>";
+                html += "<td><input style='width:82px' mkv='true' id='DON_GIA' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='' onblur='TestSo(this,true,false);TinhTien(this);' /></td>";
+                html += "<td><input style='width:82px' mkv='true' id='THANH_TIEN' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='' onblur='TestSo(this,true,false);TinhDonGia(this);' /></td>";
+                html += "<td><input style='width:82px' mkv='true' id='GHI_CHU' type='text' onfocusout='chuyenformout(this)' onfocus='chuyendong(this);chuyenphim(this);' value='' /> <input mkv='true' id='idkhoachinh' type='hidden' value=''/></td>";
+                //html += "<td></td>";
                 html += "</tr>";
             }
-            html += "<tr><td></td><td colspan='3'>" + (add ? "" : "Bạn không có quyền thêm mới") + "</td></tr>";
+            html += "<tr><td></td><td colspan='8'>" + (add ? "" : "<font color='red'>" + functions.GetValueLanguage("MssgNotPerAdd") + "</font>") + "</td></tr>";
             html += "</table>";
             if (!search)
-                html += "Bạn không có quyền xem.";
+                html += "<font color='red'>" + "<font color='red'>" + functions.GetValueLanguage("MssgNotPerView") + "</font>" + "</font>";
             else
                 html += paging;
             Response.Clear(); Response.Write(html);

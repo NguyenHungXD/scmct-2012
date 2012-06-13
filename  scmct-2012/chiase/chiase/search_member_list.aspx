@@ -39,7 +39,7 @@
     function deletes(vmode) {
         var obj = document.forms["chiase"];
         var checked = false;
-        if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để hủy.")) {
+        if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để Đóng.")) {
             if (obj.chk.length > 0) {
                 for (i = 0; i < obj.chk.length; i++) {
                     if (obj.chk[i].checked == true) {
@@ -89,6 +89,7 @@
 <fieldset>
     <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;">
         <tr style="color:White;font-weight:bold"><td colspan="8"><font size=3><p align="center">Tìm kiếm thành viên</p></font><br>*-Bạn có thể bỏ qua điều kiện bạn không quan tâm.</td></tr>
+        <tr><td colspan=8><hr></td></tr>
         <tr>
         <td >
             Tên đăng nhập: 
@@ -213,26 +214,27 @@
         </dx:ASPxDateEdit>
         </td>
         </tr>
-
+        <tr><td colspan=8><hr></td></tr>
         <tr>
         <td>&nbsp</td><td colspan="3">&nbsp
 
             <asp:Label ID="lbl_search_members" runat="server">
          <asp:Button ID="Button4" runat="server"  Text="Tìm kiếm" class="btn" onclick="btn_search_Click" Height="25px" Width="100px"/>
          </asp:Label>
+         <input id="Button7" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/>
         </td>
         </tr>
         </table>
 </fieldset>
-<hr>
+
 <asp:Repeater ID="member_list" runat="server" 
         onitemdatabound="member_list_ItemDataBound">
     <HeaderTemplate>
     <table border="0" cellpadding=2 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;color:Black">
-        <tr bgcolor="#990099" style="color:White;font-weight:bold"><td align="center" colspan="8">Danh sách thành viên</td></tr>
-        <tr class="new_post">
+        <tr bgcolor="#1A15FB" style="color:White;font-weight:bold"><td align="center" colspan="8">DANH SÁCH NHÓM THÀNH VIÊN</td></tr>
+        <tr class="btn_project" style="text-align:center;font-weight:bold;">
         <td width="12%" colspan="2">
-            STT
+            <p>STT</p>
         </td>
  
         <td width="10%">
@@ -333,7 +335,7 @@
             <input id="Button5" type="button" value="Khóa" class="btn" style="width:100px;height:25px" onclick="deletes('lock');"/>
             <input id="Button6" type="button" value="Mở khóa" class="btn" style="width:100px;height:25px" onclick="deletes('unlock');"/>
         </asp:Label>
-        <input id="Button2" type="button" value="Hủy" style="width:100px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
+        <input id="Button2" type="button" value="Đóng" style="width:100px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
     </td>
     </tr>
     </table>

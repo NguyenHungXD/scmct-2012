@@ -23,7 +23,7 @@
         &nbsp;<asp:Image 
             ID="img_user" runat="server" Height="50px" Width="50px" BorderColor="White" 
             BorderStyle="Solid" BorderWidth="1px" />
-        &nbsp;<table cellpadding=0 cellspacing=0 border=0 width=55%><td>
+        &nbsp;<table cellpadding=0 cellspacing=0 border=0 width=55%><tr><td>
         
         
             Avatar mới:</td> <td>
@@ -36,7 +36,7 @@
             <td>
 
 
-        <asp:Button ID="Button1" runat="server" Text="Cập nhật avatar" Height="20" Width="120" class="btn" onclick="btn_avatar_Click"/>
+        <asp:Button ID="Button1" runat="server" Text="Lưu" Height="20" Width="120" class="btn" onclick="btn_avatar_Click"/>
         </td>
         </tr>
         </table>
@@ -62,7 +62,7 @@
     <td>
         <asp:TextBox ID="txt_password" runat="server"  class="txtformat" 
             Width="96px" Height="22px" Enabled="False" BackColor="#CCFFCC">**********</asp:TextBox>
-    &nbsp;<asp:HyperLink ID="link_changepass" runat="server" Text="Đổi mật khẩu" NavigateUrl="~/change_password.aspx" title="Đổi mật khẩ"></asp:HyperLink></td>
+    &nbsp;<asp:HyperLink ID="link_changepass" ForeColor="White" runat="server" Text="Đổi mật khẩu" NavigateUrl="change_password.aspx" title="Đổi mật khẩu"></asp:HyperLink></td>
     </tr>
     <tr>
     <td>
@@ -103,7 +103,7 @@
         <asp:DropDownList ID="dropd_month" runat="server">
         </asp:DropDownList>
         <asp:DropDownList ID="dropd_year" runat="server">
-        </asp:DropDownList>(dd/MM/yyyy)
+        </asp:DropDownList>(dd/mm/yyyy)
     </td>
     </tr>
     <tr>
@@ -199,7 +199,7 @@
     </td>
     <td>
 
-    <input id="Button3" type="button" value="Hủy" onclick="backs();" style="width:120px;height:25px" class="btn"/>
+    <input id="Button3" type="button" value="Đóng" onclick="backs();" style="width:120px;height:25px" class="btn"/>
 </tr>
 <tr>
     <td colspan=3 align=right>

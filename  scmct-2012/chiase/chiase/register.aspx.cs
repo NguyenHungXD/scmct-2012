@@ -22,6 +22,7 @@ namespace chiase
                 txt_user_name.Focus();
                 functions.add_date_to_dropd(dropd_day, dropd_month, dropd_year,0);
                 Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='register.aspx' title='Đăng ký'>Đăng ký</a> ";
+                Session["current"] = "9"; //[1.Trang chu 2.Dien Dan 3.Hinh Anh 4.Gui Yeu Cau 5.Gioi Thieu 6.Lien He 7.Quan Tri]
             }
         }
         
@@ -139,21 +140,47 @@ namespace chiase
                     if (ok)
                     {
                         //auto log-in
-                        string sql_info = string.Format(@"SELECT a.*,b.*,c.* FROM ND_THONG_TIN_DN a
-                                                    INNER JOIN  ND_THONG_TIN_ND b ON  a.MEM_ID=b.ID
-                                                    INNER JOIN ND_TEN_NHOM_ND c ON  b.MEM_GROUP_ID = c.GROUPID
-                                                    WHERE username=N'{0}'", txt_user_name.Text);
 
-                        DataTable table_info = SQLConnectWeb.GetTable(sql_info);
+                        String sql = @"SELECT a.userid,a.username,a.lasted_access,a.created_date,a.mem_id,b.*,c.* 
+                                     FROM ND_THONG_TIN_DN a
+                                    INNER JOIN  ND_THONG_TIN_ND b ON  a.MEM_ID=b.ID
+                                    INNER JOIN ND_TEN_NHOM_ND c ON  b.MEM_GROUP_ID = c.GROUPID
+                                    WHERE username=@username";
+
+                        DataTable table_info = SQLConnectWeb.GetData(sql, "@username", username);
 
                         if (table_info != null && table_info.Rows.Count > 0)
                         {
-                            if (table_info.Rows[0][ND_THONG_TIN_DN.cl_PWD].ToString().Equals(txt_pass_word.Text))
-                            {
+                            //if (table_info.Rows[0][ND_THONG_TIN_DN.cl_PWD].ToString().Equals(txt_pass_word.Text))
+                            //{
+
+
+                                //capture the session
+                                string v_sessionid = functions.randomstring(17) + functions.randomstring(17);
+                                string access_date = functions.GetStringDatetime();
+                                string ipaddress = functions.getIPAddress();
+
+                                //
+                                string sql_remove_sessionid = @"update ND_LOG_IN_SESSION set sessionid=-1 where userid = @id";
+                                SQLConnectWeb.ExecuteNonQuery(sql_remove_sessionid, "@id", table_info.Rows[0]["id"]);
+                                //
+                                string sql_session = @"insert into ND_LOG_IN_SESSION(userid,sessionid,access_date,ipaddress,fullname,username,groupid) values (@userid,@sessionid,@access_date,@ipaddress,@fullname,@username,@groupid)";
+                                SQLConnectWeb.ExecuteNonQuery(sql_session, "@userid", table_info.Rows[0]["id"], "@sessionid", v_sessionid, "@access_date", access_date, "@ipaddress", ipaddress, "@fullname", table_info.Rows[0]["name"], "@username", table_info.Rows[0]["username"], "@groupid", table_info.Rows[0]["groupid"]);
+
+
+                                DataColumn col;
+                                col = new DataColumn("sessionid", System.Type.GetType(" System.String"));
+                                table_info.Columns.Add(col);
+                                table_info.Rows[0]["sessionid"] = v_sessionid;
+                                col = new DataColumn("ipaddress", System.Type.GetType(" System.String"));
+                                table_info.Columns.Add(col);
+                                table_info.Rows[0]["ipaddress"] = ipaddress;
+
                                 ok = true;
                                 Session["ThanhVien"] = table_info;
+
                                 Response.Redirect("edit_profile.aspx");
-                            }
+                            //}
                         }
 
                         

@@ -110,14 +110,11 @@ protected void btn_avatar_Click(object sender, EventArgs e)
             {
                 string memid = functions.LoginMemID(this);
                 String filename = upload_img.FileName;
-                String file_type = System.IO.Path.GetExtension(filename);
+                String file_type = System.IO.Path.GetExtension(filename).ToLower();
                 String avatar_name = memid + file_type;
                 if ((file_type == ".jpg" || file_type == ".gif" || file_type == ".png"))
                 {
-                  
-
                     //Update to database
-
                     String sql = "UPDATE ND_THONG_TIN_ND SET AVATAR_PATH=@v_AVATAR_PATH WHERE ID=@V_MEM_ID";
                     if (SQLConnectWeb.ExecuteNonQuery(sql,
                             "@v_AVATAR_PATH", avatar_name,

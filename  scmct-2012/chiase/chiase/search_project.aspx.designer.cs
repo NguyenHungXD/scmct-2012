@@ -64,7 +64,7 @@ namespace chiase {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pn_view_project;
+        protected global::System.Web.UI.WebControls.Label pn_view_project;
         
         /// <summary>
         /// Button2 control.

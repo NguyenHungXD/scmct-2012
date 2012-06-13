@@ -20,6 +20,7 @@ namespace chiase
 
             lbl_add_member_project.Visible = functions.checkPrivileges("11", functions.LoginMemID(this), "C");
             lbl_view_member_project.Visible = functions.checkPrivileges("11", functions.LoginMemID(this), "V");
+
             lbl_approve_member.Visible = functions.checkPrivileges("11", functions.LoginMemID(this), "E");
 
 

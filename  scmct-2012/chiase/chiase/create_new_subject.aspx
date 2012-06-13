@@ -17,7 +17,7 @@
 
     <script type="text/javascript">
     // <![CDATA[
-        var MaxLength = 50;
+        var MaxLength = 20;
         var CustomErrorText = "Nội dung yêu cầu phải lớn hơn " + MaxLength.toString() + " ký tự.";
         function ValidationHandler(s, e) {
             if (e.html.length < MaxLength) {

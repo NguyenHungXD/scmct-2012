@@ -15,11 +15,12 @@ namespace chiase
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                //Check LogIn session
+            //Check LogIn session
+            {
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
-
                 display();
-                Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='hot_news.aspx' title='Cập nhật bài viết nổi bật'>Bài viết nổi bật</a>";
+            }
+            Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='hot_news.aspx' title='Cập nhật bài viết nổi bật'>Bài viết nổi bật</a>";
         }
         public void display()
         {
@@ -107,7 +108,7 @@ namespace chiase
 
                     FileUpload fileupload = (FileUpload)content.FindControl("FileUpload" + i);
                     string filename = fileupload.FileName;
-                    String file_type = System.IO.Path.GetExtension(filename);
+                    String file_type = System.IO.Path.GetExtension(filename).ToLower(); //nvdatFixBug: some imgage type with Uppercase extension name
 
                     TextBox _content = (TextBox)content.FindControl(String.Format("TextBox{0}{0}", i));
                     string contents = _content.Text;
@@ -116,35 +117,24 @@ namespace chiase
                     string postid = dropd.SelectedValue;
 
                     String img_path = String.Format("images/content_slider/1{0}", file_type);
-
+                    
                     if ((file_type == ".jpg" || file_type == ".gif" || file_type == ".png" || file_type == "") && (CheckBox1.Checked == true))
                     {
+                        int ok = 0;
                         if (file_type != "")
                         {
                             File.Delete(MapPath(img_path));
                             FileUpload1.SaveAs(MapPath(img_path));
-                            String sql = "UPDATE BV_HOT_NEWS SET POST_ID=@POST_ID,TITLE=@TITLE,CONTENTS=@CONTENTS,IMG_PATH=@IMG_PATH,EDITED_BY=@EDITED_BY,EDITED_DATE=@EDITED_DATE WHERE ID=@ID";
-                            SQLConnectWeb.ExecuteNonQuery(sql,
-                                "@POST_ID", postid,
-                                "@TITLE", title,
-                                "@CONTENTS", contents,
-                                "@IMG_PATH", img_path,
-                                "@EDITED_BY", memid,
-                                "@EDITED_DATE", functions.GetStringDatetime(),
-                                "@ID", i.ToString());
+                            String sql = "UPDATE BV_HOT_NEWS SET POST_ID=" + postid + ",TITLE=N'" + title  + "',CONTENTS=N'" + contents + "',IMG_PATH='" + img_path + "',EDITED_BY=" + memid + ",EDITED_DATE='" + functions.GetStringDatetime() + "' WHERE ID=" + i;
+                            ok=SQLConnectWeb.ExecuteNonQuery(sql);
                         }
                         else
                         {
-                            String sql = "UPDATE BV_HOT_NEWS SET POST_ID=@POST_ID,TITLE=@TITLE,CONTENTS=@CONTENTS,EDITED_BY=@EDITED_BY,EDITED_DATE=@EDITED_DATE WHERE ID=@id";
-                            SQLConnectWeb.ExecuteNonQuery(sql,
-                                "@POST_ID", postid,
-                                "@TITLE", title,
-                                "@CONTENTS", contents,
-                                "@EDITED_BY", memid,
-                                "@EDITED_DATE", functions.GetStringDatetime(),
-                                "@ID",i.ToString());
+                            String sql = "UPDATE BV_HOT_NEWS SET POST_ID=" + postid + ",TITLE=N'" + title + "',CONTENTS=N'" + contents + "',EDITED_BY=" + memid + ",EDITED_DATE='" + functions.GetStringDatetime() + "' WHERE ID=" + i;
+                             ok=SQLConnectWeb.ExecuteNonQuery(sql);
                         }
-                        itemSaved = String.Format("{0}Lưu thông tin thành công bài {1}<br>", itemSaved, i);
+                        if(ok==1)
+                            itemSaved = String.Format("{0}Lưu thông tin thành công bài {1}<br>", itemSaved, i);
                     }
 
                 }

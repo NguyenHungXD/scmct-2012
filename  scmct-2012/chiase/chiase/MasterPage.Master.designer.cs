@@ -67,13 +67,13 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txtPassWord;
         
         /// <summary>
-        /// btn_login control.
+        /// btn_admin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_login;
+        protected global::System.Web.UI.WebControls.Button btn_admin;
         
         /// <summary>
         /// chk_remember control.
@@ -182,6 +182,15 @@ namespace chiase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton logout;
+        
+        /// <summary>
+        /// txt_search control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_search;
         
         /// <summary>
         /// pn_admin control.

@@ -48,6 +48,9 @@ namespace chiase
                 Repeater2.DataSource = table_hot_news;
                 Repeater2.DataBind();
 
+                
+
+
             }
             catch (Exception ex)
             {
@@ -75,6 +78,16 @@ namespace chiase
 
                 hpLink.NavigateUrl = String.Format("post_show_details.aspx?news_id={0}",table.Rows[0]["bai_viet_id"]);
                 posted_by.Text = String.Format("<br><i><b>{0}</b> ngày, {1}</i>", table.Rows[0]["username"], posted_Date.ToString("dd/MM/yyy hh:mm:ss tt"));
+
+                string sqls = @"exec sp_DA_TONG_SACH_QUYEN_GOP " + id.ToString();
+                DataTable tables = SQLConnectWeb.GetData(sqls);
+
+                //Label lbl_sums = (Label)e.Item.FindControl("sums");
+                //lbl_sums.Text = tables.Rows[0]["so_luong"].ToString();
+                HyperLink link = (HyperLink)e.Item.FindControl("link_sum");
+                link.NavigateUrl = "detail_list.aspx?id=" + id.ToString();
+                link.Text = tables.Rows[0]["so_luong"].ToString();
+
             }
             catch
             { }

@@ -17,10 +17,17 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                Boolean check = false;
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
 
-                if (Request.QueryString["vmode"] == "create_new")
+                lbl_search.Visible = functions.checkPrivileges("41", functions.LoginMemID(this), "V");
+                module_list.Visible = functions.checkPrivileges("41", functions.LoginMemID(this), "V");
+
+                if (functions.checkPrivileges("41", functions.LoginMemID(this), "C") || functions.checkPrivileges("41", functions.LoginMemID(this), "E"))
+                    check = true;
+
+                if (Request.QueryString["vmode"] == "create_new" && check==true)
                 {
                     update_right();
                 }
@@ -31,6 +38,7 @@ namespace chiase
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='create_access_right_for_member.aspx?id=" + Request.QueryString["id"] + "' title='Xét quyền cho thành viên'>Xét quyền</a>";
                     display();
                 }
+                lbl_save.Visible = check;
 
             }
         }

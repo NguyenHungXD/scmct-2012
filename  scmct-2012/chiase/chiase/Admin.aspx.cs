@@ -159,7 +159,20 @@ namespace chiase
                     lbl_update_info.Text = sLock + "Cập nhật thông tin điều khoản,trợ giúp";
               
                 }
-                //
+                if (functions.checkPrivileges("49", functions.LoginMemID(this), "V"))
+                {
+                    //Access right
+                    lbl_view_report_ton_kho.Visible = functions.checkPrivileges("46", functions.LoginMemID(this), "V");
+                    lbl_view_report_thu_chi.Visible = functions.checkPrivileges("47", functions.LoginMemID(this), "V");
+                    lbl_view_report_tong_ket_du_an.Visible = functions.checkPrivileges("48", functions.LoginMemID(this), "V");
+                }
+                else
+                {
+                    lbl_view_report_ton_kho.Text = sLock + "Báo cáo xuất-nhập-tồn";
+                    lbl_view_report_thu_chi.Text = sLock + "Báo cáo thu chi theo dự án";
+                    lbl_view_report_tong_ket_du_an.Text = sLock + "Tổng kết dự án";
+                }
+                
             }
             else
                 Response.Redirect("error_page.aspx");

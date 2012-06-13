@@ -28,10 +28,9 @@ namespace chiase
         {
             try
             {
-                string sql = @"select a.*,b.name as nguoi_thu_tien,c.name as nhan_tien_tu,d.name as thu_tu,d.address,e.tieu_de as tieude,f.ma_du_an as maduan,f.ten_du_an as tenduan
+                string sql = @"select a.*,b.name as nguoi_thu_tien,d.name as thu_tu,d.address,e.tieu_de as tieude,f.ma_du_an as maduan,f.ten_du_an as tenduan
                                     from TC_PHIEU_THU a
                                     inner join ND_THONG_TIN_ND b on b.id = a.nguoi_thu
-                                    inner join ND_THONG_TIN_ND c on c.id = a.doi_tuong_thu
                                     inner join ND_THONG_TIN_ND d on d.id = a.mem_id
                                     left outer join YC_YEU_CAU e on e.yeu_cau_id = a.yeu_cau_id
                                     inner join DA_DU_AN f on f.id = a.du_an_id
@@ -50,12 +49,12 @@ namespace chiase
                 lbl_name.Text = table_detail.Rows[0]["thu_tu"].ToString();
                 lbl_note.Text = table_detail.Rows[0]["ghi_chu"].ToString();
                 lbl_request.Text = table_detail.Rows[0]["tieude"].ToString();
-                lbl_recieved_from.Text = table_detail.Rows[0]["nhan_tien_tu"].ToString();
+                lbl_recieved_from.Text = table_detail.Rows[0]["doi_tuong_thu"].ToString();
                 Double total = Double.Parse(table_detail.Rows[0]["tong_tien"].ToString());
                 lbl_money_text.Text = functions.conVertToText(total);
                 lbl_address.Text = table_detail.Rows[0]["address"].ToString();
                 lbl_receiver.Text = table_detail.Rows[0]["nguoi_thu_tien"].ToString();
-                lbl_total.Text = table_detail.Rows[0]["tong_tien"].ToString();
+                lbl_total.Text = string.Format("{0:#,###}",table_detail.Rows[0]["tong_tien"]);
                 lbl_project_name.Text = String.Format("{0}({1}", table_detail.Rows[0]["maduan"], table_detail.Rows[0]["tenduan"]) + ')';
             }
             catch(Exception ex)

@@ -19,28 +19,37 @@ namespace chiase
             {
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+                Boolean isDel = functions.checkPrivileges("38", functions.LoginMemID(this), "D");
+                Boolean isLock = functions.checkPrivileges("38", functions.LoginMemID(this), "L");
 
-                if (Request.QueryString["vmode"] == "del")
+                Boolean isView = functions.checkPrivileges("37", functions.LoginMemID(this), "V");
+                Boolean isAdd = functions.checkPrivileges("37", functions.LoginMemID(this), "C");
+
+
+                if (Request.QueryString["vmode"] == "del" && isDel)
                 {
                     del_module();
                 }
-                else if (Request.QueryString["vmode"] == "undel")
+                else if (Request.QueryString["vmode"] == "undel" && isDel)
                 {
                     undel_module();
                 }
-                else if (Request.QueryString["vmode"] == "lock")
+                else if (Request.QueryString["vmode"] == "lock" && isLock)
                 {
                     lock_module();
                 }
-                else if (Request.QueryString["vmode"] == "unlock")
+                else if (Request.QueryString["vmode"] == "unlock" && isLock)
                 {
                     unlock_module();
                 }
                 else
                 {
-                    lbl_create_module.Visible = functions.checkPrivileges("37", functions.LoginMemID(this), "C");
-                    lbl_del_module.Visible = functions.checkPrivileges("38", functions.LoginMemID(this), "D");
-                    lbl_lock_module.Visible = functions.checkPrivileges("38", functions.LoginMemID(this), "L");
+                    lbl_search.Visible = isView;
+                    lbl_create_module.Visible = isAdd;
+                    lbl_del_module.Visible = isDel;
+                    lbl_lock_module.Visible = isLock;
+                    module_list.Visible = isView;
+
                     display();
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_module_list.aspx' title='Cập nhật chức năng'>Cập nhật chức năng</a>";
                 }

@@ -19,18 +19,21 @@ namespace chiase
             {
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+                Boolean isDel = functions.checkPrivileges("31", functions.LoginMemID(this), "D");
+                Boolean isView = functions.checkPrivileges("31", functions.LoginMemID(this), "V");
 
-                if (Request.QueryString["vmode"] == "del")
+                if (Request.QueryString["vmode"] == "del" && isDel)
                 {
                     del_phieu_chi();
-                } if (Request.QueryString["vmode"] == "undel")
+                } if (Request.QueryString["vmode"] == "undel" && isDel)
                 {
                     undel_phieu_chi();
                 }
                 else
                 {
-                    lbl_del_pc.Visible = functions.checkPrivileges("31", functions.LoginMemID(this), "D");
-                    lbl_search_pc.Visible = functions.checkPrivileges("31", functions.LoginMemID(this), "V");
+                    lbl_del_pc.Visible = isDel;
+                    phieu_chi_list.Visible = isView;
+                    lbl_search_pc.Visible = isView;
 
                     no = 1;
                     display();
@@ -109,7 +112,7 @@ namespace chiase
                                     case when a.deleted is null then 'FFFFFF' else 'CCCCCCC' end as bgcolors
                                     from TC_PHIEU_CHI a
                                     inner join ND_THONG_TIN_ND b on b.id = a.nguoi_chi
-                                    inner join ND_THONG_TIN_ND c on c.id = a.doi_tuong_chi
+                                    inner join ND_THONG_TIN_ND c on c.id = a.mem_id
                                     inner join DA_DU_AN d on d.id = a.du_an_id" + sWhere;
                                     //where a.pc_id like '" + mapc + "' and b.name like N'" + nguoilap + "' and c.name like N'" + nguoinhan + "' and c.address like N'" + diachi + "' and d.ma_du_an like N'" + maduan + "' and d.ten_du_an like N'" + tenduan + "'";
 

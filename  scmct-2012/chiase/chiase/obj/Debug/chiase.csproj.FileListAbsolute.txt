@@ -54,3 +54,13 @@ d:\DOCUMENT\HUIPro\ scmct-2012\chiase\chiase\obj\Debug\ResolveAssemblyReference.
 d:\DOCUMENT\HUIPro\ scmct-2012\chiase\chiase\obj\Debug\chiase.dll.licenses
 d:\DOCUMENT\HUIPro\ scmct-2012\chiase\chiase\obj\Debug\chiase.dll
 d:\DOCUMENT\HUIPro\ scmct-2012\chiase\chiase\obj\Debug\chiase.pdb
+D:\DOCUMENT\HUIPro\SVN\scmct-2012\chiase\chiase\bin\chiase.dll
+D:\DOCUMENT\HUIPro\SVN\scmct-2012\chiase\chiase\bin\chiase.pdb
+D:\DOCUMENT\HUIPro\SVN\scmct-2012\chiase\chiase\bin\chiase.Objects.dll
+D:\DOCUMENT\HUIPro\SVN\scmct-2012\chiase\chiase\bin\DK2C.DataAccess.dll
+D:\DOCUMENT\HUIPro\SVN\scmct-2012\chiase\chiase\bin\chiase.Objects.pdb
+D:\DOCUMENT\HUIPro\SVN\scmct-2012\chiase\chiase\bin\DK2C.DataAccess.pdb
+D:\DOCUMENT\HUIPro\SVN\scmct-2012\chiase\chiase\obj\Debug\ResolveAssemblyReference.cache
+D:\DOCUMENT\HUIPro\SVN\scmct-2012\chiase\chiase\obj\Debug\chiase.dll.licenses
+D:\DOCUMENT\HUIPro\SVN\scmct-2012\chiase\chiase\obj\Debug\chiase.dll
+D:\DOCUMENT\HUIPro\SVN\scmct-2012\chiase\chiase\obj\Debug\chiase.pdb

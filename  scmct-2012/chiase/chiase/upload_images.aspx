@@ -57,6 +57,7 @@
 
 </head>
 <body>
+<fieldset>
  <form id="form1" runat="server">
 
  <asp:Panel ID="Panel3" runat="server" Visible="false">
@@ -66,10 +67,10 @@
   <table border=0 cellpadding=3 cellspacing=3 width=100% style="color:White">
         <tr>
         <td>
-        Tên allbum:
+        Tên album:
         </td>
         <td>
-            <b><%= allbum_name %></b>
+            <b><%= album_name %></b>
         </td>
         </tr>
         <tr>
@@ -77,7 +78,7 @@
         Chi tiết:
         </td>
         <td>
-           <b><%= allbum_detail %></b>
+           <b><%= album_detail %></b>
         </td>         
         </tr>
 </table>
@@ -86,14 +87,14 @@
 </asp:Panel>
 
 <asp:Panel ID="Panel1" runat="server" Visible="false">
-  <table border=0 cellpadding=3 cellspacing=3 width=100%>
+  <table border=0 cellpadding=3 cellspacing=3 width=100% style="color:White">
         <tr>
 
         <td>
-        Tên allbum:
+        Tên album:
         </td>
         <td>
-        <asp:TextBox ID="txt_allbum_name" runat="server" class="txtformat" Width="300px" 
+        <asp:TextBox ID="txt_album_name" runat="server" class="txtformat" Width="300px" 
                 Height="23px"></asp:TextBox>
         </td>
         </tr>
@@ -113,7 +114,7 @@
 
 
 
-            <asp:Button ID="btn_save_allbum" runat="server" Text="Lưu allbum" class="btn" Height="25px" Width="120px" OnClick="btn_save_allbum_Click"/>
+            <asp:Button ID="btn_save_album" runat="server" Text="Lưu album" class="btn" Height="25px" Width="120px" OnClick="btn_save_album_Click"/>
 
 
         </td>
@@ -163,5 +164,6 @@
  
 
     </form>
+    </fieldset>
 </body>
 </html>

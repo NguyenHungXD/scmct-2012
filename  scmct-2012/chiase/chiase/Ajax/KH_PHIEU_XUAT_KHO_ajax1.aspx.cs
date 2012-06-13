@@ -178,7 +178,7 @@ namespace chiase
 
         private void setTimKiem()
         {
-            if (UserLogin.HavePermision(this, "KH_PHIEU_XUAT_KHO_Search"))
+            if (PermissionXuatKho.IsView(this))
             {
                 string idkhoachinh = Request.QueryString["idkhoachinh"].ToString();
                 DataTable table = KH_PHIEU_XUAT_KHO.SearchByPXK_ID(idkhoachinh);
@@ -259,7 +259,7 @@ namespace chiase
         }
         private void TimKiem()
         {
-            if (UserLogin.HavePermision(this, "KH_PHIEU_XUAT_KHO_Search"))
+            if (PermissionXuatKho.IsView(this))
             {
                 DataProcess process = s_KH_PHIEU_XUAT_KHO();
                 process.Page = Request.QueryString["page"];
@@ -279,21 +279,21 @@ namespace chiase
                     left join YC_YEU_CAU  F on T.YEU_CAU_ID=F.YEU_CAU_ID
           where " + process.sWhere());
                 string html = "";
-                html += process.Paging();
+                //html += process.Paging();
                 html += "<table class='jtable' id=\"gridTable\">";
                 html += "<tr>";
                 html += "<th>STT</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("MA_PXK") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("NGUOI_XUAT") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("NGAY_XUAT") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("NGUOI_NHAN") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("MEM_ID_PXK") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("KHO_ID") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("DU_AN_ID") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("LY_DO_XUAT_ID") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("CHUNG_TU") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("GHI_CHU") + "</th>";
-                html += "<th>" + DictionaryDB.sGetValueLanguage("YEU_CAU_ID") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("MA_PXK") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("NGUOI_XUAT") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("NGAY_XUAT") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("NGUOI_NHAN") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("MEM_ID_PXK") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("KHO_ID") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("DU_AN_ID") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("LY_DO_XUAT_ID") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("CHUNG_TU") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("GHI_CHU") + "</th>";
+                html += "<th>" + functions.GetValueLanguage("YEU_CAU_ID") + "</th>";
                 html += "</tr>";
                 if (table != null)
                 {
@@ -328,7 +328,7 @@ namespace chiase
             }
             else
             {
-                Response.Write("Bạn không có quyền xem dữ liệu.");
+                Response.Write("<font color='red'>" + functions.GetValueLanguage("MssgNotPerView") + "</font>");
             }
         }
     }

@@ -31,6 +31,24 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.Label lbl_ten_du_an;
         
         /// <summary>
+        /// lbl_start_date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_start_date;
+        
+        /// <summary>
+        /// lbl_end_date control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_end_date;
+        
+        /// <summary>
         /// showListmember control.
         /// </summary>
         /// <remarks>

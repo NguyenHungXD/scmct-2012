@@ -19,7 +19,7 @@ namespace chiase
             if (!IsPostBack)
                 //Check LogIn session
                 //functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
-                Session["current_link"] = String.Format("<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='member_list_project.aspx?id={0}'title='Xem chi tiết danh sách tham gia dự án'>Danh sách tham gia</a> ", Request.QueryString["id"]);
+                Session["current_link"] = String.Format("<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='member_list_project.aspx?id={0}'title='Xem chi tiết danh sách tham gia dự án'>Danh sách tham gia dự án</a> ", Request.QueryString["id"]);
                 display();
         }
 
@@ -27,10 +27,12 @@ namespace chiase
         {
             try
             {
-                string sql = @"select ma_du_an,ten_du_an from da_du_an where id=" + Request.QueryString["id"];
-                DataTable dt = SQLConnectWeb.GetData(sql);
+                string sql_da = @"select ma_du_an,ten_du_an,CONVERT(VARCHAR(10),NGAY_BAT_DAU,103) NGAY_BAT_DAU,CONVERT(VARCHAR(10),NGAY_KET_THUC,103) NGAY_KET_THUC from da_du_an where id=" + Request.QueryString["id"];
+                DataTable dt = SQLConnectWeb.GetData(sql_da);
                 lbl_ma_du_an.Text = dt.Rows[0]["ma_du_an"].ToString();
                 lbl_ten_du_an.Text = dt.Rows[0]["ten_du_an"].ToString();
+                lbl_start_date.Text = dt.Rows[0]["ngay_bat_dau"].ToString();
+                lbl_end_date.Text = dt.Rows[0]["ngay_ket_thuc"].ToString();
 
                 String sql_list_member = @"select a.id,a.active,a.du_an_id,a.mem_id,b.name,b.heart,a.added_date,c.groupname,d.post_name,e.name as added_name,f.username,
                                             case when status=1 then N'Đã duyêt' else N'Chờ duyêt' end as status

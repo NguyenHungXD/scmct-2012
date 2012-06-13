@@ -125,7 +125,7 @@
 
     <tr>
     <td>&nbsp</td><td style="font-weight:bold">Số tiền  : </td><td colspan="3"> 
-        <asp:Label ID="lbl_total" runat="server" Text=""></asp:Label>
+        <asp:Label ID="lbl_total" runat="server" Text=""></asp:Label> (VNĐ)
     </td>
     </tr>
 
@@ -164,10 +164,7 @@
     </td>
     </tr>
     </table>
-
-    </table><p align="right">
-        <input id="Button2" type="button" value="In phiếu chi" class="btn" style="width:100px;height:25px" onclick="PrintContent('mydiv')"/>
-        </p>
+    </table>
 
 
     <asp:Label ID="lbl_error" runat="server" Text=""></asp:Label>
@@ -178,7 +175,13 @@
 </tr>
 </table>
 </fieldset>
-
 </div>
-
+    <table>
+    <tr>
+    <td>
+        <input id="Button3" type="button" value="In phiếu chi" class="btn" style="width:100px;height:25px" onclick="PrintContent('mydiv')" /> &nbsp
+        <input id="Button4" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="window.close();"/><br>&nbsp
+    </td>
+    </tr>
+    </table>
 </asp:Content>

@@ -78,6 +78,16 @@
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" Display="Dynamic" ForeColor="Red" ControlToValidate="txt_project_name" runat="server" ErrorMessage="Nhập tên dự án"></asp:RequiredFieldValidator>
     </td>
     </tr>
+    <tr>
+    <td>
+    Hình đại diện:
+    </td>
+    <td>
+    <asp:FileUpload ID="upload_img" runat="server" BackColor="#67C9FF" 
+                Text="Chọn hình" class="btnformat" BorderColor="White" BorderStyle="Solid" 
+                BorderWidth="1px" Height="21px" ToolTip="Chọn hình" Width="300px"/><br><font size=-2><i>(Chọn hình có định dạng .jpg,.gif,.png)</i></font>
+    </td>
+    </tr>
     </table>
     <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
@@ -131,10 +141,9 @@
         <asp:DropDownList ID="dropd_month_start" runat="server">
         </asp:DropDownList>
         <asp:DropDownList ID="dropd_year_start" runat="server">
-        </asp:DropDownList>(dd/MM/yyyy)
+        </asp:DropDownList>(dd/mm/yyyy)
     </td>
     </tr>
-  
      <tr>
     <td>
         Ngày kết thúc:
@@ -145,7 +154,7 @@
         <asp:DropDownList ID="dropd_month_end" runat="server">
         </asp:DropDownList>
         <asp:DropDownList ID="dropd_year_end" runat="server">
-        </asp:DropDownList>(dd/MM/yyyy)
+        </asp:DropDownList>(dd/mm/yyyy)
             </td>
     </tr>
     <tr>
@@ -165,12 +174,6 @@
         <asp:DropDownList ID="dropd_status" runat="server">
         </asp:DropDownList>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="dropd_status" Display="Dynamic" InitialValue="None" ForeColor="REd" runat="server" ErrorMessage="Chọn trạng thái"></asp:RequiredFieldValidator>
-
-
-            
-        
-          
-
         </td>
     </tr>
     <tr>

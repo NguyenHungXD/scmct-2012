@@ -49,13 +49,13 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// txt_allbum_name control.
+        /// txt_album_name control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_allbum_name;
+        protected global::System.Web.UI.WebControls.TextBox txt_album_name;
         
         /// <summary>
         /// txt_desc control.
@@ -67,13 +67,13 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_desc;
         
         /// <summary>
-        /// btn_save_allbum control.
+        /// btn_save_album control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_save_allbum;
+        protected global::DevExpress.Web.ASPxEditors.ASPxButton btn_save_album;
         
         /// <summary>
         /// lbl_error control.
@@ -103,13 +103,13 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
-        /// allbum_id control.
+        /// album_id control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField allbum_id;
+        protected global::System.Web.UI.WebControls.HiddenField album_id;
         
         /// <summary>
         /// user_id control.

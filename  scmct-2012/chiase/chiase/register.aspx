@@ -34,7 +34,7 @@
     <tr>
     <td align=center colspan=2>
         <font size=3><b><asp:Label ID="lbl_result" runat="server" ></asp:Label></b></font>
-        <p align="left"><font color=red><i>* - Là thông tin bắt buộc khi đăng ký tài khoản mới</i></font></p>
+        <p align="left"><font color="Yellow"><i>* - Là thông tin bắt buộc khi đăng ký tài khoản mới</i></font></p>
         <hr>
         </td>
     <td rowspan=9><br>
@@ -47,11 +47,11 @@
     <td>
 
         <asp:TextBox ID="txt_user_name" runat="server"  class="txtformat" 
-            Width="250px" Height="22px"></asp:TextBox><font color=red>*</font>
+            Width="250px" Height="22px"></asp:TextBox><font color=yellow>*</font>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" 
             ControlToValidate="txt_user_name" runat="server" 
-            ErrorMessage="Nhập tên đăng nhập" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-            <asp:CustomValidator ID="CustomValidator2" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Tên đăng nhập ít nhất 4 ký tự" ClientValidationFunction="ValidateLenTDN"></asp:CustomValidator>
+            ErrorMessage="Nhập tên đăng nhập" ForeColor="yellow" Display="Dynamic"></asp:RequiredFieldValidator>
+            <asp:CustomValidator ID="CustomValidator2" ForeColor="yellow" Display="Dynamic" runat="server" ErrorMessage="Tên đăng nhập ít nhất 4 ký tự" ClientValidationFunction="ValidateLenTDN"></asp:CustomValidator>
     
     </td>
     </tr>
@@ -61,9 +61,9 @@
     </td>
     <td>
         <asp:TextBox ID="txt_pass_word" runat="server"  class="txtformat"  Width="250px" 
-            Height="22px" TextMode="Password"></asp:TextBox><font color=red>*</font>
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_pass_word" runat="server" ErrorMessage="Nhập mật khẩu"></asp:RequiredFieldValidator>
-        <asp:CustomValidator ID="CustomValidator3" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Mật khẩu ít nhất 4 ký tự" ClientValidationFunction="ValidateLenMK"></asp:CustomValidator>
+            Height="22px" TextMode="Password"></asp:TextBox><font color=yellow>*</font>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ForeColor="yellow" Display="Dynamic" ControlToValidate="txt_pass_word" runat="server" ErrorMessage="Nhập mật khẩu"></asp:RequiredFieldValidator>
+        <asp:CustomValidator ID="CustomValidator3" ForeColor="yellow" Display="Dynamic" runat="server" ErrorMessage="Mật khẩu ít nhất 4 ký tự" ClientValidationFunction="ValidateLenMK"></asp:CustomValidator>
             </td>
     </tr>
      <tr>
@@ -72,11 +72,11 @@
     </td>
     <td>
         <asp:TextBox ID="txt_pass_word_re" runat="server"  class="txtformat"  Width="250px" 
-            Height="22px" TextMode="Password"></asp:TextBox><font color=red>*</font>
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_pass_word_re" runat="server" ErrorMessage="Xác nhận mật khẩu"></asp:RequiredFieldValidator>
+            Height="22px" TextMode="Password"></asp:TextBox><font color=yellow>*</font>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ForeColor="yellow" Display="Dynamic" ControlToValidate="txt_pass_word_re" runat="server" ErrorMessage="Xác nhận mật khẩu"></asp:RequiredFieldValidator>
         <asp:CompareValidator ID="CompareValidator1" runat="server" 
             ControlToValidate="txt_pass_word_re" ControlToCompare="txt_pass_word" 
-            Operator="Equal" ErrorMessage="Mật khẩu không bằng nhau" ForeColor="#FF3300"></asp:CompareValidator>  
+            Operator="Equal" ErrorMessage="Mật khẩu không bằng nhau" ForeColor="yellow"></asp:CompareValidator>  
             
             </td>
     </tr>
@@ -100,7 +100,7 @@
         </asp:DropDownList>
         <asp:DropDownList ID="dropd_year" runat="server">
         </asp:DropDownList>
-        (dd/MM/yyyy)
+        (dd/mm/yyyy)
         </td>
 
     </tr>
@@ -121,9 +121,9 @@
     Email:
     </td>
     <td>
-        <asp:TextBox ID="txt_emaill_address" runat="server" class="txtformat" Width="250px" Height="22px"></asp:TextBox><font color=red>*</font>
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_emaill_address" runat="server" ErrorMessage="Nhập địa chỉ email"></asp:RequiredFieldValidator>
-        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_emaill_address" ErrorMessage="Địa chỉ email chưa đúng" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>   
+        <asp:TextBox ID="txt_emaill_address" runat="server" class="txtformat" Width="250px" Height="22px"></asp:TextBox><font color=yellow>*</font>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ForeColor="yellow" Display="Dynamic" ControlToValidate="txt_emaill_address" runat="server" ErrorMessage="Nhập địa chỉ email"></asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ForeColor="yellow" Display="Dynamic" ControlToValidate="txt_emaill_address" ErrorMessage="Địa chỉ email chưa đúng" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>   
             </td>
     </tr>
     <tr>
@@ -149,15 +149,15 @@
         Mã xác nhận:&nbsp 
     </td>
     <td><asp:Label ID="txt_random" runat="server" Text="" style="color:Yellow;font-weight:bold;font-size:x-large"></asp:Label>
-        <asp:TextBox ID="txt_confirm" style="color:Red;font-weight:bold;font-size:x-large" runat="server" class="txtformat" Width="80px" Height="27px"></asp:TextBox>
-          <asp:RequiredFieldValidator ID="RequiredFieldValidator5" Display="Dynamic" ForeColor="Red" ControlToValidate="txt_confirm" runat="server" ErrorMessage="Nhập mã xác nhận"></asp:RequiredFieldValidator>
+        <asp:TextBox ID="txt_confirm" style="color:Red;font-weight:bold;font-size:x-large" runat="server" class="txtformat" Width="80px" Height="27px"></asp:TextBox><font color=yellow>*</font>
+          <asp:RequiredFieldValidator ID="RequiredFieldValidator5" Display="Dynamic" ForeColor="yellow" ControlToValidate="txt_confirm" runat="server" ErrorMessage="Nhập mã xác nhận"></asp:RequiredFieldValidator>
     </td>
     </tr>
      <tr>
        <td colspan=2>
     <asp:CheckBox ID="chk" ClientIDMode="Static" runat="server" /><label for="chk"><b><font color="ButtonHighlight">
-        Tôi đồng ý thỏa thuận thành viên của cổng thông tin CSMCT</label> </font></b>- [<a href="roles.aspx?id=3" target="_blank">Thỏa thuận</a>]
-           <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="Bạn phải đồng ý thỏa thuận thành viên" ClientValidationFunction="ValidateChecked" ForeColor="#FF3300"></asp:CustomValidator>
+        Tôi đồng ý thỏa thuận thành viên của cổng thông tin CSMCT</label> </font></b>- [<a style="color:White" href="roles.aspx?id=3" target="_blank">Xem thỏa thuận</a>]
+           <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="Bạn phải đồng ý thỏa thuận thành viên" ClientValidationFunction="ValidateChecked" ForeColor="yellow"></asp:CustomValidator>
            </td>
     </tr>
     <tr>
@@ -167,12 +167,10 @@
     <tr>
     <td align="right">
     <asp:Button ID="Button2" runat="server" Text="Đăng ký" class="btn" Height="25px" Width="120px" onclick="btn_register_Click"/>
-
-
         </td>
         <td>
 
-            <input id="Button3" type="button" value="Hủy" onclick="backs();" style="width:120px;height:25px" class="btn"/>
+            <input id="Button3" type="button" value="Đóng" onclick="backs();" style="width:120px;height:25px" class="btn"/>
             
 
 

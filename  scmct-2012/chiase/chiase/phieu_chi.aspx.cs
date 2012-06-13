@@ -109,8 +109,8 @@ namespace chiase
                             order by b.name";
                     DataTable table_details = SQLConnectWeb.GetData(sql);
                     functions.fill_DropdownList(dropd_name_list, table_details, 0, 1);
-
-                    lbl_mapc.Text = vNo;
+                    functions.fill_DropdownList(dropd_name_lists, table_details, 0, 1);
+                    //lbl_mapc.Text = vNo;
 
 
                     if (Request.QueryString["id"] != null)
@@ -118,7 +118,7 @@ namespace chiase
                         string sql_edit = @"select a.*,b.name as nguoi_chi,c.name as nguoi_nhan_tien,c.address,d.ma_du_an as maduan,d.ten_du_an as tenduan
                                     from TC_PHIEU_CHI a
                                     inner join ND_THONG_TIN_ND b on b.id = a.nguoi_chi
-                                    inner join ND_THONG_TIN_ND c on c.id = a.doi_tuong_chi
+                                    inner join ND_THONG_TIN_ND c on c.id = a.mem_id
                                     inner join DA_DU_AN d on d.id = a.du_an_id
                                     where a.pc_id=@id";
 
@@ -140,9 +140,11 @@ namespace chiase
                         txt_address.Text = table_detail.Rows[0]["address"].ToString();
                         txt_note.Text = table_detail.Rows[0]["ghi_chu"].ToString();
                         project_name.Text = table_detail.Rows[0]["tenduan"].ToString();
-                        functions.selectedDropdown(dropd_name_list, table_detail.Rows[0]["doi_tuong_chi"].ToString());
-                        functions.selectedDropdown(dropd_list_project, table_detail.Rows[0]["du_an_id"].ToString());
+                        txt_name_receive.Text = table_detail.Rows[0]["doi_tuong_thu"].ToString(); 
 
+                        functions.selectedDropdown(dropd_name_list, table_detail.Rows[0]["mem_id"].ToString());
+                        functions.selectedDropdown(dropd_list_project, table_detail.Rows[0]["du_an_id"].ToString());
+                        
                     }
 
             }
@@ -158,13 +160,14 @@ namespace chiase
 
                 if (Request.QueryString["id"] != null)
                 {
-                    string sql = @"update tc_phieu_chi SET NGUOI_CAP_NHAT=@NGUOI_CAP_NHAT,NGAY_CAP_NHAT=@NGAY_CAP_NHAT,TONG_TIEN=@TONG_TIEN,DU_AN_ID=@DU_AN_ID,DOI_TUONG_CHI=@DOI_TUONG_CHI,GHI_CHU=@GHI_CHU WHERE PC_ID=@ID";
+                    string sql = @"update tc_phieu_chi SET NGUOI_CAP_NHAT=@NGUOI_CAP_NHAT,NGAY_CAP_NHAT=@NGAY_CAP_NHAT,TONG_TIEN=@TONG_TIEN,DU_AN_ID=@DU_AN_ID,DOI_TUONG_CHI=@DOI_TUONG_CHI,MEM_ID=@MEM_ID,GHI_CHU=@GHI_CHU WHERE PC_ID=@ID";
                     SQLConnectWeb.ExecuteNonQuery(sql,
                              "@NGUOI_CAP_NHAT", functions.LoginMemID(this),
                              "@NGAY_CAP_NHAT", functions.GetStringDatetime(),
                              "@TONG_TIEN", txt_total.Text,
                              "@DU_AN_ID", dropd_list_project.SelectedValue,
-                             "@DOI_TUONG_CHI", dropd_name_list.SelectedValue,
+                             "@DOI_TUONG_CHI",txt_name_receive.Text,
+                             "@MEM_ID",dropd_name_list.SelectedValue,
                              "@GHI_CHU", txt_note.Text,
                              "@ID",Request.QueryString["id"]);
 
@@ -182,14 +185,15 @@ namespace chiase
                     else
                         vNo = functions.getNo("PC-No.000000"); //The first time run the application
 
-                    string sql = @"insert into tc_phieu_chi (MA_PC,NGUOI_CHI,NGAY_CHI,TONG_TIEN,DU_AN_ID,DOI_TUONG_CHI,GHI_CHU) values (@MA_PC,@NGUOI_CHI,@NGAY_CHI,@TONG_TIEN,@DU_AN_ID,@DOI_TUONG_CHI,@GHI_CHU);";
+                    string sql = @"insert into tc_phieu_chi (MA_PC,NGUOI_CHI,NGAY_CHI,TONG_TIEN,DU_AN_ID,DOI_TUONG_CHI,MEM_ID,GHI_CHU) values (@MA_PC,@NGUOI_CHI,@NGAY_CHI,@TONG_TIEN,@DU_AN_ID,@DOI_TUONG_CHI,@MEM_ID,@GHI_CHU);";
                     SQLConnectWeb.ExecuteNonQuery(sql,
                              "@MA_PC", vNo,
                              "@NGUOI_CHI", functions.LoginMemID(this),
                              "@NGAY_CHI", functions.GetStringDatetime(),
                              "@TONG_TIEN", txt_total.Text,
                              "@DU_AN_ID", dropd_list_project.SelectedValue,
-                             "@DOI_TUONG_CHI", dropd_name_list.SelectedValue,
+                             "@DOI_TUONG_CHI", txt_name_receive.Text,
+                             "@MEM_ID",dropd_name_list.SelectedValue,
                              "@GHI_CHU", txt_note.Text);
 
                     Response.Redirect("phieu_chi_view.aspx?ma_pc=" + vNo);

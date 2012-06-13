@@ -7,8 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using chiase.Objects;
 using DK2C.DataAccess.Web;
-
-
+using System.IO;
 namespace chiase
 {
     public partial class edit_project : System.Web.UI.Page
@@ -138,6 +137,35 @@ namespace chiase
                 //    functions.GetStringDatetime(), functions.LoginMemID(this), functions.GetStringDate(start_date),
                 //    functions.GetStringDate(end_date), ASPxHtmlEditor1.Html.Replace("'", ""), dropd_status.SelectedValue,
                 //    "", "", txt_notes.Text, "Y");
+
+          
+                String filename = upload_img.FileName;
+                if(filename!="" || filename!=null)
+                {
+                    String file_type = System.IO.Path.GetExtension(filename).ToLower();
+                    String img = Request.QueryString["id"] + file_type;
+                    if ((file_type == ".jpg" || file_type == ".gif" || file_type == ".png"))
+                    {
+                        //Update to database
+                        String sqls = "UPDATE DA_DU_AN SET img_path='" + img  + "' WHERE ID=" + Request.QueryString["id"];
+                        if (SQLConnectWeb.ExecuteNonQuery(sqls) == 1)
+                        {
+                            const String path = "images/Projects/";
+                            File.Delete(MapPath(path) + img);
+                            upload_img.SaveAs(MapPath(path) + img);
+                        }
+                        else
+                        {
+                            lbl_error.Text = "Cập nhật hình đại diện không thành công, vui lòng kiểm tra lại thông tin!";
+                        }
+                    }
+                    else
+                    {
+                        lbl_error.Text = String.Format("Chỉ cho phép hình có định dạng JPG/GIF/PNG, file của bạn: {0}", filename);
+                    }
+                }
+
+
                 if (done == 1)
                     lbl_error.Text = "Cập nhật dự án thành công";
                 else

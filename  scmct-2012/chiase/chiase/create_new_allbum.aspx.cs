@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace chiase
 {
-    public partial class create_new_allbum : System.Web.UI.Page
+    public partial class create_new_album : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -26,6 +26,26 @@
             name.value = readXMLFormat(content, "[start1]", "[endstart1]");
             address.value = readXMLFormat(content, "[start2]", "[endstart2]");
         }
+        function return_linkss(obj) {
+            var name = document.getElementById("txt_name_receive");
+            //var address = document.getElementById("txt_address");
+            if (obj.value == "None") {
+                name.value = "";
+                address.value = "";
+                return;
+            }
+            var contentUrl = "user_info.aspx?id=" + obj.value;
+            var windowIndex = 1;
+            var window = divpopup111.GetWindow(windowIndex);
+            divpopup111.SetWindowContentUrl(window, contentUrl);
+
+
+            var url = "phieu_thu.aspx?user_id=" + obj.value + "&vmode=getdata_fullname";
+            var content = getValXML(url);
+
+            name.value = readXMLFormat(content, "[start1]", "[endstart1]");
+           // address.value = readXMLFormat(content, "[start2]", "[endstart2]");
+        }
         function return_links(obj) {
             var name = document.getElementById("txt_received_from");
             if (obj.value == "None") {
@@ -133,8 +153,8 @@
     <tr>
     <td colspan="3" align="center"><br>
         <p>
-        <font size="5px"><b>PHẾU CHI</b></font><i> Số:<b> 
-            <asp:Label ID="lbl_mapc" runat="server" ></asp:Label></b><br>
+        <font size="5px"><b>PHẾU CHI</b></font><i> Số:<b>...... 
+            <%--<asp:Label ID="lbl_mapc" runat="server" ></asp:Label>--%></b><br>
         Ngày..<asp:Label ID="lbl_day" runat="server" Text=""></asp:Label>..tháng..<asp:Label ID="lbl_month" runat="server" Text=""></asp:Label>..năm <asp:Label ID="lbl_year" runat="server" Text=""></asp:Label></i><br>
             
         Quyển số:....................</i>
@@ -147,8 +167,9 @@
 
 
     <table width="100%" border=0 >
+
     <tr>
-    <td>&nbsp</td><td width=25% style="font-weight:bold">Họ tên người nhận tiền  :</td><td colspan="3" width=75%> 
+    <td>&nbsp</td><td width=25% style="font-weight:bold">Chi cho:</td><td colspan="3" width=75%> 
         <asp:TextBox ID="txt_name" runat="server" class="txtformat" Width="200px" 
             ForeColor="#0066FF" Height="25px" ClientIDMode="Static"></asp:TextBox>
         <asp:DropDownList ID="dropd_name_list" runat="server" Height="25px" onchange="return_link(this)">
@@ -177,17 +198,47 @@
                             </dx:ASPxPopupControl>
     </td>
     </tr>
-
-    <tr>
+      <tr>
     <td>&nbsp</td><td style="font-weight:bold">Địa chỉ  :</td><td colspan="3">  <asp:TextBox ID="txt_address" 
             runat="server" class="txtformat" ForeColor="#0066FF" Height="25px" 
             Width="400px" ClientIDMode="Static"></asp:TextBox>
             
     </td>
     </tr>
+    <tr>
+    <td>&nbsp</td><td width=25% style="font-weight:bold">Người nhận tiền:</td><td colspan="3" width=75%> 
+        <asp:TextBox ID="txt_name_receive" runat="server" class="txtformat" Width="200px" 
+            ForeColor="#0066FF" Height="25px" ClientIDMode="Static"></asp:TextBox>
+        <asp:DropDownList ID="dropd_name_lists" runat="server" Height="25px" onchange="return_linkss(this)">
+        </asp:DropDownList> [<a id="divdetail1" style="cursor:pointer"><font color=blue>Xem chi tiết</font></a>]
+        
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator111" ControlToValidate="txt_name_receive" Display="Dynamic" ForeColor="Red" runat="server" ErrorMessage="Nhập họ tên người nhận tiền"></asp:RequiredFieldValidator>
+
+        <dx:ASPxPopupControl ID="ASPxPopupControl3" runat="server"
+                    AllowDragging="True" AllowResize="True" ClientInstanceName="divpopup111"
+                            CloseAction="CloseButton" 
+                            EnableViewState="False" PopupElementID='divdetail1'
+                            PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
+                            Height="600px" FooterText=""
+                            HeaderText="SCMCT-Thông tin chi tiết thành viên" 
+                            EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
+                            CssPostfix="Aqua" LoadingPanelImagePosition="Top" 
+                            SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
+                            <LoadingPanelImage Url="~/App_Themes/Aqua/Web/Loading.gif">
+                            </LoadingPanelImage>
+                            <ContentStyle VerticalAlign="Top">
+                            </ContentStyle>
+                            <ContentCollection>
+                                <dx:PopupControlContentControl ID="PopupControlContentControl3" runat="server" SupportsDisabledAttribute="True">
+                                </dx:PopupControlContentControl>
+                            </ContentCollection>
+                            </dx:ASPxPopupControl>
+    </td>
+    </tr>
+  
 
     <tr>
-    <td>&nbsp</td><td style="font-weight:bold">Chi cho dự án  :</td><td colspan="3">  
+    <td>&nbsp</td><td style="font-weight:bold">Chi cho dự án:</td><td colspan="3">  
         <asp:DropDownList ID="dropd_list_project" runat="server" Height="25px" onchange="return_link_project(this)">
         </asp:DropDownList>
         <asp:Label ID="project_name" runat="server" ClientIDMode="Static" Text=""></asp:Label>
@@ -277,7 +328,7 @@
                 Height="25px" Width="120px" onclick="btn_save_Click" />
 </asp:Label>
 
-        <input id="Button2" type="button" value="Hủy" class="btn" style="width:100px;height:25px" onclick="return Button2_onclick()" />
+        <input id="Button2" type="button" value="Đóng" class="btn" style="width:100px;height:25px" onclick="return Button2_onclick()" />
         </p>
 
 

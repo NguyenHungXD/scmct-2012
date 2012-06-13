@@ -119,10 +119,9 @@ namespace chiase
 
                     if (Request.QueryString["id"] != null)
                     {
-                        string sql_pull = @"select a.*,b.name as nguoi_thu_tien,c.name as nhan_tien_tu,d.name as thu_tu,d.address,e.tieu_de as tieude,f.ma_du_an as maduan,f.ten_du_an as tenduan
+                        string sql_pull = @"select a.*,b.name as nguoi_thu_tien,d.name as thu_tu,d.address,e.tieu_de as tieude,f.ma_du_an as maduan,f.ten_du_an as tenduan
                                     from TC_PHIEU_THU a
                                     inner join ND_THONG_TIN_ND b on b.id = a.nguoi_thu
-                                    inner join ND_THONG_TIN_ND c on c.id = a.doi_tuong_thu
                                     inner join ND_THONG_TIN_ND d on d.id = a.mem_id
                                     left outer join YC_YEU_CAU e on e.yeu_cau_id = a.yeu_cau_id
                                     inner join DA_DU_AN f on f.id = a.du_an_id
@@ -132,15 +131,16 @@ namespace chiase
                         vNo = table_detail.Rows[0]["ma_pt"].ToString();
                         txt_name.Text = table_detail.Rows[0]["thu_tu"].ToString();
                         txt_address.Text = table_detail.Rows[0]["address"].ToString();
+
                         functions.selectedDropdown(dropd_name_list, table_detail.Rows[0]["mem_id"].ToString());
 
-                        functions.selectedDropdown(drop_list, table_detail.Rows[0]["doi_tuong_thu"].ToString());
+                        //functions.selectedDropdown(drop_list, table_detail.Rows[0]["mem_id"].ToString());
 
                         functions.selectedDropdown(dropd_request, table_detail.Rows[0]["yeu_cau_id"].ToString());
                         functions.selectedDropdown(dropd_list_project, table_detail.Rows[0]["du_an_id"].ToString());
                         txt_note.Text = table_detail.Rows[0]["ghi_chu"].ToString();
                         txt_total.Text = table_detail.Rows[0]["tong_tien"].ToString();
-                        txt_received_from.Text = table_detail.Rows[0]["nhan_tien_tu"].ToString();
+                        txt_received_from.Text = table_detail.Rows[0]["doi_tuong_thu"].ToString();
                         project_name.Text = table_detail.Rows[0]["tenduan"].ToString();
                         
                         lbl_money_text.Text = functions.conVertToText((Double)table_detail.Rows[0]["tong_tien"]);
@@ -155,6 +155,10 @@ namespace chiase
         {
             try
             {
+                long request_id = 0;
+                if (dropd_request.SelectedValue != "None")
+                    request_id = long.Parse(dropd_request.SelectedValue);
+
                 if (Request.QueryString["id"] != null)
                 {
                     string sql = @"update tc_phieu_thu SET NGUOI_CAP_NHAT=@NGUOI_CAP_NHAT,NGAY_CAP_NHAT=@NGAY_CAP_NHAT,TONG_TIEN=@TONG_TIEN,DU_AN_ID=@DU_AN_ID,DOI_TUONG_THU=@DOI_TUONG_THU,MEM_ID=@MEM_ID,YEU_CAU_ID=@YEU_CAU_ID,GHI_CHU=@GHI_CHU WHERE PT_ID=@ID";
@@ -163,9 +167,9 @@ namespace chiase
                              "@NGAY_CAP_NHAT", functions.GetStringDatetime(),
                              "@TONG_TIEN", txt_total.Text,
                              "@DU_AN_ID", dropd_list_project.SelectedValue,
-                             "@DOI_TUONG_THU", drop_list.SelectedValue,
+                             "@DOI_TUONG_THU", txt_received_from.Text,
                              "@MEM_ID", dropd_name_list.SelectedValue,
-                             "@YEU_CAU_ID", dropd_request.SelectedValue,
+                             "@YEU_CAU_ID", request_id,
                              "@GHI_CHU", txt_note.Text,
                              "@ID", Request.QueryString["id"]);
                     string sql_get_next_no = @"select MA_PT from TC_PHIEU_THU where pt_id = @id";
@@ -175,6 +179,8 @@ namespace chiase
                 }
                 else
                 {
+
+
                     string sql_get_next_no = @"select MA_PT from TC_PHIEU_THU where PT_ID = (select max(PT_ID) from TC_PHIEU_THU)";
                     DataTable table_next_no = SQLConnectWeb.GetData(sql_get_next_no);
                     if (table_next_no.Rows.Count > 0)
@@ -188,9 +194,9 @@ namespace chiase
                              "@NGAY_THU", functions.GetStringDatetime(),
                              "@TONG_TIEN", txt_total.Text,
                              "@DU_AN_ID", dropd_list_project.SelectedValue,
-                             "@DOI_TUONG_THU", drop_list.SelectedValue,
+                             "@DOI_TUONG_THU", txt_received_from.Text,
                              "@MEM_ID", dropd_name_list.SelectedValue,
-                             "@YEU_CAU_ID", dropd_request.SelectedValue,
+                             "@YEU_CAU_ID", request_id,
                              "@GHI_CHU", txt_note.Text);
 
                     Response.Redirect("phieu_thu_view.aspx?ma_pt=" + vNo);
@@ -198,7 +204,7 @@ namespace chiase
             }
             catch(Exception ex)
             {
-                
+                //lbl_error.Text = ex.ToString() + dropd_name_list.SelectedValue;
             }
         }
 

@@ -18,28 +18,34 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                Boolean checkDel = functions.checkPrivileges("14", functions.LoginMemID(this), "D");
+                Boolean checkEdit = functions.checkPrivileges("14", functions.LoginMemID(this), "E");
+                Boolean checkView = functions.checkPrivileges("14", functions.LoginMemID(this), "V");
+
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
 
-                if (Request.QueryString["vmode"] == "del")
+                if (Request.QueryString["vmode"] == "del" && checkDel)
                 {
                     del_request();
-                } if (Request.QueryString["vmode"] == "undel")
+                } if (Request.QueryString["vmode"] == "undel" && checkDel)
                 {
                     undel_request();
                 }
-                else if (Request.QueryString["vmode"] == "update_kind_request")
+                else if (Request.QueryString["vmode"] == "update_kind_request" && checkEdit)
                 {
                     update_kind_request();
                 }
-                else if (Request.QueryString["vmode"] == "update_request_status")
+                else if (Request.QueryString["vmode"] == "update_request_status" && checkEdit)
                 {
                     update_request_status();
                 }
                 else
                 {
-                    lbl_search_request.Visible = lbl_search_request.Visible = functions.checkPrivileges("14", functions.LoginMemID(this), "V");
-                    lbl_del_request.Visible = lbl_search_request.Visible = functions.checkPrivileges("14", functions.LoginMemID(this), "D");
+                    lbl_search_request.Visible = checkView;
+                    request_list.Visible = checkView;
+                    lbl_del_request.Visible = checkDel;
+
                     display();
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_request.aspx' title='Cập nhật yêu cầu'>Cập nhật yêu cầu</a>";
                 }

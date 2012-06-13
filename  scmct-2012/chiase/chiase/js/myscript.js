@@ -5,6 +5,72 @@ window.onload=function(){
     var h = screen.availHeight;
     window.moveTo(0,0);
     window.resizeTo(w,h);
+   
+}
+function clearNullText(control) {
+    if (control.getAttribute("nulltext") == control.value)
+        control.value = "";
+}
+function getCurrentddMMyyyy() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+
+    var yyyy = today.getFullYear();
+    if (dd < 10) { dd = '0' + dd }
+    if (mm < 10) { mm = '0' + mm }
+    var today = dd + '/' + mm + '/' + yyyy;
+    return today;
+}
+function setPerrmissionOnCategory() {
+    var btnSearch = document.getElementById("timKiem");
+    var btnSave1 = document.getElementById("luuTable_1");
+    var btnSave2 = document.getElementById("luuTable_2");
+    if (btnSearch != null && btnSearch.getAttribute("search") == "False") {
+        btnSearch.style.display = "none";
+    }
+    if (btnSave1 != null && btnSave1.getAttribute("add") == "False" && btnSave1.getAttribute("edit") == "False") {
+        btnSave1.style.display = "none";
+    }
+    if (btnSave2 != null && btnSave2.getAttribute("add") == "False" && btnSave2.getAttribute("edit") == "False") {
+        btnSave2.style.display = "none";
+    }
+}
+function setPerrmissionOnManagePage() {
+    var btnSearch = document.getElementById("timKiem");
+    var btnAddNew = document.getElementById("addNew");
+    if (btnSearch != null && btnSearch.getAttribute("search") == "False") {
+        btnSearch.style.display = "none";
+    }
+    if (btnAddNew != null && btnAddNew.getAttribute("add") == "False") {
+        btnAddNew.style.display = "none";
+    }    
+}
+function setPerrmission(idKhoaChinh) {
+            var btnLuu = document.getElementById("luu");        
+            var btnDelete = document.getElementById("xoa")
+            var btnNew = document.getElementById("moi");          
+            if (btnLuu == null) btnLuu = document.getElementById("_luu");
+            if (btnLuu != null) {
+                if (idKhoaChinh == null || idKhoaChinh == "")//Thêm mới
+                {
+                    if (btnLuu.getAttribute("add") == "False") {
+                        btnLuu.style.display = "none";
+                        btnNew.style.display = "none";
+                    }
+                } 
+                else {
+                    if (btnLuu.getAttribute("edit") == "False") {
+                        btnLuu.style.display = "none";
+                    }
+                    if (btnLuu.getAttribute("add") == "False")
+                        btnNew.style.display = "none";
+                }
+            }
+            if (btnDelete != null && btnDelete.getAttribute("delete") == "False") {
+                btnDelete.style.display = "none";
+            }         
+                 
 }
 function idkhoachinhSua(idkhoachinh) {
     if (location.hash.match(khoachinhcapnhatdulieu))
@@ -68,7 +134,11 @@ function Them(functionScriptBefore,functionScriptAfter,ajaxThem, ajaxSua, contro
                         idkhoachinhSua(xmlHttp.responseText);
                         control.id = controlSua;
                         control.value = valueControl;
-                        document.getElementById(controlXoa).style.display = "";
+                        var ctrl = document.getElementById(controlXoa);
+                        if (ctrl.getAttribute("delete") == "False") {
+                            ctrl.style.display = "none";
+                        } else
+                            ctrl.style.display = "";
                         ExtendtionLuu(true);
                         try{setTimeout("document.getElementById(\""+controlMoi+"\").focus()",100);}
                         catch(ex){}
@@ -111,7 +181,11 @@ function Them(functionScriptBefore,functionScriptAfter,ajaxThem, ajaxSua, contro
                         idkhoachinhSua(xmlHttp.responseText);
                         control.id = controlSua;
                         control.value = valueControl;
-                        document.getElementById(controlXoa).style.display = "";
+                        var ctrl = document.getElementById(controlXoa);
+                        if (ctrl.getAttribute("delete") == "False") {
+                            ctrl.style.display = "none";
+                        } else
+                            ctrl.style.display = "";
                         ExtendtionLuu(true);
                         try{setTimeout("document.getElementById(\""+controlMoi+"\").focus()",100);}
                         catch(ex){}
@@ -241,10 +315,14 @@ function Moi(valueControlLuu) {
     if (document.getElementById(controlLuu) != null) {
         document.getElementById(controlLuu).id = controlLuu;
         document.getElementById(controlLuu).value = valueControlLuu;
+        if (document.getElementById(controlLuu).getAttribute("add") != "False")
+            document.getElementById(controlLuu).style.display = "";
     }
     if (document.getElementById(controlSua) != null) {
         document.getElementById(controlSua).id = controlLuu;
         document.getElementById(controlLuu).value = valueControlLuu;
+        if (document.getElementById(controlLuu).getAttribute("add") != "False")
+            document.getElementById(controlLuu).style.display = "";
     }
     var sel = document.getElementsByTagName("select");
     for (var i = 0; i < document.forms[0].elements.length; i++) {
@@ -322,12 +400,16 @@ function XoaControlAfterFind(idkhoachinhsua, valueControlSua) {
         document.getElementById(controlSua).id = controlSua;
         document.getElementById(controlSua).value = valueControlSua;
     }
-    try{
-        document.getElementById(controlXoa).style.display = "";
+    try {
+        var ctrl = document.getElementById(controlXoa);
+        if (ctrl.getAttribute("delete") == "False") {
+            btnDelete.style.display = "none";
+        } else
+            ctrl.style.display = "";
         document.getElementById("divParent").innerHTML = "";
-        if(currentRow != null){currentRow=0}
+        if (currentRow != null) { currentRow = 0 }
     }
-    catch(ex){}
+    catch (ex) { }
     ExtendtionLuu(true);
 
 }

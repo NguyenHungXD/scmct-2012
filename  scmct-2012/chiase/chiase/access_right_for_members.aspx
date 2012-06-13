@@ -30,6 +30,7 @@
 <fieldset>
     <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;">
         <tr style="color:White;font-weight:bold"><td colspan="8"><font size=3><p align="center">Tìm kiếm thành viên</p></font><br>*-Bạn có thể bỏ qua điều kiện bạn không quan tâm.</td></tr>
+        <tr><td colspan=8><hr></td></tr>
         <tr>
         <td >
             Tên đăng nhập: 
@@ -154,29 +155,29 @@
         </dx:ASPxDateEdit>
         </td>
         </tr>
-
+        <tr><td colspan=8><hr></td></tr>
         <tr>
         <td>&nbsp</td><td colspan="3">&nbsp
             <asp:Label ID="lbl_search_members" runat="server">
          <asp:Button ID="Button4" runat="server"  Text="Tìm kiếm" class="btn" onclick="btn_search_Click" Height="25px" Width="100px"/>
+         <input id="Button1" type="button" value="Đóng" style="width:100px;height:25px" class="btn" onclick="backs();"/>
          </asp:Label>
         </td>
         </tr>
         </table>
 </fieldset>
-<hr>
 <asp:Repeater ID="member_list" runat="server" 
         onitemdatabound="member_list_ItemDataBound">
     <HeaderTemplate>
     <table border="0" cellpadding=2 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;color:Black">
-        <tr bgcolor="#990099" style="color:White;font-weight:bold"><td align="center" colspan="8">Danh sách thành viên</td></tr>
-        <tr class="new_post">
+        <tr bgcolor="#1A15FB" style="color:White;font-weight:bold"><td align="center" colspan="8">DANH SÁCH THÀNH VIÊN</td></tr>
+        <tr class="btn_project" style="text-align:center;font-weight:bold;">
         <td width="20%" colspan="2">
-            STT
+            <P>STT</P>
         </td>
  
         <td width="10%">
-            Tên đăng nhập/Tên thành viên
+            Tên đăng nhập
         </td>
 
         <td width="10%">
@@ -207,8 +208,6 @@
            <td align="center" >
              <a style="color:Blue;cursor:pointer" id='<%#Eval("id","divdetail{0}")%>' title='<%#Eval("ten_dn","Xem chi tiết thông tin: {0}") %>' ><%# Eval("ten_dn")%></a>
         <br><%#Eval("name") %>
-
-
             <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server"
                     AllowDragging="True" AllowResize="True" ClientInstanceName="divpopup"
                             CloseAction="CloseButton" contentUrl='<%#Eval("id","user_info.aspx?id={0}")%>'  
@@ -228,8 +227,6 @@
                                 </dx:PopupControlContentControl>
                             </ContentCollection>
                             </dx:ASPxPopupControl>
-
-
         </td>
                 <td align="center">
                 <%# Eval("phone")%><br>
@@ -253,7 +250,7 @@
     <td colspan="6" style="color:white;font-weight:bold">
  <br>
     <i><br>*-Thành viên đã xóa có nền màu vàng</i><i><br>*-Thành viên đã khóa có nền màu xanh</i><i><br>*-Thành viên đã khóa và xóa có nền màu xám đen</i><br><br>
-        <input id="Button2" type="button" value="Hủy" style="width:100px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
+        <input id="Button2" type="button" value="Đóng" style="width:100px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
     </td>
     </tr>
     </table>
@@ -262,7 +259,7 @@
      <table width="100%">
      <tr align="right">
     <td colspan=3 align=right style="color:White">
-    <br>&nbsp Hôm nay,  nay,    <br>&nbsp Hôm nay,  nay, <%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %>
+    <br>&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %>
     </td>
     </tr>
     </table>

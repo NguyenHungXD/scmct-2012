@@ -81,8 +81,7 @@
     </tr>
     <tr>
     <td colspan=3 align=left><hr>
-        <p align=center><asp:HyperLink ID="link_forget_pass" runat="server" 
-                Text="Quên mật khẩu?" NavigateUrl="forget_password.aspx"></asp:HyperLink>
+        <p align=center><asp:HyperLink style="color:white" title="Quên mật khẩu" ID="link_forget_pass"  runat="server" Text="Quên mật khẩu?" NavigateUrl="forget_password.aspx"></asp:HyperLink>
     <br>
     <br>
 
@@ -98,7 +97,7 @@
                 </td>
                 <td align=left>
 
-                <input id="Button3" type="button" value="Hủy" onclick="backs();" style="width:120px;height:25px" class="btn"/>
+                <input id="Button3" type="button" value="Đóng" onclick="backs();" style="width:120px;height:25px" class="btn"/>
 
 
                 </td>

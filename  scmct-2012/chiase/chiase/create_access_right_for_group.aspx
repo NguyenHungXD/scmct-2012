@@ -92,7 +92,7 @@
             var obj = document.forms["chiase"];
             var checked = false;
             var groupid = document.getElementById("divgroupid").value;
-            if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để hủy.")) {
+            if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để Đóng.")) {
                 if (obj.chk_all.length > 0) {
                     for (i = 0; i < obj.chk_all.length; i++) {
                             var vView = returnvalChecked(obj.chk_view[i]);
@@ -132,7 +132,7 @@
             }
         
         function backs() {
-            window.location = "admin.aspx";
+            window.close();
         }
 
     </script>
@@ -166,9 +166,12 @@
         <tr>
         <td>&nbsp</td>
         <td align="left">
-
-            <asp:Button ID="Button3" runat="server" Text="Tìm kiếm" class="btn" 
+            <asp:Label id="lbl_search" runat="server" Text="">
+            <asp:Button  ID="Button3" runat="server" Text="Tìm kiếm" class="btn" 
                 Height="25px" Width="120px" onclick="Button3_Click" />
+            </asp:Label>
+
+                <input id="Button4" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/>
 
         </td>
         </tr>
@@ -183,18 +186,18 @@
 
         </table>
 </fieldset>
-<hr>
+
     <asp:Repeater ID="module_list" runat="server" 
         onitemdatabound="module_list_ItemDataBound">
     <HeaderTemplate>
     <table border="0" cellpadding=3 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;color:Black">
-        <tr bgcolor="#990099" style="color:White;font-weight:bold"><td align="center" colspan="8">Danh sách chức năng</td></tr>
-        <tr class="new_post">
+        <tr bgcolor="#1A15FB" style="color:White;font-weight:bold"><td align="center" colspan="8">DANH SÁCH CHỨC NĂNG HỆ THỐNG</td></tr>
+        <tr class="btn_project" style="text-align:center;font-weight:bold;">
+
         <td width="10%">
-            
             Mã chức năng
         </td>
-                        <td width="15%">
+        <td width="15%">
             Tên chức năng
         </td>
         <td>
@@ -217,7 +220,7 @@
                 <input name="chkall" onclick="checkalls('del',4);" id="chkall005" type="checkbox" /> <label style="cursor:pointer" for="chkall005" title="Chọn tất cả">
             Xóa</label>
         </td>
-                <td>
+        <td>
             Tất cả
         </td>
         </tr>
@@ -263,11 +266,11 @@
      <tr>
     <td colspan="6" style="color:white;font-weight:bold"><br>
     <i>*-Chọn quyền cần xét cho nhóm thành viên</i>
-    <i><br>*-Nhóm thành viên đã xóa có nền màu vàng</i><font color="ButtonHighlight" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
+    <i><br>*-Nhóm thành viên đã xóa có nền màu vàng</i><font color="white" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
         <asp:Label ID="lbl_create_access" runat="server">
     <input id="Button1" type="button" value="Lưu thông tin" class="btn" style="width:125px;height:25px" onclick="updates('create_new')"/>
     </asp:Label>
-    <input id="Button2" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
+    <input id="Button2" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
         
     </td>
     </tr>

@@ -1,8 +1,9 @@
 
 $(document).ready(function () {    
+    setPerrmissionOnCategory();
     Find(document.getElementById("timKiem"));
     $('input[id^=luuTable]').click(function () {
-        $(this).LuuTable({ ajax: "../ajax/DM_HANG_HOA_ajax2.aspx?do=luuTable", tablename: "gridTable" });
+        $(this).LuuTable({ ajax: "ajax/DM_HANG_HOA_ajax2.aspx?do=luuTable", tablename: "gridTable" });
     });
     $("#timKiem").click(function () {
         Find(this);
@@ -11,25 +12,25 @@ $(document).ready(function () {
 });
 function xoa(control, bool) {
     if (bool || bool == null)
-        $(control).XoaRow({ ajax: '../ajax/DM_HANG_HOA_ajax2.aspx?do=xoa' });
+        $(control).XoaRow({ ajax: 'ajax/DM_HANG_HOA_ajax2.aspx?do=xoa' });
 }
 function Find(control, page) {
     if (page == null) page = "1";
     $(control).TimKiem({
-        ajax: "../ajax/DM_HANG_HOA_ajax2.aspx?do=TimKiem&page=" + page
+        ajax: "ajax/DM_HANG_HOA_ajax2.aspx?do=TimKiem&page=" + page
     }, function (data) {
         $("#tableAjax_DM_HANG_HOA").html(data);
         $("table.jtable tr:nth-child(odd)").addClass("odd");
         $("table.jtable tr:nth-child(even) td:first-child").addClass("even-first");
         $("table.jtable tr:nth-child(odd) td:first-child").addClass("odd-first");
     }, function () {
-        $("#tableAjax_DM_HANG_HOA").html('<img src="../images/loading.gif" style="margin:0 41%;padding:10px 0 10px 0"/>');
+        $("#tableAjax_DM_HANG_HOA").html('<img src="images/loading.gif" style="margin:0 41%;padding:10px 0 10px 0"/>');
         return true;
     });
 
 }
 function NHH_IDSearch(obj) {
-    $(obj).unautocomplete().autocomplete("../ajax/DM_HANG_HOA_ajax2.aspx?do=NHH_IDSearch", {
+    $(obj).unautocomplete().autocomplete("ajax/DM_HANG_HOA_ajax2.aspx?do=NHH_IDSearch", {
         minChars: 0,
         width: 350,
         scroll: true,

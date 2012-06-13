@@ -26,6 +26,7 @@
 <fieldset>
     <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;">
         <tr style="color:White;font-weight:bold"><td colspan="8"><font size=3><p align="center">Tìm kiếm nhóm thành viên</p></font><br>*-Bạn có thể bỏ qua điều kiện bạn không quan tâm.</td></tr>
+        <tr><td colspan=8><hr></td></tr>
         <tr>
                     <td>
             Nhóm:
@@ -110,28 +111,26 @@
                     Width="250px"></asp:TextBox>
             </td>
         </tr>
-        
+        <tr><td colspan=8><hr></td></tr>
         <tr>
         <td>&nbsp</td><td colspan="3">&nbsp
             <asp:Label ID="lbl_seach_group" runat="server">
             <asp:Button ID="btn_search" runat="server" Text="Tìm kiếm" class="btn" 
                 Height="25px" onclick="btn_search_Click" Width="120px"  />
+                <input id="Button1" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/>
         </asp:Label>
         </td>
         </tr>
         </table>
 </fieldset>
-<hr>
-
-
     <asp:Repeater ID="group_list" runat="server" 
         onitemdatabound="group_list_ItemDataBound">
     <HeaderTemplate>
     <table border="0" cellpadding=3 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;color:Black">
-        <tr bgcolor="#990099" style="color:White;font-weight:bold"><td align="center" colspan="6">Danh sách nhóm thành viên</td></tr>
-        <tr class="new_post">
-        <td width="10%">
-            STT
+        <tr bgcolor="#1A15FB" style="color:White;font-weight:bold"><td align="center" colspan="6">DANH SÁCH NHÓM THÀNH VIÊN</td></tr>
+        <tr class="btn_project" style="text-align:center;font-weight:bold;">
+        <td width="7%">
+            <p>STT</p>
         </td>
         <td width="17%">
             Tên nhóm
@@ -168,7 +167,7 @@
     <br>
     <i><br>*-Nhóm thành viên đã xóa có nền màu vàng</i><i><br>*-Nhóm thành viên đã khóa có nền màu xanh</i><i><br>*-Nhóm thành viên đã khóa và xóa có nền màu xám đen</i><br>
         <font color="ButtonHighlight" size=4px><b><p id="stausinfo" align="center"></p></b></font><br> 
-        <input id="Button2" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
+        <input id="Button2" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
         
     </td>
     </tr>
@@ -178,7 +177,7 @@
      <table width="100%">
      <tr align="right">
     <td colspan=3 align=right style="color:White">
-    <br>&nbsp Hôm nay, br>&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %>
+    <br>&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %>
     </td>
     </tr>
     </table>

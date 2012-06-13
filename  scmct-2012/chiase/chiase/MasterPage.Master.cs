@@ -17,12 +17,17 @@ namespace chiase
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-           if (!IsPostBack)
-           {
-               pn_admin.Visible = false;
-                this.Display();
-                
-           }
+            try
+            {
+                if (!IsPostBack)
+                {
+                    pn_admin.Visible = false;
+                    this.Display();
+                    txt_search.Text = (string)Session["str_search"];
+                }
+            }
+            catch
+            { }
         }
 
         void Display()
@@ -132,6 +137,27 @@ namespace chiase
             catch
             { }
            
+        }
+
+        protected void Unnamed2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Session["search_news"] == "" || Session["search_news"] == null)
+                {
+                    Session["search_news"] = "checked";
+                    Session["search_all"] = "unchecked";
+                    Session["search_request"] = "unchecked";
+                    Session["search_album"] = "unchecked";
+                }
+                Session["str_search"] = txt_search.Text;
+                string url = "search_result.aspx?str_search=" + txt_search.Text;
+                Response.Redirect(url);
+               
+            }
+            catch
+            { 
+            }
         }
 
  

@@ -19,10 +19,10 @@
   <table border=0 cellpadding=3 cellspacing=3 width=100%>
         <tr>
         <td>
-        Tên allbum:
+        Tên album:
         </td>
         <td>
-            <b><%= allbum_name %></b>
+            <b><%= album_name %></b>
         </td>
         </tr>
         <tr>
@@ -30,7 +30,7 @@
         Chi tiết:
         </td>
         <td>
-           <b><%= allbum_detail %></b>
+           <b><%= album_detail %></b>
         </td>         
         </tr>
         </table>
@@ -43,10 +43,10 @@
   <table border=0 cellpadding=3 cellspacing=3 width=100%>
         <tr>
         <td>
-        Tên allbum:
+        Tên album:
         </td>
         <td>
-        <asp:TextBox ID="txt_allbum_name" runat="server" class="txtformat" Width="300px" 
+        <asp:TextBox ID="txt_album_name" runat="server" class="txtformat" Width="300px" 
                 Height="23px"></asp:TextBox>
         </td>
         </tr>
@@ -64,9 +64,9 @@
         </td>
         <td>
 
-            <dx:ASPxButton ID="btn_save_allbum" runat="server" Text="Lưu allbum" 
+            <dx:ASPxButton ID="btn_save_album" runat="server" Text="Lưu album" 
                 CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px" OnClick="btn_save_allbum_Click">
+                SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css" Width="120px" OnClick="btn_save_album_Click">
             </dx:ASPxButton>
 
         </td>
@@ -91,7 +91,7 @@
      </asp:Panel>
 
 
-        <asp:HiddenField ID="allbum_id" runat="server" />
+        <asp:HiddenField ID="album_id" runat="server" />
         <asp:HiddenField ID="user_id" runat="server" />
     </div>
 
@@ -100,7 +100,7 @@
 </body>
 </html>
 <script type = "text/javascript">
-    var allbum_id = document.all["<%=allbum_id.ClientID%>"].value;
+    var album_id = document.all["<%=album_id.ClientID%>"].value;
     var user_id = document.all["<%=user_id.ClientID%>"].value;
 
     $(window).load(
@@ -109,7 +109,7 @@
             'uploader': 'scripts/uploader.swf',
             'cancelImg': 'images/cancel.png',
             'buttonText': 'Chon hinh...',
-            'script': 'Upload.ashx?id=' + allbum_id + ';' + user_id + ';',
+            'script': 'Upload.ashx?id=' + album_id + ';' + user_id + ';',
             'fileDesc': 'Image Files',
             'fileExt': '*.jpg;*.jpeg;*.gif;*.png',
             'multi': true,

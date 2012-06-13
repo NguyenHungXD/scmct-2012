@@ -33,7 +33,7 @@ namespace chiase
                 
                 if (table.Rows.Count > 0)
                 {
-                    lbl_project_name.Text = (String)table.Rows[0]["TEN_DU_AN"];
+                    //lbl_project_name.Text = (String)table.Rows[0]["TEN_DU_AN"];
                     lbl_tenduan.Text = (String)table.Rows[0]["TEN_DU_AN"];
                     lbl_maduan.Text = (String)table.Rows[0]["MA_DU_AN"];
                     Int64 book = (Int64)table.Rows[0]["BOOK"];
@@ -84,6 +84,10 @@ namespace chiase
                 HyperLink cm_by = (HyperLink)e.Item.FindControl("link_cm_by");
                 Label cm_date = (Label)e.Item.FindControl("lbl_date_time");
                 post_show.NavigateUrl = string.Format("post_show_details.aspx?news_id={0}", id);
+
+                //HyperLink linkPostnew = (HyperLink)e.Item.FindControl("linkPostnew");
+                //linkPostnew.NavigateUrl = "post_news.aspx?projectID=" + Request.QueryString["id"];
+
 
                 String sql_lasted_cm = string.Format(@"SELECT bbv.*,nd.username FROM BV_BAI_VIET bbv 
                         INNER JOIN ND_THONG_TIN_DN nd ON bbv.NGUOI_TAO = nd.MEM_ID

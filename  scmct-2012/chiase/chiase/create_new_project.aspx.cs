@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Data;
 using chiase.Objects;
 using DK2C.DataAccess.Web;
+using System.IO;
+
 namespace chiase
 {
     public partial class create_new_project : System.Web.UI.Page
@@ -86,7 +88,6 @@ namespace chiase
         {
             try
             {
-              
                 String sql = "INSERT INTO DA_DU_AN(MA_DU_AN,TEN_DU_AN,NGAY_TAO,NGUOI_TAO,NGAY_BAT_DAU,NGAY_KET_THUC,CHI_TIET,TRANG_THAI_ID,GHI_CHU,ENABLE_BIT,BOOK) VALUES(@V_MA_DU_AN,@V_TEN_DU_AN,@V_NGAY_TAO,@V_NGUOI_TAO,@V_NGAY_BAT_DAU,@V_NGAY_KET_THUC,@V_CHI_TIET,@V_TRANG_THAI_ID,@V_GHI_CHU,@V_ENABLE_BIT,@V_BOOK)";
                 DateTime start_date = Convert.ToDateTime(String.Format("{0}/{1}/{2}", dropd_month_start.Text, dropd_day_start.Text, dropd_year_start.Text));
                 DateTime end_date = Convert.ToDateTime(String.Format("{0}/{1}/{2}", dropd_month_end.Text, dropd_day_end.Text, dropd_year_end.Text));
@@ -107,16 +108,53 @@ namespace chiase
                 //    functions.GetStringDatetime(), functions.LoginMemID(this), functions.GetStringDate(start_date),
                 //    functions.GetStringDate(end_date), ASPxHtmlEditor1.Html.Replace("'", ""), dropd_status.SelectedValue,
                 //    "", "", txt_notes.Text, "Y");
+
+                string max_project = @"select id from da_du_an where id = (select max(id) from da_du_an where nguoi_tao=" + functions.LoginMemID(this)+")";
+                DataTable table_detail = SQLConnectWeb.GetData(max_project);
+
+         
+                String filename = upload_img.FileName;
+                if(filename!="" || filename!=null)
+                {
+                    String file_type = System.IO.Path.GetExtension(filename).ToLower();
+                    String img = table_detail.Rows[0]["id"] + file_type;
+                    if ((file_type == ".jpg" || file_type == ".gif" || file_type == ".png"))
+                    {
+                        //Update to database
+                        String sqls = "UPDATE DA_DU_AN SET img_path='" + img  + "' WHERE ID=" + table_detail.Rows[0]["id"];
+                        if (SQLConnectWeb.ExecuteNonQuery(sqls)==1)
+                        {
+                            const String path = "images/Projects/";
+                            File.Delete(MapPath(path) + img);
+                            upload_img.SaveAs(MapPath(path) + img);
+                        }
+                        else
+                        {
+                            lbl_error.Text = "Cập nhật hình đại diện không thành công, vui lòng kiểm tra lại thông tin!";
+                        }
+                    }
+                    else 
+                    {
+                        lbl_error.Text = String.Format("Chỉ cho phép hình có định dạng JPG/GIF/PNG, file của bạn: {0}", filename);
+                    }
+                }
+
                 if (done == 1)
+                {
                     lbl_error.Text = "Tạo dự án mới thành công";
+                    ASPxButton1.Visible = false;
+                }
                 else
                     lbl_error.Text = "Tạo dự án mới không thành công, vui lòng kiểm tra lại thông tin!";
                 
+                //Update hinh dai dien
+
+
             }
             catch (Exception ex)
             {
 
-                lbl_error.Text = "Không tạo được dự án mới" ;
+                //lbl_error.Text = "Không tạo được dự án mới" ;
             }
         }
         /*

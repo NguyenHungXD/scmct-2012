@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CONFIGURATION>
+  <ACTIVE_LANG>VI</ACTIVE_LANG>
+  <LANG>
+    <WORD ID="MssgNotPerView" VI="Bạn không có quyền xem dữ liệu." EN=""/>
+    <WORD ID="MssgNotPerAdd" VI="Bạn không có quyền thêm dữ liệu." EN=""/>
+    <WORD ID="addnew" VI="Tạo mới" EN="Add New" />
+    <WORD ID="BV_BAI_VIET" VI="BÀI VIẾT" EN="" />
+    <WORD ID="BV_DM_CHU_DE_BV" VI="DANH MỤC CHỦ ĐỀ BÀI VIẾT" EN="" />
+    <WORD ID="BV_DM_TRANG_THAI_BAI_VIET" VI="DANH MỤC TRẠNG THÁI BÀI VIẾT" EN="" />
+    <WORD ID="BV_HOT_NEWS" VI="" EN="" />
+    <WORD ID="BV_VOTE" VI="" EN="" />
+    <WORD ID="CHUNG_TU" VI="Chứng từ" EN="" />
+    <WORD ID="DA_DM_TRANG_THAI_DU_AN" VI="DANH MỤC TRẠNG THÁI DỰ ÁN" EN="" />
+    <WORD ID="DA_DU_AN" VI="" EN="" />
+    <WORD ID="DA_NHAN_SU" VI="" EN="" />
+    <WORD ID="DA_POSITION" VI="" EN="" />
+    <WORD ID="delete" VI="Xoá" EN="" />
+    <WORD ID="DIA_CHI" VI="Địa chỉ" EN="" />
+    <WORD ID="DICTIONARY" VI="" EN="" />
+    <WORD ID="DIEN_THOAI" VI="Điện thoại" EN="" />
+    <WORD ID="DM_HANG_HOA" VI="DANH MỤC HÀNG HÓA" EN="" />
+    <WORD ID="DM_HANG_HOA_NHOM" VI="DANH MỤC CHỦNG LOẠI HÀNG HÓA" EN="" />
+    <WORD ID="DON_GIA" VI="Đơn giá" EN="" />
+    <WORD ID="dong" VI="Đóng" EN="" />
+    <WORD ID="DU_AN_ID" VI="Dự án" EN="" />
+    <WORD ID="dvt" VI="ĐVT" EN="" />
+    <WORD ID="find" VI="Tìm Kiếm" EN="" />
+    <WORD ID="GHI_CHU" VI="Ghi chú" EN="" />
+    <WORD ID="HH_ID" VI="Hàng hóa" EN="" />
+    <WORD ID="ID" VI="" EN="" />
+    <WORD ID="IMG_ALLBUM" VI="" EN="" />
+    <WORD ID="IMG_ALLBUM_COMMENT" VI="" EN="" />
+    <WORD ID="IMG_ALLBUM_DETAIL" VI="" EN="" />
+    <WORD ID="KH_DM_KHO" VI="DANH MỤC KHO" EN="" />
+    <WORD ID="KH_DM_LY_DO_NHAP_KHO" VI="DANH MỤC LOẠI NHẬP KHO" EN="" />
+    <WORD ID="KH_DM_LY_DO_XUAT_KHO" VI="DANH MỤC LOẠI XUẤT KHO" EN="" />
+    <WORD ID="KH_PHIEU_CHUYEN_KHO" VI="PHIẾU CHUYỂN KHO" EN="" />
+    <WORD ID="KH_PHIEU_CHUYEN_KHO_CT" VI="" EN="" />
+    <WORD ID="KH_PHIEU_NHAP_KHO" VI="PHIẾU NHẬP HÀNG" EN="" />
+    <WORD ID="KH_PHIEU_NHAP_KHO_CT" VI="" EN="" />
+    <WORD ID="KH_PHIEU_XUAT_KHO" VI="PHIẾU XUẤT HÀNG" EN="" />
+    <WORD ID="KH_PHIEU_XUAT_KHO_CT" VI="" EN="" />
+    <WORD ID="KHO_ID" VI="Kho" EN="" />
+    <WORD ID="KHO_NHAP_ID" VI="Kho nhập" EN="" />
+    <WORD ID="KHO_XUAT_ID" VI="Kho xuất" EN="" />
+    <WORD ID="LY_DO_NHAP_ID" VI="Loại nhập kho" EN="" />
+    <WORD ID="LY_DO_XUAT_ID" VI="Loại xuất" EN="" />
+    <WORD ID="MA_HH" VI="Mã hàng hóa" EN="" />
+    <WORD ID="MA_PCK" VI="Mã PC" EN="" />
+    <WORD ID="MA_PNK" VI="Mã phiếu nhập" EN="" />
+    <WORD ID="MA_PXK" VI="Mã phiếu xuất" EN="" />
+    <WORD ID="MEM_ID_PNK" VI="Nhập từ" EN="" />
+    <WORD ID="MEM_ID_PXK" VI="Xuất cho" EN="" />
+    <WORD ID="MO_TA" VI="Mô tả" EN="" />
+    <WORD ID="NAME" VI="Tên" EN="" />
+    <WORD ID="ND_NHOM_ND" VI="" EN="" />
+    <WORD ID="ND_TEN_NHOM_ND" VI="TÊN NHÓM NGƯỜI DÙNG" EN="" />
+    <WORD ID="ND_THONG_TIN_DN" VI="THÔNG TIN ĐĂNG NHẬP" EN="" />
+    <WORD ID="ND_THONG_TIN_ND" VI="THÔNG TIN NGƯỜI DÙNG" EN="" />
+    <WORD ID="ND_THONG_TIN_NHOM_ND" VI="NHÓM ĐĂNG NHẬP" EN="" />
+    <WORD ID="new" VI="Làm Mới" EN="" />
+    <WORD ID="NGAY_CAP_NHAT" VI="Ngày cập nhật" EN="" />
+    <WORD ID="NGAY_CHUYEN" VI="Ngày chuyển" EN="" />
+    <WORD ID="NGAY_NHAP" VI="Ngày nhập" EN="" />
+    <WORD ID="NGAY_XUAT" VI="Ngày xuất" EN="" />
+    <WORD ID="NGUOI_CAP_NHAT" VI="Người cập nhật" EN="" />
+    <WORD ID="NGUOI_CHUYEN" VI="Người chuyển" EN="" />
+    <WORD ID="NGUOI_NHAN" VI="Người nhận" EN="" />
+    <WORD ID="NGUOI_NHAP" VI="Người nhập" EN="" />
+    <WORD ID="NGUOI_QUAN_LY" VI="Người quản lý" EN="" />
+    <WORD ID="NGUOI_XUAT" VI="Người xuất" EN="" />
+    <WORD ID="NHH_ID" VI="Nhóm hàng hóa" EN="" />
+    <WORD ID="PCK_ID" VI="Phiếu chuyển kho" EN="" />
+    <WORD ID="PNK_CT_ID" VI="PNK chi tiết" EN="" />
+    <WORD ID="PNK_ID" VI="Phiếu nhập kho" EN="" />
+    <WORD ID="PQ_CHUC_NANG" VI="" EN="" />
+    <WORD ID="PQ_NHOM_DN_CHUC_NANG" VI="" EN="" />
+    <WORD ID="PXK_CT_ID" VI="PXK chi tiết" EN="" />
+    <WORD ID="PXK_ID" VI="Phiếu xuất kho" EN="" />
+    <WORD ID="Qly_Session" VI="" EN="" />
+    <WORD ID="save" VI="Lưu" EN="" />
+    <WORD ID="select" VI="Chọn" EN="" />
+    <WORD ID="SO_LUONG" VI="Số lượng" EN="" />
+    <WORD ID="stop" VI="Dừng" EN="" />
+    <WORD ID="stt" VI="STT" EN="" />
+    <WORD ID="sysdiagrams" VI="" EN="" />
+    <WORD ID="TAP_TIN_DINH_KEM" VI="" EN="" />
+    <WORD ID="TC_PHIEU_CHI" VI="PHIẾU CHI" EN="" />
+    <WORD ID="TC_PHIEU_CHI_CT" VI="" EN="" />
+    <WORD ID="TC_PHIEU_THU" VI="PHIẾU THU" EN="" />
+    <WORD ID="TC_PHIEU_THU_CT" VI="" EN="" />
+    <WORD ID="THANH_TIEN" VI="Thành tiền" EN="" />
+    <WORD ID="timkiem" VI="Tìm Kiếm" EN="" />
+    <WORD ID="total" VI="Tổng cộng" EN="" />
+    <WORD ID="UserProfile" VI="" EN="" />
+    <WORD ID="vat" VI="VAT(%)" EN="" />
+    <WORD ID="VISIBLE_BIT" VI="Đang dùng" EN="" />
+    <WORD ID="YC_DM_LOAI_YEU_CAU" VI="DANH MỤC LOẠI YÊU CẦU" EN="" />
+    <WORD ID="YC_DM_TRANG_THAI_YEU_CAU" VI="DANH MỤC TRẠNG THÁI YÊU CẦU" EN="" />
+    <WORD ID="YC_YEU_CAU" VI="YÊU CẦU" EN="" />
+    <WORD ID="YEU_CAU_ID" VI="Phiếu yêu cầu" EN="" />
+    <WORD ID="MA_HANG" VI="Mã hàng" EN="" />
+    <WORD ID="TEN_HANG" VI="Tên hàng" EN="" />
+    <WORD ID="CHUNG_LOAI" VI="Chủng loại" EN="" />
+    <WORD ID="PHIEU_NHAP" VI="Phiếu nhập" EN="" />
+    <WORD ID="DIEU_KIEN_TIM" VI="Điều kiện tìm kiếm" EN="" />    
+  </LANG>
+</CONFIGURATION>

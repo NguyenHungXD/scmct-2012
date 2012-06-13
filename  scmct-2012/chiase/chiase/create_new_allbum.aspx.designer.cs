@@ -10,6 +10,6 @@
 namespace chiase {
     
     
-    public partial class create_new_allbum {
+    public partial class create_new_album {
     }
 }

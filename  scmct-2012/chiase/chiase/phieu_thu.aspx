@@ -151,7 +151,7 @@
     <tr>
     <td colspan="3" align="center"><br>
         <p>
-        <font size="5px"><b>PHẾU THU</b></font><i> Số:<b> <%= vNo %></b><br>
+        <font size="5px"><b>PHẾU THU</b></font><i> Số:<b>...... <%--<%= vNo %>--%></b><br>
         Ngày..<%= System.DateTime.Now.ToString("dd") %>..tháng..<%= System.DateTime.Now.ToString("MM") %>..năm <%= System.DateTime.Now.ToString("yyyy") %></i><br>
         Quyển số:....................</i>
         </p><br>&nbsp
@@ -209,11 +209,11 @@
         </asp:DropDownList>
 
         [<a id="divdetail3" style="cursor:pointer"><font color=blue>Xem chi tiết</font></a>]
-        [<a style="cursor:pointer;color:Blue" href="request.aspx?vmode=admin">Tạo yêu cầu mới</a>]
+<%--        [<a style="cursor:pointer;color:Blue" href="request.aspx?vmode=admin">Tạo yêu cầu mới</a>]--%>
 
-        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
+<%--        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
             InitialValue="None" ControlToValidate="dropd_request" Display="Dynamic" 
-            ErrorMessage="Chọn yêu cầu" ForeColor="Red"></asp:RequiredFieldValidator>
+            ErrorMessage="Chọn yêu cầu" ForeColor="Red"></asp:RequiredFieldValidator>--%>
 
                 <dx:ASPxPopupControl ID="ASPxPopupControl4" runat="server"
                     AllowDragging="True" AllowResize="True" ClientInstanceName="divpopup3"
@@ -285,15 +285,18 @@
     </tr>
 
     <tr>
-    <td>&nbsp</td><td width=25% style="font-weight:bold">Nhận tiền từ  :</td><td colspan="3" width=75%> 
+    <td>&nbsp</td><td width=25% style="font-weight:bold">Nhận tiền từ:</td><td colspan="3" width=75%> 
         <asp:TextBox ID="txt_received_from" runat="server" class="txtformat" Width="200px" 
             ForeColor="#0066FF" Height="25px" ClientIDMode="Static"></asp:TextBox>
-       
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server"  ControlToValidate="txt_received_from" Display="Dynamic" 
+            ErrorMessage="Chưa nhập họ tên người giao tiền" ForeColor="Red"></asp:RequiredFieldValidator>
+
+
         <asp:DropDownList ID="drop_list" runat="server" Height="25px" onchange="return_links(this)">
         </asp:DropDownList> [<a id="divdetail2" style="cursor:pointer"><font color=blue>Xem chi tiết</font></a>]
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+<%--                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
             InitialValue="None" ControlToValidate="drop_list" Display="Dynamic" 
-            ErrorMessage="Chọn người giao tiền" ForeColor="Red"></asp:RequiredFieldValidator>
+            ErrorMessage="Chọn người giao tiền" ForeColor="Red"></asp:RequiredFieldValidator>--%>
 
          <dx:ASPxPopupControl ID="ASPxPopupControl3" runat="server"
                     AllowDragging="True" AllowResize="True" ClientInstanceName="divpopup2"
@@ -373,7 +376,7 @@
                 Height="25px" Width="120px" onclick="btn_save_Click" />
         </asp:Label>
 
-                <input id="Button2" type="button" value="Hủy" class="btn" style="width:100px;height:25px" onclick="return Button2_onclick()"/>
+                <input id="Button2" type="button" value="Đóng" class="btn" style="width:100px;height:25px" onclick="return Button2_onclick()"/>
         </p>
 
 

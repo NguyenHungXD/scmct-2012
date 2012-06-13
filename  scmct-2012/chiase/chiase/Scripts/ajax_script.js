@@ -59,8 +59,7 @@
 	         }
              else
              { 
-	           alert("There was a problem retrieving the XML data:\n" + 
-	               requpdate.statusText); 
+	           //alert("There was a problem retrieving the XML data:\n" + requpdate.statusText); 
 	          } 
 	     } 
          }
@@ -123,7 +122,7 @@ catch (e) {
 	 		displayMessages(req.responseText); 		
 	 		window.status="Done"; 
 	 } else { 
-	   alert("There was a problem retrieving the XML data:\n" + displayErrors(req.statusText)); 
+	   //alert("There was a problem retrieving the XML data:\n" + displayErrors(req.statusText)); 
 	
 	  } 
 	 } 
@@ -183,6 +182,7 @@ function readXMLFormat(content,tagNameStart,tagNameEnd)
     else
         return "";
 }
+
 
 
 

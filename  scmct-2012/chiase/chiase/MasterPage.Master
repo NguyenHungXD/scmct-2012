@@ -1,8 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="chiase.MasterPage" %>
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>.:SCMCT-Cổng thông tin SCMCT:.</title>
@@ -14,60 +13,72 @@
 <link href="Styles/StyleSheet.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="Styles/basic.css" type="text/css" />
 <link rel="stylesheet" href="Styles/galleriffic-3.css" type="text/css" />
-  <link rel="Stylesheet" type="text/css" href="Styles/uploadify.css" />
+<link rel="Stylesheet" type="text/css" href="Styles/uploadify.css" />
+<script type="text/javascript" src="Scripts/ajax_script.js" ></script>
 <script type="text/javascript" src="Scripts/jquery.1.3.2.min.js" ></script>
 <script type="text/javascript" src="Scripts/jquery-ui.min.js" ></script>
-<script type="text/javascript" src="Scripts/ajax_script.js" ></script>
 <script type="text/javascript" src="Scripts/jquery.history.js"></script>
 <script type="text/javascript" src="Scripts/jquery.galleriffic.js"></script>
 <script type="text/javascript" src="Scripts/jquery.opacityrollover.js"></script>
-</head>
 
+<link type="text/css" href="css/jquery-ui.css" rel="Stylesheet"/>
+<link type="text/css" href="css/jtable.css" rel="Stylesheet"/>
+<link type="text/css" href="css/timepicker.css" rel="Stylesheet" />
+<link type="text/css" href="css/treeview.css" rel="Stylesheet" />  
+<link type="text/css" href="css/jquery.autocomplete.css" rel="Stylesheet"/>
+
+<!--
+<script src="../js/jquery-1.6.1.min.js" type="text/javascript"></script>
+<script src="../js/jquery-ui.js" type="text/javascript"></script>
+<script src="../js/jquery.autocomplete.js" type="text/javascript"></script>    
+<script src="../js/jquery.validate.js" type="text/javascript"></script>
+<script src="../js/myscriptvalid.js" type="text/javascript"></script>
+<script type="text/javascript" src="../js/timepicker.js"></script>
+<script type="text/javascript" src="../js/myscript.js"></script>
+<script type="text/javascript" src="../js/myscript.jqr.js"></script>
+-->
 <script type="text/javascript">
     $(document).ready(function () {
         $("#featured > ul").tabs({ fx: { opacity: "toggle"} }).tabs("rotate", 5000, true);
     });
 </script>
-
 </head>
 <body>
-
 <form id="chiase" runat="server">
 <div id="templatemo_header_main">
 <div id="templatemo_headers_flash">
-<embed src="flash/hieuung.swf" width="800" height="100" wmode="transparent" align="left"> 
+<embed src="flash/hieuung.swf" width="400" height="100" wmode="transparent" align="left"> 
 </div>
 <!--
 <div id="templatemo_header_flash">
 <embed src="Flash/header.swf" width="400" height="500" wmode="transparent" align="left">
 </div> 
 -->
-    <div id="templatemo_header">
-    	<div id="site_title">
-        
-            <h1><a href="http://www.chiase.org"><img src="images/templatemo_logo.png" alt="logo" /><span>Cổng quyên góp sách online</span></a></h1>
-        </div> <!-- end of site_title -->
+    <div id="templatemo_header" class="link_main">
+ 
+  
+
 		<div id="templatemo_login" class="textformat">
             <asp:MultiView ID="MultiView1" runat="server">
 
             <asp:View ID="View1" runat="server">
-            <table cellpadding="3" cellspacing="1" border="0">
+            <table cellpadding="1" cellspacing="1" border="0">
             <tr>
             <td>
                      Tài khoản:<asp:TextBox ID="txtUserID" runat="server" class="txtformat" 
                          Width="95px" Height="18px"></asp:TextBox>
                     &nbsp;Mật khẩu:<asp:TextBox ID="txtPassWord" runat="server" class="txtformat" 
                          Width="95px" TextMode="Password" Height="18px"></asp:TextBox>
-                    <asp:Button ID="btn_login" runat="server" Text="Đăng nhập" 
-                         onclick="btn_login_Click1"  Height="20px" Width="90px" 
-                         style="font-size: 10px;cursor: pointer;" class="btn"/>
-                    <asp:CheckBox ID="chk_remember" runat="server" checked="true" /> Nhớ
+                    <asp:Button ID="btn_admin" runat="server" Text="Đăng nhập" 
+                         onclick="btn_login_Click1"  Height="25px" Width="100px" 
+                         style="font-size: 12px;cursor: pointer;" class="btn_admin"/>
+                    <!--<asp:CheckBox ID="chk_remember" runat="server" checked="true" /> Nhớ-->
             </td>
             </tr>
             <tr> 
-            <td>   
+            <td valign=middle class="link_main">   
                     <!--<p align=center>Quên mật khẩu ? | Đăng ký</p>-->
-                    <p align=right><b><font color=red size=-2><asp:Label ID="lblError" runat="server" ForeColor="#FF3300"></asp:Label></b></font> <asp:HyperLink ID="link_forget_pass" runat="server" 
+                    <p align=right><b><font color="#FFFF33" size=-2><asp:Label ID="lblError" runat="server" ForeColor="#FFFF00"></asp:Label></b></font> <asp:HyperLink ID="link_forget_pass" runat="server" 
                 Text="Quên mật khẩu?" NavigateUrl="forget_password.aspx"></asp:HyperLink> | 
                         <asp:HyperLink ID="register_link" runat="server" Text="Đăng ký" NavigateUrl="~/register.aspx" title="Đăng ký thành viên"></asp:HyperLink>&nbsp</p>
             </td>
@@ -78,7 +89,7 @@
                    <table cellpadding=1 cellspacing=3 border=0 width=100%>
                    <tr>
                    <td rowspan=2 align=center>
-                    <asp:Image ID="imgUser" runat="server" Height="40px" Width="40px" BorderStyle="Solid" BorderWidth="1px" />
+                    <asp:Image ID="imgUser" style="border-radius: 5px;" runat="server" Height="40px" Width="40px" BorderStyle="Solid" BorderWidth="1px" />
                     </td>
                     <td align=center>
                     Chào mừng <b><asp:Label ID="lbl_username" runat="server" ForeColor="White"/></asp:Label></b>,
@@ -95,18 +106,25 @@
                     </table>
                 </asp:View>
             </asp:MultiView>
-			
+ 
+			<div id="search_section" style="background-color:#FFF;border:0px solid #FFF" >
+            <table style="background-color:#3BB9FF;border:1px solid #FFF" border=0 cellpadding=2><tr><td valign=middle><image src="images/search.png" width=20 height=20></td><td><asp:TextBox id="txt_search" runat="server"  class="txtformat" width="200" height="25" title="Tìm kiếm bài viết, hình ảnh, yêu cầu,..."></asp:TextBox>
+                <asp:Button runat="server" Text="Tìm kiếm" class="btn_admin" width="80" 
+                    height=25 onclick="Unnamed2_Click"></asp:Button></td></tr></table>
+           </div>
         </div> <!-- end of templatemo_menu -->
+   
 
         <div id="templatemo_menu">
-        <ul class=blue>
+        <ul class="blue">
 	        <li><a href="default.aspx" title="Trang chủ" class='<%if(Session["current"]=="1"){%>current'<%}else{%>no'<%}%> ><span>Trang chủ</span></a></li>
             <li><a href="forum.aspx" title="Diễn đàn" class='<%if(Session["current"]=="2"){%>current'<%}else{%>no'<%}%> ><span>Diễn đàn</span></a></li>
-            <li><a href="show_allbum.aspx" title="Hình ảnh" class='<%if(Session["current"]=="3"){%>current'<%}else{%>no'<%}%> ><span>Hình ảnh</span></a></li>
+            <li><a href="show_album.aspx" title="Hình ảnh" class='<%if(Session["current"]=="3"){%>current'<%}else{%>no'<%}%> ><span>Hình ảnh</span></a></li>
             <li><a href="request.aspx" title="Gửi yêu cầu" class='<%if(Session["current"]=="4"){%>current'<%}else{%>no'<%}%>><span>Gửi yêu cầu</span></a></li>
             <li><a href="roles.aspx?id=1" title="Giới thiệu" class='<%if(Session["current"]=="5"){%>current'<%}else{%>no'<%}%>><span>Giới thiệu</span></a></li>
             <li><a href="roles.aspx?id=4" title="Liên hệ" class='<%if(Session["current"]=="6"){%>current'<%}else{%>no'<%}%>><span>Liên hệ</span></a></li>
             <li><a href="roles.aspx?id=2" title="Trợ giúp" class='<%if(Session["current"]=="8"){%>current'<%}else{%>no'<%}%>><span>Trợ giúp</span></a></li>
+            <li><a href="register.aspx" title="Đăng ký" class='<%if(Session["current"]=="9"){%>current'<%}else{%>no'<%}%>><span>Đăng ký</span></a></li>
             <li><asp:Panel ID="pn_admin" runat="server" Visible="false"><a href="admin.aspx" title="Quản trị" class='<%if(Session["current"]=="7"){%>current'<%}else{%>no'<%}%>><span>Quản trị</span></a> </asp:Panel></li>
         </ul>
             
@@ -117,90 +135,54 @@
 </div>  <!-- end of templatemo_header_main -->
  <div id="templatemo_wrapper_outer">
  <div id="templatemo_wrapper">
-        <asp:ContentPlaceHolder ID="Content_slider" runat="server">
-        </asp:ContentPlaceHolder>
-	<div id="footer_top1">&nbsp 
+<asp:ContentPlaceHolder ID="Content_slider" runat="server">
+</asp:ContentPlaceHolder>
+<div id="footer_top1">&nbsp 
     </div>	
     <div id="templatemo_content">
-    <div style="background-color:White;border:0px; margin-bottom:3px;" class="link_back">
+    <div style="background-color:White; margin-bottom:3px;" class="link_back">
 
-    <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td valign="middle" align="left"><image src="images/home_page.png" width="30" height="20"> <%= Session["current_link"] %></td><td width="60%"><MARQUEE onmouseover="this.stop();" onmouseout="this.start();">Chào mừng bạn đến với SCMCT online - Cổng quyên góp sách cho miền cát trắng - Chung tay chấp cách những ước mơ...<a href="register.aspx"><i><font size=-1 color="red">tham gia ngay</font></i></a>...</MARQUEE></td></tr></table>
+    <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td valign="middle" align="left"><image src="images/home_page.png" width="30" height="20"> <%= Session["current_link"] %></td><td width="60%"><MARQUEE onmouseover="this.stop();" onmouseout="this.start();">Chào mừng bạn đến với SCMCT online - Cổng quyên góp sách cho miền cát trắng - Chung tay chắp cách những ước mơ...<a href="register.aspx"><i><font size=-1 color="red">tham gia ngay</font></i></a>...</MARQUEE></td></tr></table>
     
     </div>
 
      <asp:ContentPlaceHolder ID="content_area" runat="server">
      
+
+
+
     </asp:ContentPlaceHolder>
     <div class="cleaner"></div>
-    </div> <!--End div content-->
-   
-   
-	
+    </div>
+<!--End div content-->
 <!--</div> -->
 <!--</div> -->
 
 <div id="templatemo_footer_wrapper">
-
-	
 	<div id="templatemo_footer" >
-        
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="bottom_ses" >
-        <tr valign=top width="25%">
-        <td>
-            <h5  >Chia sẻ cộng đồng</h5>
-            <p  >SCMCT Online trên các trang xã hội</p><BR>
-                <a href="http://www.facebook.com" title="Zing Me"><img src="images/zing_logo.gif" alt="Zing Me" width=80 height=30/></a>
-                <a href="http://www.facebook.com" title="Facebook"><img src="images/facebook.png" alt="Facebook" width=30 height=30 /></a>
-                <a href="http://www.facebook.com" title="Google Plus"><img src="images/googleplus.gif" alt="Goolge Plus" width=80 height=30 /></a>      
+        <table border="0" cellpadding="5" cellspacing="0" width="100%" class="bottom_ses" >
+        <tr valign=top>
+        <td class="link_main"  width="30%">
+            <h5><u>Chia sẻ cộng đồng</u></h5>
+            <p >SCMCT Online trên các trang xã hội</p>
+            <a href="www.me.zing.vn" target="_blank"><image src="images/zing.png" width=15 height=15> ZingMe</a> | <a href="www.facebook.com" target="_blank"><image src="images/facebook.gif" width=15 height=15> FaceBook</a> | <a href="https://plus.google.com" target="_blank"><image src="images/google-plus.jpg" width=15 height=15> Google+</a>
         </td>
-        <td width="25%">
-            <h5  >SCMCT Online</h5>
-            <ul class="tmo_list">
-                <li><a href="default.aspx">Trang chủ</a></li>
-                <li><a href="forum.aspx">Diễn đàn</a></li>
-                <li><a href="request.aspx">Gửi yêu cầu</a></li>
-                <li><a href="roles.aspx?id=1">Giới thiệu</a></li>
-                <li><a href="roles.aspx?id=2">Trợ giúp</a></li>
-                <li><a href="contact.aspx">Liên hệ</a></li>
-              
-            </ul>  
+        <td width="20%" class="link_main">
+            <h5><u>SCMCT Online</u></h5>
+                <a href="default.aspx">Trang chủ</a><br>
+                <a href="forum.aspx">Diễn đàn</a>
         </td>
-        <td width="25%">
-        
-        <div class="col_w220">
-            <h5  >SCMCT Hoạt động</h5>
-			<ul class="tmo_list">
-                <li><a href="show_allbum.aspx">Hình ảnh offline</a></li>
-                <li><a href="#">Video offline</a></li>
- 
-            </ul>
- 
+        <td width="20%" class="link_main">
+            <h5  ><u>SCMCT Hoạt động</u></h5>
+                <a href="show_album.aspx">Hình ảnh offline</a><br>
+                <a href="#">Video offline</a>
         </td>
-
-
          <td width="25%">
-&nbsp
-        </td>
-                </tr>
-        <tr>
-        <td colspan=3>
-            <h5  >Nhà tài trợ</h5>
+            <h5><u>Nhà tài trợ</u></h5>
+            <img src="images/qc.gif" width=100 height="100" style="border:1px solid #FFF"> <img src="images/qc1.gif" width=100 height="100" style="border:1px solid #FFF">
         </td>
         </tr>
-        <tr>
-        <td>
-Website nhà tài trợ  
-        </td>
-        <td>
-Website nhà tài trợ  
-        </td>
-        <td>
-Website nhà tài trợ  
-        </td>
-        <td>
-Website nhà tài trợ  
-        </td>
-        </tr>
+      
         </table>
 
         
@@ -209,7 +191,7 @@ Website nhà tài trợ
 	
     <div id="templatemo_copyright">
     
-        Copyright © 2012-<%# System.DateTime.Now.Year%> <a href="#">SCMCT Online Group</a> | <a href="#" target="_parent">Trang chủ</a> | <a href="#">Diễn đàn</a> | <a href="#">Liên hệ</a> | <a href="#">Trợ giúp</a>
+        Copyright © 2012-<%# System.DateTime.Now.Year%> <a href="default.aspx">SCMCT Online Group</a> | <a href="default.aspx" >Trang chủ</a> | <a href="forum.aspx">Diễn đàn</a> | <a href="roles.aspx?id=4">Liên hệ</a> | <a href="roles.aspx?id=2">Trợ giúp</a>
     
     </div>
 </div>

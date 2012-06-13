@@ -19,18 +19,23 @@ namespace chiase
             {
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+                Boolean isDel = functions.checkPrivileges("18", functions.LoginMemID(this), "D");
+                Boolean isView = functions.checkPrivileges("18", functions.LoginMemID(this), "V");
 
-                if (Request.QueryString["vmode"] == "del")
+                if (Request.QueryString["vmode"] == "del" && isDel)
                 {
                     del_kind_request();
-                } if (Request.QueryString["vmode"] == "undel")
+                } if (Request.QueryString["vmode"] == "undel" && isDel)
                 {
                     undel_kind_request();
                 }
                 else
                 {
-                    lbl_search_kind_request.Visible = functions.checkPrivileges("18", functions.LoginMemID(this), "V");
-                    lbl_del_kind_request.Visible = functions.checkPrivileges("18", functions.LoginMemID(this), "D");
+
+                    lbl_search_kind_request.Visible = isView;
+                    kind_list.Visible = isView;
+                    lbl_del_kind_request.Visible = isDel;
+
                     display();
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_kind_request.aspx' title='Cập nhật loại yêu cầu'>Cập nhật loại yêu cầu</a>";
 

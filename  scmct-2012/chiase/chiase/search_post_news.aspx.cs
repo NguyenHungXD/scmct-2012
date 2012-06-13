@@ -20,22 +20,26 @@ namespace chiase
             {
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
-
-                if (Request.QueryString["vmode"] == "del")
+                Boolean isDel = functions.checkPrivileges("22", functions.LoginMemID(this), "D");
+                Boolean isView = functions.checkPrivileges("22", functions.LoginMemID(this), "V");
+                Boolean isEdit = functions.checkPrivileges("22", functions.LoginMemID(this), "E");
+                if (Request.QueryString["vmode"] == "del" && isDel)
                 {
                     del_news();
-                } if (Request.QueryString["vmode"] == "undel")
+                } if (Request.QueryString["vmode"] == "undel" && isDel)
                 {
                     undel_news();
                 }
-                else if (Request.QueryString["vmode"] == "update_news_status")
+                else if (Request.QueryString["vmode"] == "update_news_status" && isEdit)
                 {
                     update_news_status();
                 }
                 else
                 {
-                    lbl_search_news.Visible = functions.checkPrivileges("22", functions.LoginMemID(this), "V");
-                    lbl_del_news.Visible = functions.checkPrivileges("22", functions.LoginMemID(this), "D");
+                    lbl_search_news.Visible = isView;
+                    news_list.Visible = isView;
+                    lbl_del_news.Visible = isDel;
+
                     display();
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_post_news.aspx' title='Cập nhật bài viết'>Cập nhật bài viết</a>";
 

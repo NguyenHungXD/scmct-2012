@@ -21,37 +21,40 @@ namespace chiase
             {
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
-
-                if (Request.QueryString["vmode"] == "del")
+                Boolean isDel = functions.checkPrivileges("42", functions.LoginMemID(this), "D");
+                Boolean isLock = functions.checkPrivileges("42", functions.LoginMemID(this), "L");
+                Boolean isView = functions.checkPrivileges("42", functions.LoginMemID(this), "V");
+                Boolean isEdit = functions.checkPrivileges("42", functions.LoginMemID(this), "E");
+                if (Request.QueryString["vmode"] == "del" && isDel)
                 {
                     del_user();
                 }
-                else if (Request.QueryString["vmode"] == "undel")
+                else if (Request.QueryString["vmode"] == "undel" && isDel)
                 {
                     undel_user();
                 }
-                else if (Request.QueryString["vmode"] == "lock")
+                else if (Request.QueryString["vmode"] == "lock" && isLock)
                 {
                     lock_user();
                 }
-                else if (Request.QueryString["vmode"] == "unlock")
+                else if (Request.QueryString["vmode"] == "unlock" && isLock)
                 {
                     unlock_user();
                 }
-                else if (Request.QueryString["vmode"] == "reset_pass")
+                else if (Request.QueryString["vmode"] == "reset_pass" && isEdit)
                 {
                     reset_pass_user();
                 }
-                else if (Request.QueryString["vmode"] == "update_group")
+                else if (Request.QueryString["vmode"] == "update_group" && isEdit)
                 {
                     update_group_user();
                 }
                 else
                 {
-                    lbl_del_members.Visible = functions.checkPrivileges("42", functions.LoginMemID(this), "D");
-                    lbl_lock_members.Visible = functions.checkPrivileges("42", functions.LoginMemID(this), "L");
-                    lbl_search_members.Visible = functions.checkPrivileges("42", functions.LoginMemID(this), "V");
-
+                    lbl_del_members.Visible = isDel;
+                    lbl_lock_members.Visible = isLock;
+                    lbl_search_members.Visible = isView;
+                    member_list.Visible = isView;
                     no = 1;
                     display();
                 }
@@ -189,13 +192,12 @@ namespace chiase
                 string sql_pt = @"select groupid,groupname from ND_TEN_NHOM_ND order by groupname";
                 DataTable table_pt = SQLConnectWeb.GetData(sql_pt);
                 functions.fill_DropdownList(dropd_group, table_pt, 0, 1);
-                //functions.selectedDropdown(dropd_group, mapt);
+                functions.selectedDropdown(dropd_group, group_id);
             }
             catch (Exception ex)
             {
                 //lbl_error.Text = ex.ToString();
             }
-
         }
 
         protected void btn_search_Click(object sender, EventArgs e)

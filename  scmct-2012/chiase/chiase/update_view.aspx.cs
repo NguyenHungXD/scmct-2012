@@ -16,7 +16,7 @@ namespace chiase
             if (!IsPostBack)
             {
                 //Check LogIn session
-                functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+                //functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this)); //nvdat06/06/2012 : commented-out : View photos no need to login
 
                 updateView();
             }
@@ -27,9 +27,9 @@ namespace chiase
         {
             try
             {
-                String sql = "UPDATE IMG_ALLBUM SET VIEWED=VIEWED+1 WHERE ALLBUM_ID=@ALLBUM_ID";
+                String sql = "UPDATE IMG_album SET VIEWED=VIEWED+1 WHERE album_ID=@album_ID";
                 SQLConnectWeb.ExecuteNonQuery(sql,
-                        "@ALLBUM_ID", Request.QueryString["allbumid"]);
+                        "@album_ID", Request.QueryString["albumid"]);
             }
             catch
             { 

@@ -4,13 +4,13 @@
     Namespace="DevExpress.Web.ASPxPopupControl" TagPrefix="dx" %>
 
  <asp:Content ID="Content1" ContentPlaceHolderID="content_slider" Runat="Server">
-
  <script type="text/javascript">
 
      function like_post(id, val, divid) {
          var url = "update_like_post.aspx?project_id=" + id + "&mode=2";
          loadXMLUpdate(url);
-         document.getElementById(divid).innerHTML = val + 1;
+         var vals =  val + 1;
+         document.getElementById(divid).innerHTML = "(" + vals + ")";
      }
 
      function return_link(val) {
@@ -24,8 +24,8 @@
 
 </script>
      
-     <div id="templatemo_slider">
-		<div id="featured" >
+     <div id="templatemo_slider" >
+		<div id="featured" style="background-color:#FFF">
 			<ul class="ui-tabs-nav">
                 <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
@@ -63,72 +63,85 @@
         <HeaderTemplate>
         </HeaderTemplate>
         <ItemTemplate>
-            <table border="0" cellpadding=1 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;" class="btn_project">
-            <tr class="new_post">
-            <td >
-                &nbsp
-            </td>
-            <td>
-                Mã dự án
-            </td>
-            <td>
-                Tên dự án
-            </td>
-            <td>
-                Ngày
-            </td>
-            <td>
-                Bài viết mới
-            </td>
-            <td>
-                Trạng thái
-            </td>
-            </tr>
-                    <tr class="new_post_details">
-                    <td with=5% valign="middle" align="center" style="cursor:pointer;"  onclick=like_post(<%# Eval("ID")%>,<%#Eval("liked")%>,'<%#Eval("ID","div{0}")%>')>
-                    <div id='<%#Eval("ID","div{0}")%>' class="like_text">
-                    <%#Eval("liked")%>
-                    </div>
-                    <div class="like_fm">
-                    &nbsp
-                    <div>
-                    </td>
-                    <td with=5% valign=middle align="center">
-                    <%#Eval("MA_DU_AN")%>
-                    <br>
-                    <asp:HyperLink ID="link_more" runat="server" NavigateUrl='<%#Eval("ID","project_detail.aspx?id={0}")%>' Text="Xem chi tiết" style="cursor:pointer;"></asp:HyperLink>
-                    </td>
-                    <td with=10% valign=middle align="center">
-                    <%#Eval("TEN_DU_AN")%>
-                    </td>
-                    <td with=10% valign=middle align="center">
-                    Bắt đầu: <%#Eval("NGAY_BAT_DAU", "{0:dd/MM/yyyy }")%><br>
-                    Kết thúc: <%#Eval("NGAY_KET_THUC", "{0:dd/MM/yyyy }")%>
-                    </td>
-                    <td with=30% valign=middle align="center">
+            <table border="0" cellpadding=0 cellspacing=1 width="100%" class="btn_project_main">
 
-                        <asp:HyperLink ID="link_new_post" runat="server"></asp:HyperLink>
-                        <asp:Label ID="lbl_posted_by" runat="server" Text=""></asp:Label>
+            <tr > <%--class="new_post_details"--%>
+                    
+                    <td rowspan=2 width=40% align=center>
+                        <img src='<%#Eval("img_path","images/projects/{0}")%>' class="img_border" width="320" height="200" />
                     </td>
-                    <td with=10% valign=middle align="center">
-                        <%#Eval("NAME")%>
+
+                    <td with=5% valign=middle align="left">
+                        <b><font color=#306EFF size=3><%#Eval("MA_DU_AN")%></font></b>
+                        <br>
+                        <%#Eval("TEN_DU_AN")%>
+                        <br>
+                        Thời gian: <%#Eval("NGAY_BAT_DAU", "{0:dd/MM/yyyy }")%>-<%#Eval("NGAY_KET_THUC", "{0:dd/MM/yyyy }")%>(<%#Eval("NAME")%>)
+                        <br>
+                        <asp:HyperLink ID="link_more" runat="server" NavigateUrl='<%#Eval("ID","project_detail.aspx?id={0}")%>' title='<%#Eval("MA_DU_AN","Xem chi tiết dự án {0}")%>' Text="...xem chi tiết dự án..." style="cursor:pointer;"></asp:HyperLink>
+                    
+                        <asp:HyperLink Visible="false" ID="link_new_post" runat="server"></asp:HyperLink>
+                        <asp:Label Visible="false" ID="lbl_posted_by" runat="server" Text=""></asp:Label>
+                    
                     </td>
+
+
+
                     </tr>
+
                     <tr>
                     <td colspan="7">
-                    <div class="project_detail">
-                    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+
+                    <div > <%--class="project_detail"--%>
+                    <table cellpadding="2" cellspacing="0" border="0" width="100%">
                     <tr>
-                    <td>&nbsp
+                    <td>
+                    <hr>
                     </td>
                     </tr>
                     <tr>
-                    <td><asp:Image ID="img_status" runat="server" ImageUrl="images/heart.gif" width="10" Height="10"/>
-                        Số sách cần quyên góp cho dự án: <b><%#Eval("BOOK")%></b> quyển
+                    <td><asp:Image ID="img_status" runat="server" ImageUrl="images/book-open.png" width="12" Height="12"/>
+                        Số sách cần quyên góp cho dự án: <font color=red><b><%#Eval("BOOK")%></b></font> quyển
                     </td>
-                    <td rowspan=7 align=right>
-                        <a href="<%#Eval("ID","request.aspx?id={0}")%>" class="btn_admin">Tặng sách</a>  <a class="btn_admin" id='<%#Eval("id","divpopup{0}") %>'>Tham gia dự án</a> <a href='<%#Eval("ID","post_news.aspx?projectID={0}")%>' class="btn_admin">Viết bài</a>  <a href='<%#Eval("id","show_allbum.aspx?projectid={0}") %>' class="btn_admin">Hình ảnh</a>
-                    
+                    <td rowspan=8 valign=bottom align=right>
+                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td><asp:Image ID="Image1" runat="server" ImageUrl="images/book-open.png" width="12" Height="12"/>
+                        Số hàng(sách, vật dụng,..) <font color=red>đã quyên góp</font> được: <b><asp:HyperLink title="Xem chi tiết" style="color:red; text-decoration: underline; font-weight: bold;" target="_blank" id="link_sum" runat="server"></asp:HyperLink></b> phần
+                    </td>
+                    </tr>
+                    <tr>
+                    <td class="link_format1"><asp:Image ID="Image2" runat="server" ImageUrl="images/book-open.png" width="12" Height="12"/>
+                        Danh sách <font color=red>đóng góp</font> cho dự án: [<a title="Xem chi tiết" href="<%#Eval("id","contributor_list.aspx?id={0}") %>" target="_blank">xem</a>]
+                    </td>
+                    </tr>
+                    <tr>
+                    <td class="link_format1"><asp:Image ID="Image4" runat="server" ImageUrl="images/book-open.png" width="12" Height="12"/>
+                        Danh sách <font color=red>tham gia</font> dự án: [<a title="Xem chi tiết" href='<%#Eval("ID","member_list_project.aspx?id={0}")%>' target="_blank">xem</a>]
+                    </td>
+                    </tr>
+                    <tr>
+                    <td class="link_format1"><asp:Image ID="Image5" runat="server" ImageUrl="images/book-open.png" width="12" Height="12"/>
+                        Báo cáo <font color=red>tổng kết</font> dự án: [<a title="Xem chi tiết" href='<%#Eval("ID","project_reports.aspx?id={0}")%>' target="_blank">xem</a>]
+                    </td>
+                    </tr>
+                    <tr>
+                     <td with=5% valign="middle" align="center" style="cursor:pointer;"  >
+                    <hr>
+                    </td>
+                    </tr>
+                    </table>
+                    </div>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                    <table cellpadding=0 cellspacing=0 border=0><tr><td width=5%><a title="Thích dự án" style="cursor:pointer" onclick=like_post(<%# Eval("ID")%>,<%#Eval("liked")%>,'<%#Eval("ID","div{0}")%>')><img src="images/like.gif" width="20" height="15"></td><td id='<%#Eval("ID","div{0}")%>'>(<%#Eval("liked")%>)</td></tr></table>
+                    </td>
+                    <td colspan=2 align="right">
+                    <a class="btn_admin_default" href="<%#Eval("ID","request.aspx?id={0}")%>" >Tặng sách</a><a class="btn_admin_default" id='<%#Eval("id","divpopup{0}") %>'>Tham gia dự án</a><a class="btn_admin_default" href='<%#Eval("ID","post_news.aspx?projectID={0}")%>' >Viết bài</a><a class="btn_admin_default" href='<%#Eval("id","show_album.aspx?projectid={0}") %>' >Hình ảnh</a>
                     <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" ContentUrl='<%#Eval("id","join_project.aspx?id={0}")%>'
                     AllowDragging="True" AllowResize="True"
                             CloseAction="CloseButton" 
@@ -148,34 +161,6 @@
                                 </dx:PopupControlContentControl>
                             </ContentCollection>
                             </dx:ASPxPopupControl>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td><asp:Image ID="Image1" runat="server" ImageUrl="images/heart.gif" width="10" Height="10"/>
-                        Số sách đã quyên góp được: 100 quyển
-                    </td>
-                    </tr>
-                    <tr>
-                    <td class="link_format"><asp:Image ID="Image2" runat="server" ImageUrl="images/heart.gif" width="10" Height="10"/>
-                        Danh sách quyên góp: [<a href="#" target="_blank">xem</a>]
-                    </td>
-                    </tr>
-                    <tr>
-                    <td class="link_format"><asp:Image ID="Image4" runat="server" ImageUrl="images/heart.gif" width="10" Height="10"/>
-                        Danh sách tham gia dự án: [<a href='<%#Eval("ID","member_list_project.aspx?id={0}")%>' target="_blank">xem</a>]
-                    </td>
-                    </tr>
-                    <tr>
-                    <td class="link_format"><asp:Image ID="Image5" runat="server" ImageUrl="images/heart.gif" width="10" Height="10"/>
-                        Báo cáo tổng kết dự án: [<a href="#" target="_blank">xem</a>]
-                    </td>
-                    </tr>
-                    <tr>
-                    <td>&nbsp
-                    </td>
-                    </tr>
-                    </table>
-                    </div>
                     </td>
                     </tr>
                      </table>

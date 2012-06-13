@@ -63,7 +63,7 @@
     <td>
         <asp:TextBox ID="txt_project_code" runat="server"  class="txtformat" 
             Width="150px" Height="22px" BackColor="#CCFFCC">
-            </asp:TextBox> <i><font color="#0000CC">(Bạn nên thay đổi mã dự án phù hợp)</font></i>
+            </asp:TextBox> <i><font color="ButtonHighlight">(Bạn nên thay đổi mã dự án phù hợp)</font></i>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" Display="Dynamic" ForeColor="Red" ControlToValidate="txt_project_code" runat="server" ErrorMessage="Nhập mã dự án"></asp:RequiredFieldValidator>
     </td>
     </tr>
@@ -75,6 +75,16 @@
         <asp:TextBox ID="txt_project_name" runat="server"  class="txtformat" 
             Width="300px" Height="22px" BackColor="#CCFFCC"></asp:TextBox>
              <asp:RequiredFieldValidator ID="RequiredFieldValidator1" Display="Dynamic" ForeColor="Red" ControlToValidate="txt_project_name" runat="server" ErrorMessage="Nhập tên dự án"></asp:RequiredFieldValidator>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    Hình đại diện:
+    </td>
+    <td>
+    <asp:FileUpload ID="upload_img" runat="server" BackColor="#67C9FF" 
+                Text="Chọn hình" class="btnformat" BorderColor="White" BorderStyle="Solid" 
+                BorderWidth="1px" Height="21px" ToolTip="Chọn hình" Width="300px"/><br><font size=-2><i>(Chọn hình có định dạng .jpg,.gif,.png)</i></font>
     </td>
     </tr>
     </table>

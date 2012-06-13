@@ -16,16 +16,22 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+                Boolean check = false;
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
-
-                if (Request.QueryString["vmode"] == "create_new")
+                lbl_search.Visible = functions.checkPrivileges("40", functions.LoginMemID(this), "V");
+                module_list.Visible = functions.checkPrivileges("40", functions.LoginMemID(this), "V");
+                if (functions.checkPrivileges("40", functions.LoginMemID(this), "E") || functions.checkPrivileges("40", functions.LoginMemID(this), "C"))
+                {
+                    check = true;
+                }
+                if (Request.QueryString["vmode"] == "create_new" && check==true)
                 {
                     update_right();
                 }
                 else
                 {
-                    lbl_create_access.Visible = functions.checkPrivileges("40", functions.LoginMemID(this), "E");
+                    lbl_create_access.Visible = check;
                     no = 0;
                     divgroupid.Value = Request.QueryString["id"];
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='create_access_right_for_group.aspx?id=" + Request.QueryString["id"] + "' title='Xét quyền'>Xét quyền</a>";

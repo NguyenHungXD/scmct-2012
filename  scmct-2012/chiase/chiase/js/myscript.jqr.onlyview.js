@@ -121,7 +121,7 @@
             $(this).unbind("blur");
             $.TestDate(this)
         })
-    } 
+    }
     });
     $.LuuTable = function (options, before, after) {
         options = $.extend({}, $.defaults, options);
@@ -152,9 +152,9 @@
         } else
             list += "&" + $(this).attr("id") + "=" + encodeURIComponent($(this).text());
         return list
-    } 
+    }
     });
-    $.defaults = { width: "700px", height: "300px", ajax: "", idkhoachinh: "idkhoachinh", title: "Danh sÃ¡ch dá»¯ liá»‡u", Frame: ".body-div .in-a", tablename: "", valueBtLuu: "LÆ°u/Dá»«ng", ctlLuu: 'luu', ctlXoa: 'xoa', ctlMoi: 'moi', valLuu: "LÆ°u", valSua: "Sá»­a", ajaxLuu: "", ajaxSua: "", keyCode: "", defaultVal: "- Select One -", valMesComplete: "ÄÃ£ HoÃ n thÃ nh", valueMesLuu: "LÆ°u thÃ nh cÃ´ng.", valueErLuu: "LÆ°u tháº¥t báº¡i.", valueMesSua: "Cáº­p nháº­t thÃ nh cÃ´ng.", valueErSua: "Cáº­p nháº­t tháº¥t báº¡i.", valueMesXoa: "XÃ³a thÃ nh cÃ´ng.", valueErXoa: "XÃ³a tháº¥t báº¡i.", valueConfirm: "XÃ¡c nháº­n.", readMKV: true, ctlSaveOnFrame: function (opt) {
+    $.defaults = { width: "700px", height: "300px", ajax: "", idkhoachinh: "idkhoachinh", title: "Danh sách dữ liệu", Frame: ".body-div .in-a", tablename: "", valueBtLuu: "Lưu/Dừng", ctlLuu: 'luu', ctlXoa: 'xoa', ctlMoi: 'moi', valLuu: "Lưu", valSua: "Sửa", ajaxLuu: "", ajaxSua: "", keyCode: "", defaultVal: "- Select One -", valMesComplete: "Đã Hoàn thành", valueMesLuu: "Lưu thành công.", valueErLuu: "Lưu thất bại.", valueMesSua: "Cập nhật thành công.", valueErSua: "Cập nhật thất bại.", valueMesXoa: "Xóa thành công.", valueErXoa: "Xóa thất bại.", valueConfirm: "Xác nhận.", readMKV: true, ctlSaveOnFrame: function (opt) {
         opt = $.extend({}, $.defaults, opt);
         var list = "&" + opt.idkhoachinh + "=" + $.mkv.queryString(opt.idkhoachinh);
         if (opt.readMKV) {
@@ -172,13 +172,13 @@
             })
         }
         return list
-    } 
+    }
     }, $.mkv = { controlfind: "", Save: { run: function (control, opt, before, after) {
         if (control.attr("id") == opt.ctlLuu)
             $.mkv.Them(control, opt, before, after);
         if (control.attr("id") == "_" + opt.ctlLuu)
             $.mkv.CapNhat(control, opt)
-    } 
+    }
     }, flagtemp: true, row1: 1, row2: "", queryString: function (param, value) {
         if (value != null) {
             var preUrl = "", postUrl = "", newUrl = "", url = location.hash, start = url.indexOf(param + "=");
@@ -212,6 +212,7 @@
         if ($("#_" + options.ctlLuu).length != 0) {
             $("#_" + options.ctlLuu).attr("id", options.ctlLuu);
             $("#" + options.ctlLuu).val(options.valLuu)
+            if ($("#" + options.ctlLuu).attr("add") == "False") $("#" + options.ctlLuu).show();
         }
         $.mkv.permisionLuu(options)
     }, removeQueryString: function (param) {
@@ -235,7 +236,10 @@
                 $.mkv.queryString(opt.idkhoachinh, value);
                 control.attr("id", "_" + opt.ctlLuu);
                 control.val(opt.valSua);
-                $("#" + opt.ctlXoa).show();
+                if (control.attr("edit") == "False")
+                    control.hide();
+                if ($("#" + opt.ctlXoa).attr("delete") != "False")
+                    $("#" + opt.ctlXoa).show();
                 $.mkv.ExtendtionLuu(true, opt);
                 setTimeout(function () {
                     $("#" + opt.ctlMoi).filter(':visible').filter(':enabled').focus()
@@ -252,7 +256,7 @@
                     $.mkv.myerror(data.responseText);
                 else
                     $.mkv.myerror(opt.valueErSua)
-            } 
+            }
             })
         } else {
             $.ajax({ type: "GET", cache: false, dataType: "text", url: (opt.ajaxLuu == "" ? opt.ajax : opt.ajaxLuu) + opt.ctlSaveOnFrame(opt), success: function (value) {
@@ -262,7 +266,8 @@
                 $.mkv.queryString(opt.idkhoachinh, value);
                 control.attr("id", "_" + opt.ctlLuu);
                 control.val(opt.valSua);
-                $("#" + opt.ctlXoa).show();
+                if ($("#" + opt.ctlXoa).attr("delete") != "False")
+                    $("#" + opt.ctlXoa).show();
                 $.mkv.ExtendtionLuu(true, opt);
                 setTimeout(function () {
                     $("#" + opt.ctlMoi).filter(':visible').filter(':enabled').focus()
@@ -274,12 +279,14 @@
             }, error: function (data) {
                 $("#loadingAjax").remove();
                 control.attr("disabled", false);
+                if (control.attr("edit") == "False")
+                    control.hide();
                 $('form:not(.filter) :input:visible:first').focus();
                 if (data.responseText.length)
                     $.mkv.myerror(data.responseText);
                 else
                     $.mkv.myerror(opt.valueErLuu)
-            } 
+            }
             })
         }
     }, BindDuLieuTimKiem: function (opt, before, after) {
@@ -313,11 +320,12 @@
                 after(data)
         }, error: function (data) {
             $.mkv.myerror(data.responseText)
-        } 
+        }
         })
     }, CapNhat: function (control, opt) {
         control.attr("id", opt.ctlLuu);
         control.val(opt.valLuu);
+        if (control.attr("add") != "False") control.show();
         $.mkv.ExtendtionLuu(false, opt)
     }, LoadTimKiem: function (control, opt, otherTable, before, after) {
         if ($(control).attr("type") === "button") {
@@ -421,7 +429,7 @@
                 if ($("#loadingAjax").length > 0)
                     $("#loadingAjax").remove();
                 $.mkv.myerror(data.responseText)
-            } 
+            }
             })
         } else {
             if ($("#divTimKiem").length == 0) {
@@ -431,7 +439,7 @@
                 $("<p onscroll=\"$.mkv.scrollyactive('" + $(control).attr("id") + "')\" id=\"divSetTimKiem\" />").css({ 'background': '#fff', 'width': '99.5%', 'height': '97%', 'float': 'right', 'margin-top': '-11px', 'overflow': 'scroll', 'text-align': 'center', 'border': '1px solid #cfcfcf' }).appendTo("#divTimKiem");
                 $("<img onclick=\"$.mkv.dongtimkiem('" + $(control).attr("id") + "');\" src=\"../images/close.gif\" />").css({ 'float': 'right', 'cursor': 'pointer', 'padding-right': '5px', 'top': '2px', 'right': '0', 'position': 'absolute' }).appendTo("#divTimKiemTitle")
             }
-            $("#divSetTimKiem").html("Äang tÃ¬m dá»¯ liá»‡u ...");
+            $("#divSetTimKiem").html("Đang tìm dữ liệu ...");
             $.ajax({ type: "GET", cache: false, dataType: "text", url: opt.ajax + $.mkv.controlfind, success: function (value) {
                 $("#divSetTimKiem").html(value);
                 if ($("#divSetTimKiem").find("table").find("tr").length < 3)
@@ -443,8 +451,8 @@
                 if (data.responseText.length)
                     $.mkv.myerror(data.responseText);
                 else
-                    $.mkv.myalert("KhÃ´ng tÃ¬m tháº¥y dá»¯ liá»‡u !", 2000, "info")
-            } 
+                    $.mkv.myalert("Không tìm thấy dữ liệu !", 2000, "info")
+            }
             })
         }
     }, XoaTrangData: function (opt) {
@@ -494,7 +502,7 @@
                 $.mkv.myerror(data.responseText);
             else
                 $.mkv.myerror(opt.valueErXoa)
-        } 
+        }
         })
     }, focusLuu: function (opt) {
         $("#_" + opt.ctlLuu).filter(':visible').filter(':enabled').focus()
@@ -502,9 +510,12 @@
         $.mkv.queryString(opt.idkhoachinh, valuekhoachinh);
         if ($("#" + opt.ctlLuu).length != 0) {
             $("#" + opt.ctlLuu).attr("id", "_" + opt.ctlLuu);
-            $("#_" + opt.ctlLuu).val(opt.valSua)
+            $("#_" + opt.ctlLuu).val(opt.valSua);
+            if ($("#_" + opt.ctlLuu).attr("edit") == "False")
+                $("#_" + opt.ctlLuu).hide();
         }
-        $("#" + opt.ctlXoa).show();
+        if ($("#" + opt.ctlXoa).attr("delete") != "False")
+            $("#" + opt.ctlXoa).show();
         $.mkv.closeDivTimKiem();
         $.mkv.ExtendtionLuu(true, opt);
         $.mkv.permisionSua(opt);
@@ -546,7 +557,7 @@
                 after(value)
         }, error: function (data) {
             $.mkv.myerror(data.responseText)
-        } 
+        }
         })
     }, chuyenphim: function (control) {
         $(control).keydown(function (event) {
@@ -642,7 +653,7 @@
                 return ""
             }, 'checked': function () {
                 return false
-            } 
+            }
             })
         }).end();
         $("#" + tableName).find("tr").eq(1).find('input[type="text"]').each(function () {
@@ -660,7 +671,6 @@
         if ($.trim(document.getElementById(tableName).rows[tableNames - 1].cells[0].innerText).length < 1) {
             $("#" + tableName).find("tr").eq(tableNames - 2).after(money);
             tableNames = tableNames + 1;
-            $("#" + tableName).find("tr").eq(tableNames - 2).find("td").eq(0).html(eval($("#" + tableName).find("tr").eq(tableNames - 3).find("td").eq(0).html()) + 1);
             if ($("#" + tableName).find("tr").eq(tableNames - 2).find("td").eq(0).html() == "NaN") {
                 $("#" + tableName).find("tr").eq(tableNames - 3).find("td").eq(0).html(1);
                 $("#" + tableName).find("tr").eq(tableNames - 2).find("td").eq(0).html(2)
@@ -712,7 +722,7 @@
             if ($.mkv.row1 >= $("#" + opt.tablename).find("tr").length - 1)
                 $("#" + opt.tablename).find("tr").eq($.mkv.row1).css("background-color", "");
             $.mkv.jTable.behindLuuTable1(control, opt, after)
-        } 
+        }
         })
     }, xoa: function (control, opt, before, after) {
         var khoachinh = $(control.parents("table")).find("tr").eq(control.parent().parent().index()).find("[id=" + opt.idkhoachinh + "]").val();
@@ -735,7 +745,7 @@
                     $.mkv.myerror(data.responseText);
                 else
                     $.mkv.myerror(opt.valueErXoa)
-            } 
+            }
             })
         } else
             $(control.parents("table")).find("tr").eq(control.parent().parent().index()).remove()
@@ -766,7 +776,7 @@
             }
         }
         $.mkv.jTable.behindLuuTable2(control, opt, after)
-    } 
+    }
     }, moveUpandDown: function (idtable) {
         var currentRow = 1;
         var tr = "";
@@ -812,7 +822,7 @@
                     $.mkv.row2 = control.parent().parent().index();
                 else {
                     control.checked = false;
-                    alert("ÄÃ£ chá»n dÃ²ng " + $.mkv.row1 + " --> " + $.mkv.row2 + " !")
+                    alert("Đã chọn dòng " + $.mkv.row1 + " --> " + $.mkv.row2 + " !")
                 }
             }
         } else {
@@ -826,7 +836,7 @@
             $.mkv.row2 = $.mkv.row1;
             $.mkv.row1 = tam1
         }
-    } 
+    }
     };
     $.getCharacter = function (el) {
         if (el.selectionStart) {
@@ -889,7 +899,7 @@
         var datePat = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
         var matchArray = dateStr.match(datePat);
         if (matchArray == null) {
-            $.mkv.myerror("NgÃ y thÃ¡ng khÃ´ng há»£p lá»‡: " + dateStr);
+            $.mkv.myerror("Ngày tháng không hợp lệ: " + dateStr);
             return false
         }
         var day = matchArray[1];
@@ -897,21 +907,21 @@
         var year = matchArray[5];
         var flag = true;
         if (month < 1 || month > 12) {
-            $.mkv.myerror("ThÃ¡ng pháº£i giá»¯a 1 vÃ  12.");
+            $.mkv.myerror("Tháng phải giữa 1 và 12.");
             flag = false
         }
         if (day < 1 || day > 31) {
-            $.mkv.myerror("NgÃ y pháº£i giá»¯a 1 vÃ  31 ngÃ y.");
+            $.mkv.myerror("Ngày phải giữa 1 và 31 ngày.");
             flag = false
         }
         if ((month == 4 || month == 6 || month == 9 || month == 11) && day == 31) {
-            $.mkv.myerror("ThÃ¡ng " + month + " khÃ´ng cÃ³ 31 ngÃ y!");
+            $.mkv.myerror("Tháng " + month + " không có 31 ngày!");
             flag = false
         }
         if (month == 2) {
             var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
             if (day > 29 || (day == 29 && !isleap)) {
-                $.mkv.myerror("ThÃ¡ng 2 nÄƒm " + year + " khÃ´ng cÃ³ " + day + " ngÃ y!");
+                $.mkv.myerror("Tháng 2 năm " + year + " không có " + day + " ngày!");
                 flag = false
             }
         }

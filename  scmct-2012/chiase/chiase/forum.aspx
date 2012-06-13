@@ -22,8 +22,8 @@
 
 
     <tr class="post_news">
-    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td valign="middle"><img src="images/subject.png" width="40" height="25"><%#Eval("title")%></td><td align=right>
-            <asp:Label ID="lbl_post_new" runat="server" ><asp:HyperLink style="cursor:pointer" ID="linkPostnew" NavigateUrl='<%#Eval("id","post_news.aspx?subjectID={0}") %>' runat="server">  <img src="images/post_new.png" width="20" height="20"> Bài mới</asp:HyperLink></asp:Label>
+    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td valign="middle"><img src="images/subject.png" width="40" height="20"><%#Eval("title")%></td><td align=right>
+      <asp:Label ID="lbl_post_new" runat="server" ><a class="btn" href='<%#Eval("id","post_news.aspx?subjectID={0}") %>' title='Viết bài mới' >  <img src="images/post_new.png" width="20" height="20"> Bài mới</a></asp:Label>
     </td><tr></table> </td>
     </tr>
     <tr class="post_news_desc">
@@ -36,7 +36,7 @@
             onitemdatabound="showListPost_ItemDataBound1">
         <HeaderTemplate>
         <table border="0" cellpadding=4 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;background-color:#3BB9FF" class="btn_forum">
-        <tr class="new_post">
+        <tr class="btn_project" style="text-align:center;font-weight:bold;">
         <td colspan=3 width=30%>
             Tiêu đề
         </td>
@@ -70,8 +70,8 @@
                     </div>
                     </td>
 
-                    <td align=left with=25%><img src="<%# Eval("avatar_path","images/avatars/{0}") %>" width="30px" height="30px">&nbsp<asp:HyperLink ID="link_show_detail" runat="server" Text='<%# Eval("tieu_de") %>'></asp:HyperLink><br><font size=-3><i>Tạo bởi 
-                                        <a style="cursor:pointer" ID='<%#Eval("BAI_VIET_ID", "username{0}") %>'><font color="Yellow"><%#Eval("username") %></font></a>
+                    <td align=left with=25%><img style="border-radius: 5px;" src="<%# Eval("avatar_path","images/avatars/{0}") %>" width="30px" height="30px">&nbsp<asp:HyperLink ID="link_show_detail" runat="server" Text='<%# Eval("tieu_de") %>' title='Xem chi tiết'></asp:HyperLink><br><font size=-3><i>Tạo bởi 
+                                        <a style="cursor:pointer" ID='<%#Eval("BAI_VIET_ID", "username{0}") %>' ><font color="Yellow"><%#Eval("username") %></font></a>
                                         , <%#Eval("ngay_tao", "{0:dd/MM/yyyy hh:mm:ss tt}")%></font></i>
                     <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" 
                     AllowDragging="True" AllowResize="True"
@@ -108,10 +108,11 @@
                     <asp:Image ID="Image6" runat="server" ImageUrl="images/star_w.gif" Width=12 Height=12/>
                     <asp:Image ID="Image7" runat="server" ImageUrl="images/star_w.gif" Width=12 Height=12/>
                     <asp:Image ID="Image8" runat="server" ImageUrl="images/star_w.gif" Width=12 Height=12/>
+                  
                     </td>
                     <td with=25% align=left>
                     
-                        <asp:HyperLink ID="link_comment" runat="server"></asp:HyperLink><br>
+                        <asp:HyperLink title='Xem chi tiết' ID="link_comment" runat="server"></asp:HyperLink><br>
                         <font size=-3><asp:Label ID="lbl_text" runat="server"></asp:Label>
                         <asp:Label ID="_cm_by" runat="server" Text=""></asp:Label> <asp:Label ID="lbl_date_time" runat="server" Text=""></asp:Label></font>
                     </td>
@@ -127,7 +128,7 @@
 <FooterTemplate>
 <tr>
 <td>
-    <table cellpadding=3 cellspacing=3 style="color:White">
+    <table cellpadding=3 cellspacing=3 style="color:Blue">
     <tr>
     <td>
         <asp:Image ID="Image1" runat="server" ImageUrl="images/new_post.gif" /> Bài mới đăng

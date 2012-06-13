@@ -21,22 +21,27 @@ namespace chiase
             {
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+                Boolean checkDel = functions.checkPrivileges("21", functions.LoginMemID(this), "D");
+                Boolean checkEdit = functions.checkPrivileges("21", functions.LoginMemID(this), "E");
+                Boolean checkView = functions.checkPrivileges("21", functions.LoginMemID(this), "V");
 
-                if (Request.QueryString["vmode"] == "del")
+                if (Request.QueryString["vmode"] == "del" && checkDel)
                 {
                      del_subject();
-                } if (Request.QueryString["vmode"] == "undel")
+                } if (Request.QueryString["vmode"] == "undel" && checkDel)
                 {
                      undel_subject();
                 }
-                else if (Request.QueryString["vmode"] == "update_subject_status")
+                else if (Request.QueryString["vmode"] == "update_subject_status" && checkEdit)
                 {
                     update_subject_status();
                 }
                 else
                 {
-                    lbl_del_subject.Visible = functions.checkPrivileges("21", functions.LoginMemID(this), "D");
-                    lbl_search_subject.Visible = functions.checkPrivileges("21", functions.LoginMemID(this), "V");
+                    lbl_del_subject.Visible = checkDel;
+                    lbl_search_subject.Visible = checkView;
+                    subject_list.Visible = checkView;
+
                     display();
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_subject.aspx' title='Cập nhật chủ đề'>Cập nhật chủ đề</a>";
 

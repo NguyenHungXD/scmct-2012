@@ -17,23 +17,27 @@ namespace chiase
         {
             if (!IsPostBack)
             {
+
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+                Boolean isDel = functions.checkPrivileges("16", functions.LoginMemID(this), "D");
+                Boolean isView = functions.checkPrivileges("16", functions.LoginMemID(this), "V");
 
-                if (Request.QueryString["vmode"] == "del")
+                if (Request.QueryString["vmode"] == "del" && isDel)
                 {
                     del_status();
-                } if (Request.QueryString["vmode"] == "undel")
+                } if (Request.QueryString["vmode"] == "undel" && isDel)
                 {
                     undel_status();
                 }
                 else
                 {
-                    lbl_search_status_request.Visible = functions.checkPrivileges("16", functions.LoginMemID(this), "V");
-                    lbl_del_status_request.Visible = functions.checkPrivileges("16", functions.LoginMemID(this), "D");
+                    lbl_search_status_request.Visible = isView;
+                    lbl_del_status_request.Visible = isDel;
+                    status_list.Visible = isView;
+
                     display();
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_status_request.aspx' title='Cập nhật trạng thái yêu cầu'>Cập nhật trạng thái</a>";
-
                 }
             }
         }

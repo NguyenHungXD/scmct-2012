@@ -8,20 +8,20 @@
     <asp:Panel ID="pn_addmin_main" runat="server" Visible="false">
 
 <fieldset style="background-color:#0066FF">
-    <table border=0 cellpadding =0 cellspacing=0 width =100%>
+    <table border=0 cellpadding =0 cellspacing=0 width =100% >
     <tr>
     <td>
         <asp:Panel ID="pn_project" runat="server" >
                 <div style="margin-bottom:5px;" class="admin">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%"  >
-                <tr><td align="left"><b>Quản lý dự án</b></td></tr>
+                <tr><td align="left" valign="middle"><img src="images/admin_sec.png" width=20 height=20> <b>QUẢN LÝ DỰ ÁN</b></td></tr>
                 <tr>
                 <td align="right"><hr>
                     <asp:Label ID="lbl_create_new_project" runat="server">
                             <a style='cursor:pointer' class="btn_admin" id="new_project">Tạo dự án mới</a>
                     </asp:Label>
                     <asp:Label ID="lbl_search_project" runat="server">
-                            <a href="search_project.aspx" class="btn_admin">Cập nhật dự án</a>
+                            <a style='cursor:pointer' href="search_project.aspx" class="btn_admin">Cập nhật dự án</a>
                     </asp:Label>
                     <asp:Label ID="lbl_add_member_project" runat="server">
                             <a style='cursor:pointer'  class="btn_admin" id="add_member_project" >Nhân sự cho dự án</a>
@@ -40,12 +40,9 @@
                 </tr>
                 </table>
             </div>
-
-
-          
           </asp:Panel>
-                             <dx:ASPxPopupControl ID="ASPxPopupControl7" runat="server" 
-                    AllowDragging="True" AllowResize="True"
+                            <dx:ASPxPopupControl ID="ASPxPopupControl7" runat="server" 
+                            AllowDragging="True" AllowResize="True"
                             CloseAction="CloseButton" ContentUrl="create_new_status_project.aspx"
                             EnableViewState="False" PopupElementID="create_new_status_project"
                             PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="400px"
@@ -113,7 +110,7 @@
         <asp:Panel ID="pn_request" runat="server">
               <div style="margin-bottom:5px;" class="admin">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%"  >
-                <tr><td align="left"><b>Quản lý yêu cầu tặng/xin sách</b></td></tr>
+                <tr><td align="left"><img src="images/admin_sec.png" width=20 height=20> <b>QUẢN LÝ YÊU CẦU TẶNG VÀ XIN SÁCH</b></td></tr>
                 <tr>
                 <td align="right"><hr>
                     <asp:Label ID="lbl_new_request" runat="server">
@@ -142,7 +139,7 @@
                 </table>
             </div>
             </asp:Panel>
-                                           <dx:ASPxPopupControl ID="ASPxPopupControl6" runat="server" 
+                  <dx:ASPxPopupControl ID="ASPxPopupControl6" runat="server" 
                     AllowDragging="True" AllowResize="True"
                             CloseAction="CloseButton" ContentUrl="create_new_kind_request.aspx"
                             EnableViewState="False" PopupElementID="create_new_kind_request"
@@ -208,7 +205,7 @@
         <asp:Panel ID="pn_news" runat="server">
                 <div style="margin-bottom:5px;" class="admin">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%"  >
-                <tr><td align="left"><b>Quản lý chủ đề/bài viết</b></td></tr>
+                <tr><td align="left"><img src="images/admin_sec.png" width=20 height=20> <b>QUẢN LÝ CHỦ ĐỀ VÀ BÀI BIẾT</b></td></tr>
                 <tr>
                 <td align="right"><hr>
                 <asp:Label ID="lbl_create_new_subject" runat="server">
@@ -306,28 +303,26 @@
     <tr>
     <td>
 
-        <asp:Panel ID="pn_stock" runat="server">
+       <!-- <asp:Panel ID="pn_stock" runat="server"> -->
         
                 <div style="margin-bottom:5px;" class="admin">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%"  >
-                <tr><td align="left"><b>Quản lý kho</b></td></tr>
+                <tr><td align="left"><img src="images/admin_sec.png" width=20 height=20> <b>QUẢN LÝ XUẤT NHẬP KHO</b></td></tr>
                 <tr>
                 <td align="right">
                 <hr />
-                        <a href="web/ManageOfReceiver.aspx" class="btn_admin">Quản lý nhập kho</a>
-                        <a href="web/ManageOfShipments.aspx" class="btn_admin">Quản lý xuất kho</a>
-                        <a href="web/ManageOfTransfer.aspx" class="btn_admin">Quản lý chuyển kho</a>     
-                       <hr />   
-                        <a href="web/CategoryWarehouse.aspx" class="btn_admin">Danh mục kho</a>                       
-                        <a href="web/CategoryItems.aspx" class="btn_admin">Danh mục hàng hóa</a>    
-                        <a href="web/CategoryGroupItems.aspx" class="btn_admin">Danh mục chủng loại</a>  
+                        <a href="manageofreceiver.aspx" class="btn_admin">Quản lý nhập kho</a>
+                        <a href="manageofshipments.aspx" class="btn_admin">Quản lý xuất kho</a>
+                        <a href="manageoftransfer.aspx" class="btn_admin">Quản lý chuyển kho</a>     
+                        <a href="categorywarehouse.aspx" class="btn_admin">Danh mục kho</a>                       
+                        <a href="categoryitems.aspx" class="btn_admin">Danh mục hàng hóa</a>    
+                        <a href="categorygroupItems.aspx" class="btn_admin">Danh mục chủng loại</a>  
                         <hr />
-                
                 </td>
                 </tr>
                 </table>
                 </div>
-            </asp:Panel>
+         <!--   </asp:Panel> -->
 <!--
            <fieldset style="background-color: #010005;">
           <legend>   Quản lý kho    </legend>
@@ -353,7 +348,7 @@
         
                 <div style="margin-bottom:5px;" class="admin">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%"  >
-                <tr><td align="left"><b>Quản lý thu chi</b></td></tr>
+                <tr><td align="left"><img src="images/admin_sec.png" width=20 height=20> <b>QUẢN LÝ THU CHI</b></td></tr>
                 <tr>
                 <td align="right"><hr>
                 <asp:Label ID="lbl_phieu_thu" runat="server">
@@ -403,7 +398,7 @@
        
                 <div style="margin-bottom:5px;" class="admin">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%"  >
-                <tr><td align="left"><b>Quản lý người dùng</b></td></tr>
+                <tr><td align="left"><img src="images/admin_sec.png" width=20 height=20> <b>QUẢN LÝ NGƯỜI DÙNG</b></td></tr>
                 <tr>
                 <td align="right"><hr>
                 <asp:Label ID="lbl_create_new_members" runat="server">
@@ -491,7 +486,7 @@
         
                 <div style="margin-bottom:5px;" class="admin">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%"  >
-                <tr><td align="left"><b>Quản lý chức năng</b></td></tr>
+                <tr><td align="left"><img src="images/admin_sec.png" width=20 height=20> <b>QUẢN LÝ CHỨC NĂNG HỆ THỐNG</b></td></tr>
                 <tr>
                 <td align="right"><hr>
                 <asp:Label ID="lbl_create_new_module" runat="server">
@@ -551,7 +546,7 @@
         <asp:Panel ID="pn_access_right" runat="server">
                 <div style="margin-bottom:5px;" class="admin">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%"  >
-                <tr><td align="left"><b>Quản lý quyền truy cập</b></td></tr>
+                <tr><td align="left"><img src="images/admin_sec.png" width=20 height=20> <b>QUẢN LÝ PHÂN QUYỀN TRUY CẬP HỆ THỐNG</b></td></tr>
                 <tr>
                 <td align="right"><hr>
                 <asp:Label ID="lbl_access_right_for_groups" runat="server">
@@ -574,7 +569,7 @@
         <asp:Panel ID="pn_orther" runat="server">
                 <div style="margin-bottom:5px;" class="admin">
                 <table cellpadding="0" cellspacing="0" border="0" width="100%"  >
-                <tr><td align="left"><b>Quản lý thông tin khác</b></td></tr>
+                <tr><td align="left"><img src="images/admin_sec.png" width=20 height=20> <b>QUẢN LÝ THÔNG TIN KHÁC</b></td></tr>
                 <tr>
                 <td align="right"><hr>
                 <asp:Label ID="lbl_update_info" runat="server">
@@ -589,7 +584,33 @@
          </asp:Panel>
     </td>
     </tr>
+      <tr>
+    <td>
+        <asp:Panel ID="pn_reports" runat="server">
+                <div style="margin-bottom:5px;" class="admin">
+                <table cellpadding="0" cellspacing="0" border="0" width="100%"  >
+                <tr><td align="left"><img src="images/admin_sec.png" width=20 height=20> <b>BÁO CÁO</b></td></tr>
+                <tr>
+                <td align="right"><hr>
+                <asp:Label ID="lbl_view_report_ton_kho" runat="server">
+                        <a href="stock_reports.aspx" style="cursor:pointer" class="btn_admin" >Báo cáo tồn kho</a>
+                </asp:Label>
+                <asp:Label ID="lbl_view_report_thu_chi" runat="server">
+                        <a href="finance_reports.aspx" style="cursor:pointer" class="btn_admin" >Báo cáo thu chi</a>
+                </asp:Label>
+                <asp:Label ID="lbl_view_report_tong_ket_du_an" runat="server">
+                        <a href="project_manage_reports.aspx" style="cursor:pointer" class="btn_admin" >Tổng kết dự án</a>
+                </asp:Label>
 
+                        <!--<a href="#" class="btn_admin">Tìm kiếm</a>-->
+                    <hr>
+                </td>
+                </tr>
+                </table>
+                </div>
+         </asp:Panel>
+    </td>
+    </tr>
     <tr>
     <td align=right style="color: White">
         <br>&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %>

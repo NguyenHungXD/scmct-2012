@@ -19,27 +19,32 @@ namespace chiase
             {
                 //Check LogIn session
                 functions.checkLogIn(this, functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
+                Boolean isDel = functions.checkPrivileges("35", functions.LoginMemID(this), "D");
+                Boolean isLock = functions.checkPrivileges("35", functions.LoginMemID(this), "L");
+                Boolean isView = functions.checkPrivileges("35", functions.LoginMemID(this), "V");
 
-                if (Request.QueryString["vmode"] == "del")
+                if (Request.QueryString["vmode"] == "del" && isDel)
                 {
                     del_group();
-                } else if (Request.QueryString["vmode"] == "undel")
+                }
+                else if (Request.QueryString["vmode"] == "undel" && isDel)
                 {
                     undel_group();
                 }
-                else if (Request.QueryString["vmode"] == "lock")
+                else if (Request.QueryString["vmode"] == "lock" && isLock)
                 {
                     lock_group();
                 }
-                else if (Request.QueryString["vmode"] == "unlock")
+                else if (Request.QueryString["vmode"] == "unlock" && isLock)
                 {
                     unlock_group();
                 }
                 else
                 {
-                    lbl_search_group_member.Visible = functions.checkPrivileges("35", functions.LoginMemID(this), "V");
-                    lbl_del_members.Visible = functions.checkPrivileges("35", functions.LoginMemID(this), "D");
-                    lbl_lock_members.Visible = functions.checkPrivileges("35", functions.LoginMemID(this), "L");
+                    lbl_search_group_member.Visible = isView;
+                    group_list.Visible = isView;
+                    lbl_del_members.Visible = isDel;
+                    lbl_lock_members.Visible = isLock;
                     display();
                     Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='admin.aspx' title='Quản trị'>Quản trị</a> >> <a href='search_group_member.aspx' title='Cập nhật nhóm người dùng'>Nhóm người dùng</a>";
 

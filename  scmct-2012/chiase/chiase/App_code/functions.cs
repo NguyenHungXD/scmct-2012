@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections;
+using System.Data;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using chiase.Objects;
-using System.Collections;
-using System.Text;
-using System.IO;
+using System.Xml;
 using chiase.Objects;
 using DK2C.DataAccess.Web;
 namespace chiase
@@ -51,7 +48,7 @@ namespace chiase
         public static Boolean checkPrivileges(string vmoduleid, string userid,string kind)
         {
             try
-            {
+            {               
                 
                 //[V: view] | [C: Create] | [E: Edit] | [L: Lock] | [D: Delete]
                 string sWhere = "";
@@ -383,6 +380,12 @@ namespace chiase
 
 
         #region Khanhdtn
+        public static string LoginMemFullName(System.Web.UI.Page page)
+        {
+            DataTable table = (DataTable)page.Session["ThanhVien"];
+            if (table == null || table.Rows.Count == 0) return "";
+            return table.Rows[0][ND_THONG_TIN_ND.cl_NAME].ToString();
+        }
 
         public static string CheckDate(string strDate)
         {
@@ -787,7 +790,40 @@ namespace chiase
                 return prefix + date.ToString("yyyyMMdd") + "-" + num.ToString("000");
             }
         }
-        
+        public static Page WebPage = new Page();
+        public static string GetValueLanguage(string IDWord)
+        {
+
+            try
+            {
+
+
+                XmlDocument doc = new XmlDocument();
+                doc.Load(WebPage.Server.MapPath("~/App_Data/AppLanguages.xml"));
+
+
+                XmlNode noddActiveLang = doc.SelectSingleNode("//ACTIVE_LANG");
+                string activeLang = noddActiveLang.InnerText;
+                if (string.IsNullOrEmpty(activeLang)) activeLang = "VI";
+
+                string rNode = "//LANG";
+                string pathKey = "WORD[@ID='" + IDWord + "']";
+                XmlNode node = doc.SelectSingleNode(rNode);
+                XmlElement meanNode = (XmlElement)node.SelectSingleNode(pathKey);
+                if (meanNode != null)
+                {
+                    string mean = meanNode.GetAttribute(activeLang);
+                    if (string.IsNullOrEmpty(mean))
+                        return IDWord;
+                    else return mean;
+                }
+            }
+            catch
+            {
+                
+            }
+            return IDWord;
+        }
         #endregion
     }
 }

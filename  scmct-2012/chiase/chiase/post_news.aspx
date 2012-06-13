@@ -42,8 +42,7 @@
     <td colspan=2><font color=white><b>
         Tiêu đề: </font></b>
 
-        <asp:TextBox ID="txt_title" runat="server"  class="txtformat" Width="614px" 
-            Height="23px"></asp:TextBox>
+        <asp:TextBox ID="txt_title" runat="server"  class="txtformat" Width="614px" Maxlength=150 Height="23px"></asp:TextBox>
             <asp:RequiredFieldValidator ForeColor="Red" Display="Dynamic" ControlToValidate="txt_title" ID="RequiredFieldValidator1" runat="server" ErrorMessage="Nhập tiêu đề"></asp:RequiredFieldValidator>
             </td>
     </tr>
@@ -133,7 +132,7 @@
         <td align=left style="width: 470px">
 
 
-            <!--<input id="Button2" type="button" value="Hủy" class="btn" style="width:120px;height:25px;" onclick="backs()"/>-->
+            <!--<input id="Button2" type="button" value="Đóng" class="btn" style="width:120px;height:25px;" onclick="backs()"/>-->
 
 
     </td>

@@ -26,11 +26,12 @@ namespace chiase
         {
             try
             {
+         
 
                 string sql = @"select a.*,b.name as nguoi_chi_tien,c.name as nguoi_nhan_tien,c.address,d.ma_du_an,d.ten_du_an
                                     from TC_PHIEU_CHI a
                                     inner join ND_THONG_TIN_ND b on b.id = a.nguoi_chi
-                                    inner join ND_THONG_TIN_ND c on c.id = a.doi_tuong_chi
+                                    inner join ND_THONG_TIN_ND c on c.id = a.mem_id
                                     inner join DA_DU_AN d on d.id = a.du_an_id
                                     where a.ma_pc=@id";
 
@@ -49,7 +50,7 @@ namespace chiase
                 lbl_nguoi_lap_phieu.Text = table_detail.Rows[0]["nguoi_chi_tien"].ToString();
                 lbl_note.Text = table_detail.Rows[0]["ghi_chu"].ToString();
                 lbl_project_name.Text = String.Format("{0}({1})", table_detail.Rows[0]["ma_du_an"], table_detail.Rows[0]["ten_du_an"]);
-                lbl_total.Text = table_detail.Rows[0]["tong_tien"].ToString();
+                lbl_total.Text = string.Format("{0:#,###}",table_detail.Rows[0]["tong_tien"]);
                 Double total = (Double)table_detail.Rows[0]["tong_tien"];
                 lbl_text_money.Text = functions.conVertToText(total);
            

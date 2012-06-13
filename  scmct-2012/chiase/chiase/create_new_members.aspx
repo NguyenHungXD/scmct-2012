@@ -215,7 +215,7 @@
     <td>
 
 
-        <input id="Button2" type="button" value="Hủy" onclick="backs()" class="btn" style="height:25px;width:120px" />
+        <input id="Button2" type="button" value="Đóng" onclick="backs()" class="btn" style="height:25px;width:120px" />
         </td>
 </tr>
 <tr>

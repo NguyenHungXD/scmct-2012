@@ -21,7 +21,7 @@
         function deletes(vmode) {
             var obj = document.forms["chiase"];
             var checked = false;
-            if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để hủy.")) {
+            if (confirm("Xác nhận thay đổi!\n Chọn [OK] để tiếp tục, [Cancel] để Đóng.")) {
                 if (obj.chk.length > 0) {
                     for (i = 0; i < obj.chk.length; i++) {
                         if (obj.chk[i].checked == true) {
@@ -63,6 +63,7 @@
 <fieldset>
     <table border="0" cellpadding=3 cellspacing=1 width="100%"  style="border:0px solid #CCFFFF;">
         <tr style="color:White;font-weight:bold"><td colspan="8"><font size=3><p align="center">Tìm kiếm trạng thái yêu cầu</p></font><br>*-Bạn có thể bỏ qua điều kiện bạn không quan tâm.</td></tr>
+        <tr><td colspan=5><hr></td></tr>
         <tr>
                     <td>
             Trạng thái:
@@ -148,24 +149,25 @@
                     Width="250px"></asp:TextBox>
             </td>
         </tr>
-        
+        <tr><td colspan=5><hr></td></tr>
         <tr>
         <td>&nbsp</td><td colspan="3">&nbsp
             <asp:Label ID="lbl_view_status" runat="server">
             <asp:Button ID="btn_search" runat="server" Text="Tìm kiếm" class="btn" 
                 Height="25px" onclick="btn_search_Click" Width="120px"  />
         </asp:Label>
+        <input id="Button4" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/>
         </td>
         </tr>
         </table>
 </fieldset>
-<hr>
+
     <table border="0" cellpadding=3 cellspacing=1 width="100%"  style="border:1px solid #CCFFFF;color:Black">
-        <tr bgcolor="#990099" style="color:White;font-weight:bold"><td align="center" 
-                colspan="4">Danh sách trạng thái yêu cầu</td></tr>
-        <tr class="new_post">
-        <td width="10%">
-            STT
+        <tr bgcolor="#1A15FB" style="color:White;font-weight:bold"><td align="center" 
+                colspan="4">DANH SÁCH TRẠNG THÁI YÊU CẦU</td></tr>
+        <tr class="btn_project" style="text-align:center;font-weight:bold;">
+        <td width="5%">
+            <P>STT</P>
         </td>
         <td width="17%">
             Tên trạng thái
@@ -214,7 +216,7 @@
             <input id="Button3" type="button" value="Phục hồi trạng thái" class="btn" style="width:125px;height:25px" onclick="deletes('undel')"/>
         </asp:Label>
 
-        <input id="Button2" type="button" value="Hủy" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
+        <input id="Button2" type="button" value="Đóng" style="width:120px;height:25px" class="btn" onclick="backs();"/><br>&nbsp
         
     </td>
     </tr>
