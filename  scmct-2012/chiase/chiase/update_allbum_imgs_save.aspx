@@ -1,1 +1,0 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="update_allbum_imgs_save.aspx.cs" Inherits="chiase.update_allbum_imgs_save" %>
