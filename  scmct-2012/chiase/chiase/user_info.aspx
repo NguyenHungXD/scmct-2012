@@ -15,7 +15,7 @@
 <body>
     <form id="form1" runat="server">
     <fieldset> 
-<table cellpadding="1" cellspacing="1" border="0" bgcolor="#0099CC"  width="100%" style="color:#000000">
+<table cellpadding="1" cellspacing="0" border="0" bgcolor="#0099CC"  width="100%" style="color:#000000">
 <tr bgcolor="White">
 <td colspan="2" align="left">
     <asp:Image ID="img_user" runat="server" width="120" Height="120" BorderWidth="1" BorderColor="#0099ff"
@@ -56,7 +56,7 @@
 </tr>
 <tr bgcolor="White">
 <td align="right" class="style1">
-    SDT:
+    SĐT:
         </td>
     <td width="60%">
     <b><asp:Label ID="lbl_sodienthoai" runat="server" Text=""></asp:Label></b>
@@ -122,7 +122,7 @@
 </tr>
 <tr bgcolor="White">
 <td align="right" class="style1">
-    Số bài viết:
+    Bài viết:
         </td>
     <td width="60%">
     <b><asp:Label ID="lbl_baidang" runat="server" Text=""></asp:Label></b>
@@ -130,20 +130,20 @@
 </tr>
 <tr bgcolor="White">
 <td align="right" class="style1">
-    Dự án tham gia:
+    Bình luận:
         </td>
     <td width="60%">
-    <b><asp:Label ID="lbl_duan" runat="server" Text=""></asp:Label></b>
+    <b><asp:Label ID="lbl_bl" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
-<tr bgcolor="White">
+<%--<tr bgcolor="White">
 <td align="right" class="style1">
     Số sách ủng hộ:
         </td>
     <td width="60%">
     <b><asp:Label ID="lbl_sach" runat="server" Text="100"></asp:Label></b>
 </td>
-</tr>
+</tr>--%>
 <tr bgcolor="White">
 <td align="right" class="style1">
     Truy cập lần cuối:
@@ -157,7 +157,7 @@
     Trạng thái:
         </td>
     <td width="60%">
-    <b><asp:Label ID="lbl_trangthai" runat="server" Text="Online"></asp:Label></b>
+    <b><asp:Label ID="lbl_trangthai" runat="server" Text=""></asp:Label></b>
 </td>
 </tr>
 

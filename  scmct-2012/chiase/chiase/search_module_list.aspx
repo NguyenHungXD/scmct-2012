@@ -232,7 +232,7 @@
         <td width="10%" align="center">
             Mã chức năng
         </td>
-                <td width="10%">
+                <td width="15%">
             Tên chức năng
         </td>
         <td width="17%" align="center">

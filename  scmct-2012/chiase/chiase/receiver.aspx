@@ -27,9 +27,10 @@
             window.opener.document.body.disabled = true;
         }
         window.onunload = function () {
+        
             window.opener.document.body.disabled = false;
         }
-
+       
 
         function afterSelectHH(ctrl, hhid) {
             //Change code to fix for IE,Firefox,Chrome
@@ -157,7 +158,7 @@
                 khoachinh = $("#" + tableHH.id).find("tr").eq(x).find("[id=idkhoachinh]")[0];
                 captions = Array("Mã hàng hóa", "Tên hàng hóa", "Chủng loại", "Số lượng");
                 ctlInputs = Array(mahh, hhName, nhhName, soluong);
-                ctlValues = Array(hhid, null, nhhID, null);
+                ctlValues = Array(null, null, nhhID, null);
                 typeChecks = Array("R", "R", "R", "R Z");
 
 

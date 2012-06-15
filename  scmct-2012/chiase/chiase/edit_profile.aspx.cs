@@ -35,22 +35,22 @@ namespace chiase
                     ND_THONG_TIN_ND nd = new ND_THONG_TIN_ND(table, 0);
                     String avatar_name = nd.AVATAR_PATH == "" ? "default_img.gif" : nd.AVATAR_PATH;
                     txt_username.Text = (String)table.Rows[0][ND_THONG_TIN_DN.cl_USERNAME];
-                    if (table.Rows[0][ND_THONG_TIN_DN.cl_LASTED_ACCESS].ToString() != null)
-                    {
-                        DateTime lasted_access = (DateTime)table.Rows[0][ND_THONG_TIN_DN.cl_LASTED_ACCESS];
-                        lbl_lasted_access.Text = lasted_access.ToString("dd/MM/yyyy hh:mm:ss tt");
-                    }
-                    else
-                    {
-                        lbl_lasted_access.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                    //if (table.Rows[0][ND_THONG_TIN_DN.cl_LASTED_ACCESS].ToString() != null)
+                    //{
+                    //    DateTime lasted_access = (DateTime)table.Rows[0][ND_THONG_TIN_DN.cl_LASTED_ACCESS];
+                    //    lbl_lasted_access.Text = lasted_access.ToString("dd/MM/yyyy hh:mm:ss tt");
+                    //}
+                    //else
+                    //{
+                    //    lbl_lasted_access.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
 
-                    }
-
+                    //}
+                    lbl_lasted_access.Text = functions.getLastedAccess(table.Rows[0]["id"].ToString());
                     img_user.ImageUrl = "Images/avatars/" + avatar_name;
 
                     //Fill data on form
-                    
-                    txt_address.Text =nd.ADDRESS;
+
+                    txt_address.Text = nd.ADDRESS;
                     txt_full_name.Text = nd.NAME;
                     txt_faxnumber.Text = nd.FAX;
                     txt_phonenumber.Text = nd.PHONE;
@@ -68,7 +68,7 @@ namespace chiase
 
                     lbl_group_name.Text = (String)table.Rows[0][ND_TEN_NHOM_ND.cl_GROUPNAME];
                     txt_note.Text = nd.NOTE;
-                    
+                    //sum_point.Text = functions.returnPoint(table.Rows[0]["id"].ToString());
                 }
             }
             catch (Exception ex) {

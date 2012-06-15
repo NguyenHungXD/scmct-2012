@@ -107,7 +107,7 @@ namespace chiase
                 String sql_lasted_cm = string.Format(@"SELECT bbv.*,nd.username FROM BV_BAI_VIET bbv 
                         INNER JOIN ND_THONG_TIN_DN nd ON bbv.NGUOI_TAO = nd.MEM_ID
                         WHERE 
-                        bbv.BAI_VIET_ID = (SELECT MAX(BAI_VIET_ID) FROM BV_BAI_VIET bbv2 WHERE bbv2.BAI_VIET_CHA_ID ={0} )", id);
+                        bbv.BAI_VIET_ID = (SELECT MAX(BAI_VIET_ID) FROM BV_BAI_VIET bbv2 WHERE bbv2.BAI_VIET_CHA_ID ={0} and deleted is null) ", id);
                 DataTable lasted_cm = SQLConnectWeb.GetTable(sql_lasted_cm);
                 if (lasted_cm.Rows.Count > 0)
                 {

@@ -146,7 +146,10 @@ namespace chiase
             // DataTable table = DM_HANG_HOA.GetTableAll();
             DataTable table = SQLConnectWeb.GetTable(@"SELECT HH.ID,HH.MA_HH,HH.[NAME],HH.NHH_ID,NHH.[NAME] NHH_NAME
                       FROM DM_HANG_HOA HH                    
-                    LEFT JOIN DM_HANG_HOA_NHOM NHH ON NHH.ID=HH.NHH_ID");
+                      LEFT JOIN DM_HANG_HOA_NHOM NHH ON NHH.ID=HH.NHH_ID
+                      WHERE EXISTS(SELECT TOP 1 PNCT.PNK_CT_ID
+                                FROM KH_PHIEU_NHAP_KHO_CT PNCT 
+                                WHERE PNCT.HH_ID=HH.ID)");
             string html = "";
             if (table != null && table.Rows.Count > 0)
             {

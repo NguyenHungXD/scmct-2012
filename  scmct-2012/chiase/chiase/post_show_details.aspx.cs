@@ -107,7 +107,10 @@ namespace chiase
                 showList_comment.DataBind();
 
                 HyperLink linkPostNew = (HyperLink)e.Item.FindControl("linkPostnew");
-                linkPostNew.NavigateUrl = "post_news.aspx?subjectID=" + Request.QueryString["subjectID"];
+                if (Request.QueryString["subjectID"] != null && Request.QueryString["subjectID"] != "")
+                    linkPostNew.NavigateUrl = "post_news.aspx?subjectID=" + Request.QueryString["subjectID"];
+                else if (Request.QueryString["project_id"] != null && Request.QueryString["subjectID"] != "")
+                    linkPostNew.NavigateUrl = "post_news.aspx?projectID=" + Request.QueryString["project_id"];
 
                 //Total Post
                 Label lbl_post_new = (Label)e.Item.FindControl("lbl_post_new");
@@ -136,26 +139,41 @@ namespace chiase
 
         protected void btn_comments_Click(object sender, EventArgs e)
         {
-            
             try
             {
-                string memid = functions.LoginMemID(this);
-                if (memid != "")
-                {
+
+
+
+
+
                     DataTable bv_info = BV_BAI_VIET.GetTableAll("BAI_VIET_ID=" + Request.QueryString["news_id"]);
+                    string sql = @"insert into BV_BAI_VIET (tieu_de,nguoi_tao,ngay_tao,noi_dung,trang_thai_id,bai_viet_cha_id,du_an_id,chu_de_id,sort) 
+                                               values(@tieu_de,@nguoi_tao,@ngay_tao,@noi_dung,@trang_thai_id,@bai_viet_cha_id,@du_an_id,@chu_de_id,@sort)";
 
+                    string url = "";
+                    string projectID = bv_info.Rows[0]["du_an_id"].ToString();
+                    string subjectID = bv_info.Rows[0]["chu_de_id"].ToString();
 
+                    if (bv_info.Rows[0]["du_an_id"].ToString() != null && bv_info.Rows[0]["du_an_id"].ToString() != "")
+                    {
+                        subjectID = "";
+                        url = "post_show_details.aspx?news_id=" + Request.QueryString["news_id"] + "&projectID=" + projectID;
+                    }
+                    else if (bv_info.Rows[0]["chu_de_id"].ToString() != null && bv_info.Rows[0]["chu_de_id"].ToString() != "")
+                    {
+                        projectID = "";
+                        url = "post_show_details.aspx?news_id=" + Request.QueryString["news_id"] + "&subjectID=" + subjectID;
+                    }
 
-                    string date = functions.GetStringDatetime();
+                SQLConnectWeb.ExecuteNonQuery(sql,
+                        "@tieu_de", bv_info.Rows[0]["tieu_de"].ToString(), "@nguoi_tao", functions.LoginMemID(this), "@ngay_tao", functions.GetStringDatetime(), "@noi_dung", ASPxHtmlEditor1.Html.Replace("'", ""), "@trang_thai_id", "1", "@bai_viet_cha_id", Request.QueryString["news_id"], "@du_an_id", projectID, "@chu_de_id", subjectID, "@sort", "0");
+                    //BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(bv_info.Rows[0][BV_BAI_VIET.cl_TIEU_DE].ToString(), memid, date, "", "", ASPxHtmlEditor1.Html.Replace("'", ""), "1", Request.QueryString["news_id"], bv_info.Rows[0][BV_BAI_VIET.cl_DU_AN_ID].ToString(), bv_info.Rows[0][BV_BAI_VIET.cl_CHU_DE_ID].ToString(), "0", "0");
+                Response.Redirect(url);
 
-                    BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(bv_info.Rows[0][BV_BAI_VIET.cl_TIEU_DE].ToString(), memid, date, "", "", ASPxHtmlEditor1.Html.Replace("'", ""), "1", Request.QueryString["news_id"], bv_info.Rows[0][BV_BAI_VIET.cl_DU_AN_ID].ToString(), bv_info.Rows[0][BV_BAI_VIET.cl_CHU_DE_ID].ToString(), "0", "0");
-
-                    Response.Redirect("post_show_details.aspx?news_id=" + Request.QueryString["news_id"]);
-                }
             }
             catch (Exception ex)
             {
-               
+                //lbl_info.Text = ex.ToString();
             }
         }
 

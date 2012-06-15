@@ -22,6 +22,7 @@
                 tablename: "gridTable"
             });
         });
+        window.opener.Find(window.opener.document.getElementById("timKiem"));
     });
     $("#moi").click(function () {
         $(this).Moi();
@@ -31,7 +32,7 @@
         $(this).Xoa({
             ajax: "ajax/KH_PHIEU_XUAT_KHO_ajax3.aspx?do=xoa"
         }, null, function () {
-            loadTableAjaxKH_PHIEU_XUAT_KHO_CT('');
+            loadTableAjaxKH_PHIEU_XUAT_KHO_CT('@delete');
         });
     });
     $("#timKiem").click(function () {
@@ -58,6 +59,10 @@ function xoaontable(control, bool) {
         });
 }
 function loadTableAjaxKH_PHIEU_XUAT_KHO_CT(idkhoa, page) {
+    if (idkhoa == "@delete") {
+        window.opener.Find(window.opener.document.getElementById("timKiem"));
+        idkhoa = "";
+    }
     if (idkhoa == null) idkhoa = "";
     if (page == null) page = "1";
     $("#tableAjax_KH_PHIEU_XUAT_KHO_CT").html('<img src="images/loading-bar.gif" style="margin:0 41%;padding:10px 0 10px 0"/>');
@@ -78,7 +83,7 @@ function HH_IDSearch(obj) {
 
     $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_XUAT_KHO_ajax3.aspx?do=HH_IDSearch", {
         minChars: 0,
-        width: 350,
+        width: 350, fs
         scroll: true,
         formatItem: function (data) {
             return data[0];

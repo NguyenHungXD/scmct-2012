@@ -157,22 +157,13 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.Label lbl_baidang;
         
         /// <summary>
-        /// lbl_duan control.
+        /// lbl_bl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_duan;
-        
-        /// <summary>
-        /// lbl_sach control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_sach;
+        protected global::System.Web.UI.WebControls.Label lbl_bl;
         
         /// <summary>
         /// lbl_truycap control.

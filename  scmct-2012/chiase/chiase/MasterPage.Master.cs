@@ -40,13 +40,15 @@ namespace chiase
                 {
                     lbl_username.Text = (String)table.Rows[0][ND_THONG_TIN_DN.cl_USERNAME];
 
-                    object obj = table.Rows[0][ND_THONG_TIN_DN.cl_LASTED_ACCESS];
-                    if (obj != null && obj != DBNull.Value)
-                    {
-                        DateTime lasted_access = (DateTime)obj;
-                        lbl_lasted_access.Text = lasted_access.ToString("dd/MM/yyyy hh:mm:ss tt");
-                    }
-                    else lbl_lasted_access.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+                    lbl_lasted_access.Text = functions.getLastedAccess(table.Rows[0]["id"].ToString());
+                    //object obj = table.Rows[0][ND_THONG_TIN_DN.cl_LASTED_ACCESS];
+                    //if (obj != null && obj != DBNull.Value)
+                    //{
+                    //    DateTime lasted_access = (DateTime)obj;
+                    //    lbl_lasted_access.Text = lasted_access.ToString("dd/MM/yyyy hh:mm:ss tt");
+                    //}
+                    //else lbl_lasted_access.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
+
                     String avatar_name = Convert.IsDBNull(table.Rows[0][ND_THONG_TIN_ND.cl_AVATAR_PATH]) ? "default_img.gif" : (String)table.Rows[0][ND_THONG_TIN_ND.cl_AVATAR_PATH];
                     imgUser.ImageUrl = "Images/avatars/" + avatar_name;
                     link_member_page.NavigateUrl = "my_page.aspx?id=" + table.Rows[0]["id"];
@@ -87,7 +89,7 @@ namespace chiase
                                      FROM ND_THONG_TIN_DN a
                                     INNER JOIN  ND_THONG_TIN_ND b ON  a.MEM_ID=b.ID
                                     INNER JOIN ND_TEN_NHOM_ND c ON  b.MEM_GROUP_ID = c.GROUPID
-                                    WHERE username=@username and pwd=@pwd";
+                                    WHERE username=@username and pwd=@pwd and a.deleted is null and a.isactive_bit='Y'"; 
 
                 DataTable table = SQLConnectWeb.GetData(sql, "@username", txtUserID.Text, "@pwd", txtPassWord.Text);
 

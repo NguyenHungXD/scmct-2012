@@ -30,7 +30,7 @@ namespace chiase
                     lbl_sort.Visible = check;
 
                 if (Request.QueryString["projectID"] != null)
-                    Session["current_link"] = String.Format("<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='post_news.aspx?projectID={0}'title='Bài mới'>Bài mới</a> ", Request.QueryString["projectID"]);
+                    Session["current_link"] = String.Format("<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='project_detail.aspx?id={0}' title='Dự án'>Dự án</a> >> <a href='post_news.aspx?projectID={0}'title='Bài mới'>Bài mới</a> ", Request.QueryString["projectID"]);
                 else if (Request.QueryString["post_id"] != null)
                 {
 
@@ -125,28 +125,37 @@ namespace chiase
                     string sort="0";
                     if (check)
                         sort = txt_sort.Text;
-                    BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(txt_title.Text.Replace("'", ""), memid,
-                       date, memid,
-                       date.ToString(),
-                        ASPxHtmlEditor1.Html.Replace("'", ""), "1", "", Request.QueryString["projectID"], Request.QueryString["subjectID"], sort, "0");
-                    if (Request.QueryString["projectID"] == null)
-                    {
+                    //BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(txt_title.Text.Replace("'", ""), memid,
+                    //   date, memid,
+                    //   date.ToString(),
+                    //    ASPxHtmlEditor1.Html.Replace("'", ""), "1", "", Request.QueryString["projectID"], Request.QueryString["subjectID"], sort, "0");
+                    string projectID = Request.QueryString["projectID"];
+                    if (Request.QueryString["projectID"] == null || Request.QueryString["projectID"] == "") projectID = "";
+                    
+                    string subjectID = Request.QueryString["subjectID"];
+                    if (Request.QueryString["subjectID"] == null || Request.QueryString["subjectID"] == "") subjectID = "";
+                    
+                    string sql = @"insert into BV_BAI_VIET (tieu_de,nguoi_tao,ngay_tao,noi_dung,trang_thai_id,du_an_id,chu_de_id,sort) 
+                                               values(@tieu_de,@nguoi_tao,@ngay_tao,@noi_dung,@trang_thai_id,@du_an_id,@chu_de_id,@sort)";
+                    SQLConnectWeb.ExecuteNonQuery(sql,
+                        "@tieu_de", txt_title.Text.Replace("'", ""), "@nguoi_tao", memid, "@ngay_tao", date, "@noi_dung", ASPxHtmlEditor1.Html.Replace("'", ""), "@trang_thai_id", "1", "@du_an_id", projectID, "@chu_de_id", subjectID, "@sort", sort);
 
-                        //else
-                        //    lbl_error.Text = "Đăng bài không thành công";
-                        string sqlgetmaxID = @"select BAI_VIET_ID from BV_BAI_VIET where BAI_VIET_ID=(select max(BAI_VIET_ID) from BV_BAI_VIET where nguoi_tao=@nguoi_tao and bai_viet_cha_id is null)";
-                        DataTable dt = SQLConnectWeb.GetData(sqlgetmaxID, "@nguoi_tao", memid);
-                        Response.Redirect("post_show_details.aspx?news_id=" + dt.Rows[0]["BAI_VIET_ID"]);
-                    }
-                    else
+                    string sqlgetmaxID = @"select BAI_VIET_ID from BV_BAI_VIET where BAI_VIET_ID=(select max(BAI_VIET_ID) from BV_BAI_VIET where nguoi_tao=@nguoi_tao and bai_viet_cha_id is null)";
+                    DataTable dt = SQLConnectWeb.GetData(sqlgetmaxID, "@nguoi_tao", memid);
+                    
+                    if (Request.QueryString["subjectID"] != null && Request.QueryString["subjectID"] !="")
                     {
-                        lbl_error.Text = "Đăng bài thành công";
+                        Response.Redirect("post_show_details.aspx?news_id=" + dt.Rows[0]["BAI_VIET_ID"] + "&subjectID=" + subjectID);
+                    }
+                    else if (Request.QueryString["projectID"] != null && Request.QueryString["projectID"] != "")
+                    {
+                        Response.Redirect("post_show_details.aspx?news_id=" + dt.Rows[0]["BAI_VIET_ID"] + "&projectID=" + projectID);
                     }
                 }
             }
             catch (Exception ex)
             {
-                lbl_error.Text = "Lưu bài viết không thành công, vui lòng kiểm tra lại thông tin";
+                //lbl_error.Text = "Lưu bài viết không thành công, vui lòng kiểm tra lại thông tin";
                 
             }
         }

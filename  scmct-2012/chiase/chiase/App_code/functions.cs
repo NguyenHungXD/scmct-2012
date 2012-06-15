@@ -44,6 +44,62 @@ namespace chiase
             }
         
         }
+ public static string getLastedAccess(string userid)
+        {
+            DateTime access_date = DateTime.Now;
+            try
+            {
+            string sql = @"select access_date from ND_LOG_IN_SESSION where id=(select max(id) from ND_LOG_IN_SESSION where userid=" + userid  + " and sessionid='-1' )";
+            DataTable table = SQLConnectWeb.GetData(sql);
+            if (table.Rows.Count >0)
+            {
+                access_date = (DateTime)table.Rows[0]["access_date"];
+            }
+                return access_date.ToString("dd/MM/yyyy hh:mm:ss tt"); 
+            }catch
+            {
+                return access_date.ToString("dd/MM/yyyy hh:mm:ss tt"); 
+            }
+        }
+
+        public static string returnPoint(string userid)
+        {
+
+            double point = 0;
+            double bv_p = 1;
+            double bl_p = 0.1;
+            double like_p = 0.1;
+
+            try
+            {
+                string sql;
+                sql = @"select count(bai_viet_id) cnt from BV_BAI_VIET where bai_viet_cha_id is null and deleted is null and nguoi_tao=" + userid;
+                DataTable info_cnt_bv = SQLConnectWeb.GetTable(sql);
+                int cnt_bv = (int)info_cnt_bv.Rows[0]["cnt"];
+
+                sql = @"select count(bai_viet_id) cnt from BV_BAI_VIET where bai_viet_cha_id is not null and deleted is null and nguoi_tao=" + userid;
+                DataTable info_cnt_bl = SQLConnectWeb.GetTable(sql);
+                int cnt_bl = (int)info_cnt_bl.Rows[0]["cnt"];
+
+                sql = @"select count(usserid) cnt from BV_VOTE where usserid=" + userid;
+                DataTable info_cnt_vote = SQLConnectWeb.GetTable(sql);
+                int cnt_vote = (int)info_cnt_bl.Rows[0]["cnt"];
+
+
+                //--------Set point-----------------------------------
+                //1point/ bai viet
+                //0.1 point/binh luan
+                //0.1 pont /like (binh luan,bai viet,hinh anh, album )
+                //----------------------------------------------------
+                point = cnt_bv * bv_p + (double)cnt_bl * bl_p + (double)cnt_vote * like_p;
+
+                return string.Format("{0:#.##}", point);
+            }
+            catch
+            {
+                return point.ToString();
+            }
+        }
 
         public static Boolean checkPrivileges(string vmoduleid, string userid,string kind)
         {

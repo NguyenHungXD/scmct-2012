@@ -88,7 +88,7 @@
             }
             catch (Exception exception)
             {
-                HttpContext.Current.Response.Write("<script language='javascript'>alert('Error at function \"Exec\": " + exception.Message + "');</script>");
+               // HttpContext.Current.Response.Write("<script language='javascript'>alert('Error at function \"Exec\": " + exception.Message + "');</script>");
                 ErroMess = exception.Message;
                 num2 = -1;
             }
@@ -399,7 +399,7 @@
             catch (Exception exception)
             {
                 HttpContext.Current.Response.Write("<script language='javascript'>alert('Error at function \"s_SystemDate\": " + exception.Message + "');</script>");
-                return "";
+                return ""; 
             }
         }
 

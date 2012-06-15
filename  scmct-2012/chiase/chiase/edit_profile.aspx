@@ -43,6 +43,7 @@
         <br>
         <i>Truy cập lần cuối, <asp:Label ID="lbl_lasted_access" runat="server" ForeColor="White"></asp:Label></i><br>
         Nhóm:&nbsp<b><asp:Label ID="lbl_group_name" runat="server" Text=""></asp:Label></b>
+        <%--<asp:Label id="sum_point" runat="server" Text="0"></asp:Label>--%>
         <hr>
     </td>
     </tr>

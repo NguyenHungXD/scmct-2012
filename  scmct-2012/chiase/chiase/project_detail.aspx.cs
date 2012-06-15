@@ -16,7 +16,7 @@ namespace chiase
         {
             if (!IsPostBack)
                 display();
-            Session["current_link"] = String.Format("<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='project_detail.aspx?id={0}'title='Xem chi tiết'>Xem chi tiết</a> ", Request.QueryString["id"]);
+            Session["current_link"] = String.Format("<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='project_detail.aspx?id={0}'title='Dự án'>Dự án</a> ", Request.QueryString["id"]);
         }
         public void display()
         {
@@ -73,6 +73,9 @@ namespace chiase
                 DataRowView RowView = (DataRowView)e.Item.DataItem;
                 if (RowView == null) return;
                 long id = (long)RowView.Row[BV_BAI_VIET.cl_BAI_VIET_ID];
+
+                long project_id = (long)RowView.Row[BV_BAI_VIET.cl_DU_AN_ID];
+
                 String sql_cnt = string.Format(@"SELECT count(*) as cnt FROM BV_BAI_VIET WHERE BAI_VIET_CHA_ID={0}", id);
                 DataTable cnt = SQLConnectWeb.GetTable(sql_cnt);
                 cnt_view.Text = cnt.Rows[0]["cnt"].ToString();
@@ -83,7 +86,7 @@ namespace chiase
 
                 HyperLink cm_by = (HyperLink)e.Item.FindControl("link_cm_by");
                 Label cm_date = (Label)e.Item.FindControl("lbl_date_time");
-                post_show.NavigateUrl = string.Format("post_show_details.aspx?news_id={0}", id);
+                post_show.NavigateUrl = string.Format("post_show_details.aspx?news_id={0}&project_id={1}", id, project_id);
 
                 //HyperLink linkPostnew = (HyperLink)e.Item.FindControl("linkPostnew");
                 //linkPostnew.NavigateUrl = "post_news.aspx?projectID=" + Request.QueryString["id"];
@@ -101,7 +104,7 @@ namespace chiase
                         lasted_comment = lasted_comment.Substring(0, 30) + "...";
                     cm_link.Text = lasted_comment;
 
-                    cm_link.NavigateUrl = string.Format("post_show_details.aspx?news_id={0}", id);
+                    cm_link.NavigateUrl = string.Format("post_show_details.aspx?news_id={0}&project_id={1}", id,project_id);
 
 
                     string str_cm = lasted_cm.Rows[0]["username"].ToString();
