@@ -88,7 +88,7 @@
             }
             catch (Exception exception)
             {
-               // HttpContext.Current.Response.Write("<script language='javascript'>alert('Error at function \"Exec\": " + exception.Message + "');</script>");
+                // HttpContext.Current.Response.Write("<script language='javascript'>alert('Error at function \"Exec\": " + exception.Message + "');</script>");
                 ErroMess = exception.Message;
                 num2 = -1;
             }
@@ -180,7 +180,7 @@
                 Conn.Open();
                 command.CommandType = CommandType.Text;
                 byte[] buffer = null;
-                buffer = (byte[]) Cmd.ExecuteScalar();
+                buffer = (byte[])Cmd.ExecuteScalar();
                 Conn.Close();
                 return buffer;
             }
@@ -399,7 +399,7 @@
             catch (Exception exception)
             {
                 HttpContext.Current.Response.Write("<script language='javascript'>alert('Error at function \"s_SystemDate\": " + exception.Message + "');</script>");
-                return ""; 
+                return "";
             }
         }
 
@@ -427,6 +427,66 @@
                 return "";
             }
         }
+
+        #region Transaction
+        public static SqlCommand CreateCommandTrans(SqlConnection conn, SqlTransaction trans, string text, params object[] args)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+            if (args != null && args.Length != 0)
+            {
+                object[] argnames = new object[args.Length];
+                for (int i = 0; i < args.Length; i++)
+                {
+                    string name = "@AutoArg" + (i + 1);
+                    argnames[i] = name;
+                    cmd.Parameters.AddWithValue(name, args[i]);
+                }
+                text = string.Format(text, argnames);
+            }
+            cmd.Connection = conn;
+            cmd.Transaction = trans;
+            cmd.CommandText = text;
+            return cmd;
+        }
+        public static SqlCommand CreateCommandTrans(SqlConnection conn, string text, params object[] args)
+        {
+            if (conn == null) throw (new ArgumentNullException("conn"));
+            if (text == null) throw (new ArgumentNullException("text"));
+            return CreateCommandTrans(conn, null, text, args);
+        }
+        public static SqlCommand CreateCommandTrans(SqlTransaction trans, string text, params object[] args)
+        {
+            if (trans == null) throw (new ArgumentNullException("trans"));
+            if (text == null) throw (new ArgumentNullException("text"));
+            return CreateCommandTrans(trans.Connection, trans, text, args);
+        }
+
+        public static object ExecuteScalarTrans(SqlTransaction trans, string text, params object[] args)
+        {
+            if (text == null) throw (new ArgumentNullException("text"));
+            SqlCommand cmd = CreateCommandTrans(trans, text, args);
+            return cmd.ExecuteScalar();
+        }
+
+        public static  int ExecuteInt32Trans(SqlTransaction trans, string text, params object[] args)
+        {
+            return Convert.ToInt32(ExecuteScalarTrans(trans, text, args));
+        }
+        public static string ExecuteStringTrans(SqlTransaction trans, string text, params object[] args)
+        {
+            object obj = ExecuteScalarTrans(trans, text, args);
+            if (obj == null)
+                return null;
+            return obj.ToString();
+        }
+        public static bool ExecuteNonQueryTrans(SqlTransaction trans, string text, params object[] args)
+        {
+            if (text == null) throw (new ArgumentNullException("text"));
+            SqlCommand cmd = CreateCommandTrans(trans, text, args);
+            return cmd.ExecuteNonQuery() > 0;
+        }
+        #endregion
+
         #region from database
         public static String ConnectionString = SQLConnectWeb.GetConnectionString();
 
@@ -482,7 +542,7 @@
         {
             return SQLConnectWeb.Fill(new DataTable(), sql, parameters);
         }
-#endregion
+        #endregion
     }
 }
 

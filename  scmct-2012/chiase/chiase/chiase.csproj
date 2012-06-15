@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CuteWebUI.AjaxUploader, Version=3.0.0.0, Culture=neutral, PublicKeyToken=bc00d4b0e43ec38d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\CuteWebUI.AjaxUploader.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Data.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.SpellChecker.v11.1.Core, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Web.ASPxEditors.v11.1, Version=11.1.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -87,6 +91,7 @@
     <Content Include="contact.aspx" />
     <Content Include="contribution_product_list.aspx" />
     <Content Include="contributor_list.aspx" />
+    <Content Include="upload_multiimages.aspx" />
     <Content Include="create_access_right_for_group.aspx" />
     <Content Include="create_access_right_for_member.aspx" />
     <Content Include="create_new_allbum.aspx" />
@@ -339,6 +344,7 @@
       <DependentUpon>KH_PHIEU_XUAT_KHO_ajax3.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="App_code\FileItem.cs" />
     <Compile Include="App_code\PermissionFuctions.cs" />
     <Compile Include="categorygroupitems.aspx.cs">
       <DependentUpon>categorygroupitems.aspx</DependentUpon>
@@ -374,6 +380,13 @@
     </Compile>
     <Compile Include="contributor_list.aspx.designer.cs">
       <DependentUpon>contributor_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="upload_multiimages.aspx.cs">
+      <DependentUpon>upload_multiimages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="upload_multiimages.aspx.designer.cs">
+      <DependentUpon>upload_multiimages.aspx</DependentUpon>
     </Compile>
     <Compile Include="detail_contribution_product_list.aspx.cs">
       <DependentUpon>detail_contribution_product_list.aspx</DependentUpon>
