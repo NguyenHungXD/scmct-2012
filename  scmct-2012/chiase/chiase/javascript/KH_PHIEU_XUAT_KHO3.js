@@ -80,8 +80,37 @@ function loadTableAjaxKH_PHIEU_XUAT_KHO_CT(idkhoa, page) {
 }
 function HH_IDSearch(obj) {
 
+    var tr = obj.parentNode.parentNode;   
+    var duan = document.getElementById("DU_AN_ID");
+    var kho = document.getElementById("KHO_ID");
+    var error = document.getElementById("show_eror");
+    var khoName = document.getElementById("mkv_KHO_ID")
+    var daName = document.getElementById("mkv_DU_AN_ID")
+    var pxkctid = $("#gridTable").find("tr").eq(tr.rowIndex).find("[id=idkhoachinh]")[0];
+    var valid = "";
+    if (kho.value == "") {
+        valid = "kho xuất";
+        khoName.style.borderColor = errorColor;
 
-    $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_XUAT_KHO_ajax3.aspx?do=HH_IDSearch", {
+    } else {
+        khoName.style.borderColor = "";
+    }
+    if (duan.value == "") {
+        if (valid != "")
+            valid = valid + " và dự án";
+        else
+            valid = "dự án";
+        daName.style.borderColor = errorColor;
+    } else {
+        daName.style.borderColor = "";
+    }
+    error.innerHTML = "";
+    if (valid != "") {
+        error.innerHTML = "Bạn vui lòng chọn " + valid + " trước khi chọn phiếu hàng hóa!";
+        return;
+    }
+    $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_XUAT_KHO_ajax3.aspx?do=HH_IDSearch&sDU_AN_ID=" + duan.value + "&sKHO_ID=" + kho.value+"&sPXKCT_ID="+pxkctid.value,
+     {
         minChars: 0,
         width: 350,
         scroll: true,
@@ -104,12 +133,13 @@ function HH_IDSearch(obj) {
 }
 function PNK_CT_IDSearch(obj) {
     var tr = obj.parentNode.parentNode;
-    var hhID = tr.cells[2].childNodes[0];
+    var hhID = $("#gridTable").find("tr").eq(tr.rowIndex).find("[id=HH_ID]")[0];
     var duan = document.getElementById("DU_AN_ID");
     var kho = document.getElementById("KHO_ID");
     var error = document.getElementById("show_eror");
     var khoName = document.getElementById("mkv_KHO_ID")
     var daName = document.getElementById("mkv_DU_AN_ID")
+    var pxkctid = $("#gridTable").find("tr").eq(tr.rowIndex).find("[id=idkhoachinh]")[0];
     var valid = "";
     if (kho.value == "") {
         valid = "kho xuất";
@@ -132,7 +162,7 @@ function PNK_CT_IDSearch(obj) {
         error.innerHTML = "Bạn vui lòng chọn " + valid + " trước khi chọn phiếu nhập!";       
         return;
     }
-    $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_XUAT_KHO_ajax3.aspx?do=PNK_CT_IDSearch&sHH_ID=" + hhID.value + "&sDU_AN_ID=" + duan.value + "&sKHO_ID=" + kho.value,
+    $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_XUAT_KHO_ajax3.aspx?do=PNK_CT_IDSearch&sHH_ID=" + hhID.value + "&sDU_AN_ID=" + duan.value + "&sKHO_ID=" + kho.value+"&sPXKCT_ID="+pxkctid.value,
              {
                  minChars: 0,
                  width: 650,

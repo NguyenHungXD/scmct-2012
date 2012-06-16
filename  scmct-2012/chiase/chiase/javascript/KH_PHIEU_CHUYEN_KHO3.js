@@ -81,7 +81,29 @@ function loadTableAjaxKH_PHIEU_CHUYEN_KHO_CT(idkhoa, page) {
 }
 function HH_IDSearch(obj) {
 
-    $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=HH_IDSearch", {
+    var tr = obj.parentNode.parentNode; 
+    var kho = document.getElementById("KHO_XUAT_ID");
+    var error = document.getElementById("show_eror");
+    var khoName = document.getElementById("mkv_KHO_XUAT_ID")
+   
+    var pckctid = $("#gridTable").find("tr").eq(tr.rowIndex).find("[id=idkhoachinh]")[0];
+    var valid = "";
+    if (kho.value == "") {
+        valid = "kho xuất";
+        khoName.style.borderColor = errorColor;
+
+    } else {
+        khoName.style.borderColor = "";
+    }
+   
+    
+    error.innerHTML = "";
+    if (valid != "") {
+        error.innerHTML = "Bạn vui lòng chọn " + valid + " trước khi chọn phiếu nhập!";
+        return;
+    }
+    
+    $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=HH_IDSearch&sKHO_ID=" + kho.value+"&sPCKCT_ID="+pckctid.value, {
         minChars: 0,
         width: 350,
         scroll: true,
@@ -106,13 +128,33 @@ function HH_IDSearch(obj) {
 function PNK_CT_IDSearch(obj) {
 
     var tr = obj.parentNode.parentNode;
-    var hhID = tr.cells[2].childNodes[0];
+    var hhID = $("#gridTable").find("tr").eq(tr.rowIndex).find("[id=HH_ID]")[0];
+    
     var kho = document.getElementById("KHO_XUAT_ID");
     var error = document.getElementById("show_eror");
+    var khoName = document.getElementById("mkv_KHO_XUAT_ID")
+   
+    var pckctid = $("#gridTable").find("tr").eq(tr.rowIndex).find("[id=idkhoachinh]")[0];
+    var valid = "";
+    if (kho.value == "") {
+        valid = "kho xuất";
+        khoName.style.borderColor = errorColor;
+
+    } else {
+        khoName.style.borderColor = "";
+    }
+   
+    
     error.innerHTML = "";
+    if (valid != "") {
+        error.innerHTML = "Bạn vui lòng chọn " + valid + " trước khi chọn phiếu nhập!";
+        return;
+    }
+    
 
 
-    $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=PNK_CT_IDSearch&sHH_ID=" + hhID.value + "&sKHO_ID=" + kho.value, {
+    $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_CHUYEN_KHO_ajax3.aspx?do=PNK_CT_IDSearch&sHH_ID=" + hhID.value + "&sKHO_ID=" + kho.value+"&sPCKCT_ID="+pckctid.value,
+     {
         minChars: 0,
         width: 650,
         scroll: true,

@@ -185,13 +185,69 @@ namespace chiase
         }
         private void HH_IDSearch()
         {
-            // DataTable table = DM_HANG_HOA.GetTableAll();
-            DataTable table = SQLConnectWeb.GetTable(@"SELECT HH.ID,HH.MA_HH,HH.[NAME],HH.NHH_ID,NHH.[NAME] NHH_NAME
-                                FROM DM_HANG_HOA HH                    
-                                LEFT JOIN DM_HANG_HOA_NHOM NHH ON NHH.ID=HH.NHH_ID
-                                WHERE EXISTS(SELECT TOP 1 PNCT.PNK_CT_ID
-                                FROM KH_PHIEU_NHAP_KHO_CT PNCT 
-                                WHERE PNCT.HH_ID=HH.ID)");
+           
+            string duanID = Request.QueryString["sDU_AN_ID"];
+            string khoID = Request.QueryString["sKHO_ID"];
+            string pxct = Request.QueryString["sPXKCT_ID"];
+            string where = " where 1=1";
+            string where2 = " where 1=1";
+            string where3 = "";
+            if(!string.IsNullOrEmpty(pxct))
+                where3+=" pxct.PXK_CT_ID <> "+pxct;        
+              
+                if (!string.IsNullOrEmpty(duanID))
+                {    where += " AND pn.DU_AN_ID=" + duanID;
+                    where2 += "AND pc.DU_AN_ID="+duanID;
+                }
+                if (!string.IsNullOrEmpty(khoID))
+                { 
+                    where += " AND pn.KHO_ID=" + khoID;
+                    where2+=" AND pc.kho_nhap_id="+khoID;
+                }
+           
+            string sql = string.Format(@"SELECT DISTINCT HH.ID,HH.MA_HH,HH.[NAME],HH.NHH_ID,NHH.[NAME] NHH_NAME
+            FROM 
+            (
+            SELECT pnct.HH_ID, pnct.PNK_CT_ID,pn.MA_PNK,CONVERT (VARCHAR(10),pn.NGAY_NHAP,103) NGAY_NHAP,
+            pn.KHO_ID,pn.DU_AN_ID,N'' GHI_CHU,
+            pnct.SO_LUONG -
+            ISNULL((SELECT sum (pcct.SO_LUONG)
+            FROM KH_PHIEU_CHUYEN_KHO_CT pcct
+            WHERE pcct.PNK_CT_ID=pnct.PNK_CT_ID
+            ),0)-
+            ISNULL((SELECT sum (pxct.SO_LUONG)
+            FROM KH_PHIEU_XUAT_KHO_CT pxct
+            WHERE pxct.PNK_CT_ID=pnct.PNK_CT_ID {0}
+            ),0) SO_LUONG
+            FROM KH_PHIEU_NHAP_KHO_CT pnct
+            INNER JOIN KH_PHIEU_NHAP_KHO pn ON pn.PNK_ID = pnct.PNK_ID    
+            {1}                        
+            UNION ALL
+            SELECT pnct.HH_ID, pcct.PNK_CT_ID,pn.MA_PNK,CONVERT (VARCHAR(10),pn.NGAY_NHAP,103) NGAY_NHAP,
+            pn.KHO_ID,pn.DU_AN_ID,N'Chuyển đến',
+            SUM (pcct.SO_LUONG) SO_LUONG
+            FROM KH_PHIEU_NHAP_KHO pn
+            INNER JOIN KH_PHIEU_NHAP_KHO_CT pnct ON pnct.PNK_ID = pn.PNK_ID
+            INNER JOIN KH_PHIEU_CHUYEN_KHO_CT pcct ON pnct.PNK_CT_ID=pcct.PNK_CT_ID
+            INNER JOIN KH_PHIEU_CHUYEN_KHO pc ON pc.PCK_ID=pcct.PCK_ID
+            {2}
+            GROUP BY pcct.PNK_CT_ID,pnct.HH_ID, pn.MA_PNK,pn.MA_PNK,CONVERT (VARCHAR(10),pn.NGAY_NHAP,103) ,
+            pn.KHO_ID,pn.DU_AN_ID
+            ) abc
+            LEFT JOIN  DA_DU_AN da ON da.ID=abc.DU_AN_ID
+            LEFT JOIN KH_DM_KHO kh ON kh.ID=abc.KHO_ID
+            LEFT JOIN DM_HANG_HOA hh ON hh.ID=abc.HH_ID
+            LEFT JOIN DM_HANG_HOA_NHOM NHH ON NHH.ID=HH.NHH_ID 
+            GROUP BY abc.HH_ID, abc.PNK_CT_ID,abc.MA_PNK,abc.NGAY_NHAP,da.MA_DU_AN,kh.[NAME],abc.ghi_chu,
+            HH.ID,HH.MA_HH,HH.[NAME],HH.NHH_ID,NHH.[NAME]
+            HAVING  SUM(abc.SO_LUONG)>0",where3,where,where2);
+//            DataTable table = SQLConnectWeb.GetTable(@"SELECT HH.ID,HH.MA_HH,HH.[NAME],HH.NHH_ID,NHH.[NAME] NHH_NAME
+//                                FROM DM_HANG_HOA HH                    
+//                                LEFT JOIN DM_HANG_HOA_NHOM NHH ON NHH.ID=HH.NHH_ID
+//                                WHERE EXISTS(SELECT TOP 1 PNCT.PNK_CT_ID
+//                                FROM KH_PHIEU_NHAP_KHO_CT PNCT 
+//                                WHERE PNCT.HH_ID=HH.ID)");
+DataTable table = SQLConnectWeb.GetTable(sql);
             string html = "";
             if (table != null && table.Rows.Count > 0)
             {
@@ -240,25 +296,72 @@ namespace chiase
             string hhid = Request.QueryString["sHH_ID"];
             string duanID = Request.QueryString["sDU_AN_ID"];
             string khoID = Request.QueryString["sKHO_ID"];
+            string pxct = Request.QueryString["sPXKCT_ID"];
             string where = " where ";
+            string where2 = " where";
+            string where3 = "";
+            if (!string.IsNullOrEmpty(pxct))
+                where3 += " pxct.PXK_CT_ID <> " + pxct;
             if (string.IsNullOrEmpty(hhid))
+            {
                 where += " 1=-1";
+                where2 += " 1=-1";
+            }
             else
             {
                 where += " PNCT.HH_ID=" + hhid;
+                where2 += " PNCT.HH_ID=" + hhid;
                 if (!string.IsNullOrEmpty(duanID))
+                {
                     where += " AND pn.DU_AN_ID=" + duanID;
+                    where2 += "AND pc.DU_AN_ID=" + duanID;
+                }
                 if (!string.IsNullOrEmpty(khoID))
+                {
                     where += " AND pn.KHO_ID=" + khoID;
-
+                    where2 += " AND pc.kho_nhap_id=" + khoID;
+                }
             }
-            string sql = string.Format(@"SELECT pnct.PNK_CT_ID,pn.MA_PNK,CONVERT (VARCHAR(10),pn.NGAY_NHAP,103) NGAY_NHAP,
-            kh.[NAME] KHO_NHAP,da.MA_DU_AN, pnct.SO_LUONG
-            FROM KH_PHIEU_NHAP_KHO_CT pnct
-            INNER JOIN KH_PHIEU_NHAP_KHO pn ON pn.PNK_ID = pnct.PNK_ID
-            LEFT JOIN KH_DM_KHO kh ON kh.ID=pn.KHO_ID
-            LEFT JOIN DA_DU_AN da ON da.ID=pn.DU_AN_ID
-            {0}", where);
+            //            string sql = string.Format(@"SELECT pnct.PNK_CT_ID,pn.MA_PNK,CONVERT (VARCHAR(10),pn.NGAY_NHAP,103) NGAY_NHAP,
+            //            kh.[NAME] KHO_NHAP,da.MA_DU_AN, pnct.SO_LUONG
+            //            FROM KH_PHIEU_NHAP_KHO_CT pnct
+            //            INNER JOIN KH_PHIEU_NHAP_KHO pn ON pn.PNK_ID = pnct.PNK_ID
+            //            LEFT JOIN KH_DM_KHO kh ON kh.ID=pn.KHO_ID
+            //            LEFT JOIN DA_DU_AN da ON da.ID=pn.DU_AN_ID
+            //            {0}", where);
+            string sql = string.Format(@"SELECT abc.PNK_CT_ID,abc.MA_PNK,abc.NGAY_NHAP,da.MA_DU_AN,kh.[NAME] KHO_NHAP, SUM(abc.SO_LUONG) SO_LUONG, abc.GHI_CHU
+            FROM 
+            (
+			            SELECT pnct.PNK_CT_ID,pn.MA_PNK,CONVERT (VARCHAR(10),pn.NGAY_NHAP,103) NGAY_NHAP,
+                        pn.KHO_ID,pn.DU_AN_ID,N'' GHI_CHU,
+                        pnct.SO_LUONG -
+                        ISNULL((SELECT sum (pcct.SO_LUONG)
+                            FROM KH_PHIEU_CHUYEN_KHO_CT pcct
+                            WHERE pcct.PNK_CT_ID=pnct.PNK_CT_ID
+                            ),0)-
+                            ISNULL((SELECT sum (pxct.SO_LUONG)
+                            FROM KH_PHIEU_XUAT_KHO_CT pxct
+                            WHERE pxct.PNK_CT_ID=pnct.PNK_CT_ID {0}
+                            ),0) SO_LUONG
+                        FROM KH_PHIEU_NHAP_KHO_CT pnct
+                        INNER JOIN KH_PHIEU_NHAP_KHO pn ON pn.PNK_ID = pnct.PNK_ID   
+                        {1}       
+            UNION ALL
+            SELECT pcct.PNK_CT_ID,pn.MA_PNK,CONVERT (VARCHAR(10),pn.NGAY_NHAP,103) NGAY_NHAP,
+            pn.KHO_ID,pn.DU_AN_ID,N'Chuyển đến',
+            SUM (pcct.SO_LUONG) SO_LUONG
+            FROM KH_PHIEU_NHAP_KHO pn
+            INNER JOIN KH_PHIEU_NHAP_KHO_CT pnct ON pnct.PNK_ID = pn.PNK_ID
+            INNER JOIN KH_PHIEU_CHUYEN_KHO_CT pcct ON pnct.PNK_CT_ID=pcct.PNK_CT_ID
+            INNER JOIN KH_PHIEU_CHUYEN_KHO pc ON pc.PCK_ID=pcct.PCK_ID
+            {2}
+            GROUP BY pcct.PNK_CT_ID, pn.MA_PNK,pn.MA_PNK,CONVERT (VARCHAR(10),pn.NGAY_NHAP,103) ,
+            pn.KHO_ID,pn.DU_AN_ID
+            ) abc
+            LEFT JOIN  DA_DU_AN da ON da.ID=abc.DU_AN_ID
+            LEFT JOIN KH_DM_KHO kh ON kh.ID=abc.KHO_ID
+            GROUP BY abc.PNK_CT_ID,abc.MA_PNK,abc.NGAY_NHAP,da.MA_DU_AN,kh.[NAME],abc.ghi_chu
+            HAVING  SUM(abc.SO_LUONG)>0", where3, where, where2);
             DataTable table = SQLConnectWeb.GetTable(sql);
             string html = "";
             if (table != null)
@@ -289,8 +392,11 @@ namespace chiase
                             + "</span >"
                             + "<span style=\"margin-left:" + (step) + "px\"> - "
                              + "</span >"
-                            + "<span style=\"margin-left:" + (step) + "px\">"
+                             + "<span style=\"margin-left:" + (step) + "px\"" + (table.Rows[i]["GHI_CHU"].ToString() == "" ? "" : "-") + ">"
                             + table.Rows[i]["SO_LUONG"].ToString()
+                            + "</span >"
+                             + "<span style=\"margin-left:" + (step) + "px\">"
+                            + table.Rows[i]["GHI_CHU"].ToString()
                             + "</span >"
                             + "|" + table.Rows[i]["PNK_CT_ID"].ToString() + Environment.NewLine;
 
@@ -581,20 +687,20 @@ namespace chiase
             html += "<table class='jtable' id=\"gridTable\">";
             html += "<tr>";
             html += "<th>STT</th>";
-            html += "<th></th>"; 
+            html += "<th></th>";
             html += "<th>" + functions.GetValueLanguage("MA_HANG") + "</th>";
             html += "<th>" + functions.GetValueLanguage("TEN_HANG") + "</th>";
-            html += "<th>"+ functions.GetValueLanguage("CHUNG_LOAI") + "</th>";
-            html += "<th>"+ functions.GetValueLanguage("PHIEU_NHAP")+"</th>";
+            html += "<th>" + functions.GetValueLanguage("CHUNG_LOAI") + "</th>";
+            html += "<th>" + functions.GetValueLanguage("PHIEU_NHAP") + "</th>";
             html += "<th>" + functions.GetValueLanguage("SO_LUONG") + "</th>";
             html += "<th>" + functions.GetValueLanguage("DON_GIA") + "</th>";
             html += "<th>" + functions.GetValueLanguage("THANH_TIEN") + "</th>";
-            html += "<th>" + functions.GetValueLanguage("GHI_CHU") + "</th>";  
+            html += "<th>" + functions.GetValueLanguage("GHI_CHU") + "</th>";
 
             //html += "<th></th>";
             html += "</tr>";
             bool add = PermissionXuatKho.IsAdd(this);
-            bool search =PermissionXuatKho.IsView(this);
+            bool search = PermissionXuatKho.IsView(this);
             if (search)
             {
                 DataProcess process = s_KH_PHIEU_XUAT_KHO_CT(true);
@@ -613,7 +719,7 @@ namespace chiase
                 if (table.Rows.Count > 0)
                 {
                     paging = process.Paging("KH_PHIEU_XUAT_KHO_CT");
-                    bool delete =PermissionXuatKho.IsDelete(this);
+                    bool delete = PermissionXuatKho.IsDelete(this);
                     bool edit = PermissionXuatKho.IsEdit(this);
                     for (int i = 0; i < table.Rows.Count; i++)
                     {
