@@ -303,12 +303,20 @@ namespace chiase
         {
             try
             {
-                DataProcess process = s_KH_PHIEU_XUAT_KHO();
-                bool ok = process.Delete();
-                if (ok)
+                if (PermissionXuatKho.IsDelete(this))
                 {
-                    Response.Clear(); Response.Write(process.getData("PXK_ID"));
-                    return;
+                    DataProcess process = s_KH_PHIEU_XUAT_KHO();
+                    bool ok = process.Delete();
+                    if (ok)
+                    {
+                        Response.Clear(); Response.Write(process.getData("PXK_ID"));
+                        return;
+                    }
+                }
+                else
+                {
+                    Response.Clear();
+                    Response.Write(functions.GetValueLanguage("MssgNotPerDelete"));
                 }
             }
             catch
@@ -321,12 +329,20 @@ namespace chiase
         {
             try
             {
-                DataProcess process = s_KH_PHIEU_XUAT_KHO_CT(false);
-                bool ok = process.Delete();
-                if (ok)
+                if (PermissionXuatKho.IsDelete(this))
                 {
-                    Response.Clear(); Response.Write(process.getData("PXK_CT_ID"));
-                    return;
+                    DataProcess process = s_KH_PHIEU_XUAT_KHO_CT(false);
+                    bool ok = process.Delete();
+                    if (ok)
+                    {
+                        Response.Clear(); Response.Write(process.getData("PXK_CT_ID"));
+                        return;
+                    }
+                }
+                else
+                {
+                    Response.Clear();
+                    Response.Write(functions.GetValueLanguage("MssgNotPerDelete"));
                 }
             }
             catch
@@ -471,22 +487,38 @@ namespace chiase
                 DataProcess process = s_KH_PHIEU_XUAT_KHO();
                 if (process.getData("PXK_ID") != null && process.getData("PXK_ID") != "")
                 {
-                    bool ok = process.Update();
-                    if (ok)
+                    if (PermissionXuatKho.IsEdit(this))
                     {
-                        Response.Clear(); Response.Write(process.getData("PXK_ID"));
-                        return;
+                        bool ok = process.Update();
+                        if (ok)
+                        {
+                            Response.Clear(); Response.Write(process.getData("PXK_ID"));
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Response.Clear();
+                        Response.Write(functions.GetValueLanguage("MssgNotPerEdit"));
                     }
                 }
                 else
                 {
-                    string mp = functions.NewMaPhieuXuat();
-                    process.data("MA_PXK", mp);
-                    bool ok = process.Insert();
-                    if (ok)
+                    if (PermissionXuatKho.IsEdit(this))
                     {
-                        Response.Clear(); Response.Write(process.getData("PXK_ID"));
-                        return;
+                        string mp = functions.NewMaPhieuXuat();
+                        process.data("MA_PXK", mp);
+                        bool ok = process.Insert();
+                        if (ok)
+                        {
+                            Response.Clear(); Response.Write(process.getData("PXK_ID"));
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Response.Clear();
+                        Response.Write(functions.GetValueLanguage("MssgNotPerAdd"));
                     }
                 }
             }
@@ -502,22 +534,38 @@ namespace chiase
                 DataProcess process = s_KH_PHIEU_XUAT_KHO_CT(false);
                 if (process.getData("PXK_CT_ID") != null && process.getData("PXK_CT_ID") != "")
                 {
-                    bool ok = process.Update();
-                    if (ok)
+                    if (PermissionXuatKho.IsEdit(this))
                     {
-                        Response.Clear(); Response.Write(process.getData("PXK_CT_ID"));
-                        return;
+                        bool ok = process.Update();
+                        if (ok)
+                        {
+                            Response.Clear(); Response.Write(process.getData("PXK_CT_ID"));
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Response.Clear();
+                        Response.Write(functions.GetValueLanguage("MssgNotPerEdit"));
                     }
                 }
                 else
                 {
-                    string mp = functions.NewMaPhieuXuat();
-                    process.data("MA_PXK", mp);
-                    bool ok = process.Insert();
-                    if (ok)
+                    if (PermissionXuatKho.IsAdd(this))
                     {
-                        Response.Clear(); Response.Write(process.getData("PXK_CT_ID"));
-                        return;
+                        string mp = functions.NewMaPhieuXuat();
+                        process.data("MA_PXK", mp);
+                        bool ok = process.Insert();
+                        if (ok)
+                        {
+                            Response.Clear(); Response.Write(process.getData("PXK_CT_ID"));
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Response.Clear();
+                        Response.Write(functions.GetValueLanguage("MssgNotPerAdd"));
                     }
                 }
             }

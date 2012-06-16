@@ -243,12 +243,20 @@ namespace chiase
         {
             try
             {
-                DataProcess process = s_KH_PHIEU_NHAP_KHO();
-                bool ok = process.Delete();
-                if (ok)
+                if (PermissionNhapKho.IsDelete(this))
                 {
-                    Response.Clear(); Response.Write(process.getData("PNK_ID"));
-                    return;
+                    DataProcess process = s_KH_PHIEU_NHAP_KHO();
+                    bool ok = process.Delete();
+                    if (ok)
+                    {
+                        Response.Clear(); Response.Write(process.getData("PNK_ID"));
+                        return;
+                    }
+                }
+                else
+                {
+                    Response.Clear();
+                    Response.Write(functions.GetValueLanguage("MssgNotPerDelete"));
                 }
             }
             catch
@@ -261,12 +269,20 @@ namespace chiase
         {
             try
             {
-                DataProcess process = s_KH_PHIEU_NHAP_KHO_CT(false);
-                bool ok = process.Delete();
-                if (ok)
+                if (PermissionNhapKho.IsDelete(this))
                 {
-                    Response.Clear(); Response.Write(process.getData("PNK_CT_ID"));
-                    return;
+                    DataProcess process = s_KH_PHIEU_NHAP_KHO_CT(false);
+                    bool ok = process.Delete();
+                    if (ok)
+                    {
+                        Response.Clear(); Response.Write(process.getData("PNK_CT_ID"));
+                        return;
+                    }
+                }
+                else
+                {
+                    Response.Clear();
+                    Response.Write(functions.GetValueLanguage("MssgNotPerDelete"));
                 }
             }
             catch
@@ -408,22 +424,38 @@ namespace chiase
                 DataProcess process = s_KH_PHIEU_NHAP_KHO();
                 if (process.getData("PNK_ID") != null && process.getData("PNK_ID") != "")
                 {
-                    bool ok = process.Update();
-                    if (ok)
+                    if (PermissionNhapKho.IsEdit(this))
                     {
-                        Response.Clear(); Response.Write(process.getData("PNK_ID"));
-                        return;
+                        bool ok = process.Update();
+                        if (ok)
+                        {
+                            Response.Clear(); Response.Write(process.getData("PNK_ID"));
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Response.Clear();
+                        Response.Write(functions.GetValueLanguage("MssgNotPerEdit"));
                     }
                 }
                 else
                 {
-                    string mpn = functions.NewMaPhieuNhap();
-                    process.data("MA_PNK", mpn);
-                    bool ok = process.Insert();
-                    if (ok)
+                    if (PermissionNhapKho.IsAdd(this))
                     {
-                        Response.Clear(); Response.Write(process.getData("PNK_ID"));
-                        return;
+                        string mpn = functions.NewMaPhieuNhap();
+                        process.data("MA_PNK", mpn);
+                        bool ok = process.Insert();
+                        if (ok)
+                        {
+                            Response.Clear(); Response.Write(process.getData("PNK_ID"));
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Response.Clear();
+                        Response.Write(functions.GetValueLanguage("MssgNotPerAdd"));
                     }
                 }
             }
@@ -452,20 +484,37 @@ namespace chiase
 
                 if (process.getData("PNK_CT_ID") != null && process.getData("PNK_CT_ID") != "")
                 {
-                    bool ok = process.Update();
-                    if (ok)
+
+                    if (PermissionNhapKho.IsEdit(this))
                     {
-                        Response.Clear(); Response.Write(process.getData("PNK_CT_ID"));
-                        return;
+                        bool ok = process.Update();
+                        if (ok)
+                        {
+                            Response.Clear(); Response.Write(process.getData("PNK_CT_ID"));
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Response.Clear();
+                        Response.Write(functions.GetValueLanguage("MssgNotPerEdit"));
                     }
                 }
                 else
                 {
-                    bool ok = process.Insert();
-                    if (ok)
+                    if (PermissionNhapKho.IsEdit(this))
                     {
-                        Response.Clear(); Response.Write(process.getData("PNK_CT_ID"));
-                        return;
+                        bool ok = process.Insert();
+                        if (ok)
+                        {
+                            Response.Clear(); Response.Write(process.getData("PNK_CT_ID"));
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Response.Clear();
+                        Response.Write(functions.GetValueLanguage("MssgNotPerAdd"));
                     }
                 }
             }

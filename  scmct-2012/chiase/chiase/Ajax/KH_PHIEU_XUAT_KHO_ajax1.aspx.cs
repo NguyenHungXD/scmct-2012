@@ -162,12 +162,20 @@ namespace chiase
         {
             try
             {
-                DataProcess process = s_KH_PHIEU_XUAT_KHO();
-                bool ok = process.Delete();
-                if (ok)
+                if (PermissionXuatKho.IsDelete(this))
                 {
-                    Response.Clear(); Response.Write(process.getData("PXK_ID"));
-                    return;
+                    DataProcess process = s_KH_PHIEU_XUAT_KHO();
+                    bool ok = process.Delete();
+                    if (ok)
+                    {
+                        Response.Clear(); Response.Write(process.getData("PXK_ID"));
+                        return;
+                    }
+                }
+                else
+                {
+                    Response.Clear();
+                    Response.Write(functions.GetValueLanguage("MssgNotPerDelete"));
                 }
             }
             catch
@@ -223,7 +231,7 @@ namespace chiase
             }
             else
             {
-                Response.Write("Bạn không có quyền xem dữ liệu");
+                Response.Write(functions.GetValueLanguage("MssgNotPerView"));
                 Response.StatusCode = 500;
             }
         }
@@ -235,20 +243,37 @@ namespace chiase
                 DataProcess process = s_KH_PHIEU_XUAT_KHO();
                 if (process.getData("PXK_ID") != null && process.getData("PXK_ID") != "")
                 {
-                    bool ok = process.Update();
-                    if (ok)
+                    if (PermissionXuatKho.IsEdit(this))
                     {
-                        Response.Clear(); Response.Write(process.getData("PXK_ID"));
-                        return;
+                        bool ok = process.Update();
+                        if (ok)
+                        {
+                            Response.Clear(); Response.Write(process.getData("PXK_ID"));
+                            return;
+                        }
+                    }
+                    else
+                    {
+
+                        Response.Clear();
+                        Response.Write(functions.GetValueLanguage("MssgNotPerEdit"));
                     }
                 }
                 else
                 {
-                    bool ok = process.Insert();
-                    if (ok)
+                    if (PermissionXuatKho.IsAdd(this))
                     {
-                        Response.Clear(); Response.Write(process.getData("PXK_ID"));
-                        return;
+                        bool ok = process.Insert();
+                        if (ok)
+                        {
+                            Response.Clear(); Response.Write(process.getData("PXK_ID"));
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Response.Clear();
+                        Response.Write(functions.GetValueLanguage("MssgNotPerAdd"));
                     }
                 }
             }
@@ -277,11 +302,14 @@ namespace chiase
                     left join DA_DU_AN  D on T.DU_AN_ID=D.ID
                     left join KH_DM_LY_DO_XUAT_KHO  E on T.LY_DO_XUAT_ID=E.ID
                     left join YC_YEU_CAU  F on T.YEU_CAU_ID=F.YEU_CAU_ID
-          where " + process.sWhere());
+                where " + process.sWhere());
+                bool isDelete = PermissionXuatKho.IsDelete(this);
+                bool isEdit = PermissionXuatKho.IsEdit(this);
                 string html = "";
                 //html += process.Paging();
                 html += "<table class='jtable' id=\"gridTable\">";
                 html += "<tr>";
+                if (isDelete) html += "<th></th>";
                 html += "<th>STT</th>";
                 html += "<th>" + functions.GetValueLanguage("MA_PXK") + "</th>";
                 html += "<th>" + functions.GetValueLanguage("NGUOI_XUAT") + "</th>";
@@ -299,32 +327,38 @@ namespace chiase
                 {
                     if (table.Rows.Count > 0)
                     {
+                        string style = null;
+                        DataRow r = null;
                         for (int i = 0; i < table.Rows.Count; i++)
                         {
-                            html += "<tr style='cursor:pointer;' onclick=\"openPhieu('" + table.Rows[i]["PXK_ID"].ToString() + "')\">";
-                            html += "<td>" + table.Rows[i]["stt"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["MA_PXK"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["NX_NAME"].ToString() + "</td>";
-                            if (table.Rows[i]["NGAY_XUAT"].ToString() != "")
+                            r = table.Rows[i];
+                            style = " style='cursor:pointer;' onclick=\"openPhieu('" + r["PXK_ID"] + "') \" title=\"Click để xem " + (isEdit ? "hoặc sửa " : "") + "phiếu chuyển " + r["MA_PXK"] + "\" ";
+                            html += "<tr>";
+                            if (isDelete) html += "<td><img src=\"images/delete.png\" width=\"20\" height=\"20\" style=\"cursor:pointer\"  onclick=\"xoaontable(this,'" + r["MA_PXK"] + "')\" title=\"Xóa phiếu xuất " + r["MA_PXK"] + "\" /></td>";
+                            html += "<td" + style + ">"+ r["stt"] + "</td>";
+                            html += "<td" + style + ">"+ r["MA_PXK"] + "</td>";
+                            html += "<td" + style + ">"+ r["NX_NAME"] + "</td>";
+                            if (r["NGAY_XUAT"].ToString() != "")
                             {
-                                html += "<td>" + DateTime.Parse(table.Rows[i]["NGAY_XUAT"].ToString()).ToString("dd/MM/yyyy") + "</td>";
+                                html += "<td" + style + ">"+ DateTime.Parse(r["NGAY_XUAT"].ToString()).ToString("dd/MM/yyyy") + "</td>";
                             }
-                            else { html += "<td>" + table.Rows[i]["NGAY_XUAT"].ToString() + "</td>"; }
-                            html += "<td>" + table.Rows[i]["NGUOI_NHAN"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["XC_NAME"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["KH_NAME"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["MA_DU_AN"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["LX_NAME"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["CHUNG_TU"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["GHI_CHU"].ToString() + "</td>";
-                            html += "<td>" + table.Rows[i]["TIEU_DE"].ToString() + "</td>";
+                            else { html += "<td" + style + ">"+ r["NGAY_XUAT"] + "</td>"; }
+                            html += "<td" + style + ">"+ r["NGUOI_NHAN"] + "</td>";
+                            html += "<td" + style + ">"+ r["XC_NAME"] + "</td>";
+                            html += "<td" + style + ">"+ r["KH_NAME"] + "</td>";
+                            html += "<td" + style + ">"+ r["MA_DU_AN"] + "</td>";
+                            html += "<td" + style + ">"+ r["LX_NAME"] + "</td>";
+                            html += "<td" + style + ">"+ r["CHUNG_TU"] + "</td>";
+                            html += "<td" + style + ">"+ r["GHI_CHU"] + "</td>";
+                            html += "<td" + style + ">"+ r["TIEU_DE"] + "<input mkv='true' id='idkhoachinh' type='hidden' value='" + r["PXK_ID"].ToString() + "'/></td>";
                             html += "</tr>";
                         }
                     }
                 }
                 html += "</table>";
                 html += process.Paging();
-                Response.Clear(); Response.Write(html);
+                Response.Clear(); 
+                Response.Write(html);
             }
             else
             {

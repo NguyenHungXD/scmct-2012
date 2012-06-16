@@ -4,6 +4,8 @@
   <LANG>
     <WORD ID="MssgNotPerView" VI="Bạn không có quyền xem dữ liệu." EN=""/>
     <WORD ID="MssgNotPerAdd" VI="Bạn không có quyền thêm dữ liệu." EN=""/>
+    <WORD ID="MssgNotPerDelete" VI="Bạn không có quyền xóa dữ liệu." EN=""/>
+    <WORD ID="MssgNotPerEdit" VI="Bạn không có quyền sửa dữ liệu." EN=""/> 
     <WORD ID="addnew" VI="Tạo mới" EN="Add New" />
     <WORD ID="BV_BAI_VIET" VI="BÀI VIẾT" EN="" />
     <WORD ID="BV_DM_CHU_DE_BV" VI="DANH MỤC CHỦ ĐỀ BÀI VIẾT" EN="" />

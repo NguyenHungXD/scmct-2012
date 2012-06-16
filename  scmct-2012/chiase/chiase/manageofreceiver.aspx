@@ -27,7 +27,33 @@
             if (window.focus) { newwindow.focus() }
             return false;
         }
+        function deletePhieu(id, maphieu) {
+            if (!confirm("Bạn có chắc là muốn xóa phiếu " + maphieu + "?"))
+                return false;
+            $.mkv.loading();
+            $.ajax({ type: "GET", cache: false, dataType: "text", url: 'ajax/KH_PHIEU_NHAP_KHO_ajax1.aspx?do=xoa' + "&idkhoachinh" + "=" + id, success: function (value) {
+                if ($("#diverror").length > 0)
+                    $.mkv.closeMyerror("#diverror");
+                $.mkv.myalert("Xóa dữ liệu thành công!", 2000, "success");
+                //   $.mkv.New(opt);
+                //  $.mkv.XoaTrangData(opt);
+                //   $.mkv.ExtendtionLuu(false, opt);
+                //    $(control).attr('disabled', false);
+                $("#loadingAjax").remove();
+                //   if (!$.isNullOrEmpty(after))
+                //      after(value)
+            }, error: function (data) {
+                //  $(control).attr('disabled', false);
+                $("#loadingAjax").remove();
+                //   $(control).filter(':visible').filter(':enabled').focus();
+                if (data.responseText.length)
+                    $.mkv.myerror(data.responseText);
+                else
+                    $.mkv.myerror("Xóa dữ liệu không thành công. Dữ liệu đang sữ dụng!");
+            }
+            })
 
+        }
         function createNew() {
             pnk_ID = "";
             var contentUrl = "Receiver.aspx";

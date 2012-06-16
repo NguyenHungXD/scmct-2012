@@ -229,7 +229,7 @@
             <%= no++ %>.
                     <input name="chk" value="<%#Eval("pt_id") %>" type="checkbox" /> 
                     <asp:Label ID="lbl_edit_pt" runat="server" > | <img src="images/edit.gif" width="25" height="25" style="cursor:pointer"  onclick=return_link('<%#Eval("pt_id") %>') title='<%#Eval("ma_pt","Sửa phiếu thu {0}") %>'></asp:Label>
-
+                  
 
 
 

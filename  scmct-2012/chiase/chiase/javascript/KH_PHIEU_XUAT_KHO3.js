@@ -83,7 +83,7 @@ function HH_IDSearch(obj) {
 
     $(obj).unautocomplete().autocomplete("ajax/KH_PHIEU_XUAT_KHO_ajax3.aspx?do=HH_IDSearch", {
         minChars: 0,
-        width: 350, fs
+        width: 350,
         scroll: true,
         formatItem: function (data) {
             return data[0];
