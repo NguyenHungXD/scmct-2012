@@ -46,7 +46,7 @@
                             CloseAction="CloseButton" ContentUrl="create_new_status_project.aspx"
                             EnableViewState="False" PopupElementID="create_new_status_project"
                             PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="400px"
-                            Height="340px" FooterText=""
+                            Height="360px" FooterText=""
                             HeaderText="Tạo trạng thái dự án mới" ClientInstanceName="FeedPopupControl" 
                             EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
                             CssPostfix="Aqua" LoadingPanelImagePosition="Top" 
@@ -209,7 +209,7 @@
                 <tr>
                 <td align="right"><hr>
                 <asp:Label ID="lbl_create_new_subject" runat="server">
-                        <a style="cursor:pointer" class="btn_admin" id="create_new_subject">Tạo chủ đề</a>
+                        <a style="cursor:pointer" class="btn_admin" id="create_new_subject">Tạo chủ đề mới</a>
                         </asp:Label>
                 <asp:Label ID="lbl_search_subject" runat="server">
                         <a href="search_subject.aspx" class="btn_admin">Quản lý chủ đề</a>

@@ -94,6 +94,7 @@ color:#CC00CC;
 border:1px solid #C5DEF8;
 }
 
+
 .link_back a
 {
 color: #0099FF; text-decoration: none;font-weight:bold;     
@@ -127,28 +128,40 @@ border:1px solid #CCC;
 .btn_project_main {
 margin: 1px;
 padding: 5px 5px;
-margin:5px 8px 15px 8px;
+margin:15px 8px 20px 8px;
 box-shadow: 5px 5px 5px #666;
 -moz-box-shadow: 5px 5px 5px #666;
 -webkit-box-shadow: 5px 5px 5px #666;
 border-radius: 15px;
-background-color:#FFF;
+background:#F0F0F0 url(/images/bg_head_main1.gif) repeat-x ;
 text-decoration: none;
-color:#1589FF;
-width:920px;
+color:#000; /*B0B0B0*/
+width:915px;
 }
 
 .btn_project_main:hover {
-	background-color:#F8F8F8;
+    background: url(/images/bg_white.png) repeat;
 	text-decoration: none;
-	color:#000; /*B0B0B0*/
+	
+	color:#1589FF;
 }
 .btn_project_main:active {
 	position:relative;
 	top:1px;
 }
 
+.header_main_project
+{
+     color:#306EFF ;
+     font-size:14px;
+     font-weight:bold;
+     height:30px;
+    }
+.header_main_project:hover {
 
+    
+    /*background: url(/images/bg_white.png) repeat;*/
+    }
 .adjust_text_header
 {
     text-align:center;font-weight:bold;
@@ -262,13 +275,13 @@ font-weight:bold;
 
 padding: 1px 1px;
 margin-top:0px;
-margin-left:5px;
+margin-left:3px;
 margin-right:5px;
 margin-bottom:5px;
 width:920px;
 border: 1px solid #FFFFFF;
 border-radius: 5px;
-background: #088FDB url(./images/commentList-title.jpg) repeat-y 0 0;
+background: #088FDB;
 
 text-decoration: none;
 color:#FFFFFF;
@@ -324,19 +337,20 @@ padding: 3px;
 
 .btn_admin_default {
 margin: 0px;
-padding: 4px 10px 4px 10px;
+padding: 4px 6px 4px 6px;
 border-radius: 0px;
-background:#306EFF;
+background:#AFEEEE;
 /*background: url(/images/post_news.gif) repeat-x;*/
 border: 1px solid #FFFFFF;
-text-decoration: underline;
+text-decoration: none;
+border-radius: 5px;
 cursor:pointer;
-color:#FFF;
+color:#0099FF;
+font-size:10px;
 font-weight:bold;
 }
 .btn_admin_default:hover {
     border: 1px solid #FFFFFF;
-    
     background: url(/images/blue.png) repeat-x;
 	color:#FFFFFF;
 	font-weight:lighter;
@@ -374,10 +388,10 @@ font-weight:bold;
     }
   .post_news
   {
-       background: url(/images/post_news.gif) repeat;
-       color:#FFFFFF;
-       	padding: 10px 10px 10px 50px;
-	    font-size: 14px;
+      background: url(/images/post_news.gif) repeat;
+       color:#FFF;
+       	padding: 2px 2px 2px 2px;
+	    font-size: 13px;
 	    text-align: left;
 	    font-weight: bold;
 	    text-decoration: none;
@@ -476,9 +490,10 @@ font-weight:bold;
        background: url(/images/post_news1.gif) repeat;
        color:#000033;
        	padding: 3px 3px 3px 20px;
-	    font-size: 11px;
+	    font-size: 10px;
 	    text-align: left;
 	    text-decoration: none;
+	    
    }
 
 .txtformat {
@@ -516,20 +531,20 @@ BACKGROUND-COLOR: #ffffff";
 	margin: 0 auto;
 }
 #templatemo_wrapper {
-	width: 940px;
-	padding: 1 1px;
+	width: 933px;
+	padding: 0px 1px;
 	margin: 0 auto;
 	
 }
 #templatemo_header_main {
 	width: 100%;
-	height: 150px;
+	height: 92px;
 	margin: 0 auto;
 	margin-top: 0px;
 }
 #templatemo_header {
 	width: 935px;
-	height: 157px;
+	height: 120px;
 	padding: 0 0px;
 	margin: 0 auto;
 	margin-top: 0px;
@@ -583,28 +598,34 @@ BACKGROUND-COLOR: #ffffff";
 	float: left;
 	width: 935px;
 	display: inline-block;
-	margin-top: 60px;
+	margin-top: 58px;
 	margin-right: 0px;
-	background: url(/images/menu_bg.gif) center no-repeat;
-}
-#templatemo_login {
-    float: right;
-	display: inline-block;
-	width: 450px;
-	height: 58px;
-	margin-right:2px;
-	margin-top:2px;
-	border:1px solid #FFF;
-	background-color:#0099FF;
-	/*background: url(/images/login_bg.gif) center no-repeat;*/
+	height:28px;
+	background: url(/images/ui-bg_menu.png) center repeat-x;
+
+
 }
 #templatemo_menu ul {
-	padding: 5px;
-	margin: 10px 0;
+	padding: 0px;
+	margin: -5px 0px 0px 3px;
 	list-style: none;
 	float: left;
 	clear: left;
 }
+#templatemo_login 
+{
+    display:block; 
+    float: right;
+	width: 450px;
+	height: 58px;
+	margin-right:8px;
+	margin-top:2px;
+	border:1px solid #8296F9;
+	border-radius: 8px;
+	/*background-color:#0099FF;*/
+	/*background: url(/images/login_bg.gif) center no-repeat;*/
+}
+
 
 #templatemo_menu ul li {
 	float: left;
@@ -623,19 +644,21 @@ BACKGROUND-COLOR: #ffffff";
 	float:left;
 	color: #FFFFFF;
 	cursor: pointer;
-	font: 700 15px/24px "Arial", Helvetica, sans-serif;
+	font: 700 14px/24px "Arial", Helvetica, sans-serif;
 }
 
 #templatemo_menu ul li a span {
-	margin: 0 10px 0 -10px;
+	margin: 0px 10px 0 -10px;
 	padding: 1px 10px 5px 18px;
 	position: relative; 
 	float:left;
 }
 /*BLUE*/
 #templatemo_menu ul.blue li a.current,#templatemo_menu ul.blue li a:hover {
-	background: url(/images/blue.png) no-repeat top right;
- 	color: #FFF;
+	/*background: url(/images/blue.png) no-repeat top right;*/
+	background-color:#FFFFFF;
+	
+ 	color: #000;
 	display: inline; 
     border-radius: 5px;
 }
@@ -657,16 +680,23 @@ BACKGROUND-COLOR: #ffffff";
 	background: url(/images/templatemo_sp_box.png) no-repeat;
 
 }
+
 #search_section
 {
+    display:block;
     float:right;
-    margin-top:42px;
-    margin-right:-1px;
+    margin-top:1px;
+    margin-bottom:0px;
+    margin-left:0px;
+    border-right:0px;
+    margin-right:0px;
+    border:1px solid #0696FC;border-radius: 15px;background-color:#FFF;
+    
 }
 
 #templatemo_content {
 	clear: both;
-	width: 940px;
+	width: 933px;
 	margin-top: 5px;
 	margin-bottom: 0px;
 	padding-left: 0px;
@@ -701,10 +731,11 @@ fieldset {
     _padding-bottom : 15px;
     _display : block;
     border : 1px solid #FFFFFF;
-    /*background-color: Orange;*/
-    background-color:#2B65EC;
+    
+   background-color:#68B4F7;
+    /*background: url(/images/templatemo_footer.png) center repeat-y;*/
     margin-bottom : 15px;
-    color:White;
+    color:Black;
 }
 .header
 {
@@ -864,13 +895,13 @@ fieldset {
 /* footer */
 
 #templatemo_footer_wrapper {
-	clear: both;
+	
 	width: 100%;
 	/*background: url(images/templatemo_wrapper_bottom.jpg) bottom repeat-x;*/
 }
 
 #templatemo_footer {
-	width: 930px;
+	width: 923px;
 	padding: 0 5px 1px;
 	margin: 0 auto;
 	color: #000;
@@ -931,8 +962,8 @@ fieldset {
 
 #templatemo_copyright {
 	clear: both;
-	width: 920px;
-	padding: 10px;
+	width: 925px;
+	padding: 5px;
 	margin: 0 auto;
 	text-align: center;
 	color: #ccc;

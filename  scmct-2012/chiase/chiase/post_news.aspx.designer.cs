@@ -76,6 +76,24 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_sort;
         
         /// <summary>
+        /// RequiredFieldValidator111 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator111;
+        
+        /// <summary>
+        /// RegularExpressionValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        
+        /// <summary>
         /// lbl_post_news control.
         /// </summary>
         /// <remarks>

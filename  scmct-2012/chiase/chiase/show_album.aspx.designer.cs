@@ -13,6 +13,24 @@ namespace chiase {
     public partial class show_album {
         
         /// <summary>
+        /// ASPxPopupControl2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPopupControl.ASPxPopupControl ASPxPopupControl2;
+        
+        /// <summary>
+        /// PopupControlContentControl2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPopupControl.PopupControlContentControl PopupControlContentControl2;
+        
+        /// <summary>
         /// ASPxPopupControl1 control.
         /// </summary>
         /// <remarks>

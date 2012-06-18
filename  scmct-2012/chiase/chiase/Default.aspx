@@ -29,7 +29,7 @@
 			<ul class="ui-tabs-nav">
                 <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
-                    <li class="ui-tabs-nav-item" id='<%#Eval("ID","nav-fragment-{0}") %>'><a href='<%#Eval("ID","#fragment-{0}") %>' ><img src='<%#Eval("img_path") %>' alt="" width="80" height="45"/><span><%#Eval("title") %></span></a></li>
+                    <li class="ui-tabs-nav-item" id='<%#Eval("ID","nav-fragment-{0}") %>'><a style="text-decoration:none; " href='<%#Eval("ID","#fragment-{0}") %>' ><img src='<%#Eval("img_path") %>' alt="" width="80" height="45"/><span><%#Eval("title") %></span></a></li>
                 </ItemTemplate>
                 </asp:Repeater>
             <!--
@@ -55,33 +55,28 @@
 </div> <!-- end of templatemo_slider -->
 </asp:Content>
 <asp:Content ID="register" ContentPlaceHolderID="content_area" Runat="Server">
-
-
-
     <asp:Repeater ID="showListProject" runat="server" 
         onitemdatabound="showListProject_ItemDataBound">
         <HeaderTemplate>
         </HeaderTemplate>
         <ItemTemplate>
-            <table border="0" cellpadding=0 cellspacing=1 width="100%" class="btn_project_main">
-
-            <tr > <%--class="new_post_details"--%>
+            <table border="0"  bgcolor="#F0F0F0" cellpadding=0 cellspacing=0 width="100%" class="btn_project_main">
+            
+            <tr> <%--class="new_post_details"--%>
                     
-                    <td rowspan=2 width=40% align=center>
+                    <td rowspan=4 width=40% align=center>
                         <img src='<%#Eval("img_path","images/projects/{0}")%>' class="img_border" width="320" height="200" />
                     </td>
-
+                    <tr><td valign=bottom><p><b><font color=#306EFF size=3><br>DỰ ÁN <%#Eval("MA_DU_AN")%></font></p></td></tr>
+                    <tr>
                     <td with=5% valign=middle align="left">
-                        <b><font color=#306EFF size=3><%#Eval("MA_DU_AN")%></font></b>
-                        <br>
-                        <%#Eval("TEN_DU_AN")%>
-                        <br>
-                        Thời gian: <%#Eval("NGAY_BAT_DAU", "{0:dd/MM/yyyy }")%>-<%#Eval("NGAY_KET_THUC", "{0:dd/MM/yyyy }")%>(<%#Eval("NAME")%>)
-                        <br>
-                        <asp:HyperLink ID="link_more" runat="server" NavigateUrl='<%#Eval("ID","project_detail.aspx?id={0}")%>' title='<%#Eval("MA_DU_AN","Xem chi tiết dự án {0}")%>' Text="...xem chi tiết dự án..." style="cursor:pointer;"></asp:HyperLink>
-                    
-                        <asp:HyperLink Visible="false" ID="link_new_post" runat="server"></asp:HyperLink>
-                        <asp:Label Visible="false" ID="lbl_posted_by" runat="server" Text=""></asp:Label>
+                        <u>Tên dự án:</u> <b><%#Eval("TEN_DU_AN")%></b> <br>
+                        <u>Thời gian:</u>&nbsp;&nbsp;&nbsp<b><%#Eval("NGAY_BAT_DAU", "{0:dd/MM/yyyy }")%>- <%#Eval("NGAY_KET_THUC", "{0:dd/MM/yyyy }")%></b>(<i><%#Eval("NAME")%></i>)
+                        
+                        <p><i><%#Eval("chi_tiets")%>...<asp:HyperLink forecolor="Green" ID="link_more" runat="server" NavigateUrl='<%#Eval("ID","project_detail.aspx?id={0}")%>' title='<%#Eval("MA_DU_AN","Xem chi tiết dự án {0}")%>' Text="xem chi tiết" style="cursor:pointer;"></asp:HyperLink></i></p>
+                        <hr>
+<%--                        <asp:HyperLink Visible="false" ID="link_new_post" runat="server"></asp:HyperLink>
+                        <asp:Label Visible="false" ID="lbl_posted_by" runat="server" Text=""></asp:Label>--%>
                     
                     </td>
 
@@ -96,7 +91,7 @@
                     <table cellpadding="2" cellspacing="0" border="0" width="100%">
                     <tr>
                     <td>
-                    <hr>
+
                     </td>
                     </tr>
                     <tr>
@@ -141,7 +136,9 @@
                     <table cellpadding=0 cellspacing=0 border=0><tr><td width=5%><a title="Thích dự án" style="cursor:pointer" onclick=like_post(<%# Eval("ID")%>,<%#Eval("liked")%>,'<%#Eval("ID","div{0}")%>')><img src="images/like.gif" width="20" height="15"></td><td id='<%#Eval("ID","div{0}")%>'>(<%#Eval("liked")%>)</td></tr></table>
                     </td>
                     <td colspan=2 align="right">
-                    <a class="btn_admin_default" href="<%#Eval("ID","request.aspx?id={0}")%>" >Tặng sách</a><a class="btn_admin_default" id='<%#Eval("id","divpopup{0}") %>'>Tham gia dự án</a><a class="btn_admin_default" href='<%#Eval("ID","post_news.aspx?projectID={0}")%>' >Viết bài</a><a class="btn_admin_default" href='<%#Eval("id","show_album.aspx?projectid={0}") %>' >Hình ảnh</a>
+
+                    <a class="btn_admin_default" href="<%#Eval("ID","request.aspx?id={0}")%>" >Quyên góp cho dự án</a><a class="btn_admin_default" id='<%#Eval("id","divpopup{0}") %>'>Tham gia dự án</a><a class="btn_admin_default" href='<%#Eval("ID","post_news.aspx?projectID={0}&types_id=5")%>'>Cảm nhận</a><a class="btn_admin_default" href='<%#Eval("id","show_album.aspx?projectid={0}") %>' >Hình ảnh dự án</a>&nbsp
+                    
                     <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" ContentUrl='<%#Eval("id","join_project.aspx?id={0}")%>'
                     AllowDragging="True" AllowResize="True"
                             CloseAction="CloseButton" 

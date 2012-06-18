@@ -21,7 +21,7 @@ namespace chiase
                 
                display();
                Session["current"] = "1"; //[1.Trang chu 2.Dien Dan 3.Hinh Anh 4.Gui Yeu Cau 5.Gioi Thieu 6.Lien He 7.Quan Tri]
-               Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a>";
+               Session["current_link"] = ">> <a href='default.aspx' title='Trang chủ'>Trang chủ</a>";
                
             }
         }
@@ -30,9 +30,9 @@ namespace chiase
         {
             try
             {
-                String sql = @"select a.*,b.name 
+                String sql = @"select a.*,replace(replace(substring(a.chi_tiet,0,90),'<p>',''),'</p>','') chi_tiets,b.name 
                             from da_du_an a 
-                            inner join DA_DM_TRANG_THAI_DU_AN b on a.TRANG_THAI_ID = B.ID where b.id in (2,3) and a.Enable_bit='Y' order by b.id";
+                            inner join DA_DM_TRANG_THAI_DU_AN b on a.TRANG_THAI_ID = B.ID where b.id in (2,3) and a.Enable_bit='Y' order by sort,b.id";
                 DataTable table = SQLConnectWeb.GetData(sql);
 
                 showListProject.DataSource = table;

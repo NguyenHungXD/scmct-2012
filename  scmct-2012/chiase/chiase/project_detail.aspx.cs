@@ -29,7 +29,7 @@ namespace chiase
                 DataTable table = SQLConnectWeb.GetData(sql, "@v_id", Request.QueryString["id"]);
 
                 lbl_post_new.Visible = functions.ValidateUserLogin(functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this));
-                linkPostnew.NavigateUrl = "post_news.aspx?projectID=" + Request.QueryString["id"];
+                linkPostnew.NavigateUrl = "post_news.aspx?subjectID=" + Request.QueryString["id"] + "&types_id=5";
                 
                 if (table.Rows.Count > 0)
                 {
@@ -38,7 +38,7 @@ namespace chiase
                     lbl_maduan.Text = (String)table.Rows[0]["MA_DU_AN"];
                     Int64 book = (Int64)table.Rows[0]["BOOK"];
                     lbl_book.Text = book.ToString();
-                    lbl_ghichu.Text = (String)table.Rows[0]["GHI_CHU"];
+                    //lbl_ghichu.Text = (String)table.Rows[0]["GHI_CHU"];
                     lbl_chitiet.Text = (String)table.Rows[0]["CHI_TIET"];
                     lbl_trangthai.Text= (String)table.Rows[0]["NAME"];
                     DateTime start_date = (DateTime)table.Rows[0]["ngay_bat_dau"];
@@ -47,11 +47,13 @@ namespace chiase
                     lbl_ketthuc.Text = end_date.ToString("dd/MM/yyyy");
 
                     //nvdat02/04/12 : Get posted_by field --commented-out and replace
-                    String sql_show_post = string.Format(@"SELECT a.*,b.USERNAME,case when c.avatar_path is null then 'default_img.gif' else c.avatar_path end as avatar_path
-                         FROM BV_BAI_VIET a
-                        INNER JOIN  ND_THONG_TIN_DN b ON  a.NGUOI_TAO=b.MEM_ID
-                        INNER JOIN ND_THONG_TIN_ND c ON a.NGUOI_TAO = c.ID
-                        WHERE DU_AN_ID={0} and BAI_VIET_CHA_ID IS NULL", Request.QueryString["id"]);
+//                    String sql_show_post = string.Format(@"SELECT a.*,b.USERNAME,case when c.avatar_path is null then 'default_img.gif' else c.avatar_path end as avatar_path
+//                         FROM BV_BAI_VIET a
+//                        INNER JOIN  ND_THONG_TIN_DN b ON  a.NGUOI_TAO=b.MEM_ID
+//                        INNER JOIN ND_THONG_TIN_ND c ON a.NGUOI_TAO = c.ID
+//                        WHERE DU_AN_ID={0} and BAI_VIET_CHA_ID IS NULL", Request.QueryString["id"]);
+                    //DataTable baiviet = SQLConnectWeb.GetTable(sql_show_post);
+                    string sql_show_post = String.Format(@"exec SP_DS_BAI_VIET_THEO_DU_AN {0}", Request.QueryString["id"]);
                     DataTable baiviet = SQLConnectWeb.GetTable(sql_show_post);
 
                     showListPost.DataSource = baiviet;
@@ -74,7 +76,8 @@ namespace chiase
                 if (RowView == null) return;
                 long id = (long)RowView.Row[BV_BAI_VIET.cl_BAI_VIET_ID];
 
-                long project_id = (long)RowView.Row[BV_BAI_VIET.cl_DU_AN_ID];
+                long subjectID = (long)RowView.Row["du_an_id"];
+                
 
                 String sql_cnt = string.Format(@"SELECT count(*) as cnt FROM BV_BAI_VIET WHERE BAI_VIET_CHA_ID={0}", id);
                 DataTable cnt = SQLConnectWeb.GetTable(sql_cnt);
@@ -86,7 +89,7 @@ namespace chiase
 
                 HyperLink cm_by = (HyperLink)e.Item.FindControl("link_cm_by");
                 Label cm_date = (Label)e.Item.FindControl("lbl_date_time");
-                post_show.NavigateUrl = string.Format("post_show_details.aspx?news_id={0}&project_id={1}", id, project_id);
+                post_show.NavigateUrl = string.Format("post_show_details.aspx?news_id={0}&subjectID={1}&types_id=5", id, subjectID);
 
                 //HyperLink linkPostnew = (HyperLink)e.Item.FindControl("linkPostnew");
                 //linkPostnew.NavigateUrl = "post_news.aspx?projectID=" + Request.QueryString["id"];
@@ -104,11 +107,12 @@ namespace chiase
                         lasted_comment = lasted_comment.Substring(0, 30) + "...";
                     cm_link.Text = lasted_comment;
 
-                    cm_link.NavigateUrl = string.Format("post_show_details.aspx?news_id={0}&project_id={1}", id,project_id);
+                    cm_link.NavigateUrl = string.Format("post_show_details.aspx?news_id={0}&subjectID={1}&types_id=5", id, subjectID);
 
-
-                    string str_cm = lasted_cm.Rows[0]["username"].ToString();
-                    cm_by.Text = str_cm;
+                    Label cm_text = (Label)e.Item.FindControl("lbl_create");
+                    //string str_cm = ;
+                    cm_text.Text = "Trả lời bởi, ";
+                    cm_by.Text = lasted_cm.Rows[0]["username"].ToString();
                     cm_by.NavigateUrl = string.Format("user_info.aspx?user_name={0}", lasted_cm.Rows[0]["username"]);
                     DateTime created_date = (DateTime)lasted_cm.Rows[0]["ngay_tao"];
                     cm_date.Text = created_date.ToString("dd/MM/yyyy hh:mm:ss tt");
@@ -155,6 +159,7 @@ namespace chiase
             }
             catch (Exception ex)
             {
+                lbl_book.Text = ex.ToString();
             }
         }
 

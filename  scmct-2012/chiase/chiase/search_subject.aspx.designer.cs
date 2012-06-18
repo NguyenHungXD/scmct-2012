@@ -67,6 +67,15 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.DropDownList dropd_status;
         
         /// <summary>
+        /// dropd_project_type control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dropd_project_type;
+        
+        /// <summary>
         /// lbl_search_subject control.
         /// </summary>
         /// <remarks>

@@ -132,7 +132,7 @@ namespace chiase
                                         inner join BV_DM_TRANG_THAI_BAI_VIET b on a.trang_thai_id = b.id
                                         inner join ND_THONG_TIN_ND c on c.id = a.nguoi_tao
                                         left join BV_DM_CHU_DE_BV d on d.id = a.chu_de_id
-                                        left join DA_DU_AN e on e.id = a.du_an_id" + sWhere;
+                                        left join DA_DU_AN e on e.id = a.chu_de_id " + sWhere;
                                         //where a.bai_viet_cha_id is null and a.tieu_de like N'" + vTitle + "' and a.noi_dung like N'" + vDesc + "' and a.trang_thai_id like N'" + vStatus + "' and c.name like N'" + vCreated_by + "'";
 
                 DataTable table_request = SQLConnectWeb.GetData(sql);

@@ -167,6 +167,15 @@
                 </asp:DropDownList>
         </td>
         </tr>
+        <tr>
+        <td>
+        Loại chủ đề:
+        </td>
+        <td>
+                        <asp:DropDownList ID="dropd_project_type" runat="server" Width="250px" Height="25px">
+                </asp:DropDownList>
+        </td>
+        </tr>
         <tr><td colspan=5><hr></td></tr>
         <tr>
         <td>&nbsp</td><td colspan="3">&nbsp
@@ -212,8 +221,8 @@
         <tr bgcolor='#<%# Eval("bgcolors")%>'>
                 <td valign="middle" align="center">
             <%=vNo++ %>. 
-            <input name="chk" value="<%#Eval("id") %>" type="checkbox" /><asp:Label ID="lbl_edit_subject"
-                runat="server" > | <a style=cursor:pointer title='Sửa yêu cầu' onclick=update_request('<%#Eval("id") %>')><img src=images/edit.gif width=20 height=20 alt='Cập nhật chủ đề'></asp:Label> 
+            <input name="chk" value="<%#Eval("chu_de_id") %>" type="checkbox" /><asp:Label ID="lbl_edit_subject"
+                runat="server" > | <a style=cursor:pointer title='Sửa chủ đề' onclick=update_request('<%#Eval("chu_de_id") %>')><img src=images/edit.gif width=20 height=20 alt='Cập nhật chủ đề'></asp:Label> 
         </td>
         <td>
             <%# Eval("title")%>

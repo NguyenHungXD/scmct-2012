@@ -91,7 +91,6 @@
     <Content Include="contact.aspx" />
     <Content Include="contribution_product_list.aspx" />
     <Content Include="contributor_list.aspx" />
-    <Content Include="upload_multiimages.aspx" />
     <Content Include="create_access_right_for_group.aspx" />
     <Content Include="create_access_right_for_member.aspx" />
     <Content Include="create_new_allbum.aspx" />
@@ -153,6 +152,7 @@
     <Content Include="manageoftransfer.aspx" />
     <Content Include="member_list_project.aspx" />
     <Content Include="my_page.aspx" />
+    <Content Include="news.aspx" />
     <Content Include="phieu_chi.aspx" />
     <Content Include="phieu_chi_view.aspx" />
     <Content Include="phieu_thu.aspx" />
@@ -257,6 +257,7 @@
     <Content Include="update_view.aspx" />
     <Content Include="uploads.aspx" />
     <Content Include="upload_images.aspx" />
+    <Content Include="upload_multiimages.aspx" />
     <Content Include="user_info.aspx" />
     <Content Include="view_request.aspx" />
     <Content Include="Web.config">
@@ -381,13 +382,6 @@
     <Compile Include="contributor_list.aspx.designer.cs">
       <DependentUpon>contributor_list.aspx</DependentUpon>
     </Compile>
-    <Compile Include="upload_multiimages.aspx.cs">
-      <DependentUpon>upload_multiimages.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="upload_multiimages.aspx.designer.cs">
-      <DependentUpon>upload_multiimages.aspx</DependentUpon>
-    </Compile>
     <Compile Include="detail_contribution_product_list.aspx.cs">
       <DependentUpon>detail_contribution_product_list.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -485,6 +479,13 @@
     </Compile>
     <Compile Include="manageoftransfer.aspx.designer.cs">
       <DependentUpon>manageoftransfer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="news.aspx.cs">
+      <DependentUpon>news.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="news.aspx.designer.cs">
+      <DependentUpon>news.aspx</DependentUpon>
     </Compile>
     <Compile Include="project_manage_reports.aspx.cs">
       <DependentUpon>project_manage_reports.aspx</DependentUpon>
@@ -872,6 +873,13 @@
     </Compile>
     <Compile Include="upload_images.aspx.designer.cs">
       <DependentUpon>upload_images.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="upload_multiimages.aspx.cs">
+      <DependentUpon>upload_multiimages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="upload_multiimages.aspx.designer.cs">
+      <DependentUpon>upload_multiimages.aspx</DependentUpon>
     </Compile>
     <Compile Include="user_info.aspx.cs">
       <DependentUpon>user_info.aspx</DependentUpon>

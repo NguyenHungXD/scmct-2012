@@ -13,6 +13,60 @@ namespace chiase {
     public partial class forum {
         
         /// <summary>
+        /// ASPxPopupControl4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPopupControl.ASPxPopupControl ASPxPopupControl4;
+        
+        /// <summary>
+        /// PopupControlContentControl4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPopupControl.PopupControlContentControl PopupControlContentControl4;
+        
+        /// <summary>
+        /// lbl_create_new_subject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_create_new_subject;
+        
+        /// <summary>
+        /// ASPxPopupControl3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPopupControl.ASPxPopupControl ASPxPopupControl3;
+        
+        /// <summary>
+        /// PopupControlContentControl3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPopupControl.PopupControlContentControl PopupControlContentControl3;
+        
+        /// <summary>
+        /// showListNews control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater showListNews;
+        
+        /// <summary>
         /// show_subject control.
         /// </summary>
         /// <remarks>

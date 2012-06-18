@@ -27,6 +27,28 @@ namespace chiase
                 }
                 else
                 {
+                    if (Request.QueryString["types_id"] == "1")
+                    {
+                        Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='forum.aspx' title='Diễn đàn'>Diễn đàn</a> ";
+                    }
+                    else if (Request.QueryString["types_id"] == "2")
+                    {
+                        Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='news.aspx' title='Tin tức'>Tin tức</a> ";
+                    } 
+                    else if (Request.QueryString["types_id"] == "5")
+                    {
+                        Session["current_link"] = String.Format("<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='project_detail.aspx?id={0}'title='Dự án'>Dự án</a> ", Request.QueryString["id"]);
+                    }
+                    else if(Request.QueryString["types_id"] == "3")
+                    {
+                        Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='about.aspx' title='Giới thiệu'>Giới thiệu</a> ";
+                    }
+                    else if (Request.QueryString["types_id"] == "4")
+                    {
+                        Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='help.aspx' title='Trợ giúp'>Trợ giúp</a> ";
+                    }
+
+
                     if (functions.ValidateUserLogin(functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this)))
                     {
                         lbl_comment.Visible = true;
@@ -73,8 +95,6 @@ namespace chiase
                 SQLConnectWeb.ExecuteNonQuery(sql_view,
                         "@BAI_VIET_ID", Request.QueryString["news_id"]);
 
-                
-
             }
             catch (Exception ex)
             {
@@ -107,10 +127,16 @@ namespace chiase
                 showList_comment.DataBind();
 
                 HyperLink linkPostNew = (HyperLink)e.Item.FindControl("linkPostnew");
-                if (Request.QueryString["subjectID"] != null && Request.QueryString["subjectID"] != "")
-                    linkPostNew.NavigateUrl = "post_news.aspx?subjectID=" + Request.QueryString["subjectID"];
-                else if (Request.QueryString["project_id"] != null && Request.QueryString["subjectID"] != "")
-                    linkPostNew.NavigateUrl = "post_news.aspx?projectID=" + Request.QueryString["project_id"];
+                linkPostNew.NavigateUrl = "post_news.aspx?types_id=" + Request.QueryString["types_id"] + "&subjectID=" + Request.QueryString["subjectID"];
+                HyperLink linkEdit = (HyperLink)e.Item.FindControl("linkEdit");
+                linkEdit.NavigateUrl = "post_news.aspx?post_id=" + id.ToString() +"&types_id=" + Request.QueryString["types_id"] + "&subjectID=" + Request.QueryString["subjectID"];
+
+                //<a class="btn" style="cursor:pointer" href="<%#Eval("BAI_VIET_ID","post_news.aspx?post_id={0}")%>">
+
+                //if (Request.QueryString["subjectID"] != null && Request.QueryString["subjectID"] != "")
+                //    linkPostNew.NavigateUrl = "post_news.aspx?subjectID=" + Request.QueryString["subjectID"];
+                //else if (Request.QueryString["project_id"] != null && Request.QueryString["subjectID"] != "")
+                //    linkPostNew.NavigateUrl = "post_news.aspx?projectID=" + Request.QueryString["project_id"];
 
                 //Total Post
                 Label lbl_post_new = (Label)e.Item.FindControl("lbl_post_new");
@@ -119,15 +145,28 @@ namespace chiase
 
                 if (functions.ValidateUserLogin(functions.LoginMemID(this), functions.LoginSession(this), functions.LoginIPaddress(this)))
                 {
-                    if (functions.checkOwnSection(functions.LoginMemID(this), id.ToString(), "BV_BAI_VIET", "NGUOI_TAO", "BAI_VIET_ID") || functions.checkPrivileges("22", functions.LoginMemID(this), "E"))
+                    if (functions.checkOwnSection(functions.LoginMemID(this), id.ToString(), "BV_BAI_VIET", "NGUOI_TAO", "BAI_VIET_ID") || functions.checkPrivileges("22", functions.LoginMemID(this), "E")) //Own post can edit/delete the post
                     {check = true;}
-                    lbl_post_new.Visible = true;
+
+                    if (Request.QueryString["types_id"] == "2" || Request.QueryString["types_id"] == "3" || Request.QueryString["types_id"] == "4") //Private: Can create new post if you have permition to create a new subject/or news
+                    {
+                        if (functions.checkPrivileges("22", functions.LoginMemID(this), "E") || functions.checkPrivileges("20", functions.LoginMemID(this), "C")) 
+                            lbl_post_new.Visible = true;
+                    }
+                    else if (Request.QueryString["types_id"] == "1" || Request.QueryString["types_id"] == "5" ) //Public : Everyone can create a new post for any project or forum
+                    {
+                        lbl_post_new.Visible = true;
+                    }
+
+
                 }else
                 {
                     lbl_post_new.Visible = false;
                 }
+                    //Dont move this line to another place. Thanks
                     lbl_edit_post.Visible = check;
                     lbl_del_post.Visible = check;
+                   //End comment
             
             }
             catch (Exception ex)
@@ -142,31 +181,47 @@ namespace chiase
             try
             {
 
+                string sql_info = @"select * from BV_BAI_VIET where BAI_VIET_ID="+Request.QueryString["news_id"];
+                DataTable bv_info = SQLConnectWeb.GetTable(sql_info);
+                //DataTable bv_info = BV_BAI_VIET.GetTableAll("BAI_VIET_ID=" + Request.QueryString["news_id"]);
 
 
-
-
-                    DataTable bv_info = BV_BAI_VIET.GetTableAll("BAI_VIET_ID=" + Request.QueryString["news_id"]);
-                    string sql = @"insert into BV_BAI_VIET (tieu_de,nguoi_tao,ngay_tao,noi_dung,trang_thai_id,bai_viet_cha_id,du_an_id,chu_de_id,sort) 
-                                               values(@tieu_de,@nguoi_tao,@ngay_tao,@noi_dung,@trang_thai_id,@bai_viet_cha_id,@du_an_id,@chu_de_id,@sort)";
-
+                    string subjectID = "";
+                    if (Request.QueryString["types_id"] == "5")
+                    {
+                        subjectID = bv_info.Rows[0]["du_an_id"].ToString();
+                        string sql = @"insert into BV_BAI_VIET (tieu_de,nguoi_tao,ngay_tao,noi_dung,trang_thai_id,bai_viet_cha_id,du_an_id,sort) 
+                                               values(@tieu_de,@nguoi_tao,@ngay_tao,@noi_dung,@trang_thai_id,@bai_viet_cha_id,@du_an_id,@sort)";
+                        SQLConnectWeb.ExecuteNonQuery(sql,
+                                "@tieu_de", bv_info.Rows[0]["tieu_de"].ToString(), "@nguoi_tao", functions.LoginMemID(this), "@ngay_tao", functions.GetStringDatetime(), "@noi_dung", ASPxHtmlEditor1.Html.Replace("'", ""), "@trang_thai_id", "1", "@bai_viet_cha_id", Request.QueryString["news_id"], "@du_an_id", subjectID, "@sort", "0");
+                    }
+                    else
+                    {
+                        subjectID = bv_info.Rows[0]["chu_de_id"].ToString();
+                        string sql = @"insert into BV_BAI_VIET (tieu_de,nguoi_tao,ngay_tao,noi_dung,trang_thai_id,bai_viet_cha_id,chu_de_id,sort) 
+                                               values(@tieu_de,@nguoi_tao,@ngay_tao,@noi_dung,@trang_thai_id,@bai_viet_cha_id,@chu_de_id,@sort)";
+                        SQLConnectWeb.ExecuteNonQuery(sql,
+                                "@tieu_de", bv_info.Rows[0]["tieu_de"].ToString(), "@nguoi_tao", functions.LoginMemID(this), "@ngay_tao", functions.GetStringDatetime(), "@noi_dung", ASPxHtmlEditor1.Html.Replace("'", ""), "@trang_thai_id", "1", "@bai_viet_cha_id", Request.QueryString["news_id"], "@chu_de_id", subjectID, "@sort", "0");
+                    }
+                
+                
                     string url = "";
-                    string projectID = bv_info.Rows[0]["du_an_id"].ToString();
-                    string subjectID = bv_info.Rows[0]["chu_de_id"].ToString();
+                    //string projectID = bv_info.Rows[0]["du_an_id"].ToString();
+                    //string subjectID = bv_info.Rows[0]["chu_de_id"].ToString();
 
-                    if (bv_info.Rows[0]["du_an_id"].ToString() != null && bv_info.Rows[0]["du_an_id"].ToString() != "")
-                    {
-                        subjectID = "";
-                        url = "post_show_details.aspx?news_id=" + Request.QueryString["news_id"] + "&projectID=" + projectID;
-                    }
-                    else if (bv_info.Rows[0]["chu_de_id"].ToString() != null && bv_info.Rows[0]["chu_de_id"].ToString() != "")
-                    {
-                        projectID = "";
-                        url = "post_show_details.aspx?news_id=" + Request.QueryString["news_id"] + "&subjectID=" + subjectID;
-                    }
+                    //if (bv_info.Rows[0]["du_an_id"].ToString() != null && bv_info.Rows[0]["du_an_id"].ToString() != "")
+                    //{
+                    //    subjectID = "";
+                    url = "post_show_details.aspx?news_id=" + Request.QueryString["news_id"] + "&subjectID=" + subjectID + "&types_id=" + Request.QueryString["types_id"];
+                    //}
+                    //else if (bv_info.Rows[0]["chu_de_id"].ToString() != null && bv_info.Rows[0]["chu_de_id"].ToString() != "")
+                    //{
+                    //    projectID = "";
+                    //    url = "post_show_details.aspx?news_id=" + Request.QueryString["news_id"] + "&subjectID=" + subjectID;
+                    //}
 
-                SQLConnectWeb.ExecuteNonQuery(sql,
-                        "@tieu_de", bv_info.Rows[0]["tieu_de"].ToString(), "@nguoi_tao", functions.LoginMemID(this), "@ngay_tao", functions.GetStringDatetime(), "@noi_dung", ASPxHtmlEditor1.Html.Replace("'", ""), "@trang_thai_id", "1", "@bai_viet_cha_id", Request.QueryString["news_id"], "@du_an_id", projectID, "@chu_de_id", subjectID, "@sort", "0");
+                //SQLConnectWeb.ExecuteNonQuery(sql,
+                //        "@tieu_de", bv_info.Rows[0]["tieu_de"].ToString(), "@nguoi_tao", functions.LoginMemID(this), "@ngay_tao", functions.GetStringDatetime(), "@noi_dung", ASPxHtmlEditor1.Html.Replace("'", ""), "@trang_thai_id", "1", "@bai_viet_cha_id", Request.QueryString["news_id"],"@chu_de_id", subjectID, "@sort", "0");
                     //BV_BAI_VIET bv = BV_BAI_VIET.Insert_Object(bv_info.Rows[0][BV_BAI_VIET.cl_TIEU_DE].ToString(), memid, date, "", "", ASPxHtmlEditor1.Html.Replace("'", ""), "1", Request.QueryString["news_id"], bv_info.Rows[0][BV_BAI_VIET.cl_DU_AN_ID].ToString(), bv_info.Rows[0][BV_BAI_VIET.cl_CHU_DE_ID].ToString(), "0", "0");
                 Response.Redirect(url);
 

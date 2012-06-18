@@ -108,9 +108,9 @@
 
         <asp:TextBox ID="txt_sort" runat="server"  class="txtformat" Width="74px" 
             Height="22px"></asp:TextBox>
-
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator111" ControlToValidate="txt_sort" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Nhập thứ tự sắp xếp"></asp:RequiredFieldValidator>
         </asp:Label>
-
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_sort" ValidationExpression="^\d+$" runat="server" ErrorMessage=" Sắp xếp là số"></asp:RegularExpressionValidator>
 
             </td>
     </tr>

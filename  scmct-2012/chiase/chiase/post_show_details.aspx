@@ -84,10 +84,10 @@
     
 <ItemTemplate>
     <tr class="post_news">
-    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td><img src="images/news.png" width=25 height=20>&nbsp<%#Eval("tieu_de")%></td><td align="right"> 
+    <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr><td valign=bottom><img src="images/news.png" width=25 height=18>&nbsp<%#Eval("tieu_de")%></td><td align="right"> 
         
         <asp:Label ID="lbl_post_new" runat="server" ><asp:HyperLink class="btn" style="cursor:pointer" ID="linkPostnew" runat="server">  <img src="images/post_new.png" width="20" height="20"> Bài mới</asp:HyperLink> </asp:Label>  
-        <asp:Label ID="lbl_edit_post" runat="server"> | <a class="btn" style="cursor:pointer" href="<%#Eval("BAI_VIET_ID","post_news.aspx?post_id={0}")%>"><img src="images/edit_post.png" width="20" height="20">  Sửa bài</a> </asp:Label>  <asp:Label ID="lbl_del_post" runat="server"> | <a class="btn" style="cursor:pointer" onclick=deletes('<%#Eval("BAI_VIET_ID")%>') ><img src="images/del_post.png" width="20" height="20"> Xóa bài</a></asp:Label></td><tr></table> </td></tr>
+        <asp:Label ID="lbl_edit_post" runat="server"> | <asp:HyperLink class="btn" style="cursor:pointer" ID="linkEdit" runat="server"> <img src="images/edit_post.png" width="20" height="20">  Sửa bài</asp:HyperLink> </asp:Label>  <asp:Label ID="lbl_del_post" runat="server"> | <a class="btn" style="cursor:pointer" onclick=deletes('<%#Eval("BAI_VIET_ID")%>') ><img src="images/del_post.png" width="20" height="20"> Xóa bài</a></asp:Label></td><tr></table> </td></tr>
     
     <tr class="post_news_desc">
         <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr>
@@ -142,7 +142,7 @@
     </tr>
     
     <tr>
-    <td><table border=0 cellpadding=3 cellspacing=3 width=100% bgcolor=white><tr><td><%#Eval("noi_dung")%></td></tr></table></td>
+    <td><table border=0 cellpadding=3 cellspacing=3 width=100% bgcolor=#F8F8F5><tr><td><%#Eval("noi_dung")%></td></tr></table></td>
     </tr>
     <tr class="post_news_desc">
         <td><table border=0 cellpadding=0 cellspacing=3 width=100%><tr>
@@ -193,8 +193,6 @@
                         <tr>
                         <td colspan=2>
                             <asp:Image style="border-radius: 5px;" ID="user_img" runat="server" ImageUrl='<%#Eval("avatar_path", "images/avatars/{0}")%>' Width="40" Height="40" /><br>
-                           
-                           
                             <a style="cursor:pointer;" ID='<%#Eval("BAI_VIET_ID", "username{0}") %>'><font color="blue"><%#Eval("username") %></font></a>
                    <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" 
                     AllowDragging="True" AllowResize="True"

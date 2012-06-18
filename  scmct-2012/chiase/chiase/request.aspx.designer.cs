@@ -40,24 +40,6 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
-        /// ASPxHtmlEditor1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor ASPxHtmlEditor1;
-        
-        /// <summary>
-        /// lblContentLength control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblContentLength;
-        
-        /// <summary>
         /// dropd_project control.
         /// </summary>
         /// <remarks>
@@ -236,6 +218,24 @@ namespace chiase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        
+        /// <summary>
+        /// ASPxHtmlEditor1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor ASPxHtmlEditor1;
+        
+        /// <summary>
+        /// lblContentLength control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblContentLength;
         
         /// <summary>
         /// lbl_create_new_request control.

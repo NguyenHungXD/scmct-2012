@@ -94,13 +94,22 @@ namespace chiase {
         protected global::DevExpress.Web.ASPxEditors.ASPxLabel lblContentLength;
         
         /// <summary>
-        /// txt_sort control.
+        /// drop_news_type control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_sort;
+        protected global::System.Web.UI.WebControls.DropDownList drop_news_type;
+        
+        /// <summary>
+        /// RequiredFieldValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
         /// dropd_status control.
@@ -110,5 +119,41 @@ namespace chiase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dropd_status;
+        
+        /// <summary>
+        /// RequiredFieldValidator3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
+        
+        /// <summary>
+        /// txt_sort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_sort;
+        
+        /// <summary>
+        /// RequiredFieldValidator4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        
+        /// <summary>
+        /// RegularExpressionValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
     }
 }

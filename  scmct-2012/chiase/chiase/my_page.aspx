@@ -117,7 +117,7 @@
     </tr>
     <tr>
     <td colspan=6><hr><i>*-Chọn dự án bạn muốn xem chi tiết</i><br>
-    <img src="images/book-open.png" width=25 height=25> <a style="cursor:pointer;font-size:15px;text-decoration:underline;font-weight:bold" onclick="return_link();" id="link_view_contribution_list" target="_blank"  title="Xem chi tiết" >Xem danh sách đóng góp của bạn theo dự án</a>
+    <img src="images/book-open.png" width=25 height=25> <a style="cursor:pointer;font-size:15px;text-decoration:underline;font-weight:bold;color:White" onclick="return_link();" id="link_view_contribution_list" target="_blank"  title="Xem chi tiết" >Xem danh sách đóng góp của bạn theo dự án</a>
     </td>
     </table>
 

@@ -31,24 +31,6 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.Label lbl_tenduan;
         
         /// <summary>
-        /// lbl_chitiet control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_chitiet;
-        
-        /// <summary>
-        /// lbl_ghichu control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_ghichu;
-        
-        /// <summary>
         /// lbl_book control.
         /// </summary>
         /// <remarks>
@@ -83,6 +65,15 @@ namespace chiase {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_ketthuc;
+        
+        /// <summary>
+        /// lbl_chitiet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_chitiet;
         
         /// <summary>
         /// lbl_post_new control.

@@ -74,7 +74,29 @@
 
 <fieldset style="background-color:#F2F2F2;color:blue">
 <div class="upload" >
+     <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" AllowDragging="True" AllowResize="True"
+        CloseAction="CloseButton"
+        EnableViewState="False" PopupElementID="popupArea1"
+        PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
+        Height="500px" FooterText=""
+        HeaderText="Tạo album ảnh" ClientInstanceName="FeedPopupControl" 
+        EnableHierarchyRecreation="True" CssFilePath="~/App_Themes/Aqua/{0}/styles.css" 
+        CssPostfix="Aqua" LoadingPanelImagePosition="Top" 
+        SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
+        <LoadingPanelImage Url="~/App_Themes/Aqua/Web/Loading.gif">
+        </LoadingPanelImage>
+        <ContentStyle VerticalAlign="Top">
+        </ContentStyle>
+        <ContentCollection>
+            <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server" SupportsDisabledAttribute="True">
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+                                                <ClientSideEvents CloseUp="function(s, e) {       
+	                                            location.reload(true);
+                                        }" />
 
+
+    </dx:ASPxPopupControl>
      <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" AllowDragging="True" AllowResize="True"
         CloseAction="CloseButton"
         EnableViewState="False" PopupElementID="popupArea"
@@ -100,7 +122,8 @@
     </dx:ASPxPopupControl>
     <table width=100% cellspacing=0 cellpadding=0 border=0><tr><td valign="bottom"><font size=-1><asp:Label ID="lbl_info" runat="server" Text="">*-Đăng nhập để sử dụng tiện ích tùy chọn hình ảnh</asp:Label></font></td><td align=right>
 <asp:Label ID="lbl_create_album" runat="server">
-    <a title="Tạo album ảnh mới" id="popupArea" class="btn" style="height:25px;padding:5px 10px 5px 10px"/><img src="images/createnewallbum.png" width=20 height=20> <b>Tạo album ảnh mới</b></a>
+    <a title="Tạo album ảnh mới" id="popupArea" class="btn" style="height:25px;padding:5px 10px 5px 10px"/><img src="images/createnewallbum.png" width=20 height=20> <b>Tạo album ảnh cơ bản</b></a>
+     <a title="Tạo album ảnh mới" id="popupArea1" class="btn" style="height:25px;padding:5px 10px 5px 10px"/><img src="images/createnewallbum.png" width=20 height=20> <b>Tạo album ảnh nâng cao</b></a>
 </asp:Label>
 </td></tr>
 </table>

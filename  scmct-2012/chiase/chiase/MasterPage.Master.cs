@@ -24,6 +24,7 @@ namespace chiase
                     pn_admin.Visible = false;
                     this.Display();
                     txt_search.Text = (string)Session["str_search"];
+                    
                 }
             }
             catch
@@ -120,7 +121,7 @@ namespace chiase
                     table.Rows[0]["ipaddress"] = ipaddress;
 
                     Session["ThanhVien"] = table;
-                    link_member_page.NavigateUrl = "my_page.aspx?id=" + table.Rows[0]["id"];
+                    //link_member_page.NavigateUrl = "my_page.aspx?id=" + table.Rows[0]["id"];
                     //lblError.Text = "Dang nhap thanh cong !";
                     this.Display();
                     

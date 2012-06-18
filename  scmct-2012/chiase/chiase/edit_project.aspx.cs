@@ -115,10 +115,12 @@ namespace chiase
                                 TRANG_THAI_ID=@V_TRANG_THAI_ID,
                                 GHI_CHU=@V_GHI_CHU,
                                 ENABLE_BIT=@V_ENABLE_BIT,
-                                BOOK=@V_BOOK
+                                BOOK=@V_BOOK,SORT=@SORT
                                 WHERE ID = @ID";
-                DateTime start_date = Convert.ToDateTime(String.Format("{0}/{1}/{2}", dropd_month_start.Text, dropd_day_start.Text, dropd_year_start.Text));
-                DateTime end_date = Convert.ToDateTime(String.Format("{0}/{1}/{2}", dropd_month_end.Text, dropd_day_end.Text, dropd_year_end.Text));
+
+                string start_date= functions.CheckDate(String.Format("{0}/{1}/{2}", dropd_month_start.Text, dropd_day_start.Text, dropd_year_start.Text));
+                string end_date = functions.CheckDate(String.Format("{0}/{1}/{2}", dropd_month_end.Text, dropd_day_end.Text, dropd_year_end.Text));
+
                 int done = SQLConnectWeb.ExecuteNonQuery(sql,
                                             "@V_MA_DU_AN",txt_project_code.Text,
                                             "@V_TEN_DU_AN", txt_project_name.Text,
@@ -131,6 +133,7 @@ namespace chiase
                                             "@V_GHI_CHU", txt_notes.Text,
                                             "@V_ENABLE_BIT", 'Y',
                                             "@V_BOOK", txt_book.Text,
+                                            "@SORT",txt_sort.Text,
                                             "@ID",Request.QueryString["id"]);
 
                 //DA_DU_AN da = DA_DU_AN.Insert_Object(txt_project_code.Text, txt_project_name.Text,

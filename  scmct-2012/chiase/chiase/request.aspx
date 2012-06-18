@@ -44,79 +44,35 @@
 <!--<legend>Gửi yêu cầu</legend> -->   
 <table border=0 cellpadding =1 cellspacing=2 width =100%>
     <tr>
-    <td align=center colspan=2>
+    <td align=left colspan=2>
         <font size=3><b><asp:Label ID="lbl_result" runat="server" ForeColor="#FFFFFF"></asp:Label></b></font>
         <hr>
+       <font color=white size=3><b> CHẤP CÁNH ƯỚC MƠ</font></b>
+        <hr>
         </td>
-    <td rowspan=9><br>
+    <td rowspan=9 align=center><br>
+    
     </td>
     </tr>
     <tr>
-    <td colspan="2">
+    <td>
     Tiêu đề:
-
-        <asp:TextBox ID="txt_request_subject" runat="server"  class="txtformat"  Width="840px" 
-            Height="23px"></asp:TextBox>
+    </td>
+    <td>
+        <asp:TextBox ID="txt_request_subject" runat="server"  class="txtformat"  Width="500px" 
+            Height="23px" Text="Tôi muốn tặng sách cho SCMCT"></asp:TextBox>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="txt_request_subject" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Nhập tiêu đề"></asp:RequiredFieldValidator>
     
     </td>
     </tr>
      <tr>
-    <td colspan=2>
 
-
-
-        <dx:ASPxHtmlEditor ID="ASPxHtmlEditor1" runat="server" 
-            CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
-            Width="900px" Height="300px">
-            <ClientSideEvents HtmlChanged="HtmlChangedHandler" />
-            <Styles CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua">
-                <ViewArea>
-                    <Border BorderColor="#A3C0E8" />
-                </ViewArea>
-            </Styles>
-    <SettingsImageSelector Enabled="True">
-            <CommonSettings RootFolder="~/images/upload/" ThumbnailFolder="~/images/upload/"
-                InitialFolder="upload" />
-            <PermissionSettings>
-
-            </PermissionSettings>
-        </SettingsImageSelector>
-        <SettingsImageUpload UploadImageFolder="~/images/upload/">
-            <ValidationSettings AllowedFileExtensions=".jpe,.jpeg,.jpg,.gif,.png" MaxFileSize="500000">
-            </ValidationSettings>
-        </SettingsImageUpload>
-                      <SettingsValidation>
-                    <RequiredField IsRequired="True" ErrorText="Yêu cầu chưa có nội dung" />
-                </SettingsValidation>
-<SettingsDocumentSelector>
-
-
-
-<CommonSettings AllowedFileExtensions=".rtf, .pdf, .doc, .docx, .odt, .txt, .xls, .xlsx, .ods, .ppt, .pptx, .odp"></CommonSettings>
-</SettingsDocumentSelector>
-            <Images SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
-                <LoadingPanel Url="~/App_Themes/Aqua/HtmlEditor/Loading.gif">
-                </LoadingPanel>
-            </Images>
-            <ImagesFileManager>
-                <FolderContainerNodeLoadingPanel Url="~/App_Themes/Aqua/Web/tvNodeLoading.gif">
-                </FolderContainerNodeLoadingPanel>
-                <LoadingPanel Url="~/App_Themes/Aqua/Web/Loading.gif">
-                </LoadingPanel>
-            </ImagesFileManager>
-        </dx:ASPxHtmlEditor>
-       
-       <font color="white">Số ký tự bạn đã nhập(ký tự): <dx:ASPxLabel ID="lblContentLength" runat="server" ClientInstanceName="ContentLength" Text="0" Font-Bold="True"></dx:ASPxLabel></font>
-            </td>
-    </tr>
-     
- <tr>
+     <tr>
     <td>
     Dự án:
     </td>
     <td>
-       <asp:DropDownList ID="dropd_project" runat="server">
+       <asp:DropDownList ID="dropd_project" runat="server" width=200>
         </asp:DropDownList>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator8" Display="Dynamic" ControlToValidate="dropd_project" ForeColor="Red" InitialValue="None" runat="server" ErrorMessage="Chọn dự án"></asp:RequiredFieldValidator>
     </td>
@@ -131,7 +87,7 @@
 
       
     
-        <asp:DropDownList ID="dropd_request_kind" runat="server">
+        <asp:DropDownList ID="dropd_request_kind" runat="server" width=200>
         </asp:DropDownList>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator6" Display="Dynamic" ControlToValidate="dropd_request_kind" ForeColor="Red" InitialValue="None" runat="server" ErrorMessage="Chọn loại yêu cầu"></asp:RequiredFieldValidator>
 
@@ -232,6 +188,69 @@
     </td>
     </tr>
     </asp:Panel>
+
+
+    <td colspan=2>
+
+
+
+        <dx:ASPxHtmlEditor ID="ASPxHtmlEditor1" runat="server" 
+            CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua" 
+            Width="900px" Height="200px">
+            <ClientSideEvents HtmlChanged="HtmlChangedHandler" />
+            <Styles CssFilePath="~/App_Themes/Aqua/{0}/styles.css" CssPostfix="Aqua">
+                <ViewArea>
+                    <Border BorderColor="#A3C0E8" />
+                </ViewArea>
+            </Styles>
+    <SettingsImageSelector Enabled="True">
+            <CommonSettings RootFolder="~/images/upload/" ThumbnailFolder="~/images/upload/"
+                InitialFolder="upload" />
+            <PermissionSettings>
+
+            </PermissionSettings>
+        </SettingsImageSelector>
+        <SettingsImageUpload UploadImageFolder="~/images/upload/">
+            <ValidationSettings AllowedFileExtensions=".jpe,.jpeg,.jpg,.gif,.png" MaxFileSize="500000">
+            </ValidationSettings>
+        </SettingsImageUpload>
+                      <SettingsValidation>
+                    <RequiredField IsRequired="True" ErrorText="Yêu cầu chưa có nội dung" />
+                </SettingsValidation>
+<SettingsDocumentSelector>
+
+
+
+<CommonSettings AllowedFileExtensions=".rtf, .pdf, .doc, .docx, .odt, .txt, .xls, .xlsx, .ods, .ppt, .pptx, .odp"></CommonSettings>
+</SettingsDocumentSelector>
+            <Images SpriteCssFilePath="~/App_Themes/Aqua/{0}/sprite.css">
+                <LoadingPanel Url="~/App_Themes/Aqua/HtmlEditor/Loading.gif">
+                </LoadingPanel>
+            </Images>
+            <ImagesFileManager>
+                <FolderContainerNodeLoadingPanel Url="~/App_Themes/Aqua/Web/tvNodeLoading.gif">
+                </FolderContainerNodeLoadingPanel>
+                <LoadingPanel Url="~/App_Themes/Aqua/Web/Loading.gif">
+                </LoadingPanel>
+            </ImagesFileManager>
+        </dx:ASPxHtmlEditor>
+       
+       <font color="white">Số ký tự bạn đã nhập(ký tự): <dx:ASPxLabel ID="lblContentLength" runat="server" ClientInstanceName="ContentLength" Text="0" Font-Bold="True"></dx:ASPxLabel></font>
+            </td>
+    </tr>
+     
+ 
+
+
+
+
+
+
+
+
+
+
+
     <tr>
     <td colspan=3 align=left><hr>
     </td>
@@ -247,6 +266,12 @@
     </td>
         
     </tr>
+
+
+
+
+
+
     <tr>
     <td colspan=3 align=right style="color:White">
     <br>&nbsp Hôm nay, <%= System.DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt") %>

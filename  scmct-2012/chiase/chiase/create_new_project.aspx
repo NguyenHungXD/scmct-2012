@@ -190,6 +190,19 @@
     </td>
     </tr>
     <tr>
+    <td>
+    Sắp xếp:
+    </td>
+    <td>
+        <asp:TextBox ID="txt_sort" runat="server"  class="txtformat" 
+            Width="150px" Height="22px" BackColor="#CCFFCC"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" 
+            ControlToValidate="txt_sort" Display="Dynamic" runat="server" 
+            ErrorMessage="Nhập thứ tự sắp xếp" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_sort" ValidationExpression="^\d+$" runat="server" ErrorMessage=" Sắp xếp là số"></asp:RegularExpressionValidator>
+    </td>
+    </tr>
+    <tr>
     <td colspan=3 align=left><hr>
 </tr>
      </table>

@@ -65,10 +65,8 @@
             <table cellpadding="1" cellspacing="1" border="0">
             <tr>
             <td>
-                     Tài khoản:<asp:TextBox ID="txtUserID" runat="server" class="txtformat" 
-                         Width="95px" Height="18px"></asp:TextBox>
-                    &nbsp;Mật khẩu:<asp:TextBox ID="txtPassWord" runat="server" class="txtformat" 
-                         Width="95px" TextMode="Password" Height="18px"></asp:TextBox>
+                     Tài khoản:<asp:TextBox ID="txtUserID" style="font-style:italic;border:1px solid #0696FC;border-radius: 8px;background-color:#FFF;color:#0696FC;font-size:12px" runat="server"  Width="105px" Height="18px" value="Tên đăng nhập..." onfocus="if(this.value==this.defaultValue){this.value='';this.style.color='#000';this.style.fontStyle='normal' }" onblur="if(this.value==''){this.value=this.defaultValue;this.style.color='#90C5F6';this.style.fontStyle='italic';}"></asp:TextBox>
+                    &nbsp;Mật khẩu:<asp:TextBox style="font-style:italic;border:1px solid #0696FC;border-radius: 8px;background-color:#FFF;color:#0696FC;font-size:12px" ID="txtPassWord" runat="server"  Width="105px" TextMode="Password" Height="18px" value="Mật khẩu..." onfocus="if(this.value==this.defaultValue){this.value='';this.style.color='#000';this.style.fontStyle='normal' }" onblur="if(this.value==''){this.value=this.defaultValue;this.style.color='#90C5F6';this.style.fontStyle='italic';}"></asp:TextBox>
                     <asp:Button ID="btn_admin" runat="server" Text="Đăng nhập" 
                          onclick="btn_login_Click1"  Height="25px" Width="100px" 
                          style="font-size: 12px;cursor: pointer;" class="btn_admin"/>
@@ -84,7 +82,7 @@
             </td>
             </tr>
             </table>
-                </asp:View>
+            </asp:View>
                 <asp:View ID="View2" runat="server">
                    <table cellpadding=1 cellspacing=3 border=0 width=100%>
                    <tr>
@@ -95,6 +93,7 @@
                     Chào mừng <b><asp:Label ID="lbl_username" runat="server" ForeColor="White"/></asp:Label></b>,
                         <i>truy cập lần cuối, <asp:Label ID="lbl_lasted_access" runat="server" ForeColor="White"></asp:Label></i><br>
                     </td>
+                    </tr>
                     <tr>
                     <td align=center>
                     <p align=center class="textformat"> 
@@ -107,45 +106,47 @@
                 </asp:View>
             </asp:MultiView>
  
-			<div id="search_section" style="background-color:#FFF;border:0px solid #FFF" >
-            <table style="background-color:#3BB9FF;border:1px solid #FFF" border=0 cellpadding=2><tr><td valign=middle><image src="images/search.png" width=20 height=20></td><td><asp:TextBox id="txt_search" runat="server"  class="txtformat" width="200" height="25" title="Tìm kiếm bài viết, hình ảnh, yêu cầu,..."></asp:TextBox>
-                <asp:Button runat="server" Text="Tìm kiếm" class="btn_admin" width="80" 
-                    height=25 onclick="Unnamed2_Click"></asp:Button></td></tr></table>
-           </div>
+
         </div> <!-- end of templatemo_menu -->
    
 
         <div id="templatemo_menu">
+            <div id="search_section">
+                <table  border=0 cellpadding=0><tr><td>&nbsp</td><td valign=middle><asp:TextBox ClientIDMode="Static" style="margin-top:2px;border:1px solid #FFFFFF;font-style:italic;color:#0696FC;font-size:12px;background-color:#FFFFFF"  value="Tìm kiếm..." onfocus="if(this.value==this.defaultValue){this.value='';this.style.color='#000';this.style.fontStyle='normal' }" onblur="if(this.value==''){this.value=this.defaultValue;this.style.color='#90C5F6';this.style.fontStyle='italic';}" id="txt_search" runat="server" width="130" height="17" title="Tìm kiếm bài viết, hình ảnh, yêu cầu,..."></asp:TextBox>
+                <td valign=middle align=center><asp:ImageButton ImageUrl="images/search.png" id="img_btn" onclick="Unnamed2_Click" runat="server" width=22 height=20 title="Tìm kiếm" ></asp:ImageButton></td><td>&nbsp</td>
+                </tr></table>
+            </div>
         <ul class="blue">
 	        <li><a href="default.aspx" title="Trang chủ" class='<%if(Session["current"]=="1"){%>current'<%}else{%>no'<%}%> ><span>Trang chủ</span></a></li>
+            <li><a href="about.aspx" title="Giới thiệu" class='<%if(Session["current"]=="5"){%>current'<%}else{%>no'<%}%>><span>Giới thiệu</span></a></li>
+            <li><a href="request.aspx" title="Gửi yêu cầu tặng sách, vật dụng,...cho dự án" class='<%if(Session["current"]=="4"){%>current'<%}else{%>no'<%}%>><span>Chia sẻ</span></a></li>
+            <li><a href="news.aspx" title="Tin tức" class='<%if(Session["current"]=="10"){%>current'<%}else{%>no'<%}%> ><span>Tin tức</span></a></li>
             <li><a href="forum.aspx" title="Diễn đàn" class='<%if(Session["current"]=="2"){%>current'<%}else{%>no'<%}%> ><span>Diễn đàn</span></a></li>
-            <li><a href="show_album.aspx" title="Hình ảnh" class='<%if(Session["current"]=="3"){%>current'<%}else{%>no'<%}%> ><span>Hình ảnh</span></a></li>
-            <li><a href="request.aspx" title="Gửi yêu cầu" class='<%if(Session["current"]=="4"){%>current'<%}else{%>no'<%}%>><span>Gửi yêu cầu</span></a></li>
-            <li><a href="roles.aspx?id=1" title="Giới thiệu" class='<%if(Session["current"]=="5"){%>current'<%}else{%>no'<%}%>><span>Giới thiệu</span></a></li>
+            <li><a href="show_album.aspx" title="Media" class='<%if(Session["current"]=="3"){%>current'<%}else{%>no'<%}%> ><span>Media</span></a></li>
+            <li><a href="help.aspx" title="Trợ giúp" class='<%if(Session["current"]=="8"){%>current'<%}else{%>no'<%}%>><span>Trợ giúp</span></a></li>
             <li><a href="roles.aspx?id=4" title="Liên hệ" class='<%if(Session["current"]=="6"){%>current'<%}else{%>no'<%}%>><span>Liên hệ</span></a></li>
-            <li><a href="roles.aspx?id=2" title="Trợ giúp" class='<%if(Session["current"]=="8"){%>current'<%}else{%>no'<%}%>><span>Trợ giúp</span></a></li>
-            <li><a href="register.aspx" title="Đăng ký" class='<%if(Session["current"]=="9"){%>current'<%}else{%>no'<%}%>><span>Đăng ký</span></a></li>
+            <%--<li><a href="register.aspx" title="Đăng ký" class='<%if(Session["current"]=="9"){%>current'<%}else{%>no'<%}%>><span>Đăng ký</span></a></li>--%>
             <li><asp:Panel ID="pn_admin" runat="server" Visible="false"><a href="admin.aspx" title="Quản trị" class='<%if(Session["current"]=="7"){%>current'<%}else{%>no'<%}%>><span>Quản trị</span></a> </asp:Panel></li>
         </ul>
-            
-            
         </div> <!-- end of templatemo_menu -->
 
     </div> <!-- end of templatemo_header -->
 </div>  <!-- end of templatemo_header_main -->
  <div id="templatemo_wrapper_outer">
  <div id="templatemo_wrapper">
+     <div style="background-color:White; margin-bottom:-4px;margin-top:28px;margin-left:1px;border-radius: 3px;heigth:18px" class="link_back">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td valign="middle" align="left"></td></tr></table>
+    </div>
 <asp:ContentPlaceHolder ID="Content_slider" runat="server">
 </asp:ContentPlaceHolder>
 <div id="footer_top1">&nbsp 
     </div>	
     <div id="templatemo_content">
-    <div style="background-color:White; margin-bottom:3px;" class="link_back">
 
-    <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td valign="middle" align="left"><image src="images/home_page.png" width="30" height="20"> <%= Session["current_link"] %></td><td width="60%"><MARQUEE onmouseover="this.stop();" onmouseout="this.start();">Chào mừng bạn đến với SCMCT online - Cổng quyên góp sách cho miền cát trắng - Chung tay chắp cách những ước mơ...<a href="register.aspx"><i><font size=-1 color="red">tham gia ngay</font></i></a>...</MARQUEE></td></tr></table>
     
+    <div style="background-color:White; margin-bottom:3px;" class="link_back">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td valign="middle" align="left"><image src="images/home_page.png" width="30" height="20"> <%= Session["current_link"] %></td><td width="60%"><MARQUEE onmouseover="this.stop();" onmouseout="this.start();">Chào mừng bạn đến với SCMCT online - Cổng quyên góp sách cho miền cát trắng - Chung tay chắp cách những ước mơ...<a href="register.aspx"><i><font size=-1 color="red">tham gia ngay</font></i></a>...</MARQUEE></td></tr></table>
     </div>
-
      <asp:ContentPlaceHolder ID="content_area" runat="server">
      
 
@@ -191,7 +192,7 @@
 	
     <div id="templatemo_copyright">
     
-        Copyright © 2012-<%# System.DateTime.Now.Year%> <a href="default.aspx">SCMCT Online Group</a> | <a href="default.aspx" >Trang chủ</a> | <a href="forum.aspx">Diễn đàn</a> | <a href="roles.aspx?id=4">Liên hệ</a> | <a href="roles.aspx?id=2">Trợ giúp</a>
+        Copyright © 2011-<%= System.DateTime.Now.Year%> <a href="default.aspx">SCMCT Online Group</a> | <a href="default.aspx" >Trang chủ</a> | <a href="about.aspx" >Giới thiệu</a> | <a href="forum.aspx">Diễn đàn</a> | <a href="roles.aspx?id=3">Điều khoản sử dụng</a> | <a href="roles.aspx?id=4">Liên hệ</a> | <a href="help.aspx">Trợ giúp</a>
     
     </div>
 </div>

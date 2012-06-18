@@ -92,7 +92,7 @@
                    </asp:Label>
 
         <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" AllowDragging="True" AllowResize="True"
-        CloseAction="CloseButton" ContentUrl='<%#Eval("album_id","upload_multiimages.aspx?albumid={0}") %>'
+        CloseAction="CloseButton" ContentUrl='<%#Eval("album_id","upload_images.aspx?albumid={0}") %>'
         EnableViewState="False" PopupElementID="popupArea"
         PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" ShowFooter="True" Width="800px"
         Height="600px" FooterText="Thêm ảnh cho album - bạn nhấn Shift hoặc Ctrl để chọn nhiều ảnh"

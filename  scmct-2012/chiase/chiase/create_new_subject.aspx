@@ -113,15 +113,19 @@
             <font color="white">Số ký tự bạn đã nhập(ký tự): <dx:ASPxLabel ID="lblContentLength" runat="server" ClientInstanceName="ContentLength" Text="0" Font-Bold="True"></dx:ASPxLabel></font>
             </td>
     </tr>
-      <tr>
+
+          <tr>
     <td class="style1">
-       Sắp xếp:
+       Loại chủ đề:
     </td>
     <td>
-        <asp:TextBox ID="txt_sort" runat="server"  class="txtformat" Width="74px" 
-            Height="22px"></asp:TextBox>
-            </td>
+        <asp:DropDownList ID="drop_news_type" runat="server">
+        </asp:DropDownList>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="drop_news_type" Display="Dynamic" InitialValue="None" ForeColor="REd" runat="server" ErrorMessage="Chọn loại chủ đề"></asp:RequiredFieldValidator>
+    </td>
     </tr>
+
+
 
    
       <tr>
@@ -131,7 +135,21 @@
     <td>
         <asp:DropDownList ID="dropd_status" runat="server">
         </asp:DropDownList>
+        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ControlToValidate="dropd_status" Display="Dynamic" InitialValue="None" ForeColor="REd" runat="server" ErrorMessage="Chọn trạng thái chủ đề"></asp:RequiredFieldValidator>
     </td>
+    </tr>
+          <tr>
+    <td class="style1">
+       Sắp xếp:
+    </td>
+    <td>
+        <asp:TextBox ID="txt_sort" runat="server" Text="0"  class="txtformat" Width="74px" 
+            Height="22px"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" 
+            ControlToValidate="txt_sort" Display="Dynamic" runat="server" 
+            ErrorMessage="Nhập thứ tự sắp xếp" ForeColor="#FF3300"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ForeColor="Red" Display="Dynamic" ControlToValidate="txt_sort" ValidationExpression="^\d+$" runat="server" ErrorMessage=" Sắp xếp là số"></asp:RegularExpressionValidator>
+            </td>
     </tr>
     <tr>
     <td colspan=3 align=left><hr>

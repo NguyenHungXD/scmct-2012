@@ -29,8 +29,7 @@
     <table cellpadding=0 cellspacing=0 border=0 width=100% style="background-color:#FFFFFF;color:Black">
     <tr>
      <td valign="middle" rowspan="3">
-    <img src="/images/logo_print.png"><br>
-    <b>Cổng quyên góp sách online</b>
+    <img src="/images/logo_print.png" width=100 height=107>
     </td>
     
     <td colspan="2"><br>&nbsp</td></tr>

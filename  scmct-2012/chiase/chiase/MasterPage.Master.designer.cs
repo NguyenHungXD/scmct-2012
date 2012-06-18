@@ -193,6 +193,15 @@ namespace chiase {
         protected global::System.Web.UI.WebControls.TextBox txt_search;
         
         /// <summary>
+        /// img_btn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton img_btn;
+        
+        /// <summary>
         /// pn_admin control.
         /// </summary>
         /// <remarks>

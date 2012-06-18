@@ -36,14 +36,16 @@ namespace chiase
 
                 if (Request.QueryString["projectid"] == null)
                 {
-                    Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='show_album.aspx' title='Hình ảnh'>Hình ảnh</a> ";
-                    ASPxPopupControl1.ContentUrl = "upload_multiimages.aspx";
+                    Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='show_album.aspx' title='Hình ảnh'>Thư viện ảnh</a> ";
+                    ASPxPopupControl1.ContentUrl = "upload_images.aspx";
+                    ASPxPopupControl2.ContentUrl = "upload_multiimages.aspx";
                 }
                 else
                 {
-                    Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='show_album.aspx?projectid=" + Request.QueryString["projectid"] + "'>Hình ảnh</a>";
-                    v_project_id = "upload_multiimages.aspx?projectid=" + Request.QueryString["projectid"];
+                    Session["current_link"] = "<a href='default.aspx' title='Trang chủ'>Trang chủ</a> >> <a href='show_album.aspx?projectid=" + Request.QueryString["projectid"] + "'>Thư viện ảnh</a>";
+                    v_project_id = "upload_images.aspx?projectid=" + Request.QueryString["projectid"];
                     ASPxPopupControl1.ContentUrl = v_project_id;
+                    ASPxPopupControl2.ContentUrl = "upload_multiimages.aspx?projectid=" + Request.QueryString["projectid"];
                 }
             }
         }
