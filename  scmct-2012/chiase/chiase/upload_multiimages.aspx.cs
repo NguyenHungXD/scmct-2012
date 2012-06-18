@@ -15,9 +15,9 @@ namespace chiase
 {
     public partial class upload_multiimages : System.Web.UI.Page
     {
-        public static string album_name;
-        public static string album_detail;
-        public static string album_id;
+        public string album_name;
+        public string album_detail;
+        public string album_id;
         private const string vUploadPath = "Images/upload/";
         public string UploadPath
         {
@@ -39,6 +39,7 @@ namespace chiase
                 //lbl_error.Text = Request.QueryString["projectid"];
                 if (Request.QueryString["albumid"] == null)
                 {
+                    album_id = null;
                     txt_album_name.Text = "Album ảnh " + DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt");
                     Panel1.Visible = true;
                 }
