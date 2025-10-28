@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top" />
+    <meta charset="UTF-8" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --accent: #f97316;
+        --bg: #f8fafc;
+        --card-bg: rgba(255, 255, 255, 0.85);
+        --text: #0f172a;
+        font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(249, 115, 22, 0.1));
+        min-height: 100vh;
+        color: var(--text);
+      }
+
+      .app-shell {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 24px 60px;
+        box-sizing: border-box;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+
+      header h1 {
+        font-size: 32px;
+        margin: 0;
+        font-weight: 700;
+      }
+
+      header p {
+        margin: 0;
+        color: rgba(15, 23, 42, 0.72);
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 24px;
+      }
+
+      @media (max-width: 1024px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: var(--card-bg);
+        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+        border-radius: 18px;
+        padding: 24px;
+        backdrop-filter: blur(8px);
+      }
+
+      .calendar-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
+      .calendar-header button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 20px;
+        color: var(--primary);
+      }
+
+      .calendar-header button:hover {
+        background: rgba(37, 99, 235, 0.12);
+      }
+
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+      }
+
+      .weekday {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        text-align: center;
+        color: rgba(15, 23, 42, 0.55);
+      }
+
+      .day-cell {
+        position: relative;
+        padding: 12px 10px 36px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.75);
+        box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.25);
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.2s ease;
+      }
+
+      .day-cell:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 30px rgba(37, 99, 235, 0.12);
+      }
+
+      .day-cell.outside {
+        opacity: 0.45;
+      }
+
+      .day-cell.today {
+        box-shadow: inset 0 0 0 2px var(--primary);
+      }
+
+      .day-number {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .badge {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: var(--primary);
+        color: white;
+        font-size: 11px;
+        padding: 4px 8px;
+        border-radius: 999px;
+      }
+
+      .day-detail {
+        margin-top: 18px;
+      }
+
+      .day-detail h2 {
+        margin: 0 0 12px;
+        font-size: 20px;
+      }
+
+      .plan-item {
+        border-radius: 14px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.25);
+        display: grid;
+        gap: 6px;
+        position: relative;
+      }
+
+      .plan-item + .plan-item {
+        margin-top: 10px;
+      }
+
+      .plan-item .plan-time {
+        font-weight: 600;
+        color: var(--primary-dark);
+      }
+
+      .plan-actions {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        display: flex;
+        gap: 6px;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 12px;
+        padding: 10px 16px;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-dark);
+      }
+
+      .btn-secondary {
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary);
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .form-grid label {
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(15, 23, 42, 0.65);
+      }
+
+      .form-grid input,
+      .form-grid textarea,
+      .form-grid select {
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        padding: 10px 12px;
+        font-size: 14px;
+        box-sizing: border-box;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.12);
+        color: var(--primary-dark);
+      }
+
+      .ai-section {
+        display: grid;
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .muted {
+        color: rgba(15, 23, 42, 0.55);
+        font-size: 13px;
+      }
+
+      .upcoming-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .status {
+        font-size: 12px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(16, 185, 129, 0.15);
+        color: #047857;
+        font-weight: 600;
+      }
+
+      .empty {
+        border: 1px dashed rgba(148, 163, 184, 0.5);
+        border-radius: 14px;
+        padding: 24px;
+        text-align: center;
+        color: rgba(15, 23, 42, 0.6);
+      }
+
+      .search-bar {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+
+      .search-bar input {
+        flex: 1;
+      }
+
+      .suggestion-card {
+        border-radius: 12px;
+        padding: 12px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      .suggestion-card + .suggestion-card {
+        margin-top: 10px;
+      }
+
+      .loading {
+        display: none;
+        gap: 6px;
+        align-items: center;
+        font-size: 13px;
+        color: rgba(15, 23, 42, 0.65);
+      }
+
+      .loading.active {
+        display: inline-flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header>
+        <h1>PlanBoard AI</h1>
+        <p>
+          Quản lý lịch cá nhân với AI: nhập liệu nhanh, tìm kiếm thông minh và lịch tháng trực quan.
+        </p>
+      </header>
+
+      <div class="layout">
+        <section class="card">
+          <div class="calendar-header">
+            <button type="button" id="prevMonth" aria-label="Tháng trước">&#8592;</button>
+            <div>
+              <div id="calendarLabel" style="font-weight: 600; font-size: 18px;"></div>
+              <div class="muted" id="todayLabel"></div>
+            </div>
+            <button type="button" id="nextMonth" aria-label="Tháng sau">&#8594;</button>
+          </div>
+
+          <div class="calendar-grid" id="weekdayRow"></div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+
+          <div class="day-detail">
+            <h2 id="dayTitle">Chọn một ngày</h2>
+            <div id="dayPlans" class="day-plans empty">Chưa có công việc nào.</div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2 style="margin-top: 0">Thêm kế hoạch</h2>
+          <form id="planForm" class="form-grid">
+            <input type="hidden" id="planId" />
+            <div>
+              <label for="planDate">Ngày</label>
+              <input type="date" id="planDate" required />
+            </div>
+            <div>
+              <label for="planTime">Giờ (tuỳ chọn)</label>
+              <input type="time" id="planTime" />
+            </div>
+            <div>
+              <label for="planTitle">Tiêu đề</label>
+              <input type="text" id="planTitle" required placeholder="Ví dụ: Họp khách hàng" />
+            </div>
+            <div>
+              <label for="planDescription">Chi tiết</label>
+              <textarea id="planDescription" rows="3" placeholder="Ghi chú thêm"></textarea>
+            </div>
+            <div>
+              <label for="planTags">Tags</label>
+              <input type="text" id="planTags" placeholder="work, health" />
+            </div>
+            <div>
+              <label for="planStatus">Trạng thái</label>
+              <select id="planStatus">
+                <option value="Planned">Planned</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Done">Done</option>
+              </select>
+            </div>
+            <div style="display: flex; gap: 12px;">
+              <button class="btn btn-primary" type="submit">Lưu kế hoạch</button>
+              <button class="btn btn-secondary" type="button" id="resetBtn">Làm mới</button>
+              <div class="loading" id="formLoading">
+                <span>Đang xử lý...</span>
+              </div>
+            </div>
+          </form>
+
+          <div class="ai-section">
+            <div>
+              <h3 style="margin: 0 0 6px;">AI nhập liệu</h3>
+              <p class="muted">
+                Nhập danh sách công việc (mỗi dòng một việc). Hệ thống sẽ tự động tạo gợi ý kế hoạch cho ngày đã chọn.
+              </p>
+              <textarea id="aiPrompt" rows="3" placeholder="08:30 Họp nhóm dự án\n11h30 Ăn trưa với khách hàng"></textarea>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <button class="btn btn-secondary" id="aiSuggestBtn" type="button">Tạo gợi ý</button>
+                <div class="loading" id="aiLoading">
+                  <span>Đang gọi AI...</span>
+                </div>
+              </div>
+              <div id="aiSuggestions"></div>
+            </div>
+
+            <div>
+              <h3 style="margin: 0 0 6px;">Tìm kiếm AI</h3>
+              <div class="search-bar">
+                <input type="text" id="searchQuery" placeholder="Tìm kế hoạch: họp, khách hàng..." />
+                <button class="btn btn-secondary" id="searchBtn" type="button">Tìm</button>
+                <div class="loading" id="searchLoading">
+                  <span>Đang tìm...</span>
+                </div>
+              </div>
+              <div id="searchResults" class="upcoming-list"></div>
+            </div>
+
+            <div>
+              <h3 style="margin: 0 0 6px;">Sắp tới</h3>
+              <div id="upcomingPlans" class="upcoming-list"></div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const weekdayLabels = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+      const weekdayRow = document.getElementById('weekdayRow');
+      const calendarGrid = document.getElementById('calendarGrid');
+      const calendarLabel = document.getElementById('calendarLabel');
+      const todayLabel = document.getElementById('todayLabel');
+      const dayTitle = document.getElementById('dayTitle');
+      const dayPlans = document.getElementById('dayPlans');
+      const prevBtn = document.getElementById('prevMonth');
+      const nextBtn = document.getElementById('nextMonth');
+      const form = document.getElementById('planForm');
+      const formLoading = document.getElementById('formLoading');
+      const resetBtn = document.getElementById('resetBtn');
+      const aiPrompt = document.getElementById('aiPrompt');
+      const aiSuggestBtn = document.getElementById('aiSuggestBtn');
+      const aiSuggestions = document.getElementById('aiSuggestions');
+      const aiLoading = document.getElementById('aiLoading');
+      const planDateInput = document.getElementById('planDate');
+      const planIdInput = document.getElementById('planId');
+      const planTimeInput = document.getElementById('planTime');
+      const planTitleInput = document.getElementById('planTitle');
+      const planDescriptionInput = document.getElementById('planDescription');
+      const planTagsInput = document.getElementById('planTags');
+      const planStatusInput = document.getElementById('planStatus');
+      const searchQueryInput = document.getElementById('searchQuery');
+      const searchBtn = document.getElementById('searchBtn');
+      const searchResults = document.getElementById('searchResults');
+      const searchLoading = document.getElementById('searchLoading');
+      const upcomingPlans = document.getElementById('upcomingPlans');
+
+      let currentYear, currentMonth, selectedDate;
+
+      function initWeekdayRow() {
+        weekdayLabels.forEach((label) => {
+          const div = document.createElement('div');
+          div.className = 'weekday';
+          div.textContent = label;
+          weekdayRow.appendChild(div);
+        });
+      }
+
+      function setLoading(element, loading) {
+        if (loading) {
+          element.classList.add('active');
+        } else {
+          element.classList.remove('active');
+        }
+      }
+
+      function renderCalendar(data) {
+        calendarLabel.textContent = data.label;
+        currentYear = data.year;
+        currentMonth = data.month;
+        calendarGrid.innerHTML = '';
+
+        data.days.forEach((day) => {
+          const cell = document.createElement('div');
+          cell.className = 'day-cell';
+          if (!day.inMonth) {
+            cell.classList.add('outside');
+          }
+          if (day.isToday) {
+            cell.classList.add('today');
+          }
+          cell.dataset.date = day.date;
+          const number = document.createElement('div');
+          number.className = 'day-number';
+          number.textContent = day.day;
+          cell.appendChild(number);
+
+          if (day.count > 0) {
+            const badge = document.createElement('div');
+            badge.className = 'badge';
+            badge.textContent = day.count + ' việc';
+            cell.appendChild(badge);
+          }
+
+          cell.addEventListener('click', () => selectDate(day.date));
+          calendarGrid.appendChild(cell);
+        });
+
+        todayLabel.textContent = 'Hôm nay: ' + new Date().toLocaleDateString('vi-VN');
+      }
+
+      function selectDate(isoDate) {
+        selectedDate = isoDate;
+        planDateInput.value = isoDate;
+        planIdInput.value = '';
+        planTimeInput.value = '';
+        planTitleInput.value = '';
+        planDescriptionInput.value = '';
+        planTagsInput.value = '';
+        planStatusInput.value = 'Planned';
+        loadDayPlans(isoDate);
+      }
+
+      function planCard(plan) {
+        const card = document.createElement('div');
+        card.className = 'plan-item';
+        const title = document.createElement('div');
+        title.textContent = plan.title || '(Không tiêu đề)';
+        title.style.fontWeight = '600';
+        const time = document.createElement('div');
+        time.className = 'plan-time';
+        time.textContent = plan.time || 'Cả ngày';
+        const description = document.createElement('div');
+        description.textContent = plan.description || '';
+        description.className = 'muted';
+        const meta = document.createElement('div');
+        meta.style.display = 'flex';
+        meta.style.gap = '8px';
+        if (plan.tags) {
+          const tags = document.createElement('span');
+          tags.className = 'pill';
+          tags.textContent = plan.tags;
+          meta.appendChild(tags);
+        }
+        const status = document.createElement('span');
+        status.className = 'status';
+        status.textContent = plan.status || 'Planned';
+        meta.appendChild(status);
+
+        const actions = document.createElement('div');
+        actions.className = 'plan-actions';
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Sửa';
+        editBtn.className = 'btn btn-secondary';
+        editBtn.type = 'button';
+        editBtn.addEventListener('click', () => editPlan(plan));
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Xoá';
+        deleteBtn.className = 'btn btn-secondary';
+        deleteBtn.type = 'button';
+        deleteBtn.addEventListener('click', () => removePlan(plan));
+        actions.appendChild(editBtn);
+        actions.appendChild(deleteBtn);
+
+        card.appendChild(actions);
+        card.appendChild(time);
+        card.appendChild(title);
+        if (plan.description) {
+          card.appendChild(description);
+        }
+        card.appendChild(meta);
+        return card;
+      }
+
+      function loadDayPlans(date) {
+        dayTitle.textContent = 'Công việc ngày ' + new Date(date).toLocaleDateString('vi-VN');
+        dayPlans.innerHTML = '';
+        google.script.run
+          .withSuccessHandler((plans) => {
+            dayPlans.innerHTML = '';
+            if (!plans.length) {
+              dayPlans.className = 'day-plans empty';
+              dayPlans.textContent = 'Chưa có công việc nào.';
+              return;
+            }
+            dayPlans.className = 'day-plans';
+            plans.forEach((plan) => dayPlans.appendChild(planCard(plan)));
+          })
+          .withFailureHandler(showError)
+          .apiGetPlansForDay(date);
+      }
+
+      function editPlan(plan) {
+        planIdInput.value = plan.id;
+        planDateInput.value = plan.date;
+        planTimeInput.value = plan.time || '';
+        planTitleInput.value = plan.title || '';
+        planDescriptionInput.value = plan.description || '';
+        planTagsInput.value = plan.tags || '';
+        planStatusInput.value = plan.status || 'Planned';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function removePlan(plan) {
+        if (!confirm('Xoá công việc này?')) {
+          return;
+        }
+        google.script.run
+          .withSuccessHandler((result) => {
+            renderCalendar(result.calendar);
+            if (selectedDate) {
+              loadDayPlans(selectedDate);
+            }
+            refreshUpcoming();
+          })
+          .withFailureHandler(showError)
+          .apiDeletePlan(plan.id, currentYear, currentMonth);
+      }
+
+      function showError(error) {
+        console.error(error);
+        alert('Đã xảy ra lỗi: ' + error.message);
+      }
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const payload = {
+          id: planIdInput.value,
+          date: planDateInput.value,
+          time: planTimeInput.value,
+          title: planTitleInput.value,
+          description: planDescriptionInput.value,
+          tags: planTagsInput.value,
+          status: planStatusInput.value
+        };
+        setLoading(formLoading, true);
+        google.script.run
+          .withSuccessHandler((result) => {
+            setLoading(formLoading, false);
+            renderCalendar(result.calendar);
+            selectedDate = result.plan.date;
+            loadDayPlans(result.plan.date);
+            refreshUpcoming();
+            form.reset();
+            planDateInput.value = result.plan.date;
+          })
+          .withFailureHandler((error) => {
+            setLoading(formLoading, false);
+            showError(error);
+          })
+          .apiSavePlan(payload);
+      });
+
+      resetBtn.addEventListener('click', () => {
+        form.reset();
+        if (selectedDate) {
+          planDateInput.value = selectedDate;
+        }
+      });
+
+      aiSuggestBtn.addEventListener('click', () => {
+        const prompt = aiPrompt.value;
+        if (!selectedDate) {
+          alert('Vui lòng chọn ngày trên lịch trước.');
+          return;
+        }
+        if (!prompt.trim()) {
+          alert('Hãy nhập nội dung để AI gợi ý.');
+          return;
+        }
+        setLoading(aiLoading, true);
+        google.script.run
+          .withSuccessHandler((suggestions) => {
+            setLoading(aiLoading, false);
+            aiSuggestions.innerHTML = '';
+            if (!suggestions.length) {
+              aiSuggestions.innerHTML = '<div class="empty">AI chưa có gợi ý phù hợp.</div>';
+              return;
+            }
+            suggestions.forEach((item) => {
+              const card = document.createElement('div');
+              card.className = 'suggestion-card';
+
+              const header = document.createElement('div');
+              const timeEl = document.createElement('strong');
+              timeEl.textContent = item.time || 'Cả ngày';
+              header.appendChild(timeEl);
+
+              const titleEl = document.createElement('span');
+              titleEl.textContent = ' - ' + (item.title || '');
+              header.appendChild(titleEl);
+              card.appendChild(header);
+
+              if (item.description) {
+                const desc = document.createElement('div');
+                desc.className = 'muted';
+                desc.textContent = item.description;
+                card.appendChild(desc);
+              }
+
+              if (item.tags) {
+                const tags = document.createElement('div');
+                tags.className = 'pill';
+                tags.textContent = item.tags;
+                card.appendChild(tags);
+              }
+              const addBtn = document.createElement('button');
+              addBtn.type = 'button';
+              addBtn.className = 'btn btn-primary';
+              addBtn.textContent = 'Thêm';
+              addBtn.addEventListener('click', () => {
+                planTitleInput.value = item.title || '';
+                planTimeInput.value = item.time || '';
+                planDescriptionInput.value = item.description || '';
+                planTagsInput.value = item.tags || '';
+              });
+              card.appendChild(addBtn);
+              aiSuggestions.appendChild(card);
+            });
+          })
+          .withFailureHandler((error) => {
+            setLoading(aiLoading, false);
+            showError(error);
+          })
+          .apiGetAiSuggestions(prompt, selectedDate);
+      });
+
+      searchBtn.addEventListener('click', () => {
+        const query = searchQueryInput.value;
+        setLoading(searchLoading, true);
+        google.script.run
+          .withSuccessHandler((plans) => {
+            setLoading(searchLoading, false);
+            searchResults.innerHTML = '';
+            if (!plans.length) {
+              searchResults.innerHTML = '<div class="empty">Không tìm thấy công việc.</div>';
+              return;
+            }
+            plans.forEach((plan) => searchResults.appendChild(planCard(plan)));
+          })
+          .withFailureHandler((error) => {
+            setLoading(searchLoading, false);
+            showError(error);
+          })
+          .apiSearchPlans(query);
+      });
+
+      function refreshUpcoming() {
+        google.script.run
+          .withSuccessHandler((plans) => {
+            upcomingPlans.innerHTML = '';
+            if (!plans.length) {
+              upcomingPlans.innerHTML = '<div class="empty">Không có công việc sắp tới.</div>';
+              return;
+            }
+            plans.forEach((plan) => {
+              const card = document.createElement('div');
+              card.className = 'suggestion-card';
+
+              const line = document.createElement('div');
+              line.style.fontWeight = '600';
+              line.textContent =
+                new Date(plan.date).toLocaleDateString('vi-VN') + ' · ' + (plan.time || 'Cả ngày');
+              card.appendChild(line);
+
+              const title = document.createElement('div');
+              title.textContent = plan.title || '';
+              card.appendChild(title);
+
+              if (plan.description) {
+                const desc = document.createElement('div');
+                desc.className = 'muted';
+                desc.textContent = plan.description;
+                card.appendChild(desc);
+              }
+
+              upcomingPlans.appendChild(card);
+            });
+          })
+          .withFailureHandler(showError)
+          .apiGetUpcomingPlans();
+      }
+
+      function init() {
+        initWeekdayRow();
+        const now = new Date();
+        currentYear = now.getFullYear();
+        currentMonth = now.getMonth() + 1;
+        google.script.run
+          .withSuccessHandler((data) => {
+            renderCalendar(data);
+            selectDate(toIsoDate(new Date()));
+            refreshUpcoming();
+          })
+          .withFailureHandler(showError)
+          .apiGetCalendar(currentYear, currentMonth);
+      }
+
+      function toIsoDate(date) {
+        if (!(date instanceof Date)) {
+          date = new Date(date);
+        }
+        return date.toISOString().slice(0, 10);
+      }
+
+      prevBtn.addEventListener('click', () => {
+        let month = currentMonth - 1;
+        let year = currentYear;
+        if (month < 1) {
+          month = 12;
+          year -= 1;
+        }
+        google.script.run
+          .withSuccessHandler((data) => {
+            renderCalendar(data);
+            if (selectedDate) {
+              loadDayPlans(selectedDate);
+            }
+          })
+          .withFailureHandler(showError)
+          .apiGetCalendar(year, month);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        let month = currentMonth + 1;
+        let year = currentYear;
+        if (month > 12) {
+          month = 1;
+          year += 1;
+        }
+        google.script.run
+          .withSuccessHandler((data) => {
+            renderCalendar(data);
+            if (selectedDate) {
+              loadDayPlans(selectedDate);
+            }
+          })
+          .withFailureHandler(showError)
+          .apiGetCalendar(year, month);
+      });
+
+      window.addEventListener('load', init);
+    </script>
+  </body>
+</html>
