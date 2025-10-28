@@ -124,6 +124,7 @@
             <li><a href="forum.aspx" title="Diễn đàn" class='<%if(Session["current"]=="2"){%>current'<%}else{%>no'<%}%> ><span>Diễn đàn</span></a></li>
             <li><a href="show_album.aspx" title="Media" class='<%if(Session["current"]=="3"){%>current'<%}else{%>no'<%}%> ><span>Media</span></a></li>
             <li><a href="help.aspx" title="Trợ giúp" class='<%if(Session["current"]=="8"){%>current'<%}else{%>no'<%}%>><span>Trợ giúp</span></a></li>
+            <li><a href="quiz.aspx" title="Thi trắc nghiệm" class='<%if(Session["current"]=="11"){%>current'<%}else{%>no'<%}%>><span>Thi trắc nghiệm</span></a></li>
             <li><a href="roles.aspx?id=4" title="Liên hệ" class='<%if(Session["current"]=="6"){%>current'<%}else{%>no'<%}%>><span>Liên hệ</span></a></li>
             <%--<li><a href="register.aspx" title="Đăng ký" class='<%if(Session["current"]=="9"){%>current'<%}else{%>no'<%}%>><span>Đăng ký</span></a></li>--%>
             <li><asp:Panel ID="pn_admin" runat="server" Visible="false"><a href="admin.aspx" title="Quản trị" class='<%if(Session["current"]=="7"){%>current'<%}else{%>no'<%}%>><span>Quản trị</span></a> </asp:Panel></li>
