@@ -162,6 +162,7 @@
     <Content Include="project_detail_popup.aspx" />
     <Content Include="project_manage_reports.aspx" />
     <Content Include="project_reports.aspx" />
+    <Content Include="quiz.aspx" />
     <Content Include="receiver.aspx" />
     <Content Include="request_detail.aspx" />
     <Content Include="roles.aspx" />
@@ -500,6 +501,13 @@
     </Compile>
     <Compile Include="project_reports.aspx.designer.cs">
       <DependentUpon>project_reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="quiz.aspx.cs">
+      <DependentUpon>quiz.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="quiz.aspx.designer.cs">
+      <DependentUpon>quiz.aspx</DependentUpon>
     </Compile>
     <Compile Include="receiver.aspx.cs">
       <DependentUpon>receiver.aspx</DependentUpon>
