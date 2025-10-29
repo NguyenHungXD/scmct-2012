@@ -61,12 +61,12 @@ function getPlannerSheet() {
 function rowToPlan(row) {
   return {
     id: row[0],
-    date: row[1],
-    time: row[2],
-    title: row[3],
-    description: row[4],
-    tags: row[5],
-    status: row[6],
+    date: normalizeIsoDate(row[1]),
+    time: toSheetTime(row[2]),
+    title: cleanText(row[3]),
+    description: cleanText(row[4]),
+    tags: cleanText(row[5]),
+    status: cleanText(row[6]) || 'Planned',
     createdAt: row[7],
     updatedAt: row[8]
   };
@@ -265,4 +265,40 @@ function normalizePlan(plan) {
   }
 
   return normalized;
+}
+
+/**
+ * Normalizes mixed sheet time values into HH:mm strings.
+ * @param {*=} value
+ * @return {string}
+ */
+function toSheetTime(value) {
+  if (value === null || typeof value === 'undefined' || value === '') {
+    return '';
+  }
+
+  if (Object.prototype.toString.call(value) === '[object Date]') {
+    return Utilities.formatDate(value, Session.getScriptTimeZone(), 'HH:mm');
+  }
+
+  if (typeof value === 'number') {
+    const millis = Math.round(value * 24 * 60 * 60 * 1000);
+    return Utilities.formatDate(new Date(millis), Session.getScriptTimeZone(), 'HH:mm');
+  }
+
+  const text = cleanText(value);
+  if (!text) {
+    return '';
+  }
+
+  if (/^\d{1,2}:\d{2}/.test(text)) {
+    return text.slice(0, 5);
+  }
+
+  const parsed = new Date('1970-01-01T' + text);
+  if (!isNaN(parsed.getTime())) {
+    return Utilities.formatDate(parsed, Session.getScriptTimeZone(), 'HH:mm');
+  }
+
+  return text;
 }
