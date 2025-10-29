@@ -4,6 +4,8 @@
     <base target="_top" />
     <meta charset="UTF-8" />
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
       :root {
         color-scheme: light dark;
         --primary: #6366f1;
@@ -15,7 +17,12 @@
         --card-bg: rgba(255, 255, 255, 0.88);
         --text: #0f172a;
         --glass: rgba(148, 163, 184, 0.18);
-        font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        --font-size-xs: 11px;
+        --font-size-sm: 13px;
+        --font-size-md: 15px;
+        --font-size-lg: 18px;
+        --font-size-xl: 32px;
       }
 
       body {
@@ -26,6 +33,33 @@
           radial-gradient(circle at 80% 10%, rgba(45, 212, 191, 0.3), transparent 50%),
           linear-gradient(135deg, rgba(15, 23, 42, 0.04), rgba(15, 23, 42, 0.06));
         color: var(--text);
+        font-family: var(--font-sans);
+        font-size: var(--font-size-md);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: var(--font-sans);
+        font-weight: 700;
+        color: var(--text);
+        margin: 0;
+      }
+
+      p {
+        font-size: var(--font-size-md);
+        margin: 0;
       }
 
       body::before {
@@ -43,6 +77,16 @@
         margin: 0 auto;
         padding: 40px 24px 72px;
         box-sizing: border-box;
+      }
+
+      h2 {
+        font-size: var(--font-size-lg);
+        line-height: 1.4;
+      }
+
+      .card h2 {
+        margin-top: 0;
+        margin-bottom: 12px;
       }
 
       header {
@@ -64,7 +108,7 @@
       }
 
       header h1 {
-        font-size: 34px;
+        font-size: var(--font-size-xl);
         margin: 0;
         font-weight: 800;
         background: linear-gradient(135deg, var(--primary), var(--teal));
@@ -75,6 +119,8 @@
       header p {
         margin: 6px 0 0;
         color: rgba(15, 23, 42, 0.7);
+        font-size: var(--font-size-sm);
+        max-width: 480px;
       }
 
       .top-actions {
@@ -86,7 +132,7 @@
       }
 
       .top-actions .loading {
-        font-size: 12px;
+        font-size: var(--font-size-xs);
       }
 
       .layout {
@@ -144,6 +190,11 @@
         margin-bottom: 16px;
       }
 
+      .calendar-title {
+        font-size: var(--font-size-lg);
+        font-weight: 700;
+      }
+
       .calendar-header button {
         border: none;
         background: none;
@@ -168,7 +219,7 @@
       }
 
       .weekday {
-        font-size: 12px;
+        font-size: var(--font-size-xs);
         text-transform: uppercase;
         letter-spacing: 0.08em;
         text-align: center;
@@ -207,20 +258,24 @@
       }
 
       .day-number {
-        font-size: 16px;
+        font-size: var(--font-size-lg);
         font-weight: 600;
       }
 
       .badge {
         position: absolute;
-        top: 10px;
-        right: 12px;
+        top: 8px;
+        right: 10px;
         background: linear-gradient(135deg, var(--primary), var(--teal));
         color: white;
-        font-size: 9px;
+        font-size: calc(var(--font-size-xs) - 1px);
         font-weight: 600;
         padding: 2px 6px;
         border-radius: 999px;
+        min-width: 20px;
+        height: 20px;
+        display: grid;
+        place-items: center;
         box-shadow: 0 10px 18px rgba(99, 102, 241, 0.2);
       }
 
@@ -230,7 +285,7 @@
         border-radius: 16px;
         background: rgba(15, 23, 42, 0.08);
         color: rgba(15, 23, 42, 0.75);
-        font-size: 13px;
+        font-size: var(--font-size-sm);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -327,7 +382,8 @@
         padding: 18px 20px;
         background: rgba(255, 255, 255, 0.95);
         box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
-        display: flex;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
         align-items: center;
         gap: 18px;
         position: relative;
@@ -340,13 +396,13 @@
       }
 
       .plan-item .plan-time {
-        font-weight: 700;
+        font-weight: 600;
         color: var(--primary-dark);
-        font-size: 14px;
+        font-size: var(--font-size-sm);
         background: rgba(99, 102, 241, 0.12);
         padding: 6px 12px;
         border-radius: 14px;
-        min-width: 90px;
+        min-width: 86px;
         text-align: center;
         display: inline-flex;
         align-items: center;
@@ -356,7 +412,6 @@
       .plan-content {
         display: grid;
         gap: 8px;
-        flex: 1;
       }
 
       .plan-header {
@@ -367,14 +422,14 @@
       }
 
       .plan-title {
-        margin: 0;
-        font-size: 17px;
+        font-size: var(--font-size-lg);
         font-weight: 700;
+        line-height: 1.4;
       }
 
       .plan-description {
-        margin: 0;
         color: rgba(15, 23, 42, 0.75);
+        font-size: var(--font-size-sm);
       }
 
       .plan-meta {
@@ -387,8 +442,7 @@
       .plan-actions {
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin-left: auto;
+        gap: 8px;
       }
 
       .btn {
@@ -396,6 +450,8 @@
         border-radius: 12px;
         padding: 11px 18px;
         font-weight: 600;
+        font-size: var(--font-size-sm);
+        line-height: 1.2;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
@@ -420,15 +476,15 @@
         border: none;
         background: rgba(99, 102, 241, 0.12);
         color: var(--primary-dark);
-        width: 36px;
-        height: 36px;
-        border-radius: 12px;
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         transition: background 0.18s ease, transform 0.18s ease;
-        font-size: 16px;
+        font-size: 15px;
       }
 
       .icon-btn:hover {
@@ -450,13 +506,13 @@
         color: var(--primary-dark);
         padding: 4px 10px;
         border-radius: 12px;
-        font-size: 12px;
+        font-size: var(--font-size-xs);
         font-weight: 600;
       }
 
       .status {
         font-weight: 600;
-        font-size: 12px;
+        font-size: var(--font-size-xs);
         color: var(--accent);
         background: rgba(245, 158, 11, 0.18);
         padding: 4px 10px;
@@ -492,8 +548,15 @@
         gap: 16px;
       }
 
+      .form-actions {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
       .form-grid label {
-        font-size: 13px;
+        font-size: var(--font-size-sm);
         font-weight: 600;
         color: rgba(15, 23, 42, 0.65);
       }
@@ -505,7 +568,8 @@
         border-radius: 14px;
         border: 1px solid rgba(148, 163, 184, 0.35);
         padding: 11px 13px;
-        font-size: 14px;
+        font-size: var(--font-size-sm);
+        font-family: var(--font-sans);
         box-sizing: border-box;
         transition: border 0.15s ease, box-shadow 0.2s ease;
         background: rgba(255, 255, 255, 0.95);
@@ -525,9 +589,28 @@
         margin-top: 24px;
       }
 
+      @media (min-width: 980px) {
+        .ai-section {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 20px;
+        }
+      }
+
+      .section-heading {
+        font-size: var(--font-size-lg);
+        margin: 0 0 6px;
+      }
+
+      .inline-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
       .muted {
         color: rgba(15, 23, 42, 0.55);
-        font-size: 13px;
+        font-size: var(--font-size-sm);
       }
 
       .upcoming-list {
@@ -570,7 +653,7 @@
         display: none;
         gap: 6px;
         align-items: center;
-        font-size: 13px;
+        font-size: var(--font-size-sm);
         color: rgba(15, 23, 42, 0.65);
       }
 
@@ -621,6 +704,14 @@
         margin-bottom: 16px;
       }
 
+      .modal-title {
+        font-size: var(--font-size-lg);
+      }
+
+      .modal-header .muted {
+        margin-top: 4px;
+      }
+
       .modal-body {
         display: grid;
         gap: 16px;
@@ -636,14 +727,14 @@
       }
 
       .settings-notice {
-        font-size: 13px;
+        font-size: var(--font-size-sm);
         color: var(--primary-dark);
         margin-right: auto;
       }
 
       .modal small {
         display: block;
-        font-size: 12px;
+        font-size: var(--font-size-xs);
         color: rgba(15, 23, 42, 0.55);
         margin-top: 6px;
       }
@@ -660,17 +751,19 @@
         }
 
         .plan-item {
-          flex-direction: column;
-          align-items: stretch;
+          grid-template-columns: 1fr;
+          gap: 12px;
         }
 
         .plan-item .plan-time {
+          justify-content: flex-start;
           width: fit-content;
           min-width: auto;
         }
 
         .plan-actions {
           justify-content: flex-end;
+          gap: 6px;
         }
       }
 
@@ -694,6 +787,7 @@
 
         .plan-item {
           padding: 16px;
+          gap: 10px;
         }
 
         .selected-hint {
@@ -730,7 +824,7 @@
             <div class="calendar-header">
               <button type="button" id="prevMonth" aria-label="Tháng trước">&#8592;</button>
               <div>
-                <div id="calendarLabel" style="font-weight: 700; font-size: 19px;"></div>
+                <div id="calendarLabel" class="calendar-title"></div>
                 <div class="muted" id="todayLabel"></div>
               </div>
               <button type="button" id="nextMonth" aria-label="Tháng sau">&#8594;</button>
@@ -743,7 +837,7 @@
         </section>
 
         <section class="card">
-          <h2 style="margin-top: 0">Thêm kế hoạch</h2>
+          <h2>Thêm kế hoạch</h2>
           <form id="planForm" class="form-grid">
             <input type="hidden" id="planId" />
             <div>
@@ -774,7 +868,7 @@
                 <option value="Done">Done</option>
               </select>
             </div>
-            <div style="display: flex; gap: 12px;">
+            <div class="form-actions">
               <button class="btn btn-primary" type="submit">Lưu kế hoạch</button>
               <button class="btn btn-secondary" type="button" id="resetBtn">Làm mới</button>
               <div class="loading" id="formLoading">
@@ -785,12 +879,12 @@
 
           <div class="ai-section">
             <div>
-              <h3 style="margin: 0 0 6px;">AI nhập liệu</h3>
+              <h3 class="section-heading">AI nhập liệu</h3>
               <p class="muted">
                 Nhập danh sách công việc (mỗi dòng một việc). Hệ thống sẽ tự động tạo gợi ý kế hoạch cho ngày đã chọn.
               </p>
               <textarea id="aiPrompt" rows="3" placeholder="08:30 Họp nhóm dự án\n11h30 Ăn trưa với khách hàng"></textarea>
-              <div style="display: flex; align-items: center; gap: 10px;">
+              <div class="inline-actions">
                 <button class="btn btn-secondary" id="aiSuggestBtn" type="button">Tạo gợi ý</button>
                 <div class="loading" id="aiLoading">
                   <span>Đang gọi AI...</span>
@@ -800,7 +894,7 @@
             </div>
 
             <div>
-              <h3 style="margin: 0 0 6px;">Tìm kiếm AI</h3>
+              <h3 class="section-heading">Tìm kiếm AI</h3>
               <div class="search-bar">
                 <input type="text" id="searchQuery" placeholder="Tìm kế hoạch: họp, khách hàng..." />
                 <button class="btn btn-secondary" id="searchBtn" type="button">Tìm</button>
@@ -812,7 +906,7 @@
             </div>
 
             <div>
-              <h3 style="margin: 0 0 6px;">Sắp tới</h3>
+              <h3 class="section-heading">Sắp tới</h3>
               <div id="upcomingPlans" class="upcoming-list"></div>
             </div>
           </div>
@@ -824,8 +918,8 @@
       <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="dayModalTitle">
         <div class="modal-header">
           <div>
-            <h2 id="dayModalTitle" style="margin: 0;">Kế hoạch ngày</h2>
-            <p class="muted" id="dayModalSubtitle" style="margin: 4px 0 0;">Chọn ngày để xem nội dung.</p>
+            <h2 id="dayModalTitle" class="modal-title">Kế hoạch ngày</h2>
+            <p class="muted" id="dayModalSubtitle">Chọn ngày để xem nội dung.</p>
           </div>
           <button type="button" class="btn-ghost" id="dayModalClose" aria-label="Đóng">&times;</button>
         </div>
@@ -837,8 +931,8 @@
       <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
         <div class="modal-header">
           <div>
-            <h2 id="settingsTitle" style="margin: 0;">Cài đặt tích hợp</h2>
-            <p class="muted" style="margin: 4px 0 0;">
+            <h2 id="settingsTitle" class="modal-title">Cài đặt tích hợp</h2>
+            <p class="muted">
               Nhập Gemini API Key để kích hoạt AI nhập liệu và tìm kiếm nâng cao.
             </p>
           </div>
@@ -1294,6 +1388,8 @@
 
         const cachedPlans = dayCache.get(date);
         const hasCache = Array.isArray(cachedPlans);
+        const modalWasOpen = dayModal && dayModal.classList.contains('open');
+        const shouldOpen = opts.openModal || modalWasOpen;
 
         if (selectedHint && !hasCache) {
           selectedHint.classList.remove('active');
@@ -1314,8 +1410,8 @@
             dayModalBody.dataset.state = 'ready';
           }
         }
-        if (dayModalSubtitle) {
-          dayModalSubtitle.textContent = hasCache ? '' : 'Đang tải...';
+        if (dayModalSubtitle && !hasCache) {
+          dayModalSubtitle.textContent = 'Đang tải...';
         }
 
         if (hasCache) {
@@ -1328,14 +1424,19 @@
             selectedHint.classList.toggle('active', total > 0);
           }
           updateDayModalHeader();
-          renderDayModalContent();
-          if (opts.openModal) {
-            openDayModal();
+          if (shouldOpen) {
+            if (!modalWasOpen) {
+              openDayModal();
+            } else {
+              renderDayModalContent();
+            }
+          } else {
+            renderDayModalContent();
           }
         } else {
           currentDayPlans = [];
           updateDayModalHeader();
-          if (opts.openModal) {
+          if (shouldOpen && !modalWasOpen) {
             openDayModal();
           }
         }
@@ -1356,9 +1457,14 @@
                 : `${label}: Không có công việc`;
               selectedHint.classList.toggle('active', total > 0);
             }
-            if (opts.openModal || (dayModal && dayModal.classList.contains('open'))) {
-              openDayModal();
-            } else {
+            const modalIsOpen = dayModal && dayModal.classList.contains('open');
+            if (shouldOpen) {
+              if (!modalIsOpen) {
+                openDayModal();
+              } else {
+                renderDayModalContent();
+              }
+            } else if (modalIsOpen) {
               renderDayModalContent();
             }
           })
@@ -1378,6 +1484,10 @@
               selectedHint.textContent = `${label}: Không thể tải dữ liệu.`;
             }
             updateDayModalHeader();
+            const modalIsOpen = dayModal && dayModal.classList.contains('open');
+            if (shouldOpen && !modalIsOpen) {
+              openDayModal();
+            }
             showError(error);
           })
           .apiGetPlansForDay(date);
