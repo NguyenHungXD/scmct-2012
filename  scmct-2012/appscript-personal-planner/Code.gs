@@ -44,3 +44,11 @@ function apiGetAiSuggestions(prompt, date) {
 function apiSearchPlans(query) {
   return getAiSearchMatches(query);
 }
+
+function apiGetSettings() {
+  return getSettingsForClient();
+}
+
+function apiSaveSettings(settings) {
+  return saveSettingsForClient(settings);
+}

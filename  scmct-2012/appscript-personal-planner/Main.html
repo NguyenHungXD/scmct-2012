@@ -31,10 +31,21 @@
       }
 
       header {
+        margin-bottom: 28px;
+      }
+
+      .header-row {
         display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin-bottom: 24px;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      @media (max-width: 768px) {
+        .header-row {
+          flex-direction: column;
+          align-items: flex-start;
+        }
       }
 
       header h1 {
@@ -46,6 +57,16 @@
       header p {
         margin: 0;
         color: rgba(15, 23, 42, 0.72);
+      }
+
+      .top-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .top-actions .loading {
+        font-size: 12px;
       }
 
       .layout {
@@ -129,6 +150,11 @@
         box-shadow: inset 0 0 0 2px var(--primary);
       }
 
+      .day-cell.selected {
+        box-shadow: inset 0 0 0 2px var(--accent), 0 16px 24px rgba(37, 99, 235, 0.1);
+        transform: translateY(-2px);
+      }
+
       .day-number {
         font-size: 16px;
         font-weight: 600;
@@ -149,8 +175,16 @@
         margin-top: 18px;
       }
 
-      .day-detail h2 {
-        margin: 0 0 12px;
+      .day-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .day-toolbar h2 {
+        margin: 0;
         font-size: 20px;
       }
 
@@ -190,6 +224,19 @@
         display: inline-flex;
         align-items: center;
         gap: 6px;
+        transition: transform 0.15s ease, box-shadow 0.2s ease;
+      }
+
+      .btn:hover:not([disabled]) {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 20px rgba(37, 99, 235, 0.2);
+      }
+
+      .btn[disabled] {
+        cursor: not-allowed;
+        opacity: 0.6;
+        box-shadow: none;
+        transform: none;
       }
 
       .btn-primary {
@@ -204,6 +251,19 @@
       .btn-secondary {
         background: rgba(37, 99, 235, 0.1);
         color: var(--primary);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: rgba(15, 23, 42, 0.65);
+        font-size: 22px;
+        padding: 4px;
+      }
+
+      .btn-ghost:hover {
+        color: var(--primary);
+        box-shadow: none;
+        transform: none;
       }
 
       .form-grid {
@@ -304,15 +364,86 @@
       .loading.active {
         display: inline-flex;
       }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(15, 23, 42, 0.35);
+        backdrop-filter: blur(4px);
+        z-index: 1000;
+      }
+
+      .modal.open {
+        display: flex;
+      }
+
+      .modal-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        width: min(480px, 100%);
+        box-shadow: 0 32px 60px rgba(15, 23, 42, 0.25);
+        padding: 24px;
+        position: relative;
+      }
+
+      .modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .modal-body {
+        display: grid;
+        gap: 16px;
+      }
+
+      .modal-footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+        margin-top: 8px;
+      }
+
+      .settings-notice {
+        font-size: 13px;
+        color: var(--primary-dark);
+        margin-right: auto;
+      }
+
+      .modal small {
+        display: block;
+        font-size: 12px;
+        color: rgba(15, 23, 42, 0.55);
+        margin-top: 6px;
+      }
     </style>
   </head>
   <body>
     <div class="app-shell">
       <header>
-        <h1>PlanBoard AI</h1>
-        <p>
-          Quản lý lịch cá nhân với AI: nhập liệu nhanh, tìm kiếm thông minh và lịch tháng trực quan.
-        </p>
+        <div class="header-row">
+          <div>
+            <h1>PlanBoard AI</h1>
+            <p>
+              Quản lý lịch cá nhân với AI: nhập liệu nhanh, tìm kiếm thông minh và lịch tháng trực quan.
+            </p>
+          </div>
+          <div class="top-actions">
+            <button class="btn btn-secondary" type="button" id="syncBtn">Đồng bộ Sheet</button>
+            <div class="loading" id="syncLoading">
+              <span>Đang đồng bộ...</span>
+            </div>
+            <button class="btn btn-primary" type="button" id="settingsBtn">Cài đặt</button>
+          </div>
+        </div>
       </header>
 
       <div class="layout">
@@ -330,7 +461,10 @@
           <div class="calendar-grid" id="calendarGrid"></div>
 
           <div class="day-detail">
-            <h2 id="dayTitle">Chọn một ngày</h2>
+            <div class="day-toolbar">
+              <h2 id="dayTitle">Chọn một ngày</h2>
+              <button class="btn btn-secondary" type="button" id="reloadDayBtn">Tải lại ngày</button>
+            </div>
             <div id="dayPlans" class="day-plans empty">Chưa có công việc nào.</div>
           </div>
         </section>
@@ -413,6 +547,40 @@
       </div>
     </div>
 
+    <div id="settingsModal" class="modal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+        <div class="modal-header">
+          <div>
+            <h2 id="settingsTitle" style="margin: 0;">Cài đặt tích hợp</h2>
+            <p class="muted" style="margin: 4px 0 0;">
+              Nhập Gemini API Key để kích hoạt AI nhập liệu và tìm kiếm nâng cao.
+            </p>
+          </div>
+          <button type="button" class="btn-ghost" id="settingsClose" aria-label="Đóng">&times;</button>
+        </div>
+        <form id="settingsForm" class="modal-body">
+          <div>
+            <label for="geminiApiKey">Gemini API Key</label>
+            <input type="password" id="geminiApiKey" placeholder="AIza..." autocomplete="off" />
+            <small>Khoá sẽ được lưu trong Google Sheet bảo mật của dự án.</small>
+          </div>
+          <div>
+            <label for="geminiModel">Model</label>
+            <input type="text" id="geminiModel" value="gemini-pro" />
+            <small>Ví dụ: gemini-pro, gemini-1.5-pro.</small>
+          </div>
+          <div class="modal-footer">
+            <div class="loading" id="settingsLoading">
+              <span>Đang lưu...</span>
+            </div>
+            <span class="settings-notice" id="settingsNotice"></span>
+            <button class="btn btn-secondary" type="button" id="settingsCancel">Huỷ</button>
+            <button class="btn btn-primary" type="submit">Lưu cài đặt</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <script>
       const weekdayLabels = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
       const weekdayRow = document.getElementById('weekdayRow');
@@ -442,6 +610,18 @@
       const searchResults = document.getElementById('searchResults');
       const searchLoading = document.getElementById('searchLoading');
       const upcomingPlans = document.getElementById('upcomingPlans');
+      const reloadDayBtn = document.getElementById('reloadDayBtn');
+      const syncBtn = document.getElementById('syncBtn');
+      const syncLoading = document.getElementById('syncLoading');
+      const settingsBtn = document.getElementById('settingsBtn');
+      const settingsModal = document.getElementById('settingsModal');
+      const settingsForm = document.getElementById('settingsForm');
+      const settingsLoading = document.getElementById('settingsLoading');
+      const settingsNotice = document.getElementById('settingsNotice');
+      const settingsClose = document.getElementById('settingsClose');
+      const settingsCancel = document.getElementById('settingsCancel');
+      const geminiApiKeyInput = document.getElementById('geminiApiKey');
+      const geminiModelInput = document.getElementById('geminiModel');
 
       let currentYear, currentMonth, selectedDate;
 
@@ -455,11 +635,67 @@
       }
 
       function setLoading(element, loading) {
+        if (!element) {
+          return;
+        }
         if (loading) {
           element.classList.add('active');
         } else {
           element.classList.remove('active');
         }
+      }
+
+      function loadCalendarFor(year, month, options) {
+        const opts = Object.assign({ refreshDay: true, after: null }, options || {});
+        google.script.run
+          .withSuccessHandler((data) => {
+            renderCalendar(data);
+            if (opts.refreshDay && selectedDate) {
+              loadDayPlans(selectedDate);
+            }
+            if (typeof opts.after === 'function') {
+              opts.after(null, data);
+            }
+          })
+          .withFailureHandler((error) => {
+            if (typeof opts.after === 'function') {
+              opts.after(error);
+            }
+            showError(error);
+          })
+          .apiGetCalendar(year, month);
+      }
+
+      function openSettings() {
+        if (!settingsModal) {
+          return;
+        }
+        settingsModal.classList.add('open');
+        settingsModal.setAttribute('aria-hidden', 'false');
+        settingsNotice.textContent = '';
+        setLoading(settingsLoading, true);
+        google.script.run
+          .withSuccessHandler((settings) => {
+            setLoading(settingsLoading, false);
+            geminiApiKeyInput.value = settings.geminiApiKey || '';
+            geminiModelInput.value = settings.geminiModel || 'gemini-pro';
+          })
+          .withFailureHandler((error) => {
+            setLoading(settingsLoading, false);
+            showError(error);
+            closeSettings();
+          })
+          .apiGetSettings();
+      }
+
+      function closeSettings() {
+        if (!settingsModal) {
+          return;
+        }
+        settingsModal.classList.remove('open');
+        settingsModal.setAttribute('aria-hidden', 'true');
+        settingsNotice.textContent = '';
+        setLoading(settingsLoading, false);
       }
 
       function renderCalendar(data) {
@@ -476,6 +712,9 @@
           }
           if (day.isToday) {
             cell.classList.add('today');
+          }
+          if (selectedDate && day.date === selectedDate) {
+            cell.classList.add('selected');
           }
           cell.dataset.date = day.date;
           const number = document.createElement('div');
@@ -495,6 +734,7 @@
         });
 
         todayLabel.textContent = 'Hôm nay: ' + new Date().toLocaleDateString('vi-VN');
+        highlightSelectedDay();
       }
 
       function selectDate(isoDate) {
@@ -506,7 +746,19 @@
         planDescriptionInput.value = '';
         planTagsInput.value = '';
         planStatusInput.value = 'Planned';
+        highlightSelectedDay();
         loadDayPlans(isoDate);
+      }
+
+      function highlightSelectedDay() {
+        const cells = calendarGrid.querySelectorAll('.day-cell');
+        cells.forEach((cell) => {
+          if (selectedDate && cell.dataset.date === selectedDate) {
+            cell.classList.add('selected');
+          } else {
+            cell.classList.remove('selected');
+          }
+        });
       }
 
       function planCard(plan) {
@@ -646,6 +898,71 @@
         }
       });
 
+      reloadDayBtn.addEventListener('click', () => {
+        if (!selectedDate) {
+          alert('Vui lòng chọn ngày trên lịch trước.');
+          return;
+        }
+        loadDayPlans(selectedDate);
+      });
+
+      settingsBtn.addEventListener('click', openSettings);
+      settingsClose.addEventListener('click', closeSettings);
+      settingsCancel.addEventListener('click', closeSettings);
+      settingsModal.addEventListener('click', (event) => {
+        if (event.target === settingsModal) {
+          closeSettings();
+        }
+      });
+
+      settingsForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        setLoading(settingsLoading, true);
+        settingsNotice.textContent = '';
+        google.script.run
+          .withSuccessHandler((saved) => {
+            setLoading(settingsLoading, false);
+            geminiApiKeyInput.value = saved.geminiApiKey || '';
+            geminiModelInput.value = saved.geminiModel || 'gemini-pro';
+            settingsNotice.textContent = 'Đã lưu cài đặt Gemini!';
+            setTimeout(() => {
+              settingsNotice.textContent = '';
+              closeSettings();
+            }, 1200);
+          })
+          .withFailureHandler((error) => {
+            setLoading(settingsLoading, false);
+            showError(error);
+          })
+          .apiSaveSettings({
+            geminiApiKey: geminiApiKeyInput.value,
+          geminiModel: geminiModelInput.value
+        });
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && settingsModal && settingsModal.classList.contains('open')) {
+          closeSettings();
+        }
+      });
+
+      syncBtn.addEventListener('click', () => {
+        if (!currentYear || !currentMonth) {
+          return;
+        }
+        syncBtn.disabled = true;
+        setLoading(syncLoading, true);
+        loadCalendarFor(currentYear, currentMonth, {
+          after: (error) => {
+            setLoading(syncLoading, false);
+            syncBtn.disabled = false;
+            if (!error) {
+              refreshUpcoming();
+            }
+          }
+        });
+      });
+
       aiSuggestBtn.addEventListener('click', () => {
         const prompt = aiPrompt.value;
         if (!selectedDate) {
@@ -774,14 +1091,15 @@
         const now = new Date();
         currentYear = now.getFullYear();
         currentMonth = now.getMonth() + 1;
-        google.script.run
-          .withSuccessHandler((data) => {
-            renderCalendar(data);
-            selectDate(toIsoDate(new Date()));
-            refreshUpcoming();
-          })
-          .withFailureHandler(showError)
-          .apiGetCalendar(currentYear, currentMonth);
+        loadCalendarFor(currentYear, currentMonth, {
+          refreshDay: false,
+          after: (error) => {
+            if (!error) {
+              selectDate(toIsoDate(new Date()));
+              refreshUpcoming();
+            }
+          }
+        });
       }
 
       function toIsoDate(date) {
@@ -798,15 +1116,7 @@
           month = 12;
           year -= 1;
         }
-        google.script.run
-          .withSuccessHandler((data) => {
-            renderCalendar(data);
-            if (selectedDate) {
-              loadDayPlans(selectedDate);
-            }
-          })
-          .withFailureHandler(showError)
-          .apiGetCalendar(year, month);
+        loadCalendarFor(year, month);
       });
 
       nextBtn.addEventListener('click', () => {
@@ -816,15 +1126,7 @@
           month = 1;
           year += 1;
         }
-        google.script.run
-          .withSuccessHandler((data) => {
-            renderCalendar(data);
-            if (selectedDate) {
-              loadDayPlans(selectedDate);
-            }
-          })
-          .withFailureHandler(showError)
-          .apiGetCalendar(year, month);
+        loadCalendarFor(year, month);
       });
 
       window.addEventListener('load', init);

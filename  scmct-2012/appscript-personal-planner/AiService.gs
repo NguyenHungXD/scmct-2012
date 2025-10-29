@@ -1,41 +1,222 @@
 /**
- * Retrieves AI configuration from Script Properties.
- * @return {{endpoint: string|null, apiKey: string|null}}
+ * Retrieves AI configuration from persisted settings.
+ * @return {{apiKey: string|null, model: string}}
  */
 function getAiConfig() {
-  const props = PropertiesService.getScriptProperties();
+  const apiKey = getSettingValue('GEMINI_API_KEY', '');
+  const model = getSettingValue('GEMINI_MODEL', 'gemini-pro');
   return {
-    endpoint: props.getProperty('AI_ENDPOINT') || null,
-    apiKey: props.getProperty('AI_API_KEY') || null
+    apiKey: apiKey || null,
+    model: cleanText(model) || 'gemini-pro'
   };
 }
 
 /**
- * Calls an external AI endpoint if configured, otherwise falls back to a built-in helper.
+ * Calls Gemini if configured, otherwise falls back to deterministic helpers.
  * @param {string} action
  * @param {Object} payload
  * @return {Object}
  */
 function callAi(action, payload) {
   const config = getAiConfig();
-  if (config.endpoint && config.apiKey) {
+  if (config.apiKey) {
     try {
-      const response = UrlFetchApp.fetch(config.endpoint, {
-        method: 'post',
-        contentType: 'application/json',
-        headers: {
-          Authorization: 'Bearer ' + config.apiKey
-        },
-        payload: JSON.stringify({ action: action, payload: payload })
-      });
-      const text = response.getContentText();
-      return JSON.parse(text);
+      const result = callGemini(action, payload, config);
+      if (result) {
+        return result;
+      }
     } catch (error) {
-      console.warn('AI endpoint call failed, falling back to local helper.', error);
+      console.warn('Gemini call failed, using fallback AI.', error);
     }
   }
 
   return fallbackAi(action, payload);
+}
+
+/**
+ * Calls Gemini to complete a specific action.
+ * @param {string} action
+ * @param {Object} payload
+ * @param {{apiKey: string, model: string}} config
+ * @return {Object|null}
+ */
+function callGemini(action, payload, config) {
+  payload = payload || {};
+  const prompt = buildGeminiPrompt(action, payload);
+  if (!prompt) {
+    return null;
+  }
+
+  const requestBody = {
+    contents: [
+      {
+        role: 'user',
+        parts: [{ text: prompt }]
+      }
+    ],
+    generationConfig: {
+      temperature: 0.25,
+      topP: 0.9,
+      maxOutputTokens: 600
+    }
+  };
+
+  const url =
+    'https://generativelanguage.googleapis.com/v1beta/models/' +
+    encodeURIComponent(config.model) +
+    ':generateContent?key=' +
+    encodeURIComponent(config.apiKey);
+
+  const response = UrlFetchApp.fetch(url, {
+    method: 'post',
+    contentType: 'application/json',
+    muteHttpExceptions: true,
+    payload: JSON.stringify(requestBody)
+  });
+
+  if (response.getResponseCode() >= 300) {
+    throw new Error('Gemini API error: ' + response.getContentText());
+  }
+
+  const result = JSON.parse(response.getContentText());
+  const text = extractGeminiText(result);
+  if (!text) {
+    return null;
+  }
+
+  const parsed = parseGeminiStructuredJson(text);
+  if (!parsed) {
+    return null;
+  }
+
+  if (action === 'plan_suggestions' && parsed.suggestions) {
+    return parsed;
+  }
+
+  if (action === 'search_plans' && parsed.matches) {
+    const plans = payload && payload.plans ? payload.plans : [];
+    const parsedMatches = Array.isArray(parsed.matches) ? parsed.matches : [parsed.matches];
+    if (parsedMatches.length && typeof parsedMatches[0] === 'object') {
+      return { matches: parsedMatches };
+    }
+    const matches = parsedMatches
+      .map(function (matchId) {
+        return plans.find(function (plan) {
+          return plan.id === matchId;
+        });
+      })
+      .filter(function (plan) {
+        return plan;
+      });
+    return { matches: matches };
+  }
+
+  return null;
+}
+
+/**
+ * Builds a detailed prompt for Gemini based on the action.
+ * @param {string} action
+ * @param {Object} payload
+ * @return {string}
+ */
+function buildGeminiPrompt(action, payload) {
+  if (action === 'plan_suggestions') {
+    var isoDate = normalizeIsoDate(payload.date) || normalizeIsoDate(new Date());
+    return [
+      'Bạn là trợ lý lập kế hoạch cá nhân.',
+      'Hãy tạo gợi ý kế hoạch dựa trên nội dung người dùng cung cấp.',
+      'Trả về đối tượng JSON với cấu trúc {"suggestions": [{"date","time","title","description","tags"}]}.',
+      'Luôn dùng định dạng thời gian HH:mm và tiếng Việt tự nhiên.',
+      'Nếu không chắc chắn về giờ, để trống chuỗi.',
+      'Ngày mục tiêu: ' + isoDate + '.',
+      'Văn bản người dùng:',
+      '"""' + (payload.prompt || '') + '"""'
+    ].join('\n');
+  }
+
+  if (action === 'search_plans') {
+    const plans = (payload && payload.plans) || [];
+    const serializedPlans = JSON.stringify(
+      plans.map(function (plan) {
+        return {
+          id: plan.id,
+          date: plan.date,
+          time: plan.time,
+          title: plan.title,
+          description: plan.description,
+          tags: plan.tags
+        };
+      })
+    );
+    return [
+      'Bạn là trợ lý tìm kiếm lịch cá nhân.',
+      'Hãy xác định kế hoạch phù hợp với truy vấn người dùng.',
+      'Trả về đối tượng JSON với cấu trúc {"matches": ["planId", ...]}.',
+      'Truy vấn: ' + (payload.query || ''),
+      'Danh sách kế hoạch dạng JSON:',
+      serializedPlans
+    ].join('\n');
+  }
+
+  return '';
+}
+
+/**
+ * Extracts the primary text content from a Gemini response.
+ * @param {Object} response
+ * @return {string}
+ */
+function extractGeminiText(response) {
+  if (!response || !response.candidates || !response.candidates.length) {
+    return '';
+  }
+
+  const candidate = response.candidates[0];
+  if (candidate && candidate.content && candidate.content.parts) {
+    return candidate.content.parts
+      .map(function (part) {
+        return part.text || '';
+      })
+      .join('\n')
+      .trim();
+  }
+
+  if (candidate && candidate.output && candidate.output[0]) {
+    return cleanText(candidate.output[0]);
+  }
+
+  return '';
+}
+
+/**
+ * Attempts to parse a JSON object from Gemini text output.
+ * @param {string} text
+ * @return {Object|null}
+ */
+function parseGeminiStructuredJson(text) {
+  if (!text) {
+    return null;
+  }
+
+  var cleaned = text.trim();
+  cleaned = cleaned.replace(/```json/gi, '```');
+  cleaned = cleaned.replace(/```/g, '');
+
+  try {
+    return JSON.parse(cleaned);
+  } catch (error) {
+    var firstBrace = cleaned.indexOf('{');
+    var lastBrace = cleaned.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+      try {
+        return JSON.parse(cleaned.slice(firstBrace, lastBrace + 1));
+      } catch (ignored) {
+        return null;
+      }
+    }
+    return null;
+  }
 }
 
 /**
