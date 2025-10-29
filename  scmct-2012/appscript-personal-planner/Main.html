@@ -81,6 +81,8 @@
         display: flex;
         align-items: center;
         gap: 12px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
       }
 
       .top-actions .loading {
@@ -242,12 +244,13 @@
 
       .badge {
         position: absolute;
-        bottom: 12px;
-        left: 12px;
+        top: 10px;
+        right: 12px;
         background: linear-gradient(135deg, var(--primary), var(--teal));
         color: white;
-        font-size: 11px;
-        padding: 4px 9px;
+        font-size: 10px;
+        font-weight: 600;
+        padding: 3px 7px;
         border-radius: 999px;
         box-shadow: 0 10px 18px rgba(99, 102, 241, 0.2);
       }
@@ -269,41 +272,97 @@
         margin: 0;
       }
 
+      .day-toolbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .day-count {
+        margin: 6px 0 0;
+        font-size: 13px;
+        color: rgba(15, 23, 42, 0.65);
+      }
+
       .day-plans {
-        min-height: 280px;
-        display: grid;
+        display: flex;
+        flex-direction: column;
         gap: 14px;
       }
 
-      .timeline {
-        position: relative;
-        padding-left: 32px;
+      .day-preview {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        align-items: stretch;
       }
 
-      .timeline::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 14px;
-        width: 3px;
+      .day-preview.empty {
+        display: block;
+        text-align: center;
+        color: rgba(15, 23, 42, 0.7);
+        font-style: italic;
+      }
+
+      .preview-card {
+        min-width: 180px;
+        flex: 1 1 200px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 18px;
+        padding: 16px;
+        box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+        display: grid;
+        gap: 10px;
+      }
+
+      .preview-card .plan-title {
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .preview-card .plan-meta {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .preview-card .plan-time {
+        width: fit-content;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .preview-more {
+        align-self: center;
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(15, 23, 42, 0.6);
+        cursor: pointer;
+        padding: 6px 12px;
         border-radius: 999px;
-        background: linear-gradient(180deg, rgba(99, 102, 241, 0.4), rgba(45, 212, 191, 0.35));
+        background: rgba(99, 102, 241, 0.08);
+      }
+
+      .preview-more:hover,
+      .preview-more:focus {
+        outline: none;
+        background: rgba(99, 102, 241, 0.18);
+        color: var(--primary-dark);
       }
 
       .plan-item {
-        border-radius: 18px;
-        padding: 18px 18px 18px 28px;
-        background: rgba(255, 255, 255, 0.92);
+        border-radius: 20px;
+        padding: 18px 20px;
+        background: rgba(255, 255, 255, 0.95);
         box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
-        display: grid;
-        gap: 10px;
+        display: flex;
+        align-items: center;
+        gap: 18px;
         position: relative;
         transition: transform 0.18s ease, box-shadow 0.22s ease;
-      }
-
-      .plan-item:not(.timeline-item) {
-        padding-left: 22px;
       }
 
       .plan-item:hover {
@@ -311,30 +370,31 @@
         box-shadow: 0 26px 50px rgba(99, 102, 241, 0.22);
       }
 
-      .timeline-item {
-        position: relative;
+      .plan-item .plan-time {
+        font-weight: 700;
+        color: var(--primary-dark);
+        font-size: 14px;
+        background: rgba(99, 102, 241, 0.12);
+        padding: 6px 12px;
+        border-radius: 14px;
+        min-width: 90px;
+        text-align: center;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      .plan-item + .plan-item {
-        margin-top: 16px;
-      }
-
-      .timeline-marker {
-        position: absolute;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        left: -32px;
-        top: 22px;
-        background: linear-gradient(135deg, var(--primary), var(--accent));
-        box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.12), 0 0 15px rgba(245, 158, 11, 0.4);
+      .plan-content {
+        display: grid;
+        gap: 8px;
+        flex: 1;
       }
 
       .plan-header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 12px;
+        gap: 10px;
+        flex-wrap: wrap;
       }
 
       .plan-title {
@@ -343,18 +403,9 @@
         font-weight: 700;
       }
 
-      .plan-item .plan-time {
-        font-weight: 700;
-        color: var(--primary-dark);
-        font-size: 13px;
-        background: rgba(99, 102, 241, 0.12);
-        padding: 4px 10px;
-        border-radius: 999px;
-      }
-
-      .plan-body {
-        display: grid;
-        gap: 10px;
+      .plan-description {
+        margin: 0;
+        color: rgba(15, 23, 42, 0.75);
       }
 
       .plan-meta {
@@ -364,15 +415,11 @@
         align-items: center;
       }
 
-      .plan-description {
-        margin: 0;
-      }
-
       .plan-actions {
         display: flex;
-        gap: 8px;
-        justify-content: flex-end;
-        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-left: auto;
       }
 
       .btn {
@@ -398,6 +445,53 @@
         opacity: 0.6;
         box-shadow: none;
         transform: none;
+      }
+
+      .icon-btn {
+        border: none;
+        background: rgba(99, 102, 241, 0.12);
+        color: var(--primary-dark);
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.18s ease, transform 0.18s ease;
+        font-size: 16px;
+      }
+
+      .icon-btn:hover {
+        background: rgba(99, 102, 241, 0.2);
+        transform: translateY(-1px);
+      }
+
+      .icon-btn.danger {
+        background: rgba(239, 68, 68, 0.14);
+        color: #dc2626;
+      }
+
+      .icon-btn.danger:hover {
+        background: rgba(239, 68, 68, 0.22);
+      }
+
+      .pill {
+        background: rgba(99, 102, 241, 0.16);
+        color: var(--primary-dark);
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .status {
+        font-weight: 600;
+        font-size: 12px;
+        color: var(--accent);
+        background: rgba(245, 158, 11, 0.18);
+        padding: 4px 10px;
+        border-radius: 12px;
       }
 
       .btn-primary {
@@ -456,17 +550,6 @@
         box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
       }
 
-      .pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 12px;
-        padding: 4px 10px;
-        border-radius: 999px;
-        background: rgba(99, 102, 241, 0.12);
-        color: var(--primary-dark);
-      }
-
       .ai-section {
         display: grid;
         gap: 16px;
@@ -481,15 +564,6 @@
       .upcoming-list {
         display: grid;
         gap: 12px;
-      }
-
-      .status {
-        font-size: 12px;
-        padding: 4px 10px;
-        border-radius: 999px;
-        background: rgba(16, 185, 129, 0.18);
-        color: #0f766e;
-        font-weight: 600;
       }
 
       .empty {
@@ -560,6 +634,16 @@
         position: relative;
       }
 
+      #dayModal .modal-card {
+        width: min(720px, 100%);
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+      }
+
+      #dayModal .modal-body {
+        padding-right: 4px;
+      }
+
       .modal-header {
         display: flex;
         align-items: center;
@@ -593,6 +677,78 @@
         font-size: 12px;
         color: rgba(15, 23, 42, 0.55);
         margin-top: 6px;
+      }
+
+      @media (max-width: 900px) {
+        .top-actions {
+          justify-content: flex-start;
+        }
+
+        .day-pane {
+          order: -1;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .app-shell {
+          padding: 32px 18px 60px;
+        }
+
+        .plan-item {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .plan-item .plan-time {
+          width: fit-content;
+          min-width: auto;
+        }
+
+        .plan-actions {
+          justify-content: flex-end;
+        }
+
+        .day-preview {
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          padding-bottom: 6px;
+        }
+
+        .day-preview::-webkit-scrollbar {
+          height: 6px;
+        }
+
+        .day-preview::-webkit-scrollbar-thumb {
+          background: rgba(99, 102, 241, 0.3);
+          border-radius: 999px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        header h1 {
+          font-size: 28px;
+        }
+
+        .day-cell {
+          padding: 12px 10px 32px;
+        }
+
+        .day-number {
+          font-size: 14px;
+        }
+
+        .badge {
+          font-size: 9px;
+          padding: 3px 6px;
+        }
+
+        .preview-card {
+          min-width: 140px;
+        }
+
+        .plan-item {
+          padding: 16px;
+        }
       }
     </style>
   </head>
@@ -639,10 +795,14 @@
                   Kế hoạch trong ngày
                 </p>
                 <h2 id="dayTitle">Chọn một ngày</h2>
+                <p class="day-count" id="dayCount">Chọn ngày trên lịch để xem chi tiết.</p>
               </div>
-              <button class="btn btn-secondary" type="button" id="reloadDayBtn">Tải lại ngày</button>
+              <div class="day-toolbar-actions">
+                <button class="btn btn-secondary" type="button" id="reloadDayBtn">Tải lại ngày</button>
+                <button class="btn btn-primary" type="button" id="openDayModalBtn">Xem chi tiết</button>
+              </div>
             </div>
-            <div id="dayPlans" class="day-plans empty">Chưa có công việc nào.</div>
+            <div id="dayPreview" class="day-preview empty">Chưa có công việc nào.</div>
           </aside>
         </section>
 
@@ -724,6 +884,19 @@
       </div>
     </div>
 
+    <div id="dayModal" class="modal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="dayModalTitle">
+        <div class="modal-header">
+          <div>
+            <h2 id="dayModalTitle" style="margin: 0;">Kế hoạch ngày</h2>
+            <p class="muted" id="dayModalSubtitle" style="margin: 4px 0 0;">Chọn ngày để xem nội dung.</p>
+          </div>
+          <button type="button" class="btn-ghost" id="dayModalClose" aria-label="Đóng">&times;</button>
+        </div>
+        <div id="dayModalBody" class="modal-body"></div>
+      </div>
+    </div>
+
     <div id="settingsModal" class="modal" aria-hidden="true">
       <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
         <div class="modal-header">
@@ -765,7 +938,8 @@
       const calendarLabel = document.getElementById('calendarLabel');
       const todayLabel = document.getElementById('todayLabel');
       const dayTitle = document.getElementById('dayTitle');
-      const dayPlans = document.getElementById('dayPlans');
+      const dayCount = document.getElementById('dayCount');
+      const dayPreview = document.getElementById('dayPreview');
       const prevBtn = document.getElementById('prevMonth');
       const nextBtn = document.getElementById('nextMonth');
       const form = document.getElementById('planForm');
@@ -788,6 +962,12 @@
       const searchLoading = document.getElementById('searchLoading');
       const upcomingPlans = document.getElementById('upcomingPlans');
       const reloadDayBtn = document.getElementById('reloadDayBtn');
+      const openDayModalBtn = document.getElementById('openDayModalBtn');
+      const dayModal = document.getElementById('dayModal');
+      const dayModalBody = document.getElementById('dayModalBody');
+      const dayModalTitle = document.getElementById('dayModalTitle');
+      const dayModalSubtitle = document.getElementById('dayModalSubtitle');
+      const dayModalClose = document.getElementById('dayModalClose');
       const syncBtn = document.getElementById('syncBtn');
       const syncLoading = document.getElementById('syncLoading');
       const settingsBtn = document.getElementById('settingsBtn');
@@ -801,6 +981,15 @@
       const geminiModelInput = document.getElementById('geminiModel');
 
       let currentYear, currentMonth, selectedDate;
+      let currentDayPlans = [];
+      let currentDayLabel = '';
+
+      if (reloadDayBtn) {
+        reloadDayBtn.disabled = true;
+      }
+      if (openDayModalBtn) {
+        openDayModalBtn.disabled = true;
+      }
 
       function initWeekdayRow() {
         weekdayLabels.forEach((label) => {
@@ -828,7 +1017,8 @@
           .withSuccessHandler((data) => {
             renderCalendar(data);
             if (opts.refreshDay && selectedDate) {
-              loadDayPlans(selectedDate);
+              const shouldOpen = dayModal && dayModal.classList.contains('open');
+              loadDayPlans(selectedDate, { openModal: shouldOpen });
             }
             if (typeof opts.after === 'function') {
               opts.after(null, data);
@@ -902,7 +1092,9 @@
           if (day.count > 0) {
             const badge = document.createElement('div');
             badge.className = 'badge';
-            badge.textContent = day.count + ' việc';
+            badge.textContent = day.count;
+            badge.setAttribute('aria-label', day.count + ' công việc');
+            badge.title = day.count + ' công việc';
             cell.appendChild(badge);
           }
 
@@ -914,7 +1106,8 @@
         highlightSelectedDay();
       }
 
-      function selectDate(isoDate) {
+      function selectDate(isoDate, options) {
+        const opts = Object.assign({ openModal: true }, options || {});
         selectedDate = isoDate;
         planDateInput.value = isoDate;
         planIdInput.value = '';
@@ -923,8 +1116,14 @@
         planDescriptionInput.value = '';
         planTagsInput.value = '';
         planStatusInput.value = 'Planned';
+        if (reloadDayBtn) {
+          reloadDayBtn.disabled = false;
+        }
+        if (openDayModalBtn) {
+          openDayModalBtn.disabled = false;
+        }
         highlightSelectedDay();
-        loadDayPlans(isoDate);
+        loadDayPlans(isoDate, { openModal: opts.openModal });
       }
 
       function highlightSelectedDay() {
@@ -939,96 +1138,337 @@
       }
 
       function planCard(plan, options) {
-        const opts = Object.assign({ timeline: false }, options);
+        const opts = Object.assign({ variant: 'modal', showActions: true }, options || {});
+        const titleText = plan.title || '(Không tiêu đề)';
+        const timeText = plan.time || 'Cả ngày';
+
+        if (opts.variant === 'preview') {
+          const preview = document.createElement('div');
+          preview.className = 'preview-card';
+
+          const time = document.createElement('span');
+          time.className = 'plan-time';
+          time.textContent = timeText;
+          preview.appendChild(time);
+
+          const title = document.createElement('p');
+          title.className = 'plan-title';
+          title.style.margin = '0';
+          title.textContent = titleText;
+          preview.appendChild(title);
+
+          if (plan.description) {
+            const description = document.createElement('p');
+            description.className = 'muted';
+            description.style.margin = '0';
+            description.textContent = plan.description;
+            preview.appendChild(description);
+          }
+
+          if (plan.tags || plan.status) {
+            const meta = document.createElement('div');
+            meta.className = 'plan-meta';
+            if (plan.tags) {
+              const tags = document.createElement('span');
+              tags.className = 'pill';
+              tags.textContent = plan.tags;
+              meta.appendChild(tags);
+            }
+            if (plan.status) {
+              const status = document.createElement('span');
+              status.className = 'status';
+              status.textContent = plan.status;
+              meta.appendChild(status);
+            }
+            preview.appendChild(meta);
+          }
+
+          return preview;
+        }
+
         const card = document.createElement('article');
         card.className = 'plan-item';
-        if (opts.timeline) {
-          card.classList.add('timeline-item');
-          const marker = document.createElement('span');
-          marker.className = 'timeline-marker';
-          card.appendChild(marker);
-        }
+
+        const time = document.createElement('span');
+        time.className = 'plan-time';
+        time.textContent = timeText;
+        card.appendChild(time);
+
+        const content = document.createElement('div');
+        content.className = 'plan-content';
 
         const header = document.createElement('div');
         header.className = 'plan-header';
 
         const title = document.createElement('h3');
         title.className = 'plan-title';
-        title.textContent = plan.title || '(Không tiêu đề)';
+        title.textContent = titleText;
         header.appendChild(title);
 
-        const time = document.createElement('span');
-        time.className = 'plan-time';
-        time.textContent = plan.time || 'Cả ngày';
-        header.appendChild(time);
-
-        const meta = document.createElement('div');
-        meta.className = 'plan-meta';
-
-        if (plan.tags) {
-          const tags = document.createElement('span');
-          tags.className = 'pill';
-          tags.textContent = plan.tags;
-          meta.appendChild(tags);
-        }
-
-        const status = document.createElement('span');
-        status.className = 'status';
-        status.textContent = plan.status || 'Planned';
-        meta.appendChild(status);
-
-        const body = document.createElement('div');
-        body.className = 'plan-body';
-        body.appendChild(header);
+        content.appendChild(header);
 
         if (plan.description) {
           const description = document.createElement('p');
-          description.className = 'muted plan-description';
+          description.className = 'plan-description';
           description.textContent = plan.description;
-          body.appendChild(description);
+          content.appendChild(description);
         }
 
-        body.appendChild(meta);
+        if (plan.tags || plan.status) {
+          const meta = document.createElement('div');
+          meta.className = 'plan-meta';
+          if (plan.tags) {
+            const tags = document.createElement('span');
+            tags.className = 'pill';
+            tags.textContent = plan.tags;
+            meta.appendChild(tags);
+          }
+          if (plan.status) {
+            const status = document.createElement('span');
+            status.className = 'status';
+            status.textContent = plan.status;
+            meta.appendChild(status);
+          }
+          content.appendChild(meta);
+        }
 
-        const actions = document.createElement('div');
-        actions.className = 'plan-actions';
+        card.appendChild(content);
 
-        const editBtn = document.createElement('button');
-        editBtn.textContent = 'Sửa';
-        editBtn.className = 'btn btn-secondary';
-        editBtn.type = 'button';
-        editBtn.addEventListener('click', () => editPlan(plan));
+        if (opts.showActions) {
+          const actions = document.createElement('div');
+          actions.className = 'plan-actions';
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Xoá';
-        deleteBtn.className = 'btn btn-secondary';
-        deleteBtn.type = 'button';
-        deleteBtn.addEventListener('click', () => removePlan(plan));
+          const editBtn = document.createElement('button');
+          editBtn.type = 'button';
+          editBtn.className = 'icon-btn';
+          editBtn.textContent = '✏️';
+          editBtn.setAttribute('aria-label', 'Sửa kế hoạch');
+          editBtn.title = 'Sửa kế hoạch';
+          editBtn.addEventListener('click', () => editPlan(plan));
 
-        actions.appendChild(editBtn);
-        actions.appendChild(deleteBtn);
+          const deleteBtn = document.createElement('button');
+          deleteBtn.type = 'button';
+          deleteBtn.className = 'icon-btn danger';
+          deleteBtn.textContent = '🗑️';
+          deleteBtn.setAttribute('aria-label', 'Xoá kế hoạch');
+          deleteBtn.title = 'Xoá kế hoạch';
+          deleteBtn.addEventListener('click', () => removePlan(plan));
 
-        card.appendChild(body);
-        card.appendChild(actions);
+          actions.appendChild(editBtn);
+          actions.appendChild(deleteBtn);
+          card.appendChild(actions);
+        }
 
         return card;
       }
 
-      function loadDayPlans(date) {
-        dayTitle.textContent = 'Công việc ngày ' + new Date(date).toLocaleDateString('vi-VN');
-        dayPlans.innerHTML = '';
+      function renderDayPreview(plans) {
+        if (!dayPreview) {
+          return;
+        }
+
+        dayPreview.innerHTML = '';
+
+        if (!plans.length) {
+          dayPreview.className = 'day-preview empty';
+          dayPreview.textContent = 'Chưa có công việc nào.';
+          return;
+        }
+
+        dayPreview.className = 'day-preview';
+        const topPlans = plans.slice(0, 3);
+        topPlans.forEach((plan) => dayPreview.appendChild(planCard(plan, { variant: 'preview', showActions: false })));
+
+        if (plans.length > topPlans.length) {
+          const more = document.createElement('div');
+          more.className = 'preview-more';
+          more.textContent = `+${plans.length - topPlans.length} công việc khác`;
+          more.setAttribute('role', 'button');
+          more.setAttribute('tabindex', '0');
+          more.setAttribute('aria-label', `Xem thêm ${plans.length - topPlans.length} công việc`);
+          more.addEventListener('click', () => {
+            if (selectedDate) {
+              openDayModal();
+            }
+          });
+          more.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              if (selectedDate) {
+                openDayModal();
+              }
+            }
+          });
+          dayPreview.appendChild(more);
+        }
+      }
+
+      function renderDayModalContent() {
+        if (!dayModalBody) {
+          return;
+        }
+
+        dayModalBody.innerHTML = '';
+        dayModalBody.dataset.state = 'ready';
+
+        if (!selectedDate) {
+          const prompt = document.createElement('div');
+          prompt.className = 'empty';
+          prompt.textContent = 'Chọn ngày trên lịch để xem chi tiết.';
+          dayModalBody.appendChild(prompt);
+          return;
+        }
+
+        const list = document.createElement('div');
+        list.className = 'day-plans';
+
+        if (!currentDayPlans.length) {
+          list.classList.add('empty');
+          list.textContent = 'Chưa có công việc nào.';
+          dayModalBody.appendChild(list);
+          return;
+        }
+
+        currentDayPlans.forEach((plan) => list.appendChild(planCard(plan, { variant: 'modal' })));
+        dayModalBody.appendChild(list);
+      }
+
+      function updateDayModalHeader() {
+        if (!dayModalTitle || !dayModalSubtitle) {
+          return;
+        }
+
+        let labelText = currentDayLabel;
+        if (!labelText && selectedDate) {
+          labelText = new Date(selectedDate).toLocaleDateString('vi-VN', {
+            weekday: 'long',
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+          });
+        }
+
+        dayModalTitle.textContent = labelText ? 'Kế hoạch ngày ' + labelText : 'Kế hoạch ngày';
+
+        if (selectedDate) {
+          const total = currentDayPlans.length;
+          dayModalSubtitle.textContent = total ? `${total} công việc` : 'Chưa có công việc nào.';
+        } else {
+          dayModalSubtitle.textContent = 'Chọn ngày để xem nội dung.';
+        }
+      }
+
+      function openDayModal() {
+        if (!dayModal) {
+          return;
+        }
+        const modalState = dayModalBody ? dayModalBody.dataset.state : 'ready';
+        if (modalState === 'loading') {
+          if (dayModalBody) {
+            dayModalBody.innerHTML = '<div class="empty">Đang tải dữ liệu...</div>';
+          }
+        } else if (modalState === 'ready') {
+          updateDayModalHeader();
+          renderDayModalContent();
+        }
+        if (modalState === 'error') {
+          // keep current error message
+        }
+        dayModal.classList.add('open');
+        dayModal.setAttribute('aria-hidden', 'false');
+      }
+
+      function closeDayModal() {
+        if (!dayModal) {
+          return;
+        }
+        dayModal.classList.remove('open');
+        dayModal.setAttribute('aria-hidden', 'true');
+      }
+
+      function loadDayPlans(date, options) {
+        const opts = Object.assign({ openModal: false }, options || {});
+        if (!date) {
+          return;
+        }
+
+        const label = new Date(date).toLocaleDateString('vi-VN', {
+          weekday: 'long',
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        });
+
+        dayTitle.textContent = 'Ngày ' + label;
+        dayCount.textContent = 'Đang tải...';
+        if (dayPreview) {
+          dayPreview.className = 'day-preview empty';
+          dayPreview.textContent = 'Đang tải...';
+        }
+        currentDayLabel = label;
+        currentDayPlans = [];
+        if (dayModalTitle) {
+          dayModalTitle.textContent = 'Kế hoạch ngày ' + label;
+        }
+        if (dayModalSubtitle) {
+          dayModalSubtitle.textContent = 'Đang tải...';
+        }
+        if (dayModal && dayModal.classList.contains('open') && dayModalBody) {
+          dayModalBody.innerHTML = '<div class="empty">Đang tải dữ liệu...</div>';
+        }
+        if (dayModalBody) {
+          dayModalBody.dataset.state = 'loading';
+        }
+
         google.script.run
           .withSuccessHandler((plans) => {
-            dayPlans.innerHTML = '';
-            if (!plans.length) {
-              dayPlans.className = 'day-plans empty';
-              dayPlans.textContent = 'Chưa có công việc nào.';
-              return;
+            currentDayPlans = plans || [];
+            currentDayLabel = label;
+            const total = currentDayPlans.length;
+            dayCount.textContent = total ? `${total} công việc` : 'Không có công việc';
+            if (reloadDayBtn) {
+              reloadDayBtn.disabled = false;
             }
-            dayPlans.className = 'day-plans timeline';
-            plans.forEach((plan) => dayPlans.appendChild(planCard(plan, { timeline: true })));
+            if (openDayModalBtn) {
+              openDayModalBtn.disabled = false;
+            }
+            renderDayPreview(currentDayPlans);
+            if (dayModalBody) {
+              dayModalBody.dataset.state = 'ready';
+            }
+            updateDayModalHeader();
+            if (opts.openModal || (dayModal && dayModal.classList.contains('open'))) {
+              openDayModal();
+            } else {
+              renderDayModalContent();
+            }
           })
-          .withFailureHandler(showError)
+          .withFailureHandler((error) => {
+            dayCount.textContent = 'Không thể tải công việc';
+            currentDayPlans = [];
+            currentDayLabel = label;
+            if (reloadDayBtn) {
+              reloadDayBtn.disabled = false;
+            }
+            if (openDayModalBtn) {
+              openDayModalBtn.disabled = false;
+            }
+            if (dayPreview) {
+              dayPreview.className = 'day-preview empty';
+              dayPreview.textContent = 'Có lỗi xảy ra.';
+            }
+            if (dayModalTitle) {
+              dayModalTitle.textContent = 'Kế hoạch ngày ' + label;
+            }
+            if (dayModalSubtitle) {
+              dayModalSubtitle.textContent = 'Không thể tải công việc.';
+            }
+            if (dayModalBody) {
+              dayModalBody.dataset.state = 'error';
+              dayModalBody.innerHTML = '<div class="empty">Có lỗi xảy ra khi tải công việc.</div>';
+            }
+            showError(error);
+          })
           .apiGetPlansForDay(date);
       }
 
@@ -1051,7 +1491,8 @@
           .withSuccessHandler((result) => {
             renderCalendar(result.calendar);
             if (selectedDate) {
-              loadDayPlans(selectedDate);
+              const shouldOpen = dayModal && dayModal.classList.contains('open');
+              loadDayPlans(selectedDate, { openModal: shouldOpen });
             }
             refreshUpcoming();
           })
@@ -1081,7 +1522,8 @@
             setLoading(formLoading, false);
             renderCalendar(result.calendar);
             selectedDate = result.plan.date;
-            loadDayPlans(result.plan.date);
+            const shouldOpen = dayModal && dayModal.classList.contains('open');
+            loadDayPlans(result.plan.date, { openModal: shouldOpen });
             refreshUpcoming();
             form.reset();
             planDateInput.value = result.plan.date;
@@ -1100,13 +1542,37 @@
         }
       });
 
-      reloadDayBtn.addEventListener('click', () => {
-        if (!selectedDate) {
-          alert('Vui lòng chọn ngày trên lịch trước.');
-          return;
-        }
-        loadDayPlans(selectedDate);
-      });
+      if (reloadDayBtn) {
+        reloadDayBtn.addEventListener('click', () => {
+          if (!selectedDate) {
+            alert('Vui lòng chọn ngày trên lịch trước.');
+            return;
+          }
+          loadDayPlans(selectedDate, { openModal: true });
+        });
+      }
+
+      if (openDayModalBtn) {
+        openDayModalBtn.addEventListener('click', () => {
+          if (!selectedDate) {
+            alert('Vui lòng chọn ngày trên lịch trước.');
+            return;
+          }
+          openDayModal();
+        });
+      }
+
+      if (dayModalClose) {
+        dayModalClose.addEventListener('click', closeDayModal);
+      }
+
+      if (dayModal) {
+        dayModal.addEventListener('click', (event) => {
+          if (event.target === dayModal) {
+            closeDayModal();
+          }
+        });
+      }
 
       settingsBtn.addEventListener('click', openSettings);
       settingsClose.addEventListener('click', closeSettings);
@@ -1143,8 +1609,13 @@
       });
 
       document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && settingsModal && settingsModal.classList.contains('open')) {
-          closeSettings();
+        if (event.key === 'Escape') {
+          if (settingsModal && settingsModal.classList.contains('open')) {
+            closeSettings();
+          }
+          if (dayModal && dayModal.classList.contains('open')) {
+            closeDayModal();
+          }
         }
       });
 
@@ -1297,7 +1768,7 @@
           refreshDay: false,
           after: (error) => {
             if (!error) {
-              selectDate(toIsoDate(new Date()));
+              selectDate(toIsoDate(new Date()), { openModal: false });
               refreshUpcoming();
             }
           }
